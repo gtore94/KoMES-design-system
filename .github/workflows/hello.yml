@@ -1,0 +1,14 @@
+name: Hello CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 인사하기
+        run: echo "CI 작동 중!"
