@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KoMES — UI Kit</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+:root {
+  --ink-900: #111E1C; --ink-800: #1C2B2B; --ink-700: #2A3C3A; --ink-600: #3A4F4C;
+  --ink-500: #4A5E5B; --ink-400: #6B7E7B; --ink-300: #8A9E9A; --ink-200: #B5C5C2;
+  --ink-100: #D8E4E2; --ink-50:  #EEF4F3;
+  --jade-900: #1A3C34; --jade-800: #2A5548; --jade-700: #2E5C52; --jade-600: #3A7065;
+  --jade-500: #4A7C6F; --jade-400: #6B9E90; --jade-300: #8DBFB3; --jade-200: #B3D8D1;
+  --jade-100: #D4EDE9; --jade-50:  #EEF8F6;
+  --stone-900: #5C5248; --stone-800: #7A6E62; --stone-700: #9A8E82; --stone-600: #B8AFA4;
+  --stone-500: #CEC6BC; --stone-400: #D8D0C4; --stone-300: #E4DDD4; --stone-200: #EDE7D9;
+  --stone-100: #F5F0E8; --stone-50:  #FDFAF5;
+  --cinnabar-900: #6B1A14; --cinnabar-800: #922420; --cinnabar-700: #B03028;
+  --cinnabar-600: #C4594B; --cinnabar-500: #D4756A; --cinnabar-400: #E09690;
+  --cinnabar-300: #EBB8B3; --cinnabar-200: #F3D4D1; --cinnabar-100: #FAEDEC;
+  --amber-700: #8C5A1A; --amber-600: #B47A28; --amber-500: #C4974B; --amber-400: #D4AE78;
+  --amber-200: #F0DFC0; --amber-100: #FAF2E4;
+  --bg-page: var(--stone-50); --bg-surface: #FFFFFF;
+  --bg-raised: var(--stone-100); --bg-sunken: var(--stone-200);
+  --bg-overlay: rgba(17, 30, 28, 0.48);
+  --text-primary: var(--ink-800); --text-secondary: var(--ink-500);
+  --text-muted: var(--ink-300); --text-disabled: var(--ink-200);
+  --text-inverse: var(--stone-50); --text-brand: var(--jade-700);
+  --text-danger: var(--cinnabar-600); --text-warning: var(--amber-600);
+  --border-subtle: var(--stone-300); --border-default: var(--stone-400);
+  --border-strong: var(--ink-200); --border-brand: var(--jade-500);
+  --border-danger: var(--cinnabar-400);
+  --brand: var(--jade-500); --brand-hover: var(--jade-600);
+  --brand-active: var(--jade-700); --brand-subtle: var(--jade-50);
+  --brand-muted: var(--jade-100);
+  --status-success-bg: var(--jade-50); --status-success-text: var(--jade-700); --status-success-border: var(--jade-200);
+  --status-warning-bg: var(--amber-100); --status-warning-text: var(--amber-700); --status-warning-border: var(--amber-200);
+  --status-danger-bg: var(--cinnabar-100); --status-danger-text: var(--cinnabar-700); --status-danger-border: var(--cinnabar-200);
+  --status-neutral-bg: var(--stone-100); --status-neutral-text: var(--ink-600); --status-neutral-border: var(--stone-300);
+  --shadow-sm:  0 1px 2px rgba(17, 30, 28, 0.06), 0 1px 4px rgba(17, 30, 28, 0.04);
+  --shadow-md:  0 2px 8px rgba(17, 30, 28, 0.08), 0 1px 3px rgba(17, 30, 28, 0.05);
+  --shadow-lg:  0 4px 16px rgba(17, 30, 28, 0.10), 0 2px 6px rgba(17, 30, 28, 0.06);
+  --shadow-xl:  0 8px 32px rgba(17, 30, 28, 0.12), 0 4px 12px rgba(17, 30, 28, 0.07);
+  --radius-xs: 2px; --radius-sm: 4px; --radius-md: 8px; --radius-lg: 12px;
+  --radius-xl: 16px; --radius-2xl: 24px; --radius-full: 9999px;
+  --font-serif: 'Noto Serif KR', 'Georgia', serif;
+  --font-sans: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Menlo', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, #root { height: 100%; }
+body { font-family: var(--font-sans); background-color: var(--bg-page); color: var(--text-primary); -webkit-font-smoothing: antialiased; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body, #root { height: 100%; }
+  body { background: var(--bg-page); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="Components.jsx"></script>
+<script type="text/babel" src="LeftRail.jsx"></script>
+<script type="text/babel" src="NewPatientModal.jsx"></script>
+<script type="text/babel" src="ChartActingPanel.jsx"></script>
+<script type="text/babel" src="PatientListScreen.jsx"></script>
+<script type="text/babel" src="PatientManagementScreen.jsx"></script>
+<script type="text/babel" src="PatientChartScreen.jsx"></script>
+<script type="text/babel" src="PrescriptionScreen.jsx"></script>
+<script type="text/babel" src="ScheduleScreen.jsx"></script>
+<script type="text/babel" src="PaymentScreen.jsx"></script>
+
+<script type="text/babel">
+const { useState, useEffect } = React;
+
+const SCREENS = {
+  patients: "patients",
+  chart: "chart",
+  prescribe: "prescribe",
+};
+
+function App() {
+  const [nav, setNav] = useState(() => localStorage.getItem("komes_nav") || "patients");
+  const [selectedPatient, setSelectedPatient] = useState(null);
+  const [screen, setScreen] = useState(() => localStorage.getItem("komes_screen") || SCREENS.patients);
+
+  useEffect(() => { localStorage.setItem("komes_nav", nav); }, [nav]);
+  useEffect(() => { localStorage.setItem("komes_screen", screen); }, [screen]);
+
+  const handleSelectPatient = (p) => {
+    setSelectedPatient(p);
+    setScreen(SCREENS.chart);
+    setNav("chart");
+  };
+
+  const handlePrescribe = () => setScreen(SCREENS.prescribe);
+
+  const handleNavBack = () => {
+    if (screen === SCREENS.prescribe) { setScreen(SCREENS.chart); setNav("chart"); }
+    else { setScreen(SCREENS.patients); setNav("patients"); setSelectedPatient(null); }
+  };
+
+  // Non-implemented screens placeholder
+  const PlaceholderScreen = ({ title }) => (
+    <div style={{ display: "flex", flexDirection: "column", height: "100%", background: "var(--bg-page)" }}>
+      <TopBar title={title} />
+      <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 12 }}>
+        <Icon name="construction" size={32} style={{ color: "var(--text-muted)" }} />
+        <div style={{ fontSize: 14, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>이 화면은 준비 중입니다</div>
+      </div>
+    </div>
+  );
+
+  const renderMain = () => {
+    if (nav === "patients") {
+      return <PatientListScreen onSelectPatient={handleSelectPatient} />;
+    }
+    if (nav === "chart") {
+      if (screen === SCREENS.prescribe && selectedPatient) {
+        return <PrescriptionScreen patient={selectedPatient} onBack={handleNavBack} />;
+      }
+      return <PatientChartScreen patient={selectedPatient} onBack={handleNavBack} onPrescribe={handlePrescribe} />;
+    }
+    if (nav === "registry") {
+      return <PatientManagementScreen onOpenChart={handleSelectPatient} />;
+    }
+    if (nav === "schedule") {
+      return <ScheduleScreen />;
+    }
+    if (nav === "payment") {
+      return <PaymentScreen />;
+    }
+    const labels = {
+      prescriptions: "처방 관리", inventory: "약재 재고",
+      stats: "통계", ai: "AI 분석", settings: "설정"
+    };
+    return <PlaceholderScreen title={labels[nav] || nav} />;
+  };
+
+  const handleNavigate = (key) => {
+    setNav(key);
+    if (key === "patients") {
+      setScreen(SCREENS.patients);
+    }
+    if (key === "chart") {
+      setScreen(SCREENS.chart);
+    }
+  };
+
+  return (
+    <div style={{ display: "flex", height: "100vh", overflow: "hidden" }}>
+      <Sidebar activeScreen={nav} onNavigate={handleNavigate} />
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
+        {renderMain()}
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

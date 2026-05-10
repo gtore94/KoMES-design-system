@@ -1,0 +1,2190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KoMES — UI Kit (Standalone)</title>
+
+<!-- ============================================================
+     KoMES Design System — Colors & Typography (inlined)
+     ============================================================ -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --ink-900: #111E1C; --ink-800: #1C2B2B; --ink-700: #2A3C3A; --ink-600: #3A4F4C;
+  --ink-500: #4A5E5B; --ink-400: #6B7E7B; --ink-300: #8A9E9A; --ink-200: #B5C5C2;
+  --ink-100: #D8E4E2; --ink-50:  #EEF4F3;
+
+  --jade-900: #1A3C34; --jade-800: #2A5548; --jade-700: #2E5C52; --jade-600: #3A7065;
+  --jade-500: #4A7C6F; --jade-400: #6B9E90; --jade-300: #8DBFB3; --jade-200: #B3D8D1;
+  --jade-100: #D4EDE9; --jade-50:  #EEF8F6;
+
+  --stone-900: #5C5248; --stone-800: #7A6E62; --stone-700: #9A8E82; --stone-600: #B8AFA4;
+  --stone-500: #CEC6BC; --stone-400: #D8D0C4; --stone-300: #E4DDD4; --stone-200: #EDE7D9;
+  --stone-100: #F5F0E8; --stone-50:  #FDFAF5;
+
+  --cinnabar-900: #6B1A14; --cinnabar-800: #922420; --cinnabar-700: #B03028;
+  --cinnabar-600: #C4594B; --cinnabar-500: #D4756A; --cinnabar-400: #E09690;
+  --cinnabar-300: #EBB8B3; --cinnabar-200: #F3D4D1; --cinnabar-100: #FAEDEC;
+
+  --amber-700: #8C5A1A; --amber-600: #B47A28; --amber-500: #C4974B; --amber-400: #D4AE78;
+  --amber-200: #F0DFC0; --amber-100: #FAF2E4;
+
+  --bg-page: var(--stone-50); --bg-surface: #FFFFFF;
+  --bg-raised: var(--stone-100); --bg-sunken: var(--stone-200);
+  --bg-overlay: rgba(17, 30, 28, 0.48);
+
+  --text-primary: var(--ink-800); --text-secondary: var(--ink-500);
+  --text-muted: var(--ink-300); --text-disabled: var(--ink-200);
+  --text-inverse: var(--stone-50); --text-brand: var(--jade-700);
+  --text-danger: var(--cinnabar-600); --text-warning: var(--amber-600);
+
+  --border-subtle: var(--stone-300); --border-default: var(--stone-400);
+  --border-strong: var(--ink-200); --border-brand: var(--jade-500);
+  --border-danger: var(--cinnabar-400);
+
+  --brand: var(--jade-500); --brand-hover: var(--jade-600);
+  --brand-active: var(--jade-700); --brand-subtle: var(--jade-50);
+  --brand-muted: var(--jade-100);
+
+  --status-success-bg: var(--jade-50); --status-success-text: var(--jade-700); --status-success-border: var(--jade-200);
+  --status-warning-bg: var(--amber-100); --status-warning-text: var(--amber-700); --status-warning-border: var(--amber-200);
+  --status-danger-bg: var(--cinnabar-100); --status-danger-text: var(--cinnabar-700); --status-danger-border: var(--cinnabar-200);
+  --status-neutral-bg: var(--stone-100); --status-neutral-text: var(--ink-600); --status-neutral-border: var(--stone-300);
+
+  --shadow-sm:  0 1px 2px rgba(17, 30, 28, 0.06), 0 1px 4px rgba(17, 30, 28, 0.04);
+  --shadow-md:  0 2px 8px rgba(17, 30, 28, 0.08), 0 1px 3px rgba(17, 30, 28, 0.05);
+  --shadow-lg:  0 4px 16px rgba(17, 30, 28, 0.10), 0 2px 6px rgba(17, 30, 28, 0.06);
+  --shadow-xl:  0 8px 32px rgba(17, 30, 28, 0.12), 0 4px 12px rgba(17, 30, 28, 0.07);
+
+  --radius-xs: 2px; --radius-sm: 4px; --radius-md: 8px; --radius-lg: 12px;
+  --radius-xl: 16px; --radius-2xl: 24px; --radius-full: 9999px;
+
+  --font-serif: 'Noto Serif KR', 'Georgia', serif;
+  --font-sans: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Menlo', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, #root { height: 100%; }
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+</style>
+
+<!-- React production builds + htm (no Babel) -->
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/htm@3.1.1/dist/htm.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script>
+(function () {
+  "use strict";
+  const { useState, useRef, useEffect, useMemo } = React;
+  const html = htm.bind(React.createElement);
+  const F = React.Fragment;
+
+  // ════════════════════════════════════════════════════════════════
+  // Shared Components
+  // ════════════════════════════════════════════════════════════════
+
+  function Icon({ name, size = 16, style = {}, className = "" }) {
+    const ref = useRef(null);
+    useEffect(() => {
+      if (ref.current && window.lucide) window.lucide.createIcons({ nodes: [ref.current] });
+    }, [name]);
+    return html`<span ref=${ref} style=${{ display: "inline-flex", alignItems: "center", ...style }} className=${className}>
+      <i data-lucide=${name} style=${{ width: size, height: size }}></i>
+    </span>`;
+  }
+
+  function Avatar({ name, size = 28 }) {
+    const char = name ? name[0] : "?";
+    return html`<div style=${{
+      width: size, height: size, borderRadius: "50%",
+      background: "var(--jade-200)", color: "var(--jade-700)",
+      display: "flex", alignItems: "center", justifyContent: "center",
+      fontSize: size * 0.42, fontWeight: 600, flexShrink: 0,
+      fontFamily: "var(--font-sans)"
+    }}>${char}</div>`;
+  }
+
+  function Badge({ variant = "neutral", children }) {
+    const styles = {
+      success: { background: "var(--status-success-bg)", color: "var(--status-success-text)", border: "1px solid var(--status-success-border)" },
+      warning: { background: "var(--status-warning-bg)", color: "var(--status-warning-text)", border: "1px solid var(--status-warning-border)" },
+      danger:  { background: "var(--status-danger-bg)",  color: "var(--status-danger-text)",  border: "1px solid var(--status-danger-border)" },
+      neutral: { background: "var(--status-neutral-bg)", color: "var(--status-neutral-text)", border: "1px solid var(--status-neutral-border)" },
+      brand:   { background: "var(--jade-50)", color: "var(--jade-700)", border: "1px solid var(--jade-200)" },
+    };
+    return html`<span style=${{
+      display: "inline-flex", alignItems: "center", gap: 4,
+      fontSize: 11, fontWeight: 500, padding: "2px 8px",
+      borderRadius: "var(--radius-full)", ...styles[variant],
+      fontFamily: "var(--font-sans)"
+    }}>${children}</span>`;
+  }
+
+  function Button({ variant = "primary", size = "md", onClick, children, disabled, icon }) {
+    const base = {
+      display: "inline-flex", alignItems: "center", gap: 6,
+      fontFamily: "var(--font-sans)", fontWeight: 500, border: "none",
+      cursor: disabled ? "not-allowed" : "pointer", opacity: disabled ? 0.45 : 1,
+      transition: "all 0.12s ease", letterSpacing: "0.01em", whiteSpace: "nowrap"
+    };
+    const sizes = {
+      sm: { fontSize: 11, padding: "5px 11px", borderRadius: "var(--radius-sm)" },
+      md: { fontSize: 13, padding: "8px 16px", borderRadius: "var(--radius-md)" },
+    };
+    const variants = {
+      primary:   { background: "var(--jade-500)", color: "white", boxShadow: "var(--shadow-sm)" },
+      secondary: { background: "var(--bg-surface)", color: "var(--text-primary)", border: "1px solid var(--border-default)", boxShadow: "var(--shadow-sm)" },
+      ghost:     { background: "transparent", color: "var(--jade-700)" },
+      danger:    { background: "var(--cinnabar-600)", color: "white" },
+    };
+    return html`<button onClick=${onClick} disabled=${disabled} style=${{ ...base, ...sizes[size], ...variants[variant] }}>
+      ${icon && html`<${Icon} name=${icon} size=${13} />`}
+      ${children}
+    </button>`;
+  }
+
+  function Input({ label, value, onChange, placeholder, type = "text", hint, error, icon }) {
+    const [focused, setFocused] = useState(false);
+    return html`<div style=${{ display: "flex", flexDirection: "column", gap: 4 }}>
+      ${label && html`<label style=${{ fontSize: 12, fontWeight: 500, color: "var(--text-secondary)", fontFamily: "var(--font-sans)" }}>${label}</label>`}
+      <div style=${{ position: "relative" }}>
+        ${icon && html`<span style=${{ position: "absolute", left: 9, top: "50%", transform: "translateY(-50%)", color: "var(--text-muted)", display: "flex" }}>
+          <${Icon} name=${icon} size=${14} />
+        </span>`}
+        <input type=${type} value=${value} onChange=${e => onChange && onChange(e.target.value)}
+          placeholder=${placeholder}
+          onFocus=${() => setFocused(true)} onBlur=${() => setFocused(false)}
+          style=${{
+            fontFamily: "var(--font-sans)", fontSize: 13, color: "var(--text-primary)",
+            background: "var(--bg-surface)", border: `1px solid ${error ? "var(--border-danger)" : focused ? "var(--border-brand)" : "var(--border-default)"}`,
+            borderRadius: "var(--radius-md)", padding: icon ? "7px 10px 7px 30px" : "7px 10px",
+            outline: "none", width: "100%", boxShadow: focused ? "0 0 0 3px var(--jade-100)" : "none",
+            transition: "all 0.12s ease", boxSizing: "border-box"
+          }} />
+      </div>
+      ${error && html`<span style=${{ fontSize: 11, color: "var(--text-danger)", fontFamily: "var(--font-sans)" }}>${error}</span>`}
+      ${hint && !error && html`<span style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>${hint}</span>`}
+    </div>`;
+  }
+
+  function Sidebar({ activeScreen, onNavigate }) {
+    const navGroups = [
+      { label: "진료", items: [
+        { key: "patients",  icon: "layout-dashboard", label: "진료 현황" },
+        { key: "chart",     icon: "file-heart",       label: "진료 차트" },
+        { key: "registry",  icon: "users",            label: "환자 관리" },
+        { key: "schedule",  icon: "calendar",          label: "예약 관리" },
+        { key: "payment",   icon: "credit-card",       label: "수납" },
+      ]},
+      { label: "처방", items: [
+        { key: "prescriptions", icon: "flask-conical", label: "처방 관리" },
+        { key: "inventory",     icon: "package",        label: "약재 재고" },
+      ]},
+      { label: "분석", items: [
+        { key: "stats", icon: "bar-chart-2", label: "통계" },
+        { key: "ai",    icon: "sparkles",    label: "AI 분석" },
+      ]},
+    ];
+
+    const s = {
+      root: { width: 220, background: "var(--ink-800)", display: "flex", flexDirection: "column", flexShrink: 0, height: "100%" },
+      logo: { display: "flex", alignItems: "center", gap: 10, padding: "14px 14px 12px", borderBottom: "1px solid rgba(255,255,255,0.08)" },
+      mark: { width: 30, height: 30, background: "var(--jade-500)", borderRadius: "var(--radius-sm)", display: "flex", alignItems: "center", justifyContent: "center" },
+      markLetter: { fontFamily: "var(--font-serif)", fontSize: 15, fontWeight: 600, color: "white" },
+      brandName: { fontFamily: "var(--font-serif)", fontSize: 15, fontWeight: 400, color: "var(--stone-50)", letterSpacing: "-0.01em" },
+      section: { padding: "10px 8px 2px" },
+      sectionLabel: { fontSize: 9, fontWeight: 700, letterSpacing: "0.1em", color: "var(--ink-300)", textTransform: "uppercase", padding: "0 6px", marginBottom: 3 },
+      footer: { marginTop: "auto", padding: "10px 8px", borderTop: "1px solid rgba(255,255,255,0.08)" },
+    };
+
+    return html`<div style=${s.root}>
+      <div style=${s.logo}>
+        <div style=${s.mark}><span style=${s.markLetter}>K</span></div>
+        <span style=${s.brandName}>KoMES</span>
+      </div>
+      ${navGroups.map(g => html`
+        <div key=${g.label} style=${s.section}>
+          <div style=${s.sectionLabel}>${g.label}</div>
+          ${g.items.map(item => html`
+            <div key=${item.key} onClick=${() => onNavigate(item.key)}
+              style=${{
+                display: "flex", alignItems: "center", gap: 8, padding: "7px 8px",
+                borderRadius: "var(--radius-md)", cursor: "pointer",
+                background: activeScreen === item.key ? "var(--jade-600)" : "transparent",
+                color: activeScreen === item.key ? "white" : "var(--ink-200)",
+                fontSize: 13, fontWeight: activeScreen === item.key ? 500 : 400,
+                transition: "all 0.12s ease", fontFamily: "var(--font-sans)",
+              }}>
+              <${Icon} name=${item.icon} size=${15} />
+              ${item.label}
+            </div>
+          `)}
+        </div>
+      `)}
+      <div style=${s.section}>
+        <div onClick=${() => onNavigate("settings")} style=${{
+          display: "flex", alignItems: "center", gap: 8, padding: "7px 8px",
+          borderRadius: "var(--radius-md)", cursor: "pointer",
+          background: activeScreen === "settings" ? "var(--jade-600)" : "transparent",
+          color: "var(--ink-200)", fontSize: 13, fontFamily: "var(--font-sans)",
+        }}>
+          <${Icon} name="settings" size=${15} />설정
+        </div>
+      </div>
+      <div style=${s.footer}>
+        <div style=${{ display: "flex", alignItems: "center", gap: 8, padding: "6px 6px", borderRadius: "var(--radius-md)", cursor: "pointer" }}>
+          <${Avatar} name="김" size=${26} />
+          <div>
+            <div style=${{ fontSize: 12, color: "var(--stone-100)", fontWeight: 500, fontFamily: "var(--font-sans)" }}>김민준</div>
+            <div style=${{ fontSize: 10, color: "var(--ink-300)", fontFamily: "var(--font-sans)" }}>원장</div>
+          </div>
+          <${Icon} name="chevrons-up-down" size=${13} style=${{ marginLeft: "auto", color: "var(--ink-300)" }} />
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function TopBar({ title, subtitle, actions }) {
+    return html`<div style=${{
+      height: 54, background: "var(--bg-surface)", borderBottom: "1px solid var(--border-subtle)",
+      display: "flex", alignItems: "center", padding: "0 24px", gap: 12, flexShrink: 0
+    }}>
+      <div style=${{ flex: 1 }}>
+        <div style=${{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>${title}</div>
+        ${subtitle && html`<div style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>${subtitle}</div>`}
+      </div>
+      <div style=${{ display: "flex", gap: 8, alignItems: "center" }}>
+        ${actions}
+        <div style=${{ width: 1, height: 20, background: "var(--border-subtle)", margin: "0 4px" }}></div>
+        <${Icon} name="bell" size=${17} style=${{ color: "var(--text-muted)", cursor: "pointer" }} />
+      </div>
+    </div>`;
+  }
+
+  // ════════════════════════════════════════════════════════════════
+  // PatientListScreen
+  // ════════════════════════════════════════════════════════════════
+
+  const PATIENTS = [
+    { id: 11, name: "한지민", gender: "여", dob: "1991-08-14", age: 34, phone: "010-4455-1100", lastVisit: "2026-04-15", stage: "예약",     chief: "어지러움 (10:30)",   waitMins: 0,  visitType: "재진" },
+    { id: 12, name: "장우성", gender: "남", dob: "1983-12-02", age: 42, phone: "010-7711-9922", lastVisit: "—",         stage: "예약",     chief: "허리 통증 (11:00)", waitMins: 0,  visitType: "초진", insurance: "자보" },
+    { id: 1,  name: "홍길동", gender: "남", dob: "1985-04-12", age: 40, phone: "010-1234-5678", lastVisit: "2026-04-22", stage: "진료대기", chief: "두통, 어지러움",     waitMins: 18, visitType: "재진", insurance: "자보" },
+    { id: 2,  name: "김수진", gender: "여", dob: "1972-11-30", age: 52, phone: "010-9876-5432", lastVisit: "2026-04-22", stage: "진료실",   chief: "요통, 피로감",     waitMins: 7,  visitType: "재진" },
+    { id: 3,  name: "이민호", gender: "남", dob: "1990-07-22", age: 34, phone: "010-5555-1234", lastVisit: "2026-04-22", stage: "치료대기", chief: "소화불량, 복통",    waitMins: 5,  visitType: "초진" },
+    { id: 4,  name: "박지현", gender: "여", dob: "1968-02-14", age: 57, phone: "010-3344-7788", lastVisit: "2026-04-22", stage: "치료실",   chief: "불면증, 심계항진", waitMins: 22, visitType: "재진" },
+    { id: 5,  name: "최동욱", gender: "남", dob: "2001-09-05", age: 23, phone: "010-7722-9900", lastVisit: "2026-04-22", stage: "수납대기", chief: "비염, 두통",        waitMins: 3,  visitType: "재진" },
+    { id: 6,  name: "정유미", gender: "여", dob: "1995-03-18", age: 30, phone: "010-6611-2233", lastVisit: "2026-04-22", stage: "수납완료", chief: "생리통, 빈혈",      waitMins: 0,  visitType: "초진" },
+    { id: 7,  name: "오세훈", gender: "남", dob: "1979-06-20", age: 46, phone: "010-8800-4411", lastVisit: "2026-04-22", stage: "진료대기", chief: "어깨 통증",         waitMins: 31, visitType: "재진" },
+    { id: 8,  name: "윤지영", gender: "여", dob: "2000-01-11", age: 26, phone: "010-2200-8833", lastVisit: "2026-04-22", stage: "치료실",   chief: "피부 트러블",       waitMins: 14, visitType: "초진" },
+    { id: 9,  name: "강민재", gender: "남", dob: "1988-11-03", age: 37, phone: "010-1122-5566", lastVisit: "2026-04-22", stage: "수납대기", chief: "무릎 통증",         waitMins: 8,  visitType: "재진" },
+    { id: 10, name: "임소연", gender: "여", dob: "1993-04-25", age: 33, phone: "010-9911-3344", lastVisit: "2026-04-22", stage: "수납완료", chief: "갱년기 증상",       waitMins: 0,  visitType: "재진" },
+  ];
+
+  const STAGES = [
+    { key: "예약",     icon: "calendar-clock", color: "#5A6E8A", bg: "#EEF1F6", border: "#CFD7E3", label: "예약" },
+    { key: "진료대기", icon: "clock",         color: "#C4974B", bg: "#FAF2E4", border: "#F0DFC0", label: "진료 대기" },
+    { key: "진료실",   icon: "stethoscope",   color: "#3A7065", bg: "#EEF8F6", border: "#B3D8D1", label: "진료 중" },
+    { key: "치료대기", icon: "hourglass",     color: "#6B7E7B", bg: "#EEF4F3", border: "#D8E4E2", label: "치료 대기" },
+    { key: "치료실",   icon: "activity",      color: "#4A7C6F", bg: "#EEF8F6", border: "#8DBFB3", label: "치료 중" },
+    { key: "수납대기", icon: "credit-card",   color: "#9A8E82", bg: "#F5F0E8", border: "#E4DDD4", label: "수납 대기" },
+    { key: "수납완료", icon: "check-circle-2",color: "#2E5C52", bg: "#D4EDE9", border: "#8DBFB3", label: "수납 완료" },
+  ];
+  const STAGE_BY_KEY = STAGES.reduce((a, s) => (a[s.key] = s, a), {});
+
+  const GROUPS = [
+    { key: "예약", label: "예약", icon: "calendar-clock", color: "#5A6E8A", bg: "#EEF1F6", border: "#CFD7E3", subStages: ["예약"] },
+    { key: "대기", label: "대기", icon: "clock",          color: "#B5873E", bg: "#FAF2E4", border: "#F0DFC0", subStages: ["진료대기", "치료대기"] },
+    { key: "치료", label: "치료", icon: "activity",       color: "#3A7065", bg: "#EAF4F1", border: "#B3D8D1", subStages: ["진료실", "치료실"] },
+    { key: "수납", label: "수납", icon: "credit-card",    color: "#7A6E60", bg: "#F5F0E8", border: "#E4DDD4", subStages: ["수납대기", "수납완료"] },
+  ];
+
+  const NEXT_STAGE = {
+    "예약": "진료대기", "진료대기": "진료실", "진료실": "치료대기",
+    "치료대기": "치료실", "치료실": "수납대기", "수납대기": "수납완료",
+  };
+
+  function WaitChip({ mins, stage }) {
+    if (stage === "수납완료") return null;
+    const urgent = mins >= 20;
+    return html`<span style=${{
+      display: "inline-flex", alignItems: "center", gap: 3,
+      fontSize: 10, fontFamily: "var(--font-mono)",
+      color: urgent ? "var(--cinnabar-700)" : "var(--text-muted)",
+      background: urgent ? "var(--cinnabar-100)" : "var(--stone-100)",
+      border: `1px solid ${urgent ? "var(--cinnabar-200)" : "var(--border-subtle)"}`,
+      borderRadius: "var(--radius-full)", padding: "1px 7px",
+    }}>
+      <${Icon} name="clock" size=${9} />
+      ${mins}분
+    </span>`;
+  }
+
+  function PatientCard({ patient, stage, onSelect, onAdvance }) {
+    const [hovered, setHovered] = useState(false);
+    const nextStage = NEXT_STAGE[patient.stage];
+    const isDone = patient.stage === "수납완료";
+
+    return html`<div
+      onMouseEnter=${() => setHovered(true)}
+      onMouseLeave=${() => setHovered(false)}
+      onClick=${() => onSelect(patient)}
+      style=${{
+        background: hovered ? "var(--jade-50)" : "var(--bg-surface)",
+        border: `1px solid ${hovered ? "var(--jade-200)" : "var(--border-subtle)"}`,
+        borderRadius: "var(--radius-md)",
+        padding: "10px 12px",
+        cursor: "pointer",
+        transition: "all 0.15s ease",
+        boxShadow: hovered ? "var(--shadow-md)" : "var(--shadow-sm)",
+        opacity: isDone ? 0.7 : 1,
+      }}>
+      <div style=${{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 6 }}>
+        <div style=${{ display: "flex", alignItems: "center", gap: 8 }}>
+          <${Avatar} name=${patient.name} size=${26} />
+          <div>
+            <div style=${{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)", lineHeight: 1.2 }}>${patient.name}</div>
+            <div style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>${patient.gender} · ${patient.age}세</div>
+          </div>
+        </div>
+        <${WaitChip} mins=${patient.waitMins} stage=${patient.stage} />
+      </div>
+
+      <div style=${{ fontSize: 11, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", marginBottom: 8, lineHeight: 1.4, paddingLeft: 34 }}>
+        ${patient.chief}
+      </div>
+
+      <div style=${{ paddingLeft: 34, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div style=${{ display: "flex", alignItems: "center", gap: 4 }}>
+          <span style=${{
+            fontSize: 10, fontWeight: 600, letterSpacing: "0.04em",
+            color: patient.visitType === "초진" ? "var(--cinnabar-600)" : "var(--jade-600)",
+            background: patient.visitType === "초진" ? "var(--cinnabar-100)" : "var(--jade-50)",
+            border: `1px solid ${patient.visitType === "초진" ? "var(--cinnabar-200)" : "var(--jade-200)"}`,
+            borderRadius: "var(--radius-full)", padding: "2px 7px",
+            fontFamily: "var(--font-sans)",
+          }}>${patient.visitType}</span>
+          ${patient.insurance === "자보" && html`<span style=${{
+            fontSize: 10, fontWeight: 700, letterSpacing: "0.04em",
+            color: "#7A4F1A", background: "#FEF3C7",
+            border: "1px solid #FCD34D",
+            borderRadius: "var(--radius-full)", padding: "2px 7px",
+            fontFamily: "var(--font-sans)",
+          }}>자보</span>`}
+        </div>
+
+        ${nextStage && hovered && html`
+          <button
+            onClick=${e => { e.stopPropagation(); onAdvance(patient.id, nextStage); }}
+            style=${{
+              display: "flex", alignItems: "center", gap: 4,
+              fontSize: 11, fontWeight: 500, color: "var(--jade-700)",
+              background: "var(--jade-100)", border: "1px solid var(--jade-200)",
+              borderRadius: "var(--radius-sm)", padding: "3px 9px",
+              cursor: "pointer", fontFamily: "var(--font-sans)", transition: "all 0.12s",
+            }}>
+            ${nextStage} →
+          </button>
+        `}
+        ${isDone && html`<${Icon} name="check-circle-2" size=${14} style=${{ color: "var(--jade-500)" }} />`}
+      </div>
+    </div>`;
+  }
+
+  function SubStageSection({ stage, patients, onSelect, onAdvance, showDivider }) {
+    return html`<div>
+      <div style=${{
+        display: "flex", alignItems: "center", gap: 6,
+        padding: "8px 12px 6px",
+        borderTop: showDivider ? "1px dashed rgba(0,0,0,0.08)" : "none",
+      }}>
+        <${Icon} name=${stage.icon} size=${11} style=${{ color: stage.color }} />
+        <span style=${{
+          fontSize: 10, fontWeight: 700, letterSpacing: "0.04em",
+          color: stage.color, fontFamily: "var(--font-sans)",
+          textTransform: "uppercase",
+        }}>${stage.label}</span>
+        <span style=${{
+          fontSize: 10, fontWeight: 700, color: stage.color, opacity: 0.7,
+          fontFamily: "var(--font-mono)", marginLeft: "auto",
+        }}>${patients.length}</span>
+      </div>
+      <div style=${{ padding: "0 10px 10px", display: "flex", flexDirection: "column", gap: 8 }}>
+        ${patients.length === 0 && html`
+          <div style=${{
+            fontSize: 10, color: stage.color, opacity: 0.4,
+            textAlign: "center", padding: "8px 0",
+            fontFamily: "var(--font-sans)",
+            border: "1px dashed rgba(0,0,0,0.08)",
+            borderRadius: "var(--radius-sm)",
+          }}>—</div>
+        `}
+        ${patients.map(p => html`
+          <${PatientCard} key=${p.id} patient=${p} stage=${stage} onSelect=${onSelect} onAdvance=${onAdvance} />
+        `)}
+      </div>
+    </div>`;
+  }
+
+  function GroupColumn({ group, patients, onSelect, onAdvance }) {
+    const groupTotal = patients.length;
+    return html`<div style=${{
+      display: "flex", flexDirection: "column", flex: 1,
+      background: group.bg,
+      border: `1px solid ${group.border}`,
+      borderRadius: "var(--radius-lg)",
+      overflow: "hidden",
+    }}>
+      <div style=${{
+        padding: "12px 14px",
+        borderBottom: `1px solid ${group.border}`,
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        background: "rgba(255,255,255,0.4)",
+      }}>
+        <div style=${{ display: "flex", alignItems: "center", gap: 8 }}>
+          <${Icon} name=${group.icon} size=${16} style=${{ color: group.color }} />
+          <span style=${{
+            fontSize: 14, fontWeight: 700, color: group.color,
+            fontFamily: "var(--font-sans)", letterSpacing: "0.02em",
+          }}>${group.label}</span>
+        </div>
+        <span style=${{
+          fontSize: 11, fontWeight: 700,
+          background: group.color, color: "#fff",
+          borderRadius: "var(--radius-full)", minWidth: 22, height: 22,
+          padding: "0 7px",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          fontFamily: "var(--font-mono)",
+        }}>${groupTotal}</span>
+      </div>
+
+      <div style=${{ flex: 1, minHeight: 80 }}>
+        ${group.subStages.map((stageKey, i) => {
+          const stage = STAGE_BY_KEY[stageKey];
+          const stagePatients = patients.filter(p => p.stage === stageKey);
+          return html`<${SubStageSection}
+            key=${stageKey}
+            stage=${stage}
+            patients=${stagePatients}
+            onSelect=${onSelect}
+            onAdvance=${onAdvance}
+            showDivider=${i > 0}
+          />`;
+        })}
+      </div>
+    </div>`;
+  }
+
+  function PatientListScreen({ onSelectPatient }) {
+    const [patients, setPatients] = useState(() => {
+      try {
+        const saved = localStorage.getItem("komes_dashboard_patients_v2");
+        return saved ? JSON.parse(saved) : PATIENTS;
+      } catch { return PATIENTS; }
+    });
+
+    useEffect(() => {
+      localStorage.setItem("komes_dashboard_patients_v2", JSON.stringify(patients));
+    }, [patients]);
+
+    const [search, setSearch] = useState("");
+    const [view, setView] = useState("board");
+
+    const advanceStage = (id, newStage) => {
+      setPatients(prev => prev.map(p => p.id === id ? { ...p, stage: newStage, waitMins: 0 } : p));
+    };
+
+    const resetPatients = () => setPatients(PATIENTS);
+
+    const filtered = search
+      ? patients.filter(p => p.name.includes(search) || p.chief.includes(search))
+      : patients;
+
+    const totalActive = patients.filter(p => p.stage !== "수납완료").length;
+    const totalDone = patients.filter(p => p.stage === "수납완료").length;
+
+    const actions = html`<${F}>
+      <div style=${{ display: "flex", background: "var(--stone-200)", borderRadius: "var(--radius-md)", padding: 2, gap: 2 }}>
+        ${[{ key: "board", icon: "layout-dashboard" }, { key: "list", icon: "list" }].map(v => html`
+          <button key=${v.key} onClick=${() => setView(v.key)} style=${{
+            display: "flex", alignItems: "center", padding: "5px 10px", borderRadius: "var(--radius-sm)",
+            border: "none", cursor: "pointer", transition: "all 0.12s",
+            background: view === v.key ? "var(--bg-surface)" : "transparent",
+            boxShadow: view === v.key ? "var(--shadow-sm)" : "none",
+            color: view === v.key ? "var(--text-primary)" : "var(--text-muted)",
+          }}>
+            <${Icon} name=${v.icon} size=${14} />
+          </button>
+        `)}
+      </div>
+      <div style=${{ width: 200 }}>
+        <${Input} placeholder="환자 검색..." value=${search} onChange=${setSearch} icon="search" />
+      </div>
+      <${Button} variant="primary" icon="user-plus">신규 등록<//>
+    <//>`;
+
+    return html`<div style=${{ display: "flex", flexDirection: "column", height: "100%", background: "var(--bg-page)" }}>
+      <${TopBar}
+        title="오늘의 진료 현황"
+        subtitle=${`${new Date().toLocaleDateString("ko-KR", { month: "long", day: "numeric", weekday: "short" })} · 진료 중 ${totalActive}명 · 완료 ${totalDone}명`}
+        actions=${actions}
+      />
+
+      <div style=${{
+        display: "flex", gap: 0, background: "var(--bg-surface)",
+        borderBottom: "1px solid var(--border-subtle)", padding: "0 24px", overflowX: "auto", flexShrink: 0,
+      }}>
+        ${GROUPS.map((g, i) => {
+          const groupCount = patients.filter(p => g.subStages.includes(p.stage)).length;
+          return html`<div key=${g.key} style=${{
+            display: "flex", alignItems: "center", gap: 14, padding: "10px 20px",
+            borderRight: i < GROUPS.length - 1 ? "1px solid var(--border-subtle)" : "none",
+            flexShrink: 0,
+          }}>
+            <div style=${{ display: "flex", alignItems: "center", gap: 8 }}>
+              <${Icon} name=${g.icon} size=${15} style=${{ color: g.color }} />
+              <span style=${{ fontSize: 13, fontWeight: 700, color: g.color, fontFamily: "var(--font-sans)" }}>${g.label}</span>
+              <span style=${{ fontSize: 16, fontWeight: 700, color: g.color, fontFamily: "var(--font-mono)" }}>${groupCount}</span>
+            </div>
+            ${g.subStages.length > 1 && html`
+              <div style=${{ display: "flex", gap: 8, paddingLeft: 4, borderLeft: `1px dashed ${g.border}` }}>
+                ${g.subStages.map(stageKey => {
+                  const stage = STAGE_BY_KEY[stageKey];
+                  const c = patients.filter(p => p.stage === stageKey).length;
+                  return html`<div key=${stageKey} style=${{ display: "flex", alignItems: "center", gap: 4, paddingLeft: 8 }}>
+                    <span style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>${stage.label}</span>
+                    <span style=${{ fontSize: 12, fontWeight: 600, color: stage.color, fontFamily: "var(--font-mono)" }}>${c}</span>
+                  </div>`;
+                })}
+              </div>
+            `}
+          </div>`;
+        })}
+        <button onClick=${resetPatients} style=${{
+          marginLeft: "auto", display: "flex", alignItems: "center", gap: 5,
+          fontSize: 11, color: "var(--text-muted)", background: "none", border: "none", cursor: "pointer",
+          fontFamily: "var(--font-sans)", padding: "8px 0", flexShrink: 0,
+        }}>
+          <${Icon} name="rotate-ccw" size=${11} />초기화
+        </button>
+      </div>
+
+      ${view === "board" && html`
+        <div style=${{ flex: 1, overflowX: "auto", overflowY: "auto", padding: "16px 20px" }}>
+          <div style=${{ display: "flex", gap: 14, minWidth: "max-content", height: "100%", alignItems: "stretch" }}>
+            ${GROUPS.map(group => {
+              const groupPatients = filtered.filter(p => group.subStages.includes(p.stage));
+              return html`<div key=${group.key} style=${{ width: 260, flexShrink: 0, display: "flex" }}>
+                <${GroupColumn}
+                  group=${group}
+                  patients=${groupPatients}
+                  onSelect=${onSelectPatient}
+                  onAdvance=${advanceStage}
+                />
+              </div>`;
+            })}
+          </div>
+        </div>
+      `}
+
+      ${view === "list" && html`
+        <div style=${{ flex: 1, overflowY: "auto", padding: "16px 24px", display: "flex", flexDirection: "column", gap: 24 }}>
+          ${GROUPS.map(group => {
+            const groupPatients = filtered.filter(p => group.subStages.includes(p.stage));
+            if (groupPatients.length === 0) return null;
+            return html`<div key=${group.key}>
+              <div style=${{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10, paddingBottom: 8, borderBottom: `1px solid ${group.border}` }}>
+                <${Icon} name=${group.icon} size=${16} style=${{ color: group.color }} />
+                <span style=${{ fontSize: 14, fontWeight: 700, color: group.color, fontFamily: "var(--font-sans)", letterSpacing: "0.02em" }}>${group.label}</span>
+                <span style=${{ fontSize: 12, fontWeight: 700, color: group.color, fontFamily: "var(--font-mono)" }}>${groupPatients.length}명</span>
+              </div>
+              <div style=${{ background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-lg)", overflow: "hidden", boxShadow: "var(--shadow-sm)" }}>
+                ${groupPatients.map((p, i) => {
+                  const subStage = STAGE_BY_KEY[p.stage];
+                  return html`<div key=${p.id} onClick=${() => onSelectPatient(p)}
+                    style=${{ display: "flex", alignItems: "center", gap: 12, padding: "10px 16px", borderBottom: i < groupPatients.length - 1 ? "1px solid var(--border-subtle)" : "none", cursor: "pointer", transition: "background 0.1s" }}
+                    onMouseEnter=${e => e.currentTarget.style.background = "var(--jade-50)"}
+                    onMouseLeave=${e => e.currentTarget.style.background = "transparent"}>
+                    <${Avatar} name=${p.name} size=${28} />
+                    <div style=${{ flex: 1 }}>
+                      <span style=${{ fontSize: 13, fontWeight: 500, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>${p.name}</span>
+                      <span style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginLeft: 8 }}>${p.gender} · ${p.age}세</span>
+                    </div>
+                    <span style=${{ fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-sans)" }}>${p.chief}</span>
+                    <span style=${{
+                      display: "inline-flex", alignItems: "center", gap: 4,
+                      fontSize: 10, fontWeight: 600, color: subStage.color,
+                      background: subStage.bg, border: `1px solid ${subStage.border}`,
+                      borderRadius: "var(--radius-full)", padding: "2px 8px",
+                      fontFamily: "var(--font-sans)",
+                    }}>
+                      <${Icon} name=${subStage.icon} size=${10} />${subStage.label}
+                    </span>
+                    <${WaitChip} mins=${p.waitMins} stage=${p.stage} />
+                    <span style=${{
+                      fontSize: 10, fontWeight: 600,
+                      color: p.visitType === "초진" ? "var(--cinnabar-600)" : "var(--jade-600)",
+                      background: p.visitType === "초진" ? "var(--cinnabar-100)" : "var(--jade-50)",
+                      border: `1px solid ${p.visitType === "초진" ? "var(--cinnabar-200)" : "var(--jade-200)"}`,
+                      borderRadius: "var(--radius-full)", padding: "2px 7px", fontFamily: "var(--font-sans)",
+                    }}>${p.visitType}</span>
+                    ${p.insurance === "자보" && html`<span style=${{
+                      fontSize: 10, fontWeight: 700,
+                      color: "#7A4F1A", background: "#FEF3C7",
+                      border: "1px solid #FCD34D",
+                      borderRadius: "var(--radius-full)", padding: "2px 7px", fontFamily: "var(--font-sans)",
+                    }}>자보</span>`}
+                    ${NEXT_STAGE[p.stage] && html`
+                      <button onClick=${e => { e.stopPropagation(); advanceStage(p.id, NEXT_STAGE[p.stage]); }}
+                        style=${{ fontSize: 11, color: "var(--jade-700)", background: "var(--jade-50)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-sm)", padding: "3px 9px", cursor: "pointer", fontFamily: "var(--font-sans)", whiteSpace: "nowrap" }}>
+                        ${NEXT_STAGE[p.stage]} →
+                      </button>
+                    `}
+                  </div>`;
+                })}
+              </div>
+            </div>`;
+          })}
+        </div>
+      `}
+    </div>`;
+  }
+
+  // ════════════════════════════════════════════════════════════════
+  // PatientChartScreen
+  // ════════════════════════════════════════════════════════════════
+
+  const HISTORY = [
+    {
+      id: "v3", date: "2026-04-22", doctor: "김민준", visitType: "재진", isToday: true,
+      soap: {
+        s: "두통 지속, 전보다 빈도 줄었으나 어지러움 여전함. 수면은 조금 개선됨.",
+        o: "혈압 116/74 · 맥박 70 · 체온 36.4°C\n망진: 안색 호전, 설태 박백\n문진: 납량 호전",
+        a: "기허혈허(氣虛血虛) 호전 중. 수면장애 잔존.",
+        p: "귀비탕 가감 유지, 2주 연장. 산조인 증량.",
+      },
+      actingOrders: [
+        { type: "체침", sites: "백회, 풍지, 족삼리", count: 15, duration: 20, done: true },
+        { type: "뜸",   sites: "관원, 신궐",         count: 3,  duration: 10, done: false },
+      ],
+      rxOrders: [
+        { name: "귀비탕 가감", herbs: "황기 10g, 백출 8g, 복신 10g, 산조인 15g, 용안육 8g, 감초 6g", days: 14, status: "조제 중" },
+      ],
+      aiNote: "두통+불면 호전 패턴. 산조인 증량 적합도 91%",
+    },
+    {
+      id: "v2", date: "2026-04-10", doctor: "김민준", visitType: "재진", isToday: false,
+      soap: {
+        s: "두통이 지속되며 어지러움이 있다. 수면의 질이 낮고 자주 깬다고 함.",
+        o: "혈압 118/76 · 맥박 72 · 체온 36.5°C\n망진: 안색 약간 창백, 설태 박백",
+        a: "기허혈허(氣虛血虛) 패턴. 수면장애 동반.",
+        p: "귀비탕 가감, 2주 처방. 다음 내원 시 수면 상태 재평가.",
+      },
+      actingOrders: [
+        { type: "체침",   sites: "백회, 풍지, 합곡", count: 12, duration: 20, done: true },
+        { type: "전침",   sites: "족삼리 (2Hz)",      count: 2,  duration: 15, done: true },
+        { type: "부항",   sites: "견정, 대추",         count: 4,  duration: 10, done: true },
+      ],
+      rxOrders: [
+        { name: "귀비탕 가감", herbs: "황기 10g, 백출 8g, 복신 10g, 산조인 12g, 용안육 8g, 감초 6g", days: 14, status: "완료" },
+      ],
+      aiNote: "두통+불면 패턴에서 귀비탕(歸脾湯) 적합도 87%",
+    },
+    {
+      id: "v1", date: "2026-03-15", doctor: "김민준", visitType: "초진", isToday: false,
+      soap: {
+        s: "두통 초진. 업무 스트레스 많다고 함. 두통 주 3회, VAS 6/10.",
+        o: "혈압 122/80 · 맥박 78\n망진: 안면홍조, 설홍 설태 박황",
+        a: "간기울결(肝氣鬱結) 의심.",
+        p: "시호소간탕, 1주 처방. 추적 관찰.",
+      },
+      actingOrders: [
+        { type: "체침", sites: "태충, 합곡, 내관", count: 10, duration: 20, done: true },
+        { type: "추나", sites: "경추 교정",         count: 1,  duration: 15, done: true },
+      ],
+      rxOrders: [
+        { name: "시호소간탕", herbs: "시호 8g, 백작약 10g, 지실 6g, 진피 6g, 향부자 8g, 감초 4g", days: 7, status: "완료" },
+      ],
+      aiNote: null,
+    },
+  ];
+
+  const ACTING_TYPES = [
+    { key: "체침",   icon: "zap",        color: "#3A7065" },
+    { key: "전침",   icon: "activity",   color: "#4A7C6F" },
+    { key: "약침",   icon: "syringe",    color: "#2E5C52" },
+    { key: "뜸",     icon: "flame",      color: "#B47A28" },
+    { key: "부항",   icon: "droplets",   color: "#C4594B" },
+    { key: "추나",   icon: "hand",       color: "#6B7E7B" },
+    { key: "레이저", icon: "scan-line",  color: "#4A5E5B" },
+  ];
+
+  function SectionHeader({ icon, title, children }) {
+    return html`<div style=${{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
+      <div style=${{ display: "flex", alignItems: "center", gap: 8 }}>
+        <${Icon} name=${icon} size=${15} style=${{ color: "var(--jade-600)" }} />
+        <span style=${{ fontSize: 13, fontWeight: 700, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>${title}</span>
+      </div>
+      <div style=${{ display: "flex", gap: 6 }}>${children}</div>
+    </div>`;
+  }
+
+  function ActingOrderBlock({ orders, editable }) {
+    const [items, setItems] = useState(orders);
+    const [adding, setAdding] = useState(false);
+    const [newType, setNewType] = useState("체침");
+    const [newSites, setNewSites] = useState("");
+
+    const toggleDone = (i) => {
+      if (!editable) return;
+      setItems(prev => prev.map((o, idx) => idx === i ? { ...o, done: !o.done } : o));
+    };
+
+    const addItem = () => {
+      if (!newSites.trim()) return;
+      setItems(prev => [...prev, { type: newType, sites: newSites, count: 10, duration: 20, done: false }]);
+      setNewSites(""); setAdding(false);
+    };
+
+    return html`<div style=${{ display: "flex", flexDirection: "column", gap: 6 }}>
+      ${items.map((o, i) => {
+        const typeInfo = ACTING_TYPES.find(t => t.key === o.type) || ACTING_TYPES[0];
+        return html`<div key=${i} onClick=${() => toggleDone(i)} style=${{
+          display: "flex", alignItems: "center", gap: 10,
+          padding: "8px 12px", borderRadius: "var(--radius-md)",
+          background: o.done ? "var(--stone-100)" : "var(--bg-surface)",
+          border: `1px solid ${o.done ? "var(--border-subtle)" : "var(--border-default)"}`,
+          cursor: editable ? "pointer" : "default",
+          opacity: o.done ? 0.65 : 1, transition: "all 0.12s",
+        }}>
+          <div style=${{ width: 18, height: 18, borderRadius: "var(--radius-sm)", border: `2px solid ${o.done ? "var(--jade-400)" : "var(--border-default)"}`, background: o.done ? "var(--jade-400)" : "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "all 0.12s" }}>
+            ${o.done && html`<${Icon} name="check" size=${11} style=${{ color: "white" }} />`}
+          </div>
+          <span style=${{ fontSize: 11, fontWeight: 700, color: typeInfo.color, background: `${typeInfo.color}18`, padding: "2px 7px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)", flexShrink: 0 }}>${o.type}</span>
+          <span style=${{ fontSize: 13, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flex: 1, textDecoration: o.done ? "line-through" : "none" }}>${o.sites}</span>
+          <span style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-mono)", flexShrink: 0 }}>${o.count}침 · ${o.duration}분</span>
+        </div>`;
+      })}
+
+      ${editable && !adding && html`
+        <button onClick=${() => setAdding(true)} style=${{ display: "flex", alignItems: "center", gap: 6, padding: "7px 12px", borderRadius: "var(--radius-md)", border: "1px dashed var(--border-default)", background: "transparent", color: "var(--text-muted)", fontSize: 12, cursor: "pointer", fontFamily: "var(--font-sans)", transition: "all 0.12s" }}>
+          <${Icon} name="plus" size=${13} /> 액팅 오더 추가
+        </button>
+      `}
+      ${editable && adding && html`
+        <div style=${{ display: "flex", gap: 8, alignItems: "center", padding: "8px 12px", borderRadius: "var(--radius-md)", border: "1px solid var(--border-brand)", background: "var(--jade-50)" }}>
+          <select value=${newType} onChange=${e => setNewType(e.target.value)} style=${{ fontSize: 12, fontFamily: "var(--font-sans)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-sm)", padding: "4px 6px", background: "white", color: "var(--text-primary)" }}>
+            ${ACTING_TYPES.map(t => html`<option key=${t.key}>${t.key}</option>`)}
+          </select>
+          <input value=${newSites} onChange=${e => setNewSites(e.target.value)} placeholder="부위 입력..." style=${{ flex: 1, fontSize: 13, fontFamily: "var(--font-sans)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-sm)", padding: "5px 8px", outline: "none" }} />
+          <button onClick=${addItem} style=${{ fontSize: 12, color: "white", background: "var(--jade-500)", border: "none", borderRadius: "var(--radius-sm)", padding: "5px 10px", cursor: "pointer", fontFamily: "var(--font-sans)" }}>추가</button>
+          <button onClick=${() => setAdding(false)} style=${{ fontSize: 12, color: "var(--text-muted)", background: "none", border: "none", cursor: "pointer" }}>취소</button>
+        </div>
+      `}
+    </div>`;
+  }
+
+  function SoapBlock({ data, editable }) {
+    const [vals, setVals] = useState(data);
+    const fields = [
+      { key: "s", label: "S 주소증",        rows: 2 },
+      { key: "o", label: "O 객관적 소견",    rows: 3 },
+      { key: "a", label: "A 진단",           rows: 2 },
+      { key: "p", label: "P 치료 계획",      rows: 2 },
+    ];
+    return html`<div style=${{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+      ${fields.map(f => html`<div key=${f.key}>
+        <div style=${{ fontSize: 10, fontWeight: 700, letterSpacing: "0.07em", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: 4, fontFamily: "var(--font-sans)" }}>${f.label}</div>
+        ${editable
+          ? html`<textarea value=${vals[f.key]} onChange=${e => { const v = e.target.value; setVals(prev => ({ ...prev, [f.key]: v })); }}
+              rows=${f.rows} style=${{ width: "100%", fontFamily: "var(--font-sans)", fontSize: 13, color: "var(--text-primary)", background: "var(--stone-50)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-md)", padding: "7px 10px", outline: "none", resize: "vertical", lineHeight: 1.6, boxSizing: "border-box" }} />`
+          : html`<div style=${{ fontSize: 13, color: "var(--text-primary)", lineHeight: 1.7, fontFamily: "var(--font-sans)", whiteSpace: "pre-line" }}>${vals[f.key]}</div>`
+        }
+      </div>`)}
+    </div>`;
+  }
+
+  function RxOrderBlock({ orders, onPrescribe }) {
+    return html`<div style=${{ display: "flex", flexDirection: "column", gap: 8 }}>
+      ${orders.map((rx, i) => html`<div key=${i} style=${{ background: "var(--stone-50)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", padding: "10px 14px" }}>
+        <div style=${{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+          <span style=${{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>${rx.name}</span>
+          <div style=${{ display: "flex", alignItems: "center", gap: 8 }}>
+            <span style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>${rx.days}일분</span>
+            <${Badge} variant=${rx.status === "완료" ? "success" : rx.status === "조제 중" ? "brand" : "neutral"}>${rx.status}<//>
+          </div>
+        </div>
+        <div style=${{ fontSize: 11, color: "var(--text-secondary)", fontFamily: "var(--font-mono)", lineHeight: 1.6 }}>${rx.herbs}</div>
+      </div>`)}
+      ${onPrescribe && html`
+        <button onClick=${onPrescribe} style=${{ display: "flex", alignItems: "center", gap: 6, padding: "7px 12px", borderRadius: "var(--radius-md)", border: "1px dashed var(--border-default)", background: "transparent", color: "var(--text-muted)", fontSize: 12, cursor: "pointer", fontFamily: "var(--font-sans)" }}>
+          <${Icon} name="plus" size=${13} />처방 오더 추가
+        </button>
+      `}
+    </div>`;
+  }
+
+  function VisitCard({ visit }) {
+    const [expanded, setExpanded] = useState(true);
+    const [ordersOpen, setOrdersOpen] = useState(false);
+
+    return html`<div style=${{ display: "flex", gap: 0 }}>
+      <div style=${{ display: "flex", flexDirection: "column", alignItems: "center", marginRight: 16, flexShrink: 0, width: 20 }}>
+        <div style=${{ width: 10, height: 10, borderRadius: "50%", background: visit.isToday ? "var(--jade-500)" : "var(--border-default)", border: `2px solid ${visit.isToday ? "var(--jade-300)" : "var(--border-subtle)"}`, flexShrink: 0, marginTop: 14, zIndex: 1 }} />
+        <div style=${{ width: 2, flex: 1, background: "var(--border-subtle)", minHeight: 20 }} />
+      </div>
+
+      <div style=${{ flex: 1, marginBottom: 14 }}>
+        <div onClick=${() => setExpanded(!expanded)}
+          style=${{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8, cursor: "pointer", userSelect: "none" }}>
+          <span style=${{ fontSize: 13, fontWeight: 700, color: visit.isToday ? "var(--jade-700)" : "var(--text-primary)", fontFamily: "var(--font-sans)", flexShrink: 0 }}>
+            ${visit.isToday ? "오늘 · " : ""}${visit.date}
+          </span>
+          ${visit.isToday && html`<${Badge} variant="brand">진료 중<//>`}
+          <${Badge} variant=${visit.visitType === "초진" ? "danger" : "neutral"}>${visit.visitType}<//>
+          <span style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)", flexShrink: 0 }}>담당: ${visit.doctor}</span>
+          ${!visit.isToday && html`
+            <span style=${{ fontSize: 11, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", background: "var(--stone-100)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-full)", padding: "1px 9px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: 200 }}>
+              ${visit.soap.a}
+            </span>
+          `}
+          <${Icon} name=${expanded ? "chevron-up" : "chevron-down"} size=${14} style=${{ color: "var(--text-muted)", marginLeft: "auto", flexShrink: 0 }} />
+        </div>
+
+        ${expanded && html`
+          <div style=${{ display: "flex", flexDirection: "column", gap: 10 }}>
+            <div style=${{ background: "var(--bg-surface)", border: `1px solid ${visit.isToday ? "var(--jade-200)" : "var(--border-subtle)"}`, borderRadius: "var(--radius-lg)", padding: "14px 18px", boxShadow: visit.isToday ? "var(--shadow-md)" : "var(--shadow-sm)" }}>
+              <${SoapBlock} data=${visit.soap} editable=${visit.isToday} />
+              ${visit.aiNote && html`
+                <div style=${{ marginTop: 12, padding: "9px 12px", background: "var(--jade-50)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)", display: "flex", gap: 8, alignItems: "flex-start" }}>
+                  <${Icon} name="sparkles" size=${13} style=${{ color: "var(--jade-600)", marginTop: 1, flexShrink: 0 }} />
+                  <span style=${{ fontSize: 12, color: "var(--jade-700)", fontFamily: "var(--font-sans)" }}><strong>AI 추천</strong> ${visit.aiNote}</span>
+                </div>
+              `}
+            </div>
+
+            ${!visit.isToday && html`
+              <div style=${{ background: "var(--stone-50)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", overflow: "hidden" }}>
+                <div onClick=${() => setOrdersOpen(!ordersOpen)}
+                  style=${{ display: "flex", alignItems: "center", gap: 8, padding: "8px 14px", cursor: "pointer", borderBottom: ordersOpen ? "1px solid var(--border-subtle)" : "none" }}>
+                  <${Icon} name="clipboard-check" size=${13} style=${{ color: "var(--text-muted)" }} />
+                  <span style=${{ fontSize: 12, fontWeight: 600, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", flex: 1 }}>오더 내역</span>
+                  <div style=${{ display: "flex", gap: 5 }}>
+                    ${visit.actingOrders.map((o, i) => html`<span key=${i} style=${{ fontSize: 10, color: "var(--text-muted)", background: "var(--stone-200)", borderRadius: "var(--radius-full)", padding: "1px 7px", fontFamily: "var(--font-sans)" }}>${o.type}</span>`)}
+                    ${visit.rxOrders.map((r, i) => html`<span key=${i} style=${{ fontSize: 10, color: "var(--jade-700)", background: "var(--jade-50)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-full)", padding: "1px 7px", fontFamily: "var(--font-sans)" }}>${r.name}</span>`)}
+                  </div>
+                  <${Icon} name=${ordersOpen ? "chevron-up" : "chevron-down"} size=${13} style=${{ color: "var(--text-muted)", flexShrink: 0 }} />
+                </div>
+
+                ${ordersOpen && html`
+                  <div style=${{ padding: "12px 14px", display: "flex", flexDirection: "column", gap: 12 }}>
+                    <div>
+                      <div style=${{ fontSize: 10, fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 6 }}>액팅 오더</div>
+                      <div style=${{ display: "flex", flexDirection: "column", gap: 5 }}>
+                        ${visit.actingOrders.map((o, i) => {
+                          const typeInfo = ACTING_TYPES.find(t => t.key === o.type) || ACTING_TYPES[0];
+                          return html`<div key=${i} style=${{ display: "flex", alignItems: "center", gap: 8, padding: "6px 10px", background: o.done ? "var(--stone-100)" : "var(--bg-surface)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-sm)", opacity: o.done ? 0.7 : 1 }}>
+                            <span style=${{ fontSize: 10, fontWeight: 700, color: typeInfo.color, background: `${typeInfo.color}18`, padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)", flexShrink: 0 }}>${o.type}</span>
+                            <span style=${{ fontSize: 12, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flex: 1, textDecoration: o.done ? "line-through" : "none" }}>${o.sites}</span>
+                            <span style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>${o.count}침 · ${o.duration}분</span>
+                            ${o.done && html`<${Icon} name="check-circle-2" size=${13} style=${{ color: "var(--jade-500)", flexShrink: 0 }} />`}
+                          </div>`;
+                        })}
+                      </div>
+                    </div>
+                    <div>
+                      <div style=${{ fontSize: 10, fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 6 }}>처방 오더</div>
+                      ${visit.rxOrders.map((rx, i) => html`<div key=${i} style=${{ background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-sm)", padding: "8px 12px" }}>
+                        <div style=${{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
+                          <span style=${{ fontSize: 12, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>${rx.name}</span>
+                          <div style=${{ display: "flex", gap: 6, alignItems: "center" }}>
+                            <span style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>${rx.days}일분</span>
+                            <${Badge} variant="success">${rx.status}<//>
+                          </div>
+                        </div>
+                        <div style=${{ fontSize: 11, color: "var(--text-secondary)", fontFamily: "var(--font-mono)", lineHeight: 1.5 }}>${rx.herbs}</div>
+                      </div>`)}
+                    </div>
+                  </div>
+                `}
+              </div>
+            `}
+          </div>
+        `}
+      </div>
+    </div>`;
+  }
+
+  function PatientChartScreen({ patient, onBack, onPrescribe }) {
+    const scrollRef = useRef(null);
+
+    if (!patient) {
+      const noPatientActions = html`<${Button} variant="secondary" size="sm" icon="arrow-left" onClick=${onBack}>진료 현황<//>`;
+      return html`<div style=${{ display: "flex", flexDirection: "column", height: "100%", background: "var(--bg-page)" }}>
+        <${TopBar} title="진료 차트" subtitle="환자를 선택하세요" actions=${noPatientActions} />
+        <div style=${{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 14 }}>
+          <${Icon} name="file-heart" size=${36} style=${{ color: "var(--text-muted)" }} />
+          <div style=${{ fontSize: 14, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>진료 현황에서 환자를 선택하거나 검색하세요.</div>
+          <${Button} variant="primary" icon="layout-dashboard" onClick=${onBack}>진료 현황으로<//>
+        </div>
+      </div>`;
+    }
+
+    const actions = html`<${F}>
+      <${Button} variant="secondary" size="sm" icon="arrow-left" onClick=${onBack}>목록<//>
+      <${Button} variant="primary" icon="file-plus" onClick=${onPrescribe}>신규 처방<//>
+    <//>`;
+
+    return html`<div style=${{ display: "flex", flexDirection: "column", height: "100%", background: "var(--bg-page)" }}>
+      <${TopBar}
+        title=${`${patient.name} 차트`}
+        subtitle=${`${patient.gender} · ${patient.age}세 · ${patient.dob} · ${patient.phone}`}
+        actions=${actions}
+      />
+
+      <div style=${{ display: "flex", flex: 1, overflow: "hidden" }}>
+
+        <div ref=${scrollRef} style=${{ flex: 1, overflowY: "auto", padding: "20px 24px", borderRight: "1px solid var(--border-subtle)" }}>
+
+          <div style=${{ background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-lg)", padding: "12px 18px", marginBottom: 20, boxShadow: "var(--shadow-sm)", display: "flex", gap: 20, alignItems: "center", flexWrap: "wrap" }}>
+            <div style=${{ display: "flex", alignItems: "center", gap: 10 }}>
+              <${Avatar} name=${patient.name} size=${36} />
+              <div>
+                <div style=${{ fontSize: 15, fontWeight: 700, color: "var(--text-primary)", fontFamily: "var(--font-serif)", lineHeight: 1.2 }}>${patient.name}</div>
+                <div style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>${patient.gender} · ${patient.age}세 · ${patient.dob}</div>
+              </div>
+            </div>
+            <div style=${{ width: 1, height: 28, background: "var(--border-subtle)" }} />
+            ${[
+              { label: "총 내원", value: `${HISTORY.length}회` },
+              { label: "주소증", value: patient.chief },
+            ].map(item => html`<div key=${item.label}>
+              <div style=${{ fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", color: "var(--text-muted)", textTransform: "uppercase", fontFamily: "var(--font-sans)", marginBottom: 1 }}>${item.label}</div>
+              <div style=${{ fontSize: 13, fontWeight: 500, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>${item.value}</div>
+            </div>`)}
+            <div style=${{ marginLeft: "auto" }}>
+              <div style=${{ padding: "5px 10px", background: "var(--status-warning-bg)", border: "1px solid var(--status-warning-border)", borderRadius: "var(--radius-md)", display: "flex", gap: 5, alignItems: "center" }}>
+                <${Icon} name="alert-triangle" size=${11} style=${{ color: "var(--status-warning-text)" }} />
+                <span style=${{ fontSize: 11, color: "var(--status-warning-text)", fontFamily: "var(--font-sans)" }}>감초+감수 주의</span>
+              </div>
+            </div>
+          </div>
+
+          <div style=${{ fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 14, display: "flex", alignItems: "center", gap: 6 }}>
+            <${Icon} name="git-branch" size=${12} style=${{ color: "var(--text-muted)" }} />
+            진료 기록 (SOAP) — ${HISTORY.length}회
+          </div>
+
+          ${HISTORY.map(visit => html`<${VisitCard} key=${visit.id} visit=${visit} />`)}
+          <div style=${{ height: 48 }} />
+        </div>
+
+        <div style=${{ width: 300, display: "flex", flexDirection: "column", flexShrink: 0, background: "var(--bg-page)", overflowY: "auto" }}>
+
+          <div style=${{ padding: "14px 16px", borderBottom: "1px solid var(--border-subtle)", background: "var(--bg-surface)" }}>
+            <${SectionHeader} icon="zap" title="오늘 액팅 오더">
+              <span style=${{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>클릭 = 완료</span>
+            <//>
+            <${ActingOrderBlock} orders=${HISTORY[0].actingOrders} editable=${true} />
+          </div>
+
+          <div style=${{ padding: "14px 16px", borderBottom: "1px solid var(--border-subtle)", background: "var(--bg-surface)" }}>
+            <${SectionHeader} icon="flask-conical" title="오늘 처방 오더">
+              <${Button} variant="ghost" size="sm" icon="plus" onClick=${onPrescribe}>추가<//>
+            <//>
+            <${RxOrderBlock} orders=${HISTORY[0].rxOrders} onPrescribe=${onPrescribe} />
+          </div>
+
+          <div style=${{ padding: "14px 16px", borderBottom: "1px solid var(--border-subtle)", background: "var(--bg-surface)", marginTop: 8 }}>
+            <div style=${{ fontSize: 10, fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 10 }}>활력징후</div>
+            <div style=${{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px 12px" }}>
+              ${[
+                { label: "혈압", value: "116/74", unit: "mmHg" },
+                { label: "맥박", value: "70",     unit: "bpm" },
+                { label: "체온", value: "36.4",   unit: "°C" },
+                { label: "체중", value: "68",     unit: "kg" },
+              ].map(v => html`<div key=${v.label} style=${{ background: "var(--stone-50)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", padding: "7px 10px" }}>
+                <div style=${{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 2 }}>${v.label}</div>
+                <div style=${{ fontSize: 14, fontWeight: 700, color: "var(--text-primary)", fontFamily: "var(--font-mono)" }}>${v.value}</div>
+                <div style=${{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>${v.unit}</div>
+              </div>`)}
+            </div>
+          </div>
+
+          <div style=${{ padding: "14px 16px", borderBottom: "1px solid var(--border-subtle)", background: "var(--bg-surface)", marginTop: 8 }}>
+            <div style=${{ fontSize: 10, fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 8 }}>다음 예약</div>
+            <div style=${{ fontSize: 13, fontWeight: 600, color: "var(--jade-600)", fontFamily: "var(--font-sans)" }}>2026-05-06 (수) 14:00</div>
+            <div style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 14 }}>재진</div>
+
+            <div style=${{ fontSize: 10, fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 8 }}>내원 이력</div>
+            ${HISTORY.map(v => html`<div key=${v.id} style=${{ display: "flex", gap: 8, alignItems: "center", marginBottom: 5 }}>
+              <div style=${{ width: 6, height: 6, borderRadius: "50%", background: v.isToday ? "var(--jade-500)" : "var(--border-default)", flexShrink: 0 }} />
+              <span style=${{ fontSize: 11, color: v.isToday ? "var(--jade-600)" : "var(--text-secondary)", fontFamily: "var(--font-mono)", fontWeight: v.isToday ? 600 : 400 }}>${v.date}</span>
+              <${Badge} variant=${v.visitType === "초진" ? "danger" : "neutral"}>${v.visitType}<//>
+            </div>`)}
+          </div>
+
+          <div style=${{ padding: "14px 16px", background: "var(--bg-surface)", marginTop: 8 }}>
+            <div style=${{ display: "flex", flexDirection: "column", gap: 5 }}>
+              ${[
+                { icon: "printer",       label: "차트 인쇄" },
+                { icon: "file-down",     label: "PDF 내보내기" },
+                { icon: "calendar-plus", label: "예약 추가" },
+              ].map(a => html`<button key=${a.label} style=${{ display: "flex", alignItems: "center", gap: 8, padding: "7px 10px", borderRadius: "var(--radius-md)", border: "1px solid var(--border-subtle)", background: "var(--stone-50)", cursor: "pointer", fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", transition: "all 0.12s" }}>
+                <${Icon} name=${a.icon} size=${13} style=${{ color: "var(--text-muted)" }} />${a.label}
+              </button>`)}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  // ════════════════════════════════════════════════════════════════
+  // PrescriptionScreen
+  // ════════════════════════════════════════════════════════════════
+
+  const HERB_SUGGESTIONS = [
+    { name: "황기", latin: "Astragalus", category: "보기", defaultDose: 10 },
+    { name: "백출", latin: "Atractylodes", category: "보기", defaultDose: 8 },
+    { name: "복신", latin: "Poria cocos", category: "안신", defaultDose: 10 },
+    { name: "산조인", latin: "Ziziphus", category: "안신", defaultDose: 12 },
+    { name: "용안육", latin: "Longan", category: "보혈", defaultDose: 8 },
+    { name: "감초", latin: "Glycyrrhiza", category: "조화", defaultDose: 6 },
+    { name: "당귀", latin: "Angelica", category: "보혈", defaultDose: 10 },
+    { name: "천궁", latin: "Ligusticum", category: "활혈", defaultDose: 8 },
+  ];
+
+  const AI_SUGGESTION = {
+    name: "귀비탕 가감",
+    confidence: 87,
+    herbs: [
+      { name: "황기", dose: 10 }, { name: "백출", dose: 8 },
+      { name: "복신", dose: 10 }, { name: "산조인", dose: 12 },
+      { name: "용안육", dose: 8 }, { name: "감초", dose: 6 },
+    ],
+    rationale: "기허혈허 + 불면 패턴에 적합. 최근 6개월 내 유사 증례 23건 기반.",
+  };
+
+  function PrescriptionScreen({ patient, onBack }) {
+    const [herbs, setHerbs] = useState([
+      { name: "황기", dose: 10 },
+      { name: "백출", dose: 8 },
+      { name: "감초", dose: 6 },
+    ]);
+    const [days, setDays] = useState("14");
+    const [memo, setMemo] = useState("");
+    const [showAI, setShowAI] = useState(true);
+    const [herbSearch, setHerbSearch] = useState("");
+    const [saved, setSaved] = useState(false);
+
+    const totalWeight = herbs.reduce((s, h) => s + Number(h.dose), 0);
+
+    const addHerb = (herb) => {
+      if (!herbs.find(h => h.name === herb.name)) {
+        setHerbs([...herbs, { name: herb.name, dose: herb.defaultDose }]);
+      }
+      setHerbSearch("");
+    };
+
+    const removeHerb = (name) => setHerbs(herbs.filter(h => h.name !== name));
+    const updateDose = (name, val) => setHerbs(herbs.map(h => h.name === name ? { ...h, dose: val } : h));
+    const applyAI = () => setHerbs(AI_SUGGESTION.herbs.map(h => ({ ...h })));
+    const handleSave = () => { setSaved(true); setTimeout(() => setSaved(false), 2000); };
+
+    const filteredSuggestions = herbSearch
+      ? HERB_SUGGESTIONS.filter(h => h.name.includes(herbSearch) && !herbs.find(x => x.name === h.name))
+      : [];
+
+    const actions = html`<${F}>
+      <${Button} variant="secondary" size="sm" icon="arrow-left" onClick=${onBack}>취소<//>
+      <${Button} variant="primary" icon=${saved ? "check" : "save"} onClick=${handleSave}>
+        ${saved ? "저장 완료" : "처방 저장"}
+      <//>
+    <//>`;
+
+    return html`<div style=${{ display: "flex", flexDirection: "column", height: "100%", background: "var(--bg-page)" }}>
+      <${TopBar}
+        title="신규 처방"
+        subtitle=${patient ? `${patient.name} · ${patient.gender} · ${patient.age}세` : ""}
+        actions=${actions}
+      />
+
+      <div style=${{ flex: 1, display: "flex", overflow: "hidden" }}>
+        <div style=${{ flex: 1, padding: "20px 24px", overflowY: "auto", display: "flex", flexDirection: "column", gap: 16 }}>
+
+          ${showAI && html`
+            <div style=${{ background: "var(--jade-50)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-lg)", padding: "14px 18px" }}>
+              <div style=${{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 8 }}>
+                <div style=${{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <${Icon} name="sparkles" size=${16} style=${{ color: "var(--jade-600)" }} />
+                  <span style=${{ fontSize: 13, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-sans)" }}>AI 추천: ${AI_SUGGESTION.name}</span>
+                  <span style=${{ fontSize: 12, background: "var(--jade-100)", color: "var(--jade-700)", padding: "1px 7px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>적합도 ${AI_SUGGESTION.confidence}%</span>
+                </div>
+                <button onClick=${() => setShowAI(false)} style=${{ background: "none", border: "none", cursor: "pointer", color: "var(--jade-400)", fontSize: 16, lineHeight: 1, padding: 0 }}>×</button>
+              </div>
+              <div style=${{ fontSize: 12, color: "var(--jade-600)", fontFamily: "var(--font-sans)", marginBottom: 10, lineHeight: 1.5 }}>${AI_SUGGESTION.rationale}</div>
+              <div style=${{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 10 }}>
+                ${AI_SUGGESTION.herbs.map(h => html`<span key=${h.name} style=${{ fontSize: 11, background: "var(--jade-100)", color: "var(--jade-700)", padding: "3px 9px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-mono)" }}>
+                  ${h.name} ${h.dose}g
+                </span>`)}
+              </div>
+              <${Button} variant="secondary" size="sm" icon="clipboard-copy" onClick=${applyAI}>처방에 적용<//>
+            </div>
+          `}
+
+          <div style=${{ background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-lg)", boxShadow: "var(--shadow-sm)", overflow: "hidden" }}>
+            <div style=${{ padding: "12px 16px", borderBottom: "1px solid var(--border-subtle)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <span style=${{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>약재 구성</span>
+              <span style=${{ fontSize: 12, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>총 ${totalWeight}g / 첩</span>
+            </div>
+            <table style=${{ width: "100%", borderCollapse: "collapse", fontFamily: "var(--font-sans)" }}>
+              <thead>
+                <tr style=${{ background: "var(--stone-100)" }}>
+                  ${["약재명", "효능 분류", "용량 (g)", ""].map(h => html`<th key=${h} style=${{ padding: "7px 14px", fontSize: 10, fontWeight: 700, color: "var(--text-muted)", textAlign: "left", letterSpacing: "0.06em", textTransform: "uppercase" }}>${h}</th>`)}
+                </tr>
+              </thead>
+              <tbody>
+                ${herbs.map((h, i) => {
+                  const info = HERB_SUGGESTIONS.find(x => x.name === h.name);
+                  return html`<tr key=${h.name} style=${{ borderTop: "1px solid var(--border-subtle)" }}>
+                    <td style=${{ padding: "8px 14px" }}>
+                      <div style=${{ fontSize: 13, fontWeight: 500, color: "var(--text-primary)" }}>${h.name}</div>
+                      ${info && html`<div style=${{ fontSize: 10, color: "var(--text-muted)", fontStyle: "italic" }}>${info.latin}</div>`}
+                    </td>
+                    <td style=${{ padding: "8px 14px" }}>
+                      ${info && html`<span style=${{ fontSize: 11, background: "var(--stone-100)", color: "var(--text-secondary)", padding: "2px 7px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-subtle)" }}>${info.category}</span>`}
+                    </td>
+                    <td style=${{ padding: "8px 14px" }}>
+                      <input type="number" value=${h.dose} onChange=${e => updateDose(h.name, e.target.value)}
+                        style=${{ width: 64, fontFamily: "var(--font-mono)", fontSize: 13, color: "var(--text-primary)", background: "var(--stone-50)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-sm)", padding: "4px 8px", outline: "none", textAlign: "right" }} />
+                    </td>
+                    <td style=${{ padding: "8px 14px" }}>
+                      <button onClick=${() => removeHerb(h.name)} style=${{ background: "none", border: "none", cursor: "pointer", color: "var(--text-muted)", fontSize: 15, lineHeight: 1, padding: "2px 4px", borderRadius: "var(--radius-sm)" }}>×</button>
+                    </td>
+                  </tr>`;
+                })}
+              </tbody>
+            </table>
+
+            <div style=${{ padding: "10px 14px", borderTop: "1px solid var(--border-subtle)", position: "relative" }}>
+              <${Input} placeholder="약재 추가..." value=${herbSearch} onChange=${setHerbSearch} icon="plus" />
+              ${filteredSuggestions.length > 0 && html`
+                <div style=${{ position: "absolute", left: 14, right: 14, background: "var(--bg-surface)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-md)", boxShadow: "var(--shadow-lg)", zIndex: 10, marginTop: 4 }}>
+                  ${filteredSuggestions.map(h => html`<div key=${h.name} onClick=${() => addHerb(h)}
+                    style=${{ padding: "8px 14px", cursor: "pointer", display: "flex", justifyContent: "space-between", fontSize: 13, fontFamily: "var(--font-sans)", borderBottom: "1px solid var(--border-subtle)" }}
+                    onMouseEnter=${e => e.currentTarget.style.background = "var(--jade-50)"}
+                    onMouseLeave=${e => e.currentTarget.style.background = "transparent"}>
+                    <span style=${{ fontWeight: 500 }}>${h.name}</span>
+                    <span style=${{ color: "var(--text-muted)", fontSize: 12 }}>${h.category} · 기본 ${h.defaultDose}g</span>
+                  </div>`)}
+                </div>
+              `}
+            </div>
+          </div>
+
+          <div style=${{ background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-lg)", padding: "14px 18px", boxShadow: "var(--shadow-sm)" }}>
+            <div style=${{ fontSize: 12, fontWeight: 600, color: "var(--text-secondary)", marginBottom: 8, fontFamily: "var(--font-sans)" }}>복용 지도 / 메모</div>
+            <textarea value=${memo} onChange=${e => setMemo(e.target.value)} placeholder="복용 방법, 주의사항 등 기재..."
+              rows=${3} style=${{ width: "100%", fontFamily: "var(--font-sans)", fontSize: 13, color: "var(--text-primary)", background: "var(--stone-50)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-md)", padding: "8px 12px", outline: "none", resize: "none", boxSizing: "border-box" }} />
+          </div>
+        </div>
+
+        <div style=${{ width: 240, background: "var(--bg-surface)", borderLeft: "1px solid var(--border-subtle)", padding: "16px", display: "flex", flexDirection: "column", gap: 16, flexShrink: 0, overflowY: "auto" }}>
+          <div>
+            <div style=${{ fontSize: 11, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 10 }}>처방 설정</div>
+            <div style=${{ display: "flex", flexDirection: "column", gap: 12 }}>
+              <div>
+                <label style=${{ fontSize: 12, fontWeight: 500, color: "var(--text-secondary)", display: "block", marginBottom: 4, fontFamily: "var(--font-sans)" }}>처방 일수</label>
+                <div style=${{ display: "flex", alignItems: "center", gap: 6 }}>
+                  <input type="number" value=${days} onChange=${e => setDays(e.target.value)}
+                    style=${{ width: 64, fontFamily: "var(--font-mono)", fontSize: 14, color: "var(--text-primary)", background: "var(--stone-50)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-sm)", padding: "6px 8px", outline: "none", textAlign: "center" }} />
+                  <span style=${{ fontSize: 13, color: "var(--text-secondary)", fontFamily: "var(--font-sans)" }}>일</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style=${{ borderTop: "1px solid var(--border-subtle)", paddingTop: 14 }}>
+            <div style=${{ fontSize: 11, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 10 }}>처방 요약</div>
+            <div style=${{ display: "flex", flexDirection: "column", gap: 6 }}>
+              <div style=${{ display: "flex", justifyContent: "space-between", fontSize: 12, fontFamily: "var(--font-sans)" }}>
+                <span style=${{ color: "var(--text-secondary)" }}>약재 수</span>
+                <span style=${{ fontWeight: 600, color: "var(--text-primary)" }}>${herbs.length}종</span>
+              </div>
+              <div style=${{ display: "flex", justifyContent: "space-between", fontSize: 12, fontFamily: "var(--font-sans)" }}>
+                <span style=${{ color: "var(--text-secondary)" }}>총 중량 / 첩</span>
+                <span style=${{ fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-mono)" }}>${totalWeight}g</span>
+              </div>
+              <div style=${{ display: "flex", justifyContent: "space-between", fontSize: 12, fontFamily: "var(--font-sans)" }}>
+                <span style=${{ color: "var(--text-secondary)" }}>처방 일수</span>
+                <span style=${{ fontWeight: 600, color: "var(--text-primary)" }}>${days}일</span>
+              </div>
+            </div>
+          </div>
+
+          ${saved && html`
+            <div style=${{ background: "var(--status-success-bg)", border: "1px solid var(--status-success-border)", borderRadius: "var(--radius-md)", padding: "10px 12px", display: "flex", gap: 8, alignItems: "center" }}>
+              <${Icon} name="check-circle" size=${14} style=${{ color: "var(--status-success-text)" }} />
+              <span style=${{ fontSize: 12, color: "var(--status-success-text)", fontFamily: "var(--font-sans)" }}>처방이 저장되었습니다.</span>
+            </div>
+          `}
+        </div>
+      </div>
+    </div>`;
+  }
+
+  // ════════════════════════════════════════════════════════════════
+  // PatientManagementScreen
+  // ════════════════════════════════════════════════════════════════
+
+  const PATIENT_MASTER = [
+    { id: 1,  name: "홍길동", gender: "남", dob: "1985-04-12", age: 40, phone: "010-1234-5678", address: "서울 마포구 합정동", regDate: "2024-03-10", lastVisit: "2026-04-22", visitCount: 12, insurance: "자보", tags: ["VIP"],   chief: "두통, 어지러움", status: "active",   memo: "스트레스성 두통",       relations: [{ id: 2, type: "배우자" }, { id: 9, type: "지인 소개" }] },
+    { id: 2,  name: "김수진", gender: "여", dob: "1972-11-30", age: 52, phone: "010-9876-5432", address: "서울 마포구 합정동", regDate: "2024-05-22", lastVisit: "2026-04-22", visitCount: 28, insurance: "건강보험", tags: ["VIP","갱년기"], chief: "요통, 피로감", status: "active",   memo: "홍길동 환자 배우자",     relations: [{ id: 1, type: "배우자" }, { id: 10, type: "친구" }] },
+    { id: 3,  name: "이민호", gender: "남", dob: "1990-07-22", age: 34, phone: "010-5555-1234", address: "서울 강남구 역삼동", regDate: "2025-08-15", lastVisit: "2026-04-22", visitCount: 4,  insurance: "건강보험", tags: ["초진"],  chief: "소화불량, 복통",   status: "active",   memo: "",                      relations: [] },
+    { id: 4,  name: "박지현", gender: "여", dob: "1968-02-14", age: 57, phone: "010-3344-7788", address: "경기 고양시 일산동", regDate: "2023-09-04", lastVisit: "2026-04-22", visitCount: 41, insurance: "건강보험", tags: ["불면증"],  chief: "불면증, 심계항진", status: "active",   memo: "수면제 복용 이력",       relations: [{ id: 5, type: "자녀" }] },
+    { id: 5,  name: "최동욱", gender: "남", dob: "2001-09-05", age: 23, phone: "010-7722-9900", address: "경기 고양시 일산동", regDate: "2025-12-01", lastVisit: "2026-04-22", visitCount: 6,  insurance: "건강보험", tags: ["소아"], chief: "비염, 두통",      status: "active",   memo: "박지현 환자 아들",       relations: [{ id: 4, type: "부모" }] },
+    { id: 6,  name: "정유미", gender: "여", dob: "1995-03-18", age: 30, phone: "010-6611-2233", address: "서울 송파구 잠실동", regDate: "2026-04-10", lastVisit: "2026-04-22", visitCount: 1,  insurance: "건강보험", tags: ["초진","산정특례"], chief: "생리통, 빈혈", status: "active",   memo: "",                      relations: [] },
+    { id: 7,  name: "오세훈", gender: "남", dob: "1979-06-20", age: 46, phone: "010-8800-4411", address: "서울 강서구 화곡동", regDate: "2024-11-22", lastVisit: "2026-04-22", visitCount: 18, insurance: "건강보험", tags: [],  chief: "어깨 통증",        status: "active",   memo: "",                      relations: [] },
+    { id: 8,  name: "윤지영", gender: "여", dob: "2000-01-11", age: 26, phone: "010-2200-8833", address: "서울 종로구 평창동", regDate: "2026-02-04", lastVisit: "2026-04-22", visitCount: 3,  insurance: "건강보험", tags: ["알러지"], chief: "피부 트러블",  status: "active",   memo: "페니실린 알러지",        relations: [] },
+    { id: 9,  name: "강민재", gender: "남", dob: "1988-11-03", age: 37, phone: "010-1122-5566", address: "서울 마포구 망원동", regDate: "2024-07-18", lastVisit: "2026-04-22", visitCount: 9,  insurance: "건강보험", tags: [], chief: "무릎 통증",            status: "active",   memo: "",                      relations: [{ id: 1, type: "지인" }] },
+    { id: 10, name: "임소연", gender: "여", dob: "1993-04-25", age: 33, phone: "010-9911-3344", address: "서울 마포구 합정동", regDate: "2025-04-30", lastVisit: "2026-04-22", visitCount: 7,  insurance: "건강보험", tags: ["갱년기"],  chief: "갱년기 증상",   status: "active",   memo: "",                      relations: [{ id: 2, type: "친구" }] },
+    { id: 11, name: "한지민", gender: "여", dob: "1991-08-14", age: 34, phone: "010-4455-1100", address: "경기 성남시 분당구", regDate: "2025-01-10", lastVisit: "2026-04-15", visitCount: 14, insurance: "건강보험", tags: ["VIP"], chief: "어지러움",       status: "active",   memo: "",                      relations: [] },
+    { id: 12, name: "장우성", gender: "남", dob: "1983-12-02", age: 42, phone: "010-7711-9922", address: "인천 연수구 송도동", regDate: "2026-05-01", lastVisit: "—",         visitCount: 1,  insurance: "자보", tags: ["초진","자보"], chief: "허리 통증",   status: "active",   memo: "교통사고 — 5/1 수상",     relations: [] },
+    { id: 13, name: "송재호", gender: "남", dob: "1976-05-18", age: 49, phone: "010-3322-7755", address: "서울 강동구 천호동", regDate: "2026-04-12", lastVisit: "2026-04-26", visitCount: 5,  insurance: "자보", tags: ["자보"], chief: "교통사고 후 경항통", status: "active", memo: "쌍방 사고 — 4/12 수상",   relations: [] },
+    { id: 14, name: "안세영", gender: "여", dob: "1995-09-23", age: 30, phone: "010-6677-2244", address: "서울 동작구 사당동", regDate: "2026-03-10", lastVisit: "2026-03-20", visitCount: 8,  insurance: "자보", tags: ["자보"], chief: "교통사고 후 요통", status: "active",   memo: "직장 출근길 사고",        relations: [] },
+    { id: 15, name: "노준호", gender: "남", dob: "1955-08-09", age: 70, phone: "010-2244-6688", address: "서울 광진구 자양동", regDate: "2022-06-12", lastVisit: "2025-11-04", visitCount: 67, insurance: "건강보험", tags: ["노인","산정특례"], chief: "관절염, 만성요통", status: "dormant", memo: "오래된 단골",            relations: [{ id: 16, type: "배우자" }] },
+    { id: 16, name: "황순자", gender: "여", dob: "1957-02-22", age: 68, phone: "010-3355-7799", address: "서울 광진구 자양동", regDate: "2022-06-12", lastVisit: "2026-01-20", visitCount: 52, insurance: "건강보험", tags: ["노인"], chief: "어깨, 무릎 통증", status: "active", memo: "노준호 환자 배우자",     relations: [{ id: 15, type: "배우자" }] },
+  ];
+
+  const PATIENT_BY_ID = PATIENT_MASTER.reduce((a, p) => (a[p.id] = p, a), {});
+
+  const RELATION_TYPES = [
+    { key: "배우자",    icon: "heart",      color: "#C4594B" },
+    { key: "부모",      icon: "user",       color: "#5A6E8A" },
+    { key: "자녀",      icon: "smile",      color: "#3A7065" },
+    { key: "형제자매",  icon: "users",      color: "#4A7C6F" },
+    { key: "친구",      icon: "user-plus",  color: "#9A8E82" },
+    { key: "지인",      icon: "user-plus",  color: "#9A8E82" },
+    { key: "지인 소개", icon: "share-2",    color: "#B5873E" },
+    { key: "직장 동료", icon: "briefcase",  color: "#5A6E8A" },
+    { key: "기타",      icon: "circle",     color: "#7A6E60" },
+  ];
+
+  const TAG_COLORS_MGR = {
+    "VIP":      { bg: "var(--amber-100)",    color: "var(--amber-700)",    border: "var(--amber-200)" },
+    "자보":     { bg: "var(--cinnabar-100)", color: "var(--cinnabar-700)", border: "var(--cinnabar-200)" },
+    "초진":     { bg: "var(--jade-50)",      color: "var(--jade-700)",     border: "var(--jade-200)" },
+    "노인":     { bg: "var(--stone-100)",    color: "var(--ink-600)",      border: "var(--stone-300)" },
+    "소아":     { bg: "var(--jade-100)",     color: "var(--jade-700)",     border: "var(--jade-200)" },
+    "알러지":   { bg: "var(--cinnabar-100)", color: "var(--cinnabar-700)", border: "var(--cinnabar-200)" },
+    "산정특례": { bg: "var(--jade-100)",     color: "var(--jade-700)",     border: "var(--jade-200)" },
+    "갱년기":   { bg: "var(--amber-100)",    color: "var(--amber-700)",    border: "var(--amber-200)" },
+    "불면증":   { bg: "var(--stone-200)",    color: "var(--ink-600)",      border: "var(--stone-300)" },
+  };
+
+  const tagStyleMgr = (tag) => TAG_COLORS_MGR[tag] || { bg: "var(--stone-100)", color: "var(--text-secondary)", border: "var(--border-subtle)" };
+
+  const iconBtnSmallMgr = {
+    width: 22, height: 22, display: "inline-flex", alignItems: "center", justifyContent: "center",
+    background: "transparent", border: "1px solid var(--border-subtle)",
+    borderRadius: "var(--radius-sm)", cursor: "pointer", color: "var(--text-muted)",
+  };
+
+  function MgrFilterSidebar({ filter, setFilter, counts }) {
+    const items = [
+      { key: "all",     icon: "users",          label: "전체 환자" },
+      { key: "active",  icon: "heart-pulse",    label: "활동 환자" },
+      { key: "new",     icon: "user-plus",      label: "이달 신규" },
+      { key: "dormant", icon: "moon",           label: "휴면 환자" },
+    ];
+    const tagItems = [
+      { key: "tag:VIP",      icon: "crown",          label: "VIP" },
+      { key: "tag:자보",     icon: "car",            label: "자보 환자" },
+      { key: "tag:알러지",   icon: "alert-triangle", label: "알러지" },
+      { key: "tag:노인",     icon: "user",           label: "노인" },
+      { key: "tag:산정특례", icon: "shield-check",   label: "산정특례" },
+    ];
+    const relItems = [
+      { key: "rel:any",  icon: "share-2", label: "관계 등록 환자" },
+      { key: "rel:none", icon: "user-x",  label: "관계 미등록" },
+    ];
+    const renderRow = (item) => html`<div key=${item.key} onClick=${() => setFilter(item.key)} style=${{
+      display: "flex", alignItems: "center", gap: 8, padding: "7px 10px",
+      borderRadius: "var(--radius-md)", cursor: "pointer",
+      background: filter === item.key ? "var(--jade-100)" : "transparent",
+      color: filter === item.key ? "var(--jade-700)" : "var(--text-secondary)",
+      fontSize: 12, fontWeight: filter === item.key ? 600 : 400,
+      fontFamily: "var(--font-sans)", transition: "all 0.12s",
+    }}>
+      <${Icon} name=${item.icon} size=${13} />
+      <span style=${{ flex: 1 }}>${item.label}</span>
+      <span style=${{ fontFamily: "var(--font-mono)", fontSize: 11, color: filter === item.key ? "var(--jade-700)" : "var(--text-muted)" }}>${counts[item.key] ?? 0}</span>
+    </div>`;
+    return html`<div style=${{ width: 220, flexShrink: 0, borderRight: "1px solid var(--border-subtle)", background: "var(--bg-surface)", overflowY: "auto", padding: "14px 10px" }}>
+      <div style=${{ fontSize: 9, fontWeight: 700, letterSpacing: "0.08em", color: "var(--text-muted)", textTransform: "uppercase", padding: "0 10px", marginBottom: 6, fontFamily: "var(--font-sans)" }}>상태</div>
+      ${items.map(renderRow)}
+      <div style=${{ fontSize: 9, fontWeight: 700, letterSpacing: "0.08em", color: "var(--text-muted)", textTransform: "uppercase", padding: "0 10px", margin: "16px 0 6px", fontFamily: "var(--font-sans)" }}>태그</div>
+      ${tagItems.map(renderRow)}
+      <div style=${{ fontSize: 9, fontWeight: 700, letterSpacing: "0.08em", color: "var(--text-muted)", textTransform: "uppercase", padding: "0 10px", margin: "16px 0 6px", fontFamily: "var(--font-sans)" }}>관계도</div>
+      ${relItems.map(renderRow)}
+    </div>`;
+  }
+
+  function MgrPatientRow({ p, selected, onSelect }) {
+    return html`<div onClick=${() => onSelect(p)} style=${{
+      display: "grid", gridTemplateColumns: "32px 1.2fr 0.7fr 1fr 0.8fr 1.2fr 0.7fr 0.9fr",
+      alignItems: "center", gap: 10, padding: "10px 16px", cursor: "pointer",
+      background: selected ? "var(--jade-50)" : "transparent",
+      borderLeft: `3px solid ${selected ? "var(--jade-500)" : "transparent"}`,
+      borderBottom: "1px solid var(--border-subtle)", fontFamily: "var(--font-sans)", transition: "all 0.1s",
+    }}
+      onMouseEnter=${e => { if (!selected) e.currentTarget.style.background = "var(--stone-50)"; }}
+      onMouseLeave=${e => { if (!selected) e.currentTarget.style.background = "transparent"; }}>
+      <${Avatar} name=${p.name} size=${28} />
+      <div>
+        <div style=${{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)", lineHeight: 1.3 }}>
+          ${p.name}
+          ${p.relations.length > 0 && html`<${Icon} name="share-2" size=${10} style=${{ color: "var(--jade-500)", marginLeft: 5, verticalAlign: "middle" }} />`}
+        </div>
+        <div style=${{ fontSize: 10, color: "var(--text-muted)" }}>${p.gender} · 만 ${p.age}세 · ${p.dob}</div>
+      </div>
+      <span style=${{ fontSize: 11, color: "var(--text-secondary)", fontFamily: "var(--font-mono)" }}>${p.phone}</span>
+      <span style=${{ fontSize: 11, color: "var(--text-secondary)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>${p.chief}</span>
+      <span style=${{
+        fontSize: 10, fontWeight: 600, padding: "2px 8px", borderRadius: "var(--radius-full)", justifySelf: "start",
+        background: p.insurance === "자보" ? "var(--cinnabar-100)" : "var(--stone-100)",
+        color: p.insurance === "자보" ? "var(--cinnabar-700)" : "var(--text-secondary)",
+        border: `1px solid ${p.insurance === "자보" ? "var(--cinnabar-200)" : "var(--border-subtle)"}`,
+      }}>${p.insurance}</span>
+      <div style=${{ display: "flex", gap: 4, flexWrap: "wrap" }}>
+        ${p.tags.slice(0, 2).map(t => { const s = tagStyleMgr(t); return html`<span key=${t} style=${{ fontSize: 10, fontWeight: 600, padding: "1px 7px", borderRadius: "var(--radius-full)", background: s.bg, color: s.color, border: `1px solid ${s.border}` }}>${t}</span>`; })}
+        ${p.tags.length > 2 && html`<span style=${{ fontSize: 10, color: "var(--text-muted)" }}>+${p.tags.length - 2}</span>`}
+      </div>
+      <div style=${{ textAlign: "right" }}>
+        <div style=${{ fontSize: 12, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-mono)" }}>${p.visitCount}회</div>
+        <div style=${{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>${p.lastVisit}</div>
+      </div>
+      <${Icon} name="chevron-right" size=${14} style=${{ color: "var(--text-muted)", justifySelf: "end" }} />
+    </div>`;
+  }
+
+  function RelationsPanel({ patient, allPatients, onPatientClick }) {
+    const [relations, setRelations] = useState(patient.relations || []);
+    const [adding, setAdding] = useState(false);
+    const [searchQ, setSearchQ] = useState("");
+    const [pickedType, setPickedType] = useState("배우자");
+    useEffect(() => { setRelations(patient.relations || []); setAdding(false); setSearchQ(""); }, [patient.id]);
+    const candidates = useMemo(() => {
+      const q = searchQ.trim();
+      const excludeIds = new Set([patient.id, ...relations.map(r => r.id)]);
+      let pool = allPatients.filter(p => !excludeIds.has(p.id));
+      if (q) pool = pool.filter(p => p.name.includes(q) || p.phone.includes(q));
+      return pool.slice(0, 6);
+    }, [searchQ, relations, patient.id, allPatients]);
+    const addRelation = (id) => { setRelations(prev => [...prev, { id, type: pickedType }]); setSearchQ(""); };
+    const removeRelation = (id) => setRelations(prev => prev.filter(r => r.id !== id));
+    const setType = (id, type) => setRelations(prev => prev.map(r => r.id === id ? { ...r, type } : r));
+    return html`<div>
+      <div style=${{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
+        <${Icon} name="share-2" size=${14} style=${{ color: "var(--jade-600)" }} />
+        <span style=${{ fontSize: 13, fontWeight: 700, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>관계도</span>
+        <span style=${{ fontSize: 11, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-mono)", background: "var(--jade-100)", borderRadius: "var(--radius-full)", padding: "1px 7px" }}>${relations.length}건</span>
+        <button onClick=${() => setAdding(!adding)} style=${{ marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 4, fontSize: 11, fontWeight: 500, color: "var(--jade-700)", background: adding ? "var(--jade-100)" : "transparent", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-sm)", padding: "3px 9px", cursor: "pointer", fontFamily: "var(--font-sans)" }}>
+          <${Icon} name=${adding ? "x" : "plus"} size=${11} />${adding ? "닫기" : "관계 추가"}
+        </button>
+      </div>
+      <div style=${{ display: "flex", flexDirection: "column", gap: 6, marginBottom: adding ? 12 : 0 }}>
+        ${relations.length === 0 && html`<div style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)", padding: "12px", textAlign: "center", border: "1px dashed var(--border-subtle)", borderRadius: "var(--radius-md)" }}>등록된 관계가 없습니다. 가족이나 지인을 추가해 보세요.</div>`}
+        ${relations.map(rel => {
+          const target = PATIENT_BY_ID[rel.id];
+          if (!target) return null;
+          const typeInfo = RELATION_TYPES.find(t => t.key === rel.type) || RELATION_TYPES[0];
+          return html`<div key=${rel.id} style=${{ display: "flex", alignItems: "center", gap: 10, padding: "8px 12px", border: "1px solid var(--border-subtle)", background: "var(--stone-50)", borderRadius: "var(--radius-md)" }}>
+            <select value=${rel.type} onChange=${e => setType(rel.id, e.target.value)} style=${{ fontSize: 10, fontWeight: 600, padding: "3px 6px", color: typeInfo.color, background: typeInfo.color + "18", border: "1px solid " + typeInfo.color + "33", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)", cursor: "pointer", outline: "none" }}>
+              ${RELATION_TYPES.map(t => html`<option key=${t.key} value=${t.key}>${t.key}</option>`)}
+            </select>
+            <${Avatar} name=${target.name} size=${26} />
+            <div onClick=${() => onPatientClick(target)} style=${{ cursor: "pointer", flex: 1 }}>
+              <div style=${{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>${target.name}</div>
+              <div style=${{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>${target.gender} · ${target.age}세 · 내원 ${target.visitCount}회</div>
+            </div>
+            <button onClick=${() => onPatientClick(target)} title="차트로 이동" style=${{ ...iconBtnSmallMgr, color: "var(--jade-600)" }}><${Icon} name="external-link" size=${12} /></button>
+            <button onClick=${() => removeRelation(rel.id)} title="삭제" style=${iconBtnSmallMgr}><${Icon} name="x" size=${12} /></button>
+          </div>`;
+        })}
+      </div>
+      ${adding && html`<div style=${{ background: "var(--jade-50)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)", padding: 12 }}>
+        <div style=${{ fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--jade-700)", marginBottom: 6, fontFamily: "var(--font-sans)" }}>관계 유형</div>
+        <div style=${{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: 12 }}>
+          ${RELATION_TYPES.map(t => { const active = pickedType === t.key; return html`<button key=${t.key} onClick=${() => setPickedType(t.key)} style=${{ display: "inline-flex", alignItems: "center", gap: 4, fontSize: 11, padding: "3px 9px", borderRadius: "var(--radius-full)", border: "1px solid " + (active ? t.color : "var(--border-subtle)"), background: active ? t.color + "22" : "var(--bg-surface)", color: active ? t.color : "var(--text-secondary)", fontWeight: active ? 600 : 400, cursor: "pointer", fontFamily: "var(--font-sans)" }}><${Icon} name=${t.icon} size=${10} />${t.key}</button>`; })}
+        </div>
+        <div style=${{ fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--jade-700)", marginBottom: 6, fontFamily: "var(--font-sans)" }}>환자 검색</div>
+        <div style=${{ display: "flex", alignItems: "center", gap: 6, padding: "6px 10px", background: "var(--bg-surface)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-md)", marginBottom: 8 }}>
+          <${Icon} name="search" size=${13} style=${{ color: "var(--text-muted)" }} />
+          <input value=${searchQ} onChange=${e => setSearchQ(e.target.value)} placeholder="등록된 환자 이름·연락처로 검색" style=${{ flex: 1, border: "none", outline: "none", background: "transparent", fontSize: 12, fontFamily: "var(--font-sans)", color: "var(--text-primary)" }} />
+        </div>
+        <div style=${{ display: "flex", flexDirection: "column", gap: 4, maxHeight: 200, overflowY: "auto" }}>
+          ${candidates.length === 0 && html`<div style=${{ fontSize: 11, color: "var(--text-muted)", padding: "8px", textAlign: "center", fontFamily: "var(--font-sans)" }}>검색 결과가 없습니다.</div>`}
+          ${candidates.map(c => html`<button key=${c.id} onClick=${() => addRelation(c.id)} style=${{ display: "flex", alignItems: "center", gap: 10, padding: "7px 10px", background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", cursor: "pointer", textAlign: "left", fontFamily: "var(--font-sans)" }} onMouseEnter=${e => e.currentTarget.style.borderColor = "var(--jade-300)"} onMouseLeave=${e => e.currentTarget.style.borderColor = "var(--border-subtle)"}><${Avatar} name=${c.name} size=${24} /><div style=${{ flex: 1 }}><div style=${{ fontSize: 12, fontWeight: 500, color: "var(--text-primary)" }}>${c.name}</div><div style=${{ fontSize: 10, color: "var(--text-muted)" }}>${c.gender} · ${c.age}세 · ${c.phone}</div></div><${Icon} name="plus" size=${13} style=${{ color: "var(--jade-600)" }} /></button>`)}
+        </div>
+        <div style=${{ marginTop: 10, paddingTop: 10, borderTop: "1px dashed var(--jade-200)" }}>
+          <button style=${{ width: "100%", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 5, fontSize: 11, color: "var(--jade-700)", background: "transparent", border: "1px dashed var(--jade-300)", borderRadius: "var(--radius-sm)", padding: "6px 10px", cursor: "pointer", fontFamily: "var(--font-sans)" }}><${Icon} name="user-plus" size=${11} />등록되지 않은 인물 추가 (이름·연락처만)</button>
+        </div>
+      </div>`}
+    </div>`;
+  }
+
+  function PatientDetailPanel({ patient, onClose, onSelectPatient, onOpenChart, allPatients }) {
+    const [tab, setTab] = useState("info");
+    useEffect(() => { setTab("info"); }, [patient.id]);
+    return html`<div style=${{ width: 420, flexShrink: 0, borderLeft: "1px solid var(--border-subtle)", background: "var(--bg-surface)", display: "flex", flexDirection: "column", overflow: "hidden" }}>
+      <div style=${{ padding: "14px 18px 12px", borderBottom: "1px solid var(--border-subtle)" }}>
+        <div style=${{ display: "flex", alignItems: "flex-start", gap: 12 }}>
+          <${Avatar} name=${patient.name} size=${48} />
+          <div style=${{ flex: 1, minWidth: 0 }}>
+            <div style=${{ fontSize: 18, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-serif)", letterSpacing: "-0.01em" }}>${patient.name}</div>
+            <div style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginTop: 2 }}>${patient.gender} · 만 ${patient.age}세 · ${patient.dob}</div>
+            <div style=${{ display: "flex", flexWrap: "wrap", gap: 4, marginTop: 6 }}>
+              ${patient.tags.map(t => { const s = tagStyleMgr(t); return html`<span key=${t} style=${{ fontSize: 10, fontWeight: 600, padding: "1px 7px", borderRadius: "var(--radius-full)", background: s.bg, color: s.color, border: `1px solid ${s.border}`, fontFamily: "var(--font-sans)" }}>${t}</span>`; })}
+            </div>
+          </div>
+          <button onClick=${onClose} style=${iconBtnSmallMgr}><${Icon} name="x" size=${13} /></button>
+        </div>
+        <div style=${{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8, marginTop: 14 }}>
+          ${[{ label: "총 내원", value: `${patient.visitCount}회` }, { label: "최근 내원", value: patient.lastVisit }, { label: "보험", value: patient.insurance }].map(s => html`<div key=${s.label} style=${{ background: "var(--stone-50)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", padding: "7px 10px" }}><div style=${{ fontSize: 9, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>${s.label}</div><div style=${{ fontSize: 12, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)", marginTop: 2 }}>${s.value}</div></div>`)}
+        </div>
+        <button onClick=${() => onOpenChart(patient)} style=${{ width: "100%", marginTop: 12, padding: "8px 12px", background: "var(--jade-500)", color: "#fff", border: "none", borderRadius: "var(--radius-md)", fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: "var(--font-sans)", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 6, boxShadow: "var(--shadow-sm)" }}>
+          <${Icon} name="file-heart" size=${14} />차트 열기
+        </button>
+      </div>
+      <div style=${{ display: "flex", borderBottom: "1px solid var(--border-subtle)", padding: "0 12px", flexShrink: 0 }}>
+        ${[{ k: "info", l: "기본 정보", i: "user" }, { k: "relations", l: "관계도", i: "share-2", count: patient.relations.length }, { k: "history", l: "내원 이력", i: "clock" }].map(t => html`<button key=${t.k} onClick=${() => setTab(t.k)} style=${{ padding: "10px 12px", border: "none", background: "transparent", cursor: "pointer", fontSize: 12, fontWeight: tab === t.k ? 600 : 400, color: tab === t.k ? "var(--jade-700)" : "var(--text-muted)", borderBottom: `2px solid ${tab === t.k ? "var(--jade-500)" : "transparent"}`, display: "inline-flex", alignItems: "center", gap: 5, fontFamily: "var(--font-sans)", marginBottom: -1 }}><${Icon} name=${t.i} size=${12} />${t.l}${t.count != null && html`<span style=${{ fontSize: 10, fontWeight: 600, color: "var(--jade-700)", background: "var(--jade-100)", padding: "0 5px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-mono)" }}>${t.count}</span>`}</button>`)}
+      </div>
+      <div style=${{ flex: 1, overflowY: "auto", padding: "16px 18px" }}>
+        ${tab === "info" && html`<div style=${{ display: "flex", flexDirection: "column", gap: 14 }}>
+          ${[{ label: "연락처", value: patient.phone, mono: true, icon: "phone" }, { label: "주소", value: patient.address, icon: "map-pin" }, { label: "최근 주소증", value: patient.chief, icon: "stethoscope" }, { label: "등록일", value: patient.regDate, mono: true, icon: "calendar" }, { label: "메모", value: patient.memo || "—", icon: "notebook-pen" }].map(f => html`<div key=${f.label}><div style=${{ display: "flex", alignItems: "center", gap: 5, fontSize: 9, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 4 }}><${Icon} name=${f.icon} size=${10} />${f.label}</div><div style=${{ fontSize: 13, color: "var(--text-primary)", fontFamily: f.mono ? "var(--font-mono)" : "var(--font-sans)", lineHeight: 1.5 }}>${f.value}</div></div>`)}
+        </div>`}
+        ${tab === "relations" && html`<${RelationsPanel} patient=${patient} allPatients=${allPatients} onPatientClick=${onSelectPatient} />`}
+        ${tab === "history" && html`<div>
+          <div style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 10 }}>총 ${patient.visitCount}회 내원 · 최근 ${patient.lastVisit}</div>
+          <div style=${{ display: "flex", flexDirection: "column", gap: 6 }}>
+            ${[{ date: patient.lastVisit, type: "재진", dx: patient.chief, dr: "김민준" }, { date: "2026-04-10", type: "재진", dx: patient.chief, dr: "김민준" }, { date: "2026-03-15", type: "초진", dx: patient.chief, dr: "김민준" }].filter(v => v.date !== "—").map((v, i) => html`<div key=${i} style=${{ display: "flex", alignItems: "center", gap: 10, padding: "8px 10px", background: "var(--stone-50)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)" }}><span style=${{ fontSize: 12, fontFamily: "var(--font-mono)", color: "var(--text-secondary)" }}>${v.date}</span><${Badge} variant=${v.type === "초진" ? "danger" : "neutral"}>${v.type}</${Badge}><span style=${{ flex: 1, fontSize: 12, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>${v.dx}</span><span style=${{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>${v.dr}</span></div>`)}
+          </div>
+        </div>`}
+      </div>
+    </div>`;
+  }
+
+  function PatientManagementScreen({ onOpenChart }) {
+    const [patients] = useState(PATIENT_MASTER);
+    const [filter, setFilter] = useState("all");
+    const [search, setSearch] = useState("");
+    const [sort, setSort] = useState("recent");
+    const [selectedId, setSelectedId] = useState(patients[0]?.id);
+    const counts = useMemo(() => {
+      const tagSet = (key) => patients.filter(p => p.tags.includes(key)).length;
+      return {
+        "all": patients.length, "active": patients.filter(p => p.status === "active").length,
+        "new": patients.filter(p => p.regDate >= "2026-04-01").length,
+        "dormant": patients.filter(p => p.status === "dormant").length,
+        "tag:VIP": tagSet("VIP"), "tag:자보": patients.filter(p => p.insurance === "자보").length,
+        "tag:알러지": tagSet("알러지"), "tag:노인": tagSet("노인"), "tag:산정특례": tagSet("산정특례"),
+        "rel:any": patients.filter(p => p.relations.length > 0).length,
+        "rel:none": patients.filter(p => p.relations.length === 0).length,
+      };
+    }, [patients]);
+    const filtered = useMemo(() => {
+      let list = patients;
+      if (filter === "active")             list = list.filter(p => p.status === "active");
+      else if (filter === "new")           list = list.filter(p => p.regDate >= "2026-04-01");
+      else if (filter === "dormant")       list = list.filter(p => p.status === "dormant");
+      else if (filter.startsWith("tag:")) { const tag = filter.slice(4); list = tag === "자보" ? list.filter(p => p.insurance === "자보") : list.filter(p => p.tags.includes(tag)); }
+      else if (filter === "rel:any")       list = list.filter(p => p.relations.length > 0);
+      else if (filter === "rel:none")      list = list.filter(p => p.relations.length === 0);
+      if (search.trim()) { const q = search.trim(); list = list.filter(p => p.name.includes(q) || p.phone.includes(q) || p.chief.includes(q)); }
+      return [...list].sort((a, b) => {
+        if (sort === "visits") return b.visitCount - a.visitCount;
+        if (sort === "name")   return a.name.localeCompare(b.name, "ko");
+        if (sort === "reg")    return b.regDate.localeCompare(a.regDate);
+        const aV = a.lastVisit === "—" ? "0000-00-00" : a.lastVisit;
+        const bV = b.lastVisit === "—" ? "0000-00-00" : b.lastVisit;
+        return bV.localeCompare(aV);
+      });
+    }, [patients, filter, search, sort]);
+    const selected = patients.find(p => p.id === selectedId);
+    const mgrActions = html`<${F}>
+      <div style=${{ width: 240 }}><${Input} placeholder="이름·연락처·주소증 검색…" value=${search} onChange=${setSearch} icon="search" /></div>
+      <${Button} variant="secondary" size="sm" icon="download">내보내기</${Button}>
+      <${Button} variant="primary" icon="user-plus">신규 등록</${Button}>
+    </${F}>`;
+    return html`<div style=${{ display: "flex", flexDirection: "column", height: "100%", background: "var(--bg-page)" }}>
+      <${TopBar} title="환자 관리" subtitle=${`등록 환자 ${patients.length}명 · 활동 ${counts.active}명 · 이달 신규 ${counts.new}명`} actions=${mgrActions} />
+      <div style=${{ flex: 1, display: "flex", minHeight: 0, overflow: "hidden" }}>
+        <${MgrFilterSidebar} filter=${filter} setFilter=${setFilter} counts=${counts} />
+        <div style=${{ flex: 1, display: "flex", flexDirection: "column", minWidth: 0 }}>
+          <div style=${{ padding: "10px 16px", borderBottom: "1px solid var(--border-subtle)", display: "flex", alignItems: "center", gap: 12, background: "var(--bg-surface)" }}>
+            <span style=${{ fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-sans)" }}><span style=${{ fontWeight: 600, color: "var(--text-primary)" }}>${filtered.length}</span>명</span>
+            <div style=${{ width: 1, height: 16, background: "var(--border-subtle)" }} />
+            <span style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>정렬</span>
+            <div style=${{ display: "flex", gap: 2, background: "var(--stone-100)", borderRadius: "var(--radius-sm)", padding: 2 }}>
+              ${[{ k: "recent", l: "최근 내원" }, { k: "visits", l: "내원 횟수" }, { k: "reg", l: "등록일" }, { k: "name", l: "가나다순" }].map(o => html`<button key=${o.k} onClick=${() => setSort(o.k)} style=${{ fontSize: 11, fontWeight: sort === o.k ? 600 : 400, padding: "3px 9px", borderRadius: "var(--radius-sm)", border: "none", cursor: "pointer", fontFamily: "var(--font-sans)", background: sort === o.k ? "var(--bg-surface)" : "transparent", color: sort === o.k ? "var(--text-primary)" : "var(--text-muted)", boxShadow: sort === o.k ? "var(--shadow-sm)" : "none" }}>${o.l}</button>`)}
+            </div>
+          </div>
+          <div style=${{ display: "grid", gridTemplateColumns: "32px 1.2fr 0.7fr 1fr 0.8fr 1.2fr 0.7fr 0.9fr", alignItems: "center", gap: 10, padding: "8px 16px", background: "var(--stone-50)", borderBottom: "1px solid var(--border-subtle)", fontSize: 9, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>
+            <span></span><span>환자</span><span>연락처</span><span>주소증</span><span>보험</span><span>태그</span><span style=${{ textAlign: "right" }}>내원/최근</span><span></span>
+          </div>
+          <div style=${{ flex: 1, overflowY: "auto" }}>
+            ${filtered.length === 0
+              ? html`<div style=${{ padding: "60px 20px", textAlign: "center", color: "var(--text-muted)", fontSize: 13, fontFamily: "var(--font-sans)" }}><${Icon} name="users" size=${32} style=${{ color: "var(--stone-300)", marginBottom: 10 }} /><div>조건에 맞는 환자가 없습니다.</div></div>`
+              : filtered.map(p => html`<${MgrPatientRow} key=${p.id} p=${p} selected=${selectedId === p.id} onSelect=${() => setSelectedId(p.id)} />`)}
+          </div>
+        </div>
+        ${selected && html`<${PatientDetailPanel} patient=${selected} allPatients=${patients} onClose=${() => setSelectedId(null)} onSelectPatient=${(p) => setSelectedId(p.id)} onOpenChart=${onOpenChart} />`}
+      </div>
+    </div>`;
+  }
+
+  // ════════════════════════════════════════════════════════════════
+  // ScheduleScreen
+  // ════════════════════════════════════════════════════════════════
+
+  const KO_WEEKDAYS_SCH = ["일", "월", "화", "수", "목", "금", "토"];
+  const KO_MONTHS_SCH = ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"];
+  const HOURS_SCH = [];
+  for (let h = 9; h < 19; h++) { HOURS_SCH.push(`${String(h).padStart(2,"0")}:00`); HOURS_SCH.push(`${String(h).padStart(2,"0")}:30`); }
+  const DOCTORS_SCH = [
+    { id: "d1", name: "김민준 원장",  room: "진료실 1", color: "#4A7C6F", bg: "#EEF8F6", border: "#B3D8D1" },
+    { id: "d2", name: "이지영 원장",  room: "진료실 2", color: "#B5873E", bg: "#FAF2E4", border: "#F0DFC0" },
+    { id: "d3", name: "박서윤 부원장", room: "치료실 A", color: "#5A6E8A", bg: "#EEF1F6", border: "#CFD7E3" },
+  ];
+  const TREATMENTS_SCH = [
+    { key: "초진", mins: 40 }, { key: "재진", mins: 20 }, { key: "침치료", mins: 30 },
+    { key: "약침", mins: 25 }, { key: "추나", mins: 40 }, { key: "한약 상담", mins: 30 },
+  ];
+  const TODAY_SCH = new Date(2026, 4, 10);
+  const ymd = (d) => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+  const startOfWeekSch = (d) => { const x = new Date(d); x.setHours(0,0,0,0); x.setDate(x.getDate() - x.getDay()); return x; };
+  const addDaysSch = (d, n) => { const x = new Date(d); x.setDate(x.getDate()+n); return x; };
+  const STATUS_SCH = {
+    "확정": { bg: "var(--jade-50)",      border: "var(--jade-300)",     text: "var(--jade-700)",     dot: "var(--jade-500)"   },
+    "대기": { bg: "var(--amber-100)",    border: "var(--amber-200)",    text: "var(--amber-700)",    dot: "var(--amber-500)"  },
+    "노쇼": { bg: "var(--cinnabar-100)", border: "var(--cinnabar-200)", text: "var(--cinnabar-700)", dot: "var(--cinnabar-600)" },
+    "취소": { bg: "var(--stone-100)",    border: "var(--stone-300)",    text: "var(--text-muted)",   dot: "var(--stone-700)"  },
+  };
+  const minsFromTime = (t) => { const [h,m] = t.split(":").map(Number); return h*60+m; };
+  const timeFromMins = (m) => `${String(Math.floor(m/60)).padStart(2,"0")}:${String(m%60).padStart(2,"0")}`;
+  const buildSeed = () => {
+    const wkStart = startOfWeekSch(TODAY_SCH); const seed = []; let id = 1;
+    seed.push({ id: id++, date: ymd(addDaysSch(wkStart, 1)), start: "09:30", mins: 20, doctor: "d1", patient: "한지민", chief: "어지러움",    visit: "재진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: ymd(addDaysSch(wkStart, 1)), start: "10:30", mins: 30, doctor: "d2", patient: "장우성", chief: "허리 통증",    visit: "초진", status: "확정", insurance: "자보" });
+    seed.push({ id: id++, date: ymd(addDaysSch(wkStart, 1)), start: "14:00", mins: 40, doctor: "d1", patient: "송재호", chief: "경항통",        visit: "재진", status: "확정", insurance: "자보" });
+    seed.push({ id: id++, date: ymd(addDaysSch(wkStart, 2)), start: "10:00", mins: 30, doctor: "d3", patient: "안세영", chief: "요통",          visit: "재진", status: "대기", insurance: "자보" });
+    seed.push({ id: id++, date: ymd(addDaysSch(wkStart, 2)), start: "11:30", mins: 25, doctor: "d2", patient: "정유미", chief: "생리통",        visit: "재진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: ymd(addDaysSch(wkStart, 2)), start: "15:30", mins: 40, doctor: "d1", patient: "오세훈", chief: "어깨 통증",    visit: "재진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: ymd(addDaysSch(wkStart, 3)), start: "09:00", mins: 40, doctor: "d1", patient: "이민호", chief: "소화불량",      visit: "초진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: ymd(addDaysSch(wkStart, 3)), start: "13:30", mins: 20, doctor: "d2", patient: "박지현", chief: "불면증",        visit: "재진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: ymd(addDaysSch(wkStart, 3)), start: "16:00", mins: 30, doctor: "d3", patient: "강민재", chief: "무릎 통증",    visit: "재진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: ymd(addDaysSch(wkStart, 4)), start: "10:30", mins: 30, doctor: "d1", patient: "윤지영", chief: "피부 트러블",  visit: "초진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: ymd(addDaysSch(wkStart, 4)), start: "14:30", mins: 40, doctor: "d2", patient: "최동욱", chief: "비염",          visit: "재진", status: "노쇼", insurance: "건보" });
+    seed.push({ id: id++, date: ymd(addDaysSch(wkStart, 5)), start: "09:30", mins: 25, doctor: "d1", patient: "임소연", chief: "갱년기",        visit: "재진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: ymd(addDaysSch(wkStart, 5)), start: "11:00", mins: 30, doctor: "d3", patient: "홍길동", chief: "두통",          visit: "재진", status: "확정", insurance: "자보" });
+    seed.push({ id: id++, date: ymd(addDaysSch(wkStart, 5)), start: "16:30", mins: 40, doctor: "d2", patient: "김수진", chief: "요통, 피로",   visit: "재진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: ymd(addDaysSch(wkStart, 6)), start: "10:00", mins: 30, doctor: "d1", patient: "장태호", chief: "목 통증",      visit: "초진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: "2026-05-11", start: "09:30", mins: 30, doctor: "d1", patient: "남궁민", chief: "두통",     visit: "재진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: "2026-05-11", start: "14:00", mins: 30, doctor: "d2", patient: "조혜린", chief: "어지럼증", visit: "재진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: "2026-05-12", start: "10:00", mins: 25, doctor: "d3", patient: "이수민", chief: "관절통",   visit: "초진", status: "대기", insurance: "건보" });
+    seed.push({ id: id++, date: "2026-05-13", start: "15:30", mins: 30, doctor: "d1", patient: "조현우", chief: "재진",     visit: "재진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: "2026-05-14", start: "11:00", mins: 40, doctor: "d2", patient: "백수정", chief: "한약 상담",visit: "재진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: "2026-05-15", start: "16:00", mins: 30, doctor: "d1", patient: "권보라", chief: "요통",     visit: "재진", status: "확정", insurance: "건보" });
+    return seed;
+  };
+  const apptLbl = { fontSize: 11, fontWeight: 600, color: "var(--text-secondary)", marginBottom: 5, fontFamily: "var(--font-sans)", letterSpacing: "0.02em" };
+  const apptInput = { width: "100%", padding: "8px 11px", fontSize: 13, fontFamily: "var(--font-sans)", color: "var(--text-primary)", background: "var(--bg-surface)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-md)", outline: "none", boxSizing: "border-box" };
+  const navIconBtnSch = { width: 28, height: 28, display: "inline-flex", alignItems: "center", justifyContent: "center", background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", cursor: "pointer", color: "var(--text-secondary)" };
+  const detailRowSch = { display: "flex", alignItems: "center", gap: 10 };
+  const detailKeySch = { fontSize: 11, fontWeight: 600, color: "var(--text-muted)", letterSpacing: "0.04em", textTransform: "uppercase", fontFamily: "var(--font-sans)", width: 50, flexShrink: 0 };
+  const detailValSch = { fontSize: 13, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flex: 1 };
+
+  function NewAppointmentModal({ initial, onClose, onSubmit }) {
+    const [d, setD] = useState({
+      date: initial?.date || ymd(TODAY_SCH), start: initial?.start || "10:00",
+      doctor: initial?.doctor || "d1", patient: "", visit: "재진", treatment: "재진",
+      chief: "", insurance: "건보", phone: "", notify: true,
+    });
+    const set = (k, v) => setD(p => ({ ...p, [k]: v }));
+    const treatmentMins = (TREATMENTS_SCH.find(t => t.key === d.treatment) || TREATMENTS_SCH[0]).mins;
+    return html`<div onClick=${onClose} style=${{ position: "fixed", inset: 0, zIndex: 100, background: "var(--bg-overlay)", backdropFilter: "blur(4px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+      <div onClick=${e => e.stopPropagation()} style=${{ width: "100%", maxWidth: 560, background: "var(--bg-page)", borderRadius: "var(--radius-xl)", overflow: "hidden", boxShadow: "var(--shadow-xl)", display: "flex", flexDirection: "column" }}>
+        <div style=${{ display: "flex", alignItems: "center", gap: 12, padding: "16px 20px", background: "var(--bg-surface)", borderBottom: "1px solid var(--border-subtle)" }}>
+          <div style=${{ width: 36, height: 36, borderRadius: "var(--radius-md)", background: "var(--jade-100)", color: "var(--jade-700)", display: "flex", alignItems: "center", justifyContent: "center" }}><${Icon} name="calendar-plus" size=${17} /></div>
+          <div style=${{ flex: 1 }}>
+            <div style=${{ fontFamily: "var(--font-serif)", fontSize: 17, fontWeight: 500, color: "var(--text-primary)", letterSpacing: "-0.01em" }}>새 예약</div>
+            <div style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>날짜·시간·환자 정보를 입력해 예약을 추가합니다</div>
+          </div>
+          <button onClick=${onClose} style=${{ width: 28, height: 28, borderRadius: "var(--radius-sm)", background: "transparent", border: "1px solid var(--border-subtle)", cursor: "pointer", color: "var(--text-secondary)", display: "inline-flex", alignItems: "center", justifyContent: "center" }}><${Icon} name="x" size=${15} /></button>
+        </div>
+        <div style=${{ padding: 20, display: "flex", flexDirection: "column", gap: 14, maxHeight: "70vh", overflowY: "auto" }}>
+          <div style=${{ display: "grid", gridTemplateColumns: "1.2fr 1fr 1fr", gap: 10 }}>
+            <div><div style=${apptLbl}>날짜</div><input type="date" value=${d.date} onChange=${e => set("date", e.target.value)} style=${apptInput} /></div>
+            <div><div style=${apptLbl}>시작 시간</div><select value=${d.start} onChange=${e => set("start", e.target.value)} style=${apptInput}>${HOURS_SCH.map(h => html`<option key=${h} value=${h}>${h}</option>`)}</select></div>
+            <div><div style=${apptLbl}>소요 시간</div><div style=${{ ...apptInput, background: "var(--stone-100)", color: "var(--text-secondary)", fontFamily: "var(--font-mono)", display: "flex", alignItems: "center" }}>${treatmentMins}분</div></div>
+          </div>
+          <div>
+            <div style=${apptLbl}>담당의 / 진료실</div>
+            <div style=${{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 6 }}>
+              ${DOCTORS_SCH.map(doc => { const sel = d.doctor === doc.id; return html`<button key=${doc.id} onClick=${() => set("doctor", doc.id)} style=${{ padding: "9px 10px", borderRadius: "var(--radius-md)", border: `1px solid ${sel ? doc.color : "var(--border-subtle)"}`, background: sel ? doc.bg : "var(--bg-surface)", cursor: "pointer", textAlign: "left", fontFamily: "var(--font-sans)", transition: "all 0.12s" }}><div style=${{ display: "flex", alignItems: "center", gap: 6 }}><span style=${{ width: 8, height: 8, borderRadius: "50%", background: doc.color, flexShrink: 0 }} /><span style=${{ fontSize: 12, fontWeight: 600, color: sel ? doc.color : "var(--text-primary)" }}>${doc.name}</span></div><div style=${{ fontSize: 10, color: "var(--text-muted)", marginTop: 2, paddingLeft: 14 }}>${doc.room}</div></button>`; })}
+            </div>
+          </div>
+          <div style=${{ display: "grid", gridTemplateColumns: "1.5fr 1fr", gap: 10 }}>
+            <div><div style=${apptLbl}>진료 / 시술 항목</div><select value=${d.treatment} onChange=${e => set("treatment", e.target.value)} style=${apptInput}>${TREATMENTS_SCH.map(t => html`<option key=${t.key} value=${t.key}>${t.key} · ${t.mins}분</option>`)}</select></div>
+            <div><div style=${apptLbl}>방문 구분</div><div style=${{ display: "flex", background: "var(--stone-100)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", padding: 2, gap: 2 }}>${["초진","재진"].map(v => html`<button key=${v} onClick=${() => set("visit", v)} style=${{ flex: 1, padding: "6px 10px", border: "none", cursor: "pointer", background: d.visit === v ? "var(--bg-surface)" : "transparent", color: d.visit === v ? "var(--text-primary)" : "var(--text-muted)", fontWeight: d.visit === v ? 600 : 400, boxShadow: d.visit === v ? "var(--shadow-sm)" : "none", borderRadius: "var(--radius-sm)", fontSize: 12, fontFamily: "var(--font-sans)" }}>${v}</button>`)}</div></div>
+          </div>
+          <div><div style=${apptLbl}>환자 검색</div><div style=${{ position: "relative" }}><span style=${{ position: "absolute", left: 10, top: "50%", transform: "translateY(-50%)", color: "var(--text-muted)", display: "flex" }}><${Icon} name="search" size=${14} /></span><input value=${d.patient} onChange=${e => set("patient", e.target.value)} placeholder="이름, 차트번호, 전화번호로 검색" style=${{ ...apptInput, paddingLeft: 32 }} /></div></div>
+          <div style=${{ display: "grid", gridTemplateColumns: "1.4fr 1fr", gap: 10 }}>
+            <div><div style=${apptLbl}>연락처</div><input value=${d.phone} onChange=${e => set("phone", e.target.value)} placeholder="010-0000-0000" style=${{ ...apptInput, fontFamily: "var(--font-mono)" }} /></div>
+            <div><div style=${apptLbl}>보험</div><select value=${d.insurance} onChange=${e => set("insurance", e.target.value)} style=${apptInput}><option value="건보">건강보험</option><option value="자보">자동차보험</option><option value="산재">산재</option><option value="일반">일반(비급여)</option></select></div>
+          </div>
+          <div><div style=${apptLbl}>예약 사유 / 메모</div><textarea value=${d.chief} onChange=${e => set("chief", e.target.value)} placeholder="예: 허리 통증 재진, MRI 결과 상담" style=${{ ...apptInput, minHeight: 56, resize: "vertical", padding: "9px 11px" }} /></div>
+          <label style=${{ display: "flex", alignItems: "center", gap: 8, padding: "10px 12px", background: "var(--jade-50)", border: "1px solid var(--jade-100)", borderRadius: "var(--radius-md)", cursor: "pointer" }}>
+            <input type="checkbox" checked=${d.notify} onChange=${e => set("notify", e.target.checked)} style=${{ accentColor: "var(--jade-500)" }} />
+            <span style=${{ fontSize: 12, color: "var(--jade-700)", fontFamily: "var(--font-sans)" }}>예약 확정 SMS 발송</span>
+            <span style=${{ marginLeft: "auto", fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>D-${Math.max(0, Math.round((new Date(d.date) - new Date(ymd(TODAY_SCH)))/86400000))}</span>
+          </label>
+        </div>
+        <div style=${{ padding: "12px 20px", background: "var(--bg-surface)", borderTop: "1px solid var(--border-subtle)", display: "flex", gap: 8, justifyContent: "flex-end" }}>
+          <button onClick=${onClose} style=${{ padding: "8px 16px", fontSize: 13, fontWeight: 500, background: "transparent", border: "1px solid var(--border-default)", borderRadius: "var(--radius-md)", color: "var(--text-secondary)", cursor: "pointer", fontFamily: "var(--font-sans)" }}>취소</button>
+          <button onClick=${() => onSubmit && onSubmit({ ...d, mins: treatmentMins, status: "확정" })} disabled=${!d.patient} style=${{ padding: "8px 18px", fontSize: 13, fontWeight: 600, background: d.patient ? "var(--jade-500)" : "var(--stone-300)", border: "none", borderRadius: "var(--radius-md)", color: "#fff", cursor: d.patient ? "pointer" : "not-allowed", fontFamily: "var(--font-sans)", display: "inline-flex", alignItems: "center", gap: 6, boxShadow: d.patient ? "var(--shadow-sm)" : "none" }}><${Icon} name="calendar-check" size=${13} />예약 등록</button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function ApptBlock({ appt, onClick, hourHeightPx }) {
+    const startMin = minsFromTime(appt.start);
+    const top = ((startMin - 9*60) / 60) * hourHeightPx;
+    const height = (appt.mins / 60) * hourHeightPx;
+    const doc = DOCTORS_SCH.find(x => x.id === appt.doctor);
+    const status = STATUS_SCH[appt.status] || STATUS_SCH["확정"];
+    return html`<div onClick=${(e) => { e.stopPropagation(); onClick && onClick(appt); }} style=${{ position: "absolute", left: 3, right: 3, top: top + 2, height: Math.max(height - 4, 22), background: doc.bg, border: `1px solid ${doc.border}`, borderLeft: `3px solid ${doc.color}`, borderRadius: "var(--radius-sm)", padding: "4px 6px", cursor: "pointer", overflow: "hidden", fontFamily: "var(--font-sans)", opacity: appt.status === "노쇼" || appt.status === "취소" ? 0.6 : 1, textDecoration: appt.status === "취소" ? "line-through" : "none" }}>
+      <div style=${{ display: "flex", alignItems: "center", gap: 4, marginBottom: 2 }}>
+        <span style=${{ fontSize: 9, fontFamily: "var(--font-mono)", fontWeight: 600, color: doc.color }}>${appt.start}</span>
+        <span style=${{ width: 4, height: 4, borderRadius: "50%", background: status.dot }} />
+        <span style=${{ fontSize: 9, color: status.text, fontWeight: 600 }}>${appt.status}</span>
+      </div>
+      <div style=${{ fontSize: 11, fontWeight: 600, color: "var(--text-primary)", lineHeight: 1.2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>${appt.patient}</div>
+      ${height > 36 && html`<div style=${{ fontSize: 10, color: "var(--text-muted)", lineHeight: 1.3, marginTop: 2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>${appt.chief}</div>`}
+    </div>`;
+  }
+
+  function DayView({ date, appts, onCellClick, onApptClick, doctorFilter }) {
+    const HOUR_PX = 56;
+    const dayStr = ymd(date);
+    const todays = appts.filter(a => a.date === dayStr && (!doctorFilter || a.doctor === doctorFilter));
+    const visibleDocs = doctorFilter ? DOCTORS_SCH.filter(d => d.id === doctorFilter) : DOCTORS_SCH;
+    return html`<div style=${{ display: "flex", flexDirection: "column", flex: 1, minHeight: 0 }}>
+      <div style=${{ display: "grid", gridTemplateColumns: `64px repeat(${visibleDocs.length}, 1fr)`, borderBottom: "1px solid var(--border-subtle)", background: "var(--bg-surface)", flexShrink: 0 }}>
+        <div style=${{ padding: "10px 8px", fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)", textAlign: "right" }}>시간</div>
+        ${visibleDocs.map(doc => html`<div key=${doc.id} style=${{ padding: "10px 14px", borderLeft: "1px solid var(--border-subtle)", display: "flex", alignItems: "center", gap: 8 }}>
+          <span style=${{ width: 9, height: 9, borderRadius: "50%", background: doc.color }} />
+          <div><div style=${{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>${doc.name}</div><div style=${{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>${doc.room} · 예약 ${todays.filter(a => a.doctor === doc.id).length}건</div></div>
+        </div>`)}
+      </div>
+      <div style=${{ flex: 1, overflowY: "auto", background: "var(--bg-surface)" }}>
+        <div style=${{ display: "grid", gridTemplateColumns: `64px repeat(${visibleDocs.length}, 1fr)`, position: "relative" }}>
+          <div>${Array.from({ length: 10 }).map((_, i) => html`<div key=${i} style=${{ height: HOUR_PX, padding: "4px 8px", borderTop: "1px solid var(--stone-200)", fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)", textAlign: "right" }}>${String(9+i).padStart(2,"0")}:00</div>`)}</div>
+          ${visibleDocs.map(doc => html`<div key=${doc.id} style=${{ position: "relative", borderLeft: "1px solid var(--border-subtle)" }}>
+            ${Array.from({ length: 10 }).map((_, i) => html`<div key=${i} onClick=${() => onCellClick && onCellClick({ date: dayStr, start: `${String(9+i).padStart(2,"0")}:00`, doctor: doc.id })} style=${{ height: HOUR_PX, borderTop: "1px solid var(--stone-200)", cursor: "pointer", position: "relative" }}><div style=${{ position: "absolute", top: HOUR_PX/2, left: 0, right: 0, borderTop: "1px dashed var(--stone-200)" }} /></div>`)}
+            ${todays.filter(a => a.doctor === doc.id).map(a => html`<${ApptBlock} key=${a.id} appt=${a} onClick=${onApptClick} hourHeightPx=${HOUR_PX} />`)}
+          </div>`)}
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function WeekView({ date, appts, onCellClick, onApptClick, doctorFilter }) {
+    const HOUR_PX = 52;
+    const wkStart = startOfWeekSch(date);
+    const days = Array.from({ length: 7 }, (_, i) => addDaysSch(wkStart, i));
+    const todayStr = ymd(TODAY_SCH);
+    const filtered = doctorFilter ? appts.filter(a => a.doctor === doctorFilter) : appts;
+    return html`<div style=${{ display: "flex", flexDirection: "column", flex: 1, minHeight: 0 }}>
+      <div style=${{ display: "grid", gridTemplateColumns: "56px repeat(7, 1fr)", borderBottom: "1px solid var(--border-subtle)", background: "var(--bg-surface)", flexShrink: 0 }}>
+        <div style=${{ padding: "10px 6px", fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)", textAlign: "right" }}>시간</div>
+        ${days.map((d, i) => { const isToday = ymd(d) === todayStr; const dayCt = filtered.filter(a => a.date === ymd(d)).length; return html`<div key=${i} style=${{ padding: "8px 10px", borderLeft: "1px solid var(--border-subtle)", background: isToday ? "var(--jade-50)" : "transparent" }}>
+          <div style=${{ display: "flex", alignItems: "baseline", gap: 6 }}>
+            <span style=${{ fontSize: 10, fontWeight: 600, color: i === 0 ? "var(--cinnabar-600)" : i === 6 ? "var(--jade-600)" : "var(--text-muted)", fontFamily: "var(--font-sans)" }}>${KO_WEEKDAYS_SCH[i]}</span>
+            <span style=${{ fontFamily: "var(--font-serif)", fontSize: 18, fontWeight: isToday ? 600 : 400, color: isToday ? "var(--jade-700)" : "var(--text-primary)", letterSpacing: "-0.01em" }}>${d.getDate()}</span>
+            ${dayCt > 0 && html`<span style=${{ marginLeft: "auto", fontSize: 10, fontWeight: 600, color: "var(--jade-700)", background: "var(--jade-100)", borderRadius: "var(--radius-full)", padding: "1px 7px", fontFamily: "var(--font-mono)" }}>${dayCt}</span>`}
+          </div>
+        </div>`; })}
+      </div>
+      <div style=${{ flex: 1, overflowY: "auto", background: "var(--bg-surface)" }}>
+        <div style=${{ display: "grid", gridTemplateColumns: "56px repeat(7, 1fr)", position: "relative" }}>
+          <div>${Array.from({ length: 10 }).map((_, i) => html`<div key=${i} style=${{ height: HOUR_PX, padding: "4px 8px", borderTop: "1px solid var(--stone-200)", fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)", textAlign: "right" }}>${String(9+i).padStart(2,"0")}:00</div>`)}</div>
+          ${days.map((d, di) => { const dayStr = ymd(d); const isToday = dayStr === todayStr; const dayAppts = filtered.filter(a => a.date === dayStr); return html`<div key=${di} style=${{ position: "relative", borderLeft: "1px solid var(--border-subtle)", background: isToday ? "rgba(74,124,111,0.03)" : "transparent" }}>
+            ${Array.from({ length: 10 }).map((_, hi) => html`<div key=${hi} onClick=${() => onCellClick && onCellClick({ date: dayStr, start: `${String(9+hi).padStart(2,"0")}:00` })} style=${{ height: HOUR_PX, borderTop: "1px solid var(--stone-200)", cursor: "pointer", position: "relative" }}><div style=${{ position: "absolute", top: HOUR_PX/2, left: 0, right: 0, borderTop: "1px dashed var(--stone-200)" }} /></div>`)}
+            ${dayAppts.map(a => html`<${ApptBlock} key=${a.id} appt=${a} onClick=${onApptClick} hourHeightPx=${HOUR_PX} />`)}
+          </div>`; })}
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function MonthView({ date, appts, onCellClick, onDayClick, onApptClick, doctorFilter }) {
+    const view = { y: date.getFullYear(), m: date.getMonth() };
+    const filtered = doctorFilter ? appts.filter(a => a.doctor === doctorFilter) : appts;
+    const cells = useMemo(() => {
+      const first = new Date(view.y, view.m, 1), last = new Date(view.y, view.m + 1, 0);
+      const startWk = first.getDay(), days = last.getDate(), prevDays = new Date(view.y, view.m, 0).getDate();
+      const out = [];
+      for (let i = startWk - 1; i >= 0; i--) out.push({ d: new Date(view.y, view.m - 1, prevDays - i), muted: true });
+      for (let dn = 1; dn <= days; dn++) out.push({ d: new Date(view.y, view.m, dn), muted: false });
+      while (out.length % 7 !== 0) { const lx = out[out.length - 1].d; out.push({ d: new Date(lx.getFullYear(), lx.getMonth(), lx.getDate()+1), muted: true }); }
+      return out;
+    }, [view.y, view.m]);
+    const todayStr = ymd(TODAY_SCH);
+    return html`<div style=${{ display: "flex", flexDirection: "column", flex: 1, minHeight: 0, background: "var(--bg-surface)" }}>
+      <div style=${{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", borderBottom: "1px solid var(--border-subtle)", background: "var(--stone-50)", flexShrink: 0 }}>
+        ${KO_WEEKDAYS_SCH.map((w, i) => html`<div key=${w} style=${{ padding: "8px 10px", borderLeft: i > 0 ? "1px solid var(--border-subtle)" : "none", fontSize: 11, fontWeight: 700, color: i === 0 ? "var(--cinnabar-600)" : i === 6 ? "var(--jade-600)" : "var(--text-secondary)", fontFamily: "var(--font-sans)", letterSpacing: "0.04em" }}>${w}요일</div>`)}
+      </div>
+      <div style=${{ flex: 1, display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gridAutoRows: "1fr", overflowY: "auto" }}>
+        ${cells.map((c, i) => { const dayStr = ymd(c.d); const dayAppts = filtered.filter(a => a.date === dayStr); const isToday = dayStr === todayStr; const dow = c.d.getDay(); return html`<div key=${i} onClick=${() => onDayClick && onDayClick(c.d)} style=${{ minHeight: 110, borderTop: i >= 7 ? "1px solid var(--stone-200)" : "none", borderLeft: i % 7 !== 0 ? "1px solid var(--stone-200)" : "none", background: c.muted ? "var(--stone-50)" : isToday ? "var(--jade-50)" : "var(--bg-surface)", padding: "6px 8px", cursor: c.muted ? "default" : "pointer", display: "flex", flexDirection: "column", gap: 3, opacity: c.muted ? 0.4 : 1, position: "relative" }}>
+          <div style=${{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <span style=${{ fontFamily: "var(--font-mono)", fontSize: 12, fontWeight: isToday ? 700 : 500, color: isToday ? "#fff" : dow === 0 ? "var(--cinnabar-600)" : dow === 6 ? "var(--jade-600)" : "var(--text-primary)", background: isToday ? "var(--jade-500)" : "transparent", borderRadius: "50%", width: 22, height: 22, display: "flex", alignItems: "center", justifyContent: "center" }}>${c.d.getDate()}</span>
+            ${dayAppts.length > 0 && html`<span style=${{ fontSize: 10, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-mono)" }}>${dayAppts.length}건</span>`}
+          </div>
+          <div style=${{ display: "flex", flexDirection: "column", gap: 2, overflow: "hidden" }}>
+            ${dayAppts.slice(0, 3).map(a => { const doc = DOCTORS_SCH.find(x => x.id === a.doctor); return html`<div key=${a.id} onClick=${(e) => { e.stopPropagation(); onApptClick && onApptClick(a); }} style=${{ display: "flex", alignItems: "center", gap: 5, padding: "2px 5px", background: doc.bg, borderLeft: `2px solid ${doc.color}`, borderRadius: 2, fontSize: 10, fontFamily: "var(--font-sans)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}><span style=${{ fontFamily: "var(--font-mono)", color: doc.color, fontWeight: 600, flexShrink: 0 }}>${a.start}</span><span style=${{ color: "var(--text-primary)", fontWeight: 500, overflow: "hidden", textOverflow: "ellipsis" }}>${a.patient}</span></div>`; })}
+            ${dayAppts.length > 3 && html`<div style=${{ fontSize: 10, color: "var(--text-muted)", paddingLeft: 5, fontFamily: "var(--font-sans)" }}>+${dayAppts.length - 3}건 더</div>`}
+          </div>
+        </div>`; })}
+      </div>
+    </div>`;
+  }
+
+  function ApptDetail({ appt, onClose, onChangeStatus }) {
+    if (!appt) return null;
+    const doc = DOCTORS_SCH.find(x => x.id === appt.doctor);
+    const status = STATUS_SCH[appt.status] || STATUS_SCH["확정"];
+    const endMin = minsFromTime(appt.start) + appt.mins;
+    return html`<div onClick=${onClose} style=${{ position: "fixed", inset: 0, zIndex: 80, background: "rgba(17,30,28,0.3)", display: "flex", justifyContent: "flex-end" }}>
+      <div onClick=${e => e.stopPropagation()} style=${{ width: 380, height: "100%", background: "var(--bg-surface)", boxShadow: "var(--shadow-xl)", display: "flex", flexDirection: "column" }}>
+        <div style=${{ padding: "16px 20px", borderBottom: "1px solid var(--border-subtle)", display: "flex", alignItems: "center", gap: 12, background: doc.bg, borderLeft: `4px solid ${doc.color}` }}>
+          <${Avatar} name=${appt.patient} size=${40} />
+          <div style=${{ flex: 1 }}>
+            <div style=${{ fontFamily: "var(--font-serif)", fontSize: 18, fontWeight: 500, color: "var(--text-primary)" }}>${appt.patient}</div>
+            <div style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>${appt.visit} · ${appt.insurance}</div>
+          </div>
+          <button onClick=${onClose} style=${{ width: 28, height: 28, borderRadius: "var(--radius-sm)", background: "rgba(255,255,255,0.6)", border: "1px solid var(--border-subtle)", cursor: "pointer", color: "var(--text-secondary)", display: "inline-flex", alignItems: "center", justifyContent: "center" }}><${Icon} name="x" size=${15} /></button>
+        </div>
+        <div style=${{ flex: 1, overflowY: "auto", padding: 20, display: "flex", flexDirection: "column", gap: 14 }}>
+          <div style=${detailRowSch}><${Icon} name="calendar" size=${14} style=${{ color: "var(--text-muted)" }} /><span style=${detailKeySch}>날짜</span><span style=${detailValSch}>${appt.date}</span></div>
+          <div style=${detailRowSch}><${Icon} name="clock" size=${14} style=${{ color: "var(--text-muted)" }} /><span style=${detailKeySch}>시간</span><span style=${detailValSch}>${appt.start} – ${timeFromMins(endMin)} (${appt.mins}분)</span></div>
+          <div style=${detailRowSch}><${Icon} name="stethoscope" size=${14} style=${{ color: "var(--text-muted)" }} /><span style=${detailKeySch}>담당의</span><span style=${detailValSch}>${doc.name} · ${doc.room}</span></div>
+          <div style=${detailRowSch}><${Icon} name="file-text" size=${14} style=${{ color: "var(--text-muted)" }} /><span style=${detailKeySch}>주소증</span><span style=${detailValSch}>${appt.chief}</span></div>
+          <div style=${detailRowSch}><${Icon} name="circle-dot" size=${14} style=${{ color: status.dot }} /><span style=${detailKeySch}>상태</span><span style=${{ ...detailValSch, color: status.text, background: status.bg, border: `1px solid ${status.border}`, borderRadius: "var(--radius-full)", padding: "2px 10px", fontSize: 11, fontWeight: 600 }}>${appt.status}</span></div>
+          <div style=${{ marginTop: 4, padding: 12, background: "var(--stone-50)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", display: "flex", flexDirection: "column", gap: 6 }}>
+            <div style=${{ fontSize: 10, fontWeight: 700, color: "var(--text-muted)", letterSpacing: "0.08em", textTransform: "uppercase", fontFamily: "var(--font-sans)" }}>상태 변경</div>
+            <div style=${{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 6 }}>
+              ${Object.keys(STATUS_SCH).map(s => { const sc = STATUS_SCH[s]; const sel = appt.status === s; return html`<button key=${s} onClick=${() => onChangeStatus && onChangeStatus(appt.id, s)} style=${{ padding: "6px 4px", borderRadius: "var(--radius-sm)", border: `1px solid ${sel ? sc.border : "var(--border-subtle)"}`, background: sel ? sc.bg : "var(--bg-surface)", color: sel ? sc.text : "var(--text-secondary)", fontSize: 11, fontWeight: sel ? 600 : 400, cursor: "pointer", fontFamily: "var(--font-sans)", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 4 }}><span style=${{ width: 6, height: 6, borderRadius: "50%", background: sc.dot }} />${s}</button>`; })}
+            </div>
+          </div>
+        </div>
+        <div style=${{ padding: 14, borderTop: "1px solid var(--border-subtle)", display: "flex", gap: 8 }}>
+          <button style=${{ flex: 1, padding: "8px 12px", fontSize: 12, fontWeight: 500, background: "transparent", border: "1px solid var(--border-default)", borderRadius: "var(--radius-md)", color: "var(--text-secondary)", cursor: "pointer", fontFamily: "var(--font-sans)", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 5 }}><${Icon} name="message-circle" size=${12} />SMS 발송</button>
+          <button style=${{ flex: 1, padding: "8px 12px", fontSize: 12, fontWeight: 600, background: "var(--jade-500)", border: "none", borderRadius: "var(--radius-md)", color: "#fff", cursor: "pointer", fontFamily: "var(--font-sans)", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 5 }}><${Icon} name="user-check" size=${12} />접수 처리</button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function ScheduleScreen() {
+    const [appts, setAppts] = useState(() => { try { const saved = localStorage.getItem("komes_appts_v1"); return saved ? JSON.parse(saved) : buildSeed(); } catch { return buildSeed(); } });
+    useEffect(() => { localStorage.setItem("komes_appts_v1", JSON.stringify(appts)); }, [appts]);
+    const [view, setView] = useState("week");
+    const [date, setDate] = useState(TODAY_SCH);
+    const [doctorFilter, setDoctorFilter] = useState("");
+    const [showNew, setShowNew] = useState(false);
+    const [newInitial, setNewInitial] = useState(null);
+    const [selectedAppt, setSelectedAppt] = useState(null);
+    const goPrev = () => { if (view === "day") setDate(addDaysSch(date, -1)); else if (view === "week") setDate(addDaysSch(date, -7)); else setDate(new Date(date.getFullYear(), date.getMonth() - 1, 1)); };
+    const goNext = () => { if (view === "day") setDate(addDaysSch(date, 1)); else if (view === "week") setDate(addDaysSch(date, 7)); else setDate(new Date(date.getFullYear(), date.getMonth() + 1, 1)); };
+    const headerLabel = (() => {
+      if (view === "day") return `${date.getFullYear()}년 ${KO_MONTHS_SCH[date.getMonth()]} ${date.getDate()}일 (${KO_WEEKDAYS_SCH[date.getDay()]})`;
+      if (view === "week") { const s = startOfWeekSch(date), e = addDaysSch(s, 6); return `${s.getFullYear()}년 ${s.getMonth()+1}월 ${s.getDate()}일 — ${e.getDate()}일`; }
+      return `${date.getFullYear()}년 ${KO_MONTHS_SCH[date.getMonth()]}`;
+    })();
+    const periodAppts = (() => {
+      if (view === "day") return appts.filter(a => a.date === ymd(date));
+      if (view === "week") { const s = startOfWeekSch(date), e = addDaysSch(s, 6); return appts.filter(a => a.date >= ymd(s) && a.date <= ymd(e)); }
+      const my = `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,"0")}`;
+      return appts.filter(a => a.date.startsWith(my));
+    })();
+    const periodFiltered = doctorFilter ? periodAppts.filter(a => a.doctor === doctorFilter) : periodAppts;
+    const newCnt = periodFiltered.filter(a => a.visit === "초진").length;
+    const reCnt = periodFiltered.filter(a => a.visit === "재진").length;
+    const noShowCnt = periodFiltered.filter(a => a.status === "노쇼").length;
+    const onCellClick = (init) => { setNewInitial(init); setShowNew(true); };
+    const onNewSubmit = (a) => { setAppts(prev => [...prev, { ...a, id: Math.max(0, ...prev.map(x => x.id)) + 1 }]); setShowNew(false); };
+    const onChangeStatus = (id, status) => { setAppts(prev => prev.map(a => a.id === id ? { ...a, status } : a)); setSelectedAppt(prev => prev ? { ...prev, status } : null); };
+    const schActions = html`<${F}>
+      <div style=${{ display: "flex", background: "var(--stone-200)", borderRadius: "var(--radius-md)", padding: 2, gap: 2 }}>
+        ${[{ key: "day", l: "일간" }, { key: "week", l: "주간" }, { key: "month", l: "월간" }].map(v => html`<button key=${v.key} onClick=${() => setView(v.key)} style=${{ padding: "5px 14px", border: "none", cursor: "pointer", borderRadius: "var(--radius-sm)", background: view === v.key ? "var(--bg-surface)" : "transparent", boxShadow: view === v.key ? "var(--shadow-sm)" : "none", color: view === v.key ? "var(--text-primary)" : "var(--text-muted)", fontWeight: view === v.key ? 600 : 400, fontSize: 12, fontFamily: "var(--font-sans)" }}>${v.l}</button>`)}
+      </div>
+      <${Button} variant="primary" icon="calendar-plus" onClick=${() => { setNewInitial(null); setShowNew(true); }}>새 예약</${Button}>
+    </${F}>`;
+    return html`<div style=${{ display: "flex", flexDirection: "column", height: "100%", background: "var(--bg-page)" }}>
+      <${TopBar} title="예약 관리" subtitle=${`${headerLabel} · 총 ${periodFiltered.length}건 (초진 ${newCnt} · 재진 ${reCnt}${noShowCnt ? ` · 노쇼 ${noShowCnt}` : ""})`} actions=${schActions} />
+      <div style=${{ flex: 1, display: "flex", flexDirection: "column", minHeight: 0 }}>
+        <div style=${{ display: "flex", alignItems: "center", gap: 12, padding: "10px 24px", background: "var(--bg-surface)", borderBottom: "1px solid var(--border-subtle)", flexShrink: 0 }}>
+          <div style=${{ display: "flex", alignItems: "center", gap: 4 }}>
+            <button onClick=${goPrev} style=${navIconBtnSch}><${Icon} name="chevron-left" size=${16} /></button>
+            <button onClick=${() => setDate(TODAY_SCH)} style=${{ padding: "5px 12px", fontSize: 12, fontWeight: 500, background: "var(--bg-surface)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-md)", color: "var(--text-secondary)", cursor: "pointer", fontFamily: "var(--font-sans)" }}>오늘</button>
+            <button onClick=${goNext} style=${navIconBtnSch}><${Icon} name="chevron-right" size=${16} /></button>
+          </div>
+          <div style=${{ fontFamily: "var(--font-serif)", fontSize: 18, fontWeight: 500, color: "var(--text-primary)", letterSpacing: "-0.01em" }}>${headerLabel}</div>
+          <div style=${{ flex: 1 }} />
+          <div style=${{ display: "flex", alignItems: "center", gap: 6 }}>
+            <span style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)", letterSpacing: "0.04em" }}>담당의</span>
+            <button onClick=${() => setDoctorFilter("")} style=${{ padding: "4px 10px", fontSize: 11, fontWeight: doctorFilter === "" ? 600 : 400, background: doctorFilter === "" ? "var(--jade-500)" : "var(--bg-surface)", color: doctorFilter === "" ? "#fff" : "var(--text-secondary)", border: `1px solid ${doctorFilter === "" ? "var(--jade-500)" : "var(--border-subtle)"}`, borderRadius: "var(--radius-full)", cursor: "pointer", fontFamily: "var(--font-sans)" }}>전체</button>
+            ${DOCTORS_SCH.map(doc => { const sel = doctorFilter === doc.id; return html`<button key=${doc.id} onClick=${() => setDoctorFilter(doc.id)} style=${{ padding: "4px 10px", fontSize: 11, fontWeight: sel ? 600 : 400, background: sel ? doc.bg : "var(--bg-surface)", color: sel ? doc.color : "var(--text-secondary)", border: `1px solid ${sel ? doc.color : "var(--border-subtle)"}`, borderRadius: "var(--radius-full)", cursor: "pointer", fontFamily: "var(--font-sans)", display: "inline-flex", alignItems: "center", gap: 5 }}><span style=${{ width: 6, height: 6, borderRadius: "50%", background: doc.color }} />${doc.name}</button>`; })}
+          </div>
+        </div>
+        <div style=${{ flex: 1, minHeight: 0, padding: "0 24px 16px", display: "flex", flexDirection: "column" }}>
+          <div style=${{ flex: 1, minHeight: 0, marginTop: 16, background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-lg)", overflow: "hidden", display: "flex", flexDirection: "column", boxShadow: "var(--shadow-sm)" }}>
+            ${view === "day"   && html`<${DayView}   date=${date} appts=${appts} onCellClick=${onCellClick} onApptClick=${setSelectedAppt} doctorFilter=${doctorFilter} />`}
+            ${view === "week"  && html`<${WeekView}  date=${date} appts=${appts} onCellClick=${onCellClick} onApptClick=${setSelectedAppt} doctorFilter=${doctorFilter} />`}
+            ${view === "month" && html`<${MonthView} date=${date} appts=${appts} onApptClick=${setSelectedAppt} onDayClick=${(d) => { setDate(d); setView("day"); }} doctorFilter=${doctorFilter} />`}
+          </div>
+          <div style=${{ display: "flex", gap: 14, padding: "10px 4px", flexShrink: 0 }}>
+            ${Object.keys(STATUS_SCH).map(s => { const sc = STATUS_SCH[s]; return html`<div key=${s} style=${{ display: "inline-flex", alignItems: "center", gap: 5 }}><span style=${{ width: 8, height: 8, borderRadius: "50%", background: sc.dot }} /><span style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>${s}</span></div>`; })}
+            <div style=${{ width: 1, height: 14, background: "var(--border-subtle)" }} />
+            ${DOCTORS_SCH.map(doc => html`<div key=${doc.id} style=${{ display: "inline-flex", alignItems: "center", gap: 5 }}><span style=${{ width: 10, height: 10, borderRadius: 2, background: doc.bg, border: `2px solid ${doc.color}` }} /><span style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>${doc.name}</span></div>`)}
+          </div>
+        </div>
+      </div>
+      ${showNew && html`<${NewAppointmentModal} initial=${newInitial} onClose=${() => setShowNew(false)} onSubmit=${onNewSubmit} />`}
+      ${selectedAppt && html`<${ApptDetail} appt=${selectedAppt} onClose=${() => setSelectedAppt(null)} onChangeStatus=${onChangeStatus} />`}
+    </div>`;
+  }
+
+  // ════════════════════════════════════════════════════════════════
+  // PaymentScreen
+  // ════════════════════════════════════════════════════════════════
+
+  const PAYMENT_QUEUE_SEED = [
+    { id: "p1", chartNo: "C-00231", name: "이재현", gender: "남", age: 34, dob: "1991-12-26", insurance: "건보", visit: "재진", visitTime: "16:42", chargeTime: "17:55", doctor: "김민준", department: "한방내과", status: "대기", diagnoses: [{ code: "M54.5", label: "요통" }, { code: "M62.6", label: "근육 긴장" }], items: [{ kind: "진찰", label: "한의 외래 재진 진찰료", amount: 11500, copay: 0.30 }, { kind: "시술", label: "침술 (단순)", amount: 6300, copay: 0.30 }, { kind: "시술", label: "온냉경락요법", amount: 5200, copay: 0.30 }], discountType: "none", discountValue: 0, note: "" },
+    { id: "p2", chartNo: "C-00187", name: "오세훈", gender: "남", age: 46, dob: "1979-06-20", insurance: "건보", visit: "재진", visitTime: "15:10", chargeTime: "16:20", doctor: "이지영", department: "한방내과", status: "완료", paidAt: "16:38", paidBy: "카드", diagnoses: [{ code: "M75.0", label: "유착성 견관절낭염" }], items: [{ kind: "진찰", label: "한의 외래 재진 진찰료", amount: 11500, copay: 0.30 }, { kind: "시술", label: "추나요법 (단순)", amount: 32000, copay: 0.30 }], discountType: "none", discountValue: 0, note: "" },
+    { id: "p3", chartNo: "C-00099", name: "정유미", gender: "여", age: 30, dob: "1995-03-18", insurance: "건보", visit: "초진", visitTime: "14:00", chargeTime: "15:11", doctor: "김민준", department: "한방내과", status: "완료", paidAt: "15:24", paidBy: "현금", diagnoses: [{ code: "N94.6", label: "월경통" }], items: [{ kind: "진찰", label: "한의 외래 초진 진찰료", amount: 17400, copay: 0.30 }, { kind: "시술", label: "약침술", amount: 18000, copay: 0.30 }, { kind: "한약", label: "탕전 1제 (10일분)", amount: 165000, copay: 0 }], discountType: "none", discountValue: 0, note: "" },
+  ];
+  const KRW = (n) => `${Math.round(n).toLocaleString("ko-KR")}원`;
+  const calcAmounts = (p) => {
+    const total = p.items.reduce((s, it) => s + it.amount, 0);
+    const insuranceCovered = p.items.reduce((s, it) => s + it.amount * (1 - it.copay), 0);
+    const subjectToCopay = p.items.reduce((s, it) => s + it.amount * it.copay, 0);
+    let discount = 0;
+    if (p.discountType === "percent") discount = subjectToCopay * (p.discountValue / 100);
+    else if (p.discountType === "fixed") discount = p.discountValue;
+    return { total, insuranceCovered, copay: subjectToCopay, discount, net: Math.max(0, subjectToCopay - discount) };
+  };
+  const panelStylePay = { background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-lg)", overflow: "hidden", boxShadow: "var(--shadow-sm)" };
+  const panelHeaderPay = { display: "flex", alignItems: "center", gap: 8, padding: "10px 16px", borderBottom: "1px solid var(--stone-200)", fontSize: 13, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)", background: "var(--stone-50)" };
+  const completedActionBtn = { width: "100%", padding: "10px 14px", fontSize: 13, fontWeight: 500, background: "var(--bg-surface)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-md)", color: "var(--text-secondary)", cursor: "pointer", fontFamily: "var(--font-sans)", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 6 };
+
+  function SumRow({ label, value, muted, bold }) {
+    return html`<div style=${{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "6px 0", borderBottom: bold ? "1px solid var(--border-subtle)" : "none" }}>
+      <span style=${{ fontSize: bold ? 13 : 12, fontWeight: bold ? 600 : 400, color: muted ? "var(--text-muted)" : "var(--text-secondary)", fontFamily: "var(--font-sans)" }}>${label}</span>
+      <span style=${{ fontSize: bold ? 14 : 13, fontWeight: bold ? 700 : 500, color: muted ? "var(--text-muted)" : "var(--text-primary)", fontFamily: "var(--font-mono)" }}>${value}</span>
+    </div>`;
+  }
+
+  function QueueRow({ p, selected, onSelect }) {
+    const a = calcAmounts(p);
+    const isPending = p.status === "대기";
+    return html`<div onClick=${() => onSelect(p.id)} style=${{ padding: "12px 14px", borderBottom: "1px solid var(--border-subtle)", borderLeft: `3px solid ${selected ? "var(--jade-500)" : "transparent"}`, background: selected ? "var(--jade-50)" : "transparent", cursor: "pointer", transition: "all 0.12s" }}>
+      <div style=${{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+        <span style=${{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>${p.name}</span>
+        <span style=${{ display: "inline-flex", alignItems: "center", gap: 3, fontSize: 10, fontWeight: 600, padding: "1px 7px", borderRadius: "var(--radius-full)", color: p.visit === "초진" ? "var(--cinnabar-700)" : "var(--jade-700)", background: p.visit === "초진" ? "var(--cinnabar-100)" : "var(--jade-50)", border: `1px solid ${p.visit === "초진" ? "var(--cinnabar-200)" : "var(--jade-200)"}`, fontFamily: "var(--font-sans)" }}>${p.visit}</span>
+        <span style=${{ marginLeft: "auto", fontSize: 13, fontWeight: 700, color: isPending ? "var(--cinnabar-700)" : "var(--text-muted)", fontFamily: "var(--font-mono)", textDecoration: isPending ? "none" : "line-through" }}>${KRW(a.net)}</span>
+      </div>
+      <div style=${{ display: "flex", alignItems: "center", gap: 8 }}>
+        <span style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>${p.chartNo}</span>
+        <span style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>${p.gender}/${p.age}세</span>
+        <span style=${{ marginLeft: "auto", fontSize: 10, fontFamily: "var(--font-mono)", color: isPending ? "var(--amber-700)" : "var(--jade-700)" }}>${isPending ? `대기 ${p.chargeTime}` : `완료 ${p.paidAt} · ${p.paidBy}`}</span>
+      </div>
+    </div>`;
+  }
+
+  function PayMethodBtn({ icon, label, hint, primary, onClick, disabled }) {
+    return html`<button onClick=${onClick} disabled=${disabled} style=${{ display: "flex", alignItems: "center", gap: 12, padding: "14px 16px", background: primary ? "var(--jade-500)" : "var(--bg-surface)", border: `1px solid ${primary ? "var(--jade-500)" : "var(--border-default)"}`, borderRadius: "var(--radius-md)", cursor: disabled ? "not-allowed" : "pointer", opacity: disabled ? 0.45 : 1, width: "100%", transition: "all 0.12s", fontFamily: "var(--font-sans)", boxShadow: primary ? "var(--shadow-sm)" : "none" }}>
+      <div style=${{ width: 36, height: 36, borderRadius: "var(--radius-md)", background: primary ? "rgba(255,255,255,0.2)" : "var(--jade-50)", color: primary ? "#fff" : "var(--jade-700)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><${Icon} name=${icon} size=${18} /></div>
+      <div style=${{ flex: 1, textAlign: "left" }}>
+        <div style=${{ fontSize: 14, fontWeight: 600, color: primary ? "#fff" : "var(--text-primary)" }}>${label}</div>
+        ${hint && html`<div style=${{ fontSize: 11, color: primary ? "rgba(255,255,255,0.8)" : "var(--text-muted)", marginTop: 2 }}>${hint}</div>`}
+      </div>
+      <${Icon} name="chevron-right" size=${16} style=${{ color: primary ? "#fff" : "var(--text-muted)" }} />
+    </button>`;
+  }
+
+  function PaymentScreen() {
+    const [list, setList] = useState(() => { try { const saved = localStorage.getItem("komes_payments_v1"); return saved ? JSON.parse(saved) : PAYMENT_QUEUE_SEED; } catch { return PAYMENT_QUEUE_SEED; } });
+    useEffect(() => { localStorage.setItem("komes_payments_v1", JSON.stringify(list)); }, [list]);
+    const [tab, setTab] = useState("대기");
+    const [selectedId, setSelectedId] = useState(() => list.find(p => p.status === "대기")?.id || list[0]?.id);
+    const [confirmMethod, setConfirmMethod] = useState(null);
+    const tabList = list.filter(p => p.status === tab);
+    const selected = list.find(p => p.id === selectedId);
+    const update = (id, patch) => setList(prev => prev.map(p => p.id === id ? { ...p, ...patch } : p));
+    const pendingCount = list.filter(p => p.status === "대기").length;
+    const pendingTotal = list.filter(p => p.status === "대기").reduce((s, p) => s + calcAmounts(p).net, 0);
+    const doneCount = list.filter(p => p.status === "완료").length;
+    const doneTotal = list.filter(p => p.status === "완료").reduce((s, p) => s + calcAmounts(p).net, 0);
+    const reset = () => setList(PAYMENT_QUEUE_SEED);
+    const handlePay = (method) => {
+      if (!selected) return;
+      const now = new Date();
+      update(selected.id, { status: "완료", paidAt: `${String(now.getHours()).padStart(2,"0")}:${String(now.getMinutes()).padStart(2,"0")}`, paidBy: method });
+      setConfirmMethod(null);
+      const next = list.find(p => p.id !== selected.id && p.status === "대기");
+      if (next) setSelectedId(next.id);
+    };
+    const setDiscount = (type, value) => { if (!selected) return; update(selected.id, { discountType: type, discountValue: value }); };
+    const amounts = selected ? calcAmounts(selected) : null;
+    const payActions = html`<${F}>
+      <div style=${{ display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 12px", background: "var(--amber-100)", border: "1px solid var(--amber-200)", borderRadius: "var(--radius-full)" }}>
+        <${Icon} name="clock" size=${13} style=${{ color: "var(--amber-700)" }} />
+        <span style=${{ fontSize: 12, fontWeight: 600, color: "var(--amber-700)", fontFamily: "var(--font-sans)" }}>대기 ${pendingCount}건</span>
+        <span style=${{ fontSize: 12, fontWeight: 700, color: "var(--amber-700)", fontFamily: "var(--font-mono)" }}>${KRW(pendingTotal)}</span>
+      </div>
+      <div style=${{ display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 12px", background: "var(--jade-50)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-full)" }}>
+        <${Icon} name="check-circle-2" size=${13} style=${{ color: "var(--jade-700)" }} />
+        <span style=${{ fontSize: 12, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-sans)" }}>완료 ${doneCount}건</span>
+        <span style=${{ fontSize: 12, fontWeight: 700, color: "var(--jade-700)", fontFamily: "var(--font-mono)" }}>${KRW(doneTotal)}</span>
+      </div>
+      <button onClick=${reset} title="시드 초기화" style=${{ width: 30, height: 30, borderRadius: "var(--radius-md)", background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", cursor: "pointer", color: "var(--text-muted)", display: "inline-flex", alignItems: "center", justifyContent: "center" }}><${Icon} name="rotate-ccw" size=${14} /></button>
+    </${F}>`;
+    return html`<div style=${{ display: "flex", flexDirection: "column", height: "100%", background: "var(--bg-page)" }}>
+      <${TopBar} title="수납" subtitle="진료 완료 환자의 본인 부담금 수납 및 결제 처리" actions=${payActions} />
+      <div style=${{ flex: 1, display: "flex", minHeight: 0, overflow: "hidden" }}>
+        <div style=${{ width: 320, flexShrink: 0, background: "var(--bg-surface)", borderRight: "1px solid var(--border-subtle)", display: "flex", flexDirection: "column", minHeight: 0 }}>
+          <div style=${{ display: "flex", borderBottom: "1px solid var(--border-subtle)", flexShrink: 0 }}>
+            ${[{ k: "대기", l: "수납 대기", n: pendingCount, color: "var(--amber-600)" }, { k: "완료", l: "수납 완료", n: doneCount, color: "var(--jade-600)" }].map(t => { const active = tab === t.k; return html`<button key=${t.k} onClick=${() => { setTab(t.k); const first = list.find(p => p.status === t.k); if (first) setSelectedId(first.id); }} style=${{ flex: 1, padding: "12px 8px", background: "transparent", border: "none", borderBottom: active ? `2px solid ${t.color}` : "2px solid transparent", cursor: "pointer", fontFamily: "var(--font-sans)", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 6, color: active ? t.color : "var(--text-muted)", fontWeight: active ? 600 : 500, fontSize: 13 }}>${t.l}<span style=${{ fontSize: 10, fontWeight: 700, padding: "1px 7px", borderRadius: "var(--radius-full)", background: active ? t.color : "var(--stone-200)", color: active ? "#fff" : "var(--text-muted)", fontFamily: "var(--font-mono)" }}>${t.n}</span></button>`; })}
+          </div>
+          <div style=${{ flex: 1, overflowY: "auto" }}>
+            ${tabList.length === 0
+              ? html`<div style=${{ padding: "40px 20px", textAlign: "center", color: "var(--text-muted)", fontSize: 12, fontFamily: "var(--font-sans)" }}><${Icon} name="inbox" size=${28} style=${{ color: "var(--stone-400)", marginBottom: 8 }} /><div>수납 ${tab === "대기" ? "대기" : "완료"} 환자가 없습니다.</div></div>`
+              : tabList.map(p => html`<${QueueRow} key=${p.id} p=${p} selected=${selectedId === p.id} onSelect=${setSelectedId} />`)}
+          </div>
+        </div>
+
+        <div style=${{ flex: 1, minWidth: 0, overflow: "auto", padding: "20px 24px", display: "flex", flexDirection: "column", gap: 16 }}>
+          ${!selected
+            ? html`<div style=${{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 10, color: "var(--text-muted)" }}><${Icon} name="credit-card" size=${36} style=${{ color: "var(--stone-400)" }} /><span style=${{ fontSize: 13, fontFamily: "var(--font-sans)" }}>왼쪽에서 환자를 선택하세요</span></div>`
+            : html`<${F}>
+              <div style=${{ background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-lg)", padding: "16px 20px", display: "flex", alignItems: "center", gap: 14, boxShadow: "var(--shadow-sm)" }}>
+                <${Avatar} name=${selected.name} size=${46} />
+                <div style=${{ flex: 1 }}>
+                  <div style=${{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <span style=${{ fontFamily: "var(--font-serif)", fontSize: 22, fontWeight: 500, color: "var(--text-primary)", letterSpacing: "-0.01em" }}>${selected.name}</span>
+                    <${Badge} variant="brand">${selected.insurance}</${Badge}>
+                    <${Badge} variant=${selected.visit === "초진" ? "danger" : "neutral"}>${selected.visit}</${Badge}>
+                  </div>
+                  <div style=${{ display: "flex", gap: 10, marginTop: 4, fontSize: 12, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>
+                    <span style=${{ fontFamily: "var(--font-mono)" }}>${selected.chartNo}</span><span>·</span>
+                    <span>${selected.gender}/${selected.age}세 · ${selected.dob}</span><span>·</span>
+                    <span>${selected.department} · ${selected.doctor}</span>
+                  </div>
+                </div>
+                <div style=${{ textAlign: "right" }}>
+                  <div style=${{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)", letterSpacing: "0.06em", textTransform: "uppercase" }}>진료 완료</div>
+                  <div style=${{ fontFamily: "var(--font-mono)", fontSize: 14, color: "var(--text-secondary)" }}>${selected.visitTime}</div>
+                </div>
+              </div>
+              <div style=${panelStylePay}>
+                <div style=${panelHeaderPay}><${Icon} name="clipboard-list" size=${14} style=${{ color: "var(--jade-600)" }} /><span>진단 (상병)</span></div>
+                <div style=${{ padding: "12px 16px", display: "flex", flexWrap: "wrap", gap: 6 }}>
+                  ${selected.diagnoses.length === 0
+                    ? html`<span style=${{ fontSize: 12, color: "var(--text-muted)" }}>진단 정보 없음</span>`
+                    : selected.diagnoses.map(d => html`<span key=${d.code} style=${{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 10px", fontSize: 12, background: "var(--jade-50)", border: "1px solid var(--jade-200)", color: "var(--jade-700)", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}><span style=${{ fontFamily: "var(--font-mono)", fontWeight: 600 }}>${d.code}</span><span>${d.label}</span></span>`)}
+                </div>
+              </div>
+              <div style=${panelStylePay}>
+                <div style=${panelHeaderPay}><${Icon} name="receipt" size=${14} style=${{ color: "var(--jade-600)" }} /><span>시행 내역 (처치/시술)</span><span style=${{ marginLeft: "auto", fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>총 ${selected.items.length}건</span></div>
+                <div>
+                  <div style=${{ display: "grid", gridTemplateColumns: "60px 1fr 90px 80px", padding: "6px 16px", borderBottom: "1px solid var(--stone-200)", background: "var(--stone-50)", fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", color: "var(--text-muted)", textTransform: "uppercase", fontFamily: "var(--font-sans)" }}><span>구분</span><span>항목</span><span style=${{ textAlign: "right" }}>금액</span><span style=${{ textAlign: "right" }}>본인부담</span></div>
+                  ${selected.items.map((it, i) => html`<div key=${i} style=${{ display: "grid", gridTemplateColumns: "60px 1fr 90px 80px", padding: "10px 16px", borderBottom: i < selected.items.length - 1 ? "1px solid var(--stone-200)" : "none", alignItems: "center" }}>
+                    <span style=${{ fontSize: 10, fontWeight: 600, padding: "2px 8px", borderRadius: "var(--radius-sm)", background: it.kind === "한약" ? "var(--amber-100)" : it.kind === "시술" ? "var(--jade-50)" : "var(--stone-100)", color: it.kind === "한약" ? "var(--amber-700)" : it.kind === "시술" ? "var(--jade-700)" : "var(--text-secondary)", fontFamily: "var(--font-sans)", width: "fit-content" }}>${it.kind}</span>
+                    <span style=${{ fontSize: 13, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>${it.label}</span>
+                    <span style=${{ fontSize: 13, color: "var(--text-secondary)", fontFamily: "var(--font-mono)", textAlign: "right" }}>${KRW(it.amount)}</span>
+                    <span style=${{ fontSize: 13, color: "var(--text-primary)", fontFamily: "var(--font-mono)", fontWeight: 500, textAlign: "right" }}>${KRW(it.amount * it.copay)}</span>
+                  </div>`)}
+                </div>
+              </div>
+              <div style=${panelStylePay}>
+                <div style=${panelHeaderPay}><${Icon} name="edit-3" size=${14} style=${{ color: "var(--jade-600)" }} /><span>수납 메모</span></div>
+                <div style=${{ padding: 12 }}><textarea value=${selected.note} onChange=${e => update(selected.id, { note: e.target.value })} placeholder="할인 사유, 특이사항 등을 기록하세요" disabled=${selected.status === "완료"} style=${{ width: "100%", minHeight: 56, padding: "9px 11px", fontSize: 13, fontFamily: "var(--font-sans)", color: "var(--text-primary)", background: selected.status === "완료" ? "var(--stone-50)" : "var(--bg-surface)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-md)", outline: "none", resize: "vertical" }} /></div>
+              </div>
+            </${F}>`}
+        </div>
+
+        ${selected && html`<div style=${{ width: 360, flexShrink: 0, background: "var(--bg-surface)", borderLeft: "1px solid var(--border-subtle)", display: "flex", flexDirection: "column", minHeight: 0 }}>
+          <div style=${{ flex: 1, overflowY: "auto", padding: 20, display: "flex", flexDirection: "column", gap: 16 }}>
+            <div>
+              <div style=${{ fontSize: 10, fontWeight: 700, color: "var(--text-muted)", letterSpacing: "0.08em", textTransform: "uppercase", fontFamily: "var(--font-sans)", marginBottom: 8, display: "flex", alignItems: "center", gap: 6 }}><${Icon} name="calculator" size=${12} />금액 명세</div>
+              <div style=${{ display: "flex", flexDirection: "column", gap: 4 }}>
+                <${SumRow} label="총 진료비" value=${KRW(amounts.total)} />
+                <${SumRow} label="급여 부담금" value=${"-" + KRW(amounts.insuranceCovered)} muted=${true} />
+                <${SumRow} label="본인 부담금" value=${KRW(amounts.copay)} bold=${true} />
+              </div>
+            </div>
+            <div>
+              <div style=${{ fontSize: 10, fontWeight: 700, color: "var(--text-muted)", letterSpacing: "0.08em", textTransform: "uppercase", fontFamily: "var(--font-sans)", marginBottom: 8, display: "flex", alignItems: "center", gap: 6 }}><${Icon} name="percent" size=${12} />할인 적용</div>
+              <div style=${{ background: "var(--stone-50)", border: "1px dashed var(--border-default)", borderRadius: "var(--radius-md)", padding: 10, display: "flex", flexDirection: "column", gap: 8 }}>
+                <div style=${{ display: "flex", gap: 6 }}>
+                  ${[{ k: "none", l: "없음" }, { k: "percent", l: "% 할인" }, { k: "fixed", l: "정액 할인" }].map(o => html`<button key=${o.k} onClick=${() => setDiscount(o.k, 0)} disabled=${selected.status === "완료"} style=${{ flex: 1, padding: "5px 8px", fontSize: 11, fontWeight: 600, background: selected.discountType === o.k ? "var(--jade-500)" : "var(--bg-surface)", color: selected.discountType === o.k ? "#fff" : "var(--text-secondary)", border: `1px solid ${selected.discountType === o.k ? "var(--jade-500)" : "var(--border-default)"}`, borderRadius: "var(--radius-sm)", cursor: selected.status === "완료" ? "not-allowed" : "pointer", fontFamily: "var(--font-sans)", opacity: selected.status === "완료" ? 0.5 : 1 }}>${o.l}</button>`)}
+                </div>
+                ${selected.discountType !== "none" && html`<div style=${{ display: "flex", alignItems: "center", gap: 6 }}>
+                  <input type="number" min=${0} value=${selected.discountValue || ""} onChange=${e => setDiscount(selected.discountType, parseFloat(e.target.value) || 0)} disabled=${selected.status === "완료"} placeholder="0" style=${{ flex: 1, padding: "6px 10px", fontSize: 13, fontFamily: "var(--font-mono)", textAlign: "right", border: "1px solid var(--border-default)", borderRadius: "var(--radius-sm)", outline: "none", background: selected.status === "완료" ? "var(--stone-100)" : "var(--bg-surface)" }} />
+                  <span style=${{ fontSize: 12, color: "var(--text-muted)", fontFamily: "var(--font-sans)", minWidth: 24 }}>${selected.discountType === "percent" ? "%" : "원"}</span>
+                </div>`}
+                ${amounts.discount > 0 && html`<div style=${{ display: "flex", justifyContent: "space-between", paddingTop: 6, borderTop: "1px dashed var(--border-default)" }}><span style=${{ fontSize: 12, color: "var(--cinnabar-700)", fontFamily: "var(--font-sans)" }}>할인액</span><span style=${{ fontSize: 13, fontWeight: 600, color: "var(--cinnabar-700)", fontFamily: "var(--font-mono)" }}>-${KRW(amounts.discount)}</span></div>`}
+              </div>
+            </div>
+            <div style=${{ background: "var(--jade-50)", border: "1.5px solid var(--jade-300)", borderRadius: "var(--radius-lg)", padding: "14px 16px" }}>
+              <div style=${{ display: "flex", alignItems: "baseline", justifyContent: "space-between" }}>
+                <span style=${{ fontSize: 13, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-sans)" }}>최종 수납액</span>
+                <span style=${{ fontSize: 26, fontWeight: 700, color: "var(--jade-800)", fontFamily: "var(--font-serif)", letterSpacing: "-0.02em" }}>${KRW(amounts.net)}</span>
+              </div>
+              ${selected.status === "완료" && html`<div style=${{ marginTop: 8, fontSize: 11, color: "var(--jade-700)", fontFamily: "var(--font-sans)", display: "flex", alignItems: "center", gap: 5 }}><${Icon} name="check-circle-2" size=${12} />${selected.paidAt}에 ${selected.paidBy}로 수납 완료</div>`}
+            </div>
+            ${selected.status === "대기"
+              ? html`<div style=${{ display: "flex", flexDirection: "column", gap: 8 }}>
+                  <div style=${{ fontSize: 10, fontWeight: 700, color: "var(--text-muted)", letterSpacing: "0.08em", textTransform: "uppercase", fontFamily: "var(--font-sans)", display: "flex", alignItems: "center", gap: 6 }}><${Icon} name="wallet" size=${12} />결제 수단</div>
+                  <${PayMethodBtn} icon="credit-card" label="카드 결제" hint="신용·체크카드 단말기 연동" primary=${true} onClick=${() => setConfirmMethod("카드")} />
+                  <${PayMethodBtn} icon="banknote" label="현금" hint="현금 영수증 발행 가능" onClick=${() => setConfirmMethod("현금")} />
+                  <${PayMethodBtn} icon="repeat" label="계좌 이체" hint="실시간 입금 확인" onClick=${() => setConfirmMethod("이체")} />
+                  <${PayMethodBtn} icon="layers" label="복합 결제" hint="카드 + 현금 분할 결제" onClick=${() => setConfirmMethod("복합")} />
+                </div>`
+              : html`<div style=${{ display: "flex", flexDirection: "column", gap: 8 }}>
+                  <button style=${completedActionBtn}><${Icon} name="rotate-ccw" size=${14} />수납 취소</button>
+                  <button style=${{ ...completedActionBtn, background: "var(--jade-500)", color: "#fff", border: "none" }}><${Icon} name="printer" size=${14} />영수증 출력</button>
+                </div>`}
+          </div>
+        </div>`}
+      </div>
+      ${confirmMethod && selected && html`<div onClick=${() => setConfirmMethod(null)} style=${{ position: "fixed", inset: 0, zIndex: 100, background: "var(--bg-overlay)", backdropFilter: "blur(4px)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div onClick=${e => e.stopPropagation()} style=${{ width: 380, background: "var(--bg-surface)", borderRadius: "var(--radius-xl)", overflow: "hidden", boxShadow: "var(--shadow-xl)" }}>
+          <div style=${{ padding: "18px 22px", borderBottom: "1px solid var(--border-subtle)" }}>
+            <div style=${{ fontFamily: "var(--font-serif)", fontSize: 18, fontWeight: 500, color: "var(--text-primary)" }}>${confirmMethod} 결제 확인</div>
+            <div style=${{ fontSize: 12, color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginTop: 4 }}>아래 금액을 ${confirmMethod}(으)로 수납 처리합니다.</div>
+          </div>
+          <div style=${{ padding: 22, display: "flex", flexDirection: "column", gap: 12 }}>
+            <div style=${{ display: "flex", alignItems: "center", justifyContent: "space-between" }}><span style=${{ fontSize: 12, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>환자</span><span style=${{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>${selected.name} (${selected.chartNo})</span></div>
+            <div style=${{ background: "var(--jade-50)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)", padding: "14px 16px", display: "flex", alignItems: "baseline", justifyContent: "space-between" }}><span style=${{ fontSize: 13, color: "var(--jade-700)", fontWeight: 600 }}>수납 금액</span><span style=${{ fontSize: 24, fontWeight: 700, color: "var(--jade-800)", fontFamily: "var(--font-serif)", letterSpacing: "-0.02em" }}>${KRW(amounts.net)}</span></div>
+            ${confirmMethod === "현금" && html`<label style=${{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-sans)" }}><input type="checkbox" defaultChecked=${true} style=${{ accentColor: "var(--jade-500)" }} />현금영수증 발행 (소득공제용)</label>`}
+          </div>
+          <div style=${{ padding: 14, borderTop: "1px solid var(--border-subtle)", display: "flex", gap: 8, justifyContent: "flex-end" }}>
+            <button onClick=${() => setConfirmMethod(null)} style=${{ padding: "8px 16px", fontSize: 13, fontWeight: 500, background: "transparent", border: "1px solid var(--border-default)", borderRadius: "var(--radius-md)", color: "var(--text-secondary)", cursor: "pointer", fontFamily: "var(--font-sans)" }}>취소</button>
+            <button onClick=${() => handlePay(confirmMethod)} style=${{ padding: "8px 18px", fontSize: 13, fontWeight: 600, background: "var(--jade-500)", border: "none", borderRadius: "var(--radius-md)", color: "#fff", cursor: "pointer", fontFamily: "var(--font-sans)", display: "inline-flex", alignItems: "center", gap: 6, boxShadow: "var(--shadow-sm)" }}><${Icon} name="check" size=${13} />${KRW(amounts.net)} 수납 완료</button>
+          </div>
+        </div>
+      </div>`}
+    </div>`;
+  }
+
+  // ════════════════════════════════════════════════════════════════
+  // App
+  // ════════════════════════════════════════════════════════════════
+
+  const SCREENS = { patients: "patients", chart: "chart", prescribe: "prescribe" };
+
+  function PlaceholderScreen({ title }) {
+    return html`<div style=${{ display: "flex", flexDirection: "column", height: "100%", background: "var(--bg-page)" }}>
+      <${TopBar} title=${title} />
+      <div style=${{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 12 }}>
+        <${Icon} name="construction" size=${32} style=${{ color: "var(--text-muted)" }} />
+        <div style=${{ fontSize: 14, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>이 화면은 준비 중입니다</div>
+      </div>
+    </div>`;
+  }
+
+  function App() {
+    const [nav, setNav] = useState(() => localStorage.getItem("komes_nav") || "patients");
+    const [selectedPatient, setSelectedPatient] = useState(null);
+    const [screen, setScreen] = useState(() => localStorage.getItem("komes_screen") || SCREENS.patients);
+
+    useEffect(() => { localStorage.setItem("komes_nav", nav); }, [nav]);
+    useEffect(() => { localStorage.setItem("komes_screen", screen); }, [screen]);
+
+    const handleSelectPatient = (p) => {
+      setSelectedPatient(p);
+      setScreen(SCREENS.chart);
+      setNav("chart");
+    };
+
+    const handlePrescribe = () => setScreen(SCREENS.prescribe);
+
+    const handleNavBack = () => {
+      if (screen === SCREENS.prescribe) { setScreen(SCREENS.chart); setNav("chart"); }
+      else { setScreen(SCREENS.patients); setNav("patients"); setSelectedPatient(null); }
+    };
+
+    const renderMain = () => {
+      if (nav === "patients") {
+        return html`<${PatientListScreen} onSelectPatient=${handleSelectPatient} />`;
+      }
+      if (nav === "chart") {
+        if (screen === SCREENS.prescribe && selectedPatient) {
+          return html`<${PrescriptionScreen} patient=${selectedPatient} onBack=${handleNavBack} />`;
+        }
+        return html`<${PatientChartScreen} patient=${selectedPatient} onBack=${handleNavBack} onPrescribe=${handlePrescribe} />`;
+      }
+      if (nav === "registry") {
+        return html`<${PatientManagementScreen} onOpenChart=${handleSelectPatient} />`;
+      }
+      if (nav === "schedule") {
+        return html`<${ScheduleScreen} />`;
+      }
+      if (nav === "payment") {
+        return html`<${PaymentScreen} />`;
+      }
+      const labels = {
+        prescriptions: "처방 관리", inventory: "약재 재고",
+        stats: "통계", ai: "AI 분석", settings: "설정"
+      };
+      return html`<${PlaceholderScreen} title=${labels[nav] || nav} />`;
+    };
+
+    const handleNavigate = (key) => {
+      setNav(key);
+      if (key === "patients") setScreen(SCREENS.patients);
+      if (key === "chart") setScreen(SCREENS.chart);
+    };
+
+    return html`<div style=${{ display: "flex", height: "100vh", overflow: "hidden" }}>
+      <${Sidebar} activeScreen=${nav} onNavigate=${handleNavigate} />
+      <div style=${{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
+        ${renderMain()}
+      </div>
+    </div>`;
+  }
+
+  ReactDOM.createRoot(document.getElementById("root")).render(html`<${App} />`);
+})();
+</script>
+</body>
+</html>
