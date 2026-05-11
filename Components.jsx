@@ -97,7 +97,7 @@ function Sidebar({ activeScreen, onNavigate }) {
   const navGroups = [
     { label: "진료", items: [
       { key: "patients", icon: "layout-dashboard", label: "진료 현황" },
-      { key: "chart",    icon: "file-heart",       label: "진료 차트" },
+
       { key: "registry", icon: "users",            label: "환자 관리" },
       { key: "schedule", icon: "calendar",          label: "예약 관리" },
       { key: "payment",  icon: "credit-card",       label: "수납" },
