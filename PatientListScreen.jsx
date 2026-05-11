@@ -103,14 +103,25 @@ function PatientCard({ patient, stage, onSelect, onAdvance }) {
       </div>
 
       <div style={{ paddingLeft: 34, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <span style={{
-          fontSize: 10, fontWeight: 600, letterSpacing: "0.04em",
-          color: patient.visitType === "초진" ? "var(--cinnabar-600)" : "var(--jade-600)",
-          background: patient.visitType === "초진" ? "var(--cinnabar-100)" : "var(--jade-50)",
-          border: `1px solid ${patient.visitType === "초진" ? "var(--cinnabar-200)" : "var(--jade-200)"}`,
-          borderRadius: "var(--radius-full)", padding: "2px 7px",
-          fontFamily: "var(--font-sans)",
-        }}>{patient.visitType}</span>
+        <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+          <span style={{
+            fontSize: 10, fontWeight: 600, letterSpacing: "0.04em",
+            color: patient.visitType === "초진" ? "var(--cinnabar-600)" : "var(--jade-600)",
+            background: patient.visitType === "초진" ? "var(--cinnabar-100)" : "var(--jade-50)",
+            border: `1px solid ${patient.visitType === "초진" ? "var(--cinnabar-200)" : "var(--jade-200)"}`,
+            borderRadius: "var(--radius-full)", padding: "2px 7px",
+            fontFamily: "var(--font-sans)",
+          }}>{patient.visitType}</span>
+          {patient.insurance === "자보" && (
+            <span style={{
+              fontSize: 10, fontWeight: 700, letterSpacing: "0.04em",
+              color: "#7A4F1A", background: "#FEF3C7",
+              border: "1px solid #FCD34D",
+              borderRadius: "var(--radius-full)", padding: "2px 7px",
+              fontFamily: "var(--font-sans)",
+            }}>자보</span>
+          )}
+        </div>
 
         {nextStage && hovered && (
           <button
@@ -227,13 +238,13 @@ function GroupColumn({ group, patients, onSelect, onAdvance }) {
 function PatientListScreen({ onSelectPatient }) {
   const [patients, setPatients] = useStateDash(() => {
     try {
-      const saved = localStorage.getItem("komes_dashboard_patients_v2");
+      const saved = localStorage.getItem("komes_dashboard_patients_v3");
       return saved ? JSON.parse(saved) : PATIENTS;
     } catch { return PATIENTS; }
   });
 
   useEffectDash(() => {
-    localStorage.setItem("komes_dashboard_patients_v2", JSON.stringify(patients));
+    localStorage.setItem("komes_dashboard_patients_v3", JSON.stringify(patients));
   }, [patients]);
 
   const [search, setSearch] = useStateDash("");
@@ -392,6 +403,14 @@ function PatientListScreen({ onSelectPatient }) {
                           border: `1px solid ${p.visitType === "초진" ? "var(--cinnabar-200)" : "var(--jade-200)"}`,
                           borderRadius: "var(--radius-full)", padding: "2px 7px", fontFamily: "var(--font-sans)",
                         }}>{p.visitType}</span>
+                        {p.insurance === "자보" && (
+                          <span style={{
+                            fontSize: 10, fontWeight: 700,
+                            color: "#7A4F1A", background: "#FEF3C7",
+                            border: "1px solid #FCD34D",
+                            borderRadius: "var(--radius-full)", padding: "2px 7px", fontFamily: "var(--font-sans)",
+                          }}>자보</span>
+                        )}
                         {NEXT_STAGE[p.stage] && (
                           <button onClick={e => { e.stopPropagation(); advanceStage(p.id, NEXT_STAGE[p.stage]); }}
                             style={{ fontSize: 11, color: "var(--jade-700)", background: "var(--jade-50)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-sm)", padding: "3px 9px", cursor: "pointer", fontFamily: "var(--font-sans)", whiteSpace: "nowrap" }}>
