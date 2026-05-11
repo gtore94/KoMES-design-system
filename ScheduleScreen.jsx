@@ -329,17 +329,49 @@ const apptInput = {
   boxSizing: "border-box",
 };
 
+// ── Overlap layout: assigns col / totalCols to each appt ──────
+function layoutAppts(appts) {
+  if (!appts.length) return [];
+  const sorted = [...appts].sort((a, b) => minsFromTime(a.start) - minsFromTime(b.start));
+  const colAssign = new Array(sorted.length).fill(0);
+  const colEnds = [];
+  for (let i = 0; i < sorted.length; i++) {
+    const s = minsFromTime(sorted[i].start);
+    const e = s + sorted[i].mins;
+    let c = 0;
+    while (c < colEnds.length && colEnds[c] > s) c++;
+    colAssign[i] = c;
+    colEnds[c] = e;
+  }
+  return sorted.map((a, i) => {
+    const s = minsFromTime(a.start);
+    const e = s + a.mins;
+    let maxCol = colAssign[i];
+    for (let j = 0; j < sorted.length; j++) {
+      if (i === j) continue;
+      const s2 = minsFromTime(sorted[j].start);
+      const e2 = s2 + sorted[j].mins;
+      if (s < e2 && e > s2) maxCol = Math.max(maxCol, colAssign[j]);
+    }
+    return { ...a, col: colAssign[i], totalCols: maxCol + 1 };
+  });
+}
+
 // ── Appointment Block (Day/Week) ───────────────────────────────
-function ApptBlock({ appt, onClick, hourHeightPx }) {
+function ApptBlock({ appt, onClick, hourHeightPx, col = 0, totalCols = 1 }) {
   const startMin = minsFromTime(appt.start);
   const top = ((startMin - 9*60) / 60) * hourHeightPx;
   const height = (appt.mins / 60) * hourHeightPx;
   const doc = DOCTORS_SCH.find(x => x.id === appt.doctor);
   const status = STATUS_SCH[appt.status] || STATUS_SCH["확정"];
+  const leftPct = (col / totalCols * 100).toFixed(1);
+  const rightPct = ((totalCols - col - 1) / totalCols * 100).toFixed(1);
   return (
     <div onClick={(e) => { e.stopPropagation(); onClick && onClick(appt); }}
       style={{
-        position: "absolute", left: 3, right: 3,
+        position: "absolute",
+        left: `calc(${leftPct}% + 2px)`,
+        right: `calc(${rightPct}% + 2px)`,
         top: top + 2, height: Math.max(height - 4, 22),
         background: doc.bg,
         border: `1px solid ${doc.border}`,
@@ -348,24 +380,19 @@ function ApptBlock({ appt, onClick, hourHeightPx }) {
         padding: "4px 6px",
         cursor: "pointer",
         overflow: "hidden",
+        whiteSpace: "nowrap",
         fontFamily: "var(--font-sans)",
         opacity: appt.status === "노쇼" || appt.status === "취소" ? 0.6 : 1,
         textDecoration: appt.status === "취소" ? "line-through" : "none",
       }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 4, marginBottom: 2 }}>
-        <span style={{ fontSize: 9, fontFamily: "var(--font-mono)", fontWeight: 600, color: doc.color }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 4, overflow: "hidden", whiteSpace: "nowrap" }}>
+        <span style={{ fontSize: 9, fontFamily: "var(--font-mono)", fontWeight: 600, color: doc.color, flexShrink: 0 }}>
           {appt.start}
         </span>
-        <span style={{
-          width: 4, height: 4, borderRadius: "50%", background: status.dot,
-        }} />
-        <span style={{
-          fontSize: 9, color: status.text,
-          fontWeight: 600,
-        }}>{appt.status}</span>
-      </div>
-      <div style={{ fontSize: 11, fontWeight: 600, color: "var(--text-primary)", lineHeight: 1.2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-        {appt.patient}
+        <span style={{ width: 4, height: 4, borderRadius: "50%", background: status.dot, flexShrink: 0 }} />
+        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-primary)", overflow: "hidden", textOverflow: "ellipsis", flex: 1, minWidth: 0 }}>
+          {appt.patient}
+        </span>
       </div>
       {height > 36 && (
         <div style={{ fontSize: 10, color: "var(--text-muted)", lineHeight: 1.3, marginTop: 2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
@@ -453,8 +480,8 @@ function DayView({ date, appts, onCellClick, onApptClick, doctorFilter }) {
                 </div>
               ))}
               {/* Appointment blocks for this doctor */}
-              {todays.filter(a => a.doctor === doc.id).map(a => (
-                <ApptBlock key={a.id} appt={a} onClick={onApptClick} hourHeightPx={HOUR_PX} />
+              {layoutAppts(todays.filter(a => a.doctor === doc.id)).map(a => (
+                <ApptBlock key={a.id} appt={a} onClick={onApptClick} hourHeightPx={HOUR_PX} col={a.col} totalCols={a.totalCols} />
               ))}
             </div>
           ))}
@@ -560,8 +587,8 @@ function WeekView({ date, appts, onCellClick, onApptClick, doctorFilter }) {
                     }} />
                   </div>
                 ))}
-                {dayAppts.map(a => (
-                  <ApptBlock key={a.id} appt={a} onClick={onApptClick} hourHeightPx={HOUR_PX} />
+                {layoutAppts(dayAppts).map(a => (
+                  <ApptBlock key={a.id} appt={a} onClick={onApptClick} hourHeightPx={HOUR_PX} col={a.col} totalCols={a.totalCols} />
                 ))}
               </div>
             );
