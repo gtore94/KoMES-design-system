@@ -75,6 +75,12 @@ body { font-family: var(--font-sans); background-color: var(--bg-page); color: v
 <script type="text/babel" src="PrescriptionScreen.jsx"></script>
 <script type="text/babel" src="ScheduleScreen.jsx?v=3"></script>
 <script type="text/babel" src="PaymentScreen.jsx"></script>
+<script type="text/babel" src="herbData.jsx"></script>
+<script type="text/babel" src="HerbInventoryParts.jsx"></script>
+<script type="text/babel" src="HerbInventoryScreen.jsx"></script>
+<script type="text/babel" src="suppliesData.jsx"></script>
+<script type="text/babel" src="SuppliesParts.jsx"></script>
+<script type="text/babel" src="SuppliesScreen.jsx"></script>
 <script type="text/babel" src="claimData.jsx"></script>
 <script type="text/babel" src="ClaimSidebar.jsx"></script>
 <script type="text/babel" src="ClaimList.jsx"></script>
@@ -144,8 +150,14 @@ function App() {
     if (nav === "claim") {
       return <InsuranceClaimScreen />;
     }
+    if (nav === "inventory") {
+      return <HerbInventoryScreen />;
+    }
+    if (nav === "supplies") {
+      return <SuppliesScreen />;
+    }
     const labels = {
-      prescriptions: "처방 관리", inventory: "약재 재고",
+      prescriptions: "처방 관리",
       stats: "통계", ai: "AI 분석", settings: "설정"
     };
     return <PlaceholderScreen title={labels[nav] || nav} />;

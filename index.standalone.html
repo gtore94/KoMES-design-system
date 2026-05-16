@@ -196,6 +196,9 @@ body {
         { key: "prescriptions", icon: "flask-conical", label: "처방 관리" },
         { key: "inventory",     icon: "package",        label: "약재 재고" },
       ]},
+      { label: "비품/운영", items: [
+        { key: "supplies", icon: "boxes", label: "소모품" },
+      ]},
       { label: "분석", items: [
         { key: "stats", icon: "bar-chart-2", label: "통계" },
         { key: "ai",    icon: "sparkles",    label: "AI 분석" },
@@ -1897,6 +1900,888 @@ body {
     </div>`;
   }
 
+  // ── Herb Inventory Data ────────────────────────────────────────
+  const HERBS = [
+    { id:"h-001",name:"황기",  latin:"Astragalus membranaceus",  category:"보기",stock:2400,threshold:1500,monthly:1820,lastIn:"2026-05-04",expiry:"2027-08-12",unitPrice:85, origin:"국산",  supplier:"동방한약",   location:"캐비닛 A-3"},
+    { id:"h-002",name:"백출",  latin:"Atractylodes macrocephala",category:"보기",stock:880, threshold:1200,monthly:1340,lastIn:"2026-04-18",expiry:"2027-04-18",unitPrice:120,origin:"국산",  supplier:"동방한약",   location:"캐비닛 A-3"},
+    { id:"h-003",name:"인삼",  latin:"Panax ginseng",            category:"보기",stock:620, threshold:400, monthly:380, lastIn:"2026-05-10",expiry:"2027-11-10",unitPrice:980,origin:"국산",  supplier:"금산인삼조합",location:"냉장 R-1"},
+    { id:"h-004",name:"감초",  latin:"Glycyrrhiza uralensis",    category:"조화",stock:3800,threshold:1800,monthly:2120,lastIn:"2026-05-02",expiry:"2027-09-02",unitPrice:62, origin:"중국산",supplier:"신원약업",   location:"캐비닛 A-1"},
+    { id:"h-005",name:"당귀",  latin:"Angelica gigas",           category:"보혈",stock:1640,threshold:1500,monthly:1480,lastIn:"2026-04-22",expiry:"2027-06-22",unitPrice:145,origin:"국산",  supplier:"동방한약",   location:"캐비닛 B-1"},
+    { id:"h-006",name:"천궁",  latin:"Ligusticum chuanxiong",    category:"활혈",stock:1280,threshold:900, monthly:820, lastIn:"2026-04-15",expiry:"2027-04-15",unitPrice:98, origin:"중국산",supplier:"신원약업",   location:"캐비닛 B-2"},
+    { id:"h-007",name:"작약",  latin:"Paeonia lactiflora",       category:"보혈",stock:1920,threshold:1200,monthly:1080,lastIn:"2026-05-08",expiry:"2027-10-08",unitPrice:115,origin:"국산",  supplier:"동방한약",   location:"캐비닛 B-1"},
+    { id:"h-008",name:"숙지황",latin:"Rehmannia glutinosa",      category:"보혈",stock:2150,threshold:1400,monthly:1320,lastIn:"2026-04-28",expiry:"2027-07-28",unitPrice:102,origin:"국산",  supplier:"동방한약",   location:"캐비닛 B-1"},
+    { id:"h-009",name:"복령",  latin:"Poria cocos",              category:"이수",stock:1840,threshold:1200,monthly:980, lastIn:"2026-04-12",expiry:"2027-04-12",unitPrice:78, origin:"중국산",supplier:"신원약업",   location:"캐비닛 C-1"},
+    { id:"h-010",name:"복신",  latin:"Poria cocos (with root)",  category:"안신",stock:420, threshold:600, monthly:540, lastIn:"2026-03-30",expiry:"2026-06-15",unitPrice:92, origin:"중국산",supplier:"신원약업",   location:"캐비닛 C-1"},
+    { id:"h-011",name:"산조인",latin:"Ziziphus jujuba (seed)",   category:"안신",stock:780, threshold:800, monthly:720, lastIn:"2026-04-05",expiry:"2027-02-05",unitPrice:165,origin:"중국산",supplier:"광동무역",   location:"냉장 R-2"},
+    { id:"h-012",name:"용안육",latin:"Dimocarpus longan",        category:"보혈",stock:1320,threshold:700, monthly:640, lastIn:"2026-05-01",expiry:"2026-12-01",unitPrice:138,origin:"수입",  supplier:"광동무역",   location:"냉장 R-2"},
+    { id:"h-013",name:"진피",  latin:"Citrus reticulata (peel)", category:"이기",stock:2880,threshold:1000,monthly:860, lastIn:"2026-04-20",expiry:"2027-04-20",unitPrice:54, origin:"국산",  supplier:"제주한방",   location:"캐비닛 D-2"},
+    { id:"h-014",name:"반하",  latin:"Pinellia ternata",         category:"화담",stock:940, threshold:600, monthly:520, lastIn:"2026-04-25",expiry:"2027-04-25",unitPrice:175,origin:"중국산",supplier:"신원약업",   location:"캐비닛 D-1"},
+    { id:"h-015",name:"시호",  latin:"Bupleurum chinense",       category:"해표",stock:1180,threshold:900, monthly:780, lastIn:"2026-05-05",expiry:"2027-09-05",unitPrice:128,origin:"중국산",supplier:"신원약업",   location:"캐비닛 E-1"},
+    { id:"h-016",name:"길경",  latin:"Platycodon grandiflorus",  category:"화담",stock:1540,threshold:800, monthly:720, lastIn:"2026-04-18",expiry:"2027-04-18",unitPrice:72, origin:"국산",  supplier:"동방한약",   location:"캐비닛 D-1"},
+    { id:"h-017",name:"황금",  latin:"Scutellaria baicalensis",  category:"청열",stock:320, threshold:700, monthly:680, lastIn:"2026-03-20",expiry:"2027-03-20",unitPrice:108,origin:"국산",  supplier:"동방한약",   location:"캐비닛 F-1"},
+    { id:"h-018",name:"황련",  latin:"Coptis chinensis",         category:"청열",stock:240, threshold:300, monthly:280, lastIn:"2026-03-15",expiry:"2027-03-15",unitPrice:420,origin:"중국산",supplier:"광동무역",   location:"캐비닛 F-1"},
+    { id:"h-019",name:"계지",  latin:"Cinnamomum cassia",        category:"해표",stock:2240,threshold:1000,monthly:920, lastIn:"2026-05-06",expiry:"2027-11-06",unitPrice:64, origin:"수입",  supplier:"광동무역",   location:"캐비닛 E-1"},
+    { id:"h-020",name:"두충",  latin:"Eucommia ulmoides",        category:"보양",stock:860, threshold:700, monthly:620, lastIn:"2026-04-10",expiry:"2027-04-10",unitPrice:132,origin:"국산",  supplier:"동방한약",   location:"캐비닛 G-1"},
+    { id:"h-021",name:"산수유",latin:"Cornus officinalis",       category:"보음",stock:1080,threshold:600, monthly:540, lastIn:"2026-04-27",expiry:"2027-08-27",unitPrice:155,origin:"국산",  supplier:"제주한방",   location:"냉장 R-2"},
+    { id:"h-022",name:"구기자",latin:"Lycium chinense",          category:"보혈",stock:1460,threshold:800, monthly:680, lastIn:"2026-05-09",expiry:"2026-08-09",unitPrice:88, origin:"중국산",supplier:"광동무역",   location:"냉장 R-2"},
+    { id:"h-023",name:"대추",  latin:"Ziziphus jujuba (fruit)",  category:"보기",stock:3240,threshold:1500,monthly:1240,lastIn:"2026-05-12",expiry:"2027-05-12",unitPrice:42, origin:"국산",  supplier:"제주한방",   location:"캐비닛 A-2"},
+    { id:"h-024",name:"백복령",latin:"Poria cocos (white)",      category:"이수",stock:180, threshold:500, monthly:460, lastIn:"2026-03-08",expiry:"2026-07-08",unitPrice:110,origin:"중국산",supplier:"신원약업",   location:"캐비닛 C-1"},
+  ];
+  const HERB_HISTORY = {
+    "h-002":[
+      {date:"2026-05-13",type:"사용",qty:-120,note:"귀비탕 처방 8건"},
+      {date:"2026-05-10",type:"사용",qty:-80, note:"사물탕 처방 5건"},
+      {date:"2026-04-18",type:"입고",qty:1200,note:"동방한약 정기 발주"},
+      {date:"2026-04-08",type:"사용",qty:-240,note:"주간 처방 합산"},
+    ],
+    "h-010":[
+      {date:"2026-05-14",type:"사용",qty:-60,note:"안신 처방군"},
+      {date:"2026-05-07",type:"조정",qty:-20,note:"실사 보정"},
+      {date:"2026-03-30",type:"입고",qty:600,note:"신원약업 발주"},
+    ],
+    "h-017":[
+      {date:"2026-05-11",type:"사용",qty:-160,note:"황금탕 처방 4건"},
+      {date:"2026-05-02",type:"사용",qty:-120,note:"주간 합산"},
+      {date:"2026-03-20",type:"입고",qty:900, note:"동방한약 정기 발주"},
+    ],
+    "h-018":[
+      {date:"2026-05-09",type:"사용",qty:-40,note:"황련해독탕"},
+      {date:"2026-03-15",type:"입고",qty:300,note:"광동무역"},
+    ],
+    "h-024":[
+      {date:"2026-05-12",type:"사용",qty:-80,note:"오령산 처방"},
+      {date:"2026-03-08",type:"입고",qty:600,note:"신원약업"},
+    ],
+  };
+  const HERB_CATEGORIES = [
+    {key:"all",label:"전체"},{key:"보기",label:"보기"},{key:"보혈",label:"보혈"},
+    {key:"보음",label:"보음"},{key:"보양",label:"보양"},{key:"활혈",label:"활혈"},
+    {key:"안신",label:"안신"},{key:"이수",label:"이수"},{key:"이기",label:"이기"},
+    {key:"화담",label:"화담"},{key:"해표",label:"해표"},{key:"청열",label:"청열"},{key:"조화",label:"조화"},
+  ];
+  const OPEN_PURCHASE_ORDERS = [
+    {id:"PO-2605-014",supplier:"동방한약",itemCount:6,total:1240000,status:"발주 완료",expectedDate:"2026-05-19"},
+    {id:"PO-2605-015",supplier:"광동무역",itemCount:3,total:680000, status:"승인 대기",expectedDate:"2026-05-22"},
+  ];
+  const TODAY_HI = new Date("2026-05-16");
+  function daysUntil(dateStr) {
+    const d = new Date(dateStr);
+    return Math.round((d - TODAY_HI) / (1000*60*60*24));
+  }
+  function herbStatus(h) {
+    const dExpiry = daysUntil(h.expiry);
+    if (h.stock <= h.threshold * 0.5) return {key:"critical",label:"소진 임박",    tone:"danger"};
+    if (h.stock <  h.threshold)       return {key:"low",     label:"재고 부족",    tone:"warning"};
+    if (dExpiry <= 90)                return {key:"expiring",label:"유효기간 임박",tone:"warning"};
+    return                                   {key:"ok",      label:"정상",        tone:"success"};
+  }
+  function projectedRunOutDays(h) {
+    const daily = h.monthly / 30;
+    if (daily <= 0) return 999;
+    return Math.round(h.stock / daily);
+  }
+  function won(n) { return "₩" + n.toLocaleString("ko-KR"); }
+  function fmtMass(g) {
+    if (g >= 1000) return (g/1000).toFixed(g%1000===0?0:2)+" kg";
+    return g.toLocaleString("ko-KR")+" g";
+  }
+
+  // ── Supplies Data ───────────────────────────────────────────────
+  const SUPPLIES = [
+    {id:"s-001",name:"일회용 침 0.20×30mm",  category:"의료",  unit:"박스",  pack:"100개입", stock:18, threshold:12,monthly:22,  lastIn:"2026-05-04",expiry:"2028-05-04",unitPrice:12000,supplier:"동방의료기", location:"창고 A-1",sku:"ND-2030-100"},
+    {id:"s-002",name:"일회용 침 0.25×40mm",  category:"의료",  unit:"박스",  pack:"100개입", stock:24, threshold:10,monthly:14,  lastIn:"2026-05-04",expiry:"2028-05-04",unitPrice:12500,supplier:"동방의료기", location:"창고 A-1",sku:"ND-2540-100"},
+    {id:"s-003",name:"부항컵 세트",           category:"의료",  unit:"세트",  pack:"12P",     stock:4,  threshold:5, monthly:1.0, lastIn:"2026-02-10",expiry:null,        unitPrice:48000,supplier:"동방의료기", location:"창고 A-2",sku:"CUP-12P"},
+    {id:"s-004",name:"뜸쑥 (간접뜸)",        category:"의료",  unit:"kg",    pack:"1kg/팩",  stock:6,  threshold:4, monthly:3.2, lastIn:"2026-04-22",expiry:"2027-04-22",unitPrice:28000,supplier:"한방약업사", location:"창고 B-1",sku:"MX-IDR-1K"},
+    {id:"s-005",name:"뜸 받침대",            category:"의료",  unit:"팩",    pack:"50개입",  stock:14, threshold:8, monthly:6.0, lastIn:"2026-04-28",expiry:null,        unitPrice:6800, supplier:"한방약업사", location:"창고 B-1",sku:"MX-PAD-50"},
+    {id:"s-006",name:"소독 알코올 70%",       category:"의료",  unit:"L",     pack:"1L",      stock:18, threshold:10,monthly:14,  lastIn:"2026-05-02",expiry:"2026-08-02",unitPrice:4200, supplier:"삼성약품",   location:"창고 C-1",sku:"ALC-70-1L"},
+    {id:"s-007",name:"알코올솜",              category:"의료",  unit:"박스",  pack:"200매",   stock:32, threshold:15,monthly:18,  lastIn:"2026-04-30",expiry:"2027-04-30",unitPrice:5800, supplier:"삼성약품",   location:"창고 C-1",sku:"ALC-SW-200"},
+    {id:"s-008",name:"라텍스 장갑 (M)",      category:"의료",  unit:"박스",  pack:"100매",   stock:9,  threshold:8, monthly:6.0, lastIn:"2026-04-10",expiry:"2028-04-10",unitPrice:11800,supplier:"삼성약품",   location:"창고 A-3",sku:"GLV-LTX-M"},
+    {id:"s-009",name:"라텍스 장갑 (S)",      category:"의료",  unit:"박스",  pack:"100매",   stock:3,  threshold:6, monthly:4.5, lastIn:"2026-03-20",expiry:"2028-03-20",unitPrice:11800,supplier:"삼성약품",   location:"창고 A-3",sku:"GLV-LTX-S"},
+    {id:"s-010",name:"진료 가운 (일회용)",   category:"의료",  unit:"매",    pack:"1매",     stock:240,threshold:100,monthly:80,  lastIn:"2026-05-01",expiry:null,        unitPrice:920,  supplier:"케어웍스",   location:"창고 D-1",sku:"GWN-DSP"},
+    {id:"s-011",name:"일회용 진료시트",      category:"의료",  unit:"롤",    pack:"100매/롤",stock:12, threshold:8, monthly:6.0, lastIn:"2026-05-05",expiry:null,        unitPrice:8400, supplier:"케어웍스",   location:"창고 D-1",sku:"BED-SHT-R"},
+    {id:"s-012",name:"거즈 (멸균)",          category:"의료",  unit:"팩",    pack:"50매",    stock:56, threshold:30,monthly:22,  lastIn:"2026-04-15",expiry:"2026-07-15",unitPrice:3600, supplier:"삼성약품",   location:"창고 C-2",sku:"GZ-STR-50"},
+    {id:"s-013",name:"한약 파우치 60ml",     category:"포장재",unit:"박스",  pack:"1000매",  stock:14, threshold:8, monthly:11,  lastIn:"2026-05-08",expiry:null,        unitPrice:42000,supplier:"에코파우치", location:"창고 E-1",sku:"PCH-60-1K"},
+    {id:"s-014",name:"한약 파우치 100ml",    category:"포장재",unit:"박스",  pack:"1000매",  stock:6,  threshold:6, monthly:7.0, lastIn:"2026-04-18",expiry:null,        unitPrice:56000,supplier:"에코파우치", location:"창고 E-1",sku:"PCH-100-1K"},
+    {id:"s-015",name:"환제 병 50g",          category:"포장재",unit:"개",    pack:"1개",     stock:480,threshold:300,monthly:220, lastIn:"2026-04-25",expiry:null,        unitPrice:480,  supplier:"에코파우치", location:"창고 E-2",sku:"BTL-PIL-50"},
+    {id:"s-016",name:"라벨 스티커 (처방용)", category:"포장재",unit:"롤",    pack:"500매/롤",stock:22, threshold:10,monthly:7.5, lastIn:"2026-04-12",expiry:null,        unitPrice:3200, supplier:"프린텍",     location:"창고 F-1",sku:"LBL-RX-500"},
+    {id:"s-017",name:"약첩 봉투 (한지)",     category:"포장재",unit:"팩",    pack:"100매",   stock:28, threshold:15,monthly:12,  lastIn:"2026-05-03",expiry:null,        unitPrice:8400, supplier:"한지문화사", location:"창고 E-3",sku:"ENV-HJ-100"},
+    {id:"s-018",name:"쇼핑백 (대)",          category:"포장재",unit:"묶음",  pack:"100매",   stock:6,  threshold:4, monthly:3.0, lastIn:"2026-04-08",expiry:null,        unitPrice:18000,supplier:"에코파우치", location:"창고 E-3",sku:"BAG-L-100"},
+    {id:"s-019",name:"A4 복사용지",          category:"사무",  unit:"박스",  pack:"5권",     stock:8,  threshold:4, monthly:2.5, lastIn:"2026-03-22",expiry:null,        unitPrice:22000,supplier:"오피스나라", location:"창고 G-1",sku:"PPR-A4-5"},
+    {id:"s-020",name:"영수증 용지",          category:"사무",  unit:"롤",    pack:"1롤",     stock:14, threshold:8, monthly:6.0, lastIn:"2026-04-26",expiry:null,        unitPrice:1800, supplier:"오피스나라", location:"창고 G-1",sku:"PPR-RCT-R"},
+    {id:"s-021",name:"손소독제 500ml",        category:"청소",  unit:"통",    pack:"500ml",   stock:11, threshold:8, monthly:6.4, lastIn:"2026-04-29",expiry:"2026-10-29",unitPrice:5400, supplier:"삼성약품",   location:"창고 C-1",sku:"SAN-HND-500"},
+    {id:"s-022",name:"마스크 KF94",           category:"의료",  unit:"박스",  pack:"50매",    stock:24, threshold:12,monthly:9.0, lastIn:"2026-05-06",expiry:"2027-05-06",unitPrice:18000,supplier:"케어웍스",   location:"창고 D-2",sku:"MSK-KF94-50"},
+    {id:"s-023",name:"청소세제",              category:"청소",  unit:"통",    pack:"4L",      stock:4,  threshold:3, monthly:1.6, lastIn:"2026-03-10",expiry:null,        unitPrice:9800, supplier:"오피스나라", location:"창고 H-1",sku:"CLN-DET-4L"},
+    {id:"s-024",name:"두루마리 화장지",       category:"청소",  unit:"박스",  pack:"30롤",    stock:12, threshold:6, monthly:4.0, lastIn:"2026-04-18",expiry:null,        unitPrice:24000,supplier:"오피스나라", location:"창고 H-1",sku:"TIS-RL-30"},
+  ];
+  const SUP_HISTORY = {
+    "s-003":[{date:"2026-05-12",type:"사용",qty:-1,note:"부항 치료 세트 교체"},{date:"2026-02-10",type:"입고",qty:4,note:"동방의료기 분기 발주"}],
+    "s-006":[{date:"2026-05-14",type:"사용",qty:-2,note:"치료실 보충"},{date:"2026-05-12",type:"사용",qty:-1,note:"주간 소비"},{date:"2026-05-02",type:"입고",qty:12,note:"삼성약품 정기 발주"}],
+    "s-009":[{date:"2026-05-13",type:"사용",qty:-1,note:"치료실 보충"},{date:"2026-04-30",type:"사용",qty:-1,note:"주간 소비"},{date:"2026-03-20",type:"입고",qty:4,note:"삼성약품"}],
+    "s-014":[{date:"2026-05-14",type:"사용",qty:-1,note:"한약 조제 (대용량 처방)"},{date:"2026-05-09",type:"사용",qty:-1,note:"한약 조제"},{date:"2026-04-18",type:"입고",qty:6,note:"에코파우치 정기 발주"}],
+    "s-012":[{date:"2026-05-11",type:"사용",qty:-6,note:"주간 소비"},{date:"2026-04-15",type:"입고",qty:40,note:"삼성약품 정기 발주"}],
+  };
+  const SUP_CATEGORIES = [
+    {key:"all",label:"전체"},{key:"의료",label:"의료"},{key:"포장재",label:"포장재"},{key:"사무",label:"사무"},{key:"청소",label:"청소"},
+  ];
+  const SUP_OPEN_POS = [
+    {id:"PO-2605-016",supplier:"에코파우치",itemCount:4,total:340000,status:"발주 완료",expectedDate:"2026-05-20"},
+    {id:"PO-2605-017",supplier:"삼성약품",  itemCount:5,total:186000,status:"승인 대기",expectedDate:"2026-05-21"},
+    {id:"PO-2605-018",supplier:"케어웍스",  itemCount:2,total:92000, status:"발주 완료",expectedDate:"2026-05-23"},
+  ];
+  const SUP_CAT_COLOR = {
+    "의료":   {bg:"var(--jade-50)",   fg:"var(--jade-700)",   border:"var(--jade-200)"},
+    "포장재": {bg:"var(--amber-100)", fg:"var(--amber-700)",  border:"var(--amber-200)"},
+    "사무":   {bg:"var(--stone-200)", fg:"var(--ink-600)",    border:"var(--stone-300)"},
+    "청소":   {bg:"#E4EDF6",          fg:"#3D5A7A",           border:"#C9D8E8"},
+  };
+  function supStatus(s) {
+    const dExpiry = s.expiry ? daysUntil(s.expiry) : null;
+    if (s.stock <= s.threshold * 0.5)             return {key:"critical",label:"소진 임박",    tone:"danger"};
+    if (s.stock <  s.threshold)                   return {key:"low",     label:"재고 부족",    tone:"warning"};
+    if (dExpiry !== null && dExpiry <= 90)         return {key:"expiring",label:"유효기간 임박",tone:"warning"};
+    return                                               {key:"ok",      label:"정상",        tone:"success"};
+  }
+  function supRunOut(s) {
+    if (!s.monthly) return 999;
+    return Math.round(s.stock / (s.monthly / 30));
+  }
+  function supFmt(qty, unit) {
+    const num = Number.isInteger(qty) ? qty.toLocaleString("ko-KR") : qty.toFixed(1);
+    return `${num} ${unit}`;
+  }
+
+  // ── HerbInventoryParts ──────────────────────────────────────────
+  function HIKpi({ label, value, sub, accent }) {
+    return html`<div style=${{ flex:1, background:"var(--bg-surface)", border:"1px solid var(--border-subtle)", borderRadius:"var(--radius-lg)", padding:"14px 18px", boxShadow:"var(--shadow-sm)", minWidth:0 }}>
+      <div style=${{ fontSize:11, fontWeight:600, color:"var(--text-muted)", letterSpacing:"0.04em", textTransform:"uppercase", fontFamily:"var(--font-sans)" }}>${label}</div>
+      <div style=${{ fontSize:22, fontWeight:600, color:accent||"var(--text-primary)", fontFamily:"var(--font-serif)", marginTop:4, letterSpacing:"-0.01em" }}>${value}</div>
+      ${sub && html`<div style=${{ fontSize:11, color:"var(--text-secondary)", fontFamily:"var(--font-sans)", marginTop:2 }}>${sub}</div>`}
+    </div>`;
+  }
+  function HIKpiStrip({ herbs, alerts, openPOs }) {
+    const totalValue = herbs.reduce((s,h) => s+h.stock*h.unitPrice, 0);
+    return html`<div style=${{ display:"flex", gap:12 }}>
+      <${HIKpi} label="등록 약재"   value=${`${herbs.length}종`} sub="현재 활성 품목" />
+      <${HIKpi} label="재고 가치"   value=${won(totalValue)} sub="현재 단가 기준" />
+      <${HIKpi} label="주의 필요"   value=${`${alerts.length}건`} sub="부족 · 임박 합계" accent=${alerts.length?"var(--cinnabar-700)":undefined} />
+      <${HIKpi} label="진행 중 발주" value=${`${openPOs.length}건`} sub="입고 대기" />
+    </div>`;
+  }
+  function HIAICard({ suggestions, onApply, onDismiss }) {
+    if (!suggestions.length) return null;
+    const totalCost = suggestions.reduce((s,x) => s+x.suggestQty*x.unitPrice, 0);
+    return html`<div style=${{ background:"var(--jade-50)", border:"1px solid var(--jade-200)", borderRadius:"var(--radius-lg)", padding:"16px 20px" }}>
+      <div style=${{ display:"flex", alignItems:"flex-start", justifyContent:"space-between", marginBottom:10 }}>
+        <div style=${{ display:"flex", alignItems:"center", gap:10 }}>
+          <${Icon} name="sparkles" size=${16} style=${{ color:"var(--jade-600)" }} />
+          <span style=${{ fontSize:13, fontWeight:600, color:"var(--jade-700)", fontFamily:"var(--font-sans)" }}>AI 발주 추천 · ${suggestions.length}품목</span>
+          <span style=${{ fontSize:11, background:"var(--jade-100)", color:"var(--jade-700)", padding:"2px 9px", borderRadius:"var(--radius-full)", fontFamily:"var(--font-sans)" }}>지난 90일 소비 패턴 분석</span>
+        </div>
+        <button onClick=${onDismiss} style=${{ background:"none", border:"none", cursor:"pointer", color:"var(--jade-400)", fontSize:18, lineHeight:1, padding:0 }}>×</button>
+      </div>
+      <div style=${{ fontSize:12, color:"var(--jade-700)", fontFamily:"var(--font-sans)", lineHeight:1.5, marginBottom:12 }}>현재 안전 임계치 이하 및 월 평균 소비 대비 2주 미만 잔여 품목을 묶어 추천합니다. 적용 시 발주서 초안으로 이동합니다.</div>
+      <div style=${{ background:"var(--bg-surface)", borderRadius:"var(--radius-md)", border:"1px solid var(--jade-200)", overflow:"hidden" }}>
+        <table style=${{ width:"100%", borderCollapse:"collapse", fontFamily:"var(--font-sans)" }}>
+          <thead><tr style=${{ background:"var(--jade-50)" }}>
+            ${["약재","월 소비","잔여","추천 수량","예상 금액"].map(h => html`<th key=${h} style=${{ padding:"6px 12px", fontSize:10, fontWeight:700, color:"var(--jade-700)", textAlign:"left", letterSpacing:"0.06em", textTransform:"uppercase" }}>${h}</th>`)}
+          </tr></thead>
+          <tbody>
+            ${suggestions.map(s => html`<tr key=${s.id} style=${{ borderTop:"1px solid var(--jade-100)" }}>
+              <td style=${{ padding:"7px 12px", fontSize:13, fontWeight:500, color:"var(--text-primary)" }}>${s.name}</td>
+              <td style=${{ padding:"7px 12px", fontSize:12, color:"var(--text-secondary)", fontFamily:"var(--font-mono)" }}>${fmtMass(s.monthly)}</td>
+              <td style=${{ padding:"7px 12px", fontSize:12, color:"var(--cinnabar-700)", fontFamily:"var(--font-mono)" }}>${s.daysLeft}일</td>
+              <td style=${{ padding:"7px 12px", fontSize:12, fontWeight:600, color:"var(--jade-700)", fontFamily:"var(--font-mono)" }}>${fmtMass(s.suggestQty)}</td>
+              <td style=${{ padding:"7px 12px", fontSize:12, color:"var(--text-primary)", fontFamily:"var(--font-mono)" }}>${won(s.suggestQty*s.unitPrice)}</td>
+            </tr>`)}
+            <tr style=${{ borderTop:"1px solid var(--jade-200)", background:"var(--jade-50)" }}>
+              <td colSpan=${4} style=${{ padding:"7px 12px", fontSize:11, fontWeight:600, color:"var(--jade-700)", textAlign:"right" }}>합계</td>
+              <td style=${{ padding:"7px 12px", fontSize:12, fontWeight:700, color:"var(--jade-700)", fontFamily:"var(--font-mono)" }}>${won(totalCost)}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style=${{ display:"flex", gap:8, marginTop:12 }}>
+        <${Button} variant="primary" size="sm" icon="check" onClick=${onApply}>발주서 초안 만들기</${Button}>
+        <${Button} variant="ghost"   size="sm" icon="settings" onClick=${() => {}}>추천 조건 조정</${Button}>
+      </div>
+    </div>`;
+  }
+  function HIAlertSection({ alerts, onPick }) {
+    if (!alerts.length) return null;
+    return html`<div style=${{ background:"var(--cinnabar-100)", border:"1px solid var(--cinnabar-200)", borderRadius:"var(--radius-lg)", overflow:"hidden" }}>
+      <div style=${{ padding:"10px 16px", display:"flex", alignItems:"center", justifyContent:"space-between", borderBottom:"1px solid var(--cinnabar-200)" }}>
+        <div style=${{ display:"flex", alignItems:"center", gap:8 }}>
+          <${Icon} name="alert-triangle" size=${15} style=${{ color:"var(--cinnabar-700)" }} />
+          <span style=${{ fontSize:13, fontWeight:600, color:"var(--cinnabar-800)", fontFamily:"var(--font-sans)" }}>주의 필요 · ${alerts.length}건</span>
+        </div>
+        <span style=${{ fontSize:11, color:"var(--cinnabar-700)", fontFamily:"var(--font-sans)" }}>클릭 시 상세 패널 열기</span>
+      </div>
+      <div style=${{ display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(240px, 1fr))", gap:1, background:"var(--cinnabar-200)" }}>
+        ${alerts.map(a => {
+          const st = herbStatus(a);
+          const dExpiry = daysUntil(a.expiry);
+          const reason = st.key==="critical" ? `잔여 ${projectedRunOutDays(a)}일` :
+                         st.key==="low"      ? `임계치 ${Math.round((a.threshold-a.stock)/a.threshold*100)}% 미달` :
+                         `유효기간 D-${dExpiry}`;
+          return html`<div key=${a.id} onClick=${() => onPick(a.id)} style=${{ background:"var(--bg-surface)", padding:"10px 14px", cursor:"pointer", transition:"background 0.12s ease" }}
+            onMouseEnter=${e => e.currentTarget.style.background="var(--cinnabar-100)"}
+            onMouseLeave=${e => e.currentTarget.style.background="var(--bg-surface)"}>
+            <div style=${{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:4 }}>
+              <span style=${{ fontSize:13, fontWeight:600, color:"var(--text-primary)", fontFamily:"var(--font-sans)" }}>${a.name}</span>
+              <${Badge} variant=${st.tone}>${st.label}</${Badge}>
+            </div>
+            <div style=${{ fontSize:11, color:"var(--text-secondary)", fontFamily:"var(--font-sans)", display:"flex", justifyContent:"space-between" }}>
+              <span>${a.category} · ${fmtMass(a.stock)}</span>
+              <span style=${{ color:"var(--cinnabar-700)", fontFamily:"var(--font-mono)" }}>${reason}</span>
+            </div>
+          </div>`;
+        })}
+      </div>
+    </div>`;
+  }
+  function HIOpenPOs({ pos }) {
+    if (!pos.length) return null;
+    return html`<div style=${{ background:"var(--bg-surface)", border:"1px solid var(--border-subtle)", borderRadius:"var(--radius-lg)", padding:"14px 18px", boxShadow:"var(--shadow-sm)" }}>
+      <div style=${{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:10 }}>
+        <span style=${{ fontSize:13, fontWeight:600, color:"var(--text-primary)", fontFamily:"var(--font-sans)" }}>진행 중 발주</span>
+        <${Button} variant="ghost" size="sm" icon="external-link">전체 발주 이력</${Button}>
+      </div>
+      <div style=${{ display:"flex", flexDirection:"column", gap:6 }}>
+        ${pos.map(p => html`<div key=${p.id} style=${{ display:"grid", gridTemplateColumns:"120px 1fr auto auto auto", gap:12, alignItems:"center", padding:"8px 10px", border:"1px solid var(--border-subtle)", borderRadius:"var(--radius-md)", background:"var(--stone-50)" }}>
+          <span style=${{ fontSize:12, fontFamily:"var(--font-mono)", color:"var(--text-primary)" }}>${p.id}</span>
+          <span style=${{ fontSize:12, color:"var(--text-primary)", fontFamily:"var(--font-sans)" }}>${p.supplier} · ${p.itemCount}품목</span>
+          <span style=${{ fontSize:12, color:"var(--text-secondary)", fontFamily:"var(--font-mono)" }}>${won(p.total)}</span>
+          <span style=${{ fontSize:11, color:"var(--text-secondary)", fontFamily:"var(--font-sans)" }}>입고 예정 ${p.expectedDate}</span>
+          <${Badge} variant=${p.status==="발주 완료"?"brand":"warning"}>${p.status}</${Badge}>
+        </div>`)}
+      </div>
+    </div>`;
+  }
+
+  // ── HerbInventoryScreen ─────────────────────────────────────────
+  function HITh({ label, sortable, onClick, active, dir, right }) {
+    return html`<th onClick=${sortable?onClick:undefined} style=${{ padding:"8px 14px", fontSize:10, fontWeight:700, color:active?"var(--text-primary)":"var(--text-muted)", textAlign:right?"right":"left", letterSpacing:"0.06em", textTransform:"uppercase", cursor:sortable?"pointer":"default", userSelect:"none", whiteSpace:"nowrap" }}>
+      ${label}${sortable&&active&&html`<span style=${{ marginLeft:4, fontSize:9 }}>${dir==="asc"?"▲":"▼"}</span>`}
+    </th>`;
+  }
+  function HISelect({ value, onChange, options }) {
+    return html`<select value=${value} onChange=${e => onChange(e.target.value)} style=${{ fontFamily:"var(--font-sans)", fontSize:12, color:"var(--text-primary)", background:"var(--bg-surface)", border:"1px solid var(--border-default)", borderRadius:"var(--radius-md)", padding:"6px 28px 6px 10px", outline:"none", appearance:"none", backgroundImage:"url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%238A9E9A' d='M0 0l5 6 5-6z'/></svg>\")", backgroundRepeat:"no-repeat", backgroundPosition:"right 10px center", cursor:"pointer" }}>
+      ${options.map(o => html`<option key=${o.value} value=${o.value}>${o.label}</option>`)}
+    </select>`;
+  }
+  function HIFact({ label, value, accent }) {
+    return html`<div style=${{ display:"flex", justifyContent:"space-between", gap:12, padding:"8px 12px", background:"var(--bg-surface)" }}>
+      <span style=${{ fontSize:12, color:"var(--text-secondary)", fontFamily:"var(--font-sans)" }}>${label}</span>
+      <span style=${{ fontSize:12, color:accent||"var(--text-primary)", fontFamily:"var(--font-mono)", textAlign:"right" }}>${value}</span>
+    </div>`;
+  }
+  function HIDetailPanel({ herb, onIntake, onToast }) {
+    if (!herb) return html`<div style=${{ width:320, background:"var(--bg-surface)", borderLeft:"1px solid var(--border-subtle)", padding:20, flexShrink:0, display:"flex", alignItems:"center", justifyContent:"center", color:"var(--text-muted)", fontSize:13, fontFamily:"var(--font-sans)" }}>약재를 선택하면 상세가 표시됩니다</div>`;
+    const st = herbStatus(herb);
+    const dExpiry = daysUntil(herb.expiry);
+    const runOut = projectedRunOutDays(herb);
+    const value = herb.stock * herb.unitPrice;
+    const history = HERB_HISTORY[herb.id] || [];
+    return html`<div style=${{ width:320, background:"var(--bg-surface)", borderLeft:"1px solid var(--border-subtle)", padding:"16px 18px", display:"flex", flexDirection:"column", gap:16, flexShrink:0, overflowY:"auto" }}>
+      <div>
+        <div style=${{ display:"flex", alignItems:"baseline", gap:8, marginBottom:2 }}>
+          <span style=${{ fontSize:22, fontWeight:600, fontFamily:"var(--font-serif)", color:"var(--text-primary)", letterSpacing:"-0.01em" }}>${herb.name}</span>
+          <${Badge} variant=${st.tone}>${st.label}</${Badge}>
+        </div>
+        <div style=${{ fontSize:11, color:"var(--text-muted)", fontStyle:"italic", fontFamily:"var(--font-sans)" }}>${herb.latin}</div>
+        <div style=${{ display:"flex", gap:6, marginTop:8 }}>
+          <span style=${{ fontSize:11, background:"var(--stone-100)", color:"var(--text-secondary)", padding:"2px 8px", borderRadius:"var(--radius-full)", border:"1px solid var(--border-subtle)", fontFamily:"var(--font-sans)" }}>${herb.category}</span>
+          <span style=${{ fontSize:11, background:"var(--stone-100)", color:"var(--text-secondary)", padding:"2px 8px", borderRadius:"var(--radius-full)", border:"1px solid var(--border-subtle)", fontFamily:"var(--font-sans)" }}>${herb.origin}</span>
+        </div>
+      </div>
+      <div>
+        <div style=${{ display:"flex", justifyContent:"space-between", alignItems:"baseline", marginBottom:6 }}>
+          <span style=${{ fontSize:11, fontWeight:700, letterSpacing:"0.06em", textTransform:"uppercase", color:"var(--text-muted)", fontFamily:"var(--font-sans)" }}>현재 재고</span>
+          <span style=${{ fontSize:11, color:"var(--text-muted)", fontFamily:"var(--font-mono)" }}>잔여 ${runOut}일</span>
+        </div>
+        <div style=${{ fontSize:24, fontWeight:600, fontFamily:"var(--font-mono)", color:"var(--text-primary)" }}>${fmtMass(herb.stock)}</div>
+        <div style=${{ position:"relative", height:6, background:"var(--stone-200)", borderRadius:3, overflow:"hidden", marginTop:6 }}>
+          <div style=${{ position:"absolute", left:0, top:0, bottom:0, width:`${Math.min(herb.stock/(herb.threshold*2),1)*100}%`, background:st.key==="critical"?"var(--cinnabar-500)":st.key==="low"?"var(--amber-500)":"var(--jade-500)" }}></div>
+          <div style=${{ position:"absolute", top:-2, bottom:-2, left:`${Math.min(herb.threshold/(herb.threshold*2),1)*100}%`, width:2, background:"var(--ink-500)" }}></div>
+        </div>
+        <div style=${{ display:"flex", justifyContent:"space-between", marginTop:4 }}>
+          <span style=${{ fontSize:10, color:"var(--text-muted)", fontFamily:"var(--font-mono)" }}>0</span>
+          <span style=${{ fontSize:10, color:"var(--text-muted)", fontFamily:"var(--font-mono)" }}>임계치 ${fmtMass(herb.threshold)}</span>
+          <span style=${{ fontSize:10, color:"var(--text-muted)", fontFamily:"var(--font-mono)" }}>${fmtMass(herb.threshold*2)}</span>
+        </div>
+      </div>
+      <div style=${{ display:"flex", gap:6 }}>
+        <${Button} variant="primary"    size="sm" icon="package-plus"   onClick=${onIntake}>입고</${Button}>
+        <${Button} variant="secondary"  size="sm" icon="clipboard-edit" onClick=${() => onToast("실사 보정 화면을 엽니다.")}>조정</${Button}>
+        <${Button} variant="secondary"  size="sm" icon="send"           onClick=${() => onToast(`${herb.name} 발주 라인이 추가되었습니다.`)}>발주</${Button}>
+      </div>
+      <div style=${{ display:"flex", flexDirection:"column", gap:1, background:"var(--border-subtle)", borderRadius:"var(--radius-md)", overflow:"hidden", border:"1px solid var(--border-subtle)" }}>
+        <${HIFact} label="공급처"      value=${herb.supplier} />
+        <${HIFact} label="원산지"      value=${herb.origin} />
+        <${HIFact} label="단가"        value=${`${won(herb.unitPrice)} / g`} />
+        <${HIFact} label="재고가치"    value=${won(value)} />
+        <${HIFact} label="월 소비"     value=${fmtMass(herb.monthly)} />
+        <${HIFact} label="안전 임계치" value=${fmtMass(herb.threshold)} />
+        <${HIFact} label="최근 입고"   value=${herb.lastIn} />
+        <${HIFact} label="유효기간"    value=${`${herb.expiry} · D-${dExpiry}`} accent=${dExpiry<=90?"var(--cinnabar-700)":undefined} />
+        <${HIFact} label="보관 위치"   value=${herb.location} />
+      </div>
+      <div>
+        <div style=${{ fontSize:11, fontWeight:700, letterSpacing:"0.06em", textTransform:"uppercase", color:"var(--text-muted)", fontFamily:"var(--font-sans)", marginBottom:8 }}>최근 이력</div>
+        ${history.length===0
+          ? html`<div style=${{ fontSize:12, color:"var(--text-muted)", fontFamily:"var(--font-sans)", padding:"8px 0" }}>최근 90일간 이력이 없습니다.</div>`
+          : html`<div style=${{ display:"flex", flexDirection:"column", gap:6 }}>
+              ${history.map((h,i) => html`<div key=${i} style=${{ display:"grid", gridTemplateColumns:"82px 38px 1fr auto", gap:8, alignItems:"center", padding:"7px 10px", border:"1px solid var(--border-subtle)", borderRadius:"var(--radius-sm)", background:"var(--stone-50)" }}>
+                <span style=${{ fontSize:11, color:"var(--text-muted)", fontFamily:"var(--font-mono)" }}>${h.date}</span>
+                <span style=${{ fontSize:10, fontWeight:600, fontFamily:"var(--font-sans)", color:h.type==="입고"?"var(--jade-700)":h.type==="사용"?"var(--ink-600)":"var(--amber-700)", background:h.type==="입고"?"var(--jade-100)":h.type==="사용"?"var(--stone-200)":"var(--amber-100)", padding:"1px 6px", borderRadius:"var(--radius-sm)", textAlign:"center" }}>${h.type}</span>
+                <span style=${{ fontSize:11, color:"var(--text-secondary)", fontFamily:"var(--font-sans)", overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>${h.note}</span>
+                <span style=${{ fontSize:12, fontFamily:"var(--font-mono)", color:h.qty>0?"var(--jade-700)":"var(--text-primary)" }}>${h.qty>0?"+":""}${h.qty}g</span>
+              </div>`)}
+            </div>`}
+      </div>
+    </div>`;
+  }
+  function HIIntakeModal({ herb, onClose, onSubmit }) {
+    const [qty,setQty]    = useState("");
+    const [lot,setLot]    = useState("");
+    const [expiry,setExp] = useState("");
+    return html`<div onClick=${onClose} style=${{ position:"fixed", inset:0, background:"var(--bg-overlay)", display:"flex", alignItems:"center", justifyContent:"center", zIndex:200 }}>
+      <div onClick=${e => e.stopPropagation()} style=${{ background:"var(--bg-surface)", borderRadius:"var(--radius-xl)", width:440, padding:"22px 24px", boxShadow:"var(--shadow-xl)", fontFamily:"var(--font-sans)" }}>
+        <div style=${{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:14 }}>
+          <div>
+            <div style=${{ fontSize:16, fontWeight:600, color:"var(--text-primary)", fontFamily:"var(--font-serif)" }}>입고 등록</div>
+            <div style=${{ fontSize:12, color:"var(--text-muted)" }}>${herb?`${herb.name} · 현재 ${fmtMass(herb.stock)}`:"약재 선택 필요"}</div>
+          </div>
+          <button onClick=${onClose} style=${{ background:"none", border:"none", cursor:"pointer", color:"var(--text-muted)", fontSize:20, lineHeight:1 }}>×</button>
+        </div>
+        <div style=${{ display:"flex", flexDirection:"column", gap:12 }}>
+          <${Input} label="입고 수량 (g)" value=${qty} onChange=${setQty} placeholder="예: 1200" type="number" />
+          <${Input} label="공급처 / 로트번호" value=${lot} onChange=${setLot} placeholder=${herb?herb.supplier:"공급처"} />
+          <${Input} label="유효기간" value=${expiry} onChange=${setExp} placeholder="YYYY-MM-DD" />
+        </div>
+        <div style=${{ display:"flex", justifyContent:"flex-end", gap:8, marginTop:18 }}>
+          <${Button} variant="secondary" size="md" onClick=${onClose}>취소</${Button}>
+          <${Button} variant="primary" size="md" icon="check" onClick=${() => onSubmit(Number(qty)||0)} disabled=${!qty||!herb}>입고 처리</${Button}>
+        </div>
+      </div>
+    </div>`;
+  }
+  function HerbInventoryScreen() {
+    const [selectedId,  setSelectedId]   = useState("h-002");
+    const [category,    setCategory]     = useState("all");
+    const [statusFilter,setStatusFilter] = useState("all");
+    const [supplier,    setSupplier]     = useState("all");
+    const [search,      setSearch]       = useState("");
+    const [showAI,      setShowAI]       = useState(true);
+    const [sortKey,     setSortKey]      = useState("name");
+    const [sortDir,     setSortDir]      = useState("asc");
+    const [toast,       setToast]        = useState(null);
+    const [intakeOpen,  setIntakeOpen]   = useState(false);
+    const alerts = React.useMemo(() => HERBS.filter(h => herbStatus(h).key !== "ok"), []);
+    const aiSuggestions = React.useMemo(() => HERBS
+      .filter(h => h.stock < h.threshold || projectedRunOutDays(h) <= 14)
+      .map(h => {
+        const need = Math.ceil((h.monthly/30)*60 - h.stock);
+        const suggestQty = Math.max(h.threshold, Math.ceil(need/100)*100);
+        return {id:h.id,name:h.name,monthly:h.monthly,daysLeft:projectedRunOutDays(h),suggestQty,unitPrice:h.unitPrice};
+      })
+      .sort((a,b) => a.daysLeft-b.daysLeft), []);
+    const suppliers = React.useMemo(() => {
+      const set = new Set(HERBS.map(h => h.supplier));
+      return ["all", ...Array.from(set)];
+    }, []);
+    const rows = React.useMemo(() => {
+      let out = HERBS.slice();
+      if (category!=="all")     out = out.filter(h => h.category===category);
+      if (supplier!=="all")     out = out.filter(h => h.supplier===supplier);
+      if (statusFilter!=="all") out = out.filter(h => herbStatus(h).key===statusFilter);
+      if (search) { const q=search.toLowerCase(); out=out.filter(h=>h.name.includes(search)||h.latin.toLowerCase().includes(q)); }
+      out.sort((a,b) => {
+        const dir = sortDir==="asc"?1:-1;
+        if (sortKey==="stock")   return (a.stock-b.stock)*dir;
+        if (sortKey==="monthly") return (a.monthly-b.monthly)*dir;
+        if (sortKey==="value")   return (a.stock*a.unitPrice-b.stock*b.unitPrice)*dir;
+        if (sortKey==="expiry")  return (daysUntil(a.expiry)-daysUntil(b.expiry))*dir;
+        if (sortKey==="lastIn")  return (new Date(a.lastIn)-new Date(b.lastIn))*dir;
+        return a.name.localeCompare(b.name,"ko")*dir;
+      });
+      return out;
+    }, [category,supplier,statusFilter,search,sortKey,sortDir]);
+    const selected = HERBS.find(h => h.id===selectedId)||null;
+    const showToast = msg => { setToast(msg); setTimeout(()=>setToast(null),2200); };
+    const toggleSort = key => { if(sortKey===key) setSortDir(sortDir==="asc"?"desc":"asc"); else {setSortKey(key);setSortDir("asc");} };
+    return html`<div style=${{ display:"flex", flexDirection:"column", height:"100%", background:"var(--bg-page)" }}>
+      <${TopBar} title="약재 재고" subtitle="현재 24종 · 마지막 동기화 2분 전" actions=${html`<${F}>
+        <${Button} variant="ghost"      size="sm" icon="download"       onClick=${()=>showToast("재고 현황 엑셀을 내려받았습니다.")}>엑셀</${Button}>
+        <${Button} variant="secondary"  size="sm" icon="clipboard-edit" onClick=${()=>showToast("재고 실사 모드로 진입합니다.")}>재고 조정</${Button}>
+        <${Button} variant="secondary"  size="sm" icon="plus"           onClick=${()=>showToast("신규 약재 등록 패널을 엽니다.")}>약재 등록</${Button}>
+        <${Button} variant="primary"    size="sm" icon="package-plus"   onClick=${()=>setIntakeOpen(true)}>입고 등록</${Button}>
+      </${F}>`} />
+      <div style=${{ flex:1, display:"flex", overflow:"hidden", minHeight:0 }}>
+        <div style=${{ flex:1, overflowY:"auto", minWidth:0 }}>
+          <div style=${{ padding:"20px 24px", display:"flex", flexDirection:"column", gap:16 }}>
+            <${HIKpiStrip} herbs=${HERBS} alerts=${alerts} openPOs=${OPEN_PURCHASE_ORDERS} />
+            ${showAI && html`<${HIAICard} suggestions=${aiSuggestions}
+              onApply=${()=>{ setShowAI(false); showToast(`발주서 초안 ${aiSuggestions.length}품목이 생성되었습니다.`); }}
+              onDismiss=${()=>setShowAI(false)} />`}
+            <${HIAlertSection} alerts=${alerts} onPick=${setSelectedId} />
+            <${HIOpenPOs} pos=${OPEN_PURCHASE_ORDERS} />
+            <div style=${{ background:"var(--bg-surface)", border:"1px solid var(--border-subtle)", borderRadius:"var(--radius-lg)", boxShadow:"var(--shadow-sm)", overflow:"hidden" }}>
+              <div style=${{ padding:"12px 16px", borderBottom:"1px solid var(--border-subtle)", display:"flex", alignItems:"center", gap:10, flexWrap:"wrap" }}>
+                <span style=${{ fontSize:13, fontWeight:600, color:"var(--text-primary)", fontFamily:"var(--font-sans)", marginRight:8 }}>전체 재고</span>
+                <span style=${{ fontSize:12, color:"var(--text-muted)", fontFamily:"var(--font-mono)" }}>${rows.length} / ${HERBS.length}종</span>
+                <div style=${{ flex:1 }}></div>
+                <div style=${{ width:200 }}><${Input} value=${search} onChange=${setSearch} placeholder="약재명 / 학명 검색" icon="search" /></div>
+                <${HISelect} value=${category} onChange=${setCategory} options=${HERB_CATEGORIES.map(c=>({value:c.key,label:c.label}))} />
+                <${HISelect} value=${supplier} onChange=${setSupplier} options=${suppliers.map(s=>({value:s,label:s==="all"?"공급처 전체":s}))} />
+                <${HISelect} value=${statusFilter} onChange=${setStatusFilter} options=${[
+                  {value:"all",label:"상태 전체"},{value:"ok",label:"정상"},
+                  {value:"low",label:"재고 부족"},{value:"critical",label:"소진 임박"},{value:"expiring",label:"유효기간 임박"},
+                ]} />
+              </div>
+              <div style=${{ overflowX:"auto" }}>
+                <table style=${{ width:"100%", borderCollapse:"collapse", fontFamily:"var(--font-sans)" }}>
+                  <thead><tr style=${{ background:"var(--stone-100)" }}>
+                    <${HITh} label="약재"          sortable onClick=${()=>toggleSort("name")}    active=${sortKey==="name"}    dir=${sortDir} />
+                    <${HITh} label="분류" />
+                    <${HITh} label="재고 / 임계치" sortable onClick=${()=>toggleSort("stock")}   active=${sortKey==="stock"}   dir=${sortDir} right />
+                    <${HITh} label="월 소비"       sortable onClick=${()=>toggleSort("monthly")} active=${sortKey==="monthly"} dir=${sortDir} right />
+                    <${HITh} label="최근 입고"     sortable onClick=${()=>toggleSort("lastIn")}  active=${sortKey==="lastIn"}  dir=${sortDir} />
+                    <${HITh} label="유효기간"      sortable onClick=${()=>toggleSort("expiry")}  active=${sortKey==="expiry"}  dir=${sortDir} />
+                    <${HITh} label="원산지 / 공급처" />
+                    <${HITh} label="재고가치"      sortable onClick=${()=>toggleSort("value")}   active=${sortKey==="value"}   dir=${sortDir} right />
+                    <${HITh} label="위치" />
+                    <${HITh} label="상태" />
+                  </tr></thead>
+                  <tbody>
+                    ${rows.map(h => {
+                      const st = herbStatus(h);
+                      const dExpiry = daysUntil(h.expiry);
+                      const isSel = h.id===selectedId;
+                      const ratio = Math.min(h.stock/(h.threshold*2),1);
+                      return html`<tr key=${h.id} onClick=${()=>setSelectedId(h.id)}
+                        style=${{ borderTop:"1px solid var(--border-subtle)", background:isSel?"var(--jade-50)":"transparent", cursor:"pointer", transition:"background 0.1s ease" }}
+                        onMouseEnter=${e=>{ if(!isSel) e.currentTarget.style.background="var(--stone-50)"; }}
+                        onMouseLeave=${e=>{ if(!isSel) e.currentTarget.style.background="transparent"; }}>
+                        <td style=${{ padding:"10px 14px" }}>
+                          <div style=${{ fontSize:13, fontWeight:500, color:"var(--text-primary)" }}>${h.name}</div>
+                          <div style=${{ fontSize:10, color:"var(--text-muted)", fontStyle:"italic", marginTop:1 }}>${h.latin}</div>
+                        </td>
+                        <td style=${{ padding:"10px 14px" }}>
+                          <span style=${{ fontSize:11, background:"var(--stone-100)", color:"var(--text-secondary)", padding:"2px 7px", borderRadius:"var(--radius-full)", border:"1px solid var(--border-subtle)" }}>${h.category}</span>
+                        </td>
+                        <td style=${{ padding:"10px 14px", textAlign:"right", minWidth:140 }}>
+                          <div style=${{ fontSize:13, color:"var(--text-primary)", fontFamily:"var(--font-mono)", fontWeight:500 }}>${fmtMass(h.stock)}</div>
+                          <div style=${{ display:"flex", alignItems:"center", gap:6, justifyContent:"flex-end", marginTop:4 }}>
+                            <div style=${{ width:64, height:4, background:"var(--stone-200)", borderRadius:2, overflow:"hidden" }}>
+                              <div style=${{ width:`${ratio*100}%`, height:"100%", background:st.key==="critical"?"var(--cinnabar-500)":st.key==="low"?"var(--amber-500)":"var(--jade-500)" }}></div>
+                            </div>
+                            <span style=${{ fontSize:10, color:"var(--text-muted)", fontFamily:"var(--font-mono)" }}>임 ${fmtMass(h.threshold)}</span>
+                          </div>
+                        </td>
+                        <td style=${{ padding:"10px 14px", textAlign:"right", fontSize:13, color:"var(--text-secondary)", fontFamily:"var(--font-mono)" }}>${fmtMass(h.monthly)}</td>
+                        <td style=${{ padding:"10px 14px", fontSize:12, color:"var(--text-secondary)", fontFamily:"var(--font-mono)" }}>${h.lastIn}</td>
+                        <td style=${{ padding:"10px 14px" }}>
+                          <div style=${{ fontSize:12, color:"var(--text-secondary)", fontFamily:"var(--font-mono)" }}>${h.expiry}</div>
+                          <div style=${{ fontSize:10, color:dExpiry<=90?"var(--cinnabar-700)":"var(--text-muted)", fontFamily:"var(--font-mono)", marginTop:1 }}>D-${dExpiry}</div>
+                        </td>
+                        <td style=${{ padding:"10px 14px" }}>
+                          <div style=${{ fontSize:12, color:"var(--text-primary)" }}>${h.supplier}</div>
+                          <div style=${{ fontSize:10, color:"var(--text-muted)" }}>${h.origin}</div>
+                        </td>
+                        <td style=${{ padding:"10px 14px", textAlign:"right", fontSize:13, color:"var(--text-primary)", fontFamily:"var(--font-mono)" }}>${won(h.stock*h.unitPrice)}</td>
+                        <td style=${{ padding:"10px 14px", fontSize:11, color:"var(--text-secondary)", fontFamily:"var(--font-mono)" }}>${h.location}</td>
+                        <td style=${{ padding:"10px 14px" }}>
+                          ${st.key==="ok"
+                            ? html`<span style=${{ fontSize:11, color:"var(--text-muted)", fontFamily:"var(--font-sans)" }}>정상</span>`
+                            : html`<${Badge} variant=${st.tone}>${st.label}</${Badge}>`}
+                        </td>
+                      </tr>`;
+                    })}
+                  </tbody>
+                </table>
+                ${rows.length===0 && html`<div style=${{ padding:"32px 20px", textAlign:"center", color:"var(--text-muted)", fontSize:13, fontFamily:"var(--font-sans)" }}>조건에 맞는 약재가 없습니다.</div>`}
+              </div>
+            </div>
+          </div>
+        </div>
+        <${HIDetailPanel} herb=${selected} onIntake=${()=>setIntakeOpen(true)} onToast=${showToast} />
+      </div>
+      ${toast && html`<div style=${{ position:"fixed", bottom:20, left:"50%", transform:"translateX(-50%)", background:"var(--ink-800)", color:"var(--stone-50)", padding:"10px 18px", borderRadius:"var(--radius-md)", fontSize:13, fontFamily:"var(--font-sans)", boxShadow:"var(--shadow-lg)", display:"flex", alignItems:"center", gap:8, zIndex:100 }}>
+        <${Icon} name="check-circle" size=${14} style=${{ color:"var(--jade-300)" }} />${toast}
+      </div>`}
+      ${intakeOpen && html`<${HIIntakeModal} herb=${selected} onClose=${()=>setIntakeOpen(false)}
+        onSubmit=${qty=>{ setIntakeOpen(false); showToast(`${selected?.name} ${fmtMass(qty)} 입고 처리되었습니다.`); }} />`}
+    </div>`;
+  }
+
+  // ── SuppliesParts ───────────────────────────────────────────────
+  function SPKpi({ label, value, sub, accent }) {
+    return html`<div style=${{ flex:1, background:"var(--bg-surface)", border:"1px solid var(--border-subtle)", borderRadius:"var(--radius-lg)", padding:"14px 18px", boxShadow:"var(--shadow-sm)", minWidth:0 }}>
+      <div style=${{ fontSize:11, fontWeight:600, color:"var(--text-muted)", letterSpacing:"0.04em", textTransform:"uppercase", fontFamily:"var(--font-sans)" }}>${label}</div>
+      <div style=${{ fontSize:22, fontWeight:600, color:accent||"var(--text-primary)", fontFamily:"var(--font-serif)", marginTop:4, letterSpacing:"-0.01em" }}>${value}</div>
+      ${sub && html`<div style=${{ fontSize:11, color:"var(--text-secondary)", fontFamily:"var(--font-sans)", marginTop:2 }}>${sub}</div>`}
+    </div>`;
+  }
+  function SPKpiStrip({ items, alerts, openPOs }) {
+    const totalValue = items.reduce((s,x) => s+x.stock*x.unitPrice, 0);
+    return html`<div style=${{ display:"flex", gap:12 }}>
+      <${SPKpi} label="등록 품목"    value=${`${items.length}종`} sub="활성 SKU" />
+      <${SPKpi} label="재고 가치"    value=${won(totalValue)} sub="현재 단가 기준" />
+      <${SPKpi} label="주의 필요"    value=${`${alerts.length}건`} sub="부족 · 임박 합계" accent=${alerts.length?"var(--cinnabar-700)":undefined} />
+      <${SPKpi} label="진행 중 발주" value=${`${openPOs.length}건`} sub="입고 대기" />
+    </div>`;
+  }
+  function SPAICard({ suggestions, onApply, onDismiss }) {
+    if (!suggestions.length) return null;
+    const totalCost = suggestions.reduce((s,x) => s+x.suggestQty*x.unitPrice, 0);
+    return html`<div style=${{ background:"var(--jade-50)", border:"1px solid var(--jade-200)", borderRadius:"var(--radius-lg)", padding:"16px 20px" }}>
+      <div style=${{ display:"flex", alignItems:"flex-start", justifyContent:"space-between", marginBottom:10 }}>
+        <div style=${{ display:"flex", alignItems:"center", gap:10 }}>
+          <${Icon} name="sparkles" size=${16} style=${{ color:"var(--jade-600)" }} />
+          <span style=${{ fontSize:13, fontWeight:600, color:"var(--jade-700)", fontFamily:"var(--font-sans)" }}>AI 발주 추천 · ${suggestions.length}품목</span>
+          <span style=${{ fontSize:11, background:"var(--jade-100)", color:"var(--jade-700)", padding:"2px 9px", borderRadius:"var(--radius-full)", fontFamily:"var(--font-sans)" }}>지난 90일 소비 패턴 분석</span>
+        </div>
+        <button onClick=${onDismiss} style=${{ background:"none", border:"none", cursor:"pointer", color:"var(--jade-400)", fontSize:18, lineHeight:1, padding:0 }}>×</button>
+      </div>
+      <div style=${{ fontSize:12, color:"var(--jade-700)", fontFamily:"var(--font-sans)", lineHeight:1.5, marginBottom:12 }}>안전 임계치 이하 또는 2주 미만 잔여 품목을 공급처별로 묶어 추천합니다. 적용 시 발주서 초안으로 이동합니다.</div>
+      <div style=${{ background:"var(--bg-surface)", borderRadius:"var(--radius-md)", border:"1px solid var(--jade-200)", overflow:"hidden" }}>
+        <table style=${{ width:"100%", borderCollapse:"collapse", fontFamily:"var(--font-sans)" }}>
+          <thead><tr style=${{ background:"var(--jade-50)" }}>
+            ${["품목","공급처","월 소비","잔여","추천 수량","예상 금액"].map(h => html`<th key=${h} style=${{ padding:"6px 12px", fontSize:10, fontWeight:700, color:"var(--jade-700)", textAlign:"left", letterSpacing:"0.06em", textTransform:"uppercase" }}>${h}</th>`)}
+          </tr></thead>
+          <tbody>
+            ${suggestions.map(s => html`<tr key=${s.id} style=${{ borderTop:"1px solid var(--jade-100)" }}>
+              <td style=${{ padding:"7px 12px", fontSize:13, fontWeight:500, color:"var(--text-primary)" }}>${s.name}</td>
+              <td style=${{ padding:"7px 12px", fontSize:12, color:"var(--text-secondary)" }}>${s.supplier}</td>
+              <td style=${{ padding:"7px 12px", fontSize:12, color:"var(--text-secondary)", fontFamily:"var(--font-mono)" }}>${supFmt(s.monthly,s.unit)}</td>
+              <td style=${{ padding:"7px 12px", fontSize:12, color:"var(--cinnabar-700)", fontFamily:"var(--font-mono)" }}>${s.daysLeft}일</td>
+              <td style=${{ padding:"7px 12px", fontSize:12, fontWeight:600, color:"var(--jade-700)", fontFamily:"var(--font-mono)" }}>${supFmt(s.suggestQty,s.unit)}</td>
+              <td style=${{ padding:"7px 12px", fontSize:12, color:"var(--text-primary)", fontFamily:"var(--font-mono)" }}>${won(s.suggestQty*s.unitPrice)}</td>
+            </tr>`)}
+            <tr style=${{ borderTop:"1px solid var(--jade-200)", background:"var(--jade-50)" }}>
+              <td colSpan=${5} style=${{ padding:"7px 12px", fontSize:11, fontWeight:600, color:"var(--jade-700)", textAlign:"right" }}>합계</td>
+              <td style=${{ padding:"7px 12px", fontSize:12, fontWeight:700, color:"var(--jade-700)", fontFamily:"var(--font-mono)" }}>${won(totalCost)}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style=${{ display:"flex", gap:8, marginTop:12 }}>
+        <${Button} variant="primary" size="sm" icon="check"     onClick=${onApply}>발주서 초안 만들기</${Button}>
+        <${Button} variant="ghost"   size="sm" icon="settings"  onClick=${()=>{}}>추천 조건 조정</${Button}>
+      </div>
+    </div>`;
+  }
+  function SPAlertSection({ alerts, onPick }) {
+    if (!alerts.length) return null;
+    return html`<div style=${{ background:"var(--cinnabar-100)", border:"1px solid var(--cinnabar-200)", borderRadius:"var(--radius-lg)", overflow:"hidden" }}>
+      <div style=${{ padding:"10px 16px", display:"flex", alignItems:"center", justifyContent:"space-between", borderBottom:"1px solid var(--cinnabar-200)" }}>
+        <div style=${{ display:"flex", alignItems:"center", gap:8 }}>
+          <${Icon} name="alert-triangle" size=${15} style=${{ color:"var(--cinnabar-700)" }} />
+          <span style=${{ fontSize:13, fontWeight:600, color:"var(--cinnabar-800)", fontFamily:"var(--font-sans)" }}>주의 필요 · ${alerts.length}건</span>
+        </div>
+        <span style=${{ fontSize:11, color:"var(--cinnabar-700)", fontFamily:"var(--font-sans)" }}>클릭 시 상세 패널 열기</span>
+      </div>
+      <div style=${{ display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(240px, 1fr))", gap:1, background:"var(--cinnabar-200)" }}>
+        ${alerts.map(a => {
+          const st = supStatus(a);
+          const dExpiry = a.expiry ? daysUntil(a.expiry) : null;
+          const reason = st.key==="critical" ? `잔여 ${supRunOut(a)}일` :
+                         st.key==="low"      ? `임계치 ${Math.round((a.threshold-a.stock)/a.threshold*100)}% 미달` :
+                         `유효기간 D-${dExpiry}`;
+          return html`<div key=${a.id} onClick=${()=>onPick(a.id)} style=${{ background:"var(--bg-surface)", padding:"10px 14px", cursor:"pointer", transition:"background 0.12s ease" }}
+            onMouseEnter=${e=>e.currentTarget.style.background="var(--cinnabar-100)"}
+            onMouseLeave=${e=>e.currentTarget.style.background="var(--bg-surface)"}>
+            <div style=${{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:4, gap:8 }}>
+              <span style=${{ fontSize:13, fontWeight:600, color:"var(--text-primary)", fontFamily:"var(--font-sans)", overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>${a.name}</span>
+              <${Badge} variant=${st.tone}>${st.label}</${Badge}>
+            </div>
+            <div style=${{ fontSize:11, color:"var(--text-secondary)", fontFamily:"var(--font-sans)", display:"flex", justifyContent:"space-between" }}>
+              <span>${a.category} · ${supFmt(a.stock,a.unit)}</span>
+              <span style=${{ color:"var(--cinnabar-700)", fontFamily:"var(--font-mono)" }}>${reason}</span>
+            </div>
+          </div>`;
+        })}
+      </div>
+    </div>`;
+  }
+  function SPOpenPOs({ pos }) {
+    if (!pos.length) return null;
+    return html`<div style=${{ background:"var(--bg-surface)", border:"1px solid var(--border-subtle)", borderRadius:"var(--radius-lg)", padding:"14px 18px", boxShadow:"var(--shadow-sm)" }}>
+      <div style=${{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:10 }}>
+        <span style=${{ fontSize:13, fontWeight:600, color:"var(--text-primary)", fontFamily:"var(--font-sans)" }}>진행 중 발주</span>
+        <${Button} variant="ghost" size="sm" icon="external-link">전체 발주 이력</${Button}>
+      </div>
+      <div style=${{ display:"flex", flexDirection:"column", gap:6 }}>
+        ${pos.map(p => html`<div key=${p.id} style=${{ display:"grid", gridTemplateColumns:"120px 1fr auto auto auto", gap:12, alignItems:"center", padding:"8px 10px", border:"1px solid var(--border-subtle)", borderRadius:"var(--radius-md)", background:"var(--stone-50)" }}>
+          <span style=${{ fontSize:12, fontFamily:"var(--font-mono)", color:"var(--text-primary)" }}>${p.id}</span>
+          <span style=${{ fontSize:12, color:"var(--text-primary)", fontFamily:"var(--font-sans)" }}>${p.supplier} · ${p.itemCount}품목</span>
+          <span style=${{ fontSize:12, color:"var(--text-secondary)", fontFamily:"var(--font-mono)" }}>${won(p.total)}</span>
+          <span style=${{ fontSize:11, color:"var(--text-secondary)", fontFamily:"var(--font-sans)" }}>입고 예정 ${p.expectedDate}</span>
+          <${Badge} variant=${p.status==="발주 완료"?"brand":"warning"}>${p.status}</${Badge}>
+        </div>`)}
+      </div>
+    </div>`;
+  }
+
+  // ── SuppliesScreen ──────────────────────────────────────────────
+  function SPTh({ label, sortable, onClick, active, dir, right }) {
+    return html`<th onClick=${sortable?onClick:undefined} style=${{ padding:"8px 14px", fontSize:10, fontWeight:700, color:active?"var(--text-primary)":"var(--text-muted)", textAlign:right?"right":"left", letterSpacing:"0.06em", textTransform:"uppercase", cursor:sortable?"pointer":"default", userSelect:"none", whiteSpace:"nowrap" }}>
+      ${label}${sortable&&active&&html`<span style=${{ marginLeft:4, fontSize:9 }}>${dir==="asc"?"▲":"▼"}</span>`}
+    </th>`;
+  }
+  function SPSelect({ value, onChange, options }) {
+    return html`<select value=${value} onChange=${e=>onChange(e.target.value)} style=${{ fontFamily:"var(--font-sans)", fontSize:12, color:"var(--text-primary)", background:"var(--bg-surface)", border:"1px solid var(--border-default)", borderRadius:"var(--radius-md)", padding:"6px 28px 6px 10px", outline:"none", appearance:"none", backgroundImage:"url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%238A9E9A' d='M0 0l5 6 5-6z'/></svg>\")", backgroundRepeat:"no-repeat", backgroundPosition:"right 10px center", cursor:"pointer" }}>
+      ${options.map(o => html`<option key=${o.value} value=${o.value}>${o.label}</option>`)}
+    </select>`;
+  }
+  function SPFact({ label, value, accent }) {
+    return html`<div style=${{ display:"flex", justifyContent:"space-between", gap:12, padding:"8px 12px", background:"var(--bg-surface)" }}>
+      <span style=${{ fontSize:12, color:"var(--text-secondary)", fontFamily:"var(--font-sans)" }}>${label}</span>
+      <span style=${{ fontSize:12, color:accent||"var(--text-primary)", fontFamily:"var(--font-mono)", textAlign:"right" }}>${value}</span>
+    </div>`;
+  }
+  function SPDetailPanel({ item, onIntake, onToast }) {
+    if (!item) return html`<div style=${{ width:320, background:"var(--bg-surface)", borderLeft:"1px solid var(--border-subtle)", padding:20, flexShrink:0, display:"flex", alignItems:"center", justifyContent:"center", color:"var(--text-muted)", fontSize:13, fontFamily:"var(--font-sans)" }}>품목을 선택하면 상세가 표시됩니다</div>`;
+    const st = supStatus(item);
+    const dExpiry = item.expiry ? daysUntil(item.expiry) : null;
+    const runOut = supRunOut(item);
+    const cat = SUP_CAT_COLOR[item.category] || SUP_CAT_COLOR["사무"];
+    const history = SUP_HISTORY[item.id] || [];
+    return html`<div style=${{ width:320, background:"var(--bg-surface)", borderLeft:"1px solid var(--border-subtle)", padding:"16px 18px", display:"flex", flexDirection:"column", gap:16, flexShrink:0, overflowY:"auto" }}>
+      <div>
+        <div style=${{ display:"flex", alignItems:"flex-start", gap:8, marginBottom:4 }}>
+          <div style=${{ fontSize:19, fontWeight:600, fontFamily:"var(--font-serif)", color:"var(--text-primary)", letterSpacing:"-0.01em", flex:1, lineHeight:1.2 }}>${item.name}</div>
+          <${Badge} variant=${st.tone}>${st.label}</${Badge}>
+        </div>
+        <div style=${{ fontSize:11, color:"var(--text-muted)", fontFamily:"var(--font-mono)" }}>${item.sku} · ${item.pack}</div>
+        <div style=${{ display:"flex", gap:6, marginTop:8 }}>
+          <span style=${{ fontSize:11, background:cat.bg, color:cat.fg, padding:"2px 8px", borderRadius:"var(--radius-full)", border:`1px solid ${cat.border}`, fontFamily:"var(--font-sans)" }}>${item.category}</span>
+        </div>
+      </div>
+      <div>
+        <div style=${{ display:"flex", justifyContent:"space-between", alignItems:"baseline", marginBottom:6 }}>
+          <span style=${{ fontSize:11, fontWeight:700, letterSpacing:"0.06em", textTransform:"uppercase", color:"var(--text-muted)", fontFamily:"var(--font-sans)" }}>현재 재고</span>
+          <span style=${{ fontSize:11, color:"var(--text-muted)", fontFamily:"var(--font-mono)" }}>잔여 ${runOut}일</span>
+        </div>
+        <div style=${{ fontSize:24, fontWeight:600, fontFamily:"var(--font-mono)", color:"var(--text-primary)" }}>${supFmt(item.stock,item.unit)}</div>
+        <div style=${{ position:"relative", height:6, background:"var(--stone-200)", borderRadius:3, overflow:"hidden", marginTop:6 }}>
+          <div style=${{ position:"absolute", left:0, top:0, bottom:0, width:`${Math.min(item.stock/(item.threshold*2),1)*100}%`, background:st.key==="critical"?"var(--cinnabar-500)":st.key==="low"?"var(--amber-500)":"var(--jade-500)" }}></div>
+          <div style=${{ position:"absolute", top:-2, bottom:-2, left:`${Math.min(item.threshold/(item.threshold*2),1)*100}%`, width:2, background:"var(--ink-500)" }}></div>
+        </div>
+        <div style=${{ display:"flex", justifyContent:"space-between", marginTop:4 }}>
+          <span style=${{ fontSize:10, color:"var(--text-muted)", fontFamily:"var(--font-mono)" }}>0</span>
+          <span style=${{ fontSize:10, color:"var(--text-muted)", fontFamily:"var(--font-mono)" }}>임계치 ${supFmt(item.threshold,item.unit)}</span>
+          <span style=${{ fontSize:10, color:"var(--text-muted)", fontFamily:"var(--font-mono)" }}>${supFmt(item.threshold*2,item.unit)}</span>
+        </div>
+      </div>
+      <div style=${{ display:"flex", gap:6 }}>
+        <${Button} variant="primary"   size="sm" icon="package-plus"   onClick=${onIntake}>입고</${Button}>
+        <${Button} variant="secondary" size="sm" icon="clipboard-edit" onClick=${()=>onToast("실사 보정 화면을 엽니다.")}>조정</${Button}>
+        <${Button} variant="secondary" size="sm" icon="send"           onClick=${()=>onToast(`${item.name} 발주 라인이 추가되었습니다.`)}>발주</${Button}>
+      </div>
+      <div style=${{ display:"flex", flexDirection:"column", gap:1, background:"var(--border-subtle)", borderRadius:"var(--radius-md)", overflow:"hidden", border:"1px solid var(--border-subtle)" }}>
+        <${SPFact} label="공급처"      value=${item.supplier} />
+        <${SPFact} label="단가"        value=${`${won(item.unitPrice)} / ${item.unit}`} />
+        <${SPFact} label="재고가치"    value=${won(item.stock*item.unitPrice)} />
+        <${SPFact} label="월 소비"     value=${supFmt(item.monthly,item.unit)} />
+        <${SPFact} label="안전 임계치" value=${supFmt(item.threshold,item.unit)} />
+        <${SPFact} label="최근 입고"   value=${item.lastIn} />
+        <${SPFact} label="유효기간"    value=${item.expiry?`${item.expiry} · D-${dExpiry}`:"해당 없음"} accent=${item.expiry&&dExpiry<=90?"var(--cinnabar-700)":undefined} />
+        <${SPFact} label="보관 위치"   value=${item.location} />
+      </div>
+      <div>
+        <div style=${{ fontSize:11, fontWeight:700, letterSpacing:"0.06em", textTransform:"uppercase", color:"var(--text-muted)", fontFamily:"var(--font-sans)", marginBottom:8 }}>최근 이력</div>
+        ${history.length===0
+          ? html`<div style=${{ fontSize:12, color:"var(--text-muted)", fontFamily:"var(--font-sans)", padding:"8px 0" }}>최근 90일간 이력이 없습니다.</div>`
+          : html`<div style=${{ display:"flex", flexDirection:"column", gap:6 }}>
+              ${history.map((h,i) => html`<div key=${i} style=${{ display:"grid", gridTemplateColumns:"82px 38px 1fr auto", gap:8, alignItems:"center", padding:"7px 10px", border:"1px solid var(--border-subtle)", borderRadius:"var(--radius-sm)", background:"var(--stone-50)" }}>
+                <span style=${{ fontSize:11, color:"var(--text-muted)", fontFamily:"var(--font-mono)" }}>${h.date}</span>
+                <span style=${{ fontSize:10, fontWeight:600, fontFamily:"var(--font-sans)", color:h.type==="입고"?"var(--jade-700)":h.type==="사용"?"var(--ink-600)":"var(--amber-700)", background:h.type==="입고"?"var(--jade-100)":h.type==="사용"?"var(--stone-200)":"var(--amber-100)", padding:"1px 6px", borderRadius:"var(--radius-sm)", textAlign:"center" }}>${h.type}</span>
+                <span style=${{ fontSize:11, color:"var(--text-secondary)", fontFamily:"var(--font-sans)", overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>${h.note}</span>
+                <span style=${{ fontSize:12, fontFamily:"var(--font-mono)", color:h.qty>0?"var(--jade-700)":"var(--text-primary)" }}>${h.qty>0?"+":""}${h.qty} ${item.unit}</span>
+              </div>`)}
+            </div>`}
+      </div>
+    </div>`;
+  }
+  function SPIntakeModal({ item, onClose, onSubmit }) {
+    const [qty,setQty]    = useState("");
+    const [lot,setLot]    = useState("");
+    const [expiry,setExp] = useState("");
+    return html`<div onClick=${onClose} style=${{ position:"fixed", inset:0, background:"var(--bg-overlay)", display:"flex", alignItems:"center", justifyContent:"center", zIndex:200 }}>
+      <div onClick=${e=>e.stopPropagation()} style=${{ background:"var(--bg-surface)", borderRadius:"var(--radius-xl)", width:440, padding:"22px 24px", boxShadow:"var(--shadow-xl)", fontFamily:"var(--font-sans)" }}>
+        <div style=${{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:14 }}>
+          <div>
+            <div style=${{ fontSize:16, fontWeight:600, color:"var(--text-primary)", fontFamily:"var(--font-serif)" }}>입고 등록</div>
+            <div style=${{ fontSize:12, color:"var(--text-muted)" }}>${item?`${item.name} · 현재 ${supFmt(item.stock,item.unit)}`:"품목 선택 필요"}</div>
+          </div>
+          <button onClick=${onClose} style=${{ background:"none", border:"none", cursor:"pointer", color:"var(--text-muted)", fontSize:20, lineHeight:1 }}>×</button>
+        </div>
+        <div style=${{ display:"flex", flexDirection:"column", gap:12 }}>
+          <${Input} label=${`입고 수량 (${item?.unit||""})`} value=${qty} onChange=${setQty} placeholder="예: 12" type="number" />
+          <${Input} label="공급처 / 로트번호" value=${lot} onChange=${setLot} placeholder=${item?item.supplier:"공급처"} />
+          <${Input} label="유효기간 (있을 경우)" value=${expiry} onChange=${setExp} placeholder="YYYY-MM-DD" />
+        </div>
+        <div style=${{ display:"flex", justifyContent:"flex-end", gap:8, marginTop:18 }}>
+          <${Button} variant="secondary" size="md" onClick=${onClose}>취소</${Button}>
+          <${Button} variant="primary" size="md" icon="check" onClick=${()=>onSubmit(Number(qty)||0)} disabled=${!qty||!item}>입고 처리</${Button}>
+        </div>
+      </div>
+    </div>`;
+  }
+  function SuppliesScreen() {
+    const [selectedId,   setSelectedId]   = useState("s-009");
+    const [category,     setCategory]     = useState("all");
+    const [statusFilter, setStatusFilter] = useState("all");
+    const [supplier,     setSupplier]     = useState("all");
+    const [search,       setSearch]       = useState("");
+    const [showAI,       setShowAI]       = useState(true);
+    const [sortKey,      setSortKey]      = useState("name");
+    const [sortDir,      setSortDir]      = useState("asc");
+    const [toast,        setToast]        = useState(null);
+    const [intakeOpen,   setIntakeOpen]   = useState(false);
+    const alerts = React.useMemo(() => SUPPLIES.filter(s => supStatus(s).key !== "ok"), []);
+    const aiSuggestions = React.useMemo(() => SUPPLIES
+      .filter(s => s.stock < s.threshold || supRunOut(s) <= 14)
+      .map(s => {
+        const need = Math.ceil((s.monthly/30)*60 - s.stock);
+        const suggestQty = Math.max(s.threshold, Math.ceil(need));
+        return {id:s.id,name:s.name,supplier:s.supplier,unit:s.unit,monthly:s.monthly,daysLeft:supRunOut(s),suggestQty,unitPrice:s.unitPrice};
+      })
+      .sort((a,b) => a.daysLeft-b.daysLeft), []);
+    const suppliers = React.useMemo(() => {
+      const set = new Set(SUPPLIES.map(s => s.supplier));
+      return ["all", ...Array.from(set)];
+    }, []);
+    const rows = React.useMemo(() => {
+      let out = SUPPLIES.slice();
+      if (category!=="all")     out = out.filter(s => s.category===category);
+      if (supplier!=="all")     out = out.filter(s => s.supplier===supplier);
+      if (statusFilter!=="all") out = out.filter(s => supStatus(s).key===statusFilter);
+      if (search) { const q=search.toLowerCase(); out=out.filter(s=>s.name.toLowerCase().includes(q)||s.sku.toLowerCase().includes(q)); }
+      out.sort((a,b) => {
+        const dir = sortDir==="asc"?1:-1;
+        if (sortKey==="stock")    return (a.stock-b.stock)*dir;
+        if (sortKey==="monthly")  return (a.monthly-b.monthly)*dir;
+        if (sortKey==="value")    return (a.stock*a.unitPrice-b.stock*b.unitPrice)*dir;
+        if (sortKey==="expiry")   { const da=a.expiry?daysUntil(a.expiry):9999,db=b.expiry?daysUntil(b.expiry):9999; return (da-db)*dir; }
+        if (sortKey==="lastIn")   return (new Date(a.lastIn)-new Date(b.lastIn))*dir;
+        if (sortKey==="category") return a.category.localeCompare(b.category,"ko")*dir;
+        return a.name.localeCompare(b.name,"ko")*dir;
+      });
+      return out;
+    }, [category,supplier,statusFilter,search,sortKey,sortDir]);
+    const selected = SUPPLIES.find(s => s.id===selectedId)||null;
+    const showToast = msg => { setToast(msg); setTimeout(()=>setToast(null),2200); };
+    const toggleSort = key => { if(sortKey===key) setSortDir(sortDir==="asc"?"desc":"asc"); else {setSortKey(key);setSortDir("asc");} };
+    return html`<div style=${{ display:"flex", flexDirection:"column", height:"100%", background:"var(--bg-page)" }}>
+      <${TopBar} title="소모품" subtitle=${`현재 ${SUPPLIES.length}품목 · 마지막 동기화 4분 전`} actions=${html`<${F}>
+        <${Button} variant="ghost"     size="sm" icon="download"       onClick=${()=>showToast("소모품 재고 엑셀을 내려받았습니다.")}>엑셀</${Button}>
+        <${Button} variant="secondary" size="sm" icon="clipboard-edit" onClick=${()=>showToast("재고 실사 모드로 진입합니다.")}>재고 조정</${Button}>
+        <${Button} variant="secondary" size="sm" icon="plus"           onClick=${()=>showToast("신규 품목 등록 패널을 엽니다.")}>품목 등록</${Button}>
+        <${Button} variant="primary"   size="sm" icon="package-plus"   onClick=${()=>setIntakeOpen(true)}>입고 등록</${Button}>
+      </${F}>`} />
+      <div style=${{ flex:1, display:"flex", overflow:"hidden", minHeight:0 }}>
+        <div style=${{ flex:1, overflowY:"auto", minWidth:0 }}>
+          <div style=${{ padding:"20px 24px", display:"flex", flexDirection:"column", gap:16 }}>
+            <${SPKpiStrip} items=${SUPPLIES} alerts=${alerts} openPOs=${SUP_OPEN_POS} />
+            ${showAI && html`<${SPAICard} suggestions=${aiSuggestions}
+              onApply=${()=>{ setShowAI(false); showToast(`발주서 초안 ${aiSuggestions.length}품목이 생성되었습니다.`); }}
+              onDismiss=${()=>setShowAI(false)} />`}
+            <${SPAlertSection} alerts=${alerts} onPick=${setSelectedId} />
+            <${SPOpenPOs} pos=${SUP_OPEN_POS} />
+            <div style=${{ background:"var(--bg-surface)", border:"1px solid var(--border-subtle)", borderRadius:"var(--radius-lg)", boxShadow:"var(--shadow-sm)", overflow:"hidden" }}>
+              <div style=${{ padding:"12px 16px", borderBottom:"1px solid var(--border-subtle)", display:"flex", alignItems:"center", gap:10, flexWrap:"wrap" }}>
+                <span style=${{ fontSize:13, fontWeight:600, color:"var(--text-primary)", fontFamily:"var(--font-sans)", marginRight:8 }}>전체 소모품</span>
+                <span style=${{ fontSize:12, color:"var(--text-muted)", fontFamily:"var(--font-mono)" }}>${rows.length} / ${SUPPLIES.length}품목</span>
+                <div style=${{ flex:1 }}></div>
+                <div style=${{ width:220 }}><${Input} value=${search} onChange=${setSearch} placeholder="품명 / SKU 검색" icon="search" /></div>
+                <${SPSelect} value=${category} onChange=${setCategory} options=${SUP_CATEGORIES.map(c=>({value:c.key,label:c.label}))} />
+                <${SPSelect} value=${supplier} onChange=${setSupplier} options=${suppliers.map(s=>({value:s,label:s==="all"?"공급처 전체":s}))} />
+                <${SPSelect} value=${statusFilter} onChange=${setStatusFilter} options=${[
+                  {value:"all",label:"상태 전체"},{value:"ok",label:"정상"},
+                  {value:"low",label:"재고 부족"},{value:"critical",label:"소진 임박"},{value:"expiring",label:"유효기간 임박"},
+                ]} />
+              </div>
+              <div style=${{ overflowX:"auto" }}>
+                <table style=${{ width:"100%", borderCollapse:"collapse", fontFamily:"var(--font-sans)" }}>
+                  <thead><tr style=${{ background:"var(--stone-100)" }}>
+                    <${SPTh} label="품목"        sortable onClick=${()=>toggleSort("name")}     active=${sortKey==="name"}     dir=${sortDir} />
+                    <${SPTh} label="분류"        sortable onClick=${()=>toggleSort("category")} active=${sortKey==="category"} dir=${sortDir} />
+                    <${SPTh} label="SKU" />
+                    <${SPTh} label="재고 / 임계치" sortable onClick=${()=>toggleSort("stock")}  active=${sortKey==="stock"}    dir=${sortDir} right />
+                    <${SPTh} label="월 소비"     sortable onClick=${()=>toggleSort("monthly")}  active=${sortKey==="monthly"}  dir=${sortDir} right />
+                    <${SPTh} label="최근 입고"   sortable onClick=${()=>toggleSort("lastIn")}   active=${sortKey==="lastIn"}   dir=${sortDir} />
+                    <${SPTh} label="유효기간"    sortable onClick=${()=>toggleSort("expiry")}   active=${sortKey==="expiry"}   dir=${sortDir} />
+                    <${SPTh} label="공급처" />
+                    <${SPTh} label="재고가치"    sortable onClick=${()=>toggleSort("value")}    active=${sortKey==="value"}    dir=${sortDir} right />
+                    <${SPTh} label="위치" />
+                    <${SPTh} label="상태" />
+                  </tr></thead>
+                  <tbody>
+                    ${rows.map(s => {
+                      const st = supStatus(s);
+                      const dExpiry = s.expiry ? daysUntil(s.expiry) : null;
+                      const isSel = s.id===selectedId;
+                      const ratio = Math.min(s.stock/(s.threshold*2),1);
+                      const cat = SUP_CAT_COLOR[s.category]||SUP_CAT_COLOR["사무"];
+                      return html`<tr key=${s.id} onClick=${()=>setSelectedId(s.id)}
+                        style=${{ borderTop:"1px solid var(--border-subtle)", background:isSel?"var(--jade-50)":"transparent", cursor:"pointer", transition:"background 0.1s ease" }}
+                        onMouseEnter=${e=>{ if(!isSel) e.currentTarget.style.background="var(--stone-50)"; }}
+                        onMouseLeave=${e=>{ if(!isSel) e.currentTarget.style.background="transparent"; }}>
+                        <td style=${{ padding:"10px 14px" }}>
+                          <div style=${{ fontSize:13, fontWeight:500, color:"var(--text-primary)" }}>${s.name}</div>
+                          <div style=${{ fontSize:10, color:"var(--text-muted)", marginTop:1 }}>${s.pack}</div>
+                        </td>
+                        <td style=${{ padding:"10px 14px" }}>
+                          <span style=${{ fontSize:11, background:cat.bg, color:cat.fg, padding:"2px 8px", borderRadius:"var(--radius-full)", border:`1px solid ${cat.border}` }}>${s.category}</span>
+                        </td>
+                        <td style=${{ padding:"10px 14px", fontSize:11, color:"var(--text-muted)", fontFamily:"var(--font-mono)" }}>${s.sku}</td>
+                        <td style=${{ padding:"10px 14px", textAlign:"right", minWidth:150 }}>
+                          <div style=${{ fontSize:13, color:"var(--text-primary)", fontFamily:"var(--font-mono)", fontWeight:500 }}>${supFmt(s.stock,s.unit)}</div>
+                          <div style=${{ display:"flex", alignItems:"center", gap:6, justifyContent:"flex-end", marginTop:4 }}>
+                            <div style=${{ width:64, height:4, background:"var(--stone-200)", borderRadius:2, overflow:"hidden" }}>
+                              <div style=${{ width:`${ratio*100}%`, height:"100%", background:st.key==="critical"?"var(--cinnabar-500)":st.key==="low"?"var(--amber-500)":"var(--jade-500)" }}></div>
+                            </div>
+                            <span style=${{ fontSize:10, color:"var(--text-muted)", fontFamily:"var(--font-mono)" }}>임 ${supFmt(s.threshold,s.unit)}</span>
+                          </div>
+                        </td>
+                        <td style=${{ padding:"10px 14px", textAlign:"right", fontSize:13, color:"var(--text-secondary)", fontFamily:"var(--font-mono)" }}>${supFmt(s.monthly,s.unit)}</td>
+                        <td style=${{ padding:"10px 14px", fontSize:12, color:"var(--text-secondary)", fontFamily:"var(--font-mono)" }}>${s.lastIn}</td>
+                        <td style=${{ padding:"10px 14px" }}>
+                          ${s.expiry ? html`<${F}>
+                            <div style=${{ fontSize:12, color:"var(--text-secondary)", fontFamily:"var(--font-mono)" }}>${s.expiry}</div>
+                            <div style=${{ fontSize:10, color:dExpiry<=90?"var(--cinnabar-700)":"var(--text-muted)", fontFamily:"var(--font-mono)", marginTop:1 }}>D-${dExpiry}</div>
+                          </${F}>` : html`<span style=${{ fontSize:11, color:"var(--text-muted)" }}>—</span>`}
+                        </td>
+                        <td style=${{ padding:"10px 14px", fontSize:12, color:"var(--text-primary)" }}>${s.supplier}</td>
+                        <td style=${{ padding:"10px 14px", textAlign:"right", fontSize:13, color:"var(--text-primary)", fontFamily:"var(--font-mono)" }}>${won(s.stock*s.unitPrice)}</td>
+                        <td style=${{ padding:"10px 14px", fontSize:11, color:"var(--text-secondary)", fontFamily:"var(--font-mono)" }}>${s.location}</td>
+                        <td style=${{ padding:"10px 14px" }}>
+                          ${st.key==="ok"
+                            ? html`<span style=${{ fontSize:11, color:"var(--text-muted)", fontFamily:"var(--font-sans)" }}>정상</span>`
+                            : html`<${Badge} variant=${st.tone}>${st.label}</${Badge}>`}
+                        </td>
+                      </tr>`;
+                    })}
+                  </tbody>
+                </table>
+                ${rows.length===0 && html`<div style=${{ padding:"32px 20px", textAlign:"center", color:"var(--text-muted)", fontSize:13, fontFamily:"var(--font-sans)" }}>조건에 맞는 품목이 없습니다.</div>`}
+              </div>
+            </div>
+          </div>
+        </div>
+        <${SPDetailPanel} item=${selected} onIntake=${()=>setIntakeOpen(true)} onToast=${showToast} />
+      </div>
+      ${toast && html`<div style=${{ position:"fixed", bottom:20, left:"50%", transform:"translateX(-50%)", background:"var(--ink-800)", color:"var(--stone-50)", padding:"10px 18px", borderRadius:"var(--radius-md)", fontSize:13, fontFamily:"var(--font-sans)", boxShadow:"var(--shadow-lg)", display:"flex", alignItems:"center", gap:8, zIndex:100 }}>
+        <${Icon} name="check-circle" size=${14} style=${{ color:"var(--jade-300)" }} />${toast}
+      </div>`}
+      ${intakeOpen && html`<${SPIntakeModal} item=${selected} onClose=${()=>setIntakeOpen(false)}
+        onSubmit=${qty=>{ setIntakeOpen(false); showToast(`${selected?.name} ${supFmt(qty,selected?.unit||"")} 입고 처리되었습니다.`); }} />`}
+    </div>`;
+  }
+
   function App() {
     const [nav, setNav] = useState(() => localStorage.getItem("komes_nav") || "patients");
     const [selectedPatient, setSelectedPatient] = useState(null);
@@ -1928,11 +2813,13 @@ body {
         }
         return html`<${PatientChartScreen} patient=${selectedPatient} onBack=${handleNavBack} onPrescribe=${handlePrescribe} />`;
       }
-      if (nav === "claim") return html`<${InsuranceClaimScreen} />`;
+      if (nav === "claim")     return html`<${InsuranceClaimScreen} />`;
+      if (nav === "inventory") return html`<${HerbInventoryScreen} />`;
+      if (nav === "supplies")  return html`<${SuppliesScreen} />`;
       const labels = {
         schedule: "예약 관리",
         registry: "환자 관리", payment: "수납",
-        prescriptions: "처방 관리", inventory: "약재 재고",
+        prescriptions: "처방 관리",
         stats: "통계", ai: "AI 분석", settings: "설정"
       };
       return html`<${PlaceholderScreen} title=${labels[nav] || nav} />`;

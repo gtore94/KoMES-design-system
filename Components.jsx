@@ -109,6 +109,9 @@ function Sidebar({ activeScreen, onNavigate }) {
       { key: "prescriptions", icon: "flask-conical", label: "처방 관리" },
       { key: "inventory",     icon: "package",        label: "약재 재고" },
     ]},
+    { label: "비품/운영", items: [
+      { key: "supplies", icon: "boxes", label: "소모품" },
+    ]},
     { label: "분석", items: [
       { key: "stats", icon: "bar-chart-2", label: "통계" },
       { key: "ai",    icon: "sparkles",    label: "AI 분석" },
