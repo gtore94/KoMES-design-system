@@ -331,6 +331,7 @@ function VisitCard({ visit }) {
 // ── Main Chart Screen ────────────────────────────────────────────
 function PatientChartScreen({ patient, onBack, onPrescribe, onNavigate }) {
   const scrollRef = useRefChart(null);
+  const [instructionOpen, setInstructionOpen] = useStateChart(false);
 
   if (!patient) {
     return (
@@ -442,8 +443,8 @@ function PatientChartScreen({ patient, onBack, onPrescribe, onNavigate }) {
             <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
               {[
                 { icon: "file-signature", label: "서식 발급",      onClick: () => onNavigate && onNavigate("forms") },
-                { icon: "sparkles",       label: "환자 안내문 작성(AI 보조)", onClick: null },
-                { icon: "calendar-plus",  label: "예약 추가",       onClick: null },
+                { icon: "sparkles",       label: "환자 안내문 작성(AI 보조)", onClick: () => setInstructionOpen(true) },
+                { icon: "calendar-plus",  label: "예약 추가",       onClick: () => onNavigate && onNavigate("schedule") },
               ].map(a => (
                 <button key={a.label} onClick={a.onClick} style={{ display: "flex", alignItems: "center", gap: 8, padding: "7px 10px", borderRadius: "var(--radius-md)", border: "1px solid var(--border-subtle)", background: "var(--stone-50)", cursor: "pointer", fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", transition: "all 0.12s" }}>
                   <Icon name={a.icon} size={13} style={{ color: "var(--text-muted)" }} />{a.label}
@@ -453,6 +454,13 @@ function PatientChartScreen({ patient, onBack, onPrescribe, onNavigate }) {
           </div>
         </div>
       </div>
+
+      {instructionOpen && (
+        <PatientInstructionModal
+          patient={patient}
+          onClose={() => setInstructionOpen(false)}
+        />
+      )}
     </div>
   );
 }
