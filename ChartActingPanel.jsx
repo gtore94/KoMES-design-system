@@ -477,7 +477,9 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
   const fmt = (n) => n.toLocaleString("ko-KR");
 
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+      {/* 스크롤 영역: 오더 목록 */}
+      <div style={{ flex: 1, overflowY: "auto", padding: "14px 16px" }}>
       {/* 헤더 */}
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
         <Icon name="zap" size={15} style={{ color: "var(--jade-600)" }} />
@@ -612,6 +614,10 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
       )}
 
 
+      </div>{/* end 스크롤 영역 */}
+
+      {/* 하단 고정: 진료비 계산 */}
+      <div style={{ flexShrink: 0, padding: "12px 16px", borderTop: "1px solid var(--border-subtle)", background: "var(--bg-surface)", display: "flex", flexDirection: "column", gap: 10 }}>
       {/* 청구 합계 */}
       <div style={{
         background: "var(--bg-raised)", border: "1px solid var(--border-subtle)",
@@ -663,6 +669,7 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
           <Icon name="check-circle-2" size={12} />진료 완료
         </button>
       </div>
+      </div>{/* end 하단 고정 */}
     </div>
   );
 }

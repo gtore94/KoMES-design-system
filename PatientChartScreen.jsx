@@ -413,34 +413,18 @@ function PatientChartScreen({ patient, onBack, onPrescribe, onNavigate }) {
         </div>
 
         {/* ── RIGHT: 오늘 오더 + 환자 정보 ── */}
-        <div style={{ width: 300, display: "flex", flexDirection: "column", flexShrink: 0, background: "var(--bg-page)", overflowY: "auto" }}>
+        <div style={{ width: 300, display: "flex", flexDirection: "column", flexShrink: 0, background: "var(--bg-surface)", overflow: "hidden" }}>
 
           {/* Today's billing + acting orders (통합 — 실시간 계산) */}
-          <div style={{ padding: "14px 16px", borderBottom: "1px solid var(--border-subtle)", background: "var(--bg-surface)" }}>
+          <div style={{ flex: 1, overflow: "hidden" }}>
             <ActingOrderBillingPanel
               injuryDate={patient.insurance === "자보" ? patient.injuryDate : null}
               insurance={patient.insurance || "건강보험"}
             />
           </div>
 
-          {/* Next appointment + visit history */}
-          <div style={{ padding: "14px 16px", borderBottom: "1px solid var(--border-subtle)", background: "var(--bg-surface)", marginTop: 8 }}>
-            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 8 }}>다음 예약</div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: "var(--jade-600)", fontFamily: "var(--font-sans)" }}>2026-05-06 (수) 14:00</div>
-            <div style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 14 }}>재진</div>
-
-            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 8 }}>내원 이력</div>
-            {HISTORY.map((v) => (
-              <div key={v.id} style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 5 }}>
-                <div style={{ width: 6, height: 6, borderRadius: "50%", background: v.isToday ? "var(--jade-500)" : "var(--border-default)", flexShrink: 0 }} />
-                <span style={{ fontSize: 11, color: v.isToday ? "var(--jade-600)" : "var(--text-secondary)", fontFamily: "var(--font-mono)", fontWeight: v.isToday ? 600 : 400 }}>{v.date}</span>
-                <Badge variant={v.visitType === "초진" ? "danger" : "neutral"}>{v.visitType}</Badge>
-              </div>
-            ))}
-          </div>
-
-          {/* Quick actions */}
-          <div style={{ padding: "14px 16px", background: "var(--bg-surface)", marginTop: 8 }}>
+          {/* Quick actions — 하단 고정 */}
+          <div style={{ flexShrink: 0, padding: "10px 16px 14px", background: "var(--bg-surface)", borderTop: "1px solid var(--border-subtle)" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
               {[
                 { icon: "file-signature", label: "서식 발급",      onClick: () => onNavigate && onNavigate("forms") },
