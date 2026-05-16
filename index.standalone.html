@@ -165,6 +165,20 @@
   --bg-raised:  #16263F;
   --bg-sunken:  #040810;
   --border-subtle:  #1A2D45;
+  /* board columns: use jade dark values (navy overrides light, this restores dark) */
+  --board-appt-bg:   #141C2B; --board-appt-border:  #1E2D45;
+  --board-treat-bg:  #101E1C; --board-treat-border: #1A3330;
+  /* doc-d1 card: restore dark value */
+  --doc-d1-bg: #101E1C; --doc-d1-border: #1A3330;
+  /* restore dark rail for dark navy mode */
+  --rail-bg:             #0E1A2E;
+  --rail-surface:        #16263F;
+  --rail-text:           var(--navy-50);
+  --rail-text-secondary: var(--navy-200);
+  --rail-text-muted:     var(--navy-300);
+  --rail-border:         #16263F;
+  --rail-stripe:         rgba(255,255,255,0.04);
+  --rail-divider:        rgba(255,255,255,0.07);
   /* bump jade scale so gradients stand out from bg-raised (#16263F) */
   --jade-900: #0F1F38;
   --jade-800: #1E3C6A;
