@@ -202,7 +202,7 @@ function PODraftSidebar({ drafts, selectedIdx, onSelect, totalAll }) {
     }}>
       <div style={{
         padding: "16px 16px 12px",
-        background: "linear-gradient(180deg, var(--jade-50), var(--bg-surface))",
+        background: "linear-gradient(180deg, var(--brand-subtle), var(--bg-surface))",
         borderBottom: "1px solid var(--border-subtle)",
       }}>
         <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 4 }}>총 합계</div>

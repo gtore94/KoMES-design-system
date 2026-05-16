@@ -48,7 +48,7 @@ function HerbRegistrationModal({ onClose, onSubmit }) {
         <div style={{
           padding: "20px 28px 16px", borderBottom: "1px solid var(--border-subtle)",
           display: "flex", alignItems: "flex-start", gap: 12,
-          background: "linear-gradient(180deg, var(--jade-50) 0%, var(--bg-surface) 100%)",
+          background: "linear-gradient(180deg, var(--brand-subtle) 0%, var(--bg-surface) 100%)",
         }}>
           <div style={{
             width: 36, height: 36, borderRadius: "var(--radius-md)",

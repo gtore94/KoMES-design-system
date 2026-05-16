@@ -50,11 +50,11 @@ function SupplyRegistrationModal({ onClose, onSubmit }) {
         <div style={{
           padding: "20px 28px 16px", borderBottom: "1px solid var(--border-subtle)",
           display: "flex", alignItems: "flex-start", gap: 12,
-          background: "linear-gradient(180deg, var(--stone-100) 0%, var(--bg-surface) 100%)",
+          background: "linear-gradient(180deg, var(--bg-raised) 0%, var(--bg-surface) 100%)",
         }}>
           <div style={{
             width: 36, height: 36, borderRadius: "var(--radius-md)",
-            background: "var(--stone-200)", color: "var(--ink-700)",
+            background: "var(--bg-raised)", color: "var(--text-secondary)",
             display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
           }}>
             <Icon name="package" size={18} />
@@ -128,6 +128,7 @@ function SupplyRegistrationModal({ onClose, onSubmit }) {
                     flex: 1, minWidth: 100, fontFamily: "var(--font-sans)", fontSize: 12,
                     padding: "5px 10px", border: "1px solid var(--border-default)",
                     borderRadius: "var(--radius-md)", outline: "none",
+                    background: "var(--bg-surface)", color: "var(--text-primary)",
                   }} />
               </div>
             </SRField>
@@ -242,7 +243,7 @@ function SRSection({ title, sub, num, children }) {
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
         <div style={{
           width: 22, height: 22, borderRadius: "var(--radius-full)",
-          background: "var(--stone-200)", color: "var(--ink-700)",
+          background: "var(--bg-raised)", color: "var(--text-primary)",
           display: "flex", alignItems: "center", justifyContent: "center",
           fontSize: 11, fontWeight: 700, fontFamily: "var(--font-mono)",
         }}>{num}</div>

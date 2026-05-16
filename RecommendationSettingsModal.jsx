@@ -90,7 +90,7 @@ function RecommendationSettingsModal({ onClose, onSave, initial = REC_DEFAULTS }
         <div style={{
           padding: "18px 24px", borderBottom: "1px solid var(--border-subtle)",
           display: "flex", alignItems: "center", gap: 12,
-          background: "linear-gradient(180deg, var(--jade-50) 0%, var(--bg-surface) 100%)",
+          background: "linear-gradient(180deg, var(--brand-subtle) 0%, var(--bg-surface) 100%)",
         }}>
           <div style={{
             width: 38, height: 38, borderRadius: "var(--radius-md)",
