@@ -205,6 +205,7 @@ body { font-family: var(--font-sans); background-color: var(--bg-page); color: v
 <script type="text/babel" src="PatientManagementScreen.jsx"></script>
 <script type="text/babel" src="PatientChartScreen.jsx"></script>
 <script type="text/babel" src="PrescriptionScreen.jsx"></script>
+<script type="text/babel" src="PrescriptionManagementScreen.jsx"></script>
 <script type="text/babel" src="ScheduleScreen.jsx?v=4"></script>
 <script type="text/babel" src="PaymentScreen.jsx"></script>
 <script type="text/babel" src="herbData.jsx"></script>
@@ -320,8 +321,10 @@ function App() {
     if (nav === "settings") {
       return <SettingsScreen />;
     }
+    if (nav === "prescriptions") {
+      return <PrescriptionManagementScreen />;
+    }
     const labels = {
-      prescriptions: "처방 관리",
       stats: "통계", ai: "AI 분석"
     };
     return <PlaceholderScreen title={labels[nav] || nav} />;

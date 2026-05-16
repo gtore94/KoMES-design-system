@@ -17,6 +17,7 @@ JSX_FILES = [
     "PatientManagementScreen.jsx",
     "PatientChartScreen.jsx",
     "PrescriptionScreen.jsx",
+    "PrescriptionManagementScreen.jsx",
     "ScheduleScreen.jsx",
     "PaymentScreen.jsx",
     "herbData.jsx",
