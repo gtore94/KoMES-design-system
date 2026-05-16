@@ -127,7 +127,7 @@ function AutoInsuranceBar({ injuryDate, today = new Date(), chunaUsed = 7, herbD
               fontSize: 10, fontWeight: 600,
               color: "var(--text-brand)", background: "var(--brand-muted)",
               padding: "1px 7px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
-              border: "1px solid var(--jade-300)",
+              border: "1px solid var(--brand)",
               fontFamily: "var(--font-sans)",
             }}>IR 2부위 청구 가능</span>
           )}
@@ -187,7 +187,7 @@ function AutoInsuranceBar({ injuryDate, today = new Date(), chunaUsed = 7, herbD
 // ── 사용 한도 progress bar ───────────────────────────────────────
 function UsageBar({ icon, label, used, max, unit, pct, warn, hint }) {
   const remaining = Math.max(0, max - used);
-  const barColor = warn ? "var(--amber-400)" : "var(--jade-300)";
+  const barColor = warn ? "var(--amber-400)" : "var(--brand)";
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 5, minWidth: 0 }}>
       <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
