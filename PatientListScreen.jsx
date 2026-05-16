@@ -68,11 +68,15 @@ function WaitChip({ mins, stage }) {
 
 function PatientCard({ patient, stage, onSelect, onAdvance }) {
   const [hovered, setHovered] = useStateDash(false);
+  const [dragging, setDragging] = useStateDash(false);
   const nextStage = NEXT_STAGE[patient.stage];
   const isDone = patient.stage === "수납완료";
 
   return (
     <div
+      draggable
+      onDragStart={e => { e.dataTransfer.setData("patientId", String(patient.id)); e.dataTransfer.effectAllowed = "move"; setDragging(true); }}
+      onDragEnd={() => setDragging(false)}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -80,10 +84,10 @@ function PatientCard({ patient, stage, onSelect, onAdvance }) {
         border: `1px solid ${hovered ? "var(--brand-muted)" : "var(--border-subtle)"}`,
         borderRadius: "var(--radius-md)",
         padding: "10px 12px",
-        cursor: "pointer",
+        cursor: dragging ? "grabbing" : "pointer",
         transition: "all 0.15s ease",
         boxShadow: hovered ? "var(--shadow-md)" : "var(--shadow-sm)",
-        opacity: isDone ? 0.7 : 1,
+        opacity: dragging ? 0.45 : (isDone ? 0.7 : 1),
       }}
       onClick={() => onSelect(patient)}
     >
@@ -143,9 +147,17 @@ function PatientCard({ patient, stage, onSelect, onAdvance }) {
   );
 }
 
-function SubStageSection({ stage, patients, onSelect, onAdvance, showDivider }) {
+function SubStageSection({ stage, patients, onSelect, onAdvance, showDivider, dragOver, setDragOver, onDrop }) {
+  const isOver = dragOver === stage.key;
   return (
-    <div>
+    <div
+      onDragOver={e => { e.preventDefault(); setDragOver(stage.key); }}
+      onDragLeave={e => { if (!e.currentTarget.contains(e.relatedTarget)) setDragOver(null); }}
+      onDrop={e => { e.preventDefault(); const id = Number(e.dataTransfer.getData("patientId")); if (id) onDrop(id, stage.key); setDragOver(null); }}
+      style={{
+        background: isOver ? "rgba(0,0,0,0.04)" : "transparent",
+        transition: "background 0.12s ease",
+      }}>
       <div style={{
         display: "flex", alignItems: "center", gap: 6,
         padding: "8px 12px 6px",
@@ -165,12 +177,13 @@ function SubStageSection({ stage, patients, onSelect, onAdvance, showDivider }) 
       <div style={{ padding: "0 10px 10px", display: "flex", flexDirection: "column", gap: 8 }}>
         {patients.length === 0 && (
           <div style={{
-            fontSize: 10, color: stage.color, opacity: 0.4,
+            fontSize: 10, color: stage.color, opacity: isOver ? 0.9 : 0.4,
             textAlign: "center", padding: "8px 0",
             fontFamily: "var(--font-sans)",
-            border: "1px dashed rgba(0,0,0,0.08)",
+            border: `1px dashed ${isOver ? stage.color : "rgba(0,0,0,0.08)"}`,
             borderRadius: "var(--radius-sm)",
-          }}>—</div>
+            background: isOver ? "rgba(0,0,0,0.03)" : "transparent",
+          }}>{isOver ? "여기에 놓기" : "—"}</div>
         )}
         {patients.map(p => (
           <PatientCard key={p.id} patient={p} stage={stage} onSelect={onSelect} onAdvance={onAdvance} />
@@ -180,7 +193,7 @@ function SubStageSection({ stage, patients, onSelect, onAdvance, showDivider }) 
   );
 }
 
-function GroupColumn({ group, patients, onSelect, onAdvance }) {
+function GroupColumn({ group, patients, onSelect, onAdvance, dragOver, setDragOver, onDrop }) {
   const groupTotal = patients.length;
   return (
     <div style={{
@@ -227,6 +240,9 @@ function GroupColumn({ group, patients, onSelect, onAdvance }) {
               onSelect={onSelect}
               onAdvance={onAdvance}
               showDivider={i > 0}
+              dragOver={dragOver}
+              setDragOver={setDragOver}
+              onDrop={onDrop}
             />
           );
         })}
@@ -250,9 +266,12 @@ function PatientListScreen({ onSelectPatient }) {
   const [search, setSearch] = useStateDash("");
   const [view, setView] = useStateDash("board"); // "board" | "list"
   const [showNewPatient, setShowNewPatient] = useStateDash(false);
+  const [quickPatient, setQuickPatient] = useStateDash(null);
+  const [dragOver, setDragOver] = useStateDash(null);
 
   const advanceStage = (id, newStage) => {
     setPatients(prev => prev.map(p => p.id === id ? { ...p, stage: newStage, waitMins: 0 } : p));
+    setQuickPatient(prev => prev && prev.id === id ? { ...prev, stage: newStage, waitMins: 0 } : prev);
   };
 
   const resetPatients = () => setPatients(PATIENTS);
@@ -349,8 +368,11 @@ function PatientListScreen({ onSelectPatient }) {
                   <GroupColumn
                     group={group}
                     patients={groupPatients}
-                    onSelect={onSelectPatient}
+                    onSelect={setQuickPatient}
                     onAdvance={advanceStage}
+                    dragOver={dragOver}
+                    setDragOver={setDragOver}
+                    onDrop={advanceStage}
                   />
                 </div>
               );
@@ -376,7 +398,7 @@ function PatientListScreen({ onSelectPatient }) {
                   {groupPatients.map((p, i) => {
                     const subStage = STAGE_BY_KEY[p.stage];
                     return (
-                      <div key={p.id} onClick={() => onSelectPatient(p)}
+                      <div key={p.id} onClick={() => setQuickPatient(p)}
                         style={{ display: "flex", alignItems: "center", gap: 12, padding: "10px 16px", borderBottom: i < groupPatients.length - 1 ? "1px solid var(--border-subtle)" : "none", cursor: "pointer", transition: "background 0.1s" }}
                         onMouseEnter={e => e.currentTarget.style.background = "var(--brand-subtle)"}
                         onMouseLeave={e => e.currentTarget.style.background = "transparent"}>
@@ -435,6 +457,147 @@ function PatientListScreen({ onSelectPatient }) {
           onSubmit={() => setShowNewPatient(false)}
         />
       )}
+
+      {quickPatient && (
+        <PatientQuickModal
+          patient={quickPatient}
+          onClose={() => setQuickPatient(null)}
+          onAdvance={advanceStage}
+          onOpenChart={() => { onSelectPatient(quickPatient); setQuickPatient(null); }}
+        />
+      )}
+    </div>
+  );
+}
+
+// ── Patient quick-view modal ─────────────────────────────────────────
+function PatientQuickModal({ patient, onClose, onAdvance, onOpenChart }) {
+  const stage = STAGE_BY_KEY[patient.stage];
+  const nextStage = NEXT_STAGE[patient.stage];
+
+  return (
+    <div onClick={onClose} style={{
+      position: "fixed", inset: 0, background: "var(--bg-overlay)",
+      backdropFilter: "blur(2px)", zIndex: 200,
+      display: "flex", alignItems: "center", justifyContent: "center", padding: 24,
+      fontFamily: "var(--font-sans)",
+    }}>
+      <div onClick={e => e.stopPropagation()} style={{
+        width: "100%", maxWidth: 640, maxHeight: "88vh",
+        background: "var(--bg-surface)", borderRadius: "var(--radius-xl)",
+        boxShadow: "var(--shadow-xl)", display: "flex", flexDirection: "column", overflow: "hidden",
+      }}>
+        {/* Header */}
+        <div style={{
+          padding: "18px 24px 14px", borderBottom: "1px solid var(--border-subtle)",
+          display: "flex", alignItems: "flex-start", gap: 14,
+          background: "linear-gradient(180deg, var(--brand-subtle) 0%, var(--bg-surface) 100%)",
+        }}>
+          <Avatar name={patient.name} size={44} />
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+              <span style={{ fontSize: 19, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-serif)", letterSpacing: "-0.01em" }}>{patient.name}</span>
+              <span style={{ fontSize: 12, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>{patient.gender} · {patient.age}세 · {patient.dob}</span>
+              <span style={{
+                fontSize: 10, fontWeight: 600,
+                color: patient.visitType === "초진" ? "var(--cinnabar-600)" : "var(--jade-600)",
+                background: patient.visitType === "초진" ? "var(--status-danger-bg)" : "var(--brand-subtle)",
+                border: `1px solid ${patient.visitType === "초진" ? "var(--status-danger-border)" : "var(--brand-muted)"}`,
+                borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 7px",
+              }}>{patient.visitType}</span>
+              {patient.insurance === "자보" && (
+                <span style={{
+                  fontSize: 10, fontWeight: 700,
+                  color: "#7A4F1A", background: "#FEF3C7", border: "1px solid #FCD34D",
+                  borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 7px",
+                }}>자보</span>
+              )}
+            </div>
+            <div style={{ fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", marginTop: 4 }}>
+              {patient.phone} · 마지막 내원 {patient.lastVisit || "—"}
+            </div>
+          </div>
+          <button onClick={onClose} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--text-muted)", padding: 4 }}>
+            <Icon name="x" size={20} />
+          </button>
+        </div>
+
+        {/* Body */}
+        <div style={{ flex: 1, overflowY: "auto", padding: "16px 24px", display: "flex", flexDirection: "column", gap: 16 }}>
+          {/* Current stage banner */}
+          <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", background: stage.bg, border: `1px solid ${stage.border}`, borderRadius: "var(--radius-md)" }}>
+            <Icon name={stage.icon} size={16} style={{ color: stage.color }} />
+            <span style={{ fontSize: 13, fontWeight: 600, color: stage.color, fontFamily: "var(--font-sans)" }}>{stage.label}</span>
+            <div style={{ flex: 1 }} />
+            {patient.stage !== "수납완료" && <WaitChip mins={patient.waitMins} stage={patient.stage} />}
+          </div>
+
+          {/* Chief complaint */}
+          <div>
+            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 6 }}>주소증</div>
+            <div style={{ fontSize: 14, color: "var(--text-primary)", fontFamily: "var(--font-sans)", padding: "10px 14px", background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", lineHeight: 1.5 }}>
+              {patient.chief}
+            </div>
+          </div>
+
+          {/* Stage progression */}
+          <div>
+            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 8 }}>진료 단계</div>
+            <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+              {STAGES.map((s, i) => {
+                const idx = STAGES.findIndex(x => x.key === patient.stage);
+                const passed = i < idx;
+                const current = i === idx;
+                return (
+                  <React.Fragment key={s.key}>
+                    <div style={{
+                      display: "flex", flexDirection: "column", alignItems: "center", gap: 3, flex: 1, minWidth: 0,
+                      opacity: passed || current ? 1 : 0.4,
+                    }}>
+                      <div style={{
+                        width: 24, height: 24, borderRadius: "50%",
+                        background: current ? s.color : passed ? s.bg : "var(--bg-raised)",
+                        color: current ? "#fff" : s.color,
+                        border: `1.5px solid ${current || passed ? s.color : "var(--border-subtle)"}`,
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                        fontSize: 10, fontWeight: 700, fontFamily: "var(--font-mono)",
+                      }}>{passed ? <Icon name="check" size={12} /> : i + 1}</div>
+                      <span style={{ fontSize: 9, color: current ? s.color : "var(--text-muted)", fontFamily: "var(--font-sans)", fontWeight: current ? 700 : 400, textAlign: "center", whiteSpace: "nowrap" }}>{s.label}</span>
+                    </div>
+                    {i < STAGES.length - 1 && (
+                      <div style={{ flex: 0.4, height: 2, background: i < idx ? STAGES[i].color : "var(--border-subtle)", marginBottom: 16, opacity: 0.4 }} />
+                    )}
+                  </React.Fragment>
+                );
+              })}
+            </div>
+          </div>
+
+          {patient.insurance === "자보" && patient.injuryDate && (
+            <div style={{ background: "var(--status-warning-bg)", border: "1px solid var(--status-warning-border)", borderRadius: "var(--radius-md)", padding: "10px 14px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 2 }}>
+                <Icon name="car" size={13} style={{ color: "var(--status-warning-text)" }} />
+                <span style={{ fontSize: 12, fontWeight: 600, color: "var(--status-warning-text)" }}>자보 환자</span>
+              </div>
+              <div style={{ fontSize: 12, color: "var(--status-warning-text)", fontFamily: "var(--font-sans)" }}>
+                수상일 <span style={{ fontFamily: "var(--font-mono)" }}>{patient.injuryDate}</span>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        <div style={{ padding: "14px 24px", borderTop: "1px solid var(--border-subtle)", display: "flex", gap: 8, alignItems: "center", background: "var(--bg-raised)" }}>
+          <Button variant="secondary" size="md" onClick={onClose}>닫기</Button>
+          <div style={{ flex: 1 }} />
+          {nextStage && (
+            <Button variant="ghost" size="md" icon="arrow-right" onClick={() => onAdvance(patient.id, nextStage)}>
+              {nextStage}로
+            </Button>
+          )}
+          <Button variant="primary" size="md" icon="stethoscope" onClick={onOpenChart}>차트 열기</Button>
+        </div>
+      </div>
     </div>
   );
 }
