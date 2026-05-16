@@ -74,11 +74,7 @@ function AutoInsuranceBar({ injuryDate, today = new Date(), chunaUsed = 7, herbD
   const weeks = Math.floor(days / 7);
   const remDays = days % 7;
   const phase = days <= 7 ? 1 : days <= 28 ? 2 : 3;
-  const phaseInfo = {
-    1: { label: "급성기",   color: "var(--cinnabar-700)", bg: "var(--cinnabar-100)", border: "var(--cinnabar-200)" },
-    2: { label: "아급성기", color: "var(--amber-700)",    bg: "var(--amber-100)",    border: "var(--amber-200)" },
-    3: { label: "만성기",   color: "var(--ink-600)",      bg: "var(--stone-100)",    border: "var(--stone-300)" },
-  }[phase];
+  const irClaimable = days <= 17; // 2주 3일 이내 IR 2부위 청구 가능
 
   // 사용 한도
   const CHUNA_MAX = 20;
@@ -118,13 +114,15 @@ function AutoInsuranceBar({ injuryDate, today = new Date(), chunaUsed = 7, herbD
             <span style={{ fontSize: 11, fontWeight: 700, color: "var(--stone-200)", letterSpacing: "0.06em", textTransform: "uppercase", fontFamily: "var(--font-sans)" }}>
               자동차 보험 환자
             </span>
-            <span style={{
-              fontSize: 10, fontWeight: 600,
-              color: phaseInfo.color, background: phaseInfo.bg,
-              padding: "1px 7px", borderRadius: "var(--radius-full)",
-              border: `1px solid ${phaseInfo.border}`,
-              fontFamily: "var(--font-sans)",
-            }}>{phaseInfo.label}</span>
+            {irClaimable && (
+              <span style={{
+                fontSize: 10, fontWeight: 600,
+                color: "var(--jade-700)", background: "var(--jade-100)",
+                padding: "1px 7px", borderRadius: "var(--radius-full)",
+                border: "1px solid var(--jade-300)",
+                fontFamily: "var(--font-sans)",
+              }}>IR 2부위 청구 가능</span>
+            )}
           </div>
           <div style={{ fontSize: 11, color: "var(--stone-300)", fontFamily: "var(--font-sans)", marginTop: 1 }}>
             수상일 <span style={{ fontFamily: "var(--font-mono)" }}>{injuryDate}</span>
