@@ -146,7 +146,7 @@ function Sidebar({ activeScreen, onNavigate }) {
         <div style={{ width: 30, height: 30, background: "var(--jade-500)", borderRadius: "var(--radius-sm)", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <span style={{ fontFamily: "var(--font-serif)", fontSize: 15, fontWeight: 600, color: "white" }}>K</span>
         </div>
-        <div onClick={() => setCollapsed(false)} style={{ cursor: "pointer", color: "var(--ink-300)", display: "flex", alignItems: "center", padding: 2, borderRadius: "var(--radius-sm)" }}>
+        <div key="expand-btn" onClick={() => setCollapsed(false)} style={{ cursor: "pointer", color: "var(--ink-300)", display: "flex", alignItems: "center", padding: 2, borderRadius: "var(--radius-sm)" }}>
           <Icon name="chevron-right" size={13} />
         </div>
       </div>
@@ -158,7 +158,7 @@ function Sidebar({ activeScreen, onNavigate }) {
           </div>
           <span style={{ fontFamily: "var(--font-serif)", fontSize: 15, fontWeight: 400, color: "var(--stone-50)", letterSpacing: "-0.01em", whiteSpace: "nowrap" }}>KoMES</span>
         </div>
-        <div onClick={() => setCollapsed(true)} style={{ cursor: "pointer", color: "var(--ink-300)", display: "flex", alignItems: "center", padding: 3, borderRadius: "var(--radius-sm)" }}>
+        <div key="collapse-btn" onClick={() => setCollapsed(true)} style={{ cursor: "pointer", color: "var(--ink-300)", display: "flex", alignItems: "center", padding: 3, borderRadius: "var(--radius-sm)" }}>
           <Icon name="chevron-left" size={13} />
         </div>
       </div>
