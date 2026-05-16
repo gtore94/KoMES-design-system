@@ -173,9 +173,18 @@ function PatientCard({ patient, stage, onSelect, onAdvance }) {
   );
 }
 
-function SubStageSection({ stage, patients, onSelect, onAdvance, showDivider, isOver }) {
+function SubStageSection({ stage, patients, onSelect, onAdvance, showDivider, isLast, dragOver, setDragOver, onDrop }) {
+  const isOver = dragOver === stage.key;
   return (
-    <div style={{ transition: "background 0.12s ease" }}>
+    <div
+      onDragOver={e => { e.preventDefault(); setDragOver(stage.key); }}
+      onDragLeave={e => { if (!e.currentTarget.contains(e.relatedTarget)) setDragOver(null); }}
+      onDrop={e => { e.preventDefault(); const id = Number(e.dataTransfer.getData("patientId")); if (id) onDrop(id, stage.key); setDragOver(null); }}
+      style={{
+        flex: isLast ? 1 : undefined,
+        background: isOver ? "rgba(0,0,0,0.04)" : "transparent",
+        transition: "background 0.12s ease",
+      }}>
       <div style={{
         display: "flex", alignItems: "center", gap: 6,
         padding: "8px 12px 6px",
@@ -212,13 +221,13 @@ function SubStageSection({ stage, patients, onSelect, onAdvance, showDivider, is
 }
 
 function GroupColumn({ group, patients, onSelect, onAdvance, dragOver, setDragOver, onDrop }) {
-  const isOver = dragOver === group.key;
+  const isOver = group.subStages.includes(dragOver);
   const groupTotal = patients.length;
   return (
     <div
-      onDragOver={e => { e.preventDefault(); setDragOver(group.key); }}
+      onDragOver={e => { e.preventDefault(); if (!group.subStages.includes(dragOver)) setDragOver(group.subStages[0]); }}
       onDragLeave={e => { if (!e.currentTarget.contains(e.relatedTarget)) setDragOver(null); }}
-      onDrop={e => { e.preventDefault(); const id = Number(e.dataTransfer.getData("patientId")); if (id) onDrop(id, group.subStages[0]); setDragOver(null); }}
+      onDrop={e => { e.preventDefault(); const id = Number(e.dataTransfer.getData("patientId")); if (id) { const target = group.subStages.includes(dragOver) ? dragOver : group.subStages[0]; onDrop(id, target); } setDragOver(null); }}
       style={{
         display: "flex", flexDirection: "column", flex: 1,
         background: group.bg,
@@ -252,8 +261,8 @@ function GroupColumn({ group, patients, onSelect, onAdvance, dragOver, setDragOv
         }}>{groupTotal}</span>
       </div>
 
-      {/* Sub-stage sections */}
-      <div style={{ flex: 1, minHeight: 80 }}>
+      {/* Sub-stage sections — last one fills remaining space to capture bottom drops */}
+      <div style={{ flex: 1, minHeight: 80, display: "flex", flexDirection: "column" }}>
         {group.subStages.map((stageKey, i) => {
           const stage = STAGE_BY_KEY[stageKey];
           const stagePatients = patients.filter(p => p.stage === stageKey);
@@ -265,7 +274,10 @@ function GroupColumn({ group, patients, onSelect, onAdvance, dragOver, setDragOv
               onSelect={onSelect}
               onAdvance={onAdvance}
               showDivider={i > 0}
-              isOver={isOver}
+              isLast={i === group.subStages.length - 1}
+              dragOver={dragOver}
+              setDragOver={setDragOver}
+              onDrop={onDrop}
             />
           );
         })}
