@@ -4031,11 +4031,11 @@ const { useState: useStateRxM, useMemo: useMemoRxM } = React;
 
 // ── Workflow columns ────────────────────────────────────────────────
 const RX_COLUMNS = [
-  { key: "received",   label: "접수",     icon: "inbox",          bg: "var(--board-appt-bg)",  border: "var(--board-appt-border)",  next: "dispensing" },
-  { key: "dispensing", label: "조제중",   icon: "flask-conical",  bg: "var(--board-wait-bg)",  border: "var(--board-wait-border)",  next: ["pickup", "shipping"] },
-  { key: "pickup",     label: "픽업 대기", icon: "shopping-bag",  bg: "var(--board-treat-bg)", border: "var(--board-treat-border)", next: "completed" },
-  { key: "shipping",   label: "배송중",   icon: "truck",          bg: "var(--board-pay-bg)",   border: "var(--board-pay-border)",   next: "completed" },
-  { key: "completed",  label: "완료",     icon: "check-circle-2", bg: "var(--bg-raised)",      border: "var(--border-subtle)",      next: null },
+  { key: "received",   label: "접수",     icon: "inbox",          color: "#5A6E8A", bg: "var(--board-appt-bg)",  border: "var(--board-appt-border)",  next: "dispensing" },
+  { key: "dispensing", label: "조제중",   icon: "flask-conical",  color: "#B5873E", bg: "var(--board-wait-bg)",  border: "var(--board-wait-border)",  next: ["pickup", "shipping"] },
+  { key: "pickup",     label: "픽업 대기", icon: "shopping-bag",  color: "#3A7065", bg: "var(--board-treat-bg)", border: "var(--board-treat-border)", next: "completed" },
+  { key: "shipping",   label: "배송중",   icon: "truck",          color: "#5A7EA0", bg: "var(--board-pay-bg)",   border: "var(--board-pay-border)",   next: "completed" },
+  { key: "completed",  label: "완료",     icon: "check-circle-2", color: "#6B8C7A", bg: "var(--bg-raised)",      border: "var(--border-subtle)",      next: null },
 ];
 
 // ── Sample prescriptions ────────────────────────────────────────────
@@ -4247,9 +4247,9 @@ function RxKanban({ rows, onSelect, selectedId, onAdvance, dragOver, setDragOver
             style={{
               display: "flex", flexDirection: "column",
               background: col.bg,
-              border: `1px solid ${isOver ? "var(--brand)" : col.border}`,
+              border: `1px solid ${isOver ? col.color : col.border}`,
               borderRadius: "var(--radius-lg)", overflow: "hidden", minWidth: 0,
-              boxShadow: isOver ? "0 0 0 2px var(--brand-muted)" : "none",
+              boxShadow: isOver ? `0 0 0 2px ${col.border}` : "none",
               transition: "box-shadow 0.12s ease, border-color 0.12s ease",
             }}>
             <div style={{ padding: "10px 12px", display: "flex", alignItems: "center", gap: 8, borderBottom: `1px solid ${col.border}` }}>
