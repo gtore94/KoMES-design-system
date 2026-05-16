@@ -181,7 +181,7 @@ function HerbInventoryScreen({ onNavigate, onOpenRecSettings, onCreateDrafts }) 
                           <div style={{ fontSize: 10, color: "var(--text-muted)", fontStyle: "italic", marginTop: 1 }}>{h.latin}</div>
                         </td>
                         <td style={{ padding: "10px 14px" }}>
-                          <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 7px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-subtle)" }}>{h.category}</span>
+                          <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 7px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-default)" }}>{h.category}</span>
                         </td>
                         <td style={{ padding: "10px 14px", textAlign: "right", minWidth: 140 }}>
                           <div style={{ fontSize: 13, color: "var(--text-primary)", fontFamily: "var(--font-mono)", fontWeight: 500 }}>{fmtMass(h.stock)}</div>
@@ -328,8 +328,8 @@ function HIDetailPanel({ herb, onIntake, onToast }) {
         </div>
         <div style={{ fontSize: 11, color: "var(--text-muted)", fontStyle: "italic", fontFamily: "var(--font-sans)" }}>{herb.latin}</div>
         <div style={{ display: "flex", gap: 6, marginTop: 8 }}>
-          <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 8px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-subtle)", fontFamily: "var(--font-sans)" }}>{herb.category}</span>
-          <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 8px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-subtle)", fontFamily: "var(--font-sans)" }}>{herb.origin}</span>
+          <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 8px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-default)", fontFamily: "var(--font-sans)" }}>{herb.category}</span>
+          <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 8px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-default)", fontFamily: "var(--font-sans)" }}>{herb.origin}</span>
         </div>
       </div>
 

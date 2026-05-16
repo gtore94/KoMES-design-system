@@ -228,7 +228,7 @@ function VisitCard({ visit }) {
           <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)", flexShrink: 0 }}>담당: {visit.doctor}</span>
           {/* Inline diagnosis summary */}
           {!visit.isToday && (
-            <span style={{ fontSize: 11, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-full)", padding: "1px 9px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: 200 }}>
+            <span style={{ fontSize: 11, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", background: "var(--bg-raised)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-full)", padding: "1px 9px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: 200 }}>
               {visit.soap.a}
             </span>
           )}

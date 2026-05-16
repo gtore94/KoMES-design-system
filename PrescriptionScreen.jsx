@@ -120,7 +120,7 @@ function PrescriptionScreen({ patient, onBack }) {
                     {info && <div style={{ fontSize: 10, color: "var(--text-muted)", fontStyle: "italic" }}>{info.latin}</div>}
                   </td>
                   <td style={{ padding: "8px 14px" }}>
-                    {info && <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 7px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-subtle)" }}>{info.category}</span>}
+                    {info && <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 7px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-default)" }}>{info.category}</span>}
                   </td>
                   <td style={{ padding: "8px 14px" }}>
                     <input type="number" value={h.dose} onChange={e => updateDose(h.name, e.target.value)}

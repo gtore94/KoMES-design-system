@@ -285,7 +285,7 @@ function DiagnosisSection({ initialDx = [] }) {
               </span>
               <span style={{ fontSize: 12, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", letterSpacing: "0.02em" }}>{d.code}</span>
               <span style={{ fontSize: 13, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flex: 1 }}>{d.name}</span>
-              <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)", background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", padding: "1px 7px", borderRadius: "var(--radius-full)" }}>{d.region}</span>
+              <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)", background: "var(--bg-surface)", border: "1px solid var(--border-default)", padding: "1px 7px", borderRadius: "var(--radius-full)" }}>{d.region}</span>
               <button onClick={() => remove(d.code)} style={{ display: "inline-flex", alignItems: "center", padding: 3, background: "transparent", border: "none", color: "var(--text-muted)", cursor: "pointer" }}>
                 <Icon name="x" size={13} />
               </button>
@@ -466,7 +466,7 @@ function ActingOrderPanel({ injuryDate, today = new Date() }) {
           {orders.length}건
         </span>
         {phase && (
-          <span style={{ fontSize: 10, fontWeight: 600, color: "var(--text-muted)", fontFamily: "var(--font-sans)", background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-full)", padding: "1px 8px" }}>
+          <span style={{ fontSize: 10, fontWeight: 600, color: "var(--text-muted)", fontFamily: "var(--font-sans)", background: "var(--bg-raised)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-full)", padding: "1px 8px" }}>
             자보 · {phase === 1 ? "급성기" : phase === 2 ? "아급성기" : "만성기"} 적용
           </span>
         )}

@@ -1578,7 +1578,7 @@ function DiagnosisSection({ initialDx = [] }) {
               </span>
               <span style={{ fontSize: 12, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", letterSpacing: "0.02em" }}>{d.code}</span>
               <span style={{ fontSize: 13, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flex: 1 }}>{d.name}</span>
-              <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)", background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", padding: "1px 7px", borderRadius: "var(--radius-full)" }}>{d.region}</span>
+              <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)", background: "var(--bg-surface)", border: "1px solid var(--border-default)", padding: "1px 7px", borderRadius: "var(--radius-full)" }}>{d.region}</span>
               <button onClick={() => remove(d.code)} style={{ display: "inline-flex", alignItems: "center", padding: 3, background: "transparent", border: "none", color: "var(--text-muted)", cursor: "pointer" }}>
                 <Icon name="x" size={13} />
               </button>
@@ -1759,7 +1759,7 @@ function ActingOrderPanel({ injuryDate, today = new Date() }) {
           {orders.length}건
         </span>
         {phase && (
-          <span style={{ fontSize: 10, fontWeight: 600, color: "var(--text-muted)", fontFamily: "var(--font-sans)", background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-full)", padding: "1px 8px" }}>
+          <span style={{ fontSize: 10, fontWeight: 600, color: "var(--text-muted)", fontFamily: "var(--font-sans)", background: "var(--bg-raised)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-full)", padding: "1px 8px" }}>
             자보 · {phase === 1 ? "급성기" : phase === 2 ? "아급성기" : "만성기"} 적용
           </span>
         )}
@@ -3510,7 +3510,7 @@ function VisitCard({ visit }) {
           <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)", flexShrink: 0 }}>담당: {visit.doctor}</span>
           {/* Inline diagnosis summary */}
           {!visit.isToday && (
-            <span style={{ fontSize: 11, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-full)", padding: "1px 9px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: 200 }}>
+            <span style={{ fontSize: 11, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", background: "var(--bg-raised)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-full)", padding: "1px 9px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: 200 }}>
               {visit.soap.a}
             </span>
           )}
@@ -3874,7 +3874,7 @@ function PrescriptionScreen({ patient, onBack }) {
                     {info && <div style={{ fontSize: 10, color: "var(--text-muted)", fontStyle: "italic" }}>{info.latin}</div>}
                   </td>
                   <td style={{ padding: "8px 14px" }}>
-                    {info && <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 7px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-subtle)" }}>{info.category}</span>}
+                    {info && <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 7px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-default)" }}>{info.category}</span>}
                   </td>
                   <td style={{ padding: "8px 14px" }}>
                     <input type="number" value={h.dose} onChange={e => updateDose(h.name, e.target.value)}
@@ -6462,7 +6462,7 @@ function HerbAdjustmentScreen({ onClose, onSubmit }) {
                           <div style={{ fontSize: 13, fontWeight: 500, color: "var(--text-primary)" }}>{h.name}</div>
                           <div style={{ display: "flex", gap: 6, alignItems: "center", marginTop: 1 }}>
                             <span style={{ fontSize: 10, color: "var(--text-muted)", fontStyle: "italic" }}>{h.latin}</span>
-                            <span style={{ fontSize: 10, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "0 6px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-subtle)" }}>{h.category}</span>
+                            <span style={{ fontSize: 10, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "0 6px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-default)" }}>{h.category}</span>
                           </div>
                         </td>
                         <td style={{ padding: "10px 14px", fontSize: 11, color: "var(--text-secondary)", fontFamily: "var(--font-mono)" }}>{h.location}</td>
@@ -6989,7 +6989,7 @@ function HerbInventoryScreen({ onNavigate, onOpenRecSettings, onCreateDrafts }) 
                           <div style={{ fontSize: 10, color: "var(--text-muted)", fontStyle: "italic", marginTop: 1 }}>{h.latin}</div>
                         </td>
                         <td style={{ padding: "10px 14px" }}>
-                          <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 7px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-subtle)" }}>{h.category}</span>
+                          <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 7px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-default)" }}>{h.category}</span>
                         </td>
                         <td style={{ padding: "10px 14px", textAlign: "right", minWidth: 140 }}>
                           <div style={{ fontSize: 13, color: "var(--text-primary)", fontFamily: "var(--font-mono)", fontWeight: 500 }}>{fmtMass(h.stock)}</div>
@@ -7136,8 +7136,8 @@ function HIDetailPanel({ herb, onIntake, onToast }) {
         </div>
         <div style={{ fontSize: 11, color: "var(--text-muted)", fontStyle: "italic", fontFamily: "var(--font-sans)" }}>{herb.latin}</div>
         <div style={{ display: "flex", gap: 6, marginTop: 8 }}>
-          <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 8px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-subtle)", fontFamily: "var(--font-sans)" }}>{herb.category}</span>
-          <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 8px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-subtle)", fontFamily: "var(--font-sans)" }}>{herb.origin}</span>
+          <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 8px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-default)", fontFamily: "var(--font-sans)" }}>{herb.category}</span>
+          <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 8px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-default)", fontFamily: "var(--font-sans)" }}>{herb.origin}</span>
         </div>
       </div>
 
