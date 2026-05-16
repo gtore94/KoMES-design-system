@@ -33,47 +33,47 @@ function SPAICard({ suggestions, onApply, onDismiss, onOpenSettings }) {
   const totalCost = suggestions.reduce((s, x) => s + x.suggestQty * x.unitPrice, 0);
   return (
     <div style={{
-      background: "var(--brand-subtle)", border: "1px solid var(--jade-200)",
+      background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)",
       borderRadius: "var(--radius-lg)", padding: "16px 20px",
     }}>
       <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 10 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <Icon name="sparkles" size={16} style={{ color: "var(--jade-600)" }} />
-          <span style={{ fontSize: 13, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-sans)" }}>
+          <Icon name="sparkles" size={16} style={{ color: "var(--text-brand)" }} />
+          <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-sans)" }}>
             AI 발주 추천 · {suggestions.length}품목
           </span>
-          <span style={{ fontSize: 11, background: "var(--brand-muted)", color: "var(--jade-700)", padding: "2px 9px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>
+          <span style={{ fontSize: 11, background: "var(--brand-muted)", color: "var(--text-brand)", padding: "2px 9px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>
             지난 90일 소비 패턴 분석
           </span>
         </div>
-        <button onClick={onDismiss} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--jade-400)", fontSize: 18, lineHeight: 1, padding: 0 }}>×</button>
+        <button onClick={onDismiss} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--text-muted)", fontSize: 18, lineHeight: 1, padding: 0 }}>×</button>
       </div>
-      <div style={{ fontSize: 12, color: "var(--jade-700)", fontFamily: "var(--font-sans)", lineHeight: 1.5, marginBottom: 12 }}>
+      <div style={{ fontSize: 12, color: "var(--text-brand)", fontFamily: "var(--font-sans)", lineHeight: 1.5, marginBottom: 12 }}>
         안전 임계치 이하 또는 2주 미만 잔여 품목을 공급처별로 묶어 추천합니다. 적용 시 발주서 초안으로 이동합니다.
       </div>
-      <div style={{ background: "var(--bg-surface)", borderRadius: "var(--radius-md)", border: "1px solid var(--jade-200)", overflow: "hidden" }}>
+      <div style={{ background: "var(--bg-surface)", borderRadius: "var(--radius-md)", border: "1px solid var(--brand-muted)", overflow: "hidden" }}>
         <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "var(--font-sans)" }}>
           <thead>
             <tr style={{ background: "var(--brand-subtle)" }}>
               {["품목", "공급처", "월 소비", "잔여", "추천 수량", "예상 금액"].map(h => (
-                <th key={h} style={{ padding: "6px 12px", fontSize: 10, fontWeight: 700, color: "var(--jade-700)", textAlign: "left", letterSpacing: "0.06em", textTransform: "uppercase" }}>{h}</th>
+                <th key={h} style={{ padding: "6px 12px", fontSize: 10, fontWeight: 700, color: "var(--text-brand)", textAlign: "left", letterSpacing: "0.06em", textTransform: "uppercase" }}>{h}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {suggestions.map(s => (
-              <tr key={s.id} style={{ borderTop: "1px solid var(--jade-100)" }}>
+              <tr key={s.id} style={{ borderTop: "1px solid var(--border-subtle)" }}>
                 <td style={{ padding: "7px 12px", fontSize: 13, fontWeight: 500, color: "var(--text-primary)" }}>{s.name}</td>
                 <td style={{ padding: "7px 12px", fontSize: 12, color: "var(--text-secondary)" }}>{s.supplier}</td>
                 <td style={{ padding: "7px 12px", fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-mono)" }}>{supFmt(s.monthly, s.unit)}</td>
                 <td style={{ padding: "7px 12px", fontSize: 12, color: "var(--cinnabar-700)", fontFamily: "var(--font-mono)" }}>{s.daysLeft}일</td>
-                <td style={{ padding: "7px 12px", fontSize: 12, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-mono)" }}>{supFmt(s.suggestQty, s.unit)}</td>
+                <td style={{ padding: "7px 12px", fontSize: 12, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)" }}>{supFmt(s.suggestQty, s.unit)}</td>
                 <td style={{ padding: "7px 12px", fontSize: 12, color: "var(--text-primary)", fontFamily: "var(--font-mono)" }}>{won(s.suggestQty * s.unitPrice)}</td>
               </tr>
             ))}
-            <tr style={{ borderTop: "1px solid var(--jade-200)", background: "var(--brand-subtle)" }}>
-              <td colSpan={5} style={{ padding: "7px 12px", fontSize: 11, fontWeight: 600, color: "var(--jade-700)", textAlign: "right" }}>합계</td>
-              <td style={{ padding: "7px 12px", fontSize: 12, fontWeight: 700, color: "var(--jade-700)", fontFamily: "var(--font-mono)" }}>{won(totalCost)}</td>
+            <tr style={{ borderTop: "1px solid var(--brand-muted)", background: "var(--brand-subtle)" }}>
+              <td colSpan={5} style={{ padding: "7px 12px", fontSize: 11, fontWeight: 600, color: "var(--text-brand)", textAlign: "right" }}>합계</td>
+              <td style={{ padding: "7px 12px", fontSize: 12, fontWeight: 700, color: "var(--text-brand)", fontFamily: "var(--font-mono)" }}>{won(totalCost)}</td>
             </tr>
           </tbody>
         </table>
