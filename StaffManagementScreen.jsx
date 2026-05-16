@@ -187,7 +187,8 @@ function ScheduleGrid({ schedule }) {
 // ── Detail Panel ─────────────────────────────────────────────────
 function StaffDetailPanel({ staff, onClose, onEdit }) {
   const [tab, setTab] = useStateStaff("profile"); // profile | schedule | permissions | hr
-  useEffectStaff(() => setTab("profile"), [staff.id]);
+  const [permState, setPermState] = useStateStaff([...staff.permissions]);
+  useEffectStaff(() => { setTab("profile"); setPermState([...staff.permissions]); }, [staff.id]);
   const statusMeta = STATUS_META[staff.status];
   const leaveRemaining = (staff.leaveBalance?.annual ?? 0) - (staff.leaveBalance?.used ?? 0);
 
@@ -246,7 +247,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
         {[
           { k: "profile",     l: "프로필",  i: "user" },
           { k: "schedule",    l: "근무",    i: "calendar" },
-          { k: "permissions", l: "권한",    i: "shield-check", count: staff.permissions.length },
+          { k: "permissions", l: "권한",    i: "shield-check", count: permState.length },
           { k: "hr",          l: "인사",    i: "briefcase" },
         ].map(t => (
           <button key={t.k} onClick={() => setTab(t.k)} style={{
@@ -339,6 +340,40 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
             <div style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>
               이 직원이 KoMES에서 접근할 수 있는 기능입니다.
             </div>
+
+            {/* 권한 세트 프리셋 */}
+            <div>
+              <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 7 }}>권한 세트</div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
+                {PERMISSION_PRESETS.map(preset => {
+                  const active = preset.perms.length === permState.length &&
+                    preset.perms.every(p => permState.includes(p));
+                  return (
+                    <button key={preset.key} onClick={() => setPermState([...preset.perms])} style={{
+                      display: "inline-flex", alignItems: "center", gap: 4,
+                      padding: "4px 10px", borderRadius: "var(--radius-full)",
+                      border: `1px solid ${active ? "var(--jade-300)" : "var(--border-default)"}`,
+                      background: active ? "var(--jade-100)" : "var(--bg-surface)",
+                      color: active ? "var(--jade-700)" : "var(--text-secondary)",
+                      fontSize: 11, fontWeight: active ? 600 : 400, cursor: "pointer",
+                      fontFamily: "var(--font-sans)", transition: "all 0.12s",
+                    }}>
+                      <Icon name={preset.icon} size={10} />{preset.label}
+                    </button>
+                  );
+                })}
+                <button onClick={() => setPermState([])} style={{
+                  display: "inline-flex", alignItems: "center", gap: 4,
+                  padding: "4px 10px", borderRadius: "var(--radius-full)",
+                  border: "1px solid var(--border-subtle)", background: "transparent",
+                  color: "var(--text-muted)", fontSize: 11, cursor: "pointer",
+                  fontFamily: "var(--font-sans)",
+                }}>
+                  <Icon name="x" size={10} />전체 해제
+                </button>
+              </div>
+            </div>
+
             {[
               {
                 section: "시스템",
@@ -397,7 +432,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
                   {group.items.map(p => {
-                    const granted = staff.permissions.includes(p.key);
+                    const granted = permState.includes(p.key);
                     return (
                       <div key={p.key} style={{
                         display: "flex", alignItems: "center", gap: 10, padding: "9px 12px",
@@ -409,7 +444,9 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
                           <div style={{ fontSize: 12, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>{p.label}</div>
                           <div style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginTop: 1 }}>{p.desc}</div>
                         </div>
-                        <Toggle on={granted} />
+                        <Toggle on={granted} onChange={() =>
+                          setPermState(prev => prev.includes(p.key) ? prev.filter(x => x !== p.key) : [...prev, p.key])
+                        } />
                       </div>
                     );
                   })}
@@ -490,11 +527,11 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
 }
 
 // ── Toggle ───────────────────────────────────────────────────────
-function Toggle({ on }) {
+function Toggle({ on, onChange }) {
   const [val, setVal] = useStateStaff(on);
   useEffectStaff(() => setVal(on), [on]);
   return (
-    <button onClick={() => setVal(v => !v)} style={{
+    <button onClick={() => { const next = !val; setVal(next); onChange && onChange(next); }} style={{
       width: 32, height: 18, borderRadius: "var(--radius-full)",
       background: val ? "var(--jade-500)" : "var(--stone-300)",
       border: "none", position: "relative", cursor: "pointer",

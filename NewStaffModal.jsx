@@ -496,4 +496,4 @@ function NewStaffModal({ onClose, onSubmit, initialData }) {
   );
 }
 
-Object.assign(window, { NewStaffModal });
+Object.assign(window, { NewStaffModal, PERMISSION_PRESETS });
