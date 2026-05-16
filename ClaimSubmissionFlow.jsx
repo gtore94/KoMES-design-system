@@ -345,7 +345,7 @@ function StageRow({ stage, idx, status, isLast, expanded, details }) {
               fontSize: 11, fontWeight: 600,
               color: s.color, fontFamily: "var(--font-sans)",
               padding: "1px 8px", background: s.bg,
-              borderRadius: "var(--radius-full)",
+              borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
               border: `1px solid ${s.color}`,
               opacity: 0.85,
             }}>{s.label}</span>

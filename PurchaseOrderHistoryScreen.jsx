@@ -126,7 +126,7 @@ function PurchaseOrderHistoryScreen({ openSettings }) {
                     border: `1px solid ${typeFilter === t.key ? "var(--jade-500)" : "var(--border-default)"}`,
                     background: typeFilter === t.key ? "var(--brand-subtle)" : "var(--bg-surface)",
                     color: typeFilter === t.key ? "var(--text-brand)" : "var(--text-secondary)",
-                    borderRadius: "var(--radius-full)", cursor: "pointer",
+                    borderRadius: "var(--radius-full)", whiteSpace: "nowrap", cursor: "pointer",
                     fontWeight: typeFilter === t.key ? 600 : 400,
                     display: "inline-flex", alignItems: "center", gap: 5,
                   }}>
@@ -213,7 +213,7 @@ function PurchaseOrderHistoryScreen({ openSettings }) {
                           <div style={{ display: "flex", alignItems: "center", gap: 4, maxWidth: 220, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                             <span style={{ overflow: "hidden", textOverflow: "ellipsis" }}>{po.items[0].name}</span>
                             {po.items.length > 1 && (
-                              <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)", background: "var(--bg-raised)", padding: "0 5px", borderRadius: "var(--radius-full)", flexShrink: 0 }}>
+                              <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)", background: "var(--bg-raised)", padding: "0 5px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", flexShrink: 0 }}>
                                 +{po.items.length - 1}
                               </span>
                             )}

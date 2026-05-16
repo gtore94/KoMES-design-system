@@ -395,7 +395,7 @@ function NewStaffModal({ onClose, onSubmit, initialData }) {
                     return (
                       <button key={preset.key} onClick={() => set("permissions", [...preset.perms])} style={{
                         display: "inline-flex", alignItems: "center", gap: 5,
-                        padding: "5px 12px", borderRadius: "var(--radius-full)",
+                        padding: "5px 12px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                         border: `1px solid ${active ? "var(--jade-300)" : "var(--border-default)"}`,
                         background: active ? "var(--brand-muted)" : "var(--bg-surface)",
                         color: active ? "var(--text-brand)" : "var(--text-secondary)",
@@ -412,7 +412,7 @@ function NewStaffModal({ onClose, onSubmit, initialData }) {
                   })}
                   <button onClick={() => set("permissions", [])} style={{
                     display: "inline-flex", alignItems: "center", gap: 5,
-                    padding: "5px 12px", borderRadius: "var(--radius-full)",
+                    padding: "5px 12px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                     border: "1px solid var(--border-subtle)",
                     background: "transparent", color: "var(--text-muted)",
                     fontSize: 12, cursor: "pointer", fontFamily: "var(--font-sans)",

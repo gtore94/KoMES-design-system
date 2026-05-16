@@ -239,7 +239,7 @@ function Badge({ variant = "neutral", children }) {
   return <span style={{
     display: "inline-flex", alignItems: "center", gap: 4,
     fontSize: 11, fontWeight: 500, padding: "2px 8px",
-    borderRadius: "var(--radius-full)", ...styles[variant],
+    borderRadius: "var(--radius-full)", whiteSpace: "nowrap", ...styles[variant],
     fontFamily: "var(--font-sans)"
   }}>{children}</span>;
 }
@@ -619,7 +619,7 @@ function TaskItem({ task, onToggle }) {
           <span style={{
             display: "inline-flex", alignItems: "center", gap: 4,
             fontSize: 9, fontWeight: 600, color: priColors.text, background: priColors.bg,
-            borderRadius: "var(--radius-full)", padding: "1px 7px",
+            borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 7px",
             fontFamily: "var(--font-sans)",
           }}>
             <span style={{ width: 5, height: 5, borderRadius: "50%", background: priColors.dot }} />
@@ -652,7 +652,7 @@ function TasksPanel() {
         }}>업무</span>
         <span style={{
           fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700, color: "var(--text-brand)",
-          background: "var(--brand-muted)", borderRadius: "var(--radius-full)",
+          background: "var(--brand-muted)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
           padding: "1px 7px",
         }}>{openCount}</span>
 
@@ -1087,7 +1087,7 @@ function NewPatientModal({ onClose, onSubmit }) {
                   }}>
                     <span style={{
                       fontSize: 10, fontWeight: 600, padding: "2px 8px",
-                      borderRadius: "var(--radius-full)",
+                      borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                       background: "var(--brand-muted)", color: "var(--text-brand)",
                       border: "1px solid var(--brand-muted)", fontFamily: "var(--font-sans)",
                     }}>{r.type}</span>
@@ -1176,7 +1176,7 @@ function NewPatientModal({ onClose, onSubmit }) {
                 return (
                   <button key={tag.key} onClick={() => toggleTag(tag.key)} style={{
                     display: "inline-flex", alignItems: "center", gap: 5,
-                    padding: "5px 11px", borderRadius: "var(--radius-full)",
+                    padding: "5px 11px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                     border: `1px solid ${active ? tag.border : "var(--border-subtle)"}`,
                     background: active ? tag.bg : "var(--bg-surface)",
                     color: active ? tag.color : "var(--text-muted)",
@@ -1419,7 +1419,7 @@ function AutoInsuranceBar({ injuryDate, today = new Date(), chunaUsed = 7, herbD
               display: "inline-flex", marginTop: 5,
               fontSize: 10, fontWeight: 600,
               color: "var(--text-brand)", background: "var(--brand-muted)",
-              padding: "1px 7px", borderRadius: "var(--radius-full)",
+              padding: "1px 7px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
               border: "1px solid var(--jade-300)",
               fontFamily: "var(--font-sans)",
             }}>IR 2부위 청구 가능</span>
@@ -1497,7 +1497,7 @@ function UsageBar({ icon, label, used, max, unit, pct, warn, hint }) {
           <span style={{ fontSize: 10, color: "var(--stone-300)", fontWeight: 400, marginLeft: 2 }}>{unit}</span>
         </span>
       </div>
-      <div style={{ position: "relative", height: 6, background: "rgba(255,255,255,0.12)", borderRadius: "var(--radius-full)", overflow: "hidden" }}>
+      <div style={{ position: "relative", height: 6, background: "rgba(255,255,255,0.12)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", overflow: "hidden" }}>
         <div style={{
           width: `${pct}%`, height: "100%",
           background: barColor,
@@ -1543,7 +1543,7 @@ function DiagnosisSection({ initialDx = [] }) {
         <Icon name="file-text" size={14} style={{ color: "var(--jade-600)" }} />
         <span style={{ fontSize: 13, fontWeight: 700, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>상병</span>
         <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>KCD-8</span>
-        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", background: "var(--brand-muted)", borderRadius: "var(--radius-full)", padding: "1px 7px" }}>
+        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", background: "var(--brand-muted)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 7px" }}>
           {dx.length}건
         </span>
         <button onClick={() => setAdding(!adding)} style={{
@@ -1578,7 +1578,7 @@ function DiagnosisSection({ initialDx = [] }) {
               </span>
               <span style={{ fontSize: 12, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", letterSpacing: "0.02em" }}>{d.code}</span>
               <span style={{ fontSize: 13, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flex: 1 }}>{d.name}</span>
-              <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)", background: "var(--bg-surface)", border: "1px solid var(--border-default)", padding: "1px 7px", borderRadius: "var(--radius-full)" }}>{d.region}</span>
+              <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)", background: "var(--bg-surface)", border: "1px solid var(--border-default)", padding: "1px 7px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap" }}>{d.region}</span>
               <button onClick={() => remove(d.code)} style={{ display: "inline-flex", alignItems: "center", padding: 3, background: "transparent", border: "none", color: "var(--text-muted)", cursor: "pointer" }}>
                 <Icon name="x" size={13} />
               </button>
@@ -1597,7 +1597,7 @@ function DiagnosisSection({ initialDx = [] }) {
               display: "inline-flex", alignItems: "center", gap: 5,
               fontSize: 11, color: "var(--text-brand)",
               background: "var(--brand-subtle)", border: "1px dashed var(--jade-300)",
-              borderRadius: "var(--radius-full)", padding: "3px 9px",
+              borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "3px 9px",
               cursor: "pointer", fontFamily: "var(--font-sans)",
             }}>
               <Icon name="plus" size={10} />
@@ -1755,11 +1755,11 @@ function ActingOrderPanel({ injuryDate, today = new Date() }) {
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
         <Icon name="zap" size={14} style={{ color: "var(--jade-600)" }} />
         <span style={{ fontSize: 13, fontWeight: 700, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>액팅 오더</span>
-        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", background: "var(--brand-muted)", borderRadius: "var(--radius-full)", padding: "1px 7px" }}>
+        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", background: "var(--brand-muted)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 7px" }}>
           {orders.length}건
         </span>
         {phase && (
-          <span style={{ fontSize: 10, fontWeight: 600, color: "var(--text-muted)", fontFamily: "var(--font-sans)", background: "var(--bg-raised)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-full)", padding: "1px 8px" }}>
+          <span style={{ fontSize: 10, fontWeight: 600, color: "var(--text-muted)", fontFamily: "var(--font-sans)", background: "var(--bg-raised)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 8px" }}>
             자보 · {phase === 1 ? "급성기" : phase === 2 ? "아급성기" : "만성기"} 적용
           </span>
         )}
@@ -1796,7 +1796,7 @@ function ActingOrderPanel({ injuryDate, today = new Date() }) {
                 {o.done && <Icon name="check" size={10} style={{ color: "white" }} />}
               </div>
               <span style={{ fontSize: 9, fontWeight: 600, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{cat.code}</span>
-              <span style={{ fontSize: 11, fontWeight: 700, color: cat.color, background: `${cat.color}18`, padding: "2px 7px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)", flexShrink: 0 }}>
+              <span style={{ fontSize: 11, fontWeight: 700, color: cat.color, background: `${cat.color}18`, padding: "2px 7px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)", flexShrink: 0 }}>
                 {cat.short}
               </span>
               <span style={{ fontSize: 12, fontWeight: 500, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flexShrink: 0 }}>
@@ -1827,7 +1827,7 @@ function ActingOrderPanel({ injuryDate, today = new Date() }) {
                 display: "inline-flex", alignItems: "center", gap: 5,
                 fontSize: 11, color: c.color,
                 background: `${c.color}12`, border: `1px dashed ${c.color}55`,
-                borderRadius: "var(--radius-full)", padding: "3px 9px",
+                borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "3px 9px",
                 cursor: "pointer", fontFamily: "var(--font-sans)",
               }}>
                 <Icon name="plus" size={10} />
@@ -1863,7 +1863,7 @@ function ActingOrderPanel({ injuryDate, today = new Date() }) {
                 }}
                 onMouseEnter={e => { if (allowed && !already) { e.currentTarget.style.background = "var(--brand-subtle)"; e.currentTarget.style.borderColor = "var(--jade-300)"; } }}
                 onMouseLeave={e => { if (allowed && !already) { e.currentTarget.style.background = "var(--bg-surface)"; e.currentTarget.style.borderColor = "var(--border-subtle)"; } }}>
-                  <span style={{ fontSize: 10, fontWeight: 700, color: c.color, background: `${c.color}18`, padding: "2px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)", minWidth: 46, textAlign: "center", flexShrink: 0 }}>
+                  <span style={{ fontSize: 10, fontWeight: 700, color: c.color, background: `${c.color}18`, padding: "2px 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)", minWidth: 46, textAlign: "center", flexShrink: 0 }}>
                     {c.short}
                   </span>
                   <div style={{ flex: 1, minWidth: 0 }}>
@@ -1916,7 +1916,7 @@ function ActingBillingPanel({ orders = null, insurance = "건강보험" }) {
           marginLeft: "auto", fontSize: 10, fontWeight: 600, color: isAuto ? "var(--status-danger-text)" : "var(--text-brand)",
           background: isAuto ? "var(--status-danger-bg)" : "var(--brand-muted)",
           border: `1px solid ${isAuto ? "var(--status-danger-border)" : "var(--brand-muted)"}`,
-          borderRadius: "var(--radius-full)", padding: "1px 8px", fontFamily: "var(--font-sans)",
+          borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 8px", fontFamily: "var(--font-sans)",
         }}>{insurance}</span>
       </div>
 
@@ -2016,7 +2016,7 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
         <Icon name="zap" size={15} style={{ color: "var(--jade-600)" }} />
         <span style={{ fontSize: 13, fontWeight: 700, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>오늘 액팅 오더</span>
-        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", background: "var(--brand-muted)", borderRadius: "var(--radius-full)", padding: "1px 7px" }}>
+        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", background: "var(--brand-muted)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 7px" }}>
           {orders.length}건
         </span>
         <span style={{
@@ -2024,7 +2024,7 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
           color: isAuto ? "var(--status-danger-text)" : "var(--text-brand)",
           background: isAuto ? "var(--status-danger-bg)" : "var(--brand-muted)",
           border: `1px solid ${isAuto ? "var(--status-danger-border)" : "var(--brand-muted)"}`,
-          borderRadius: "var(--radius-full)", padding: "1px 8px", fontFamily: "var(--font-sans)",
+          borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 8px", fontFamily: "var(--font-sans)",
         }}>{insurance}{phase ? ` · ${phase === 1 ? "급성기" : phase === 2 ? "아급성기" : "만성기"}` : ""}</span>
       </div>
 
@@ -2047,7 +2047,7 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
               {it.done && <Icon name="check" size={9} style={{ color: "white" }} />}
             </div>
             <span style={{ fontSize: 9, fontWeight: 700, color: "var(--text-muted)", fontFamily: "var(--font-mono)", flexShrink: 0 }}>{it.code}</span>
-            <span style={{ fontSize: 11, fontWeight: 600, color: it.color, background: `${it.color}18`, padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)", flexShrink: 0 }}>
+            <span style={{ fontSize: 11, fontWeight: 600, color: it.color, background: `${it.color}18`, padding: "1px 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)", flexShrink: 0 }}>
               {it.short}
             </span>
             <input value={it.sites} onChange={e => updateSites(i, e.target.value)}
@@ -2098,7 +2098,7 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
                   cursor: allowed && !already ? "pointer" : "not-allowed",
                   textAlign: "left", transition: "all 0.12s",
                 }}>
-                  <span style={{ fontSize: 10, fontWeight: 700, color: c.color, background: `${c.color}18`, padding: "1px 5px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)", minWidth: 42, textAlign: "center", flexShrink: 0 }}>
+                  <span style={{ fontSize: 10, fontWeight: 700, color: c.color, background: `${c.color}18`, padding: "1px 5px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)", minWidth: 42, textAlign: "center", flexShrink: 0 }}>
                     {c.short}
                   </span>
                   <span style={{ fontSize: 11, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flex: 1 }}>{c.key}</span>
@@ -2124,7 +2124,7 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
                 display: "inline-flex", alignItems: "center", gap: 3,
                 fontSize: 10, color: c.color,
                 background: `${c.color}12`, border: `1px dashed ${c.color}55`,
-                borderRadius: "var(--radius-full)", padding: "2px 7px",
+                borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 7px",
                 cursor: "pointer", fontFamily: "var(--font-sans)",
               }}>
                 <Icon name="plus" size={9} />{c.short}
@@ -2257,7 +2257,7 @@ function WaitChip({ mins, stage }) {
       color: urgent ? "var(--status-danger-text)" : "var(--text-muted)",
       background: urgent ? "var(--status-danger-bg)" : "var(--bg-raised)",
       border: `1px solid ${urgent ? "var(--status-danger-border)" : "var(--border-subtle)"}`,
-      borderRadius: "var(--radius-full)", padding: "1px 7px",
+      borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 7px",
     }}>
       <Icon name="clock" size={9} />
       {mins}분
@@ -2308,7 +2308,7 @@ function PatientCard({ patient, stage, onSelect, onAdvance }) {
             color: patient.visitType === "초진" ? "var(--cinnabar-600)" : "var(--jade-600)",
             background: patient.visitType === "초진" ? "var(--status-danger-bg)" : "var(--brand-subtle)",
             border: `1px solid ${patient.visitType === "초진" ? "var(--status-danger-border)" : "var(--brand-muted)"}`,
-            borderRadius: "var(--radius-full)", padding: "2px 7px",
+            borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 7px",
             fontFamily: "var(--font-sans)",
           }}>{patient.visitType}</span>
           {patient.insurance === "자보" && (
@@ -2316,7 +2316,7 @@ function PatientCard({ patient, stage, onSelect, onAdvance }) {
               fontSize: 10, fontWeight: 700, letterSpacing: "0.04em",
               color: "#7A4F1A", background: "#FEF3C7",
               border: "1px solid #FCD34D",
-              borderRadius: "var(--radius-full)", padding: "2px 7px",
+              borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 7px",
               fontFamily: "var(--font-sans)",
             }}>자보</span>
           )}
@@ -2406,7 +2406,7 @@ function GroupColumn({ group, patients, onSelect, onAdvance }) {
         <span style={{
           fontSize: 11, fontWeight: 700,
           background: group.color, color: "#fff",
-          borderRadius: "var(--radius-full)", minWidth: 22, height: 22,
+          borderRadius: "var(--radius-full)", whiteSpace: "nowrap", minWidth: 22, height: 22,
           padding: "0 7px",
           display: "flex", alignItems: "center", justifyContent: "center",
           fontFamily: "var(--font-mono)",
@@ -2589,7 +2589,7 @@ function PatientListScreen({ onSelectPatient }) {
                           display: "inline-flex", alignItems: "center", gap: 4,
                           fontSize: 10, fontWeight: 600, color: subStage.color,
                           background: subStage.bg, border: `1px solid ${subStage.border}`,
-                          borderRadius: "var(--radius-full)", padding: "2px 8px",
+                          borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 8px",
                           fontFamily: "var(--font-sans)",
                         }}>
                           <Icon name={subStage.icon} size={10} />{subStage.label}
@@ -2600,14 +2600,14 @@ function PatientListScreen({ onSelectPatient }) {
                           color: p.visitType === "초진" ? "var(--cinnabar-600)" : "var(--jade-600)",
                           background: p.visitType === "초진" ? "var(--status-danger-bg)" : "var(--brand-subtle)",
                           border: `1px solid ${p.visitType === "초진" ? "var(--status-danger-border)" : "var(--brand-muted)"}`,
-                          borderRadius: "var(--radius-full)", padding: "2px 7px", fontFamily: "var(--font-sans)",
+                          borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 7px", fontFamily: "var(--font-sans)",
                         }}>{p.visitType}</span>
                         {p.insurance === "자보" && (
                           <span style={{
                             fontSize: 10, fontWeight: 700,
                             color: "#7A4F1A", background: "#FEF3C7",
                             border: "1px solid #FCD34D",
-                            borderRadius: "var(--radius-full)", padding: "2px 7px", fontFamily: "var(--font-sans)",
+                            borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 7px", fontFamily: "var(--font-sans)",
                           }}>자보</span>
                         )}
                         {NEXT_STAGE[p.stage] && (
@@ -2777,7 +2777,7 @@ function PatientRow({ p, selected, onSelect }) {
       <span style={{ fontSize: 11, color: "var(--text-secondary)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{p.chief}</span>
       <span style={{
         fontSize: 10, fontWeight: 600, padding: "2px 8px",
-        borderRadius: "var(--radius-full)", textAlign: "center",
+        borderRadius: "var(--radius-full)", whiteSpace: "nowrap", textAlign: "center",
         ...tagStyle(p.insurance === "자보" ? "자보" : ""),
         background: p.insurance === "자보" ? "var(--status-danger-bg)" : "var(--bg-raised)",
         color: p.insurance === "자보" ? "var(--status-danger-text)" : "var(--text-secondary)",
@@ -2790,7 +2790,7 @@ function PatientRow({ p, selected, onSelect }) {
           return (
             <span key={t} style={{
               fontSize: 10, fontWeight: 600, padding: "1px 7px",
-              borderRadius: "var(--radius-full)",
+              borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
               background: s.bg, color: s.color, border: `1px solid ${s.border}`,
             }}>{t}</span>
           );
@@ -2839,7 +2839,7 @@ function RelationsPanel({ patient, allPatients, onPatientClick }) {
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
         <Icon name="share-2" size={14} style={{ color: "var(--jade-600)" }} />
         <span style={{ fontSize: 13, fontWeight: 700, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>관계도</span>
-        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", background: "var(--brand-muted)", borderRadius: "var(--radius-full)", padding: "1px 7px" }}>
+        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", background: "var(--brand-muted)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 7px" }}>
           {relations.length}건
         </span>
         <button onClick={() => setAdding(!adding)} style={{
@@ -2873,7 +2873,7 @@ function RelationsPanel({ patient, allPatients, onPatientClick }) {
                 fontSize: 10, fontWeight: 600, padding: "3px 6px",
                 color: typeInfo.color, background: `${typeInfo.color}18`,
                 border: `1px solid ${typeInfo.color}33`,
-                borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)",
+                borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)",
                 cursor: "pointer", outline: "none",
               }}>
                 {RELATION_TYPES.map(t => <option key={t.key} value={t.key}>{t.key}</option>)}
@@ -2905,7 +2905,7 @@ function RelationsPanel({ patient, allPatients, onPatientClick }) {
               return (
                 <button key={t.key} onClick={() => setPickedType(t.key)} style={{
                   display: "inline-flex", alignItems: "center", gap: 4,
-                  fontSize: 11, padding: "3px 9px", borderRadius: "var(--radius-full)",
+                  fontSize: 11, padding: "3px 9px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                   border: `1px solid ${active ? t.color : "var(--border-subtle)"}`,
                   background: active ? `${t.color}22` : "var(--bg-surface)",
                   color: active ? t.color : "var(--text-secondary)",
@@ -2999,7 +2999,7 @@ function PatientDetailPanel({ patient, onClose, onSelectPatient, onOpenChart, al
                 const s = tagStyle(t);
                 return (
                   <span key={t} style={{
-                    fontSize: 10, fontWeight: 600, padding: "1px 7px", borderRadius: "var(--radius-full)",
+                    fontSize: 10, fontWeight: 600, padding: "1px 7px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                     background: s.bg, color: s.color, border: `1px solid ${s.border}`, fontFamily: "var(--font-sans)",
                   }}>{t}</span>
                 );
@@ -3056,7 +3056,7 @@ function PatientDetailPanel({ patient, onClose, onSelectPatient, onOpenChart, al
           }}>
             <Icon name={t.i} size={12} />{t.l}
             {t.count != null && (
-              <span style={{ fontSize: 10, fontWeight: 600, color: "var(--text-brand)", background: "var(--brand-muted)", padding: "0 5px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-mono)" }}>
+              <span style={{ fontSize: 10, fontWeight: 600, color: "var(--text-brand)", background: "var(--brand-muted)", padding: "0 5px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-mono)" }}>
                 {t.count}
               </span>
             )}
@@ -3407,7 +3407,7 @@ function ActingOrderBlock({ orders, editable }) {
             <div style={{ width: 18, height: 18, borderRadius: "var(--radius-sm)", border: `2px solid ${o.done ? "var(--jade-400)" : "var(--border-default)"}`, background: o.done ? "var(--jade-400)" : "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "all 0.12s" }}>
               {o.done && <Icon name="check" size={11} style={{ color: "white" }} />}
             </div>
-            <span style={{ fontSize: 11, fontWeight: 700, color: typeInfo.color, background: `${typeInfo.color}28`, padding: "2px 7px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)", flexShrink: 0 }}>{o.type}</span>
+            <span style={{ fontSize: 11, fontWeight: 700, color: typeInfo.color, background: `${typeInfo.color}28`, padding: "2px 7px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)", flexShrink: 0 }}>{o.type}</span>
             <span style={{ fontSize: 13, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flex: 1, textDecoration: o.done ? "line-through" : "none" }}>{o.sites}</span>
             <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-mono)", flexShrink: 0 }}>{o.count}침 · {o.duration}분</span>
           </div>
@@ -3546,7 +3546,7 @@ function VisitCard({ visit }) {
                       fontSize: 10, color: dx.primary ? "var(--text-brand)" : "var(--text-secondary)",
                       background: dx.primary ? "var(--brand-subtle)" : "var(--bg-raised)",
                       border: `1px solid ${dx.primary ? "var(--brand-muted)" : "var(--border-subtle)"}`,
-                      borderRadius: "var(--radius-full)", padding: "1px 8px", fontFamily: "var(--font-sans)",
+                      borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 8px", fontFamily: "var(--font-sans)",
                     }}>
                       <span style={{ fontFamily: "var(--font-mono)", fontWeight: 600 }}>{dx.code}</span>
                       {dx.name}
@@ -3555,10 +3555,10 @@ function VisitCard({ visit }) {
                   <div style={{ flex: 1 }} />
                   <div style={{ display: "flex", gap: 5 }}>
                     {visit.actingOrders.map((o, i) => (
-                      <span key={i} style={{ fontSize: 10, color: "var(--text-muted)", background: "var(--bg-raised)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-full)", padding: "1px 7px", fontFamily: "var(--font-sans)" }}>{o.type}</span>
+                      <span key={i} style={{ fontSize: 10, color: "var(--text-muted)", background: "var(--bg-raised)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 7px", fontFamily: "var(--font-sans)" }}>{o.type}</span>
                     ))}
                     {visit.rxOrders.map((r, i) => (
-                      <span key={i} style={{ fontSize: 10, color: "var(--text-brand)", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-full)", padding: "1px 7px", fontFamily: "var(--font-sans)" }}>{r.name}</span>
+                      <span key={i} style={{ fontSize: 10, color: "var(--text-brand)", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 7px", fontFamily: "var(--font-sans)" }}>{r.name}</span>
                     ))}
                   </div>
                   <Icon name={ordersOpen ? "chevron-up" : "chevron-down"} size={13} style={{ color: "var(--text-muted)", flexShrink: 0 }} />
@@ -3574,7 +3574,7 @@ function VisitCard({ visit }) {
                           const typeInfo = ACTING_TYPES.find(t => t.key === o.type) || ACTING_TYPES[0];
                           return (
                             <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, padding: "6px 10px", background: o.done ? "var(--bg-raised)" : "var(--bg-surface)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-sm)" }}>
-                              <span style={{ fontSize: 10, fontWeight: 700, color: typeInfo.color, background: `${typeInfo.color}28`, padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)", flexShrink: 0 }}>{o.type}</span>
+                              <span style={{ fontSize: 10, fontWeight: 700, color: typeInfo.color, background: `${typeInfo.color}28`, padding: "1px 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)", flexShrink: 0 }}>{o.type}</span>
                               <span style={{ fontSize: 12, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flex: 1, textDecoration: o.done ? "line-through" : "none" }}>{o.sites}</span>
                               <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{o.count}침 · {o.duration}분</span>
                               {o.done && <Icon name="check-circle-2" size={13} style={{ color: "var(--jade-500)", flexShrink: 0 }} />}
@@ -3835,14 +3835,14 @@ function PrescriptionScreen({ patient, onBack }) {
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <Icon name="sparkles" size={16} style={{ color: "var(--jade-600)" }} />
                 <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-sans)" }}>AI 추천: {AI_SUGGESTION.name}</span>
-                <span style={{ fontSize: 12, background: "var(--brand-muted)", color: "var(--text-brand)", padding: "1px 7px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>적합도 {AI_SUGGESTION.confidence}%</span>
+                <span style={{ fontSize: 12, background: "var(--brand-muted)", color: "var(--text-brand)", padding: "1px 7px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)" }}>적합도 {AI_SUGGESTION.confidence}%</span>
               </div>
               <button onClick={() => setShowAI(false)} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--jade-400)", fontSize: 16, lineHeight: 1, padding: 0 }}>×</button>
             </div>
             <div style={{ fontSize: 12, color: "var(--jade-600)", fontFamily: "var(--font-sans)", marginBottom: 10, lineHeight: 1.5 }}>{AI_SUGGESTION.rationale}</div>
             <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 10 }}>
               {AI_SUGGESTION.herbs.map(h => (
-                <span key={h.name} style={{ fontSize: 11, background: "var(--brand-muted)", color: "var(--text-brand)", padding: "3px 9px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-mono)" }}>
+                <span key={h.name} style={{ fontSize: 11, background: "var(--brand-muted)", color: "var(--text-brand)", padding: "3px 9px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-mono)" }}>
                   {h.name} {h.dose}g
                 </span>
               ))}
@@ -3874,7 +3874,7 @@ function PrescriptionScreen({ patient, onBack }) {
                     {info && <div style={{ fontSize: 10, color: "var(--text-muted)", fontStyle: "italic" }}>{info.latin}</div>}
                   </td>
                   <td style={{ padding: "8px 14px" }}>
-                    {info && <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 7px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-default)" }}>{info.category}</span>}
+                    {info && <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 7px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", border: "1px solid var(--border-default)" }}>{info.category}</span>}
                   </td>
                   <td style={{ padding: "8px 14px" }}>
                     <input type="number" value={h.dose} onChange={e => updateDose(h.name, e.target.value)}
@@ -4503,7 +4503,7 @@ function WeekView({ date, appts, onCellClick, onApptClick, doctorFilter }) {
                     marginLeft: "auto",
                     fontSize: 10, fontWeight: 600,
                     color: "var(--text-brand)", background: "var(--brand-muted)",
-                    borderRadius: "var(--radius-full)", padding: "1px 7px",
+                    borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 7px",
                     fontFamily: "var(--font-mono)",
                   }}>{dayCt}</span>
                 )}
@@ -4753,7 +4753,7 @@ function ApptDetail({ appt, onClose, onChangeStatus }) {
             <span style={{
               ...detailVal, color: status.text, background: status.bg,
               border: `1px solid ${status.border}`,
-              borderRadius: "var(--radius-full)", padding: "2px 10px",
+              borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 10px",
               fontSize: 11, fontWeight: 600,
             }}>{appt.status}</span>
           </div>
@@ -4938,7 +4938,7 @@ function ScheduleScreen() {
               background: doctorFilter === "" ? "var(--jade-500)" : "var(--bg-surface)",
               color: doctorFilter === "" ? "#fff" : "var(--text-secondary)",
               border: `1px solid ${doctorFilter === "" ? "var(--jade-500)" : "var(--border-subtle)"}`,
-              borderRadius: "var(--radius-full)", cursor: "pointer", fontFamily: "var(--font-sans)",
+              borderRadius: "var(--radius-full)", whiteSpace: "nowrap", cursor: "pointer", fontFamily: "var(--font-sans)",
             }}>전체</button>
             {DOCTORS_SCH.map(doc => {
               const sel = doctorFilter === doc.id;
@@ -4948,7 +4948,7 @@ function ScheduleScreen() {
                   background: sel ? doc.bg : "var(--bg-surface)",
                   color: sel ? doc.color : "var(--text-secondary)",
                   border: `1px solid ${sel ? doc.color : "var(--border-subtle)"}`,
-                  borderRadius: "var(--radius-full)", cursor: "pointer", fontFamily: "var(--font-sans)",
+                  borderRadius: "var(--radius-full)", whiteSpace: "nowrap", cursor: "pointer", fontFamily: "var(--font-sans)",
                   display: "inline-flex", alignItems: "center", gap: 5,
                 }}>
                   <span style={{ width: 6, height: 6, borderRadius: "50%", background: doc.color }} />
@@ -5103,7 +5103,7 @@ function QueueRow({ p, selected, onSelect }) {
         <span style={{
           display: "inline-flex", alignItems: "center", gap: 3,
           fontSize: 10, fontWeight: 600, padding: "1px 7px",
-          borderRadius: "var(--radius-full)",
+          borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
           color: p.visit === "초진" ? "var(--status-danger-text)" : "var(--text-brand)",
           background: p.visit === "초진" ? "var(--status-danger-bg)" : "var(--brand-subtle)",
           border: `1px solid ${p.visit === "초진" ? "var(--status-danger-border)" : "var(--brand-muted)"}`,
@@ -5229,7 +5229,7 @@ function PaymentScreen() {
           <div style={{
             display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 12px",
             background: "var(--status-warning-bg)", border: "1px solid var(--status-warning-border)",
-            borderRadius: "var(--radius-full)",
+            borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
           }}>
             <Icon name="clock" size={13} style={{ color: "var(--status-warning-text)" }} />
             <span style={{ fontSize: 12, fontWeight: 600, color: "var(--status-warning-text)", fontFamily: "var(--font-sans)" }}>
@@ -5242,7 +5242,7 @@ function PaymentScreen() {
           <div style={{
             display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 12px",
             background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)",
-            borderRadius: "var(--radius-full)",
+            borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
           }}>
             <Icon name="check-circle-2" size={13} style={{ color: "var(--text-brand)" }} />
             <span style={{ fontSize: 12, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-sans)" }}>
@@ -5295,7 +5295,7 @@ function PaymentScreen() {
                   {t.l}
                   <span style={{
                     fontSize: 10, fontWeight: 700, padding: "1px 7px",
-                    borderRadius: "var(--radius-full)",
+                    borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                     background: active ? t.color : "var(--bg-raised)",
                     color: active ? "#fff" : "var(--text-muted)",
                     fontFamily: "var(--font-mono)",
@@ -5382,7 +5382,7 @@ function PaymentScreen() {
                         display: "inline-flex", alignItems: "center", gap: 6,
                         padding: "4px 10px", fontSize: 12,
                         background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)",
-                        color: "var(--text-brand)", borderRadius: "var(--radius-full)",
+                        color: "var(--text-brand)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                         fontFamily: "var(--font-sans)",
                       }}>
                         <span style={{ fontFamily: "var(--font-mono)", fontWeight: 600 }}>{d.code}</span>
@@ -5919,7 +5919,7 @@ function HIAICard({ suggestions, onApply, onDismiss, onOpenSettings }) {
           <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-sans)" }}>
             AI 발주 추천 · {suggestions.length}품목
           </span>
-          <span style={{ fontSize: 11, background: "var(--brand-muted)", color: "var(--text-brand)", padding: "2px 9px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>
+          <span style={{ fontSize: 11, background: "var(--brand-muted)", color: "var(--text-brand)", padding: "2px 9px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)" }}>
             지난 90일 소비 패턴 분석
           </span>
         </div>
@@ -6132,7 +6132,7 @@ function HerbRegistrationModal({ onClose, onSubmit }) {
                         border: `1px solid ${category === c.key ? "var(--jade-500)" : "var(--border-default)"}`,
                         background: category === c.key ? "var(--brand-subtle)" : "var(--bg-surface)",
                         color: category === c.key ? "var(--text-brand)" : "var(--text-secondary)",
-                        borderRadius: "var(--radius-full)", cursor: "pointer",
+                        borderRadius: "var(--radius-full)", whiteSpace: "nowrap", cursor: "pointer",
                         fontWeight: category === c.key ? 600 : 400,
                       }}>{c.label}</button>
                   ))}
@@ -6232,7 +6232,7 @@ function HRSection({ title, sub, num, children }) {
     <div style={{ marginBottom: 22 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
         <div style={{
-          width: 22, height: 22, borderRadius: "var(--radius-full)",
+          width: 22, height: 22, borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
           background: "var(--brand-muted)", color: "var(--text-brand)",
           display: "flex", alignItems: "center", justifyContent: "center",
           fontSize: 11, fontWeight: 700, fontFamily: "var(--font-mono)",
@@ -6395,7 +6395,7 @@ function HerbAdjustmentScreen({ onClose, onSubmit }) {
                     fontSize: 10, fontFamily: "var(--font-mono)",
                     background: filter === t.key ? (t.key === "diff" ? "var(--status-danger-bg)" : "var(--brand-muted)") : "var(--bg-raised)",
                     color: filter === t.key ? (t.key === "diff" ? "var(--status-danger-text)" : "var(--text-brand)") : "var(--text-muted)",
-                    padding: "0 6px", borderRadius: "var(--radius-full)",
+                    padding: "0 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                   }}>{t.count}</span>
                 </button>
               ))}
@@ -6462,7 +6462,7 @@ function HerbAdjustmentScreen({ onClose, onSubmit }) {
                           <div style={{ fontSize: 13, fontWeight: 500, color: "var(--text-primary)" }}>{h.name}</div>
                           <div style={{ display: "flex", gap: 6, alignItems: "center", marginTop: 1 }}>
                             <span style={{ fontSize: 10, color: "var(--text-muted)", fontStyle: "italic" }}>{h.latin}</span>
-                            <span style={{ fontSize: 10, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "0 6px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-default)" }}>{h.category}</span>
+                            <span style={{ fontSize: 10, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "0 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", border: "1px solid var(--border-default)" }}>{h.category}</span>
                           </div>
                         </td>
                         <td style={{ padding: "10px 14px", fontSize: 11, color: "var(--text-secondary)", fontFamily: "var(--font-mono)" }}>{h.location}</td>
@@ -6750,7 +6750,7 @@ function HAConfirmModal({ summary, edits, onClose, onConfirm }) {
       }}>
         <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 16 }}>
           <div style={{
-            width: 36, height: 36, borderRadius: "var(--radius-full)",
+            width: 36, height: 36, borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
             background: "var(--brand-muted)", color: "var(--text-brand)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
@@ -7137,7 +7137,7 @@ function HIDetailPanel({ herb, onIntake, onToast }) {
         <div style={{ fontSize: 11, color: "var(--text-muted)", fontStyle: "italic", fontFamily: "var(--font-sans)" }}>{herb.latin}</div>
         <div style={{ display: "flex", gap: 6, marginTop: 8 }}>
           <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 8px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-default)", fontFamily: "var(--font-sans)", whiteSpace: "nowrap" }}>{herb.category}</span>
-          <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 8px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-default)", fontFamily: "var(--font-sans)" }}>{herb.origin}</span>
+          <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 8px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", border: "1px solid var(--border-default)", fontFamily: "var(--font-sans)" }}>{herb.origin}</span>
         </div>
       </div>
 
@@ -7424,7 +7424,7 @@ function SPAICard({ suggestions, onApply, onDismiss, onOpenSettings }) {
           <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-sans)" }}>
             AI 발주 추천 · {suggestions.length}품목
           </span>
-          <span style={{ fontSize: 11, background: "var(--brand-muted)", color: "var(--text-brand)", padding: "2px 9px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>
+          <span style={{ fontSize: 11, background: "var(--brand-muted)", color: "var(--text-brand)", padding: "2px 9px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)" }}>
             지난 90일 소비 패턴 분석
           </span>
         </div>
@@ -7669,7 +7669,7 @@ function SupplyRegistrationModal({ onClose, onSubmit }) {
                       border: `1px solid ${unit === u ? "var(--jade-500)" : "var(--border-default)"}`,
                       background: unit === u ? "var(--brand-subtle)" : "var(--bg-surface)",
                       color: unit === u ? "var(--text-brand)" : "var(--text-secondary)",
-                      borderRadius: "var(--radius-full)", cursor: "pointer",
+                      borderRadius: "var(--radius-full)", whiteSpace: "nowrap", cursor: "pointer",
                       fontWeight: unit === u ? 600 : 400,
                     }}>{u}</button>
                 ))}
@@ -7792,7 +7792,7 @@ function SRSection({ title, sub, num, children }) {
     <div style={{ marginBottom: 22 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
         <div style={{
-          width: 22, height: 22, borderRadius: "var(--radius-full)",
+          width: 22, height: 22, borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
           background: "var(--bg-raised)", color: "var(--text-primary)",
           display: "flex", alignItems: "center", justifyContent: "center",
           fontSize: 11, fontWeight: 700, fontFamily: "var(--font-mono)",
@@ -7944,7 +7944,7 @@ function SupplyAdjustmentScreen({ onClose, onSubmit }) {
                     fontSize: 10, fontFamily: "var(--font-mono)",
                     background: filter === t.key ? (t.key === "diff" ? "var(--status-danger-bg)" : "var(--brand-muted)") : "var(--bg-raised)",
                     color: filter === t.key ? (t.key === "diff" ? "var(--status-danger-text)" : "var(--text-brand)") : "var(--text-muted)",
-                    padding: "0 6px", borderRadius: "var(--radius-full)",
+                    padding: "0 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                   }}>{t.count}</span>
                 </button>
               ))}
@@ -7967,7 +7967,7 @@ function SupplyAdjustmentScreen({ onClose, onSubmit }) {
                     border: `1px solid ${sel ? (tone?.fg || "var(--text-secondary)") : "var(--border-default)"}`,
                     background: sel ? (tone?.bg || "var(--bg-raised)") : "var(--bg-surface)",
                     color: sel ? (tone?.fg || "var(--text-primary)") : "var(--text-secondary)",
-                    borderRadius: "var(--radius-full)", cursor: "pointer",
+                    borderRadius: "var(--radius-full)", whiteSpace: "nowrap", cursor: "pointer",
                     fontWeight: sel ? 600 : 400,
                   }}>
                   {c.key === "all" ? "분류 전체" : c.label}
@@ -8020,7 +8020,7 @@ function SupplyAdjustmentScreen({ onClose, onSubmit }) {
                           <div style={{ fontSize: 13, fontWeight: 500, color: "var(--text-primary)" }}>{s.name}</div>
                           <div style={{ display: "flex", gap: 6, alignItems: "center", marginTop: 1 }}>
                             <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{s.sku}</span>
-                            <span style={{ fontSize: 10, background: cat.bg, color: cat.fg, padding: "0 6px", borderRadius: "var(--radius-full)", border: `1px solid ${cat.border}` }}>{s.category}</span>
+                            <span style={{ fontSize: 10, background: cat.bg, color: cat.fg, padding: "0 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", border: `1px solid ${cat.border}` }}>{s.category}</span>
                             <span style={{ fontSize: 10, color: "var(--text-muted)" }}>{s.pack}</span>
                           </div>
                         </td>
@@ -8301,7 +8301,7 @@ function SAConfirmModal({ summary, edits, onClose, onConfirm }) {
       }}>
         <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 16 }}>
           <div style={{
-            width: 36, height: 36, borderRadius: "var(--radius-full)",
+            width: 36, height: 36, borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
             background: "var(--brand-muted)", color: "var(--text-brand)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
@@ -9372,7 +9372,7 @@ function PurchaseOrderHistoryScreen({ openSettings }) {
                     border: `1px solid ${typeFilter === t.key ? "var(--jade-500)" : "var(--border-default)"}`,
                     background: typeFilter === t.key ? "var(--brand-subtle)" : "var(--bg-surface)",
                     color: typeFilter === t.key ? "var(--text-brand)" : "var(--text-secondary)",
-                    borderRadius: "var(--radius-full)", cursor: "pointer",
+                    borderRadius: "var(--radius-full)", whiteSpace: "nowrap", cursor: "pointer",
                     fontWeight: typeFilter === t.key ? 600 : 400,
                     display: "inline-flex", alignItems: "center", gap: 5,
                   }}>
@@ -9459,7 +9459,7 @@ function PurchaseOrderHistoryScreen({ openSettings }) {
                           <div style={{ display: "flex", alignItems: "center", gap: 4, maxWidth: 220, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                             <span style={{ overflow: "hidden", textOverflow: "ellipsis" }}>{po.items[0].name}</span>
                             {po.items.length > 1 && (
-                              <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)", background: "var(--bg-raised)", padding: "0 5px", borderRadius: "var(--radius-full)", flexShrink: 0 }}>
+                              <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)", background: "var(--bg-raised)", padding: "0 5px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", flexShrink: 0 }}>
                                 +{po.items.length - 1}
                               </span>
                             )}
@@ -10042,16 +10042,16 @@ function PODraftSidebar({ drafts, selectedIdx, onSelect, totalAll }) {
               </div>
               <div style={{ display: "flex", gap: 5, marginTop: 6, flexWrap: "wrap" }}>
                 {urgent > 0 && (
-                  <span style={{ fontSize: 9, fontWeight: 600, background: "var(--status-danger-bg)", color: "var(--status-danger-text)", padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>긴급 {urgent}</span>
+                  <span style={{ fontSize: 9, fontWeight: 600, background: "var(--status-danger-bg)", color: "var(--status-danger-text)", padding: "1px 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)" }}>긴급 {urgent}</span>
                 )}
                 {belowMin && (
                   <span title={`최소 발주 ${won(meta.minOrder)}`}
-                        style={{ fontSize: 9, fontWeight: 600, background: "var(--status-warning-bg)", color: "var(--status-warning-text)", padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>
+                        style={{ fontSize: 9, fontWeight: 600, background: "var(--status-warning-bg)", color: "var(--status-warning-text)", padding: "1px 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)" }}>
                     최소금액 미달
                   </span>
                 )}
                 {!urgent && !belowMin && (
-                  <span style={{ fontSize: 9, fontWeight: 500, background: "var(--brand-muted)", color: "var(--text-brand)", padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>준비됨</span>
+                  <span style={{ fontSize: 9, fontWeight: 500, background: "var(--brand-muted)", color: "var(--text-brand)", padding: "1px 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)" }}>준비됨</span>
                 )}
               </div>
             </div>
@@ -10212,7 +10212,7 @@ function PODraftEditor({ draft, draftIdx, activeItemKey, onSelectItem, onUpdateD
                         fontSize: 11, fontWeight: 600, fontFamily: "var(--font-sans)",
                         color: it.urgency === "high" ? "var(--status-danger-text)" :
                                it.urgency === "med"  ? "var(--status-warning-text)" : "var(--text-brand)",
-                        padding: "2px 8px", borderRadius: "var(--radius-full)",
+                        padding: "2px 8px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                         background: it.urgency === "high" ? "var(--status-danger-bg)" :
                                     it.urgency === "med"  ? "var(--status-warning-bg)" : "var(--brand-muted)",
                         whiteSpace: "nowrap",
@@ -10522,7 +10522,7 @@ function PODraftConfirmModal({ drafts, totalAll, totalItems, onClose, onConfirm 
       }}>
         <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 16 }}>
           <div style={{
-            width: 38, height: 38, borderRadius: "var(--radius-full)",
+            width: 38, height: 38, borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
             background: "var(--brand-muted)", color: "var(--text-brand)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
@@ -11005,7 +11005,7 @@ function ExceptionPanel({ s, set, toggleArr }) {
                     border: `1px solid ${sel ? "var(--cinnabar-400)" : "var(--border-default)"}`,
                     background: sel ? "var(--status-danger-bg)" : "var(--bg-surface)",
                     color: sel ? "var(--status-danger-text)" : "var(--text-secondary)",
-                    borderRadius: "var(--radius-full)", cursor: "pointer",
+                    borderRadius: "var(--radius-full)", whiteSpace: "nowrap", cursor: "pointer",
                     fontWeight: sel ? 600 : 400,
                     textDecoration: sel ? "line-through" : "none",
                   }}>
@@ -11031,7 +11031,7 @@ function ExceptionPanel({ s, set, toggleArr }) {
                       border: `1px solid ${sel ? "var(--cinnabar-400)" : "var(--border-default)"}`,
                       background: sel ? "var(--status-danger-bg)" : "var(--bg-surface)",
                       color: sel ? "var(--status-danger-text)" : "var(--text-secondary)",
-                      borderRadius: "var(--radius-full)", cursor: "pointer",
+                      borderRadius: "var(--radius-full)", whiteSpace: "nowrap", cursor: "pointer",
                       fontWeight: sel ? 600 : 400,
                       textDecoration: sel ? "line-through" : "none",
                     }}>
@@ -11121,7 +11121,7 @@ function RSPreviewPanel({ preview, settings }) {
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                     <Icon name="building" size={13} style={{ color: "var(--text-brand)" }} />
                     <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-brand)" }}>{g.supplier}</span>
-                    <span style={{ fontSize: 10, fontFamily: "var(--font-mono)", color: "var(--text-brand)", background: "var(--brand-muted)", padding: "1px 6px", borderRadius: "var(--radius-full)" }}>
+                    <span style={{ fontSize: 10, fontFamily: "var(--font-mono)", color: "var(--text-brand)", background: "var(--brand-muted)", padding: "1px 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap" }}>
                       {g.items.length}품목
                     </span>
                   </div>
@@ -11153,7 +11153,7 @@ function RSPreviewPanel({ preview, settings }) {
                         {i.qty.toLocaleString("ko-KR")} {i.unit}
                       </div>
                       <span style={{
-                        fontSize: 9, padding: "2px 6px", borderRadius: "var(--radius-full)",
+                        fontSize: 9, padding: "2px 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                         background: i.urgency === "high" ? "var(--status-danger-bg)" :
                                     i.urgency === "med"  ? "var(--status-warning-bg)" : "var(--bg-raised)",
                         color:      i.urgency === "high" ? "var(--status-danger-text)" :
@@ -11538,7 +11538,7 @@ function ClaimTypeTabs({ active, onChange, counts }) {
             </div>
             <span style={{
               fontSize: 11, fontWeight: 700, padding: "2px 8px",
-              borderRadius: "var(--radius-full)",
+              borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
               background: isActive ? t.pillColor : "var(--bg-raised)",
               color: isActive ? "#fff" : "var(--text-muted)",
               fontFamily: "var(--font-mono)", marginLeft: 4,
@@ -12148,7 +12148,7 @@ function KindBadge({ value }) {
   const c = colors[value] || colors["보험"];
   return <span style={{
     display: "inline-flex", alignItems: "center", fontSize: 10, fontWeight: 600,
-    padding: "1px 7px", borderRadius: "var(--radius-full)",
+    padding: "1px 7px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
     background: c.bg, color: c.fg, border: `1px solid ${c.bd}`,
     fontFamily: "var(--font-sans)", width: "fit-content",
   }}>{value}</span>;
@@ -12604,7 +12604,7 @@ function StageRow({ stage, idx, status, isLast, expanded, details }) {
               fontSize: 11, fontWeight: 600,
               color: s.color, fontFamily: "var(--font-sans)",
               padding: "1px 8px", background: s.bg,
-              borderRadius: "var(--radius-full)",
+              borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
               border: `1px solid ${s.color}`,
               opacity: 0.85,
             }}>{s.label}</span>
@@ -12957,7 +12957,7 @@ function PillStat({ icon, label, value, tone, mono }) {
       display: "inline-flex", alignItems: "center", gap: 8,
       padding: "5px 12px",
       background: t.bg, border: `1px solid ${t.bd}`,
-      borderRadius: "var(--radius-full)",
+      borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
     }}>
       <Icon name={icon} size={13} style={{ color: t.iconColor }} />
       <span style={{ fontSize: 11, fontWeight: 500, color: t.fg, fontFamily: "var(--font-sans)" }}>{label}</span>
@@ -15946,7 +15946,7 @@ function PatientInstructionModal({ patient, onClose }) {
                   fontSize: 10, color: dx.primary ? "var(--text-brand)" : "var(--text-secondary)",
                   background: dx.primary ? "var(--brand-subtle)" : "var(--bg-raised)",
                   border: `1px solid ${dx.primary ? "var(--brand-muted)" : "var(--border-subtle)"}`,
-                  borderRadius: "var(--radius-full)", padding: "1px 7px",
+                  borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 7px",
                 }}>
                   <span style={{ fontFamily: "var(--font-mono)", fontWeight: 600 }}>{dx.code}</span>
                   {dx.name}
@@ -16144,7 +16144,7 @@ function PatientInstructionModal({ patient, onClose }) {
                         ].map(c => (
                           <button key={c.label} style={{
                             display: "inline-flex", alignItems: "center", gap: 4,
-                            fontSize: 10, padding: "3px 8px", borderRadius: "var(--radius-full)",
+                            fontSize: 10, padding: "3px 8px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                             background: "var(--bg-raised)", border: "1px solid var(--border-subtle)",
                             color: "var(--text-secondary)", cursor: "pointer", fontFamily: "var(--font-sans)",
                           }}>
@@ -16942,7 +16942,7 @@ function NewStaffModal({ onClose, onSubmit, initialData }) {
                     return (
                       <button key={preset.key} onClick={() => set("permissions", [...preset.perms])} style={{
                         display: "inline-flex", alignItems: "center", gap: 5,
-                        padding: "5px 12px", borderRadius: "var(--radius-full)",
+                        padding: "5px 12px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                         border: `1px solid ${active ? "var(--jade-300)" : "var(--border-default)"}`,
                         background: active ? "var(--brand-muted)" : "var(--bg-surface)",
                         color: active ? "var(--text-brand)" : "var(--text-secondary)",
@@ -16959,7 +16959,7 @@ function NewStaffModal({ onClose, onSubmit, initialData }) {
                   })}
                   <button onClick={() => set("permissions", [])} style={{
                     display: "inline-flex", alignItems: "center", gap: 5,
-                    padding: "5px 12px", borderRadius: "var(--radius-full)",
+                    padding: "5px 12px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                     border: "1px solid var(--border-subtle)",
                     background: "transparent", color: "var(--text-muted)",
                     fontSize: 12, cursor: "pointer", fontFamily: "var(--font-sans)",
@@ -17128,7 +17128,7 @@ function TodayStatusPill({ status }) {
     <span style={{
       display: "inline-flex", alignItems: "center", gap: 5,
       fontSize: 10, fontWeight: 600, padding: "2px 8px",
-      borderRadius: "var(--radius-full)",
+      borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
       background: meta.bg, color: meta.color,
       fontFamily: "var(--font-sans)",
     }}>
@@ -17183,7 +17183,7 @@ function StaffRow({ s, selected, onSelect }) {
       </div>
       <span style={{
         fontSize: 10, fontWeight: 600, padding: "2px 8px",
-        borderRadius: "var(--radius-full)", textAlign: "center",
+        borderRadius: "var(--radius-full)", whiteSpace: "nowrap", textAlign: "center",
         background: statusMeta.bg, color: statusMeta.color,
         border: `1px solid ${statusMeta.border}`,
         justifySelf: "start",
@@ -17256,7 +17256,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
             <div style={{ fontSize: 12, color: staff.color, fontWeight: 600, fontFamily: "var(--font-sans)", marginTop: 2 }}>{staff.role}</div>
             <div style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginTop: 2 }}>{staff.dept} · {staff.specialty}</div>
             <div style={{ display: "flex", gap: 5, marginTop: 7 }}>
-              <span style={{ fontSize: 10, fontWeight: 600, padding: "1px 7px", borderRadius: "var(--radius-full)", background: statusMeta.bg, color: statusMeta.color, border: `1px solid ${statusMeta.border}`, fontFamily: "var(--font-sans)" }}>
+              <span style={{ fontSize: 10, fontWeight: 600, padding: "1px 7px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", background: statusMeta.bg, color: statusMeta.color, border: `1px solid ${statusMeta.border}`, fontFamily: "var(--font-sans)" }}>
                 {statusMeta.label}
               </span>
               <TodayStatusPill status={staff.todayStatus} />
@@ -17310,7 +17310,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
           }}>
             <Icon name={t.i} size={12} />{t.l}
             {t.count != null && (
-              <span style={{ fontSize: 10, fontWeight: 600, color: "var(--text-brand)", background: "var(--brand-muted)", padding: "0 5px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-mono)" }}>
+              <span style={{ fontSize: 10, fontWeight: 600, color: "var(--text-brand)", background: "var(--brand-muted)", padding: "0 5px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-mono)" }}>
                 {t.count}
               </span>
             )}
@@ -17401,7 +17401,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
                   return (
                     <button key={preset.key} onClick={() => setPermState([...preset.perms])} style={{
                       display: "inline-flex", alignItems: "center", gap: 4,
-                      padding: "4px 10px", borderRadius: "var(--radius-full)",
+                      padding: "4px 10px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                       border: `1px solid ${active ? "var(--jade-300)" : "var(--border-default)"}`,
                       background: active ? "var(--brand-muted)" : "var(--bg-surface)",
                       color: active ? "var(--text-brand)" : "var(--text-secondary)",
@@ -17414,7 +17414,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
                 })}
                 <button onClick={() => setPermState([])} style={{
                   display: "inline-flex", alignItems: "center", gap: 4,
-                  padding: "4px 10px", borderRadius: "var(--radius-full)",
+                  padding: "4px 10px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                   border: "1px solid var(--border-subtle)", background: "transparent",
                   color: "var(--text-muted)", fontSize: 11, cursor: "pointer",
                   fontFamily: "var(--font-sans)",
@@ -17525,8 +17525,8 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
                       </span>
                       <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>잔여 <span style={{ color: "var(--text-brand)", fontWeight: 600, fontFamily: "var(--font-mono)" }}>{total - used}일</span></span>
                     </div>
-                    <div style={{ height: 6, background: "var(--bg-raised)", borderRadius: "var(--radius-full)", overflow: "hidden" }}>
-                      <div style={{ width: `${pct}%`, height: "100%", background: "var(--jade-500)", borderRadius: "var(--radius-full)" }} />
+                    <div style={{ height: 6, background: "var(--bg-raised)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", overflow: "hidden" }}>
+                      <div style={{ width: `${pct}%`, height: "100%", background: "var(--jade-500)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap" }} />
                     </div>
                   </div>
                 );
@@ -17582,7 +17582,7 @@ function Toggle({ on, onChange }) {
   useEffectStaff(() => setVal(on), [on]);
   return (
     <button onClick={() => { const next = !val; setVal(next); onChange && onChange(next); }} style={{
-      width: 32, height: 18, borderRadius: "var(--radius-full)",
+      width: 32, height: 18, borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
       background: val ? "var(--jade-500)" : "var(--stone-300)",
       border: "none", position: "relative", cursor: "pointer",
       transition: "background 0.12s",

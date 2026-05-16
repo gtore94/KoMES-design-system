@@ -305,7 +305,7 @@ function KindBadge({ value }) {
   const c = colors[value] || colors["보험"];
   return <span style={{
     display: "inline-flex", alignItems: "center", fontSize: 10, fontWeight: 600,
-    padding: "1px 7px", borderRadius: "var(--radius-full)",
+    padding: "1px 7px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
     background: c.bg, color: c.fg, border: `1px solid ${c.bd}`,
     fontFamily: "var(--font-sans)", width: "fit-content",
   }}>{value}</span>;

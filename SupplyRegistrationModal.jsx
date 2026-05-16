@@ -119,7 +119,7 @@ function SupplyRegistrationModal({ onClose, onSubmit }) {
                       border: `1px solid ${unit === u ? "var(--jade-500)" : "var(--border-default)"}`,
                       background: unit === u ? "var(--brand-subtle)" : "var(--bg-surface)",
                       color: unit === u ? "var(--text-brand)" : "var(--text-secondary)",
-                      borderRadius: "var(--radius-full)", cursor: "pointer",
+                      borderRadius: "var(--radius-full)", whiteSpace: "nowrap", cursor: "pointer",
                       fontWeight: unit === u ? 600 : 400,
                     }}>{u}</button>
                 ))}
@@ -242,7 +242,7 @@ function SRSection({ title, sub, num, children }) {
     <div style={{ marginBottom: 22 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
         <div style={{
-          width: 22, height: 22, borderRadius: "var(--radius-full)",
+          width: 22, height: 22, borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
           background: "var(--bg-raised)", color: "var(--text-primary)",
           display: "flex", alignItems: "center", justifyContent: "center",
           fontSize: 11, fontWeight: 700, fontFamily: "var(--font-mono)",

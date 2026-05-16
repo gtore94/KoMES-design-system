@@ -71,7 +71,7 @@ function PatientInstructionModal({ patient, onClose }) {
                   fontSize: 10, color: dx.primary ? "var(--text-brand)" : "var(--text-secondary)",
                   background: dx.primary ? "var(--brand-subtle)" : "var(--bg-raised)",
                   border: `1px solid ${dx.primary ? "var(--brand-muted)" : "var(--border-subtle)"}`,
-                  borderRadius: "var(--radius-full)", padding: "1px 7px",
+                  borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 7px",
                 }}>
                   <span style={{ fontFamily: "var(--font-mono)", fontWeight: 600 }}>{dx.code}</span>
                   {dx.name}
@@ -269,7 +269,7 @@ function PatientInstructionModal({ patient, onClose }) {
                         ].map(c => (
                           <button key={c.label} style={{
                             display: "inline-flex", alignItems: "center", gap: 4,
-                            fontSize: 10, padding: "3px 8px", borderRadius: "var(--radius-full)",
+                            fontSize: 10, padding: "3px 8px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                             background: "var(--bg-raised)", border: "1px solid var(--border-subtle)",
                             color: "var(--text-secondary)", cursor: "pointer", fontFamily: "var(--font-sans)",
                           }}>

@@ -38,7 +38,7 @@ function Badge({ variant = "neutral", children }) {
   return <span style={{
     display: "inline-flex", alignItems: "center", gap: 4,
     fontSize: 11, fontWeight: 500, padding: "2px 8px",
-    borderRadius: "var(--radius-full)", ...styles[variant],
+    borderRadius: "var(--radius-full)", whiteSpace: "nowrap", ...styles[variant],
     fontFamily: "var(--font-sans)"
   }}>{children}</span>;
 }

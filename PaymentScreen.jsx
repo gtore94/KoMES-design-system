@@ -83,7 +83,7 @@ function QueueRow({ p, selected, onSelect }) {
         <span style={{
           display: "inline-flex", alignItems: "center", gap: 3,
           fontSize: 10, fontWeight: 600, padding: "1px 7px",
-          borderRadius: "var(--radius-full)",
+          borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
           color: p.visit === "초진" ? "var(--status-danger-text)" : "var(--text-brand)",
           background: p.visit === "초진" ? "var(--status-danger-bg)" : "var(--brand-subtle)",
           border: `1px solid ${p.visit === "초진" ? "var(--status-danger-border)" : "var(--brand-muted)"}`,
@@ -209,7 +209,7 @@ function PaymentScreen() {
           <div style={{
             display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 12px",
             background: "var(--status-warning-bg)", border: "1px solid var(--status-warning-border)",
-            borderRadius: "var(--radius-full)",
+            borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
           }}>
             <Icon name="clock" size={13} style={{ color: "var(--status-warning-text)" }} />
             <span style={{ fontSize: 12, fontWeight: 600, color: "var(--status-warning-text)", fontFamily: "var(--font-sans)" }}>
@@ -222,7 +222,7 @@ function PaymentScreen() {
           <div style={{
             display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 12px",
             background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)",
-            borderRadius: "var(--radius-full)",
+            borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
           }}>
             <Icon name="check-circle-2" size={13} style={{ color: "var(--text-brand)" }} />
             <span style={{ fontSize: 12, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-sans)" }}>
@@ -275,7 +275,7 @@ function PaymentScreen() {
                   {t.l}
                   <span style={{
                     fontSize: 10, fontWeight: 700, padding: "1px 7px",
-                    borderRadius: "var(--radius-full)",
+                    borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                     background: active ? t.color : "var(--bg-raised)",
                     color: active ? "#fff" : "var(--text-muted)",
                     fontFamily: "var(--font-mono)",
@@ -362,7 +362,7 @@ function PaymentScreen() {
                         display: "inline-flex", alignItems: "center", gap: 6,
                         padding: "4px 10px", fontSize: 12,
                         background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)",
-                        color: "var(--text-brand)", borderRadius: "var(--radius-full)",
+                        color: "var(--text-brand)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                         fontFamily: "var(--font-sans)",
                       }}>
                         <span style={{ fontFamily: "var(--font-mono)", fontWeight: 600 }}>{d.code}</span>

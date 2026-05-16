@@ -329,7 +329,7 @@ function HIDetailPanel({ herb, onIntake, onToast }) {
         <div style={{ fontSize: 11, color: "var(--text-muted)", fontStyle: "italic", fontFamily: "var(--font-sans)" }}>{herb.latin}</div>
         <div style={{ display: "flex", gap: 6, marginTop: 8 }}>
           <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 8px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-default)", fontFamily: "var(--font-sans)", whiteSpace: "nowrap" }}>{herb.category}</span>
-          <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 8px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-default)", fontFamily: "var(--font-sans)" }}>{herb.origin}</span>
+          <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 8px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", border: "1px solid var(--border-default)", fontFamily: "var(--font-sans)" }}>{herb.origin}</span>
         </div>
       </div>
 

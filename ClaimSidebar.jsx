@@ -50,7 +50,7 @@ function ClaimTypeTabs({ active, onChange, counts }) {
             </div>
             <span style={{
               fontSize: 11, fontWeight: 700, padding: "2px 8px",
-              borderRadius: "var(--radius-full)",
+              borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
               background: isActive ? t.pillColor : "var(--bg-raised)",
               color: isActive ? "#fff" : "var(--text-muted)",
               fontFamily: "var(--font-mono)", marginLeft: 4,

@@ -366,7 +366,7 @@ function NewPatientModal({ onClose, onSubmit }) {
                   }}>
                     <span style={{
                       fontSize: 10, fontWeight: 600, padding: "2px 8px",
-                      borderRadius: "var(--radius-full)",
+                      borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                       background: "var(--brand-muted)", color: "var(--text-brand)",
                       border: "1px solid var(--brand-muted)", fontFamily: "var(--font-sans)",
                     }}>{r.type}</span>
@@ -455,7 +455,7 @@ function NewPatientModal({ onClose, onSubmit }) {
                 return (
                   <button key={tag.key} onClick={() => toggleTag(tag.key)} style={{
                     display: "inline-flex", alignItems: "center", gap: 5,
-                    padding: "5px 11px", borderRadius: "var(--radius-full)",
+                    padding: "5px 11px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                     border: `1px solid ${active ? tag.border : "var(--border-subtle)"}`,
                     background: active ? tag.bg : "var(--bg-surface)",
                     color: active ? tag.color : "var(--text-muted)",

@@ -126,7 +126,7 @@ function AutoInsuranceBar({ injuryDate, today = new Date(), chunaUsed = 7, herbD
               display: "inline-flex", marginTop: 5,
               fontSize: 10, fontWeight: 600,
               color: "var(--text-brand)", background: "var(--brand-muted)",
-              padding: "1px 7px", borderRadius: "var(--radius-full)",
+              padding: "1px 7px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
               border: "1px solid var(--jade-300)",
               fontFamily: "var(--font-sans)",
             }}>IR 2부위 청구 가능</span>
@@ -204,7 +204,7 @@ function UsageBar({ icon, label, used, max, unit, pct, warn, hint }) {
           <span style={{ fontSize: 10, color: "var(--stone-300)", fontWeight: 400, marginLeft: 2 }}>{unit}</span>
         </span>
       </div>
-      <div style={{ position: "relative", height: 6, background: "rgba(255,255,255,0.12)", borderRadius: "var(--radius-full)", overflow: "hidden" }}>
+      <div style={{ position: "relative", height: 6, background: "rgba(255,255,255,0.12)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", overflow: "hidden" }}>
         <div style={{
           width: `${pct}%`, height: "100%",
           background: barColor,
@@ -250,7 +250,7 @@ function DiagnosisSection({ initialDx = [] }) {
         <Icon name="file-text" size={14} style={{ color: "var(--jade-600)" }} />
         <span style={{ fontSize: 13, fontWeight: 700, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>상병</span>
         <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>KCD-8</span>
-        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", background: "var(--brand-muted)", borderRadius: "var(--radius-full)", padding: "1px 7px" }}>
+        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", background: "var(--brand-muted)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 7px" }}>
           {dx.length}건
         </span>
         <button onClick={() => setAdding(!adding)} style={{
@@ -285,7 +285,7 @@ function DiagnosisSection({ initialDx = [] }) {
               </span>
               <span style={{ fontSize: 12, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", letterSpacing: "0.02em" }}>{d.code}</span>
               <span style={{ fontSize: 13, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flex: 1 }}>{d.name}</span>
-              <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)", background: "var(--bg-surface)", border: "1px solid var(--border-default)", padding: "1px 7px", borderRadius: "var(--radius-full)" }}>{d.region}</span>
+              <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)", background: "var(--bg-surface)", border: "1px solid var(--border-default)", padding: "1px 7px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap" }}>{d.region}</span>
               <button onClick={() => remove(d.code)} style={{ display: "inline-flex", alignItems: "center", padding: 3, background: "transparent", border: "none", color: "var(--text-muted)", cursor: "pointer" }}>
                 <Icon name="x" size={13} />
               </button>
@@ -304,7 +304,7 @@ function DiagnosisSection({ initialDx = [] }) {
               display: "inline-flex", alignItems: "center", gap: 5,
               fontSize: 11, color: "var(--text-brand)",
               background: "var(--brand-subtle)", border: "1px dashed var(--jade-300)",
-              borderRadius: "var(--radius-full)", padding: "3px 9px",
+              borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "3px 9px",
               cursor: "pointer", fontFamily: "var(--font-sans)",
             }}>
               <Icon name="plus" size={10} />
@@ -462,11 +462,11 @@ function ActingOrderPanel({ injuryDate, today = new Date() }) {
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
         <Icon name="zap" size={14} style={{ color: "var(--jade-600)" }} />
         <span style={{ fontSize: 13, fontWeight: 700, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>액팅 오더</span>
-        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", background: "var(--brand-muted)", borderRadius: "var(--radius-full)", padding: "1px 7px" }}>
+        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", background: "var(--brand-muted)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 7px" }}>
           {orders.length}건
         </span>
         {phase && (
-          <span style={{ fontSize: 10, fontWeight: 600, color: "var(--text-muted)", fontFamily: "var(--font-sans)", background: "var(--bg-raised)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-full)", padding: "1px 8px" }}>
+          <span style={{ fontSize: 10, fontWeight: 600, color: "var(--text-muted)", fontFamily: "var(--font-sans)", background: "var(--bg-raised)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 8px" }}>
             자보 · {phase === 1 ? "급성기" : phase === 2 ? "아급성기" : "만성기"} 적용
           </span>
         )}
@@ -503,7 +503,7 @@ function ActingOrderPanel({ injuryDate, today = new Date() }) {
                 {o.done && <Icon name="check" size={10} style={{ color: "white" }} />}
               </div>
               <span style={{ fontSize: 9, fontWeight: 600, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{cat.code}</span>
-              <span style={{ fontSize: 11, fontWeight: 700, color: cat.color, background: `${cat.color}18`, padding: "2px 7px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)", flexShrink: 0 }}>
+              <span style={{ fontSize: 11, fontWeight: 700, color: cat.color, background: `${cat.color}18`, padding: "2px 7px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)", flexShrink: 0 }}>
                 {cat.short}
               </span>
               <span style={{ fontSize: 12, fontWeight: 500, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flexShrink: 0 }}>
@@ -534,7 +534,7 @@ function ActingOrderPanel({ injuryDate, today = new Date() }) {
                 display: "inline-flex", alignItems: "center", gap: 5,
                 fontSize: 11, color: c.color,
                 background: `${c.color}12`, border: `1px dashed ${c.color}55`,
-                borderRadius: "var(--radius-full)", padding: "3px 9px",
+                borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "3px 9px",
                 cursor: "pointer", fontFamily: "var(--font-sans)",
               }}>
                 <Icon name="plus" size={10} />
@@ -570,7 +570,7 @@ function ActingOrderPanel({ injuryDate, today = new Date() }) {
                 }}
                 onMouseEnter={e => { if (allowed && !already) { e.currentTarget.style.background = "var(--brand-subtle)"; e.currentTarget.style.borderColor = "var(--jade-300)"; } }}
                 onMouseLeave={e => { if (allowed && !already) { e.currentTarget.style.background = "var(--bg-surface)"; e.currentTarget.style.borderColor = "var(--border-subtle)"; } }}>
-                  <span style={{ fontSize: 10, fontWeight: 700, color: c.color, background: `${c.color}18`, padding: "2px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)", minWidth: 46, textAlign: "center", flexShrink: 0 }}>
+                  <span style={{ fontSize: 10, fontWeight: 700, color: c.color, background: `${c.color}18`, padding: "2px 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)", minWidth: 46, textAlign: "center", flexShrink: 0 }}>
                     {c.short}
                   </span>
                   <div style={{ flex: 1, minWidth: 0 }}>
@@ -623,7 +623,7 @@ function ActingBillingPanel({ orders = null, insurance = "건강보험" }) {
           marginLeft: "auto", fontSize: 10, fontWeight: 600, color: isAuto ? "var(--status-danger-text)" : "var(--text-brand)",
           background: isAuto ? "var(--status-danger-bg)" : "var(--brand-muted)",
           border: `1px solid ${isAuto ? "var(--status-danger-border)" : "var(--brand-muted)"}`,
-          borderRadius: "var(--radius-full)", padding: "1px 8px", fontFamily: "var(--font-sans)",
+          borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 8px", fontFamily: "var(--font-sans)",
         }}>{insurance}</span>
       </div>
 
@@ -723,7 +723,7 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
         <Icon name="zap" size={15} style={{ color: "var(--jade-600)" }} />
         <span style={{ fontSize: 13, fontWeight: 700, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>오늘 액팅 오더</span>
-        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", background: "var(--brand-muted)", borderRadius: "var(--radius-full)", padding: "1px 7px" }}>
+        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", background: "var(--brand-muted)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 7px" }}>
           {orders.length}건
         </span>
         <span style={{
@@ -731,7 +731,7 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
           color: isAuto ? "var(--status-danger-text)" : "var(--text-brand)",
           background: isAuto ? "var(--status-danger-bg)" : "var(--brand-muted)",
           border: `1px solid ${isAuto ? "var(--status-danger-border)" : "var(--brand-muted)"}`,
-          borderRadius: "var(--radius-full)", padding: "1px 8px", fontFamily: "var(--font-sans)",
+          borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 8px", fontFamily: "var(--font-sans)",
         }}>{insurance}{phase ? ` · ${phase === 1 ? "급성기" : phase === 2 ? "아급성기" : "만성기"}` : ""}</span>
       </div>
 
@@ -754,7 +754,7 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
               {it.done && <Icon name="check" size={9} style={{ color: "white" }} />}
             </div>
             <span style={{ fontSize: 9, fontWeight: 700, color: "var(--text-muted)", fontFamily: "var(--font-mono)", flexShrink: 0 }}>{it.code}</span>
-            <span style={{ fontSize: 11, fontWeight: 600, color: it.color, background: `${it.color}18`, padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)", flexShrink: 0 }}>
+            <span style={{ fontSize: 11, fontWeight: 600, color: it.color, background: `${it.color}18`, padding: "1px 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)", flexShrink: 0 }}>
               {it.short}
             </span>
             <input value={it.sites} onChange={e => updateSites(i, e.target.value)}
@@ -805,7 +805,7 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
                   cursor: allowed && !already ? "pointer" : "not-allowed",
                   textAlign: "left", transition: "all 0.12s",
                 }}>
-                  <span style={{ fontSize: 10, fontWeight: 700, color: c.color, background: `${c.color}18`, padding: "1px 5px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)", minWidth: 42, textAlign: "center", flexShrink: 0 }}>
+                  <span style={{ fontSize: 10, fontWeight: 700, color: c.color, background: `${c.color}18`, padding: "1px 5px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)", minWidth: 42, textAlign: "center", flexShrink: 0 }}>
                     {c.short}
                   </span>
                   <span style={{ fontSize: 11, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flex: 1 }}>{c.key}</span>
@@ -831,7 +831,7 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
                 display: "inline-flex", alignItems: "center", gap: 3,
                 fontSize: 10, color: c.color,
                 background: `${c.color}12`, border: `1px dashed ${c.color}55`,
-                borderRadius: "var(--radius-full)", padding: "2px 7px",
+                borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 7px",
                 cursor: "pointer", fontFamily: "var(--font-sans)",
               }}>
                 <Icon name="plus" size={9} />{c.short}

@@ -197,7 +197,7 @@ function TaskItem({ task, onToggle }) {
           <span style={{
             display: "inline-flex", alignItems: "center", gap: 4,
             fontSize: 9, fontWeight: 600, color: priColors.text, background: priColors.bg,
-            borderRadius: "var(--radius-full)", padding: "1px 7px",
+            borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 7px",
             fontFamily: "var(--font-sans)",
           }}>
             <span style={{ width: 5, height: 5, borderRadius: "50%", background: priColors.dot }} />
@@ -230,7 +230,7 @@ function TasksPanel() {
         }}>업무</span>
         <span style={{
           fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700, color: "var(--text-brand)",
-          background: "var(--brand-muted)", borderRadius: "var(--radius-full)",
+          background: "var(--brand-muted)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
           padding: "1px 7px",
         }}>{openCount}</span>
 

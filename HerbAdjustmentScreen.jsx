@@ -133,7 +133,7 @@ function HerbAdjustmentScreen({ onClose, onSubmit }) {
                     fontSize: 10, fontFamily: "var(--font-mono)",
                     background: filter === t.key ? (t.key === "diff" ? "var(--status-danger-bg)" : "var(--brand-muted)") : "var(--bg-raised)",
                     color: filter === t.key ? (t.key === "diff" ? "var(--status-danger-text)" : "var(--text-brand)") : "var(--text-muted)",
-                    padding: "0 6px", borderRadius: "var(--radius-full)",
+                    padding: "0 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                   }}>{t.count}</span>
                 </button>
               ))}
@@ -200,7 +200,7 @@ function HerbAdjustmentScreen({ onClose, onSubmit }) {
                           <div style={{ fontSize: 13, fontWeight: 500, color: "var(--text-primary)" }}>{h.name}</div>
                           <div style={{ display: "flex", gap: 6, alignItems: "center", marginTop: 1 }}>
                             <span style={{ fontSize: 10, color: "var(--text-muted)", fontStyle: "italic" }}>{h.latin}</span>
-                            <span style={{ fontSize: 10, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "0 6px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-default)" }}>{h.category}</span>
+                            <span style={{ fontSize: 10, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "0 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", border: "1px solid var(--border-default)" }}>{h.category}</span>
                           </div>
                         </td>
                         <td style={{ padding: "10px 14px", fontSize: 11, color: "var(--text-secondary)", fontFamily: "var(--font-mono)" }}>{h.location}</td>
@@ -488,7 +488,7 @@ function HAConfirmModal({ summary, edits, onClose, onConfirm }) {
       }}>
         <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 16 }}>
           <div style={{
-            width: 36, height: 36, borderRadius: "var(--radius-full)",
+            width: 36, height: 36, borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
             background: "var(--brand-muted)", color: "var(--text-brand)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>

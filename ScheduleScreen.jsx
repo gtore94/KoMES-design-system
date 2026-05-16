@@ -536,7 +536,7 @@ function WeekView({ date, appts, onCellClick, onApptClick, doctorFilter }) {
                     marginLeft: "auto",
                     fontSize: 10, fontWeight: 600,
                     color: "var(--text-brand)", background: "var(--brand-muted)",
-                    borderRadius: "var(--radius-full)", padding: "1px 7px",
+                    borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 7px",
                     fontFamily: "var(--font-mono)",
                   }}>{dayCt}</span>
                 )}
@@ -786,7 +786,7 @@ function ApptDetail({ appt, onClose, onChangeStatus }) {
             <span style={{
               ...detailVal, color: status.text, background: status.bg,
               border: `1px solid ${status.border}`,
-              borderRadius: "var(--radius-full)", padding: "2px 10px",
+              borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 10px",
               fontSize: 11, fontWeight: 600,
             }}>{appt.status}</span>
           </div>
@@ -971,7 +971,7 @@ function ScheduleScreen() {
               background: doctorFilter === "" ? "var(--jade-500)" : "var(--bg-surface)",
               color: doctorFilter === "" ? "#fff" : "var(--text-secondary)",
               border: `1px solid ${doctorFilter === "" ? "var(--jade-500)" : "var(--border-subtle)"}`,
-              borderRadius: "var(--radius-full)", cursor: "pointer", fontFamily: "var(--font-sans)",
+              borderRadius: "var(--radius-full)", whiteSpace: "nowrap", cursor: "pointer", fontFamily: "var(--font-sans)",
             }}>전체</button>
             {DOCTORS_SCH.map(doc => {
               const sel = doctorFilter === doc.id;
@@ -981,7 +981,7 @@ function ScheduleScreen() {
                   background: sel ? doc.bg : "var(--bg-surface)",
                   color: sel ? doc.color : "var(--text-secondary)",
                   border: `1px solid ${sel ? doc.color : "var(--border-subtle)"}`,
-                  borderRadius: "var(--radius-full)", cursor: "pointer", fontFamily: "var(--font-sans)",
+                  borderRadius: "var(--radius-full)", whiteSpace: "nowrap", cursor: "pointer", fontFamily: "var(--font-sans)",
                   display: "inline-flex", alignItems: "center", gap: 5,
                 }}>
                   <span style={{ width: 6, height: 6, borderRadius: "50%", background: doc.color }} />

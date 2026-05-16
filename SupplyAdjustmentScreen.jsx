@@ -122,7 +122,7 @@ function SupplyAdjustmentScreen({ onClose, onSubmit }) {
                     fontSize: 10, fontFamily: "var(--font-mono)",
                     background: filter === t.key ? (t.key === "diff" ? "var(--status-danger-bg)" : "var(--brand-muted)") : "var(--bg-raised)",
                     color: filter === t.key ? (t.key === "diff" ? "var(--status-danger-text)" : "var(--text-brand)") : "var(--text-muted)",
-                    padding: "0 6px", borderRadius: "var(--radius-full)",
+                    padding: "0 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                   }}>{t.count}</span>
                 </button>
               ))}
@@ -145,7 +145,7 @@ function SupplyAdjustmentScreen({ onClose, onSubmit }) {
                     border: `1px solid ${sel ? (tone?.fg || "var(--text-secondary)") : "var(--border-default)"}`,
                     background: sel ? (tone?.bg || "var(--bg-raised)") : "var(--bg-surface)",
                     color: sel ? (tone?.fg || "var(--text-primary)") : "var(--text-secondary)",
-                    borderRadius: "var(--radius-full)", cursor: "pointer",
+                    borderRadius: "var(--radius-full)", whiteSpace: "nowrap", cursor: "pointer",
                     fontWeight: sel ? 600 : 400,
                   }}>
                   {c.key === "all" ? "분류 전체" : c.label}
@@ -198,7 +198,7 @@ function SupplyAdjustmentScreen({ onClose, onSubmit }) {
                           <div style={{ fontSize: 13, fontWeight: 500, color: "var(--text-primary)" }}>{s.name}</div>
                           <div style={{ display: "flex", gap: 6, alignItems: "center", marginTop: 1 }}>
                             <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{s.sku}</span>
-                            <span style={{ fontSize: 10, background: cat.bg, color: cat.fg, padding: "0 6px", borderRadius: "var(--radius-full)", border: `1px solid ${cat.border}` }}>{s.category}</span>
+                            <span style={{ fontSize: 10, background: cat.bg, color: cat.fg, padding: "0 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", border: `1px solid ${cat.border}` }}>{s.category}</span>
                             <span style={{ fontSize: 10, color: "var(--text-muted)" }}>{s.pack}</span>
                           </div>
                         </td>
@@ -479,7 +479,7 @@ function SAConfirmModal({ summary, edits, onClose, onConfirm }) {
       }}>
         <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 16 }}>
           <div style={{
-            width: 36, height: 36, borderRadius: "var(--radius-full)",
+            width: 36, height: 36, borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
             background: "var(--brand-muted)", color: "var(--text-brand)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>

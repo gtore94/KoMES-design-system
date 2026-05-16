@@ -229,7 +229,7 @@ function PillStat({ icon, label, value, tone, mono }) {
       display: "inline-flex", alignItems: "center", gap: 8,
       padding: "5px 12px",
       background: t.bg, border: `1px solid ${t.bd}`,
-      borderRadius: "var(--radius-full)",
+      borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
     }}>
       <Icon name={icon} size={13} style={{ color: t.iconColor }} />
       <span style={{ fontSize: 11, fontWeight: 500, color: t.fg, fontFamily: "var(--font-sans)" }}>{label}</span>

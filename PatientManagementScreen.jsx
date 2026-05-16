@@ -132,7 +132,7 @@ function PatientRow({ p, selected, onSelect }) {
       <span style={{ fontSize: 11, color: "var(--text-secondary)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{p.chief}</span>
       <span style={{
         fontSize: 10, fontWeight: 600, padding: "2px 8px",
-        borderRadius: "var(--radius-full)", textAlign: "center",
+        borderRadius: "var(--radius-full)", whiteSpace: "nowrap", textAlign: "center",
         ...tagStyle(p.insurance === "자보" ? "자보" : ""),
         background: p.insurance === "자보" ? "var(--status-danger-bg)" : "var(--bg-raised)",
         color: p.insurance === "자보" ? "var(--status-danger-text)" : "var(--text-secondary)",
@@ -145,7 +145,7 @@ function PatientRow({ p, selected, onSelect }) {
           return (
             <span key={t} style={{
               fontSize: 10, fontWeight: 600, padding: "1px 7px",
-              borderRadius: "var(--radius-full)",
+              borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
               background: s.bg, color: s.color, border: `1px solid ${s.border}`,
             }}>{t}</span>
           );
@@ -194,7 +194,7 @@ function RelationsPanel({ patient, allPatients, onPatientClick }) {
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
         <Icon name="share-2" size={14} style={{ color: "var(--jade-600)" }} />
         <span style={{ fontSize: 13, fontWeight: 700, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>관계도</span>
-        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", background: "var(--brand-muted)", borderRadius: "var(--radius-full)", padding: "1px 7px" }}>
+        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", background: "var(--brand-muted)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 7px" }}>
           {relations.length}건
         </span>
         <button onClick={() => setAdding(!adding)} style={{
@@ -228,7 +228,7 @@ function RelationsPanel({ patient, allPatients, onPatientClick }) {
                 fontSize: 10, fontWeight: 600, padding: "3px 6px",
                 color: typeInfo.color, background: `${typeInfo.color}18`,
                 border: `1px solid ${typeInfo.color}33`,
-                borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)",
+                borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)",
                 cursor: "pointer", outline: "none",
               }}>
                 {RELATION_TYPES.map(t => <option key={t.key} value={t.key}>{t.key}</option>)}
@@ -260,7 +260,7 @@ function RelationsPanel({ patient, allPatients, onPatientClick }) {
               return (
                 <button key={t.key} onClick={() => setPickedType(t.key)} style={{
                   display: "inline-flex", alignItems: "center", gap: 4,
-                  fontSize: 11, padding: "3px 9px", borderRadius: "var(--radius-full)",
+                  fontSize: 11, padding: "3px 9px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                   border: `1px solid ${active ? t.color : "var(--border-subtle)"}`,
                   background: active ? `${t.color}22` : "var(--bg-surface)",
                   color: active ? t.color : "var(--text-secondary)",
@@ -354,7 +354,7 @@ function PatientDetailPanel({ patient, onClose, onSelectPatient, onOpenChart, al
                 const s = tagStyle(t);
                 return (
                   <span key={t} style={{
-                    fontSize: 10, fontWeight: 600, padding: "1px 7px", borderRadius: "var(--radius-full)",
+                    fontSize: 10, fontWeight: 600, padding: "1px 7px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                     background: s.bg, color: s.color, border: `1px solid ${s.border}`, fontFamily: "var(--font-sans)",
                   }}>{t}</span>
                 );
@@ -411,7 +411,7 @@ function PatientDetailPanel({ patient, onClose, onSelectPatient, onOpenChart, al
           }}>
             <Icon name={t.i} size={12} />{t.l}
             {t.count != null && (
-              <span style={{ fontSize: 10, fontWeight: 600, color: "var(--text-brand)", background: "var(--brand-muted)", padding: "0 5px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-mono)" }}>
+              <span style={{ fontSize: 10, fontWeight: 600, color: "var(--text-brand)", background: "var(--brand-muted)", padding: "0 5px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-mono)" }}>
                 {t.count}
               </span>
             )}

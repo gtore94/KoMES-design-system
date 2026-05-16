@@ -81,14 +81,14 @@ function PrescriptionScreen({ patient, onBack }) {
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <Icon name="sparkles" size={16} style={{ color: "var(--jade-600)" }} />
                 <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-sans)" }}>AI 추천: {AI_SUGGESTION.name}</span>
-                <span style={{ fontSize: 12, background: "var(--brand-muted)", color: "var(--text-brand)", padding: "1px 7px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>적합도 {AI_SUGGESTION.confidence}%</span>
+                <span style={{ fontSize: 12, background: "var(--brand-muted)", color: "var(--text-brand)", padding: "1px 7px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)" }}>적합도 {AI_SUGGESTION.confidence}%</span>
               </div>
               <button onClick={() => setShowAI(false)} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--jade-400)", fontSize: 16, lineHeight: 1, padding: 0 }}>×</button>
             </div>
             <div style={{ fontSize: 12, color: "var(--jade-600)", fontFamily: "var(--font-sans)", marginBottom: 10, lineHeight: 1.5 }}>{AI_SUGGESTION.rationale}</div>
             <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 10 }}>
               {AI_SUGGESTION.herbs.map(h => (
-                <span key={h.name} style={{ fontSize: 11, background: "var(--brand-muted)", color: "var(--text-brand)", padding: "3px 9px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-mono)" }}>
+                <span key={h.name} style={{ fontSize: 11, background: "var(--brand-muted)", color: "var(--text-brand)", padding: "3px 9px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-mono)" }}>
                   {h.name} {h.dose}g
                 </span>
               ))}
@@ -120,7 +120,7 @@ function PrescriptionScreen({ patient, onBack }) {
                     {info && <div style={{ fontSize: 10, color: "var(--text-muted)", fontStyle: "italic" }}>{info.latin}</div>}
                   </td>
                   <td style={{ padding: "8px 14px" }}>
-                    {info && <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 7px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-default)" }}>{info.category}</span>}
+                    {info && <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 7px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", border: "1px solid var(--border-default)" }}>{info.category}</span>}
                   </td>
                   <td style={{ padding: "8px 14px" }}>
                     <input type="number" value={h.dose} onChange={e => updateDose(h.name, e.target.value)}

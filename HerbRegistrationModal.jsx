@@ -86,7 +86,7 @@ function HerbRegistrationModal({ onClose, onSubmit }) {
                         border: `1px solid ${category === c.key ? "var(--jade-500)" : "var(--border-default)"}`,
                         background: category === c.key ? "var(--brand-subtle)" : "var(--bg-surface)",
                         color: category === c.key ? "var(--text-brand)" : "var(--text-secondary)",
-                        borderRadius: "var(--radius-full)", cursor: "pointer",
+                        borderRadius: "var(--radius-full)", whiteSpace: "nowrap", cursor: "pointer",
                         fontWeight: category === c.key ? 600 : 400,
                       }}>{c.label}</button>
                   ))}
@@ -186,7 +186,7 @@ function HRSection({ title, sub, num, children }) {
     <div style={{ marginBottom: 22 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
         <div style={{
-          width: 22, height: 22, borderRadius: "var(--radius-full)",
+          width: 22, height: 22, borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
           background: "var(--brand-muted)", color: "var(--text-brand)",
           display: "flex", alignItems: "center", justifyContent: "center",
           fontSize: 11, fontWeight: 700, fontFamily: "var(--font-mono)",

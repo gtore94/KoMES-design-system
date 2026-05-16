@@ -42,7 +42,7 @@ function SPAICard({ suggestions, onApply, onDismiss, onOpenSettings }) {
           <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-sans)" }}>
             AI 발주 추천 · {suggestions.length}품목
           </span>
-          <span style={{ fontSize: 11, background: "var(--brand-muted)", color: "var(--text-brand)", padding: "2px 9px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>
+          <span style={{ fontSize: 11, background: "var(--brand-muted)", color: "var(--text-brand)", padding: "2px 9px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)" }}>
             지난 90일 소비 패턴 분석
           </span>
         </div>

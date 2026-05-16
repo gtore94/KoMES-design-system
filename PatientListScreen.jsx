@@ -58,7 +58,7 @@ function WaitChip({ mins, stage }) {
       color: urgent ? "var(--status-danger-text)" : "var(--text-muted)",
       background: urgent ? "var(--status-danger-bg)" : "var(--bg-raised)",
       border: `1px solid ${urgent ? "var(--status-danger-border)" : "var(--border-subtle)"}`,
-      borderRadius: "var(--radius-full)", padding: "1px 7px",
+      borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 7px",
     }}>
       <Icon name="clock" size={9} />
       {mins}분
@@ -109,7 +109,7 @@ function PatientCard({ patient, stage, onSelect, onAdvance }) {
             color: patient.visitType === "초진" ? "var(--cinnabar-600)" : "var(--jade-600)",
             background: patient.visitType === "초진" ? "var(--status-danger-bg)" : "var(--brand-subtle)",
             border: `1px solid ${patient.visitType === "초진" ? "var(--status-danger-border)" : "var(--brand-muted)"}`,
-            borderRadius: "var(--radius-full)", padding: "2px 7px",
+            borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 7px",
             fontFamily: "var(--font-sans)",
           }}>{patient.visitType}</span>
           {patient.insurance === "자보" && (
@@ -117,7 +117,7 @@ function PatientCard({ patient, stage, onSelect, onAdvance }) {
               fontSize: 10, fontWeight: 700, letterSpacing: "0.04em",
               color: "#7A4F1A", background: "#FEF3C7",
               border: "1px solid #FCD34D",
-              borderRadius: "var(--radius-full)", padding: "2px 7px",
+              borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 7px",
               fontFamily: "var(--font-sans)",
             }}>자보</span>
           )}
@@ -207,7 +207,7 @@ function GroupColumn({ group, patients, onSelect, onAdvance }) {
         <span style={{
           fontSize: 11, fontWeight: 700,
           background: group.color, color: "#fff",
-          borderRadius: "var(--radius-full)", minWidth: 22, height: 22,
+          borderRadius: "var(--radius-full)", whiteSpace: "nowrap", minWidth: 22, height: 22,
           padding: "0 7px",
           display: "flex", alignItems: "center", justifyContent: "center",
           fontFamily: "var(--font-mono)",
@@ -390,7 +390,7 @@ function PatientListScreen({ onSelectPatient }) {
                           display: "inline-flex", alignItems: "center", gap: 4,
                           fontSize: 10, fontWeight: 600, color: subStage.color,
                           background: subStage.bg, border: `1px solid ${subStage.border}`,
-                          borderRadius: "var(--radius-full)", padding: "2px 8px",
+                          borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 8px",
                           fontFamily: "var(--font-sans)",
                         }}>
                           <Icon name={subStage.icon} size={10} />{subStage.label}
@@ -401,14 +401,14 @@ function PatientListScreen({ onSelectPatient }) {
                           color: p.visitType === "초진" ? "var(--cinnabar-600)" : "var(--jade-600)",
                           background: p.visitType === "초진" ? "var(--status-danger-bg)" : "var(--brand-subtle)",
                           border: `1px solid ${p.visitType === "초진" ? "var(--status-danger-border)" : "var(--brand-muted)"}`,
-                          borderRadius: "var(--radius-full)", padding: "2px 7px", fontFamily: "var(--font-sans)",
+                          borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 7px", fontFamily: "var(--font-sans)",
                         }}>{p.visitType}</span>
                         {p.insurance === "자보" && (
                           <span style={{
                             fontSize: 10, fontWeight: 700,
                             color: "#7A4F1A", background: "#FEF3C7",
                             border: "1px solid #FCD34D",
-                            borderRadius: "var(--radius-full)", padding: "2px 7px", fontFamily: "var(--font-sans)",
+                            borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 7px", fontFamily: "var(--font-sans)",
                           }}>자보</span>
                         )}
                         {NEXT_STAGE[p.stage] && (

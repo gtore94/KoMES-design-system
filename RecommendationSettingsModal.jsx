@@ -382,7 +382,7 @@ function ExceptionPanel({ s, set, toggleArr }) {
                     border: `1px solid ${sel ? "var(--cinnabar-400)" : "var(--border-default)"}`,
                     background: sel ? "var(--status-danger-bg)" : "var(--bg-surface)",
                     color: sel ? "var(--status-danger-text)" : "var(--text-secondary)",
-                    borderRadius: "var(--radius-full)", cursor: "pointer",
+                    borderRadius: "var(--radius-full)", whiteSpace: "nowrap", cursor: "pointer",
                     fontWeight: sel ? 600 : 400,
                     textDecoration: sel ? "line-through" : "none",
                   }}>
@@ -408,7 +408,7 @@ function ExceptionPanel({ s, set, toggleArr }) {
                       border: `1px solid ${sel ? "var(--cinnabar-400)" : "var(--border-default)"}`,
                       background: sel ? "var(--status-danger-bg)" : "var(--bg-surface)",
                       color: sel ? "var(--status-danger-text)" : "var(--text-secondary)",
-                      borderRadius: "var(--radius-full)", cursor: "pointer",
+                      borderRadius: "var(--radius-full)", whiteSpace: "nowrap", cursor: "pointer",
                       fontWeight: sel ? 600 : 400,
                       textDecoration: sel ? "line-through" : "none",
                     }}>
@@ -498,7 +498,7 @@ function RSPreviewPanel({ preview, settings }) {
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                     <Icon name="building" size={13} style={{ color: "var(--text-brand)" }} />
                     <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-brand)" }}>{g.supplier}</span>
-                    <span style={{ fontSize: 10, fontFamily: "var(--font-mono)", color: "var(--text-brand)", background: "var(--brand-muted)", padding: "1px 6px", borderRadius: "var(--radius-full)" }}>
+                    <span style={{ fontSize: 10, fontFamily: "var(--font-mono)", color: "var(--text-brand)", background: "var(--brand-muted)", padding: "1px 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap" }}>
                       {g.items.length}품목
                     </span>
                   </div>
@@ -530,7 +530,7 @@ function RSPreviewPanel({ preview, settings }) {
                         {i.qty.toLocaleString("ko-KR")} {i.unit}
                       </div>
                       <span style={{
-                        fontSize: 9, padding: "2px 6px", borderRadius: "var(--radius-full)",
+                        fontSize: 9, padding: "2px 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                         background: i.urgency === "high" ? "var(--status-danger-bg)" :
                                     i.urgency === "med"  ? "var(--status-warning-bg)" : "var(--bg-raised)",
                         color:      i.urgency === "high" ? "var(--status-danger-text)" :

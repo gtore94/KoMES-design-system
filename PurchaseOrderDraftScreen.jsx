@@ -238,16 +238,16 @@ function PODraftSidebar({ drafts, selectedIdx, onSelect, totalAll }) {
               </div>
               <div style={{ display: "flex", gap: 5, marginTop: 6, flexWrap: "wrap" }}>
                 {urgent > 0 && (
-                  <span style={{ fontSize: 9, fontWeight: 600, background: "var(--status-danger-bg)", color: "var(--status-danger-text)", padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>긴급 {urgent}</span>
+                  <span style={{ fontSize: 9, fontWeight: 600, background: "var(--status-danger-bg)", color: "var(--status-danger-text)", padding: "1px 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)" }}>긴급 {urgent}</span>
                 )}
                 {belowMin && (
                   <span title={`최소 발주 ${won(meta.minOrder)}`}
-                        style={{ fontSize: 9, fontWeight: 600, background: "var(--status-warning-bg)", color: "var(--status-warning-text)", padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>
+                        style={{ fontSize: 9, fontWeight: 600, background: "var(--status-warning-bg)", color: "var(--status-warning-text)", padding: "1px 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)" }}>
                     최소금액 미달
                   </span>
                 )}
                 {!urgent && !belowMin && (
-                  <span style={{ fontSize: 9, fontWeight: 500, background: "var(--brand-muted)", color: "var(--text-brand)", padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>준비됨</span>
+                  <span style={{ fontSize: 9, fontWeight: 500, background: "var(--brand-muted)", color: "var(--text-brand)", padding: "1px 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)" }}>준비됨</span>
                 )}
               </div>
             </div>
@@ -408,7 +408,7 @@ function PODraftEditor({ draft, draftIdx, activeItemKey, onSelectItem, onUpdateD
                         fontSize: 11, fontWeight: 600, fontFamily: "var(--font-sans)",
                         color: it.urgency === "high" ? "var(--status-danger-text)" :
                                it.urgency === "med"  ? "var(--status-warning-text)" : "var(--text-brand)",
-                        padding: "2px 8px", borderRadius: "var(--radius-full)",
+                        padding: "2px 8px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                         background: it.urgency === "high" ? "var(--status-danger-bg)" :
                                     it.urgency === "med"  ? "var(--status-warning-bg)" : "var(--brand-muted)",
                         whiteSpace: "nowrap",
@@ -718,7 +718,7 @@ function PODraftConfirmModal({ drafts, totalAll, totalItems, onClose, onConfirm 
       }}>
         <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 16 }}>
           <div style={{
-            width: 38, height: 38, borderRadius: "var(--radius-full)",
+            width: 38, height: 38, borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
             background: "var(--brand-muted)", color: "var(--text-brand)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>

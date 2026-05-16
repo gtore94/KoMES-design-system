@@ -78,7 +78,7 @@ function TodayStatusPill({ status }) {
     <span style={{
       display: "inline-flex", alignItems: "center", gap: 5,
       fontSize: 10, fontWeight: 600, padding: "2px 8px",
-      borderRadius: "var(--radius-full)",
+      borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
       background: meta.bg, color: meta.color,
       fontFamily: "var(--font-sans)",
     }}>
@@ -133,7 +133,7 @@ function StaffRow({ s, selected, onSelect }) {
       </div>
       <span style={{
         fontSize: 10, fontWeight: 600, padding: "2px 8px",
-        borderRadius: "var(--radius-full)", textAlign: "center",
+        borderRadius: "var(--radius-full)", whiteSpace: "nowrap", textAlign: "center",
         background: statusMeta.bg, color: statusMeta.color,
         border: `1px solid ${statusMeta.border}`,
         justifySelf: "start",
@@ -206,7 +206,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
             <div style={{ fontSize: 12, color: staff.color, fontWeight: 600, fontFamily: "var(--font-sans)", marginTop: 2 }}>{staff.role}</div>
             <div style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginTop: 2 }}>{staff.dept} · {staff.specialty}</div>
             <div style={{ display: "flex", gap: 5, marginTop: 7 }}>
-              <span style={{ fontSize: 10, fontWeight: 600, padding: "1px 7px", borderRadius: "var(--radius-full)", background: statusMeta.bg, color: statusMeta.color, border: `1px solid ${statusMeta.border}`, fontFamily: "var(--font-sans)" }}>
+              <span style={{ fontSize: 10, fontWeight: 600, padding: "1px 7px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", background: statusMeta.bg, color: statusMeta.color, border: `1px solid ${statusMeta.border}`, fontFamily: "var(--font-sans)" }}>
                 {statusMeta.label}
               </span>
               <TodayStatusPill status={staff.todayStatus} />
@@ -260,7 +260,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
           }}>
             <Icon name={t.i} size={12} />{t.l}
             {t.count != null && (
-              <span style={{ fontSize: 10, fontWeight: 600, color: "var(--text-brand)", background: "var(--brand-muted)", padding: "0 5px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-mono)" }}>
+              <span style={{ fontSize: 10, fontWeight: 600, color: "var(--text-brand)", background: "var(--brand-muted)", padding: "0 5px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-mono)" }}>
                 {t.count}
               </span>
             )}
@@ -351,7 +351,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
                   return (
                     <button key={preset.key} onClick={() => setPermState([...preset.perms])} style={{
                       display: "inline-flex", alignItems: "center", gap: 4,
-                      padding: "4px 10px", borderRadius: "var(--radius-full)",
+                      padding: "4px 10px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                       border: `1px solid ${active ? "var(--jade-300)" : "var(--border-default)"}`,
                       background: active ? "var(--brand-muted)" : "var(--bg-surface)",
                       color: active ? "var(--text-brand)" : "var(--text-secondary)",
@@ -364,7 +364,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
                 })}
                 <button onClick={() => setPermState([])} style={{
                   display: "inline-flex", alignItems: "center", gap: 4,
-                  padding: "4px 10px", borderRadius: "var(--radius-full)",
+                  padding: "4px 10px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                   border: "1px solid var(--border-subtle)", background: "transparent",
                   color: "var(--text-muted)", fontSize: 11, cursor: "pointer",
                   fontFamily: "var(--font-sans)",
@@ -475,8 +475,8 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
                       </span>
                       <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>잔여 <span style={{ color: "var(--text-brand)", fontWeight: 600, fontFamily: "var(--font-mono)" }}>{total - used}일</span></span>
                     </div>
-                    <div style={{ height: 6, background: "var(--bg-raised)", borderRadius: "var(--radius-full)", overflow: "hidden" }}>
-                      <div style={{ width: `${pct}%`, height: "100%", background: "var(--jade-500)", borderRadius: "var(--radius-full)" }} />
+                    <div style={{ height: 6, background: "var(--bg-raised)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", overflow: "hidden" }}>
+                      <div style={{ width: `${pct}%`, height: "100%", background: "var(--jade-500)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap" }} />
                     </div>
                   </div>
                 );
@@ -532,7 +532,7 @@ function Toggle({ on, onChange }) {
   useEffectStaff(() => setVal(on), [on]);
   return (
     <button onClick={() => { const next = !val; setVal(next); onChange && onChange(next); }} style={{
-      width: 32, height: 18, borderRadius: "var(--radius-full)",
+      width: 32, height: 18, borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
       background: val ? "var(--jade-500)" : "var(--stone-300)",
       border: "none", position: "relative", cursor: "pointer",
       transition: "background 0.12s",

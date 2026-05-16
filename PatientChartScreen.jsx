@@ -125,7 +125,7 @@ function ActingOrderBlock({ orders, editable }) {
             <div style={{ width: 18, height: 18, borderRadius: "var(--radius-sm)", border: `2px solid ${o.done ? "var(--jade-400)" : "var(--border-default)"}`, background: o.done ? "var(--jade-400)" : "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "all 0.12s" }}>
               {o.done && <Icon name="check" size={11} style={{ color: "white" }} />}
             </div>
-            <span style={{ fontSize: 11, fontWeight: 700, color: typeInfo.color, background: `${typeInfo.color}28`, padding: "2px 7px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)", flexShrink: 0 }}>{o.type}</span>
+            <span style={{ fontSize: 11, fontWeight: 700, color: typeInfo.color, background: `${typeInfo.color}28`, padding: "2px 7px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)", flexShrink: 0 }}>{o.type}</span>
             <span style={{ fontSize: 13, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flex: 1, textDecoration: o.done ? "line-through" : "none" }}>{o.sites}</span>
             <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-mono)", flexShrink: 0 }}>{o.count}침 · {o.duration}분</span>
           </div>
@@ -264,7 +264,7 @@ function VisitCard({ visit }) {
                       fontSize: 10, color: dx.primary ? "var(--text-brand)" : "var(--text-secondary)",
                       background: dx.primary ? "var(--brand-subtle)" : "var(--bg-raised)",
                       border: `1px solid ${dx.primary ? "var(--brand-muted)" : "var(--border-subtle)"}`,
-                      borderRadius: "var(--radius-full)", padding: "1px 8px", fontFamily: "var(--font-sans)",
+                      borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 8px", fontFamily: "var(--font-sans)",
                     }}>
                       <span style={{ fontFamily: "var(--font-mono)", fontWeight: 600 }}>{dx.code}</span>
                       {dx.name}
@@ -273,10 +273,10 @@ function VisitCard({ visit }) {
                   <div style={{ flex: 1 }} />
                   <div style={{ display: "flex", gap: 5 }}>
                     {visit.actingOrders.map((o, i) => (
-                      <span key={i} style={{ fontSize: 10, color: "var(--text-muted)", background: "var(--bg-raised)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-full)", padding: "1px 7px", fontFamily: "var(--font-sans)" }}>{o.type}</span>
+                      <span key={i} style={{ fontSize: 10, color: "var(--text-muted)", background: "var(--bg-raised)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 7px", fontFamily: "var(--font-sans)" }}>{o.type}</span>
                     ))}
                     {visit.rxOrders.map((r, i) => (
-                      <span key={i} style={{ fontSize: 10, color: "var(--text-brand)", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-full)", padding: "1px 7px", fontFamily: "var(--font-sans)" }}>{r.name}</span>
+                      <span key={i} style={{ fontSize: 10, color: "var(--text-brand)", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 7px", fontFamily: "var(--font-sans)" }}>{r.name}</span>
                     ))}
                   </div>
                   <Icon name={ordersOpen ? "chevron-up" : "chevron-down"} size={13} style={{ color: "var(--text-muted)", flexShrink: 0 }} />
@@ -292,7 +292,7 @@ function VisitCard({ visit }) {
                           const typeInfo = ACTING_TYPES.find(t => t.key === o.type) || ACTING_TYPES[0];
                           return (
                             <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, padding: "6px 10px", background: o.done ? "var(--bg-raised)" : "var(--bg-surface)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-sm)" }}>
-                              <span style={{ fontSize: 10, fontWeight: 700, color: typeInfo.color, background: `${typeInfo.color}28`, padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)", flexShrink: 0 }}>{o.type}</span>
+                              <span style={{ fontSize: 10, fontWeight: 700, color: typeInfo.color, background: `${typeInfo.color}28`, padding: "1px 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)", flexShrink: 0 }}>{o.type}</span>
                               <span style={{ fontSize: 12, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flex: 1, textDecoration: o.done ? "line-through" : "none" }}>{o.sites}</span>
                               <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{o.count}침 · {o.duration}분</span>
                               {o.done && <Icon name="check-circle-2" size={13} style={{ color: "var(--jade-500)", flexShrink: 0 }} />}
