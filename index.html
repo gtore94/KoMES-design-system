@@ -100,8 +100,8 @@
   --shadow-xl: 0 8px 32px rgba(0,0,0,0.55), 0 4px 12px rgba(0,0,0,0.32);
 }
 
-/* ── Navy theme — jade scale → navy ───────────────── */
-[data-theme="navy"] {
+/* ── Navy color — jade scale → navy (light mode) ───── */
+[data-color="navy"] {
   --jade-900: #0E1A2E; --jade-800: #16263F; --jade-700: #1E3252; --jade-600: #294569;
   --jade-500: #355A82; --jade-400: #5878A3; --jade-300: #8298BF; --jade-200: #B3C0D7;
   --jade-100: #D6DEEB; --jade-50:  #EEF1F7;
@@ -115,6 +115,25 @@
   --status-success-bg:     #EEF1F7;
   --status-success-text:   #1E3252;
   --status-success-border: #B3C0D7;
+}
+
+/* ── Navy color — dark mode override ─────────────── */
+[data-theme="dark"][data-color="navy"] {
+  --bg-page:    #080F1C;
+  --bg-surface: #0E1A2E;
+  --bg-raised:  #16263F;
+  --bg-sunken:  #040810;
+  --border-subtle:  #16263F;
+  --brand:          #5878A3;
+  --brand-hover:    #8298BF;
+  --brand-active:   #B3C0D7;
+  --brand-subtle:   rgba(53, 90, 130, 0.15);
+  --brand-muted:    rgba(53, 90, 130, 0.28);
+  --text-brand:     #8298BF;
+  --border-brand:   #355A82;
+  --status-success-bg:     rgba(53, 90, 130, 0.14);
+  --status-success-text:   #8298BF;
+  --status-success-border: rgba(53, 90, 130, 0.35);
 }
 
 [data-reduce-motion="true"] *,

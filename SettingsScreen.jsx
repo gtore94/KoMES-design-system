@@ -6,9 +6,9 @@ const { useState: useStateSet, useEffect: useEffectSet } = React;
    `data-theme` on <html> drives all token overrides in index.html.
    ──────────────────────────────────────────────────────────── */
 const THEME_STORAGE_KEY = "komes_theme";
+const THEME_COLOR_KEY   = "komes_color";
 
 function applyTheme(theme) {
-  // theme: "light" | "dark" | "auto"
   const root = document.documentElement;
   if (theme === "auto") {
     const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -19,11 +19,19 @@ function applyTheme(theme) {
   root.setAttribute("data-theme-pref", theme);
 }
 
+function applyColor(color) {
+  if (color === "navy") {
+    document.documentElement.setAttribute("data-color", "navy");
+  } else {
+    document.documentElement.removeAttribute("data-color");
+  }
+}
+
 // Init on first load (idempotent)
 (function initTheme() {
   const saved = localStorage.getItem(THEME_STORAGE_KEY) || "light";
   applyTheme(saved);
-  // React to OS change when in auto mode
+  applyColor(localStorage.getItem(THEME_COLOR_KEY) || "jade");
   if (window.matchMedia) {
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
     mq.addEventListener && mq.addEventListener("change", () => {
@@ -193,11 +201,20 @@ const THEME_PREVIEWS = {
     line1: "#6B7E7B", line2: "#6B7E7B",
     pill: "rgba(74,124,111,0.18)", pillText: "#4A7C6F",
   },
+};
+
+const COLOR_PREVIEWS = {
+  jade: {
+    bg: "#D4EDE9", border: "#9ECEC5",
+    dot1: "#2E5C52", dot2: "#4A7C6F", dot3: "#B5D9D3",
+    line1: "#2E5C52", line2: "#4A7C6F",
+    pill: "#4A7C6F", pillText: "#FDFAF5",
+  },
   navy: {
-    bg: "#EEF1F7", border: "#B3C0D7",
-    dot1: "#C4594B", dot2: "#C4974B", dot3: "#355A82",
+    bg: "#D6DEEB", border: "#8298BF",
+    dot1: "#1E3252", dot2: "#355A82", dot3: "#8298BF",
     line1: "#1E3252", line2: "#5878A3",
-    pill: "#D6DEEB", pillText: "#1E3252",
+    pill: "#355A82", pillText: "#EEF1F7",
   },
 };
 
@@ -267,6 +284,7 @@ function SegGroup({ value, onChange, options }) {
 function SettingsScreen() {
   const [tab, setTab] = useStateSet("appearance"); // appearance | general | account
   const [theme, setTheme] = useStateSet(() => localStorage.getItem(THEME_STORAGE_KEY) || "light");
+  const [color, setColor] = useStateSet(() => localStorage.getItem(THEME_COLOR_KEY) || "jade");
   const [density, setDensity] = useStateSet(() => localStorage.getItem("komes_density") || "comfortable");
   const [fontSize, setFontSize] = useStateSet(() => localStorage.getItem("komes_font_size") || "default");
   const [reduceMotion, setReduceMotion] = useStateSet(() => localStorage.getItem("komes_reduce_motion") === "true");
@@ -276,6 +294,11 @@ function SettingsScreen() {
     localStorage.setItem(THEME_STORAGE_KEY, theme);
     applyTheme(theme);
   }, [theme]);
+
+  useEffectSet(() => {
+    localStorage.setItem(THEME_COLOR_KEY, color);
+    applyColor(color);
+  }, [color]);
 
   useEffectSet(() => {
     localStorage.setItem("komes_density", density);
@@ -346,25 +369,38 @@ function SettingsScreen() {
               <>
                 <SettingsSection
                   title="테마"
-                  description="시간대와 작업 환경에 맞춰 라이트·다크 테마를 전환합니다. 변경은 즉시 반영됩니다.">
+                  description="모드와 색상을 독립적으로 선택합니다. 변경은 즉시 반영됩니다.">
                   <div style={{ padding: "18px 22px 20px" }}>
+
                     <div style={{
-                      display: "grid",
-                      gridTemplateColumns: "repeat(4, 1fr)",
-                      gap: 12,
-                    }}>
+                      fontSize: 11, fontWeight: 700, letterSpacing: "0.08em",
+                      textTransform: "uppercase", color: "var(--text-muted)",
+                      marginBottom: 10,
+                    }}>모드</div>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12 }}>
                       <ThemeCard value="light" label="라이트" hint="기본 한지 톤"
                         active={theme === "light"} onSelect={setTheme}
                         preview={THEME_PREVIEWS.light} />
                       <ThemeCard value="dark" label="다크" hint="야간 진료·당직용"
                         active={theme === "dark"} onSelect={setTheme}
                         preview={THEME_PREVIEWS.dark} />
-                      <ThemeCard value="navy" label="네이비" hint="청색 브랜드 톤"
-                        active={theme === "navy"} onSelect={setTheme}
-                        preview={THEME_PREVIEWS.navy} />
                       <ThemeCard value="auto" label="시스템" hint="OS 설정을 따름"
                         active={theme === "auto"} onSelect={setTheme}
                         preview={THEME_PREVIEWS.auto} />
+                    </div>
+
+                    <div style={{
+                      fontSize: 11, fontWeight: 700, letterSpacing: "0.08em",
+                      textTransform: "uppercase", color: "var(--text-muted)",
+                      marginTop: 20, marginBottom: 10,
+                    }}>색상</div>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 12 }}>
+                      <ThemeCard value="jade" label="재이드" hint="클래식 한의 톤"
+                        active={color === "jade"} onSelect={setColor}
+                        preview={COLOR_PREVIEWS.jade} />
+                      <ThemeCard value="navy" label="네이비" hint="청색 브랜드 톤"
+                        active={color === "navy"} onSelect={setColor}
+                        preview={COLOR_PREVIEWS.navy} />
                     </div>
 
                     <div style={{
@@ -381,10 +417,12 @@ function SettingsScreen() {
                         theme === "light" ? "라이트" :
                         theme === "dark" ? "다크" : "시스템 자동"
                       }</strong>
+                      {" · "}
+                      <strong style={{ fontWeight: 600 }}>{color === "navy" ? "네이비" : "재이드"}</strong>
                       <span style={{
                         marginLeft: "auto", fontFamily: "var(--font-mono)",
                         fontSize: 11, opacity: 0.75,
-                      }}>data-theme={theme}</span>
+                      }}>data-theme={theme}{color === "navy" ? " · navy" : ""}</span>
                     </div>
                   </div>
                 </SettingsSection>
