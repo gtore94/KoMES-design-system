@@ -1,0 +1,167 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1778892497217,
+  "projectRoot": "/Users/jaehoon/Downloads/KoMES design system",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {},
+  "hotPaths": [
+    {
+      "path": "index.standalone.html",
+      "accessCount": 48,
+      "lastAccessed": 1778911282864,
+      "type": "file"
+    },
+    {
+      "path": "ScheduleScreen.jsx",
+      "accessCount": 34,
+      "lastAccessed": 1778912343464,
+      "type": "file"
+    },
+    {
+      "path": "Components.jsx",
+      "accessCount": 19,
+      "lastAccessed": 1778911706160,
+      "type": "file"
+    },
+    {
+      "path": "index.html",
+      "accessCount": 9,
+      "lastAccessed": 1778912338814,
+      "type": "file"
+    },
+    {
+      "path": "HerbAdjustmentScreen.jsx",
+      "accessCount": 2,
+      "lastAccessed": 1778907387403,
+      "type": "file"
+    },
+    {
+      "path": "SupplyAdjustmentScreen.jsx",
+      "accessCount": 2,
+      "lastAccessed": 1778907392401,
+      "type": "file"
+    },
+    {
+      "path": "PrescriptionScreen.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1778892539449,
+      "type": "file"
+    },
+    {
+      "path": "PaymentScreen.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1778892539981,
+      "type": "file"
+    },
+    {
+      "path": "InsuranceClaimScreen.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1778893448510,
+      "type": "file"
+    },
+    {
+      "path": "claimData.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1778893448850,
+      "type": "file"
+    },
+    {
+      "path": "ClaimList.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1778893453195,
+      "type": "file"
+    },
+    {
+      "path": "ClaimSidebar.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1778893453508,
+      "type": "file"
+    },
+    {
+      "path": "ClaimSubmissionFlow.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1778893453929,
+      "type": "file"
+    },
+    {
+      "path": "herbData.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1778901652169,
+      "type": "file"
+    },
+    {
+      "path": "suppliesData.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1778901652730,
+      "type": "file"
+    },
+    {
+      "path": "HerbInventoryParts.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1778901653117,
+      "type": "file"
+    },
+    {
+      "path": "SuppliesParts.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1778901653651,
+      "type": "file"
+    },
+    {
+      "path": "HerbInventoryScreen.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1778901658601,
+      "type": "file"
+    },
+    {
+      "path": "SuppliesScreen.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1778901659140,
+      "type": "file"
+    },
+    {
+      "path": "HerbRegistrationModal.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1778906854671,
+      "type": "file"
+    },
+    {
+      "path": "SupplyRegistrationModal.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1778906855574,
+      "type": "file"
+    },
+    {
+      "path": "915912",
+      "accessCount": 1,
+      "lastAccessed": 1778912423574,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}
