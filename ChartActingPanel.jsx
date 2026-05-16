@@ -114,15 +114,6 @@ function AutoInsuranceBar({ injuryDate, today = new Date(), chunaUsed = 7, herbD
             <span style={{ fontSize: 11, fontWeight: 700, color: "var(--stone-200)", letterSpacing: "0.06em", textTransform: "uppercase", fontFamily: "var(--font-sans)" }}>
               자동차 보험 환자
             </span>
-            {irClaimable && (
-              <span style={{
-                fontSize: 10, fontWeight: 600,
-                color: "var(--jade-700)", background: "var(--jade-100)",
-                padding: "1px 7px", borderRadius: "var(--radius-full)",
-                border: "1px solid var(--jade-300)",
-                fontFamily: "var(--font-sans)",
-              }}>IR 2부위 청구 가능</span>
-            )}
           </div>
           <div style={{ fontSize: 11, color: "var(--stone-300)", fontFamily: "var(--font-sans)", marginTop: 1 }}>
             수상일 <span style={{ fontFamily: "var(--font-mono)" }}>{injuryDate}</span>
@@ -130,6 +121,16 @@ function AutoInsuranceBar({ injuryDate, today = new Date(), chunaUsed = 7, herbD
           <div style={{ fontSize: 10, color: "var(--stone-400)", fontFamily: "var(--font-sans)", marginTop: 1 }}>
             삼성화재 · 경과 <span style={{ fontFamily: "var(--font-mono)", color: "var(--stone-200)" }}>{weeks}주{remDays > 0 ? ` ${remDays}일` : ""}</span> ({days}일)
           </div>
+          {irClaimable && (
+            <span style={{
+              display: "inline-flex", marginTop: 5,
+              fontSize: 10, fontWeight: 600,
+              color: "var(--jade-700)", background: "var(--jade-100)",
+              padding: "1px 7px", borderRadius: "var(--radius-full)",
+              border: "1px solid var(--jade-300)",
+              fontFamily: "var(--font-sans)",
+            }}>IR 2부위 청구 가능</span>
+          )}
         </div>
       </div>
 
