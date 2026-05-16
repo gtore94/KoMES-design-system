@@ -233,7 +233,7 @@ function PeriodAndSummary({
                 <span style={{ textAlign: "right", fontFamily: "var(--font-mono)", color: "var(--text-primary)", fontWeight: 500 }}>{d.visitDays}</span>
                 <span style={{
                   width: 18, height: 18, borderRadius: "var(--radius-sm)",
-                  border: "1px solid var(--stone-300)",
+                  border: "1px solid var(--border-subtle)",
                   display: "flex", alignItems: "center", justifyContent: "center",
                   color: "var(--text-muted)", cursor: "pointer",
                 }}><Icon name="x" size={10} /></span>

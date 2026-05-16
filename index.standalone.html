@@ -138,7 +138,7 @@
   --rail-text-secondary: var(--navy-500);
   --rail-text-muted: var(--navy-300);
   --rail-border: var(--navy-100);
-  --jade-900: #0E1A2E; --jade-800: #16263F; --jade-700: #1E3252; --jade-600: #294569;
+  --jade-900: #0E1A2E; --jade-800: #1C3560; --jade-700: #234478; --jade-600: #294569;
   --jade-500: #355A82; --jade-400: #5878A3; --jade-300: #8298BF; --jade-200: #B3C0D7;
   --jade-100: #D6DEEB; --jade-50:  #EEF1F7;
   --brand:        #355A82;
@@ -164,7 +164,11 @@
   --bg-surface: #0E1A2E;
   --bg-raised:  #16263F;
   --bg-sunken:  #040810;
-  --border-subtle:  #16263F;
+  --border-subtle:  #1A2D45;
+  /* bump jade scale so gradients stand out from bg-raised (#16263F) */
+  --jade-900: #0F1F38;
+  --jade-800: #1E3C6A;
+  --jade-700: #265080;
   --brand:          #5878A3;
   --brand-hover:    #8298BF;
   --brand-active:   #B3C0D7;
@@ -12284,7 +12288,7 @@ function PeriodAndSummary({
                 <span style={{ textAlign: "right", fontFamily: "var(--font-mono)", color: "var(--text-primary)", fontWeight: 500 }}>{d.visitDays}</span>
                 <span style={{
                   width: 18, height: 18, borderRadius: "var(--radius-sm)",
-                  border: "1px solid var(--stone-300)",
+                  border: "1px solid var(--border-subtle)",
                   display: "flex", alignItems: "center", justifyContent: "center",
                   color: "var(--text-muted)", cursor: "pointer",
                 }}><Icon name="x" size={10} /></span>
