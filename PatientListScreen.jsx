@@ -12,9 +12,9 @@ const PATIENTS = [
   { id: 4,  name: "박지현", gender: "여", dob: "1968-02-14", age: 57, phone: "010-3344-7788", lastVisit: "2026-04-22", stage: "치료실",   chief: "불면증, 심계항진", waitMins: 22, visitType: "재진" },
   { id: 5,  name: "최동욱", gender: "남", dob: "2001-09-05", age: 23, phone: "010-7722-9900", lastVisit: "2026-04-22", stage: "수납대기", chief: "비염, 두통",        waitMins: 3,  visitType: "재진" },
   { id: 6,  name: "정유미", gender: "여", dob: "1995-03-18", age: 30, phone: "010-6611-2233", lastVisit: "2026-04-22", stage: "수납완료", chief: "생리통, 빈혈",      waitMins: 0,  visitType: "초진" },
-  { id: 7,  name: "오세훈", gender: "남", dob: "1979-06-20", age: 46, phone: "010-8800-4411", lastVisit: "2026-04-22", stage: "진료대기", chief: "어깨 통증",         waitMins: 31, visitType: "재진", insurance: "상해", injuryDate: "2026-04-10" },
+  { id: 7,  name: "오세훈", gender: "남", dob: "1979-06-20", age: 46, phone: "010-8800-4411", lastVisit: "2026-04-22", stage: "진료대기", chief: "어깨 통증",         waitMins: 31, visitType: "재진", injuryDate: "2026-04-10" },
   { id: 8,  name: "윤지영", gender: "여", dob: "2000-01-11", age: 26, phone: "010-2200-8833", lastVisit: "2026-04-22", stage: "치료실",   chief: "피부 트러블",       waitMins: 14, visitType: "초진" },
-  { id: 9,  name: "강민재", gender: "남", dob: "1988-11-03", age: 37, phone: "010-1122-5566", lastVisit: "2026-04-22", stage: "수납대기", chief: "무릎 통증",         waitMins: 8,  visitType: "재진", insurance: "상해", injuryDate: "2026-03-28" },
+  { id: 9,  name: "강민재", gender: "남", dob: "1988-11-03", age: 37, phone: "010-1122-5566", lastVisit: "2026-04-22", stage: "수납대기", chief: "무릎 통증",         waitMins: 8,  visitType: "재진", insurance: "산재", injuryDate: "2026-03-28" },
   { id: 10, name: "임소연", gender: "여", dob: "1993-04-25", age: 33, phone: "010-9911-3344", lastVisit: "2026-04-22", stage: "수납완료", chief: "갱년기 증상",       waitMins: 0,  visitType: "재진" },
 ];
 
@@ -120,14 +120,14 @@ function PatientCard({ patient, stage, onSelect, onAdvance }) {
             borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 7px",
             fontFamily: "var(--font-sans)",
           }}>{patient.visitType}</span>
-          {patient.insurance === "자보" && (
+          {(patient.insurance === "자보" || patient.insurance === "산재") && (
             <span style={{
               fontSize: 10, fontWeight: 700, letterSpacing: "0.04em",
               color: "var(--status-warning-text)", background: "var(--status-warning-bg)",
               border: "1px solid var(--status-warning-border)",
               borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 7px",
               fontFamily: "var(--font-sans)",
-            }}>자보</span>
+            }}>{patient.insurance}</span>
           )}
           {isDone && <Icon name="check-circle-2" size={14} style={{ color: "var(--jade-500)", marginLeft: "auto" }} />}
         </div>
@@ -289,13 +289,13 @@ function GroupColumn({ group, patients, onSelect, onAdvance, dragOver, setDragOv
 function PatientListScreen({ onSelectPatient }) {
   const [patients, setPatients] = useStateDash(() => {
     try {
-      const saved = localStorage.getItem("komes_dashboard_patients_v3");
+      const saved = localStorage.getItem("komes_dashboard_patients_v4");
       return saved ? JSON.parse(saved) : PATIENTS;
     } catch { return PATIENTS; }
   });
 
   useEffectDash(() => {
-    localStorage.setItem("komes_dashboard_patients_v3", JSON.stringify(patients));
+    localStorage.setItem("komes_dashboard_patients_v4", JSON.stringify(patients));
   }, [patients]);
 
   const [search, setSearch] = useStateDash("");
@@ -458,13 +458,13 @@ function PatientListScreen({ onSelectPatient }) {
                           border: `1px solid ${p.visitType === "초진" ? "var(--status-danger-border)" : "var(--brand-muted)"}`,
                           borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 7px", fontFamily: "var(--font-sans)",
                         }}>{p.visitType}</span>
-                        {p.insurance === "자보" && (
+                        {(p.insurance === "자보" || p.insurance === "산재") && (
                           <span style={{
                             fontSize: 10, fontWeight: 700,
                             color: "var(--status-warning-text)", background: "var(--status-warning-bg)",
                             border: "1px solid var(--status-warning-border)",
                             borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 7px", fontFamily: "var(--font-sans)",
-                          }}>자보</span>
+                          }}>{p.insurance}</span>
                         )}
                         {NEXT_STAGE[p.stage] && (
                           <button onClick={e => { e.stopPropagation(); advanceStage(p.id, NEXT_STAGE[p.stage]); }}
