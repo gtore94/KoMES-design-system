@@ -76,15 +76,19 @@ body { font-family: var(--font-sans); background-color: var(--bg-page); color: v
 <script type="text/babel" src="ScheduleScreen.jsx?v=3"></script>
 <script type="text/babel" src="PaymentScreen.jsx"></script>
 <script type="text/babel" src="herbData.jsx"></script>
-<script type="text/babel" src="HerbInventoryParts.jsx"></script>
+<script type="text/babel" src="HerbInventoryParts.jsx?v=2"></script>
 <script type="text/babel" src="HerbRegistrationModal.jsx"></script>
 <script type="text/babel" src="HerbAdjustmentScreen.jsx"></script>
-<script type="text/babel" src="HerbInventoryScreen.jsx?v=2"></script>
+<script type="text/babel" src="HerbInventoryScreen.jsx?v=3"></script>
 <script type="text/babel" src="suppliesData.jsx"></script>
-<script type="text/babel" src="SuppliesParts.jsx"></script>
+<script type="text/babel" src="SuppliesParts.jsx?v=2"></script>
 <script type="text/babel" src="SupplyRegistrationModal.jsx"></script>
 <script type="text/babel" src="SupplyAdjustmentScreen.jsx"></script>
-<script type="text/babel" src="SuppliesScreen.jsx?v=2"></script>
+<script type="text/babel" src="SuppliesScreen.jsx?v=3"></script>
+<script type="text/babel" src="purchaseOrdersData.jsx?v=2"></script>
+<script type="text/babel" src="PurchaseOrderHistoryScreen.jsx"></script>
+<script type="text/babel" src="PurchaseOrderDraftScreen.jsx"></script>
+<script type="text/babel" src="RecommendationSettingsModal.jsx"></script>
 <script type="text/babel" src="claimData.jsx"></script>
 <script type="text/babel" src="ClaimSidebar.jsx"></script>
 <script type="text/babel" src="ClaimList.jsx"></script>
@@ -104,6 +108,9 @@ function App() {
   const [nav, setNav] = useState(() => localStorage.getItem("komes_nav") || "patients");
   const [selectedPatient, setSelectedPatient] = useState(null);
   const [screen, setScreen] = useState(() => localStorage.getItem("komes_screen") || SCREENS.patients);
+  const [recOpen, setRecOpen] = useState(false);
+  const [recToast, setRecToast] = useState(null);
+  const [draftsActive, setDraftsActive] = useState(null);  // null | "herb" | "supply" | "both"
 
   useEffect(() => { localStorage.setItem("komes_nav", nav); }, [nav]);
   useEffect(() => { localStorage.setItem("komes_screen", screen); }, [screen]);
@@ -155,10 +162,13 @@ function App() {
       return <InsuranceClaimScreen />;
     }
     if (nav === "inventory") {
-      return <HerbInventoryScreen />;
+      return <HerbInventoryScreen onNavigate={handleNavigate} onOpenRecSettings={() => setRecOpen(true)} onCreateDrafts={(scope) => setDraftsActive(scope)} />;
     }
     if (nav === "supplies") {
-      return <SuppliesScreen />;
+      return <SuppliesScreen onNavigate={handleNavigate} onOpenRecSettings={() => setRecOpen(true)} onCreateDrafts={(scope) => setDraftsActive(scope)} />;
+    }
+    if (nav === "orders") {
+      return <PurchaseOrderHistoryScreen openSettings={() => setRecOpen(true)} />;
     }
     const labels = {
       prescriptions: "처방 관리",
@@ -177,12 +187,66 @@ function App() {
     }
   };
 
+  // 발주서 초안 편집 모드가 활성일 때 전체 화면 인계
+  if (draftsActive) {
+    const recs = computeRecommendations({ ...REC_DEFAULTS, scope: draftsActive });
+    return (
+      <div style={{ display: "flex", height: "100vh", overflow: "hidden" }}>
+        <Sidebar activeScreen={nav} onNavigate={(k) => { setDraftsActive(null); handleNavigate(k); }} />
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
+          <PurchaseOrderDraftScreen
+            key={draftsActive}
+            initialRecommendations={recs}
+            onClose={() => setDraftsActive(null)}
+            onSubmit={({ draft, drafts }) => {
+              setDraftsActive(null);
+              setRecToast(draft
+                ? `초안 ${drafts.length}건이 임시 저장되었습니다.`
+                : `승인 요청 ${drafts.length}건이 원장님께 전송되었습니다.`);
+              setTimeout(() => setRecToast(null), 2400);
+            }}
+          />
+        </div>
+        {recToast && (
+          <div style={{
+            position: "fixed", bottom: 20, left: "50%", transform: "translateX(-50%)",
+            background: "var(--ink-800)", color: "var(--stone-50)",
+            padding: "10px 18px", borderRadius: "var(--radius-md)",
+            fontSize: 13, boxShadow: "var(--shadow-lg)",
+            display: "flex", alignItems: "center", gap: 8, zIndex: 300,
+          }}>
+            <Icon name="check-circle" size={14} style={{ color: "var(--jade-300)" }} />
+            {recToast}
+          </div>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div style={{ display: "flex", height: "100vh", overflow: "hidden" }}>
       <Sidebar activeScreen={nav} onNavigate={handleNavigate} />
       <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
         {renderMain()}
       </div>
+      {recOpen && (
+        <RecommendationSettingsModal
+          onClose={() => setRecOpen(false)}
+          onSave={() => { setRecOpen(false); setRecToast("추천 조건이 저장되었습니다."); setTimeout(() => setRecToast(null), 2200); }}
+        />
+      )}
+      {recToast && (
+        <div style={{
+          position: "fixed", bottom: 20, left: "50%", transform: "translateX(-50%)",
+          background: "var(--ink-800)", color: "var(--stone-50)",
+          padding: "10px 18px", borderRadius: "var(--radius-md)",
+          fontSize: 13, fontFamily: "var(--font-sans)", boxShadow: "var(--shadow-lg)",
+          display: "flex", alignItems: "center", gap: 8, zIndex: 300,
+        }}>
+          <Icon name="check-circle" size={14} style={{ color: "var(--jade-300)" }} />
+          {recToast}
+        </div>
+      )}
     </div>
   );
 }

@@ -28,7 +28,7 @@ function SPKpiStrip({ items, alerts, openPOs }) {
   );
 }
 
-function SPAICard({ suggestions, onApply, onDismiss }) {
+function SPAICard({ suggestions, onApply, onDismiss, onOpenSettings }) {
   if (!suggestions.length) return null;
   const totalCost = suggestions.reduce((s, x) => s + x.suggestQty * x.unitPrice, 0);
   return (
@@ -80,7 +80,7 @@ function SPAICard({ suggestions, onApply, onDismiss }) {
       </div>
       <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
         <Button variant="primary" size="sm" icon="check" onClick={onApply}>발주서 초안 만들기</Button>
-        <Button variant="ghost" size="sm" icon="settings" onClick={() => {}}>추천 조건 조정</Button>
+        <Button variant="ghost" size="sm" icon="settings" onClick={onOpenSettings}>추천 조건 조정</Button>
       </div>
     </div>
   );
@@ -130,7 +130,7 @@ function SPAlertSection({ alerts, onPick }) {
   );
 }
 
-function SPOpenPOs({ pos }) {
+function SPOpenPOs({ pos, onOpenHistory }) {
   if (!pos.length) return null;
   return (
     <div style={{
@@ -139,7 +139,7 @@ function SPOpenPOs({ pos }) {
     }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
         <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>진행 중 발주</span>
-        <Button variant="ghost" size="sm" icon="external-link">전체 발주 이력</Button>
+        <Button variant="ghost" size="sm" icon="external-link" onClick={onOpenHistory}>전체 발주 이력</Button>
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
         {pos.map(p => (

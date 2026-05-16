@@ -2,7 +2,7 @@
 
 const { useState: useStSup, useMemo: useMemoSup } = React;
 
-function SuppliesScreen() {
+function SuppliesScreen({ onNavigate, onOpenRecSettings, onCreateDrafts }) {
   const [selectedId, setSelectedId]     = useStSup("s-009");
   const [category, setCategory]         = useStSup("all");
   const [statusFilter, setStatusFilter] = useStSup("all");
@@ -101,14 +101,15 @@ function SuppliesScreen() {
           {showAI && (
             <SPAICard
               suggestions={aiSuggestions}
-              onApply={() => { setShowAI(false); showToast(`발주서 초안 ${aiSuggestions.length}품목이 생성되었습니다.`); }}
+              onApply={() => { setShowAI(false); onCreateDrafts && onCreateDrafts("supply"); }}
               onDismiss={() => setShowAI(false)}
+              onOpenSettings={onOpenRecSettings}
             />
           )}
 
           <SPAlertSection alerts={alerts} onPick={setSelectedId} />
 
-          <SPOpenPOs pos={SUP_OPEN_POS} />
+          <SPOpenPOs pos={SUP_OPEN_POS} onOpenHistory={() => onNavigate && onNavigate("orders")} />
 
           <div style={{
             background: "var(--bg-surface)", border: "1px solid var(--border-subtle)",

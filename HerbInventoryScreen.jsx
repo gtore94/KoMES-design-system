@@ -3,7 +3,7 @@
 
 const { useState: useStHerb, useMemo: useMemoHerb } = React;
 
-function HerbInventoryScreen() {
+function HerbInventoryScreen({ onNavigate, onOpenRecSettings, onCreateDrafts }) {
   const [selectedId, setSelectedId]   = useStHerb("h-002");
   const [category, setCategory]       = useStHerb("all");
   const [statusFilter, setStatusFilter] = useStHerb("all");
@@ -107,14 +107,15 @@ function HerbInventoryScreen() {
           {showAI && (
             <HIAICard
               suggestions={aiSuggestions}
-              onApply={() => { setShowAI(false); showToast(`발주서 초안 ${aiSuggestions.length}품목이 생성되었습니다.`); }}
+              onApply={() => { setShowAI(false); onCreateDrafts && onCreateDrafts("herb"); }}
               onDismiss={() => setShowAI(false)}
+              onOpenSettings={onOpenRecSettings}
             />
           )}
 
           <HIAlertSection alerts={alerts} onPick={setSelectedId} />
 
-          <HIOpenPOs pos={OPEN_PURCHASE_ORDERS} />
+          <HIOpenPOs pos={OPEN_PURCHASE_ORDERS} onOpenHistory={() => onNavigate && onNavigate("orders")} />
 
           {/* Filters + Table */}
           <div style={{
