@@ -220,7 +220,7 @@ function Avatar({ name, size = 28 }) {
   const char = name ? name[0] : "?";
   return <div style={{
     width: size, height: size, borderRadius: "50%",
-    background: "var(--jade-200)", color: "var(--jade-700)",
+    background: "var(--brand-muted)", color: "var(--text-brand)",
     display: "flex", alignItems: "center", justifyContent: "center",
     fontSize: size * 0.42, fontWeight: 600, flexShrink: 0,
     fontFamily: "var(--font-sans)"
@@ -234,7 +234,7 @@ function Badge({ variant = "neutral", children }) {
     warning: { background: "var(--status-warning-bg)", color: "var(--status-warning-text)", border: "1px solid var(--status-warning-border)" },
     danger:  { background: "var(--status-danger-bg)",  color: "var(--status-danger-text)",  border: "1px solid var(--status-danger-border)" },
     neutral: { background: "var(--status-neutral-bg)", color: "var(--status-neutral-text)", border: "1px solid var(--status-neutral-border)" },
-    brand:   { background: "var(--brand-subtle)", color: "var(--jade-700)", border: "1px solid var(--jade-200)" },
+    brand:   { background: "var(--brand-subtle)", color: "var(--text-brand)", border: "1px solid var(--brand-muted)" },
   };
   return <span style={{
     display: "inline-flex", alignItems: "center", gap: 4,
@@ -259,7 +259,7 @@ function Button({ variant = "primary", size = "md", onClick, children, disabled,
   const variants = {
     primary:   { background: "var(--jade-500)", color: "white", boxShadow: "var(--shadow-sm)" },
     secondary: { background: "var(--bg-surface)", color: "var(--text-primary)", border: "1px solid var(--border-default)", boxShadow: "var(--shadow-sm)" },
-    ghost:     { background: "transparent", color: "var(--jade-700)" },
+    ghost:     { background: "transparent", color: "var(--text-brand)" },
     danger:    { background: "var(--cinnabar-600)", color: "white" },
   };
   return <button onClick={onClick} disabled={disabled} style={{ ...base, ...sizes[size], ...variants[variant] }}>
@@ -284,7 +284,7 @@ function Input({ label, value, onChange, placeholder, type = "text", hint, error
           fontFamily: "var(--font-sans)", fontSize: 13, color: "var(--text-primary)",
           background: "var(--bg-surface)", border: `1px solid ${error ? "var(--border-danger)" : focused ? "var(--border-brand)" : "var(--border-default)"}`,
           borderRadius: "var(--radius-md)", padding: icon ? "7px 10px 7px 30px" : "7px 10px",
-          outline: "none", width: "100%", boxShadow: focused ? "0 0 0 3px var(--jade-100)" : "none",
+          outline: "none", width: "100%", boxShadow: focused ? "0 0 0 3px var(--brand-muted)" : "none",
           transition: "all 0.12s ease", boxSizing: "border-box"
         }} />
     </div>
