@@ -142,7 +142,7 @@ function Sidebar({ activeScreen, onNavigate }) {
   );
 
   return <div style={{
-    width: collapsed ? 56 : 220, background: "var(--ink-800)",
+    width: collapsed ? 56 : 220, background: "var(--sidebar-bg)",
     display: "flex", flexDirection: "column", flexShrink: 0, height: "100%",
     transition: "width 0.2s ease", overflow: "hidden",
   }}>
