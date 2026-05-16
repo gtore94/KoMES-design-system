@@ -1936,16 +1936,6 @@ function DiagnosisEditor({ data, onChange, clinic, patient, onChangePatient }) {
 function IssueHistory() {
   return (
     <div style={{ background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-lg)", boxShadow: "var(--shadow-sm)" }}>
-      <div style={{
-        display: "flex", justifyContent: "space-between", alignItems: "center",
-        padding: "12px 16px", borderBottom: "1px solid var(--border-subtle)",
-      }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <Icon name="history" size={14} style={{ color: "var(--text-secondary)" }} />
-          <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>최근 발급 이력</div>
-        </div>
-        <button style={{ background: "none", border: "none", color: "var(--jade-700)", fontSize: 11.5, fontWeight: 600, cursor: "pointer" }}>전체 보기</button>
-      </div>
       <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
         <thead>
           <tr style={{ background: "var(--stone-50)", color: "var(--text-muted)", fontSize: 10.5, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase" }}>
@@ -1997,6 +1987,7 @@ function MedicalFormScreen() {
   const [outpatientProofData, setOutpatientProofData] = useStateMF(MF_DEFAULT_OUTPATIENT_PROOF);
   const [patient, setPatient] = useStateMF(MF_PATIENT);
   const [pickerOpen, setPickerOpen] = useStateMF(false);
+  const [historyOpen, setHistoryOpen] = useStateMF(false);
   const stageRef = useRefMF(null);
 
   const handlePatientChange = (newPatient) => {
@@ -2208,9 +2199,31 @@ function MedicalFormScreen() {
         </div>
       </div>
 
-      {/* Bottom history */}
-      <div style={{ padding: "16px 24px 24px", background: "var(--bg-page)", flexShrink: 0, borderTop: "1px solid var(--border-subtle)" }}>
-        <IssueHistory />
+      {/* Bottom history — collapsible */}
+      <div style={{ background: "var(--bg-page)", flexShrink: 0, borderTop: "1px solid var(--border-subtle)" }}>
+        <button
+          onClick={() => setHistoryOpen(o => !o)}
+          style={{
+            width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
+            padding: "10px 24px", background: "none", border: "none", cursor: "pointer",
+            borderBottom: historyOpen ? "1px solid var(--border-subtle)" : "none",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <Icon name="history" size={13} style={{ color: "var(--text-secondary)" }} />
+            <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>최근 발급 이력</span>
+            <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{MF_HISTORY.length}건</span>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <span style={{ fontSize: 11.5, fontWeight: 600, color: "var(--jade-700)" }}>전체 보기</span>
+            <Icon name={historyOpen ? "chevron-down" : "chevron-up"} size={14} style={{ color: "var(--text-muted)" }} />
+          </div>
+        </button>
+        {historyOpen && (
+          <div style={{ padding: "0 24px 20px" }}>
+            <IssueHistory />
+          </div>
+        )}
       </div>
 
       {/* Patient picker modal */}
