@@ -131,7 +131,7 @@ function Sidebar({ activeScreen, onNavigate }) {
         display: "flex", alignItems: "center", justifyContent: collapsed ? "center" : "flex-start",
         gap: collapsed ? 0 : 8, padding: collapsed ? "8px 0" : "7px 8px",
         borderRadius: "var(--radius-md)", cursor: "pointer",
-        background: isActive ? "var(--jade-600)" : "transparent",
+        background: isActive ? "var(--sidebar-active)" : "transparent",
         color: isActive ? "white" : "var(--ink-200)",
         fontSize: 13, fontWeight: isActive ? 500 : 400,
         transition: "background 0.12s ease, color 0.12s ease", fontFamily: "var(--font-sans)",

@@ -51,6 +51,7 @@
   --font-sans: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
   --font-mono: 'JetBrains Mono', 'Menlo', monospace;
   --sidebar-bg: var(--ink-800);
+  --sidebar-active: var(--jade-600);
   --rail-bg: var(--bg-surface);
   --rail-surface: var(--bg-surface);
   --rail-text: var(--text-primary);
@@ -111,7 +112,8 @@
 
 /* ── Navy color — jade scale → navy (light mode) ───── */
 [data-color="navy"] {
-  --sidebar-bg: var(--navy-900);
+  --sidebar-bg: var(--navy-800);
+  --sidebar-active: var(--navy-400);
   --rail-bg: var(--navy-900);
   --rail-surface: var(--navy-800);
   --rail-text: var(--navy-50);
@@ -312,7 +314,7 @@ function Sidebar({ activeScreen, onNavigate }) {
         display: "flex", alignItems: "center", justifyContent: collapsed ? "center" : "flex-start",
         gap: collapsed ? 0 : 8, padding: collapsed ? "8px 0" : "7px 8px",
         borderRadius: "var(--radius-md)", cursor: "pointer",
-        background: isActive ? "var(--jade-600)" : "transparent",
+        background: isActive ? "var(--sidebar-active)" : "transparent",
         color: isActive ? "white" : "var(--ink-200)",
         fontSize: 13, fontWeight: isActive ? 500 : 400,
         transition: "background 0.12s ease, color 0.12s ease", fontFamily: "var(--font-sans)",
