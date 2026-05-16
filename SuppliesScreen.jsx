@@ -174,7 +174,7 @@ function SuppliesScreen({ onNavigate, onOpenRecSettings, onCreateDrafts }) {
                           <div style={{ fontSize: 10, color: "var(--text-muted)", marginTop: 1 }}>{s.pack}</div>
                         </td>
                         <td style={{ padding: "10px 14px" }}>
-                          <span style={{ fontSize: 11, background: cat.bg, color: cat.fg, padding: "2px 8px", borderRadius: "var(--radius-full)", border: `1px solid ${cat.border}` }}>{s.category}</span>
+                          <span style={{ fontSize: 11, background: cat.bg, color: cat.fg, padding: "2px 8px", borderRadius: "var(--radius-full)", border: `1px solid ${cat.border}`, whiteSpace: "nowrap" }}>{s.category}</span>
                         </td>
                         <td style={{ padding: "10px 14px", fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{s.sku}</td>
                         <td style={{ padding: "10px 14px", textAlign: "right", minWidth: 150 }}>
@@ -317,7 +317,7 @@ function SPDetailPanel({ item, onIntake, onToast }) {
         </div>
         <div style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{item.sku} · {item.pack}</div>
         <div style={{ display: "flex", gap: 6, marginTop: 8 }}>
-          <span style={{ fontSize: 11, background: cat.bg, color: cat.fg, padding: "2px 8px", borderRadius: "var(--radius-full)", border: `1px solid ${cat.border}`, fontFamily: "var(--font-sans)" }}>{item.category}</span>
+          <span style={{ fontSize: 11, background: cat.bg, color: cat.fg, padding: "2px 8px", borderRadius: "var(--radius-full)", border: `1px solid ${cat.border}`, fontFamily: "var(--font-sans)", whiteSpace: "nowrap" }}>{item.category}</span>
         </div>
       </div>
 
