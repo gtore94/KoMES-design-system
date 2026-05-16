@@ -13,6 +13,21 @@ const ROLE_PRESETS = [
 
 const ALL_ROLES_SR = ROLE_PRESETS.flatMap(g => g.roles.map(r => ({ role: r, roleKey: g.roleKey, dept: g.dept })));
 
+const PERMISSION_PRESETS = [
+  { key: "원장",    icon: "crown",          label: "원장",
+    perms: ["원장","차트 작성","처방 권한","통계 열람","직원 관리","급여 관리","직원 일정 관리"] },
+  { key: "한의사",  icon: "stethoscope",    label: "한의사",
+    perms: ["차트 작성","처방 권한","통계 열람"] },
+  { key: "간호사",  icon: "heart-pulse",    label: "간호사",
+    perms: ["차트 보조 작성","예약 관리","수납","재고 조정"] },
+  { key: "원무",    icon: "clipboard-list", label: "원무",
+    perms: ["예약 관리","수납","보험 청구","통계 열람"] },
+  { key: "조제",    icon: "flask-conical",  label: "조제·약재",
+    perms: ["조제 권한","약재 재고 관리","재고 조정","발주"] },
+  { key: "치료사",  icon: "hand-helping",   label: "물리치료사",
+    perms: ["차트 보조 작성","예약 관리"] },
+];
+
 const PERMISSION_GROUPS_SR = [
   { section: "시스템",   icon: "shield",          items: [{ key: "원장",           label: "원장 권한",   desc: "모든 기능 및 직원 관리 접근" }] },
   { section: "진료",     icon: "stethoscope",     items: [
@@ -370,6 +385,42 @@ function NewStaffModal({ onClose, onSubmit, initialData }) {
           {/* Section 4: 초기 권한 */}
           <SRSectionCard step="4" icon="shield-check" title="초기 권한 설정" hint={`${d.permissions.length}개 선택됨`}>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+              {/* 권한 세트 프리셋 */}
+              <div>
+                <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 7 }}>권한 세트</div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                  {PERMISSION_PRESETS.map(preset => {
+                    const active = preset.perms.length === d.permissions.length &&
+                      preset.perms.every(p => d.permissions.includes(p));
+                    return (
+                      <button key={preset.key} onClick={() => set("permissions", [...preset.perms])} style={{
+                        display: "inline-flex", alignItems: "center", gap: 5,
+                        padding: "5px 12px", borderRadius: "var(--radius-full)",
+                        border: `1px solid ${active ? "var(--jade-300)" : "var(--border-default)"}`,
+                        background: active ? "var(--jade-100)" : "var(--bg-surface)",
+                        color: active ? "var(--jade-700)" : "var(--text-secondary)",
+                        fontSize: 12, fontWeight: active ? 600 : 400, cursor: "pointer",
+                        fontFamily: "var(--font-sans)", transition: "all 0.12s",
+                      }}>
+                        <Icon name={preset.icon} size={11} />
+                        {preset.label}
+                        <span style={{ fontSize: 10, color: active ? "var(--jade-600)" : "var(--text-muted)", fontFamily: "var(--font-mono)" }}>
+                          {preset.perms.length}
+                        </span>
+                      </button>
+                    );
+                  })}
+                  <button onClick={() => set("permissions", [])} style={{
+                    display: "inline-flex", alignItems: "center", gap: 5,
+                    padding: "5px 12px", borderRadius: "var(--radius-full)",
+                    border: "1px solid var(--border-subtle)",
+                    background: "transparent", color: "var(--text-muted)",
+                    fontSize: 12, cursor: "pointer", fontFamily: "var(--font-sans)",
+                  }}>
+                    <Icon name="x" size={10} />전체 해제
+                  </button>
+                </div>
+              </div>
               {PERMISSION_GROUPS_SR.map(group => (
                 <div key={group.section}>
                   <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 9, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 6 }}>
