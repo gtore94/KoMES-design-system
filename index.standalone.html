@@ -64,6 +64,9 @@
   --board-wait-bg: #FAF2E4;  --board-wait-border: #F0DFC0;
   --board-treat-bg: #EAF4F1; --board-treat-border: #B3D8D1;
   --board-pay-bg: #F5F0E8;   --board-pay-border: #E4DDD4;
+  --doc-d1-bg: #EEF8F6; --doc-d1-border: #B3D8D1;
+  --doc-d2-bg: #FAF2E4; --doc-d2-border: #F0DFC0;
+  --doc-d3-bg: #EEF1F6; --doc-d3-border: #CFD7E3;
 }
 
 /* ── Dark theme overrides ──────────────────────────────────── */
@@ -116,6 +119,9 @@
   --board-wait-bg: #1D1810;  --board-wait-border: #2D2418;
   --board-treat-bg: #101E1C; --board-treat-border: #1A3330;
   --board-pay-bg: #1A1510;   --board-pay-border: #2A2218;
+  --doc-d1-bg: #101E1C; --doc-d1-border: #1A3330;
+  --doc-d2-bg: #1D1810; --doc-d2-border: #2D2418;
+  --doc-d3-bg: #141C2B; --doc-d3-border: #1E2D45;
 }
 
 /* ── Navy color — jade scale → navy (light mode) ───── */
@@ -3975,9 +3981,9 @@ for (let h = 9; h < 19; h++) {
 
 // Mock doctors (rooms)
 const DOCTORS_SCH = [
-  { id: "d1", name: "김민준 원장", room: "진료실 1", color: "#4A7C6F", bg: "#EEF8F6", border: "#B3D8D1" },
-  { id: "d2", name: "이지영 원장", room: "진료실 2", color: "#B5873E", bg: "#FAF2E4", border: "#F0DFC0" },
-  { id: "d3", name: "박서윤 부원장", room: "치료실 A", color: "#5A6E8A", bg: "#EEF1F6", border: "#CFD7E3" },
+  { id: "d1", name: "김민준 원장", room: "진료실 1", color: "#4A7C6F", bg: "var(--doc-d1-bg)", border: "var(--doc-d1-border)" },
+  { id: "d2", name: "이지영 원장", room: "진료실 2", color: "#B5873E", bg: "var(--doc-d2-bg)", border: "var(--doc-d2-border)" },
+  { id: "d3", name: "박서윤 부원장", room: "치료실 A", color: "#5A6E8A", bg: "var(--doc-d3-bg)", border: "var(--doc-d3-border)" },
 ];
 
 // Treatment types
