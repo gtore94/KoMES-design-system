@@ -147,17 +147,9 @@ function PatientCard({ patient, stage, onSelect, onAdvance }) {
   );
 }
 
-function SubStageSection({ stage, patients, onSelect, onAdvance, showDivider, dragOver, setDragOver, onDrop }) {
-  const isOver = dragOver === stage.key;
+function SubStageSection({ stage, patients, onSelect, onAdvance, showDivider, isOver }) {
   return (
-    <div
-      onDragOver={e => { e.preventDefault(); setDragOver(stage.key); }}
-      onDragLeave={e => { if (!e.currentTarget.contains(e.relatedTarget)) setDragOver(null); }}
-      onDrop={e => { e.preventDefault(); const id = Number(e.dataTransfer.getData("patientId")); if (id) onDrop(id, stage.key); setDragOver(null); }}
-      style={{
-        background: isOver ? "rgba(0,0,0,0.04)" : "transparent",
-        transition: "background 0.12s ease",
-      }}>
+    <div style={{ transition: "background 0.12s ease" }}>
       <div style={{
         display: "flex", alignItems: "center", gap: 6,
         padding: "8px 12px 6px",
@@ -194,15 +186,22 @@ function SubStageSection({ stage, patients, onSelect, onAdvance, showDivider, dr
 }
 
 function GroupColumn({ group, patients, onSelect, onAdvance, dragOver, setDragOver, onDrop }) {
+  const isOver = dragOver === group.key;
   const groupTotal = patients.length;
   return (
-    <div style={{
-      display: "flex", flexDirection: "column", flex: 1,
-      background: group.bg,
-      border: `1px solid ${group.border}`,
-      borderRadius: "var(--radius-lg)",
-      overflow: "hidden",
-    }}>
+    <div
+      onDragOver={e => { e.preventDefault(); setDragOver(group.key); }}
+      onDragLeave={e => { if (!e.currentTarget.contains(e.relatedTarget)) setDragOver(null); }}
+      onDrop={e => { e.preventDefault(); const id = Number(e.dataTransfer.getData("patientId")); if (id) onDrop(id, group.subStages[0]); setDragOver(null); }}
+      style={{
+        display: "flex", flexDirection: "column", flex: 1,
+        background: group.bg,
+        border: `1px solid ${isOver ? group.color : group.border}`,
+        borderRadius: "var(--radius-lg)",
+        overflow: "hidden",
+        boxShadow: isOver ? `0 0 0 2px ${group.border}` : "none",
+        transition: "box-shadow 0.12s ease, border-color 0.12s ease",
+      }}>
       {/* Group header */}
       <div style={{
         padding: "12px 14px",
@@ -240,9 +239,7 @@ function GroupColumn({ group, patients, onSelect, onAdvance, dragOver, setDragOv
               onSelect={onSelect}
               onAdvance={onAdvance}
               showDivider={i > 0}
-              dragOver={dragOver}
-              setDragOver={setDragOver}
-              onDrop={onDrop}
+              isOver={isOver}
             />
           );
         })}
