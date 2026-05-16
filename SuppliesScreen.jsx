@@ -13,6 +13,8 @@ function SuppliesScreen() {
   const [sortDir, setSortDir]           = useStSup("asc");
   const [toast, setToast]               = useStSup(null);
   const [intakeOpen, setIntakeOpen]     = useStSup(false);
+  const [registerOpen, setRegister]     = useStSup(false);
+  const [adjustMode, setAdjustMode]     = useStSup(false);
 
   const alerts = useMemoSup(() => SUPPLIES.filter(s => supStatus(s).key !== "ok"), []);
 
@@ -67,6 +69,17 @@ function SuppliesScreen() {
     else { setSortKey(key); setSortDir("asc"); }
   };
 
+  if (adjustMode) {
+    return <SupplyAdjustmentScreen
+      onClose={() => setAdjustMode(false)}
+      onSubmit={({ draft, summary }) => {
+        setAdjustMode(false);
+        showToast(draft
+          ? "재고 조정 내역이 임시 저장되었습니다."
+          : `재고 조정 ${summary?.items || 0}건이 확정되었습니다.`);
+      }} />;
+  }
+
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%", background: "var(--bg-page)" }}>
       <TopBar
@@ -74,8 +87,8 @@ function SuppliesScreen() {
         subtitle={`현재 ${SUPPLIES.length}품목 · 마지막 동기화 4분 전`}
         actions={<>
           <Button variant="ghost" size="sm" icon="download" onClick={() => showToast("소모품 재고 엑셀을 내려받았습니다.")}>엑셀</Button>
-          <Button variant="secondary" size="sm" icon="clipboard-edit" onClick={() => showToast("재고 실사 모드로 진입합니다.")}>재고 조정</Button>
-          <Button variant="secondary" size="sm" icon="plus" onClick={() => showToast("신규 품목 등록 패널을 엽니다.")}>품목 등록</Button>
+          <Button variant="secondary" size="sm" icon="clipboard-edit" onClick={() => setAdjustMode(true)}>재고 조정</Button>
+          <Button variant="secondary" size="sm" icon="plus" onClick={() => setRegister(true)}>품목 등록</Button>
           <Button variant="primary" size="sm" icon="package-plus" onClick={() => setIntakeOpen(true)}>입고 등록</Button>
         </>}
       />
@@ -227,6 +240,16 @@ function SuppliesScreen() {
       {intakeOpen && (
         <SPIntakeModal item={selected} onClose={() => setIntakeOpen(false)}
           onSubmit={(qty) => { setIntakeOpen(false); showToast(`${selected?.name} ${supFmt(qty, selected?.unit || "")} 입고 처리되었습니다.`); }} />
+      )}
+
+      {/* 신규 품목 등록 모달 */}
+      {registerOpen && (
+        <SupplyRegistrationModal
+          onClose={() => setRegister(false)}
+          onSubmit={(data) => {
+            setRegister(false);
+            showToast(`신규 품목 '${data.name}'이(가) 등록되었습니다.`);
+          }} />
       )}
     </div>
   );

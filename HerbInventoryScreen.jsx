@@ -14,6 +14,8 @@ function HerbInventoryScreen() {
   const [sortDir, setSortDir]         = useStHerb("asc");
   const [toast, setToast]             = useStHerb(null);
   const [intakeOpen, setIntakeOpen]   = useStHerb(false);
+  const [registerOpen, setRegister]   = useStHerb(false);
+  const [adjustMode, setAdjustMode]   = useStHerb(false);
 
   // 알림 대상 (주의 필요)
   const alerts = useMemoHerb(() => HERBS.filter(h => {
@@ -71,6 +73,18 @@ function HerbInventoryScreen() {
     else { setSortKey(key); setSortDir("asc"); }
   };
 
+  // 재고 조정 모드일 때는 전체 화면 인계
+  if (adjustMode) {
+    return <HerbAdjustmentScreen
+      onClose={() => setAdjustMode(false)}
+      onSubmit={({ draft, summary }) => {
+        setAdjustMode(false);
+        showToast(draft
+          ? "재고 조정 내역이 임시 저장되었습니다."
+          : `재고 조정 ${summary?.items || 0}건이 확정되었습니다.`);
+      }} />;
+  }
+
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%", background: "var(--bg-page)" }}>
       <TopBar
@@ -78,8 +92,8 @@ function HerbInventoryScreen() {
         subtitle="현재 24종 · 마지막 동기화 2분 전"
         actions={<>
           <Button variant="ghost" size="sm" icon="download" onClick={() => showToast("재고 현황 엑셀을 내려받았습니다.")}>엑셀</Button>
-          <Button variant="secondary" size="sm" icon="clipboard-edit" onClick={() => showToast("재고 실사 모드로 진입합니다.")}>재고 조정</Button>
-          <Button variant="secondary" size="sm" icon="plus" onClick={() => showToast("신규 약재 등록 패널을 엽니다.")}>약재 등록</Button>
+          <Button variant="secondary" size="sm" icon="clipboard-edit" onClick={() => setAdjustMode(true)}>재고 조정</Button>
+          <Button variant="secondary" size="sm" icon="plus" onClick={() => setRegister(true)}>약재 등록</Button>
           <Button variant="primary" size="sm" icon="package-plus" onClick={() => setIntakeOpen(true)}>입고 등록</Button>
         </>}
       />
@@ -236,6 +250,16 @@ function HerbInventoryScreen() {
       {intakeOpen && (
         <HIIntakeModal herb={selected} onClose={() => setIntakeOpen(false)}
           onSubmit={(qty) => { setIntakeOpen(false); showToast(`${selected?.name} ${fmtMass(qty)} 입고 처리되었습니다.`); }} />
+      )}
+
+      {/* 신규 약재 등록 모달 */}
+      {registerOpen && (
+        <HerbRegistrationModal
+          onClose={() => setRegister(false)}
+          onSubmit={(data) => {
+            setRegister(false);
+            showToast(`신규 약재 '${data.name}'이(가) 등록되었습니다.`);
+          }} />
       )}
     </div>
   );
