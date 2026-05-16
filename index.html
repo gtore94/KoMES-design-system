@@ -48,6 +48,61 @@
   --font-sans: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
   --font-mono: 'JetBrains Mono', 'Menlo', monospace;
 }
+
+/* ── Dark theme overrides ──────────────────────────────────── */
+[data-theme="dark"] {
+  --bg-page:    #0B1413;
+  --bg-surface: #131F1D;
+  --bg-raised:  #1A2826;
+  --bg-sunken:  #070D0C;
+  --bg-overlay: rgba(0, 0, 0, 0.62);
+
+  --text-primary:   var(--ink-50);
+  --text-secondary: var(--ink-200);
+  --text-muted:     var(--ink-300);
+  --text-disabled:  var(--ink-500);
+  --text-inverse:   var(--ink-800);
+  --text-brand:     var(--jade-300);
+  --text-danger:    var(--cinnabar-400);
+  --text-warning:   var(--amber-400);
+
+  --border-subtle:  #1F302D;
+  --border-default: var(--ink-700);
+  --border-strong:  var(--ink-600);
+  --border-brand:   var(--jade-500);
+  --border-danger:  var(--cinnabar-600);
+
+  --brand:          var(--jade-400);
+  --brand-hover:    var(--jade-300);
+  --brand-active:   var(--jade-200);
+  --brand-subtle:   rgba(74, 124, 111, 0.12);
+  --brand-muted:    rgba(74, 124, 111, 0.22);
+
+  --status-success-bg:     rgba(74, 124, 111, 0.14);
+  --status-success-text:   var(--jade-300);
+  --status-success-border: rgba(74, 124, 111, 0.35);
+  --status-warning-bg:     rgba(196, 151, 75, 0.12);
+  --status-warning-text:   var(--amber-400);
+  --status-warning-border: rgba(196, 151, 75, 0.30);
+  --status-danger-bg:      rgba(196, 89, 75, 0.12);
+  --status-danger-text:    var(--cinnabar-400);
+  --status-danger-border:  rgba(196, 89, 75, 0.30);
+  --status-neutral-bg:     #1A2826;
+  --status-neutral-text:   var(--ink-200);
+  --status-neutral-border: var(--ink-700);
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.40), 0 1px 4px rgba(0,0,0,0.25);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.28);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,0.50), 0 2px 6px rgba(0,0,0,0.30);
+  --shadow-xl: 0 8px 32px rgba(0,0,0,0.55), 0 4px 12px rgba(0,0,0,0.32);
+}
+
+[data-reduce-motion="true"] *,
+[data-reduce-motion="true"] *::before,
+[data-reduce-motion="true"] *::after {
+  animation-duration: 0.001ms !important;
+  transition-duration: 0.001ms !important;
+}
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body, #root { height: 100%; }
 body { font-family: var(--font-sans); background-color: var(--bg-page); color: var(--text-primary); -webkit-font-smoothing: antialiased; }
@@ -102,6 +157,7 @@ body { font-family: var(--font-sans); background-color: var(--bg-page); color: v
 <script type="text/babel" src="staffData.jsx?v=1"></script>
 <script type="text/babel" src="NewStaffModal.jsx"></script>
 <script type="text/babel" src="StaffManagementScreen.jsx?v=2"></script>
+<script type="text/babel" src="SettingsScreen.jsx"></script>
 
 <script type="text/babel">
 const { useState, useEffect } = React;
@@ -184,9 +240,12 @@ function App() {
     if (nav === "staff") {
       return <StaffManagementScreen />;
     }
+    if (nav === "settings") {
+      return <SettingsScreen />;
+    }
     const labels = {
       prescriptions: "처방 관리",
-      stats: "통계", ai: "AI 분석", settings: "설정"
+      stats: "통계", ai: "AI 분석"
     };
     return <PlaceholderScreen title={labels[nav] || nav} />;
   };
