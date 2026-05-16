@@ -242,7 +242,7 @@ function VisitCard({ visit }) {
               {visit.isToday
                 ? <SoapBlockAI data={visit.soap} editable={true} />
                 : <SoapBlock data={visit.soap} editable={false} />}
-              {visit.aiNote && (
+              {visit.isToday && visit.aiNote && (
                 <div style={{ marginTop: 12, padding: "9px 12px", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)", display: "flex", gap: 8, alignItems: "flex-start" }}>
                   <Icon name="sparkles" size={13} style={{ color: "var(--jade-600)", marginTop: 1, flexShrink: 0 }} />
                   <span style={{ fontSize: 12, color: "var(--text-brand)", fontFamily: "var(--font-sans)" }}><strong>AI 추천</strong> {visit.aiNote}</span>

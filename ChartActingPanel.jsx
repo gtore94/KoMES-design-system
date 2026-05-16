@@ -467,7 +467,7 @@ function ActingOrderPanel({ injuryDate, today = new Date() }) {
         </span>
         {phase && (
           <span style={{ fontSize: 10, fontWeight: 600, color: "var(--text-muted)", fontFamily: "var(--font-sans)", background: "var(--bg-raised)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 8px" }}>
-            자보 · {phase === 1 ? "급성기" : phase === 2 ? "아급성기" : "만성기"} 적용
+            자동차보험
           </span>
         )}
         <button onClick={() => setShowCatalog(!showCatalog)} style={{
@@ -551,7 +551,7 @@ function ActingOrderPanel({ injuryDate, today = new Date() }) {
           {phase && (
             <div style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 8 }}>
               <Icon name="info" size={10} style={{ verticalAlign: "middle", marginRight: 4 }} />
-              자보 환자 — 현재 <strong>{phase === 1 ? "급성기" : phase === 2 ? "아급성기" : "만성기"}</strong> · 청구 가능한 항목만 활성화됩니다
+              자동차보험 환자 — 청구 가능한 항목만 활성화됩니다
             </div>
           )}
           <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 6 }}>
@@ -732,7 +732,7 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
           background: isAuto ? "var(--status-danger-bg)" : "var(--brand-muted)",
           border: `1px solid ${isAuto ? "var(--status-danger-border)" : "var(--brand-muted)"}`,
           borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "1px 8px", fontFamily: "var(--font-sans)",
-        }}>{insurance}{phase ? ` · ${phase === 1 ? "급성기" : phase === 2 ? "아급성기" : "만성기"}` : ""}</span>
+        }}>{isAuto ? "자동차보험" : insurance}</span>
       </div>
 
       {/* 등록된 오더 */}
@@ -788,7 +788,7 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
           {phase && (
             <div style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 6 }}>
               <Icon name="info" size={10} style={{ verticalAlign: "middle", marginRight: 3 }} />
-              {phase === 1 ? "급성기" : phase === 2 ? "아급성기" : "만성기"} 청구 가능 항목
+              자동차보험 청구 가능 항목
             </div>
           )}
           <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>

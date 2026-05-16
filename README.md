@@ -8,7 +8,9 @@
 
 - **빌드 도구 없음** — React 18 + Babel Standalone을 CDN으로 로드, JSX를 브라우저에서 직접 트랜스파일
 - **단일 파일 배포** — `index.standalone.html` 하나로 모든 컴포넌트 포함
-- **디자인 토큰** — CSS 변수 기반 색상·타이포·그림자·반경 시스템 (라이트 / 다크 테마)
+- **디자인 토큰** — `colors_and_type.css` 단일 소스 CSS 변수 시스템 (색상·타이포·그림자·반경)
+- **색상 테마** — Jade(기본) / Navy / Pink — `[data-color]` 어트리뷰트 기반 전환
+- **명암 테마** — 라이트 / 다크 / 시스템 자동 — `[data-theme]` 어트리뷰트 기반 전환
 - **아이콘** — Lucide Icons (CDN)
 - **폰트** — Noto Serif KR · Noto Sans KR · JetBrains Mono (Google Fonts)
 
@@ -29,7 +31,7 @@ npx serve .
 ```
 index.standalone.html
 ```
-서버 없이 브라우저에서 바로 열 수 있는 단일 파일. 모든 JSX가 인라인으로 포함됨.
+서버 없이 브라우저에서 바로 열 수 있는 단일 파일. 모든 JSX + CSS가 인라인으로 포함됨.
 
 ### GitHub Pages
 `https://gtore94.github.io/KoMES-design-system/`
@@ -41,7 +43,7 @@ index.standalone.html
 | 메뉴 | 파일 | 설명 |
 |------|------|------|
 | 진료 현황 | `PatientListScreen.jsx` | 당일 접수 · 대기 · 진료 현황, 신규 환자 등록 |
-| 진료 차트 | `PatientChartScreen.jsx` | 환자 차트, 자보 바, 예약 추가 |
+| 진료 차트 | `PatientChartScreen.jsx` | 환자 차트, 자동차보험 바, 액팅 오더, SOAP 기록 |
 | 환자 관리 | `PatientManagementScreen.jsx` | 전체 환자 등록부, 관계도 |
 | 예약 관리 | `ScheduleScreen.jsx` | 주간 예약 캘린더 |
 | 수납 | `PaymentScreen.jsx` | 결제 및 환불 |
@@ -52,7 +54,7 @@ index.standalone.html
 | 발주 이력 | `PurchaseOrderHistoryScreen.jsx` | 발주 관리 및 초안 작성 |
 | 처방 관리 | `PrescriptionScreen.jsx` | 한약·침구 처방 |
 | 직원 관리 | `StaffManagementScreen.jsx` | 직원 등록·수정·권한 관리 |
-| 설정 | `SettingsScreen.jsx` | 테마(라이트/다크/자동)·밀도·글자 크기 |
+| 설정 | `SettingsScreen.jsx` | 색상 테마(Jade/Navy/Pink)·명암 모드(라이트/다크/자동)·밀도·글자 크기 |
 
 ---
 
@@ -60,60 +62,48 @@ index.standalone.html
 
 ```
 index.html               # 개발용 (JSX 파일 외부 로드)
-index.standalone.html    # 배포용 (모든 JSX 인라인 포함)
+index.standalone.html    # 배포용 (모든 JSX + CSS 인라인 포함)
+colors_and_type.css      # 디자인 토큰 단일 소스 (색상 팔레트·테마·타이포·그림자)
 Components.jsx           # 공통 컴포넌트 (Button, Badge, Icon, TopBar 등)
 LeftRail.jsx             # 사이드바 네비게이션
 *Screen.jsx              # 각 화면 컴포넌트
 *Modal.jsx               # 모달 컴포넌트
 *Data.jsx / *data.jsx    # 시드 데이터
+build-standalone.py      # standalone 빌드 스크립트
 ```
 
 ---
 
 ## 테마
 
-`[data-theme="dark"]` attribute를 `<html>`에 적용해 다크모드 전환.
+### 색상 테마 추가 방법
+
+`colors_and_type.css`에 `[data-color="newtheme"]` 블록 하나만 추가하면 됩니다:
+
+```css
+[data-color="newtheme"] {
+  --jade-500: /* 새 주색 */;
+  /* 필요한 토큰만 오버라이드 */
+}
+[data-theme="dark"][data-color="newtheme"] {
+  --bg-page: /* 다크 배경 */;
+  /* ... */
+}
+```
+
+그 다음 `SettingsScreen.jsx`의 `COLOR_PREVIEWS`에 항목을 추가합니다.
+
+### 명암 테마
+
+`[data-theme="dark"]` attribute를 `<html>`에 적용해 다크모드 전환.  
 설정 화면에서 라이트 / 다크 / 시스템 자동 선택 가능. `localStorage`에 저장되어 새로고침 후에도 유지.
 
 ---
 
 ## Standalone 빌드
 
-`index.html`의 외부 JSX 참조를 모두 인라인으로 삽입해 standalone 재생성:
+`build-standalone.py`를 실행하면 `index.html`의 외부 JSX·CSS 참조를 모두 인라인으로 삽입합니다:
 
 ```bash
-python3 << 'EOF'
-import re
-
-with open("index.html") as f: html = f.read()
-head_end = html.index('<script type="text/babel" src=')
-head = html[:head_end].replace("KoMES — UI Kit", "KoMES — UI Kit (Standalone)")
-last = html.rindex('<script type="text/babel">')
-app_script = html[last:html.index('</script>', last) + len('</script>')]
-
-jsx_files = [
-    "Components.jsx","LeftRail.jsx","NewPatientModal.jsx","ChartActingPanel.jsx",
-    "PatientListScreen.jsx","PatientManagementScreen.jsx","PatientChartScreen.jsx",
-    "PrescriptionScreen.jsx","ScheduleScreen.jsx","PaymentScreen.jsx",
-    "herbData.jsx","HerbInventoryParts.jsx","HerbRegistrationModal.jsx",
-    "HerbAdjustmentScreen.jsx","HerbInventoryScreen.jsx",
-    "suppliesData.jsx","SuppliesParts.jsx","SupplyRegistrationModal.jsx",
-    "SupplyAdjustmentScreen.jsx","SuppliesScreen.jsx",
-    "purchaseOrdersData.jsx","PurchaseOrderHistoryScreen.jsx",
-    "PurchaseOrderDraftScreen.jsx","RecommendationSettingsModal.jsx",
-    "claimData.jsx","ClaimSidebar.jsx","ClaimList.jsx",
-    "ClaimSubmissionFlow.jsx","InsuranceClaimScreen.jsx",
-    "PatientPickerData.jsx","PatientPickerModal.jsx","MedicalFormScreen.jsx",
-    "PatientInstructionData.jsx","PatientInstructionModal.jsx",
-    "staffData.jsx","NewStaffModal.jsx","StaffManagementScreen.jsx","SettingsScreen.jsx",
-]
-
-out = [head, "\n"]
-for f in jsx_files:
-    out.append(f'<script type="text/babel">\n{open(f).read()}\n</script>\n\n')
-out.append(app_script + "\n</body>\n</html>\n")
-
-with open("index.standalone.html", "w") as f: f.write("".join(out))
-print("Done")
-EOF
+python3 build-standalone.py
 ```
