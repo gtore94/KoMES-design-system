@@ -32,39 +32,39 @@ const TREATMENTS_SCH = [
 // Generate seed appointments for the current week (anchored to today)
 const TODAY_SCH = new Date(2026, 4, 10); // May 10, 2026 to match the system date
 
-const ymd = (d) => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
-const startOfWeek = (d) => {
+const ymdSch = (d) => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+const startOfWeekSch = (d) => {
   const x = new Date(d); x.setHours(0,0,0,0);
   x.setDate(x.getDate() - x.getDay()); // Sunday
   return x;
 };
-const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate()+n); return x; };
+const addDaysSch = (d, n) => { const x = new Date(d); x.setDate(x.getDate()+n); return x; };
 
-const buildSeed = () => {
-  const wkStart = startOfWeek(TODAY_SCH);
+const buildSeedSch = () => {
+  const wkStart = startOfWeekSch(TODAY_SCH);
   const seed = [];
   let id = 1;
   // Mon
-  seed.push({ id: id++, date: ymd(addDays(wkStart, 1)), start: "09:30", mins: 20, doctor: "d1", patient: "한지민", chief: "어지러움", visit: "재진", status: "확정", insurance: "건보" });
-  seed.push({ id: id++, date: ymd(addDays(wkStart, 1)), start: "10:30", mins: 30, doctor: "d2", patient: "장우성", chief: "허리 통증",  visit: "초진", status: "확정", insurance: "자보" });
-  seed.push({ id: id++, date: ymd(addDays(wkStart, 1)), start: "14:00", mins: 40, doctor: "d1", patient: "송재호", chief: "경항통",     visit: "재진", status: "확정", insurance: "자보" });
+  seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 1)), start: "09:30", mins: 20, doctor: "d1", patient: "한지민", chief: "어지러움", visit: "재진", status: "확정", insurance: "건보" });
+  seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 1)), start: "10:30", mins: 30, doctor: "d2", patient: "장우성", chief: "허리 통증",  visit: "초진", status: "확정", insurance: "자보" });
+  seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 1)), start: "14:00", mins: 40, doctor: "d1", patient: "송재호", chief: "경항통",     visit: "재진", status: "확정", insurance: "자보" });
   // Tue
-  seed.push({ id: id++, date: ymd(addDays(wkStart, 2)), start: "10:00", mins: 30, doctor: "d3", patient: "안세영", chief: "요통",       visit: "재진", status: "대기", insurance: "자보" });
-  seed.push({ id: id++, date: ymd(addDays(wkStart, 2)), start: "11:30", mins: 25, doctor: "d2", patient: "정유미", chief: "생리통",     visit: "재진", status: "확정", insurance: "건보" });
-  seed.push({ id: id++, date: ymd(addDays(wkStart, 2)), start: "15:30", mins: 40, doctor: "d1", patient: "오세훈", chief: "어깨 통증",  visit: "재진", status: "확정", insurance: "건보" });
+  seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 2)), start: "10:00", mins: 30, doctor: "d3", patient: "안세영", chief: "요통",       visit: "재진", status: "대기", insurance: "자보" });
+  seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 2)), start: "11:30", mins: 25, doctor: "d2", patient: "정유미", chief: "생리통",     visit: "재진", status: "확정", insurance: "건보" });
+  seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 2)), start: "15:30", mins: 40, doctor: "d1", patient: "오세훈", chief: "어깨 통증",  visit: "재진", status: "확정", insurance: "건보" });
   // Wed
-  seed.push({ id: id++, date: ymd(addDays(wkStart, 3)), start: "09:00", mins: 40, doctor: "d1", patient: "이민호", chief: "소화불량",   visit: "초진", status: "확정", insurance: "건보" });
-  seed.push({ id: id++, date: ymd(addDays(wkStart, 3)), start: "13:30", mins: 20, doctor: "d2", patient: "박지현", chief: "불면증",     visit: "재진", status: "확정", insurance: "건보" });
-  seed.push({ id: id++, date: ymd(addDays(wkStart, 3)), start: "16:00", mins: 30, doctor: "d3", patient: "강민재", chief: "무릎 통증",  visit: "재진", status: "확정", insurance: "건보" });
+  seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 3)), start: "09:00", mins: 40, doctor: "d1", patient: "이민호", chief: "소화불량",   visit: "초진", status: "확정", insurance: "건보" });
+  seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 3)), start: "13:30", mins: 20, doctor: "d2", patient: "박지현", chief: "불면증",     visit: "재진", status: "확정", insurance: "건보" });
+  seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 3)), start: "16:00", mins: 30, doctor: "d3", patient: "강민재", chief: "무릎 통증",  visit: "재진", status: "확정", insurance: "건보" });
   // Thu
-  seed.push({ id: id++, date: ymd(addDays(wkStart, 4)), start: "10:30", mins: 30, doctor: "d1", patient: "윤지영", chief: "피부 트러블",visit: "초진", status: "확정", insurance: "건보" });
-  seed.push({ id: id++, date: ymd(addDays(wkStart, 4)), start: "14:30", mins: 40, doctor: "d2", patient: "최동욱", chief: "비염",       visit: "재진", status: "노쇼", insurance: "건보" });
+  seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 4)), start: "10:30", mins: 30, doctor: "d1", patient: "윤지영", chief: "피부 트러블",visit: "초진", status: "확정", insurance: "건보" });
+  seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 4)), start: "14:30", mins: 40, doctor: "d2", patient: "최동욱", chief: "비염",       visit: "재진", status: "노쇼", insurance: "건보" });
   // Fri
-  seed.push({ id: id++, date: ymd(addDays(wkStart, 5)), start: "09:30", mins: 25, doctor: "d1", patient: "임소연", chief: "갱년기",     visit: "재진", status: "확정", insurance: "건보" });
-  seed.push({ id: id++, date: ymd(addDays(wkStart, 5)), start: "11:00", mins: 30, doctor: "d3", patient: "홍길동", chief: "두통",       visit: "재진", status: "확정", insurance: "자보" });
-  seed.push({ id: id++, date: ymd(addDays(wkStart, 5)), start: "16:30", mins: 40, doctor: "d2", patient: "김수진", chief: "요통, 피로", visit: "재진", status: "확정", insurance: "건보" });
+  seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 5)), start: "09:30", mins: 25, doctor: "d1", patient: "임소연", chief: "갱년기",     visit: "재진", status: "확정", insurance: "건보" });
+  seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 5)), start: "11:00", mins: 30, doctor: "d3", patient: "홍길동", chief: "두통",       visit: "재진", status: "확정", insurance: "자보" });
+  seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 5)), start: "16:30", mins: 40, doctor: "d2", patient: "김수진", chief: "요통, 피로", visit: "재진", status: "확정", insurance: "건보" });
   // Sat
-  seed.push({ id: id++, date: ymd(addDays(wkStart, 6)), start: "10:00", mins: 30, doctor: "d1", patient: "장태호", chief: "목 통증",    visit: "초진", status: "확정", insurance: "건보" });
+  seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 6)), start: "10:00", mins: 30, doctor: "d1", patient: "장태호", chief: "목 통증",    visit: "초진", status: "확정", insurance: "건보" });
   // Other days in the month
   seed.push({ id: id++, date: "2026-05-11", start: "09:30", mins: 30, doctor: "d1", patient: "남궁민", chief: "두통",      visit: "재진", status: "확정", insurance: "건보" });
   seed.push({ id: id++, date: "2026-05-11", start: "14:00", mins: 30, doctor: "d2", patient: "조혜린", chief: "어지럼증",  visit: "재진", status: "확정", insurance: "건보" });
@@ -84,13 +84,13 @@ const STATUS_SCH = {
 };
 
 // ── Helpers ────────────────────────────────────────────────────
-const minsFromTime = (t) => { const [h,m] = t.split(":").map(Number); return h*60+m; };
-const timeFromMins = (m) => `${String(Math.floor(m/60)).padStart(2,"0")}:${String(m%60).padStart(2,"0")}`;
+const minsFromTimeSch = (t) => { const [h,m] = t.split(":").map(Number); return h*60+m; };
+const timeFromMinsSch = (m) => `${String(Math.floor(m/60)).padStart(2,"0")}:${String(m%60).padStart(2,"0")}`;
 
 // ── New Appointment Modal ──────────────────────────────────────
 function NewAppointmentModal({ initial, onClose, onSubmit }) {
   const [d, setD] = useStateSch({
-    date: initial?.date || ymd(TODAY_SCH),
+    date: initial?.date || ymdSch(TODAY_SCH),
     start: initial?.start || "10:00",
     doctor: initial?.doctor || "d1",
     patient: "",
@@ -280,7 +280,7 @@ function NewAppointmentModal({ initial, onClose, onSubmit }) {
               예약 확정 SMS 발송
             </span>
             <span style={{ marginLeft: "auto", fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>
-              D-{Math.max(0, Math.round((new Date(d.date) - new Date(ymd(TODAY_SCH)))/86400000))}
+              D-{Math.max(0, Math.round((new Date(d.date) - new Date(ymdSch(TODAY_SCH)))/86400000))}
             </span>
           </label>
         </div>
@@ -330,13 +330,13 @@ const apptInput = {
 };
 
 // ── Overlap layout: assigns col / totalCols to each appt ──────
-function layoutAppts(appts) {
+function layoutApptsSch(appts) {
   if (!appts.length) return [];
-  const sorted = [...appts].sort((a, b) => minsFromTime(a.start) - minsFromTime(b.start));
+  const sorted = [...appts].sort((a, b) => minsFromTimeSch(a.start) - minsFromTimeSch(b.start));
   const colAssign = new Array(sorted.length).fill(0);
   const colEnds = [];
   for (let i = 0; i < sorted.length; i++) {
-    const s = minsFromTime(sorted[i].start);
+    const s = minsFromTimeSch(sorted[i].start);
     const e = s + sorted[i].mins;
     let c = 0;
     while (c < colEnds.length && colEnds[c] > s) c++;
@@ -344,12 +344,12 @@ function layoutAppts(appts) {
     colEnds[c] = e;
   }
   return sorted.map((a, i) => {
-    const s = minsFromTime(a.start);
+    const s = minsFromTimeSch(a.start);
     const e = s + a.mins;
     let maxCol = colAssign[i];
     for (let j = 0; j < sorted.length; j++) {
       if (i === j) continue;
-      const s2 = minsFromTime(sorted[j].start);
+      const s2 = minsFromTimeSch(sorted[j].start);
       const e2 = s2 + sorted[j].mins;
       if (s < e2 && e > s2) maxCol = Math.max(maxCol, colAssign[j]);
     }
@@ -359,7 +359,7 @@ function layoutAppts(appts) {
 
 // ── Appointment Block (Day/Week) ───────────────────────────────
 function ApptBlock({ appt, onClick, hourHeightPx, col = 0, totalCols = 1 }) {
-  const startMin = minsFromTime(appt.start);
+  const startMin = minsFromTimeSch(appt.start);
   const top = ((startMin - 9*60) / 60) * hourHeightPx;
   const height = (appt.mins / 60) * hourHeightPx;
   const doc = DOCTORS_SCH.find(x => x.id === appt.doctor);
@@ -406,7 +406,7 @@ function ApptBlock({ appt, onClick, hourHeightPx, col = 0, totalCols = 1 }) {
 // ── Day View ───────────────────────────────────────────────────
 function DayView({ date, appts, onCellClick, onApptClick, doctorFilter }) {
   const HOUR_PX = 56;
-  const dayStr = ymd(date);
+  const dayStr = ymdSch(date);
   const todays = appts.filter(a => a.date === dayStr && (!doctorFilter || a.doctor === doctorFilter));
   // Group by doctor (column per doctor)
   const visibleDocs = doctorFilter ? DOCTORS_SCH.filter(d => d.id === doctorFilter) : DOCTORS_SCH;
@@ -480,7 +480,7 @@ function DayView({ date, appts, onCellClick, onApptClick, doctorFilter }) {
                 </div>
               ))}
               {/* Appointment blocks for this doctor */}
-              {layoutAppts(todays.filter(a => a.doctor === doc.id)).map(a => (
+              {layoutApptsSch(todays.filter(a => a.doctor === doc.id)).map(a => (
                 <ApptBlock key={a.id} appt={a} onClick={onApptClick} hourHeightPx={HOUR_PX} col={a.col} totalCols={a.totalCols} />
               ))}
             </div>
@@ -494,9 +494,9 @@ function DayView({ date, appts, onCellClick, onApptClick, doctorFilter }) {
 // ── Week View ──────────────────────────────────────────────────
 function WeekView({ date, appts, onCellClick, onApptClick, doctorFilter }) {
   const HOUR_PX = 52;
-  const wkStart = startOfWeek(date);
-  const days = Array.from({ length: 7 }, (_, i) => addDays(wkStart, i));
-  const todayStr = ymd(TODAY_SCH);
+  const wkStart = startOfWeekSch(date);
+  const days = Array.from({ length: 7 }, (_, i) => addDaysSch(wkStart, i));
+  const todayStr = ymdSch(TODAY_SCH);
   const filtered = doctorFilter ? appts.filter(a => a.doctor === doctorFilter) : appts;
 
   return (
@@ -511,8 +511,8 @@ function WeekView({ date, appts, onCellClick, onApptClick, doctorFilter }) {
       }}>
         <div style={{ padding: "10px 6px", fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)", textAlign: "right" }}>시간</div>
         {days.map((d, i) => {
-          const isToday = ymd(d) === todayStr;
-          const dayCt = filtered.filter(a => a.date === ymd(d)).length;
+          const isToday = ymdSch(d) === todayStr;
+          const dayCt = filtered.filter(a => a.date === ymdSch(d)).length;
           return (
             <div key={i} style={{
               padding: "8px 10px",
@@ -564,7 +564,7 @@ function WeekView({ date, appts, onCellClick, onApptClick, doctorFilter }) {
             ))}
           </div>
           {days.map((d, di) => {
-            const dayStr = ymd(d);
+            const dayStr = ymdSch(d);
             const isToday = dayStr === todayStr;
             const dayAppts = filtered.filter(a => a.date === dayStr);
             return (
@@ -587,7 +587,7 @@ function WeekView({ date, appts, onCellClick, onApptClick, doctorFilter }) {
                     }} />
                   </div>
                 ))}
-                {layoutAppts(dayAppts).map(a => (
+                {layoutApptsSch(dayAppts).map(a => (
                   <ApptBlock key={a.id} appt={a} onClick={onApptClick} hourHeightPx={HOUR_PX} col={a.col} totalCols={a.totalCols} />
                 ))}
               </div>
@@ -625,7 +625,7 @@ function MonthView({ date, appts, onCellClick, onDayClick, onApptClick, doctorFi
     return out;
   }, [view.y, view.m]);
 
-  const todayStr = ymd(TODAY_SCH);
+  const todayStr = ymdSch(TODAY_SCH);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, minHeight: 0, background: "var(--bg-surface)" }}>
@@ -648,7 +648,7 @@ function MonthView({ date, appts, onCellClick, onDayClick, onApptClick, doctorFi
       {/* Cells */}
       <div style={{ flex: 1, display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gridAutoRows: "1fr", overflowY: "auto" }}>
         {cells.map((c, i) => {
-          const dayStr = ymd(c.d);
+          const dayStr = ymdSch(c.d);
           const dayAppts = filtered.filter(a => a.date === dayStr);
           const isToday = dayStr === todayStr;
           const dow = c.d.getDay();
@@ -722,7 +722,7 @@ function ApptDetail({ appt, onClose, onChangeStatus }) {
   if (!appt) return null;
   const doc = DOCTORS_SCH.find(x => x.id === appt.doctor);
   const status = STATUS_SCH[appt.status] || STATUS_SCH["확정"];
-  const endMin = minsFromTime(appt.start) + appt.mins;
+  const endMin = minsFromTimeSch(appt.start) + appt.mins;
   return (
     <div onClick={onClose} style={{
       position: "fixed", inset: 0, zIndex: 80,
@@ -768,7 +768,7 @@ function ApptDetail({ appt, onClose, onChangeStatus }) {
           <div style={detailRow}>
             <Icon name="clock" size={14} style={{ color: "var(--text-muted)" }} />
             <span style={detailKey}>시간</span>
-            <span style={detailVal}>{appt.start} – {timeFromMins(endMin)} ({appt.mins}분)</span>
+            <span style={detailVal}>{appt.start} – {timeFromMinsSch(endMin)} ({appt.mins}분)</span>
           </div>
           <div style={detailRow}>
             <Icon name="stethoscope" size={14} style={{ color: "var(--text-muted)" }} />
@@ -855,8 +855,8 @@ function ScheduleScreen() {
   const [appts, setAppts] = useStateSch(() => {
     try {
       const saved = localStorage.getItem("komes_appts_v1");
-      return saved ? JSON.parse(saved) : buildSeed();
-    } catch { return buildSeed(); }
+      return saved ? JSON.parse(saved) : buildSeedSch();
+    } catch { return buildSeedSch(); }
   });
   useEffectSch(() => { localStorage.setItem("komes_appts_v1", JSON.stringify(appts)); }, [appts]);
 
@@ -868,20 +868,20 @@ function ScheduleScreen() {
   const [selectedAppt, setSelectedAppt] = useStateSch(null);
 
   const goPrev = () => {
-    if (view === "day") setDate(addDays(date, -1));
-    else if (view === "week") setDate(addDays(date, -7));
+    if (view === "day") setDate(addDaysSch(date, -1));
+    else if (view === "week") setDate(addDaysSch(date, -7));
     else setDate(new Date(date.getFullYear(), date.getMonth() - 1, 1));
   };
   const goNext = () => {
-    if (view === "day") setDate(addDays(date, 1));
-    else if (view === "week") setDate(addDays(date, 7));
+    if (view === "day") setDate(addDaysSch(date, 1));
+    else if (view === "week") setDate(addDaysSch(date, 7));
     else setDate(new Date(date.getFullYear(), date.getMonth() + 1, 1));
   };
 
   const headerLabel = (() => {
     if (view === "day") return `${date.getFullYear()}년 ${KO_MONTHS_SCH[date.getMonth()]} ${date.getDate()}일 (${KO_WEEKDAYS_SCH[date.getDay()]})`;
     if (view === "week") {
-      const s = startOfWeek(date), e = addDays(s, 6);
+      const s = startOfWeekSch(date), e = addDaysSch(s, 6);
       return `${s.getFullYear()}년 ${s.getMonth()+1}월 ${s.getDate()}일 — ${e.getDate()}일`;
     }
     return `${date.getFullYear()}년 ${KO_MONTHS_SCH[date.getMonth()]}`;
@@ -889,10 +889,10 @@ function ScheduleScreen() {
 
   // Counts for header
   const periodAppts = (() => {
-    if (view === "day") return appts.filter(a => a.date === ymd(date));
+    if (view === "day") return appts.filter(a => a.date === ymdSch(date));
     if (view === "week") {
-      const s = startOfWeek(date), e = addDays(s, 6);
-      return appts.filter(a => a.date >= ymd(s) && a.date <= ymd(e));
+      const s = startOfWeekSch(date), e = addDaysSch(s, 6);
+      return appts.filter(a => a.date >= ymdSch(s) && a.date <= ymdSch(e));
     }
     const my = `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,"0")}`;
     return appts.filter(a => a.date.startsWith(my));
