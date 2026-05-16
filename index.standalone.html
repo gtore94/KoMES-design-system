@@ -60,6 +60,10 @@
   --rail-border: var(--border-subtle);
   --rail-stripe: var(--stone-100);
   --rail-divider: var(--stone-200);
+  --board-appt-bg: #EEF1F6;  --board-appt-border: #CFD7E3;
+  --board-wait-bg: #FAF2E4;  --board-wait-border: #F0DFC0;
+  --board-treat-bg: #EAF4F1; --board-treat-border: #B3D8D1;
+  --board-pay-bg: #F5F0E8;   --board-pay-border: #E4DDD4;
 }
 
 /* ── Dark theme overrides ──────────────────────────────────── */
@@ -108,6 +112,10 @@
   --shadow-md: 0 2px 8px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.28);
   --shadow-lg: 0 4px 16px rgba(0,0,0,0.50), 0 2px 6px rgba(0,0,0,0.30);
   --shadow-xl: 0 8px 32px rgba(0,0,0,0.55), 0 4px 12px rgba(0,0,0,0.32);
+  --board-appt-bg: #141C2B;  --board-appt-border: #1E2D45;
+  --board-wait-bg: #1D1810;  --board-wait-border: #2D2418;
+  --board-treat-bg: #101E1C; --board-treat-border: #1A3330;
+  --board-pay-bg: #1A1510;   --board-pay-border: #2A2218;
 }
 
 /* ── Navy color — jade scale → navy (light mode) ───── */
@@ -2214,10 +2222,10 @@ const STAGE_BY_KEY = STAGES.reduce((a, s) => (a[s.key] = s, a), {});
 // High-level groupings for the dashboard board.
 // Each group bundles its sub-stages and uses a single column color identity.
 const GROUPS = [
-  { key: "예약", label: "예약", icon: "calendar-clock", color: "#5A6E8A", bg: "#EEF1F6", border: "#CFD7E3", subStages: ["예약"] },
-  { key: "대기", label: "대기", icon: "clock",          color: "#B5873E", bg: "#FAF2E4", border: "#F0DFC0", subStages: ["진료대기", "치료대기"] },
-  { key: "치료", label: "치료", icon: "activity",       color: "#3A7065", bg: "#EAF4F1", border: "#B3D8D1", subStages: ["진료실", "치료실"] },
-  { key: "수납", label: "수납", icon: "credit-card",    color: "#7A6E60", bg: "#F5F0E8", border: "#E4DDD4", subStages: ["수납대기", "수납완료"] },
+  { key: "예약", label: "예약", icon: "calendar-clock", color: "#5A6E8A", bg: "var(--board-appt-bg)",  border: "var(--board-appt-border)",  subStages: ["예약"] },
+  { key: "대기", label: "대기", icon: "clock",          color: "#B5873E", bg: "var(--board-wait-bg)",  border: "var(--board-wait-border)",  subStages: ["진료대기", "치료대기"] },
+  { key: "치료", label: "치료", icon: "activity",       color: "#3A7065", bg: "var(--board-treat-bg)", border: "var(--board-treat-border)", subStages: ["진료실", "치료실"] },
+  { key: "수납", label: "수납", icon: "credit-card",    color: "#7A6E60", bg: "var(--board-pay-bg)",   border: "var(--board-pay-border)",   subStages: ["수납대기", "수납완료"] },
 ];
 
 const NEXT_STAGE = {
@@ -2376,7 +2384,7 @@ function GroupColumn({ group, patients, onSelect, onAdvance }) {
         padding: "12px 14px",
         borderBottom: `1px solid ${group.border}`,
         display: "flex", alignItems: "center", justifyContent: "space-between",
-        background: "rgba(255,255,255,0.4)",
+        background: "rgba(0,0,0,0.04)",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <Icon name={group.icon} size={16} style={{ color: group.color }} />
@@ -2451,7 +2459,7 @@ function PatientListScreen({ onSelectPatient }) {
         title="오늘의 진료 현황"
         subtitle={`${new Date().toLocaleDateString("ko-KR", { month: "long", day: "numeric", weekday: "short" })} · 진료 중 ${totalActive}명 · 완료 ${totalDone}명`}
         actions={<>
-          <div style={{ display: "flex", background: "var(--stone-200)", borderRadius: "var(--radius-md)", padding: 2, gap: 2 }}>
+          <div style={{ display: "flex", background: "var(--bg-raised)", borderRadius: "var(--radius-md)", padding: 2, gap: 2 }}>
             {[{ key: "board", icon: "layout-dashboard" }, { key: "list", icon: "list" }].map(v => (
               <button key={v.key} onClick={() => setView(v.key)} style={{
                 display: "flex", alignItems: "center", padding: "5px 10px", borderRadius: "var(--radius-sm)",

@@ -33,10 +33,10 @@ const STAGE_BY_KEY = STAGES.reduce((a, s) => (a[s.key] = s, a), {});
 // High-level groupings for the dashboard board.
 // Each group bundles its sub-stages and uses a single column color identity.
 const GROUPS = [
-  { key: "예약", label: "예약", icon: "calendar-clock", color: "#5A6E8A", bg: "#EEF1F6", border: "#CFD7E3", subStages: ["예약"] },
-  { key: "대기", label: "대기", icon: "clock",          color: "#B5873E", bg: "#FAF2E4", border: "#F0DFC0", subStages: ["진료대기", "치료대기"] },
-  { key: "치료", label: "치료", icon: "activity",       color: "#3A7065", bg: "#EAF4F1", border: "#B3D8D1", subStages: ["진료실", "치료실"] },
-  { key: "수납", label: "수납", icon: "credit-card",    color: "#7A6E60", bg: "#F5F0E8", border: "#E4DDD4", subStages: ["수납대기", "수납완료"] },
+  { key: "예약", label: "예약", icon: "calendar-clock", color: "#5A6E8A", bg: "var(--board-appt-bg)",  border: "var(--board-appt-border)",  subStages: ["예약"] },
+  { key: "대기", label: "대기", icon: "clock",          color: "#B5873E", bg: "var(--board-wait-bg)",  border: "var(--board-wait-border)",  subStages: ["진료대기", "치료대기"] },
+  { key: "치료", label: "치료", icon: "activity",       color: "#3A7065", bg: "var(--board-treat-bg)", border: "var(--board-treat-border)", subStages: ["진료실", "치료실"] },
+  { key: "수납", label: "수납", icon: "credit-card",    color: "#7A6E60", bg: "var(--board-pay-bg)",   border: "var(--board-pay-border)",   subStages: ["수납대기", "수납완료"] },
 ];
 
 const NEXT_STAGE = {
@@ -195,7 +195,7 @@ function GroupColumn({ group, patients, onSelect, onAdvance }) {
         padding: "12px 14px",
         borderBottom: `1px solid ${group.border}`,
         display: "flex", alignItems: "center", justifyContent: "space-between",
-        background: "rgba(255,255,255,0.4)",
+        background: "rgba(0,0,0,0.04)",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <Icon name={group.icon} size={16} style={{ color: group.color }} />
@@ -270,7 +270,7 @@ function PatientListScreen({ onSelectPatient }) {
         title="오늘의 진료 현황"
         subtitle={`${new Date().toLocaleDateString("ko-KR", { month: "long", day: "numeric", weekday: "short" })} · 진료 중 ${totalActive}명 · 완료 ${totalDone}명`}
         actions={<>
-          <div style={{ display: "flex", background: "var(--stone-200)", borderRadius: "var(--radius-md)", padding: 2, gap: 2 }}>
+          <div style={{ display: "flex", background: "var(--bg-raised)", borderRadius: "var(--radius-md)", padding: 2, gap: 2 }}>
             {[{ key: "board", icon: "layout-dashboard" }, { key: "list", icon: "list" }].map(v => (
               <button key={v.key} onClick={() => setView(v.key)} style={{
                 display: "flex", alignItems: "center", padding: "5px 10px", borderRadius: "var(--radius-sm)",
