@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>KoMES — Navy & Dark Palettes</title>
+<link rel="stylesheet" href="../ui_kits/web_app/colors_and_type.css" />
+<style>
+  :root {
+    /* ================================================
+       NAVY — deep indigo, sibling of jade
+       Same 10-step structure as jade. Slightly green-leaning
+       navy to harmonize with the existing celadon/ink palette.
+       ================================================ */
+    --navy-900: #0E1A2E;
+    --navy-800: #16263F;
+    --navy-700: #1E3252;
+    --navy-600: #294569;
+    --navy-500: #355A82;
+    --navy-400: #5878A3;
+    --navy-300: #8298BF;
+    --navy-200: #B3C0D7;
+    --navy-100: #D6DEEB;
+    --navy-50:  #EEF1F7;
+
+    /* ================================================
+       DARK THEME — semantic overrides
+       Drop these onto <html data-theme="dark"> to flip
+       the existing KoMES tokens. Backgrounds extend the
+       ink scale darker; text inverts ink; brand uses
+       jade-300 for sufficient contrast on near-black.
+       ================================================ */
+    --ink-950: #070D0C;
+    --ink-925: #0B1413;
+
+    /* Page chrome ramp for ABOUT page (light) */
+    --page-bg: #F4EFE6;
+    --page-fg: var(--ink-800);
+    --page-card: #FFFFFF;
+    --page-border: #E6DFD2;
+    --page-muted: var(--ink-500);
+  }
+
+  [data-theme="dark"] {
+    --bg-page:    #0B1413;
+    --bg-surface: #131F1D;
+    --bg-raised:  #1A2826;
+    --bg-sunken:  #070D0C;
+    --bg-overlay: rgba(0, 0, 0, 0.62);
+
+    --text-primary:   #EEF4F3;
+    --text-secondary: #B5C5C2;
+    --text-muted:     #8A9E9A;
+    --text-disabled:  #4A5E5B;
+    --text-inverse:   #131F1D;
+    --text-brand:     #8DBFB3;
+    --text-danger:    #E09690;
+    --text-warning:   #D4AE78;
+
+    --border-subtle:  #1F302D;
+    --border-default: #2A3C3A;
+    --border-strong:  #3A4F4C;
+    --border-brand:   #4A7C6F;
+    --border-danger:  #C4594B;
+
+    --brand:        #6B9E90;
+    --brand-hover:  #8DBFB3;
+    --brand-active: #B3D8D1;
+    --brand-subtle: rgba(74, 124, 111, 0.10);
+    --brand-muted:  rgba(74, 124, 111, 0.20);
+
+    --status-success-bg:     rgba(74, 124, 111, 0.14);
+    --status-success-text:   #8DBFB3;
+    --status-success-border: rgba(74, 124, 111, 0.35);
+    --status-warning-bg:     rgba(196, 151, 75, 0.12);
+    --status-warning-text:   #D4AE78;
+    --status-warning-border: rgba(196, 151, 75, 0.30);
+    --status-danger-bg:      rgba(196, 89, 75, 0.12);
+    --status-danger-text:    #E09690;
+    --status-danger-border:  rgba(196, 89, 75, 0.30);
+    --status-neutral-bg:     #1A2826;
+    --status-neutral-text:   #B5C5C2;
+    --status-neutral-border: #2A3C3A;
+
+    --shadow-sm:  0 1px 2px rgba(0,0,0,0.40), 0 1px 4px rgba(0,0,0,0.25);
+    --shadow-md:  0 2px 8px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.28);
+    --shadow-lg:  0 4px 16px rgba(0,0,0,0.50), 0 2px 6px rgba(0,0,0,0.30);
+    --shadow-xl:  0 8px 32px rgba(0,0,0,0.55), 0 4px 12px rgba(0,0,0,0.32);
+  }
+
+  /* ============================================================
+     Page layout
+     ============================================================ */
+  html, body { margin: 0; }
+  body {
+    background: var(--page-bg);
+    color: var(--page-fg);
+    font-family: var(--font-sans);
+    padding: 64px 56px 96px;
+  }
+
+  .doc {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  .doc-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px;
+    padding-bottom: 28px;
+    margin-bottom: 56px;
+    border-bottom: 1px solid var(--page-border);
+  }
+  .doc-head h1 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 42px;
+    letter-spacing: -0.02em;
+    margin: 0 0 6px;
+    color: var(--ink-900);
+  }
+  .doc-head .sub {
+    font-size: 14px;
+    color: var(--page-muted);
+    max-width: 540px;
+    line-height: 1.55;
+  }
+  .doc-head .meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--page-muted);
+    white-space: nowrap;
+  }
+
+  .section {
+    margin-bottom: 80px;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .section-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: var(--page-muted);
+    text-transform: uppercase;
+  }
+  .section-head h2 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 26px;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: var(--ink-900);
+  }
+  .section-head .lede {
+    margin-left: auto;
+    font-size: 13px;
+    color: var(--page-muted);
+    max-width: 480px;
+    line-height: 1.55;
+    text-align: right;
+  }
+
+  /* ============================================================
+     Swatch ramp
+     ============================================================ */
+  .ramp {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(17,30,28,0.06), 0 8px 28px rgba(17,30,28,0.07);
+  }
+  .swatch {
+    aspect-ratio: 1 / 1.5;
+    padding: 14px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+  .swatch .step {
+    font-weight: 500;
+    font-size: 12px;
+  }
+  .swatch .hex {
+    text-transform: uppercase;
+    opacity: 0.85;
+    font-size: 10.5px;
+  }
+  .swatch.light { color: rgba(17,30,28,0.78); }
+  .swatch.light .hex { color: rgba(17,30,28,0.6); }
+  .swatch.dark { color: rgba(255,255,255,0.92); }
+  .swatch.dark .hex { color: rgba(255,255,255,0.7); }
+
+  .ramp-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 14px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--page-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .ramp-meta strong {
+    color: var(--ink-700);
+    font-weight: 500;
+  }
+
+  /* Navy specific colors */
+  .n-900 { background: var(--navy-900); }
+  .n-800 { background: var(--navy-800); }
+  .n-700 { background: var(--navy-700); }
+  .n-600 { background: var(--navy-600); }
+  .n-500 { background: var(--navy-500); }
+  .n-400 { background: var(--navy-400); }
+  .n-300 { background: var(--navy-300); }
+  .n-200 { background: var(--navy-200); }
+  .n-100 { background: var(--navy-100); }
+  .n-50  { background: var(--navy-50); }
+
+  /* ============================================================
+     Usage notes table
+     ============================================================ */
+  .usage {
+    margin-top: 28px;
+    border: 1px solid var(--page-border);
+    border-radius: 12px;
+    background: var(--page-card);
+    overflow: hidden;
+  }
+  .usage-row {
+    display: grid;
+    grid-template-columns: 80px 120px 1fr;
+    align-items: center;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--page-border);
+    font-size: 13px;
+  }
+  .usage-row:last-child { border-bottom: none; }
+  .usage-row .chip {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    box-shadow: inset 0 0 0 1px rgba(17,30,28,0.08);
+  }
+  .usage-row .token {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-700);
+  }
+  .usage-row .note {
+    color: var(--page-muted);
+    line-height: 1.5;
+  }
+
+  /* ============================================================
+     Dark theme preview canvas
+     ============================================================ */
+  .dark-stage {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(17,30,28,0.06), 0 12px 36px rgba(17,30,28,0.10);
+    background: var(--bg-page);
+    border: 1px solid #0a100f;
+  }
+
+  .dark-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 0;
+  }
+
+  /* Semantic tokens column */
+  .tokens-col {
+    background: var(--bg-sunken);
+    padding: 22px;
+    border-right: 1px solid var(--border-subtle);
+  }
+  .tokens-col h3 {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 14px;
+    font-weight: 500;
+  }
+  .tokens-col h3:not(:first-child) { margin-top: 26px; }
+
+  .tok {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 0;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--text-secondary);
+  }
+  .tok .dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+  }
+  .tok .name { flex: 1; }
+  .tok .val {
+    color: var(--text-muted);
+    font-size: 10.5px;
+  }
+
+  /* Preview column */
+  .preview-col {
+    padding: 28px 32px;
+    background: var(--bg-page);
+    color: var(--text-primary);
+    min-height: 580px;
+  }
+  .preview-col .lbl {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 10px;
+  }
+  .preview-col h4 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 500;
+    margin: 0 0 6px;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+  .preview-col p.lead {
+    margin: 0 0 24px;
+    color: var(--text-secondary);
+    font-size: 13.5px;
+    line-height: 1.65;
+    max-width: 480px;
+  }
+
+  .preview-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-sm);
+  }
+  .preview-card .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .patient-name {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text-primary);
+  }
+  .patient-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+    font-family: var(--font-mono);
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 500;
+    border: 1px solid;
+  }
+  .pill.success {
+    background: var(--status-success-bg);
+    color: var(--status-success-text);
+    border-color: var(--status-success-border);
+  }
+  .pill.warning {
+    background: var(--status-warning-bg);
+    color: var(--status-warning-text);
+    border-color: var(--status-warning-border);
+  }
+  .pill.danger {
+    background: var(--status-danger-bg);
+    color: var(--status-danger-text);
+    border-color: var(--status-danger-border);
+  }
+  .pill .bullet {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: currentColor;
+  }
+
+  .btn-row { display: flex; gap: 10px; margin-top: 6px; }
+  .btn {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 9px 16px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    cursor: pointer;
+  }
+  .btn.primary {
+    background: var(--brand);
+    color: #0B1413;
+  }
+  .btn.primary:hover { background: var(--brand-hover); }
+  .btn.ghost {
+    background: transparent;
+    color: var(--text-primary);
+    border-color: var(--border-default);
+  }
+  .btn.danger {
+    background: transparent;
+    color: var(--text-danger);
+    border-color: var(--border-danger);
+  }
+
+  /* Navy variant in dark */
+  [data-theme="dark"] .preview-card.navy-accent {
+    border-color: rgba(53, 90, 130, 0.45);
+  }
+  .accent-bar {
+    width: 3px;
+    border-radius: 2px;
+    align-self: stretch;
+    background: var(--navy-400);
+  }
+
+  /* Footer */
+  .footnote {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--page-muted);
+    letter-spacing: 0.04em;
+    margin-top: 12px;
+    line-height: 1.6;
+  }
+
+  /* Code block for css export */
+  .code {
+    background: #131F1D;
+    color: #D8E4E2;
+    border-radius: 12px;
+    padding: 22px 24px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.7;
+    overflow-x: auto;
+    white-space: pre;
+  }
+  .code .c { color: #6B7E7B; }
+  .code .k { color: #8DBFB3; }
+  .code .v { color: #D8E4E2; }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <header class="doc-head">
+    <div>
+      <h1>Navy &amp; Dark Palettes</h1>
+      <div class="sub">기존 KoMES 색상 체계(ink · jade · stone · cinnabar · amber)는 그대로 두고, navy 스케일 한 줄과 dark 테마용 시맨틱 토큰 오버라이드만 추출했습니다. 다른 토큰을 건드리지 않고 그대로 swap할 수 있습니다.</div>
+    </div>
+    <div class="meta">KoMES Design System<br/>v1 · Palette extract</div>
+  </header>
+
+  <!-- ================================================
+       1. NAVY SCALE
+       ================================================ -->
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">01 / Palette</span>
+      <h2>Navy</h2>
+      <div class="lede">Jade와 동일한 10-step 구조의 짙은 인디고. 약간 그린이 섞인 navy로 ink·jade 톤과 자연스럽게 어울립니다.</div>
+    </div>
+
+    <div class="ramp">
+      <div class="swatch dark n-900"><div class="step">navy-900</div><div class="hex">#0E1A2E</div></div>
+      <div class="swatch dark n-800"><div class="step">navy-800</div><div class="hex">#16263F</div></div>
+      <div class="swatch dark n-700"><div class="step">navy-700</div><div class="hex">#1E3252</div></div>
+      <div class="swatch dark n-600"><div class="step">navy-600</div><div class="hex">#294569</div></div>
+      <div class="swatch dark n-500"><div class="step">navy-500</div><div class="hex">#355A82</div></div>
+      <div class="swatch dark n-400"><div class="step">navy-400</div><div class="hex">#5878A3</div></div>
+      <div class="swatch light n-300"><div class="step">navy-300</div><div class="hex">#8298BF</div></div>
+      <div class="swatch light n-200"><div class="step">navy-200</div><div class="hex">#B3C0D7</div></div>
+      <div class="swatch light n-100"><div class="step">navy-100</div><div class="hex">#D6DEEB</div></div>
+      <div class="swatch light n-50"><div class="step">navy-50</div><div class="hex">#EEF1F7</div></div>
+    </div>
+
+    <div class="ramp-meta">
+      <span>L*=8 → 96 · <strong>OKLCH H ≈ 255</strong></span>
+      <span>Contrast on <strong>stone-50</strong> · navy-700 AAA · navy-500 AA</span>
+    </div>
+
+    <div class="usage">
+      <div class="usage-row">
+        <div class="chip" style="background:var(--navy-700)"></div>
+        <div class="token">--navy-700</div>
+        <div class="note">Primary navy — 헤더, 강조 텍스트, secondary 브랜드 액션</div>
+      </div>
+      <div class="usage-row">
+        <div class="chip" style="background:var(--navy-500)"></div>
+        <div class="token">--navy-500</div>
+        <div class="note">Interactive default — info 톤 버튼, 링크, focus ring</div>
+      </div>
+      <div class="usage-row">
+        <div class="chip" style="background:var(--navy-300)"></div>
+        <div class="token">--navy-300</div>
+        <div class="note">Borders & dividers — informational card, chart line</div>
+      </div>
+      <div class="usage-row">
+        <div class="chip" style="background:var(--navy-100)"></div>
+        <div class="token">--navy-100</div>
+        <div class="note">Tinted surface — info banner, selected row</div>
+      </div>
+      <div class="usage-row">
+        <div class="chip" style="background:var(--navy-50)"></div>
+        <div class="token">--navy-50</div>
+        <div class="note">Page wash — 보험·청구 도메인 페이지 배경(선택)</div>
+      </div>
+    </div>
+
+    <div class="footnote">
+      Note · Jade는 primary 브랜드, navy는 보조 인포메이션 톤으로 운영합니다. 한 화면에서 동시에 강조하지 않습니다.
+    </div>
+  </section>
+
+  <!-- ================================================
+       2. DARK THEME
+       ================================================ -->
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">02 / Theme</span>
+      <h2>Dark</h2>
+      <div class="lede">기존 ink 스케일을 더 깊게 확장하고 jade-300을 brand text로 사용합니다. <code style="font-family:var(--font-mono);background:#EDE7D9;padding:1px 5px;border-radius:3px;">data-theme="dark"</code> 한 줄로 토글.</div>
+    </div>
+
+    <div class="dark-stage" data-theme="dark">
+      <div class="dark-grid">
+
+        <!-- token list -->
+        <aside class="tokens-col">
+          <h3>Backgrounds</h3>
+          <div class="tok"><span class="dot" style="background:#0B1413"></span><span class="name">--bg-page</span><span class="val">#0B1413</span></div>
+          <div class="tok"><span class="dot" style="background:#131F1D"></span><span class="name">--bg-surface</span><span class="val">#131F1D</span></div>
+          <div class="tok"><span class="dot" style="background:#1A2826"></span><span class="name">--bg-raised</span><span class="val">#1A2826</span></div>
+          <div class="tok"><span class="dot" style="background:#070D0C"></span><span class="name">--bg-sunken</span><span class="val">#070D0C</span></div>
+
+          <h3>Text</h3>
+          <div class="tok"><span class="dot" style="background:#EEF4F3"></span><span class="name">--text-primary</span><span class="val">ink-50</span></div>
+          <div class="tok"><span class="dot" style="background:#B5C5C2"></span><span class="name">--text-secondary</span><span class="val">ink-200</span></div>
+          <div class="tok"><span class="dot" style="background:#8A9E9A"></span><span class="name">--text-muted</span><span class="val">ink-300</span></div>
+          <div class="tok"><span class="dot" style="background:#8DBFB3"></span><span class="name">--text-brand</span><span class="val">jade-300</span></div>
+
+          <h3>Borders</h3>
+          <div class="tok"><span class="dot" style="background:#1F302D"></span><span class="name">--border-subtle</span><span class="val">+ink</span></div>
+          <div class="tok"><span class="dot" style="background:#2A3C3A"></span><span class="name">--border-default</span><span class="val">ink-700</span></div>
+          <div class="tok"><span class="dot" style="background:#4A7C6F"></span><span class="name">--border-brand</span><span class="val">jade-500</span></div>
+
+          <h3>Brand</h3>
+          <div class="tok"><span class="dot" style="background:#6B9E90"></span><span class="name">--brand</span><span class="val">jade-400</span></div>
+          <div class="tok"><span class="dot" style="background:#8DBFB3"></span><span class="name">--brand-hover</span><span class="val">jade-300</span></div>
+          <div class="tok"><span class="dot" style="background:#B3D8D1"></span><span class="name">--brand-active</span><span class="val">jade-200</span></div>
+        </aside>
+
+        <!-- preview -->
+        <div class="preview-col">
+          <div class="lbl">Dark · Preview</div>
+          <h4>환자 차트 · 다크 모드</h4>
+          <p class="lead">야간 진료·당직 시간대를 위해 배경은 ink-900 이하로 내리고, 텍스트는 ink-50 ↔ ink-300 사이로만 운영합니다. 강조는 jade-300, 보조 인포는 navy-400을 한정적으로 사용합니다.</p>
+
+          <div class="preview-card">
+            <div class="row">
+              <div>
+                <div class="patient-name">김 영 자</div>
+                <div class="patient-meta">62F · CHT-2025-0418 · 마지막 내원 5/12</div>
+              </div>
+              <div class="pill success"><span class="bullet"></span>처방 완료</div>
+            </div>
+          </div>
+
+          <div class="preview-card navy-accent">
+            <div class="row" style="gap:14px;">
+              <div class="accent-bar"></div>
+              <div style="flex:1;">
+                <div class="patient-name">박 정 환</div>
+                <div class="patient-meta">48M · 보험 청구 대기 · 3일째</div>
+              </div>
+              <div class="pill warning"><span class="bullet"></span>검토 필요</div>
+            </div>
+          </div>
+
+          <div class="preview-card">
+            <div class="row">
+              <div>
+                <div class="patient-name">이 미 라</div>
+                <div class="patient-meta">35F · 약재 알러지 — 황기</div>
+              </div>
+              <div class="pill danger"><span class="bullet"></span>주의</div>
+            </div>
+          </div>
+
+          <div class="btn-row">
+            <button class="btn primary">진료 시작</button>
+            <button class="btn ghost">차트 열기</button>
+            <button class="btn danger">취소</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footnote">
+      Note · Dark 테마는 ink 스케일을 살짝 더 어둡게(ink-925/950) 확장한 것 외에는 기존 ink·jade·cinnabar·amber 토큰을 그대로 재배치한 결과입니다. cinnabar는 100→400 으로, amber는 100→400 으로 시프트해 가독성을 확보했습니다.
+    </div>
+  </section>
+
+  <!-- ================================================
+       3. EXPORT
+       ================================================ -->
+  <section class="section" style="margin-bottom:0;">
+    <div class="section-head">
+      <span class="section-num">03 / Export</span>
+      <h2>Tokens</h2>
+      <div class="lede"><code style="font-family:var(--font-mono);background:#EDE7D9;padding:1px 5px;border-radius:3px;">colors_and_type.css</code> 아래에 그대로 붙여 넣을 수 있는 CSS 변수입니다.</div>
+    </div>
+
+    <pre class="code"><span class="c">/* ── Navy scale ───────────────────────────────────── */</span>
+:root {
+  <span class="k">--navy-900</span>: <span class="v">#0E1A2E</span>;
+  <span class="k">--navy-800</span>: <span class="v">#16263F</span>;
+  <span class="k">--navy-700</span>: <span class="v">#1E3252</span>;
+  <span class="k">--navy-600</span>: <span class="v">#294569</span>;
+  <span class="k">--navy-500</span>: <span class="v">#355A82</span>;
+  <span class="k">--navy-400</span>: <span class="v">#5878A3</span>;
+  <span class="k">--navy-300</span>: <span class="v">#8298BF</span>;
+  <span class="k">--navy-200</span>: <span class="v">#B3C0D7</span>;
+  <span class="k">--navy-100</span>: <span class="v">#D6DEEB</span>;
+  <span class="k">--navy-50</span>:  <span class="v">#EEF1F7</span>;
+}
+
+<span class="c">/* ── Dark theme — semantic overrides ──────────────── */</span>
+[data-theme=<span class="v">"dark"</span>] {
+  <span class="k">--bg-page</span>:        <span class="v">#0B1413</span>;
+  <span class="k">--bg-surface</span>:     <span class="v">#131F1D</span>;
+  <span class="k">--bg-raised</span>:      <span class="v">#1A2826</span>;
+  <span class="k">--bg-sunken</span>:      <span class="v">#070D0C</span>;
+  <span class="k">--bg-overlay</span>:     <span class="v">rgba(0, 0, 0, 0.62)</span>;
+
+  <span class="k">--text-primary</span>:   <span class="v">var(--ink-50)</span>;
+  <span class="k">--text-secondary</span>: <span class="v">var(--ink-200)</span>;
+  <span class="k">--text-muted</span>:     <span class="v">var(--ink-300)</span>;
+  <span class="k">--text-disabled</span>:  <span class="v">var(--ink-500)</span>;
+  <span class="k">--text-inverse</span>:   <span class="v">var(--ink-800)</span>;
+  <span class="k">--text-brand</span>:     <span class="v">var(--jade-300)</span>;
+  <span class="k">--text-danger</span>:    <span class="v">var(--cinnabar-400)</span>;
+  <span class="k">--text-warning</span>:   <span class="v">var(--amber-400)</span>;
+
+  <span class="k">--border-subtle</span>:  <span class="v">#1F302D</span>;
+  <span class="k">--border-default</span>: <span class="v">var(--ink-700)</span>;
+  <span class="k">--border-strong</span>:  <span class="v">var(--ink-600)</span>;
+  <span class="k">--border-brand</span>:   <span class="v">var(--jade-500)</span>;
+  <span class="k">--border-danger</span>:  <span class="v">var(--cinnabar-600)</span>;
+
+  <span class="k">--brand</span>:          <span class="v">var(--jade-400)</span>;
+  <span class="k">--brand-hover</span>:    <span class="v">var(--jade-300)</span>;
+  <span class="k">--brand-active</span>:   <span class="v">var(--jade-200)</span>;
+  <span class="k">--brand-subtle</span>:   <span class="v">rgba(74, 124, 111, 0.10)</span>;
+  <span class="k">--brand-muted</span>:    <span class="v">rgba(74, 124, 111, 0.20)</span>;
+
+  <span class="k">--shadow-sm</span>: <span class="v">0 1px 2px rgba(0,0,0,.40), 0 1px 4px rgba(0,0,0,.25)</span>;
+  <span class="k">--shadow-md</span>: <span class="v">0 2px 8px rgba(0,0,0,.45), 0 1px 3px rgba(0,0,0,.28)</span>;
+  <span class="k">--shadow-lg</span>: <span class="v">0 4px 16px rgba(0,0,0,.50), 0 2px 6px rgba(0,0,0,.30)</span>;
+  <span class="k">--shadow-xl</span>: <span class="v">0 8px 32px rgba(0,0,0,.55), 0 4px 12px rgba(0,0,0,.32)</span>;
+}</pre>
+  </section>
+
+</div>
+</body>
+</html>
