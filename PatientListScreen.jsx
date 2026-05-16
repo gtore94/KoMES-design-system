@@ -119,8 +119,8 @@ function PatientCard({ patient, stage, onSelect, onAdvance }) {
           {patient.insurance === "자보" && (
             <span style={{
               fontSize: 10, fontWeight: 700, letterSpacing: "0.04em",
-              color: "#7A4F1A", background: "#FEF3C7",
-              border: "1px solid #FCD34D",
+              color: "var(--status-warning-text)", background: "var(--status-warning-bg)",
+              border: "1px solid var(--status-warning-border)",
               borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 7px",
               fontFamily: "var(--font-sans)",
             }}>자보</span>
@@ -428,8 +428,8 @@ function PatientListScreen({ onSelectPatient }) {
                         {p.insurance === "자보" && (
                           <span style={{
                             fontSize: 10, fontWeight: 700,
-                            color: "#7A4F1A", background: "#FEF3C7",
-                            border: "1px solid #FCD34D",
+                            color: "var(--status-warning-text)", background: "var(--status-warning-bg)",
+                            border: "1px solid var(--status-warning-border)",
                             borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 7px", fontFamily: "var(--font-sans)",
                           }}>자보</span>
                         )}
@@ -508,7 +508,7 @@ function PatientQuickModal({ patient, onClose, onAdvance, onOpenChart }) {
               {patient.insurance === "자보" && (
                 <span style={{
                   fontSize: 10, fontWeight: 700,
-                  color: "#7A4F1A", background: "#FEF3C7", border: "1px solid #FCD34D",
+                  color: "var(--status-warning-text)", background: "var(--status-warning-bg)", border: "1px solid var(--status-warning-border)",
                   borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 7px",
                 }}>자보</span>
               )}
