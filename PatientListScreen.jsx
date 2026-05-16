@@ -19,13 +19,13 @@ const PATIENTS = [
 ];
 
 const STAGES = [
-  { key: "예약",     icon: "calendar-clock", color: "#5A6E8A", bg: "#EEF1F6", border: "#CFD7E3", label: "예약" },
-  { key: "진료대기", icon: "clock",         color: "#C4974B", bg: "#FAF2E4", border: "#F0DFC0", label: "진료 대기" },
-  { key: "진료실",   icon: "stethoscope",   color: "#3A7065", bg: "#EEF8F6", border: "#B3D8D1", label: "진료 중" },
-  { key: "치료대기", icon: "hourglass",     color: "#6B7E7B", bg: "#EEF4F3", border: "#D8E4E2", label: "치료 대기" },
-  { key: "치료실",   icon: "activity",      color: "#4A7C6F", bg: "#EEF8F6", border: "#8DBFB3", label: "치료 중" },
-  { key: "수납대기", icon: "credit-card",   color: "#9A8E82", bg: "#F5F0E8", border: "#E4DDD4", label: "수납 대기" },
-  { key: "수납완료", icon: "check-circle-2",color: "#2E5C52", bg: "#D4EDE9", border: "#8DBFB3", label: "수납 완료" },
+  { key: "예약",     icon: "calendar-clock", color: "#5A6E8A", bg: "rgba(90, 110, 138, 0.12)",  border: "rgba(90, 110, 138, 0.32)",  label: "예약" },
+  { key: "진료대기", icon: "clock",         color: "#C4974B", bg: "rgba(196, 151, 75, 0.12)", border: "rgba(196, 151, 75, 0.32)", label: "진료 대기" },
+  { key: "진료실",   icon: "stethoscope",   color: "#5C8B7E", bg: "rgba(92, 139, 126, 0.14)", border: "rgba(92, 139, 126, 0.34)", label: "진료 중" },
+  { key: "치료대기", icon: "hourglass",     color: "#6B7E7B", bg: "rgba(107, 126, 123, 0.14)", border: "rgba(107, 126, 123, 0.32)", label: "치료 대기" },
+  { key: "치료실",   icon: "activity",      color: "#6B9E90", bg: "rgba(107, 158, 144, 0.14)", border: "rgba(107, 158, 144, 0.34)", label: "치료 중" },
+  { key: "수납대기", icon: "credit-card",   color: "#9A8E82", bg: "rgba(154, 142, 130, 0.14)", border: "rgba(154, 142, 130, 0.32)", label: "수납 대기" },
+  { key: "수납완료", icon: "check-circle-2",color: "#4A7C6F", bg: "rgba(74, 124, 111, 0.16)", border: "rgba(74, 124, 111, 0.36)", label: "수납 완료" },
 ];
 
 const STAGE_BY_KEY = STAGES.reduce((a, s) => (a[s.key] = s, a), {});
