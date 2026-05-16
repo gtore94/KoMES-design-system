@@ -130,11 +130,11 @@ function MiniCalendar() {
         display: "flex", alignItems: "center", gap: 10,
       }}>
         <div style={{
-          fontFamily: "var(--font-serif)", fontSize: 22, fontWeight: 500, color: "var(--jade-700)",
+          fontFamily: "var(--font-serif)", fontSize: 22, fontWeight: 500, color: "var(--text-brand)",
           lineHeight: 1, minWidth: 26, textAlign: "center",
         }}>{selected}</div>
         <div style={{ flex: 1 }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-sans)" }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-sans)" }}>
             예약 {DAY_DENSITY[selected] || 0}건 · 대기 0건
           </div>
           <div style={{ fontSize: 10, color: "var(--rail-text-muted)", fontFamily: "var(--font-sans)" }}>
@@ -155,8 +155,8 @@ const navBtn = {
 
 function TaskItem({ task, onToggle }) {
   const priColors = {
-    high: { dot: "var(--cinnabar-600)", text: "var(--cinnabar-700)", bg: "var(--status-danger-bg)" },
-    med:  { dot: "var(--amber-500)",    text: "var(--amber-700)",    bg: "var(--status-warning-bg)" },
+    high: { dot: "var(--cinnabar-600)", text: "var(--status-danger-text)", bg: "var(--status-danger-bg)" },
+    med:  { dot: "var(--amber-500)",    text: "var(--status-warning-text)",    bg: "var(--status-warning-bg)" },
     low:  { dot: "var(--ink-300)",      text: "var(--rail-text-muted)",   bg: "var(--bg-raised)" },
   }[task.priority] || {};
   return (
@@ -229,15 +229,15 @@ function TasksPanel() {
           fontFamily: "var(--font-sans)", fontSize: 13, fontWeight: 600, color: "var(--rail-text)",
         }}>업무</span>
         <span style={{
-          fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700, color: "var(--jade-700)",
+          fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700, color: "var(--text-brand)",
           background: "var(--brand-muted)", borderRadius: "var(--radius-full)",
           padding: "1px 7px",
         }}>{openCount}</span>
 
         <button style={{
           marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 3,
-          fontSize: 10, fontWeight: 500, color: "var(--jade-700)",
-          background: "transparent", border: "1px solid var(--jade-200)",
+          fontSize: 10, fontWeight: 500, color: "var(--text-brand)",
+          background: "transparent", border: "1px solid var(--brand-muted)",
           borderRadius: "var(--radius-sm)", padding: "2px 7px", cursor: "pointer",
           fontFamily: "var(--font-sans)",
         }}>

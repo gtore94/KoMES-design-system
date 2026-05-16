@@ -381,7 +381,7 @@ function ExceptionPanel({ s, set, toggleArr }) {
                     fontFamily: "var(--font-sans)", fontSize: 12, padding: "5px 11px",
                     border: `1px solid ${sel ? "var(--cinnabar-400)" : "var(--border-default)"}`,
                     background: sel ? "var(--status-danger-bg)" : "var(--bg-surface)",
-                    color: sel ? "var(--cinnabar-700)" : "var(--text-secondary)",
+                    color: sel ? "var(--status-danger-text)" : "var(--text-secondary)",
                     borderRadius: "var(--radius-full)", cursor: "pointer",
                     fontWeight: sel ? 600 : 400,
                     textDecoration: sel ? "line-through" : "none",
@@ -407,7 +407,7 @@ function ExceptionPanel({ s, set, toggleArr }) {
                       fontFamily: "var(--font-sans)", fontSize: 12, padding: "5px 11px",
                       border: `1px solid ${sel ? "var(--cinnabar-400)" : "var(--border-default)"}`,
                       background: sel ? "var(--status-danger-bg)" : "var(--bg-surface)",
-                      color: sel ? "var(--cinnabar-700)" : "var(--text-secondary)",
+                      color: sel ? "var(--status-danger-text)" : "var(--text-secondary)",
                       borderRadius: "var(--radius-full)", cursor: "pointer",
                       fontWeight: sel ? 600 : 400,
                       textDecoration: sel ? "line-through" : "none",
@@ -516,7 +516,7 @@ function RSPreviewPanel({ preview, settings }) {
                         display: "inline-flex", alignItems: "center", justifyContent: "center",
                         width: 18, height: 18, borderRadius: "var(--radius-sm)",
                         background: i.kind === "herb" ? "var(--brand-muted)" : "var(--bg-raised)",
-                        color: i.kind === "herb" ? "var(--text-brand)" : "var(--ink-600)",
+                        color: i.kind === "herb" ? "var(--text-brand)" : "var(--text-secondary)",
                       }}>
                         <Icon name={i.kind === "herb" ? "leaf" : "package"} size={10} />
                       </span>
@@ -533,7 +533,7 @@ function RSPreviewPanel({ preview, settings }) {
                         fontSize: 9, padding: "2px 6px", borderRadius: "var(--radius-full)",
                         background: i.urgency === "high" ? "var(--status-danger-bg)" :
                                     i.urgency === "med"  ? "var(--status-warning-bg)" : "var(--bg-raised)",
-                        color:      i.urgency === "high" ? "var(--cinnabar-700)" :
+                        color:      i.urgency === "high" ? "var(--status-danger-text)" :
                                     i.urgency === "med"  ? "var(--status-warning-text)" : "var(--text-muted)",
                         fontWeight: 600, fontFamily: "var(--font-sans)",
                       }}>

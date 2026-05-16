@@ -121,7 +121,7 @@ function SupplyAdjustmentScreen({ onClose, onSubmit }) {
                   <span style={{
                     fontSize: 10, fontFamily: "var(--font-mono)",
                     background: filter === t.key ? (t.key === "diff" ? "var(--status-danger-bg)" : "var(--brand-muted)") : "var(--bg-raised)",
-                    color: filter === t.key ? (t.key === "diff" ? "var(--cinnabar-700)" : "var(--jade-700)") : "var(--text-muted)",
+                    color: filter === t.key ? (t.key === "diff" ? "var(--status-danger-text)" : "var(--text-brand)") : "var(--text-muted)",
                     padding: "0 6px", borderRadius: "var(--radius-full)",
                   }}>{t.count}</span>
                 </button>
@@ -142,7 +142,7 @@ function SupplyAdjustmentScreen({ onClose, onSubmit }) {
                 <button key={c.key} onClick={() => setCategory(c.key)}
                   style={{
                     fontFamily: "var(--font-sans)", fontSize: 12, padding: "5px 12px",
-                    border: `1px solid ${sel ? (tone?.fg || "var(--ink-600)") : "var(--border-default)"}`,
+                    border: `1px solid ${sel ? (tone?.fg || "var(--text-secondary)") : "var(--border-default)"}`,
                     background: sel ? (tone?.bg || "var(--bg-raised)") : "var(--bg-surface)",
                     color: sel ? (tone?.fg || "var(--text-primary)") : "var(--text-secondary)",
                     borderRadius: "var(--radius-full)", cursor: "pointer",
@@ -214,9 +214,9 @@ function SupplyAdjustmentScreen({ onClose, onSubmit }) {
                               style={{
                                 width: 110, padding: "7px 10px", textAlign: "right",
                                 fontFamily: "var(--font-mono)", fontSize: 13, fontWeight: 600,
-                                color: tone === "alert" ? "var(--cinnabar-700)" :
-                                       tone === "diff"  ? "var(--amber-700)" :
-                                       tone === "match" ? "var(--jade-800)" : "var(--text-primary)",
+                                color: tone === "alert" ? "var(--status-danger-text)" :
+                                       tone === "diff"  ? "var(--status-warning-text)" :
+                                       tone === "match" ? "var(--text-brand)" : "var(--text-primary)",
                                 background: "var(--bg-surface)",
                                 border: `1px solid ${
                                   tone === "alert" ? "var(--cinnabar-400)" :
@@ -241,15 +241,15 @@ function SupplyAdjustmentScreen({ onClose, onSubmit }) {
                             <>
                               <div style={{
                                 fontSize: 13, fontFamily: "var(--font-mono)", fontWeight: 600,
-                                color: diff > 0 ? "var(--jade-700)" :
-                                       diff < 0 ? "var(--cinnabar-700)" : "var(--text-muted)",
+                                color: diff > 0 ? "var(--text-brand)" :
+                                       diff < 0 ? "var(--status-danger-text)" : "var(--text-muted)",
                               }}>
                                 {diff > 0 ? "+" : ""}{diff} {s.unit}
                               </div>
                               {diff !== 0 && (
                                 <div style={{
                                   fontSize: 10, fontFamily: "var(--font-mono)", marginTop: 1,
-                                  color: Math.abs(diffPct) > 20 ? "var(--cinnabar-700)" : "var(--text-muted)",
+                                  color: Math.abs(diffPct) > 20 ? "var(--status-danger-text)" : "var(--text-muted)",
                                 }}>
                                   {diffPct > 0 ? "+" : ""}{diffPct.toFixed(1)}%
                                 </div>
@@ -334,9 +334,9 @@ const hdrCs = { ...hdrBaseS, textAlign: "center" };
 
 function SAStatCard({ icon, label, value, sub, tone = "neutral" }) {
   const tones = {
-    neutral: { fg: "var(--text-primary)",  bg: "var(--bg-raised)",  iconFg: "var(--ink-600)" },
-    success: { fg: "var(--jade-800)",      bg: "var(--brand-subtle)",    iconFg: "var(--jade-700)" },
-    danger:  { fg: "var(--cinnabar-700)",  bg: "var(--status-danger-bg)", iconFg: "var(--cinnabar-700)" },
+    neutral: { fg: "var(--text-primary)",  bg: "var(--bg-raised)",  iconFg: "var(--text-secondary)" },
+    success: { fg: "var(--text-brand)",      bg: "var(--brand-subtle)",    iconFg: "var(--text-brand)" },
+    danger:  { fg: "var(--status-danger-text)",  bg: "var(--status-danger-bg)", iconFg: "var(--status-danger-text)" },
   };
   const t = tones[tone];
   return (
@@ -423,7 +423,7 @@ function SAReviewPanel({ summary, edits }) {
                     <span style={{ fontSize: 12, fontWeight: 500, color: "var(--text-primary)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{s.name}</span>
                     <span style={{
                       fontSize: 12, fontFamily: "var(--font-mono)", fontWeight: 600,
-                      color: diff > 0 ? "var(--jade-700)" : "var(--cinnabar-700)", flexShrink: 0,
+                      color: diff > 0 ? "var(--text-brand)" : "var(--status-danger-text)", flexShrink: 0,
                     }}>
                       {diff > 0 ? "+" : ""}{diff} {s.unit}
                     </span>
@@ -446,14 +446,14 @@ function SAReviewPanel({ summary, edits }) {
 
       <div style={{
         marginTop: "auto", padding: "12px 14px", background: "var(--brand-subtle)",
-        border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)",
+        border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)",
         display: "flex", flexDirection: "column", gap: 8,
       }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
           <span style={{ fontSize: 11, color: "var(--text-secondary)" }}>총 가치 변동</span>
           <span style={{
             fontSize: 16, fontWeight: 600, fontFamily: "var(--font-mono)",
-            color: summary.valueDelta < 0 ? "var(--cinnabar-700)" : summary.valueDelta > 0 ? "var(--jade-800)" : "var(--text-primary)",
+            color: summary.valueDelta < 0 ? "var(--status-danger-text)" : summary.valueDelta > 0 ? "var(--text-brand)" : "var(--text-primary)",
           }}>
             {summary.valueDelta > 0 ? "+" : ""}{won(summary.valueDelta)}
           </span>
@@ -480,7 +480,7 @@ function SAConfirmModal({ summary, edits, onClose, onConfirm }) {
         <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 16 }}>
           <div style={{
             width: 36, height: 36, borderRadius: "var(--radius-full)",
-            background: "var(--brand-muted)", color: "var(--jade-700)",
+            background: "var(--brand-muted)", color: "var(--text-brand)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
             <Icon name="check-check" size={18} />
@@ -496,13 +496,13 @@ function SAConfirmModal({ summary, edits, onClose, onConfirm }) {
           <SACfRow label="차이 발생" value={`${summary.items}품목`} />
           <SACfRow label="증가 / 감소" value={`+${summary.diffPlus} / −${summary.diffMinus}`} />
           <SACfRow label="가치 변동" value={`${summary.valueDelta > 0 ? "+" : ""}${won(summary.valueDelta)}`}
-                   accent={summary.valueDelta < 0 ? "var(--cinnabar-700)" : "var(--jade-800)"} bold />
+                   accent={summary.valueDelta < 0 ? "var(--status-danger-text)" : "var(--text-brand)"} bold />
         </div>
 
         <div style={{
           marginTop: 14, padding: "10px 12px", background: "var(--status-warning-bg)",
-          border: "1px solid var(--amber-200)", borderRadius: "var(--radius-md)",
-          fontSize: 11, color: "var(--amber-700)", display: "flex", gap: 8,
+          border: "1px solid var(--status-warning-border)", borderRadius: "var(--radius-md)",
+          fontSize: 11, color: "var(--status-warning-text)", display: "flex", gap: 8,
         }}>
           <Icon name="alert-triangle" size={13} style={{ flexShrink: 0, marginTop: 1 }} />
           <span>확정 후에는 개별 항목별 사유만 수정 가능하며 전체 취소는 불가능합니다.</span>

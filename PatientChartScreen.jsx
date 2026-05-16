@@ -220,7 +220,7 @@ function VisitCard({ visit }) {
         {/* Visit header */}
         <div onClick={() => setExpanded(!expanded)}
           style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8, cursor: "pointer", userSelect: "none" }}>
-          <span style={{ fontSize: 13, fontWeight: 700, color: visit.isToday ? "var(--jade-700)" : "var(--text-primary)", fontFamily: "var(--font-sans)", flexShrink: 0 }}>
+          <span style={{ fontSize: 13, fontWeight: 700, color: visit.isToday ? "var(--text-brand)" : "var(--text-primary)", fontFamily: "var(--font-sans)", flexShrink: 0 }}>
             {visit.isToday ? "오늘 · " : ""}{visit.date}
           </span>
           {visit.isToday && <Badge variant="brand">진료 중</Badge>}
@@ -238,14 +238,14 @@ function VisitCard({ visit }) {
         {/* SOAP block */}
         {expanded && (
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            <div style={{ background: "var(--bg-surface)", border: `1px solid ${visit.isToday ? "var(--jade-200)" : "var(--border-subtle)"}`, borderRadius: "var(--radius-lg)", padding: "14px 18px", boxShadow: visit.isToday ? "var(--shadow-md)" : "var(--shadow-sm)" }}>
+            <div style={{ background: "var(--bg-surface)", border: `1px solid ${visit.isToday ? "var(--brand-muted)" : "var(--border-subtle)"}`, borderRadius: "var(--radius-lg)", padding: "14px 18px", boxShadow: visit.isToday ? "var(--shadow-md)" : "var(--shadow-sm)" }}>
               {visit.isToday
                 ? <SoapBlockAI data={visit.soap} editable={true} />
                 : <SoapBlock data={visit.soap} editable={false} />}
               {visit.aiNote && (
-                <div style={{ marginTop: 12, padding: "9px 12px", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)", display: "flex", gap: 8, alignItems: "flex-start" }}>
+                <div style={{ marginTop: 12, padding: "9px 12px", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)", display: "flex", gap: 8, alignItems: "flex-start" }}>
                   <Icon name="sparkles" size={13} style={{ color: "var(--jade-600)", marginTop: 1, flexShrink: 0 }} />
-                  <span style={{ fontSize: 12, color: "var(--jade-700)", fontFamily: "var(--font-sans)" }}><strong>AI 추천</strong> {visit.aiNote}</span>
+                  <span style={{ fontSize: 12, color: "var(--text-brand)", fontFamily: "var(--font-sans)" }}><strong>AI 추천</strong> {visit.aiNote}</span>
                 </div>
               )}
             </div>
@@ -261,9 +261,9 @@ function VisitCard({ visit }) {
                   {visit.diagnoses && visit.diagnoses.map((dx, di) => (
                     <span key={di} style={{
                       display: "inline-flex", alignItems: "center", gap: 4,
-                      fontSize: 10, color: dx.primary ? "var(--jade-700)" : "var(--text-secondary)",
+                      fontSize: 10, color: dx.primary ? "var(--text-brand)" : "var(--text-secondary)",
                       background: dx.primary ? "var(--brand-subtle)" : "var(--bg-raised)",
-                      border: `1px solid ${dx.primary ? "var(--jade-200)" : "var(--border-subtle)"}`,
+                      border: `1px solid ${dx.primary ? "var(--brand-muted)" : "var(--border-subtle)"}`,
                       borderRadius: "var(--radius-full)", padding: "1px 8px", fontFamily: "var(--font-sans)",
                     }}>
                       <span style={{ fontFamily: "var(--font-mono)", fontWeight: 600 }}>{dx.code}</span>
@@ -276,7 +276,7 @@ function VisitCard({ visit }) {
                       <span key={i} style={{ fontSize: 10, color: "var(--text-muted)", background: "var(--stone-200)", borderRadius: "var(--radius-full)", padding: "1px 7px", fontFamily: "var(--font-sans)" }}>{o.type}</span>
                     ))}
                     {visit.rxOrders.map((r, i) => (
-                      <span key={i} style={{ fontSize: 10, color: "var(--jade-700)", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-full)", padding: "1px 7px", fontFamily: "var(--font-sans)" }}>{r.name}</span>
+                      <span key={i} style={{ fontSize: 10, color: "var(--text-brand)", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-full)", padding: "1px 7px", fontFamily: "var(--font-sans)" }}>{r.name}</span>
                     ))}
                   </div>
                   <Icon name={ordersOpen ? "chevron-up" : "chevron-down"} size={13} style={{ color: "var(--text-muted)", flexShrink: 0 }} />

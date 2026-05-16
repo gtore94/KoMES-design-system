@@ -23,14 +23,14 @@ const initialNP = {
 };
 
 const TAG_OPTIONS = [
-  { key: "VIP",     icon: "crown",      bg: "var(--status-warning-bg)",   color: "var(--amber-700)",   border: "var(--amber-200)" },
-  { key: "임신부",  icon: "baby",       bg: "var(--status-danger-bg)", color: "var(--cinnabar-700)", border: "var(--cinnabar-200)" },
-  { key: "알러지",  icon: "alert-triangle", bg: "var(--status-danger-bg)", color: "var(--cinnabar-700)", border: "var(--cinnabar-200)" },
-  { key: "보호자",  icon: "users",      bg: "var(--stone-200)",    color: "var(--ink-600)",      border: "var(--stone-300)" },
-  { key: "노인",    icon: "user",       bg: "var(--stone-200)",    color: "var(--ink-600)",      border: "var(--stone-300)" },
-  { key: "소아",    icon: "smile",      bg: "var(--brand-muted)",     color: "var(--jade-700)",     border: "var(--jade-200)" },
-  { key: "산정특례",icon: "shield-check", bg: "var(--brand-muted)",   color: "var(--jade-700)",     border: "var(--jade-200)" },
-  { key: "연예인",  icon: "star",       bg: "var(--status-danger-bg)", color: "var(--cinnabar-700)", border: "var(--cinnabar-200)" },
+  { key: "VIP",     icon: "crown",      bg: "var(--status-warning-bg)",   color: "var(--status-warning-text)",   border: "var(--status-warning-border)" },
+  { key: "임신부",  icon: "baby",       bg: "var(--status-danger-bg)", color: "var(--status-danger-text)", border: "var(--status-danger-border)" },
+  { key: "알러지",  icon: "alert-triangle", bg: "var(--status-danger-bg)", color: "var(--status-danger-text)", border: "var(--status-danger-border)" },
+  { key: "보호자",  icon: "users",      bg: "var(--bg-raised)",    color: "var(--text-secondary)",      border: "var(--border-subtle)" },
+  { key: "노인",    icon: "user",       bg: "var(--bg-raised)",    color: "var(--text-secondary)",      border: "var(--border-subtle)" },
+  { key: "소아",    icon: "smile",      bg: "var(--brand-muted)",     color: "var(--text-brand)",     border: "var(--brand-muted)" },
+  { key: "산정특례",icon: "shield-check", bg: "var(--brand-muted)",   color: "var(--text-brand)",     border: "var(--brand-muted)" },
+  { key: "연예인",  icon: "star",       bg: "var(--status-danger-bg)", color: "var(--status-danger-text)", border: "var(--status-danger-border)" },
 ];
 
 function FieldLabel({ children, required, hint }) {
@@ -134,7 +134,7 @@ function SectionCard({ icon, title, hint, children, step }) {
       }}>
         <div style={{
           width: 24, height: 24, borderRadius: "50%",
-          background: "var(--brand-muted)", color: "var(--jade-700)",
+          background: "var(--brand-muted)", color: "var(--text-brand)",
           display: "flex", alignItems: "center", justifyContent: "center",
           fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700,
         }}>{step}</div>
@@ -203,7 +203,7 @@ function NewPatientModal({ onClose, onSubmit }) {
         }}>
           <div style={{
             width: 38, height: 38, borderRadius: "var(--radius-md)",
-            background: "var(--brand-muted)", color: "var(--jade-700)",
+            background: "var(--brand-muted)", color: "var(--text-brand)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
             <Icon name="user-plus" size={18} />
@@ -340,12 +340,12 @@ function NewPatientModal({ onClose, onSubmit }) {
               border: "1px solid var(--jade-100)",
             }}>
               <Icon name="check-circle-2" size={14} style={{ color: "var(--jade-600)" }} />
-              <span style={{ fontSize: 12, color: "var(--jade-700)", flex: 1 }}>
+              <span style={{ fontSize: 12, color: "var(--text-brand)", flex: 1 }}>
                 건강보험공단 자격 자동 조회가 가능합니다.
               </span>
               <button style={{
-                fontSize: 11, fontWeight: 600, color: "var(--jade-700)",
-                background: "var(--bg-surface)", border: "1px solid var(--jade-200)",
+                fontSize: 11, fontWeight: 600, color: "var(--text-brand)",
+                background: "var(--bg-surface)", border: "1px solid var(--brand-muted)",
                 borderRadius: "var(--radius-sm)", padding: "4px 10px", cursor: "pointer",
                 fontFamily: "var(--font-sans)",
               }}>자격 조회</button>
@@ -367,8 +367,8 @@ function NewPatientModal({ onClose, onSubmit }) {
                     <span style={{
                       fontSize: 10, fontWeight: 600, padding: "2px 8px",
                       borderRadius: "var(--radius-full)",
-                      background: "var(--brand-muted)", color: "var(--jade-700)",
-                      border: "1px solid var(--jade-200)", fontFamily: "var(--font-sans)",
+                      background: "var(--brand-muted)", color: "var(--text-brand)",
+                      border: "1px solid var(--brand-muted)", fontFamily: "var(--font-sans)",
                     }}>{r.type}</span>
                     <div style={{ flex: 1 }}>
                       <div style={{ fontSize: 13, fontWeight: 500, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>{r.name}</div>
@@ -439,7 +439,7 @@ function NewPatientModal({ onClose, onSubmit }) {
               background: "var(--brand-subtle)", border: "1px dashed var(--jade-200)",
               borderRadius: "var(--radius-md)",
               display: "flex", alignItems: "center", gap: 8,
-              fontSize: 11, color: "var(--jade-700)", fontFamily: "var(--font-sans)",
+              fontSize: 11, color: "var(--text-brand)", fontFamily: "var(--font-sans)",
             }}>
               <Icon name="info" size={12} />
               가족 단위 관리가 가능합니다 — 등록된 환자와의 관계를 입력하면 양측 차트에 자동 반영됩니다.
@@ -533,7 +533,7 @@ function NewPatientModal({ onClose, onSubmit }) {
           <button style={{
             padding: "8px 16px", fontSize: 13, fontWeight: 500,
             background: "var(--bg-surface)", border: "1px solid var(--jade-300)",
-            borderRadius: "var(--radius-md)", color: "var(--jade-700)",
+            borderRadius: "var(--radius-md)", color: "var(--text-brand)",
             cursor: "pointer", fontFamily: "var(--font-sans)",
             display: "inline-flex", alignItems: "center", gap: 6,
           }}>

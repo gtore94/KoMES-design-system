@@ -196,7 +196,7 @@ function SuppliesScreen({ onNavigate, onOpenRecSettings, onCreateDrafts }) {
                         <td style={{ padding: "10px 14px" }}>
                           {s.expiry ? <>
                             <div style={{ fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-mono)" }}>{s.expiry}</div>
-                            <div style={{ fontSize: 10, color: dExpiry <= 90 ? "var(--cinnabar-700)" : "var(--text-muted)", fontFamily: "var(--font-mono)", marginTop: 1 }}>D-{dExpiry}</div>
+                            <div style={{ fontSize: 10, color: dExpiry <= 90 ? "var(--status-danger-text)" : "var(--text-muted)", fontFamily: "var(--font-mono)", marginTop: 1 }}>D-{dExpiry}</div>
                           </> : <span style={{ fontSize: 11, color: "var(--text-muted)" }}>—</span>}
                         </td>
                         <td style={{ padding: "10px 14px", fontSize: 12, color: "var(--text-primary)" }}>{s.supplier}</td>
@@ -228,7 +228,7 @@ function SuppliesScreen({ onNavigate, onOpenRecSettings, onCreateDrafts }) {
       {toast && (
         <div style={{
           position: "fixed", bottom: 20, left: "50%", transform: "translateX(-50%)",
-          background: "var(--ink-800)", color: "var(--bg-raised)",
+          background: "var(--text-primary)", color: "var(--bg-raised)",
           padding: "10px 18px", borderRadius: "var(--radius-md)",
           fontSize: 13, fontFamily: "var(--font-sans)", boxShadow: "var(--shadow-lg)",
           display: "flex", alignItems: "center", gap: 8, zIndex: 100,
@@ -363,7 +363,7 @@ function SPDetailPanel({ item, onIntake, onToast }) {
         <SPFact label="최근 입고"    value={item.lastIn} />
         <SPFact label="유효기간"
                 value={item.expiry ? `${item.expiry} · D-${dExpiry}` : "해당 없음"}
-                accent={item.expiry && dExpiry <= 90 ? "var(--cinnabar-700)" : undefined} />
+                accent={item.expiry && dExpiry <= 90 ? "var(--status-danger-text)" : undefined} />
         <SPFact label="보관 위치"    value={item.location} />
       </div>
 
@@ -386,7 +386,7 @@ function SPDetailPanel({ item, onIntake, onToast }) {
                     padding: "1px 6px", borderRadius: "var(--radius-sm)", textAlign: "center",
                   }}>{h.type}</span>
                   <span style={{ fontSize: 11, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{h.note}</span>
-                  <span style={{ fontSize: 12, fontFamily: "var(--font-mono)", color: h.qty > 0 ? "var(--jade-700)" : "var(--text-primary)" }}>
+                  <span style={{ fontSize: 12, fontFamily: "var(--font-mono)", color: h.qty > 0 ? "var(--text-brand)" : "var(--text-primary)" }}>
                     {h.qty > 0 ? "+" : ""}{h.qty} {item.unit}
                   </span>
                 </div>

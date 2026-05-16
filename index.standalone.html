@@ -552,11 +552,11 @@ function MiniCalendar() {
         display: "flex", alignItems: "center", gap: 10,
       }}>
         <div style={{
-          fontFamily: "var(--font-serif)", fontSize: 22, fontWeight: 500, color: "var(--jade-700)",
+          fontFamily: "var(--font-serif)", fontSize: 22, fontWeight: 500, color: "var(--text-brand)",
           lineHeight: 1, minWidth: 26, textAlign: "center",
         }}>{selected}</div>
         <div style={{ flex: 1 }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-sans)" }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-sans)" }}>
             예약 {DAY_DENSITY[selected] || 0}건 · 대기 0건
           </div>
           <div style={{ fontSize: 10, color: "var(--rail-text-muted)", fontFamily: "var(--font-sans)" }}>
@@ -577,8 +577,8 @@ const navBtn = {
 
 function TaskItem({ task, onToggle }) {
   const priColors = {
-    high: { dot: "var(--cinnabar-600)", text: "var(--cinnabar-700)", bg: "var(--status-danger-bg)" },
-    med:  { dot: "var(--amber-500)",    text: "var(--amber-700)",    bg: "var(--status-warning-bg)" },
+    high: { dot: "var(--cinnabar-600)", text: "var(--status-danger-text)", bg: "var(--status-danger-bg)" },
+    med:  { dot: "var(--amber-500)",    text: "var(--status-warning-text)",    bg: "var(--status-warning-bg)" },
     low:  { dot: "var(--ink-300)",      text: "var(--rail-text-muted)",   bg: "var(--bg-raised)" },
   }[task.priority] || {};
   return (
@@ -651,15 +651,15 @@ function TasksPanel() {
           fontFamily: "var(--font-sans)", fontSize: 13, fontWeight: 600, color: "var(--rail-text)",
         }}>업무</span>
         <span style={{
-          fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700, color: "var(--jade-700)",
+          fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700, color: "var(--text-brand)",
           background: "var(--brand-muted)", borderRadius: "var(--radius-full)",
           padding: "1px 7px",
         }}>{openCount}</span>
 
         <button style={{
           marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 3,
-          fontSize: 10, fontWeight: 500, color: "var(--jade-700)",
-          background: "transparent", border: "1px solid var(--jade-200)",
+          fontSize: 10, fontWeight: 500, color: "var(--text-brand)",
+          background: "transparent", border: "1px solid var(--brand-muted)",
           borderRadius: "var(--radius-sm)", padding: "2px 7px", cursor: "pointer",
           fontFamily: "var(--font-sans)",
         }}>
@@ -744,14 +744,14 @@ const initialNP = {
 };
 
 const TAG_OPTIONS = [
-  { key: "VIP",     icon: "crown",      bg: "var(--status-warning-bg)",   color: "var(--amber-700)",   border: "var(--amber-200)" },
-  { key: "임신부",  icon: "baby",       bg: "var(--status-danger-bg)", color: "var(--cinnabar-700)", border: "var(--cinnabar-200)" },
-  { key: "알러지",  icon: "alert-triangle", bg: "var(--status-danger-bg)", color: "var(--cinnabar-700)", border: "var(--cinnabar-200)" },
-  { key: "보호자",  icon: "users",      bg: "var(--stone-200)",    color: "var(--ink-600)",      border: "var(--stone-300)" },
-  { key: "노인",    icon: "user",       bg: "var(--stone-200)",    color: "var(--ink-600)",      border: "var(--stone-300)" },
-  { key: "소아",    icon: "smile",      bg: "var(--brand-muted)",     color: "var(--jade-700)",     border: "var(--jade-200)" },
-  { key: "산정특례",icon: "shield-check", bg: "var(--brand-muted)",   color: "var(--jade-700)",     border: "var(--jade-200)" },
-  { key: "연예인",  icon: "star",       bg: "var(--status-danger-bg)", color: "var(--cinnabar-700)", border: "var(--cinnabar-200)" },
+  { key: "VIP",     icon: "crown",      bg: "var(--status-warning-bg)",   color: "var(--status-warning-text)",   border: "var(--status-warning-border)" },
+  { key: "임신부",  icon: "baby",       bg: "var(--status-danger-bg)", color: "var(--status-danger-text)", border: "var(--status-danger-border)" },
+  { key: "알러지",  icon: "alert-triangle", bg: "var(--status-danger-bg)", color: "var(--status-danger-text)", border: "var(--status-danger-border)" },
+  { key: "보호자",  icon: "users",      bg: "var(--bg-raised)",    color: "var(--text-secondary)",      border: "var(--border-subtle)" },
+  { key: "노인",    icon: "user",       bg: "var(--bg-raised)",    color: "var(--text-secondary)",      border: "var(--border-subtle)" },
+  { key: "소아",    icon: "smile",      bg: "var(--brand-muted)",     color: "var(--text-brand)",     border: "var(--brand-muted)" },
+  { key: "산정특례",icon: "shield-check", bg: "var(--brand-muted)",   color: "var(--text-brand)",     border: "var(--brand-muted)" },
+  { key: "연예인",  icon: "star",       bg: "var(--status-danger-bg)", color: "var(--status-danger-text)", border: "var(--status-danger-border)" },
 ];
 
 function FieldLabel({ children, required, hint }) {
@@ -855,7 +855,7 @@ function SectionCard({ icon, title, hint, children, step }) {
       }}>
         <div style={{
           width: 24, height: 24, borderRadius: "50%",
-          background: "var(--brand-muted)", color: "var(--jade-700)",
+          background: "var(--brand-muted)", color: "var(--text-brand)",
           display: "flex", alignItems: "center", justifyContent: "center",
           fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700,
         }}>{step}</div>
@@ -924,7 +924,7 @@ function NewPatientModal({ onClose, onSubmit }) {
         }}>
           <div style={{
             width: 38, height: 38, borderRadius: "var(--radius-md)",
-            background: "var(--brand-muted)", color: "var(--jade-700)",
+            background: "var(--brand-muted)", color: "var(--text-brand)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
             <Icon name="user-plus" size={18} />
@@ -1061,12 +1061,12 @@ function NewPatientModal({ onClose, onSubmit }) {
               border: "1px solid var(--jade-100)",
             }}>
               <Icon name="check-circle-2" size={14} style={{ color: "var(--jade-600)" }} />
-              <span style={{ fontSize: 12, color: "var(--jade-700)", flex: 1 }}>
+              <span style={{ fontSize: 12, color: "var(--text-brand)", flex: 1 }}>
                 건강보험공단 자격 자동 조회가 가능합니다.
               </span>
               <button style={{
-                fontSize: 11, fontWeight: 600, color: "var(--jade-700)",
-                background: "var(--bg-surface)", border: "1px solid var(--jade-200)",
+                fontSize: 11, fontWeight: 600, color: "var(--text-brand)",
+                background: "var(--bg-surface)", border: "1px solid var(--brand-muted)",
                 borderRadius: "var(--radius-sm)", padding: "4px 10px", cursor: "pointer",
                 fontFamily: "var(--font-sans)",
               }}>자격 조회</button>
@@ -1088,8 +1088,8 @@ function NewPatientModal({ onClose, onSubmit }) {
                     <span style={{
                       fontSize: 10, fontWeight: 600, padding: "2px 8px",
                       borderRadius: "var(--radius-full)",
-                      background: "var(--brand-muted)", color: "var(--jade-700)",
-                      border: "1px solid var(--jade-200)", fontFamily: "var(--font-sans)",
+                      background: "var(--brand-muted)", color: "var(--text-brand)",
+                      border: "1px solid var(--brand-muted)", fontFamily: "var(--font-sans)",
                     }}>{r.type}</span>
                     <div style={{ flex: 1 }}>
                       <div style={{ fontSize: 13, fontWeight: 500, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>{r.name}</div>
@@ -1160,7 +1160,7 @@ function NewPatientModal({ onClose, onSubmit }) {
               background: "var(--brand-subtle)", border: "1px dashed var(--jade-200)",
               borderRadius: "var(--radius-md)",
               display: "flex", alignItems: "center", gap: 8,
-              fontSize: 11, color: "var(--jade-700)", fontFamily: "var(--font-sans)",
+              fontSize: 11, color: "var(--text-brand)", fontFamily: "var(--font-sans)",
             }}>
               <Icon name="info" size={12} />
               가족 단위 관리가 가능합니다 — 등록된 환자와의 관계를 입력하면 양측 차트에 자동 반영됩니다.
@@ -1254,7 +1254,7 @@ function NewPatientModal({ onClose, onSubmit }) {
           <button style={{
             padding: "8px 16px", fontSize: 13, fontWeight: 500,
             background: "var(--bg-surface)", border: "1px solid var(--jade-300)",
-            borderRadius: "var(--radius-md)", color: "var(--jade-700)",
+            borderRadius: "var(--radius-md)", color: "var(--text-brand)",
             cursor: "pointer", fontFamily: "var(--font-sans)",
             display: "inline-flex", alignItems: "center", gap: 6,
           }}>
@@ -1418,7 +1418,7 @@ function AutoInsuranceBar({ injuryDate, today = new Date(), chunaUsed = 7, herbD
             <span style={{
               display: "inline-flex", marginTop: 5,
               fontSize: 10, fontWeight: 600,
-              color: "var(--jade-700)", background: "var(--brand-muted)",
+              color: "var(--text-brand)", background: "var(--brand-muted)",
               padding: "1px 7px", borderRadius: "var(--radius-full)",
               border: "1px solid var(--jade-300)",
               fontFamily: "var(--font-sans)",
@@ -1492,7 +1492,7 @@ function UsageBar({ icon, label, used, max, unit, pct, warn, hint }) {
           {hint}
         </span>
         <div style={{ flex: 1 }} />
-        <span style={{ fontFamily: "var(--font-mono)", fontSize: 14, fontWeight: 600, color: warn ? "var(--amber-200)" : "var(--stone-50)", lineHeight: 1, letterSpacing: "-0.01em", flexShrink: 0 }}>
+        <span style={{ fontFamily: "var(--font-mono)", fontSize: 14, fontWeight: 600, color: warn ? "var(--status-warning-border)" : "var(--stone-50)", lineHeight: 1, letterSpacing: "-0.01em", flexShrink: 0 }}>
           {used}<span style={{ fontSize: 11, color: "var(--stone-400)", fontWeight: 400, margin: "0 1px" }}>/</span>{max}
           <span style={{ fontSize: 10, color: "var(--stone-300)", fontWeight: 400, marginLeft: 2 }}>{unit}</span>
         </span>
@@ -1543,13 +1543,13 @@ function DiagnosisSection({ initialDx = [] }) {
         <Icon name="file-text" size={14} style={{ color: "var(--jade-600)" }} />
         <span style={{ fontSize: 13, fontWeight: 700, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>상병</span>
         <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>KCD-8</span>
-        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-mono)", background: "var(--brand-muted)", borderRadius: "var(--radius-full)", padding: "1px 7px" }}>
+        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", background: "var(--brand-muted)", borderRadius: "var(--radius-full)", padding: "1px 7px" }}>
           {dx.length}건
         </span>
         <button onClick={() => setAdding(!adding)} style={{
           marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 4,
-          fontSize: 11, fontWeight: 500, color: "var(--jade-700)",
-          background: adding ? "var(--brand-muted)" : "var(--bg-surface)", border: "1px solid var(--jade-200)",
+          fontSize: 11, fontWeight: 500, color: "var(--text-brand)",
+          background: adding ? "var(--brand-muted)" : "var(--bg-surface)", border: "1px solid var(--brand-muted)",
           borderRadius: "var(--radius-sm)", padding: "3px 9px", cursor: "pointer", fontFamily: "var(--font-sans)",
         }}>
           <Icon name={adding ? "x" : "plus"} size={11} />{adding ? "닫기" : "상병 추가"}
@@ -1576,7 +1576,7 @@ function DiagnosisSection({ initialDx = [] }) {
               }} onClick={() => !d.primary && setPrimary(d.code)}>
                 {d.primary ? "주상병" : "부상병"}
               </span>
-              <span style={{ fontSize: 12, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-mono)", letterSpacing: "0.02em" }}>{d.code}</span>
+              <span style={{ fontSize: 12, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", letterSpacing: "0.02em" }}>{d.code}</span>
               <span style={{ fontSize: 13, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flex: 1 }}>{d.name}</span>
               <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)", background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", padding: "1px 7px", borderRadius: "var(--radius-full)" }}>{d.region}</span>
               <button onClick={() => remove(d.code)} style={{ display: "inline-flex", alignItems: "center", padding: 3, background: "transparent", border: "none", color: "var(--text-muted)", cursor: "pointer" }}>
@@ -1591,11 +1591,11 @@ function DiagnosisSection({ initialDx = [] }) {
       {!adding && aiSuggestions.length > 0 && (
         <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 10, flexWrap: "wrap" }}>
           <Icon name="sparkles" size={11} style={{ color: "var(--jade-600)" }} />
-          <span style={{ fontSize: 10, fontWeight: 700, color: "var(--jade-700)", letterSpacing: "0.04em", textTransform: "uppercase", fontFamily: "var(--font-sans)" }}>AI 추천</span>
+          <span style={{ fontSize: 10, fontWeight: 700, color: "var(--text-brand)", letterSpacing: "0.04em", textTransform: "uppercase", fontFamily: "var(--font-sans)" }}>AI 추천</span>
           {aiSuggestions.map(s => (
             <button key={s.code} onClick={() => addDx(s)} style={{
               display: "inline-flex", alignItems: "center", gap: 5,
-              fontSize: 11, color: "var(--jade-700)",
+              fontSize: 11, color: "var(--text-brand)",
               background: "var(--brand-subtle)", border: "1px dashed var(--jade-300)",
               borderRadius: "var(--radius-full)", padding: "3px 9px",
               cursor: "pointer", fontFamily: "var(--font-sans)",
@@ -1627,7 +1627,7 @@ function DiagnosisSection({ initialDx = [] }) {
               }}
               onMouseEnter={e => { e.currentTarget.style.background = "var(--brand-subtle)"; e.currentTarget.style.borderColor = "var(--jade-300)"; }}
               onMouseLeave={e => { e.currentTarget.style.background = "var(--bg-surface)"; e.currentTarget.style.borderColor = "var(--border-subtle)"; }}>
-                <span style={{ fontSize: 11, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-mono)" }}>{m.code}</span>
+                <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)" }}>{m.code}</span>
                 <span style={{ fontSize: 12, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flex: 1 }}>{m.name}</span>
                 <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>{m.region}</span>
               </div>
@@ -1686,8 +1686,8 @@ function TabAutocompleteTextarea({ value, onChange, snippets = [], placeholder, 
       {ghost && (
         <div style={{
           position: "absolute", right: 8, bottom: 6,
-          fontSize: 9, fontWeight: 600, color: "var(--jade-700)",
-          background: "var(--brand-muted)", border: "1px solid var(--jade-200)",
+          fontSize: 9, fontWeight: 600, color: "var(--text-brand)",
+          background: "var(--brand-muted)", border: "1px solid var(--brand-muted)",
           borderRadius: "var(--radius-sm)", padding: "1px 5px",
           fontFamily: "var(--font-sans)", letterSpacing: "0.04em",
           display: "inline-flex", alignItems: "center", gap: 3,
@@ -1755,7 +1755,7 @@ function ActingOrderPanel({ injuryDate, today = new Date() }) {
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
         <Icon name="zap" size={14} style={{ color: "var(--jade-600)" }} />
         <span style={{ fontSize: 13, fontWeight: 700, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>액팅 오더</span>
-        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-mono)", background: "var(--brand-muted)", borderRadius: "var(--radius-full)", padding: "1px 7px" }}>
+        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", background: "var(--brand-muted)", borderRadius: "var(--radius-full)", padding: "1px 7px" }}>
           {orders.length}건
         </span>
         {phase && (
@@ -1765,8 +1765,8 @@ function ActingOrderPanel({ injuryDate, today = new Date() }) {
         )}
         <button onClick={() => setShowCatalog(!showCatalog)} style={{
           marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 4,
-          fontSize: 11, fontWeight: 500, color: "var(--jade-700)",
-          background: showCatalog ? "var(--brand-muted)" : "var(--bg-surface)", border: "1px solid var(--jade-200)",
+          fontSize: 11, fontWeight: 500, color: "var(--text-brand)",
+          background: showCatalog ? "var(--brand-muted)" : "var(--bg-surface)", border: "1px solid var(--brand-muted)",
           borderRadius: "var(--radius-sm)", padding: "3px 9px", cursor: "pointer", fontFamily: "var(--font-sans)",
         }}>
           <Icon name={showCatalog ? "x" : "plus"} size={11} />{showCatalog ? "닫기" : "오더 추가"}
@@ -1818,7 +1818,7 @@ function ActingOrderPanel({ injuryDate, today = new Date() }) {
       {!showCatalog && phase && (
         <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 10, flexWrap: "wrap" }}>
           <Icon name="sparkles" size={11} style={{ color: "var(--jade-600)" }} />
-          <span style={{ fontSize: 10, fontWeight: 700, color: "var(--jade-700)", letterSpacing: "0.04em", textTransform: "uppercase", fontFamily: "var(--font-sans)" }}>AI 추천</span>
+          <span style={{ fontSize: 10, fontWeight: 700, color: "var(--text-brand)", letterSpacing: "0.04em", textTransform: "uppercase", fontFamily: "var(--font-sans)" }}>AI 추천</span>
           {ACTING_ORDER_CATALOG
             .filter(c => c.allowedPhases.includes(phase) && !orders.find(o => o.code === c.code) && ["40080", "40300"].includes(c.code))
             .slice(0, 3)
@@ -1856,7 +1856,7 @@ function ActingOrderPanel({ injuryDate, today = new Date() }) {
                   display: "flex", alignItems: "center", gap: 8,
                   padding: "7px 10px", borderRadius: "var(--radius-sm)",
                   background: already ? "var(--bg-raised)" : "var(--bg-surface)",
-                  border: `1px solid ${allowed ? "var(--border-subtle)" : "var(--cinnabar-200)"}`,
+                  border: `1px solid ${allowed ? "var(--border-subtle)" : "var(--status-danger-border)"}`,
                   opacity: allowed && !already ? 1 : 0.45,
                   cursor: allowed && !already ? "pointer" : "not-allowed",
                   textAlign: "left", transition: "all 0.12s",
@@ -1871,7 +1871,7 @@ function ActingOrderPanel({ injuryDate, today = new Date() }) {
                     <div style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{c.code} · {c.duration}분{c.note ? ` · ${c.note}` : ""}</div>
                   </div>
                   {already && <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>등록됨</span>}
-                  {!allowed && <span style={{ fontSize: 9, color: "var(--cinnabar-700)", fontWeight: 600, background: "var(--status-danger-bg)", borderRadius: "var(--radius-sm)", padding: "1px 5px", fontFamily: "var(--font-sans)" }}>청구 불가</span>}
+                  {!allowed && <span style={{ fontSize: 9, color: "var(--status-danger-text)", fontWeight: 600, background: "var(--status-danger-bg)", borderRadius: "var(--radius-sm)", padding: "1px 5px", fontFamily: "var(--font-sans)" }}>청구 불가</span>}
                 </button>
               );
             })}
@@ -1913,9 +1913,9 @@ function ActingBillingPanel({ orders = null, insurance = "건강보험" }) {
         <Icon name="receipt" size={15} style={{ color: "var(--jade-600)" }} />
         <span style={{ fontSize: 13, fontWeight: 700, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>오늘 액팅 청구</span>
         <span style={{
-          marginLeft: "auto", fontSize: 10, fontWeight: 600, color: isAuto ? "var(--cinnabar-700)" : "var(--jade-700)",
+          marginLeft: "auto", fontSize: 10, fontWeight: 600, color: isAuto ? "var(--status-danger-text)" : "var(--text-brand)",
           background: isAuto ? "var(--status-danger-bg)" : "var(--brand-muted)",
-          border: `1px solid ${isAuto ? "var(--cinnabar-200)" : "var(--jade-200)"}`,
+          border: `1px solid ${isAuto ? "var(--status-danger-border)" : "var(--brand-muted)"}`,
           borderRadius: "var(--radius-full)", padding: "1px 8px", fontFamily: "var(--font-sans)",
         }}>{insurance}</span>
       </div>
@@ -1955,7 +1955,7 @@ function ActingBillingPanel({ orders = null, insurance = "건강보험" }) {
           <span style={{ fontSize: 12, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>
             {isAuto ? "환자 부담" : "본인 부담"}
           </span>
-          <span style={{ fontSize: 18, fontWeight: 700, color: isAuto ? "var(--jade-700)" : "var(--cinnabar-700)", fontFamily: "var(--font-mono)", letterSpacing: "-0.01em" }}>
+          <span style={{ fontSize: 18, fontWeight: 700, color: isAuto ? "var(--text-brand)" : "var(--status-danger-text)", fontFamily: "var(--font-mono)", letterSpacing: "-0.01em" }}>
             ₩{fmt(patientPay)}
           </span>
         </div>
@@ -2016,14 +2016,14 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
         <Icon name="zap" size={15} style={{ color: "var(--jade-600)" }} />
         <span style={{ fontSize: 13, fontWeight: 700, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>오늘 액팅 오더</span>
-        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-mono)", background: "var(--brand-muted)", borderRadius: "var(--radius-full)", padding: "1px 7px" }}>
+        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", background: "var(--brand-muted)", borderRadius: "var(--radius-full)", padding: "1px 7px" }}>
           {orders.length}건
         </span>
         <span style={{
           marginLeft: "auto", fontSize: 10, fontWeight: 600,
-          color: isAuto ? "var(--cinnabar-700)" : "var(--jade-700)",
+          color: isAuto ? "var(--status-danger-text)" : "var(--text-brand)",
           background: isAuto ? "var(--status-danger-bg)" : "var(--brand-muted)",
-          border: `1px solid ${isAuto ? "var(--cinnabar-200)" : "var(--jade-200)"}`,
+          border: `1px solid ${isAuto ? "var(--status-danger-border)" : "var(--brand-muted)"}`,
           borderRadius: "var(--radius-full)", padding: "1px 8px", fontFamily: "var(--font-sans)",
         }}>{insurance}{phase ? ` · ${phase === 1 ? "급성기" : phase === 2 ? "아급성기" : "만성기"}` : ""}</span>
       </div>
@@ -2066,7 +2066,7 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
       {/* 카탈로그에서 추가 */}
       <button onClick={() => setShowCatalog(!showCatalog)} style={{
         width: "100%", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 5,
-        fontSize: 11, fontWeight: 500, color: "var(--jade-700)",
+        fontSize: 11, fontWeight: 500, color: "var(--text-brand)",
         background: showCatalog ? "var(--brand-subtle)" : "transparent",
         border: "1px dashed var(--jade-300)",
         borderRadius: "var(--radius-sm)", padding: "5px 9px", cursor: "pointer", fontFamily: "var(--font-sans)",
@@ -2093,7 +2093,7 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
                   display: "flex", alignItems: "center", gap: 6,
                   padding: "5px 7px", borderRadius: "var(--radius-sm)",
                   background: already ? "var(--bg-raised)" : "var(--bg-surface)",
-                  border: `1px solid ${allowed ? "var(--border-subtle)" : "var(--cinnabar-200)"}`,
+                  border: `1px solid ${allowed ? "var(--border-subtle)" : "var(--status-danger-border)"}`,
                   opacity: allowed && !already ? 1 : 0.45,
                   cursor: allowed && !already ? "pointer" : "not-allowed",
                   textAlign: "left", transition: "all 0.12s",
@@ -2104,7 +2104,7 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
                   <span style={{ fontSize: 11, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flex: 1 }}>{c.key}</span>
                   <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>₩{fmt(c.fee)}</span>
                   {already && <Icon name="check" size={11} style={{ color: "var(--jade-500)" }} />}
-                  {!allowed && <span style={{ fontSize: 9, color: "var(--cinnabar-700)", fontWeight: 600, background: "var(--status-danger-bg)", borderRadius: "var(--radius-sm)", padding: "1px 4px", fontFamily: "var(--font-sans)" }}>불가</span>}
+                  {!allowed && <span style={{ fontSize: 9, color: "var(--status-danger-text)", fontWeight: 600, background: "var(--status-danger-bg)", borderRadius: "var(--radius-sm)", padding: "1px 4px", fontFamily: "var(--font-sans)" }}>불가</span>}
                 </button>
               );
             })}
@@ -2116,7 +2116,7 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
       {!showCatalog && phase && (
         <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 12, flexWrap: "wrap" }}>
           <Icon name="sparkles" size={10} style={{ color: "var(--jade-600)" }} />
-          <span style={{ fontSize: 9, fontWeight: 700, color: "var(--jade-700)", letterSpacing: "0.04em", textTransform: "uppercase", fontFamily: "var(--font-sans)" }}>AI 추천</span>
+          <span style={{ fontSize: 9, fontWeight: 700, color: "var(--text-brand)", letterSpacing: "0.04em", textTransform: "uppercase", fontFamily: "var(--font-sans)" }}>AI 추천</span>
           {ACTING_ORDER_CATALOG
             .filter(c => c.allowedPhases.includes(phase) && !orders.find(o => o.code === c.code) && ["40080", "40300"].includes(c.code))
             .map(c => (
@@ -2156,7 +2156,7 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
           <span style={{ fontSize: 12, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>
             {isAuto ? "환자 부담" : "본인 부담"}
           </span>
-          <span style={{ fontSize: 18, fontWeight: 700, color: isAuto ? "var(--jade-700)" : "var(--cinnabar-700)", fontFamily: "var(--font-mono)", letterSpacing: "-0.01em" }}>
+          <span style={{ fontSize: 18, fontWeight: 700, color: isAuto ? "var(--text-brand)" : "var(--status-danger-text)", fontFamily: "var(--font-mono)", letterSpacing: "-0.01em" }}>
             ₩{fmt(patientPay)}
           </span>
         </div>
@@ -2254,9 +2254,9 @@ function WaitChip({ mins, stage }) {
     <span style={{
       display: "inline-flex", alignItems: "center", gap: 3,
       fontSize: 10, fontFamily: "var(--font-mono)",
-      color: urgent ? "var(--cinnabar-700)" : "var(--text-muted)",
+      color: urgent ? "var(--status-danger-text)" : "var(--text-muted)",
       background: urgent ? "var(--status-danger-bg)" : "var(--bg-raised)",
-      border: `1px solid ${urgent ? "var(--cinnabar-200)" : "var(--border-subtle)"}`,
+      border: `1px solid ${urgent ? "var(--status-danger-border)" : "var(--border-subtle)"}`,
       borderRadius: "var(--radius-full)", padding: "1px 7px",
     }}>
       <Icon name="clock" size={9} />
@@ -2276,7 +2276,7 @@ function PatientCard({ patient, stage, onSelect, onAdvance }) {
       onMouseLeave={() => setHovered(false)}
       style={{
         background: hovered ? "var(--brand-subtle)" : "var(--bg-surface)",
-        border: `1px solid ${hovered ? "var(--jade-200)" : "var(--border-subtle)"}`,
+        border: `1px solid ${hovered ? "var(--brand-muted)" : "var(--border-subtle)"}`,
         borderRadius: "var(--radius-md)",
         padding: "10px 12px",
         cursor: "pointer",
@@ -2307,7 +2307,7 @@ function PatientCard({ patient, stage, onSelect, onAdvance }) {
             fontSize: 10, fontWeight: 600, letterSpacing: "0.04em",
             color: patient.visitType === "초진" ? "var(--cinnabar-600)" : "var(--jade-600)",
             background: patient.visitType === "초진" ? "var(--status-danger-bg)" : "var(--brand-subtle)",
-            border: `1px solid ${patient.visitType === "초진" ? "var(--cinnabar-200)" : "var(--jade-200)"}`,
+            border: `1px solid ${patient.visitType === "초진" ? "var(--status-danger-border)" : "var(--brand-muted)"}`,
             borderRadius: "var(--radius-full)", padding: "2px 7px",
             fontFamily: "var(--font-sans)",
           }}>{patient.visitType}</span>
@@ -2327,8 +2327,8 @@ function PatientCard({ patient, stage, onSelect, onAdvance }) {
             onClick={e => { e.stopPropagation(); onAdvance(patient.id, nextStage); }}
             style={{
               display: "flex", alignItems: "center", gap: 4,
-              fontSize: 11, fontWeight: 500, color: "var(--jade-700)",
-              background: "var(--brand-muted)", border: "1px solid var(--jade-200)",
+              fontSize: 11, fontWeight: 500, color: "var(--text-brand)",
+              background: "var(--brand-muted)", border: "1px solid var(--brand-muted)",
               borderRadius: "var(--radius-sm)", padding: "3px 9px",
               cursor: "pointer", fontFamily: "var(--font-sans)", transition: "all 0.12s",
             }}
@@ -2599,7 +2599,7 @@ function PatientListScreen({ onSelectPatient }) {
                           fontSize: 10, fontWeight: 600,
                           color: p.visitType === "초진" ? "var(--cinnabar-600)" : "var(--jade-600)",
                           background: p.visitType === "초진" ? "var(--status-danger-bg)" : "var(--brand-subtle)",
-                          border: `1px solid ${p.visitType === "초진" ? "var(--cinnabar-200)" : "var(--jade-200)"}`,
+                          border: `1px solid ${p.visitType === "초진" ? "var(--status-danger-border)" : "var(--brand-muted)"}`,
                           borderRadius: "var(--radius-full)", padding: "2px 7px", fontFamily: "var(--font-sans)",
                         }}>{p.visitType}</span>
                         {p.insurance === "자보" && (
@@ -2612,7 +2612,7 @@ function PatientListScreen({ onSelectPatient }) {
                         )}
                         {NEXT_STAGE[p.stage] && (
                           <button onClick={e => { e.stopPropagation(); advanceStage(p.id, NEXT_STAGE[p.stage]); }}
-                            style={{ fontSize: 11, color: "var(--jade-700)", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-sm)", padding: "3px 9px", cursor: "pointer", fontFamily: "var(--font-sans)", whiteSpace: "nowrap" }}>
+                            style={{ fontSize: 11, color: "var(--text-brand)", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-sm)", padding: "3px 9px", cursor: "pointer", fontFamily: "var(--font-sans)", whiteSpace: "nowrap" }}>
                             {NEXT_STAGE[p.stage]} →
                           </button>
                         )}
@@ -2682,15 +2682,15 @@ const RELATION_TYPES = [
 ];
 
 const TAG_COLORS = {
-  "VIP":     { bg: "var(--status-warning-bg)",   color: "var(--amber-700)",   border: "var(--amber-200)" },
-  "자보":    { bg: "var(--status-danger-bg)", color: "var(--cinnabar-700)", border: "var(--cinnabar-200)" },
-  "초진":    { bg: "var(--brand-subtle)",     color: "var(--jade-700)",     border: "var(--jade-200)" },
-  "노인":    { bg: "var(--bg-raised)",   color: "var(--ink-600)",      border: "var(--stone-300)" },
-  "소아":    { bg: "var(--brand-muted)",    color: "var(--jade-700)",     border: "var(--jade-200)" },
-  "알러지":  { bg: "var(--status-danger-bg)", color: "var(--cinnabar-700)", border: "var(--cinnabar-200)" },
-  "산정특례": { bg: "var(--brand-muted)",   color: "var(--jade-700)",     border: "var(--jade-200)" },
-  "갱년기":  { bg: "var(--status-warning-bg)",   color: "var(--amber-700)",   border: "var(--amber-200)" },
-  "불면증":  { bg: "var(--stone-200)",   color: "var(--ink-600)",      border: "var(--stone-300)" },
+  "VIP":     { bg: "var(--status-warning-bg)",   color: "var(--status-warning-text)",   border: "var(--status-warning-border)" },
+  "자보":    { bg: "var(--status-danger-bg)", color: "var(--status-danger-text)", border: "var(--status-danger-border)" },
+  "초진":    { bg: "var(--brand-subtle)",     color: "var(--text-brand)",     border: "var(--brand-muted)" },
+  "노인":    { bg: "var(--bg-raised)",   color: "var(--text-secondary)",      border: "var(--border-subtle)" },
+  "소아":    { bg: "var(--brand-muted)",    color: "var(--text-brand)",     border: "var(--brand-muted)" },
+  "알러지":  { bg: "var(--status-danger-bg)", color: "var(--status-danger-text)", border: "var(--status-danger-border)" },
+  "산정특례": { bg: "var(--brand-muted)",   color: "var(--text-brand)",     border: "var(--brand-muted)" },
+  "갱년기":  { bg: "var(--status-warning-bg)",   color: "var(--status-warning-text)",   border: "var(--status-warning-border)" },
+  "불면증":  { bg: "var(--bg-raised)",   color: "var(--text-secondary)",      border: "var(--border-subtle)" },
 };
 
 const tagStyle = (tag) => TAG_COLORS[tag] || { bg: "var(--bg-raised)", color: "var(--text-secondary)", border: "var(--border-subtle)" };
@@ -2720,13 +2720,13 @@ function MgrFilterSidebar({ filter, setFilter, counts }) {
       display: "flex", alignItems: "center", gap: 8, padding: "7px 10px",
       borderRadius: "var(--radius-md)", cursor: "pointer",
       background: filter === item.key ? "var(--brand-muted)" : "transparent",
-      color: filter === item.key ? "var(--jade-700)" : "var(--text-secondary)",
+      color: filter === item.key ? "var(--text-brand)" : "var(--text-secondary)",
       fontSize: 12, fontWeight: filter === item.key ? 600 : 400,
       fontFamily: "var(--font-sans)", transition: "all 0.12s",
     }}>
       <Icon name={item.icon} size={13} />
       <span style={{ flex: 1 }}>{item.label}</span>
-      <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: filter === item.key ? "var(--jade-700)" : "var(--text-muted)" }}>
+      <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: filter === item.key ? "var(--text-brand)" : "var(--text-muted)" }}>
         {counts[item.key] ?? 0}
       </span>
     </div>
@@ -2780,8 +2780,8 @@ function PatientRow({ p, selected, onSelect }) {
         borderRadius: "var(--radius-full)", textAlign: "center",
         ...tagStyle(p.insurance === "자보" ? "자보" : ""),
         background: p.insurance === "자보" ? "var(--status-danger-bg)" : "var(--bg-raised)",
-        color: p.insurance === "자보" ? "var(--cinnabar-700)" : "var(--text-secondary)",
-        border: `1px solid ${p.insurance === "자보" ? "var(--cinnabar-200)" : "var(--border-subtle)"}`,
+        color: p.insurance === "자보" ? "var(--status-danger-text)" : "var(--text-secondary)",
+        border: `1px solid ${p.insurance === "자보" ? "var(--status-danger-border)" : "var(--border-subtle)"}`,
         justifySelf: "start",
       }}>{p.insurance}</span>
       <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
@@ -2839,13 +2839,13 @@ function RelationsPanel({ patient, allPatients, onPatientClick }) {
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
         <Icon name="share-2" size={14} style={{ color: "var(--jade-600)" }} />
         <span style={{ fontSize: 13, fontWeight: 700, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>관계도</span>
-        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-mono)", background: "var(--brand-muted)", borderRadius: "var(--radius-full)", padding: "1px 7px" }}>
+        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", background: "var(--brand-muted)", borderRadius: "var(--radius-full)", padding: "1px 7px" }}>
           {relations.length}건
         </span>
         <button onClick={() => setAdding(!adding)} style={{
           marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 4,
-          fontSize: 11, fontWeight: 500, color: "var(--jade-700)",
-          background: adding ? "var(--brand-muted)" : "transparent", border: "1px solid var(--jade-200)",
+          fontSize: 11, fontWeight: 500, color: "var(--text-brand)",
+          background: adding ? "var(--brand-muted)" : "transparent", border: "1px solid var(--brand-muted)",
           borderRadius: "var(--radius-sm)", padding: "3px 9px", cursor: "pointer", fontFamily: "var(--font-sans)",
         }}>
           <Icon name={adding ? "x" : "plus"} size={11} />{adding ? "닫기" : "관계 추가"}
@@ -2896,9 +2896,9 @@ function RelationsPanel({ patient, allPatients, onPatientClick }) {
 
       {/* Add new relation */}
       {adding && (
-        <div style={{ background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)", padding: 12 }}>
+        <div style={{ background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)", padding: 12 }}>
           {/* Type picker */}
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--jade-700)", marginBottom: 6, fontFamily: "var(--font-sans)" }}>관계 유형</div>
+          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-brand)", marginBottom: 6, fontFamily: "var(--font-sans)" }}>관계 유형</div>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: 12 }}>
             {RELATION_TYPES.map(t => {
               const active = pickedType === t.key;
@@ -2919,7 +2919,7 @@ function RelationsPanel({ patient, allPatients, onPatientClick }) {
           </div>
 
           {/* Patient search */}
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--jade-700)", marginBottom: 6, fontFamily: "var(--font-sans)" }}>환자 검색</div>
+          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-brand)", marginBottom: 6, fontFamily: "var(--font-sans)" }}>환자 검색</div>
           <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "6px 10px", background: "var(--bg-surface)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-md)", marginBottom: 8 }}>
             <Icon name="search" size={13} style={{ color: "var(--text-muted)" }} />
             <input value={searchQ} onChange={e => setSearchQ(e.target.value)} placeholder="등록된 환자 이름·연락처로 검색"
@@ -2956,7 +2956,7 @@ function RelationsPanel({ patient, allPatients, onPatientClick }) {
           <div style={{ marginTop: 10, paddingTop: 10, borderTop: "1px dashed var(--jade-200)" }}>
             <button style={{
               width: "100%", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 5,
-              fontSize: 11, color: "var(--jade-700)", background: "transparent",
+              fontSize: 11, color: "var(--text-brand)", background: "transparent",
               border: "1px dashed var(--jade-300)", borderRadius: "var(--radius-sm)",
               padding: "6px 10px", cursor: "pointer", fontFamily: "var(--font-sans)",
             }}>
@@ -3049,14 +3049,14 @@ function PatientDetailPanel({ patient, onClose, onSelectPatient, onOpenChart, al
           <button key={t.k} onClick={() => setTab(t.k)} style={{
             padding: "10px 12px", border: "none", background: "transparent", cursor: "pointer",
             fontSize: 12, fontWeight: tab === t.k ? 600 : 400,
-            color: tab === t.k ? "var(--jade-700)" : "var(--text-muted)",
+            color: tab === t.k ? "var(--text-brand)" : "var(--text-muted)",
             borderBottom: `2px solid ${tab === t.k ? "var(--jade-500)" : "transparent"}`,
             display: "inline-flex", alignItems: "center", gap: 5,
             fontFamily: "var(--font-sans)", marginBottom: -1,
           }}>
             <Icon name={t.i} size={12} />{t.l}
             {t.count != null && (
-              <span style={{ fontSize: 10, fontWeight: 600, color: "var(--jade-700)", background: "var(--brand-muted)", padding: "0 5px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-mono)" }}>
+              <span style={{ fontSize: 10, fontWeight: 600, color: "var(--text-brand)", background: "var(--brand-muted)", padding: "0 5px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-mono)" }}>
                 {t.count}
               </span>
             )}
@@ -3502,7 +3502,7 @@ function VisitCard({ visit }) {
         {/* Visit header */}
         <div onClick={() => setExpanded(!expanded)}
           style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8, cursor: "pointer", userSelect: "none" }}>
-          <span style={{ fontSize: 13, fontWeight: 700, color: visit.isToday ? "var(--jade-700)" : "var(--text-primary)", fontFamily: "var(--font-sans)", flexShrink: 0 }}>
+          <span style={{ fontSize: 13, fontWeight: 700, color: visit.isToday ? "var(--text-brand)" : "var(--text-primary)", fontFamily: "var(--font-sans)", flexShrink: 0 }}>
             {visit.isToday ? "오늘 · " : ""}{visit.date}
           </span>
           {visit.isToday && <Badge variant="brand">진료 중</Badge>}
@@ -3520,14 +3520,14 @@ function VisitCard({ visit }) {
         {/* SOAP block */}
         {expanded && (
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            <div style={{ background: "var(--bg-surface)", border: `1px solid ${visit.isToday ? "var(--jade-200)" : "var(--border-subtle)"}`, borderRadius: "var(--radius-lg)", padding: "14px 18px", boxShadow: visit.isToday ? "var(--shadow-md)" : "var(--shadow-sm)" }}>
+            <div style={{ background: "var(--bg-surface)", border: `1px solid ${visit.isToday ? "var(--brand-muted)" : "var(--border-subtle)"}`, borderRadius: "var(--radius-lg)", padding: "14px 18px", boxShadow: visit.isToday ? "var(--shadow-md)" : "var(--shadow-sm)" }}>
               {visit.isToday
                 ? <SoapBlockAI data={visit.soap} editable={true} />
                 : <SoapBlock data={visit.soap} editable={false} />}
               {visit.aiNote && (
-                <div style={{ marginTop: 12, padding: "9px 12px", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)", display: "flex", gap: 8, alignItems: "flex-start" }}>
+                <div style={{ marginTop: 12, padding: "9px 12px", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)", display: "flex", gap: 8, alignItems: "flex-start" }}>
                   <Icon name="sparkles" size={13} style={{ color: "var(--jade-600)", marginTop: 1, flexShrink: 0 }} />
-                  <span style={{ fontSize: 12, color: "var(--jade-700)", fontFamily: "var(--font-sans)" }}><strong>AI 추천</strong> {visit.aiNote}</span>
+                  <span style={{ fontSize: 12, color: "var(--text-brand)", fontFamily: "var(--font-sans)" }}><strong>AI 추천</strong> {visit.aiNote}</span>
                 </div>
               )}
             </div>
@@ -3543,9 +3543,9 @@ function VisitCard({ visit }) {
                   {visit.diagnoses && visit.diagnoses.map((dx, di) => (
                     <span key={di} style={{
                       display: "inline-flex", alignItems: "center", gap: 4,
-                      fontSize: 10, color: dx.primary ? "var(--jade-700)" : "var(--text-secondary)",
+                      fontSize: 10, color: dx.primary ? "var(--text-brand)" : "var(--text-secondary)",
                       background: dx.primary ? "var(--brand-subtle)" : "var(--bg-raised)",
-                      border: `1px solid ${dx.primary ? "var(--jade-200)" : "var(--border-subtle)"}`,
+                      border: `1px solid ${dx.primary ? "var(--brand-muted)" : "var(--border-subtle)"}`,
                       borderRadius: "var(--radius-full)", padding: "1px 8px", fontFamily: "var(--font-sans)",
                     }}>
                       <span style={{ fontFamily: "var(--font-mono)", fontWeight: 600 }}>{dx.code}</span>
@@ -3558,7 +3558,7 @@ function VisitCard({ visit }) {
                       <span key={i} style={{ fontSize: 10, color: "var(--text-muted)", background: "var(--stone-200)", borderRadius: "var(--radius-full)", padding: "1px 7px", fontFamily: "var(--font-sans)" }}>{o.type}</span>
                     ))}
                     {visit.rxOrders.map((r, i) => (
-                      <span key={i} style={{ fontSize: 10, color: "var(--jade-700)", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-full)", padding: "1px 7px", fontFamily: "var(--font-sans)" }}>{r.name}</span>
+                      <span key={i} style={{ fontSize: 10, color: "var(--text-brand)", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-full)", padding: "1px 7px", fontFamily: "var(--font-sans)" }}>{r.name}</span>
                     ))}
                   </div>
                   <Icon name={ordersOpen ? "chevron-up" : "chevron-down"} size={13} style={{ color: "var(--text-muted)", flexShrink: 0 }} />
@@ -3830,19 +3830,19 @@ function PrescriptionScreen({ patient, onBack }) {
 
         {/* AI Suggestion banner */}
         {showAI && (
-          <div style={{ background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-lg)", padding: "14px 18px" }}>
+          <div style={{ background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-lg)", padding: "14px 18px" }}>
             <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 8 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <Icon name="sparkles" size={16} style={{ color: "var(--jade-600)" }} />
-                <span style={{ fontSize: 13, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-sans)" }}>AI 추천: {AI_SUGGESTION.name}</span>
-                <span style={{ fontSize: 12, background: "var(--brand-muted)", color: "var(--jade-700)", padding: "1px 7px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>적합도 {AI_SUGGESTION.confidence}%</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-sans)" }}>AI 추천: {AI_SUGGESTION.name}</span>
+                <span style={{ fontSize: 12, background: "var(--brand-muted)", color: "var(--text-brand)", padding: "1px 7px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>적합도 {AI_SUGGESTION.confidence}%</span>
               </div>
               <button onClick={() => setShowAI(false)} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--jade-400)", fontSize: 16, lineHeight: 1, padding: 0 }}>×</button>
             </div>
             <div style={{ fontSize: 12, color: "var(--jade-600)", fontFamily: "var(--font-sans)", marginBottom: 10, lineHeight: 1.5 }}>{AI_SUGGESTION.rationale}</div>
             <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 10 }}>
               {AI_SUGGESTION.herbs.map(h => (
-                <span key={h.name} style={{ fontSize: 11, background: "var(--brand-muted)", color: "var(--jade-700)", padding: "3px 9px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-mono)" }}>
+                <span key={h.name} style={{ fontSize: 11, background: "var(--brand-muted)", color: "var(--text-brand)", padding: "3px 9px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-mono)" }}>
                   {h.name} {h.dose}g
                 </span>
               ))}
@@ -4044,10 +4044,10 @@ const buildSeedSch = () => {
 
 // ── Status colors ──────────────────────────────────────────────
 const STATUS_SCH = {
-  "확정": { bg: "var(--brand-subtle)",       border: "var(--jade-300)",     text: "var(--jade-700)",   dot: "var(--jade-500)"   },
-  "대기": { bg: "var(--status-warning-bg)",  border: "var(--amber-200)",    text: "var(--amber-700)",  dot: "var(--amber-500)"  },
-  "노쇼": { bg: "var(--status-danger-bg)",   border: "var(--cinnabar-200)", text: "var(--cinnabar-700)", dot: "var(--cinnabar-600)" },
-  "취소": { bg: "var(--bg-raised)",          border: "var(--stone-300)",    text: "var(--text-muted)", dot: "var(--stone-700)"  },
+  "확정": { bg: "var(--brand-subtle)",       border: "var(--jade-300)",     text: "var(--text-brand)",   dot: "var(--jade-500)"   },
+  "대기": { bg: "var(--status-warning-bg)",  border: "var(--status-warning-border)",    text: "var(--status-warning-text)",  dot: "var(--amber-500)"  },
+  "노쇼": { bg: "var(--status-danger-bg)",   border: "var(--status-danger-border)", text: "var(--status-danger-text)", dot: "var(--cinnabar-600)" },
+  "취소": { bg: "var(--bg-raised)",          border: "var(--border-subtle)",    text: "var(--text-muted)", dot: "var(--text-secondary)"  },
 };
 
 // ── Helpers ────────────────────────────────────────────────────
@@ -4093,7 +4093,7 @@ function NewAppointmentModal({ initial, onClose, onSubmit }) {
         }}>
           <div style={{
             width: 36, height: 36, borderRadius: "var(--radius-md)",
-            background: "var(--brand-muted)", color: "var(--jade-700)",
+            background: "var(--brand-muted)", color: "var(--text-brand)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
             <Icon name="calendar-plus" size={17} />
@@ -4243,7 +4243,7 @@ function NewAppointmentModal({ initial, onClose, onSubmit }) {
           }}>
             <input type="checkbox" checked={d.notify} onChange={e => set("notify", e.target.checked)}
               style={{ accentColor: "var(--jade-500)" }} />
-            <span style={{ fontSize: 12, color: "var(--jade-700)", fontFamily: "var(--font-sans)" }}>
+            <span style={{ fontSize: 12, color: "var(--text-brand)", fontFamily: "var(--font-sans)" }}>
               예약 확정 SMS 발송
             </span>
             <span style={{ marginLeft: "auto", fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>
@@ -4495,14 +4495,14 @@ function WeekView({ date, appts, onCellClick, onApptClick, doctorFilter }) {
                 <span style={{
                   fontFamily: "var(--font-serif)",
                   fontSize: 18, fontWeight: isToday ? 600 : 400,
-                  color: isToday ? "var(--jade-700)" : "var(--text-primary)",
+                  color: isToday ? "var(--text-brand)" : "var(--text-primary)",
                   letterSpacing: "-0.01em",
                 }}>{d.getDate()}</span>
                 {dayCt > 0 && (
                   <span style={{
                     marginLeft: "auto",
                     fontSize: 10, fontWeight: 600,
-                    color: "var(--jade-700)", background: "var(--brand-muted)",
+                    color: "var(--text-brand)", background: "var(--brand-muted)",
                     borderRadius: "var(--radius-full)", padding: "1px 7px",
                     fontFamily: "var(--font-mono)",
                   }}>{dayCt}</span>
@@ -4646,7 +4646,7 @@ function MonthView({ date, appts, onCellClick, onDayClick, onApptClick, doctorFi
                 {dayAppts.length > 0 && (
                   <span style={{
                     fontSize: 10, fontWeight: 600,
-                    color: "var(--jade-700)", fontFamily: "var(--font-mono)",
+                    color: "var(--text-brand)", fontFamily: "var(--font-mono)",
                   }}>{dayAppts.length}건</span>
                 )}
               </div>
@@ -5104,15 +5104,15 @@ function QueueRow({ p, selected, onSelect }) {
           display: "inline-flex", alignItems: "center", gap: 3,
           fontSize: 10, fontWeight: 600, padding: "1px 7px",
           borderRadius: "var(--radius-full)",
-          color: p.visit === "초진" ? "var(--cinnabar-700)" : "var(--jade-700)",
+          color: p.visit === "초진" ? "var(--status-danger-text)" : "var(--text-brand)",
           background: p.visit === "초진" ? "var(--status-danger-bg)" : "var(--brand-subtle)",
-          border: `1px solid ${p.visit === "초진" ? "var(--cinnabar-200)" : "var(--jade-200)"}`,
+          border: `1px solid ${p.visit === "초진" ? "var(--status-danger-border)" : "var(--brand-muted)"}`,
           fontFamily: "var(--font-sans)",
         }}>{p.visit}</span>
         <span style={{
           marginLeft: "auto",
           fontSize: 13, fontWeight: 700,
-          color: isPending ? "var(--cinnabar-700)" : "var(--text-muted)",
+          color: isPending ? "var(--status-danger-text)" : "var(--text-muted)",
           fontFamily: "var(--font-mono)",
           textDecoration: isPending ? "none" : "line-through",
         }}>
@@ -5126,7 +5126,7 @@ function QueueRow({ p, selected, onSelect }) {
         <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>
           {p.gender}/{p.age}세
         </span>
-        <span style={{ marginLeft: "auto", fontSize: 10, fontFamily: "var(--font-mono)", color: isPending ? "var(--amber-700)" : "var(--jade-700)" }}>
+        <span style={{ marginLeft: "auto", fontSize: 10, fontFamily: "var(--font-mono)", color: isPending ? "var(--status-warning-text)" : "var(--text-brand)" }}>
           {isPending ? `대기 ${p.chargeTime}` : `완료 ${p.paidAt} · ${p.paidBy}`}
         </span>
       </div>
@@ -5153,7 +5153,7 @@ function PayMethodBtn({ icon, label, hint, primary, onClick, disabled }) {
       <div style={{
         width: 36, height: 36, borderRadius: "var(--radius-md)",
         background: primary ? "rgba(255,255,255,0.2)" : "var(--brand-subtle)",
-        color: primary ? "#fff" : "var(--jade-700)",
+        color: primary ? "#fff" : "var(--text-brand)",
         display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
       }}>
         <Icon name={icon} size={18} />
@@ -5228,27 +5228,27 @@ function PaymentScreen() {
         actions={<>
           <div style={{
             display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 12px",
-            background: "var(--status-warning-bg)", border: "1px solid var(--amber-200)",
+            background: "var(--status-warning-bg)", border: "1px solid var(--status-warning-border)",
             borderRadius: "var(--radius-full)",
           }}>
-            <Icon name="clock" size={13} style={{ color: "var(--amber-700)" }} />
-            <span style={{ fontSize: 12, fontWeight: 600, color: "var(--amber-700)", fontFamily: "var(--font-sans)" }}>
+            <Icon name="clock" size={13} style={{ color: "var(--status-warning-text)" }} />
+            <span style={{ fontSize: 12, fontWeight: 600, color: "var(--status-warning-text)", fontFamily: "var(--font-sans)" }}>
               대기 {pendingCount}건
             </span>
-            <span style={{ fontSize: 12, fontWeight: 700, color: "var(--amber-700)", fontFamily: "var(--font-mono)" }}>
+            <span style={{ fontSize: 12, fontWeight: 700, color: "var(--status-warning-text)", fontFamily: "var(--font-mono)" }}>
               {KRW(pendingTotal)}
             </span>
           </div>
           <div style={{
             display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 12px",
-            background: "var(--brand-subtle)", border: "1px solid var(--jade-200)",
+            background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)",
             borderRadius: "var(--radius-full)",
           }}>
-            <Icon name="check-circle-2" size={13} style={{ color: "var(--jade-700)" }} />
-            <span style={{ fontSize: 12, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-sans)" }}>
+            <Icon name="check-circle-2" size={13} style={{ color: "var(--text-brand)" }} />
+            <span style={{ fontSize: 12, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-sans)" }}>
               완료 {doneCount}건
             </span>
-            <span style={{ fontSize: 12, fontWeight: 700, color: "var(--jade-700)", fontFamily: "var(--font-mono)" }}>
+            <span style={{ fontSize: 12, fontWeight: 700, color: "var(--text-brand)", fontFamily: "var(--font-mono)" }}>
               {KRW(doneTotal)}
             </span>
           </div>
@@ -5381,8 +5381,8 @@ function PaymentScreen() {
                       <span key={d.code} style={{
                         display: "inline-flex", alignItems: "center", gap: 6,
                         padding: "4px 10px", fontSize: 12,
-                        background: "var(--brand-subtle)", border: "1px solid var(--jade-200)",
-                        color: "var(--jade-700)", borderRadius: "var(--radius-full)",
+                        background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)",
+                        color: "var(--text-brand)", borderRadius: "var(--radius-full)",
                         fontFamily: "var(--font-sans)",
                       }}>
                         <span style={{ fontFamily: "var(--font-mono)", fontWeight: 600 }}>{d.code}</span>
@@ -5423,7 +5423,7 @@ function PaymentScreen() {
                           fontSize: 10, fontWeight: 600, padding: "2px 8px",
                           borderRadius: "var(--radius-sm)",
                           background: it.kind === "한약" ? "var(--status-warning-bg)" : it.kind === "시술" ? "var(--brand-subtle)" : "var(--bg-raised)",
-                          color: it.kind === "한약" ? "var(--amber-700)" : it.kind === "시술" ? "var(--jade-700)" : "var(--text-secondary)",
+                          color: it.kind === "한약" ? "var(--status-warning-text)" : it.kind === "시술" ? "var(--text-brand)" : "var(--text-secondary)",
                           fontFamily: "var(--font-sans)",
                           width: "fit-content",
                         }}>{it.kind}</span>
@@ -5554,8 +5554,8 @@ function PaymentScreen() {
                   )}
                   {amounts.discount > 0 && (
                     <div style={{ display: "flex", justifyContent: "space-between", paddingTop: 6, borderTop: "1px dashed var(--border-default)" }}>
-                      <span style={{ fontSize: 12, color: "var(--cinnabar-700)", fontFamily: "var(--font-sans)" }}>할인액</span>
-                      <span style={{ fontSize: 13, fontWeight: 600, color: "var(--cinnabar-700)", fontFamily: "var(--font-mono)" }}>
+                      <span style={{ fontSize: 12, color: "var(--status-danger-text)", fontFamily: "var(--font-sans)" }}>할인액</span>
+                      <span style={{ fontSize: 13, fontWeight: 600, color: "var(--status-danger-text)", fontFamily: "var(--font-mono)" }}>
                         -{KRW(amounts.discount)}
                       </span>
                     </div>
@@ -5571,16 +5571,16 @@ function PaymentScreen() {
                 padding: "14px 16px",
               }}>
                 <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between" }}>
-                  <span style={{ fontSize: 13, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-sans)" }}>
+                  <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-sans)" }}>
                     최종 수납액
                   </span>
-                  <span style={{ fontSize: 26, fontWeight: 700, color: "var(--jade-800)", fontFamily: "var(--font-serif)", letterSpacing: "-0.02em" }}>
+                  <span style={{ fontSize: 26, fontWeight: 700, color: "var(--text-brand)", fontFamily: "var(--font-serif)", letterSpacing: "-0.02em" }}>
                     {KRW(amounts.net)}
                   </span>
                 </div>
                 {selected.status === "완료" && (
                   <div style={{
-                    marginTop: 8, fontSize: 11, color: "var(--jade-700)", fontFamily: "var(--font-sans)",
+                    marginTop: 8, fontSize: 11, color: "var(--text-brand)", fontFamily: "var(--font-sans)",
                     display: "flex", alignItems: "center", gap: 5,
                   }}>
                     <Icon name="check-circle-2" size={12} />
@@ -5647,12 +5647,12 @@ function PaymentScreen() {
                 <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>{selected.name} ({selected.chartNo})</span>
               </div>
               <div style={{
-                background: "var(--brand-subtle)", border: "1px solid var(--jade-200)",
+                background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)",
                 borderRadius: "var(--radius-md)", padding: "14px 16px",
                 display: "flex", alignItems: "baseline", justifyContent: "space-between",
               }}>
-                <span style={{ fontSize: 13, color: "var(--jade-700)", fontWeight: 600 }}>수납 금액</span>
-                <span style={{ fontSize: 24, fontWeight: 700, color: "var(--jade-800)", fontFamily: "var(--font-serif)", letterSpacing: "-0.02em" }}>
+                <span style={{ fontSize: 13, color: "var(--text-brand)", fontWeight: 600 }}>수납 금액</span>
+                <span style={{ fontSize: 24, fontWeight: 700, color: "var(--text-brand)", fontFamily: "var(--font-serif)", letterSpacing: "-0.02em" }}>
                   {KRW(amounts.net)}
                 </span>
               </div>
@@ -5898,7 +5898,7 @@ function HIKpiStrip({ herbs, alerts, openPOs }) {
       <HIKpi label="등록 약재" value={`${totalKinds}종`} sub="현재 활성 품목" />
       <HIKpi label="재고 가치" value={won(totalValue)} sub="현재 단가 기준" />
       <HIKpi label="주의 필요" value={`${lowCount}건`} sub="부족 · 임박 합계"
-        accent={lowCount ? "var(--cinnabar-700)" : undefined} />
+        accent={lowCount ? "var(--status-danger-text)" : undefined} />
       <HIKpi label="진행 중 발주" value={`${poInflight}건`} sub="입고 대기" />
     </div>
   );
@@ -5942,7 +5942,7 @@ function HIAICard({ suggestions, onApply, onDismiss, onOpenSettings }) {
               <tr key={s.id} style={{ borderTop: "1px solid var(--border-subtle)" }}>
                 <td style={{ padding: "7px 12px", fontSize: 13, fontWeight: 500, color: "var(--text-primary)" }}>{s.name}</td>
                 <td style={{ padding: "7px 12px", fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-mono)" }}>{fmtMass(s.monthly)}</td>
-                <td style={{ padding: "7px 12px", fontSize: 12, color: "var(--cinnabar-700)", fontFamily: "var(--font-mono)" }}>{s.daysLeft}일</td>
+                <td style={{ padding: "7px 12px", fontSize: 12, color: "var(--status-danger-text)", fontFamily: "var(--font-mono)" }}>{s.daysLeft}일</td>
                 <td style={{ padding: "7px 12px", fontSize: 12, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)" }}>{fmtMass(s.suggestQty)}</td>
                 <td style={{ padding: "7px 12px", fontSize: 12, color: "var(--text-primary)", fontFamily: "var(--font-mono)" }}>{won(s.suggestQty * s.unitPrice)}</td>
               </tr>
@@ -5972,10 +5972,10 @@ function HIAlertSection({ alerts, onPick }) {
     }}>
       <div style={{ padding: "10px 16px", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid var(--status-danger-border)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <Icon name="alert-triangle" size={15} style={{ color: "var(--cinnabar-700)" }} />
+          <Icon name="alert-triangle" size={15} style={{ color: "var(--status-danger-text)" }} />
           <span style={{ fontSize: 13, fontWeight: 600, color: "var(--status-danger-text)", fontFamily: "var(--font-sans)" }}>주의 필요 · {alerts.length}건</span>
         </div>
-        <span style={{ fontSize: 11, color: "var(--cinnabar-700)", fontFamily: "var(--font-sans)" }}>클릭 시 상세 패널 열기</span>
+        <span style={{ fontSize: 11, color: "var(--status-danger-text)", fontFamily: "var(--font-sans)" }}>클릭 시 상세 패널 열기</span>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 1, background: "var(--status-danger-border)" }}>
         {alerts.map(a => {
@@ -5997,7 +5997,7 @@ function HIAlertSection({ alerts, onPick }) {
               </div>
               <div style={{ fontSize: 11, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", display: "flex", justifyContent: "space-between" }}>
                 <span>{a.category} · {fmtMass(a.stock)}</span>
-                <span style={{ color: "var(--cinnabar-700)", fontFamily: "var(--font-mono)" }}>{reason}</span>
+                <span style={{ color: "var(--status-danger-text)", fontFamily: "var(--font-mono)" }}>{reason}</span>
               </div>
             </div>
           );
@@ -6098,7 +6098,7 @@ function HerbRegistrationModal({ onClose, onSubmit }) {
         }}>
           <div style={{
             width: 36, height: 36, borderRadius: "var(--radius-md)",
-            background: "var(--brand-muted)", color: "var(--jade-700)",
+            background: "var(--brand-muted)", color: "var(--text-brand)",
             display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
           }}>
             <Icon name="leaf" size={18} />
@@ -6131,7 +6131,7 @@ function HerbRegistrationModal({ onClose, onSubmit }) {
                         fontFamily: "var(--font-sans)", fontSize: 12, padding: "5px 10px",
                         border: `1px solid ${category === c.key ? "var(--jade-500)" : "var(--border-default)"}`,
                         background: category === c.key ? "var(--brand-subtle)" : "var(--bg-surface)",
-                        color: category === c.key ? "var(--jade-700)" : "var(--text-secondary)",
+                        color: category === c.key ? "var(--text-brand)" : "var(--text-secondary)",
                         borderRadius: "var(--radius-full)", cursor: "pointer",
                         fontWeight: category === c.key ? 600 : 400,
                       }}>{c.label}</button>
@@ -6160,11 +6160,11 @@ function HerbRegistrationModal({ onClose, onSubmit }) {
             {stockNum > 0 && upNum > 0 && (
               <div style={{
                 marginTop: 12, padding: "10px 14px", background: "var(--brand-subtle)",
-                border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)",
+                border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)",
                 display: "flex", justifyContent: "space-between", alignItems: "center",
               }}>
                 <span style={{ fontSize: 12, color: "var(--text-secondary)" }}>초기 재고가치</span>
-                <span style={{ fontSize: 15, fontWeight: 600, fontFamily: "var(--font-mono)", color: "var(--jade-800)" }}>{won(initValue)}</span>
+                <span style={{ fontSize: 15, fontWeight: 600, fontFamily: "var(--font-mono)", color: "var(--text-brand)" }}>{won(initValue)}</span>
               </div>
             )}
           </HRSection>
@@ -6180,7 +6180,7 @@ function HerbRegistrationModal({ onClose, onSubmit }) {
                         flex: 1, fontFamily: "var(--font-sans)", fontSize: 12, padding: "7px 0",
                         border: `1px solid ${storage === s ? "var(--jade-500)" : "var(--border-default)"}`,
                         background: storage === s ? "var(--brand-subtle)" : "var(--bg-surface)",
-                        color: storage === s ? "var(--jade-700)" : "var(--text-secondary)",
+                        color: storage === s ? "var(--text-brand)" : "var(--text-secondary)",
                         borderRadius: "var(--radius-md)", cursor: "pointer",
                         fontWeight: storage === s ? 600 : 400,
                       }}>{s}</button>
@@ -6233,7 +6233,7 @@ function HRSection({ title, sub, num, children }) {
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
         <div style={{
           width: 22, height: 22, borderRadius: "var(--radius-full)",
-          background: "var(--brand-muted)", color: "var(--jade-700)",
+          background: "var(--brand-muted)", color: "var(--text-brand)",
           display: "flex", alignItems: "center", justifyContent: "center",
           fontSize: 11, fontWeight: 700, fontFamily: "var(--font-mono)",
         }}>{num}</div>
@@ -6337,12 +6337,12 @@ function HerbAdjustmentScreen({ onClose, onSubmit }) {
         display: "flex", alignItems: "center", gap: 12,
         boxShadow: "0 2px 4px rgba(17,30,28,0.1)",
       }}>
-        <Icon name="clipboard-check" size={16} style={{ color: "var(--jade-200)" }} />
+        <Icon name="clipboard-check" size={16} style={{ color: "var(--brand-muted)" }} />
         <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.04em" }}>재고 실사 모드</div>
         <div style={{ width: 1, height: 14, background: "rgba(255,255,255,0.2)" }}></div>
-        <div style={{ fontSize: 11, color: "var(--jade-200)" }}>약재 · 시스템 재고와 실측 수량의 차이를 보정합니다</div>
+        <div style={{ fontSize: 11, color: "var(--brand-muted)" }}>약재 · 시스템 재고와 실측 수량의 차이를 보정합니다</div>
         <div style={{ flex: 1 }}></div>
-        <div style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--jade-200)" }}>
+        <div style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--brand-muted)" }}>
           담당 김민준 · 2026-05-16 14:32
         </div>
       </div>
@@ -6394,7 +6394,7 @@ function HerbAdjustmentScreen({ onClose, onSubmit }) {
                   <span style={{
                     fontSize: 10, fontFamily: "var(--font-mono)",
                     background: filter === t.key ? (t.key === "diff" ? "var(--status-danger-bg)" : "var(--brand-muted)") : "var(--bg-raised)",
-                    color: filter === t.key ? (t.key === "diff" ? "var(--cinnabar-700)" : "var(--jade-700)") : "var(--text-muted)",
+                    color: filter === t.key ? (t.key === "diff" ? "var(--status-danger-text)" : "var(--text-brand)") : "var(--text-muted)",
                     padding: "0 6px", borderRadius: "var(--radius-full)",
                   }}>{t.count}</span>
                 </button>
@@ -6477,9 +6477,9 @@ function HerbAdjustmentScreen({ onClose, onSubmit }) {
                               style={{
                                 width: 110, padding: "7px 10px", textAlign: "right",
                                 fontFamily: "var(--font-mono)", fontSize: 13, fontWeight: 600,
-                                color: tone === "alert" ? "var(--cinnabar-700)" :
-                                       tone === "diff"  ? "var(--amber-700)" :
-                                       tone === "match" ? "var(--jade-800)" : "var(--text-primary)",
+                                color: tone === "alert" ? "var(--status-danger-text)" :
+                                       tone === "diff"  ? "var(--status-warning-text)" :
+                                       tone === "match" ? "var(--text-brand)" : "var(--text-primary)",
                                 background: "var(--bg-surface)",
                                 border: `1px solid ${
                                   tone === "alert" ? "var(--cinnabar-400)" :
@@ -6505,15 +6505,15 @@ function HerbAdjustmentScreen({ onClose, onSubmit }) {
                             <>
                               <div style={{
                                 fontSize: 13, fontFamily: "var(--font-mono)", fontWeight: 600,
-                                color: diff > 0 ? "var(--jade-700)" :
-                                       diff < 0 ? "var(--cinnabar-700)" : "var(--text-muted)",
+                                color: diff > 0 ? "var(--text-brand)" :
+                                       diff < 0 ? "var(--status-danger-text)" : "var(--text-muted)",
                               }}>
                                 {diff > 0 ? "+" : ""}{diff !== 0 ? fmtMass(Math.abs(diff)).replace(/^/, diff < 0 ? "-" : "") : "±0"}
                               </div>
                               {diff !== 0 && (
                                 <div style={{
                                   fontSize: 10, fontFamily: "var(--font-mono)", marginTop: 1,
-                                  color: Math.abs(diffPct) > 20 ? "var(--cinnabar-700)" : "var(--text-muted)",
+                                  color: Math.abs(diffPct) > 20 ? "var(--status-danger-text)" : "var(--text-muted)",
                                 }}>
                                   {diffPct > 0 ? "+" : ""}{diffPct.toFixed(1)}%
                                 </div>
@@ -6603,9 +6603,9 @@ const hdrC = { ...hdrBase, textAlign: "center" };
 // ── KPI 카드 ─────────────────────────────────────────────────────
 function HAStatCard({ icon, label, value, sub, tone = "neutral" }) {
   const tones = {
-    neutral: { fg: "var(--text-primary)",  bg: "var(--bg-raised)",  iconFg: "var(--ink-600)" },
-    success: { fg: "var(--jade-800)",      bg: "var(--brand-subtle)",    iconFg: "var(--jade-700)" },
-    danger:  { fg: "var(--cinnabar-700)",  bg: "var(--status-danger-bg)", iconFg: "var(--cinnabar-700)" },
+    neutral: { fg: "var(--text-primary)",  bg: "var(--bg-raised)",  iconFg: "var(--text-secondary)" },
+    success: { fg: "var(--text-brand)",      bg: "var(--brand-subtle)",    iconFg: "var(--text-brand)" },
+    danger:  { fg: "var(--status-danger-text)",  bg: "var(--status-danger-bg)", iconFg: "var(--status-danger-text)" },
   };
   const t = tones[tone];
   return (
@@ -6693,7 +6693,7 @@ function HAReviewPanel({ summary, edits }) {
                     <span style={{ fontSize: 12, fontWeight: 500, color: "var(--text-primary)" }}>{h.name}</span>
                     <span style={{
                       fontSize: 12, fontFamily: "var(--font-mono)", fontWeight: 600,
-                      color: diff > 0 ? "var(--jade-700)" : "var(--cinnabar-700)",
+                      color: diff > 0 ? "var(--text-brand)" : "var(--status-danger-text)",
                     }}>
                       {diff > 0 ? "+" : ""}{fmtMass(Math.abs(diff)).replace(/^/, diff < 0 ? "-" : "")}
                     </span>
@@ -6716,14 +6716,14 @@ function HAReviewPanel({ summary, edits }) {
 
       <div style={{
         marginTop: "auto", padding: "12px 14px", background: "var(--brand-subtle)",
-        border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)",
+        border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)",
         display: "flex", flexDirection: "column", gap: 8,
       }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
           <span style={{ fontSize: 11, color: "var(--text-secondary)" }}>총 가치 변동</span>
           <span style={{
             fontSize: 16, fontWeight: 600, fontFamily: "var(--font-mono)",
-            color: summary.valueDelta < 0 ? "var(--cinnabar-700)" : summary.valueDelta > 0 ? "var(--jade-800)" : "var(--text-primary)",
+            color: summary.valueDelta < 0 ? "var(--status-danger-text)" : summary.valueDelta > 0 ? "var(--text-brand)" : "var(--text-primary)",
           }}>
             {summary.valueDelta > 0 ? "+" : ""}{won(summary.valueDelta)}
           </span>
@@ -6751,7 +6751,7 @@ function HAConfirmModal({ summary, edits, onClose, onConfirm }) {
         <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 16 }}>
           <div style={{
             width: 36, height: 36, borderRadius: "var(--radius-full)",
-            background: "var(--brand-muted)", color: "var(--jade-700)",
+            background: "var(--brand-muted)", color: "var(--text-brand)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
             <Icon name="check-check" size={18} />
@@ -6765,16 +6765,16 @@ function HAConfirmModal({ summary, edits, onClose, onConfirm }) {
         <div style={{ display: "flex", flexDirection: "column", gap: 1, background: "var(--border-subtle)", borderRadius: "var(--radius-md)", overflow: "hidden", border: "1px solid var(--border-subtle)" }}>
           <HACfRow label="실사 완료" value={`${summary.counted}종 / 전체 ${summary.total}종`} />
           <HACfRow label="차이 발생 품목" value={`${summary.items}건`} />
-          <HACfRow label="총 증가량" value={`+${fmtMass(summary.diffPlus)}`} accent="var(--jade-700)" />
-          <HACfRow label="총 감소량" value={fmtMass(summary.diffMinus)} accent="var(--cinnabar-700)" />
+          <HACfRow label="총 증가량" value={`+${fmtMass(summary.diffPlus)}`} accent="var(--text-brand)" />
+          <HACfRow label="총 감소량" value={fmtMass(summary.diffMinus)} accent="var(--status-danger-text)" />
           <HACfRow label="가치 변동" value={`${summary.valueDelta > 0 ? "+" : ""}${won(summary.valueDelta)}`}
-                   accent={summary.valueDelta < 0 ? "var(--cinnabar-700)" : "var(--jade-800)"} bold />
+                   accent={summary.valueDelta < 0 ? "var(--status-danger-text)" : "var(--text-brand)"} bold />
         </div>
 
         <div style={{
           marginTop: 14, padding: "10px 12px", background: "var(--status-warning-bg)",
-          border: "1px solid var(--amber-200)", borderRadius: "var(--radius-md)",
-          fontSize: 11, color: "var(--amber-700)", display: "flex", gap: 8,
+          border: "1px solid var(--status-warning-border)", borderRadius: "var(--radius-md)",
+          fontSize: 11, color: "var(--status-warning-text)", display: "flex", gap: 8,
         }}>
           <Icon name="alert-triangle" size={13} style={{ flexShrink: 0, marginTop: 1 }} />
           <span>확정 후에는 개별 항목별로 사유를 수정할 수 있으나 전체 취소는 불가능합니다.</span>
@@ -7009,7 +7009,7 @@ function HerbInventoryScreen({ onNavigate, onOpenRecSettings, onCreateDrafts }) 
                         <td style={{ padding: "10px 14px", fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-mono)" }}>{h.lastIn}</td>
                         <td style={{ padding: "10px 14px" }}>
                           <div style={{ fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-mono)" }}>{h.expiry}</div>
-                          <div style={{ fontSize: 10, color: dExpiry <= 90 ? "var(--cinnabar-700)" : "var(--text-muted)", fontFamily: "var(--font-mono)", marginTop: 1 }}>D-{dExpiry}</div>
+                          <div style={{ fontSize: 10, color: dExpiry <= 90 ? "var(--status-danger-text)" : "var(--text-muted)", fontFamily: "var(--font-mono)", marginTop: 1 }}>D-{dExpiry}</div>
                         </td>
                         <td style={{ padding: "10px 14px" }}>
                           <div style={{ fontSize: 12, color: "var(--text-primary)" }}>{h.supplier}</div>
@@ -7045,7 +7045,7 @@ function HerbInventoryScreen({ onNavigate, onOpenRecSettings, onCreateDrafts }) 
       {toast && (
         <div style={{
           position: "fixed", bottom: 20, left: "50%", transform: "translateX(-50%)",
-          background: "var(--ink-800)", color: "var(--bg-raised)",
+          background: "var(--text-primary)", color: "var(--bg-raised)",
           padding: "10px 18px", borderRadius: "var(--radius-md)",
           fontSize: 13, fontFamily: "var(--font-sans)", boxShadow: "var(--shadow-lg)",
           display: "flex", alignItems: "center", gap: 8, zIndex: 100,
@@ -7185,7 +7185,7 @@ function HIDetailPanel({ herb, onIntake, onToast }) {
         <HIFact label="월 소비"    value={fmtMass(herb.monthly)} />
         <HIFact label="안전 임계치" value={fmtMass(herb.threshold)} />
         <HIFact label="최근 입고"   value={herb.lastIn} />
-        <HIFact label="유효기간"   value={`${herb.expiry} · D-${dExpiry}`} accent={dExpiry <= 90 ? "var(--cinnabar-700)" : undefined} />
+        <HIFact label="유효기간"   value={`${herb.expiry} · D-${dExpiry}`} accent={dExpiry <= 90 ? "var(--status-danger-text)" : undefined} />
         <HIFact label="보관 위치"  value={herb.location} />
       </div>
 
@@ -7209,7 +7209,7 @@ function HIDetailPanel({ herb, onIntake, onToast }) {
                     padding: "1px 6px", borderRadius: "var(--radius-sm)", textAlign: "center",
                   }}>{h.type}</span>
                   <span style={{ fontSize: 11, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{h.note}</span>
-                  <span style={{ fontSize: 12, fontFamily: "var(--font-mono)", color: h.qty > 0 ? "var(--jade-700)" : "var(--text-primary)" }}>
+                  <span style={{ fontSize: 12, fontFamily: "var(--font-mono)", color: h.qty > 0 ? "var(--text-brand)" : "var(--text-primary)" }}>
                     {h.qty > 0 ? "+" : ""}{h.qty}g
                   </span>
                 </div>
@@ -7347,9 +7347,9 @@ const SUP_OPEN_POS = [
 
 // 카테고리 → 컬러 (배지/그리드 인디케이터)
 const SUP_CAT_COLOR = {
-  "의료":   { bg: "var(--jade-50)",     fg: "var(--jade-700)",     border: "var(--jade-200)" },
-  "포장재": { bg: "var(--amber-100)",   fg: "var(--amber-700)",    border: "var(--amber-200)" },
-  "사무":   { bg: "var(--stone-200)",   fg: "var(--ink-600)",      border: "var(--stone-300)" },
+  "의료":   { bg: "var(--brand-subtle)",     fg: "var(--text-brand)",     border: "var(--brand-muted)" },
+  "포장재": { bg: "var(--status-warning-bg)",   fg: "var(--status-warning-text)",    border: "var(--status-warning-border)" },
+  "사무":   { bg: "var(--bg-raised)",   fg: "var(--text-secondary)",      border: "var(--border-subtle)" },
   "청소":   { bg: "#E4EDF6",            fg: "#3D5A7A",             border: "#C9D8E8" },
 };
 
@@ -7404,7 +7404,7 @@ function SPKpiStrip({ items, alerts, openPOs }) {
       <SPKpi label="등록 품목" value={`${items.length}종`} sub="활성 SKU" />
       <SPKpi label="재고 가치" value={won(totalValue)} sub="현재 단가 기준" />
       <SPKpi label="주의 필요" value={`${alerts.length}건`} sub="부족 · 임박 합계"
-        accent={alerts.length ? "var(--cinnabar-700)" : undefined} />
+        accent={alerts.length ? "var(--status-danger-text)" : undefined} />
       <SPKpi label="진행 중 발주" value={`${openPOs.length}건`} sub="입고 대기" />
     </div>
   );
@@ -7448,7 +7448,7 @@ function SPAICard({ suggestions, onApply, onDismiss, onOpenSettings }) {
                 <td style={{ padding: "7px 12px", fontSize: 13, fontWeight: 500, color: "var(--text-primary)" }}>{s.name}</td>
                 <td style={{ padding: "7px 12px", fontSize: 12, color: "var(--text-secondary)" }}>{s.supplier}</td>
                 <td style={{ padding: "7px 12px", fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-mono)" }}>{supFmt(s.monthly, s.unit)}</td>
-                <td style={{ padding: "7px 12px", fontSize: 12, color: "var(--cinnabar-700)", fontFamily: "var(--font-mono)" }}>{s.daysLeft}일</td>
+                <td style={{ padding: "7px 12px", fontSize: 12, color: "var(--status-danger-text)", fontFamily: "var(--font-mono)" }}>{s.daysLeft}일</td>
                 <td style={{ padding: "7px 12px", fontSize: 12, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)" }}>{supFmt(s.suggestQty, s.unit)}</td>
                 <td style={{ padding: "7px 12px", fontSize: 12, color: "var(--text-primary)", fontFamily: "var(--font-mono)" }}>{won(s.suggestQty * s.unitPrice)}</td>
               </tr>
@@ -7477,10 +7477,10 @@ function SPAlertSection({ alerts, onPick }) {
     }}>
       <div style={{ padding: "10px 16px", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid var(--status-danger-border)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <Icon name="alert-triangle" size={15} style={{ color: "var(--cinnabar-700)" }} />
+          <Icon name="alert-triangle" size={15} style={{ color: "var(--status-danger-text)" }} />
           <span style={{ fontSize: 13, fontWeight: 600, color: "var(--status-danger-text)", fontFamily: "var(--font-sans)" }}>주의 필요 · {alerts.length}건</span>
         </div>
-        <span style={{ fontSize: 11, color: "var(--cinnabar-700)", fontFamily: "var(--font-sans)" }}>클릭 시 상세 패널 열기</span>
+        <span style={{ fontSize: 11, color: "var(--status-danger-text)", fontFamily: "var(--font-sans)" }}>클릭 시 상세 패널 열기</span>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 1, background: "var(--status-danger-border)" }}>
         {alerts.map(a => {
@@ -7502,7 +7502,7 @@ function SPAlertSection({ alerts, onPick }) {
               </div>
               <div style={{ fontSize: 11, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", display: "flex", justifyContent: "space-between" }}>
                 <span>{a.category} · {supFmt(a.stock, a.unit)}</span>
-                <span style={{ color: "var(--cinnabar-700)", fontFamily: "var(--font-mono)" }}>{reason}</span>
+                <span style={{ color: "var(--status-danger-text)", fontFamily: "var(--font-mono)" }}>{reason}</span>
               </div>
             </div>
           );
@@ -7668,7 +7668,7 @@ function SupplyRegistrationModal({ onClose, onSubmit }) {
                       fontFamily: "var(--font-sans)", fontSize: 12, padding: "5px 12px",
                       border: `1px solid ${unit === u ? "var(--jade-500)" : "var(--border-default)"}`,
                       background: unit === u ? "var(--brand-subtle)" : "var(--bg-surface)",
-                      color: unit === u ? "var(--jade-700)" : "var(--text-secondary)",
+                      color: unit === u ? "var(--text-brand)" : "var(--text-secondary)",
                       borderRadius: "var(--radius-full)", cursor: "pointer",
                       fontWeight: unit === u ? 600 : 400,
                     }}>{u}</button>
@@ -7726,7 +7726,7 @@ function SupplyRegistrationModal({ onClose, onSubmit }) {
                       fontFamily: "var(--font-sans)", fontSize: 12, padding: "6px 14px",
                       border: `1px solid ${hasExpiry ? "var(--jade-500)" : "var(--border-default)"}`,
                       background: hasExpiry ? "var(--brand-subtle)" : "var(--bg-surface)",
-                      color: hasExpiry ? "var(--jade-700)" : "var(--text-secondary)",
+                      color: hasExpiry ? "var(--text-brand)" : "var(--text-secondary)",
                       borderRadius: "var(--radius-md)", cursor: "pointer",
                       fontWeight: hasExpiry ? 600 : 400,
                     }}>유효기간 있음</button>
@@ -7735,7 +7735,7 @@ function SupplyRegistrationModal({ onClose, onSubmit }) {
                       fontFamily: "var(--font-sans)", fontSize: 12, padding: "6px 14px",
                       border: `1px solid ${!hasExpiry ? "var(--jade-500)" : "var(--border-default)"}`,
                       background: !hasExpiry ? "var(--brand-subtle)" : "var(--bg-surface)",
-                      color: !hasExpiry ? "var(--jade-700)" : "var(--text-secondary)",
+                      color: !hasExpiry ? "var(--text-brand)" : "var(--text-secondary)",
                       borderRadius: "var(--radius-md)", cursor: "pointer",
                       fontWeight: !hasExpiry ? 600 : 400,
                     }}>해당 없음</button>
@@ -7943,7 +7943,7 @@ function SupplyAdjustmentScreen({ onClose, onSubmit }) {
                   <span style={{
                     fontSize: 10, fontFamily: "var(--font-mono)",
                     background: filter === t.key ? (t.key === "diff" ? "var(--status-danger-bg)" : "var(--brand-muted)") : "var(--bg-raised)",
-                    color: filter === t.key ? (t.key === "diff" ? "var(--cinnabar-700)" : "var(--jade-700)") : "var(--text-muted)",
+                    color: filter === t.key ? (t.key === "diff" ? "var(--status-danger-text)" : "var(--text-brand)") : "var(--text-muted)",
                     padding: "0 6px", borderRadius: "var(--radius-full)",
                   }}>{t.count}</span>
                 </button>
@@ -7964,7 +7964,7 @@ function SupplyAdjustmentScreen({ onClose, onSubmit }) {
                 <button key={c.key} onClick={() => setCategory(c.key)}
                   style={{
                     fontFamily: "var(--font-sans)", fontSize: 12, padding: "5px 12px",
-                    border: `1px solid ${sel ? (tone?.fg || "var(--ink-600)") : "var(--border-default)"}`,
+                    border: `1px solid ${sel ? (tone?.fg || "var(--text-secondary)") : "var(--border-default)"}`,
                     background: sel ? (tone?.bg || "var(--bg-raised)") : "var(--bg-surface)",
                     color: sel ? (tone?.fg || "var(--text-primary)") : "var(--text-secondary)",
                     borderRadius: "var(--radius-full)", cursor: "pointer",
@@ -8036,9 +8036,9 @@ function SupplyAdjustmentScreen({ onClose, onSubmit }) {
                               style={{
                                 width: 110, padding: "7px 10px", textAlign: "right",
                                 fontFamily: "var(--font-mono)", fontSize: 13, fontWeight: 600,
-                                color: tone === "alert" ? "var(--cinnabar-700)" :
-                                       tone === "diff"  ? "var(--amber-700)" :
-                                       tone === "match" ? "var(--jade-800)" : "var(--text-primary)",
+                                color: tone === "alert" ? "var(--status-danger-text)" :
+                                       tone === "diff"  ? "var(--status-warning-text)" :
+                                       tone === "match" ? "var(--text-brand)" : "var(--text-primary)",
                                 background: "var(--bg-surface)",
                                 border: `1px solid ${
                                   tone === "alert" ? "var(--cinnabar-400)" :
@@ -8063,15 +8063,15 @@ function SupplyAdjustmentScreen({ onClose, onSubmit }) {
                             <>
                               <div style={{
                                 fontSize: 13, fontFamily: "var(--font-mono)", fontWeight: 600,
-                                color: diff > 0 ? "var(--jade-700)" :
-                                       diff < 0 ? "var(--cinnabar-700)" : "var(--text-muted)",
+                                color: diff > 0 ? "var(--text-brand)" :
+                                       diff < 0 ? "var(--status-danger-text)" : "var(--text-muted)",
                               }}>
                                 {diff > 0 ? "+" : ""}{diff} {s.unit}
                               </div>
                               {diff !== 0 && (
                                 <div style={{
                                   fontSize: 10, fontFamily: "var(--font-mono)", marginTop: 1,
-                                  color: Math.abs(diffPct) > 20 ? "var(--cinnabar-700)" : "var(--text-muted)",
+                                  color: Math.abs(diffPct) > 20 ? "var(--status-danger-text)" : "var(--text-muted)",
                                 }}>
                                   {diffPct > 0 ? "+" : ""}{diffPct.toFixed(1)}%
                                 </div>
@@ -8156,9 +8156,9 @@ const hdrCs = { ...hdrBaseS, textAlign: "center" };
 
 function SAStatCard({ icon, label, value, sub, tone = "neutral" }) {
   const tones = {
-    neutral: { fg: "var(--text-primary)",  bg: "var(--bg-raised)",  iconFg: "var(--ink-600)" },
-    success: { fg: "var(--jade-800)",      bg: "var(--brand-subtle)",    iconFg: "var(--jade-700)" },
-    danger:  { fg: "var(--cinnabar-700)",  bg: "var(--status-danger-bg)", iconFg: "var(--cinnabar-700)" },
+    neutral: { fg: "var(--text-primary)",  bg: "var(--bg-raised)",  iconFg: "var(--text-secondary)" },
+    success: { fg: "var(--text-brand)",      bg: "var(--brand-subtle)",    iconFg: "var(--text-brand)" },
+    danger:  { fg: "var(--status-danger-text)",  bg: "var(--status-danger-bg)", iconFg: "var(--status-danger-text)" },
   };
   const t = tones[tone];
   return (
@@ -8245,7 +8245,7 @@ function SAReviewPanel({ summary, edits }) {
                     <span style={{ fontSize: 12, fontWeight: 500, color: "var(--text-primary)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{s.name}</span>
                     <span style={{
                       fontSize: 12, fontFamily: "var(--font-mono)", fontWeight: 600,
-                      color: diff > 0 ? "var(--jade-700)" : "var(--cinnabar-700)", flexShrink: 0,
+                      color: diff > 0 ? "var(--text-brand)" : "var(--status-danger-text)", flexShrink: 0,
                     }}>
                       {diff > 0 ? "+" : ""}{diff} {s.unit}
                     </span>
@@ -8268,14 +8268,14 @@ function SAReviewPanel({ summary, edits }) {
 
       <div style={{
         marginTop: "auto", padding: "12px 14px", background: "var(--brand-subtle)",
-        border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)",
+        border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)",
         display: "flex", flexDirection: "column", gap: 8,
       }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
           <span style={{ fontSize: 11, color: "var(--text-secondary)" }}>총 가치 변동</span>
           <span style={{
             fontSize: 16, fontWeight: 600, fontFamily: "var(--font-mono)",
-            color: summary.valueDelta < 0 ? "var(--cinnabar-700)" : summary.valueDelta > 0 ? "var(--jade-800)" : "var(--text-primary)",
+            color: summary.valueDelta < 0 ? "var(--status-danger-text)" : summary.valueDelta > 0 ? "var(--text-brand)" : "var(--text-primary)",
           }}>
             {summary.valueDelta > 0 ? "+" : ""}{won(summary.valueDelta)}
           </span>
@@ -8302,7 +8302,7 @@ function SAConfirmModal({ summary, edits, onClose, onConfirm }) {
         <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 16 }}>
           <div style={{
             width: 36, height: 36, borderRadius: "var(--radius-full)",
-            background: "var(--brand-muted)", color: "var(--jade-700)",
+            background: "var(--brand-muted)", color: "var(--text-brand)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
             <Icon name="check-check" size={18} />
@@ -8318,13 +8318,13 @@ function SAConfirmModal({ summary, edits, onClose, onConfirm }) {
           <SACfRow label="차이 발생" value={`${summary.items}품목`} />
           <SACfRow label="증가 / 감소" value={`+${summary.diffPlus} / −${summary.diffMinus}`} />
           <SACfRow label="가치 변동" value={`${summary.valueDelta > 0 ? "+" : ""}${won(summary.valueDelta)}`}
-                   accent={summary.valueDelta < 0 ? "var(--cinnabar-700)" : "var(--jade-800)"} bold />
+                   accent={summary.valueDelta < 0 ? "var(--status-danger-text)" : "var(--text-brand)"} bold />
         </div>
 
         <div style={{
           marginTop: 14, padding: "10px 12px", background: "var(--status-warning-bg)",
-          border: "1px solid var(--amber-200)", borderRadius: "var(--radius-md)",
-          fontSize: 11, color: "var(--amber-700)", display: "flex", gap: 8,
+          border: "1px solid var(--status-warning-border)", borderRadius: "var(--radius-md)",
+          fontSize: 11, color: "var(--status-warning-text)", display: "flex", gap: 8,
         }}>
           <Icon name="alert-triangle" size={13} style={{ flexShrink: 0, marginTop: 1 }} />
           <span>확정 후에는 개별 항목별 사유만 수정 가능하며 전체 취소는 불가능합니다.</span>
@@ -8554,7 +8554,7 @@ function SuppliesScreen({ onNavigate, onOpenRecSettings, onCreateDrafts }) {
                         <td style={{ padding: "10px 14px" }}>
                           {s.expiry ? <>
                             <div style={{ fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-mono)" }}>{s.expiry}</div>
-                            <div style={{ fontSize: 10, color: dExpiry <= 90 ? "var(--cinnabar-700)" : "var(--text-muted)", fontFamily: "var(--font-mono)", marginTop: 1 }}>D-{dExpiry}</div>
+                            <div style={{ fontSize: 10, color: dExpiry <= 90 ? "var(--status-danger-text)" : "var(--text-muted)", fontFamily: "var(--font-mono)", marginTop: 1 }}>D-{dExpiry}</div>
                           </> : <span style={{ fontSize: 11, color: "var(--text-muted)" }}>—</span>}
                         </td>
                         <td style={{ padding: "10px 14px", fontSize: 12, color: "var(--text-primary)" }}>{s.supplier}</td>
@@ -8586,7 +8586,7 @@ function SuppliesScreen({ onNavigate, onOpenRecSettings, onCreateDrafts }) {
       {toast && (
         <div style={{
           position: "fixed", bottom: 20, left: "50%", transform: "translateX(-50%)",
-          background: "var(--ink-800)", color: "var(--bg-raised)",
+          background: "var(--text-primary)", color: "var(--bg-raised)",
           padding: "10px 18px", borderRadius: "var(--radius-md)",
           fontSize: 13, fontFamily: "var(--font-sans)", boxShadow: "var(--shadow-lg)",
           display: "flex", alignItems: "center", gap: 8, zIndex: 100,
@@ -8721,7 +8721,7 @@ function SPDetailPanel({ item, onIntake, onToast }) {
         <SPFact label="최근 입고"    value={item.lastIn} />
         <SPFact label="유효기간"
                 value={item.expiry ? `${item.expiry} · D-${dExpiry}` : "해당 없음"}
-                accent={item.expiry && dExpiry <= 90 ? "var(--cinnabar-700)" : undefined} />
+                accent={item.expiry && dExpiry <= 90 ? "var(--status-danger-text)" : undefined} />
         <SPFact label="보관 위치"    value={item.location} />
       </div>
 
@@ -8744,7 +8744,7 @@ function SPDetailPanel({ item, onIntake, onToast }) {
                     padding: "1px 6px", borderRadius: "var(--radius-sm)", textAlign: "center",
                   }}>{h.type}</span>
                   <span style={{ fontSize: 11, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{h.note}</span>
-                  <span style={{ fontSize: 12, fontFamily: "var(--font-mono)", color: h.qty > 0 ? "var(--jade-700)" : "var(--text-primary)" }}>
+                  <span style={{ fontSize: 12, fontFamily: "var(--font-mono)", color: h.qty > 0 ? "var(--text-brand)" : "var(--text-primary)" }}>
                     {h.qty > 0 ? "+" : ""}{h.qty} {item.unit}
                   </span>
                 </div>
@@ -8814,7 +8814,7 @@ const PO_STATUS = {
   pending:  { key: "pending",  label: "승인 대기", tone: "warning", color: "var(--amber-600)" },
   sent:     { key: "sent",     label: "발주 완료", tone: "brand",   color: "var(--jade-600)" },
   partial:  { key: "partial",  label: "부분 입고", tone: "brand",   color: "var(--jade-500)" },
-  received: { key: "received", label: "입고 완료", tone: "success", color: "var(--jade-700)" },
+  received: { key: "received", label: "입고 완료", tone: "success", color: "var(--text-brand)" },
   cancelled:{ key: "cancelled",label: "취소",     tone: "neutral", color: "var(--ink-400)" },
   returned: { key: "returned", label: "반품",     tone: "danger",  color: "var(--cinnabar-600)" },
 };
@@ -9329,7 +9329,7 @@ function PurchaseOrderHistoryScreen({ openSettings }) {
           <div style={{ padding: "16px 24px 0", display: "flex", gap: 12 }}>
             <POKpi icon="receipt" label="이번 달 발주" value={`${kpi.monthCount}건`} sub={won(kpi.monthValue)} />
             <POKpi icon="truck"   label="진행 중"     value={`${kpi.inflight}건`} sub="입고 대기"
-              accent={kpi.inflight > 0 ? "var(--jade-700)" : null} />
+              accent={kpi.inflight > 0 ? "var(--text-brand)" : null} />
             <POKpi icon="timer"   label="평균 리드타임" value={`${kpi.avgLead}일`} sub="최근 완료 발주 기준" />
             <POKpi icon="check-circle" label="이번 분기 입고" value={`${PURCHASE_ORDERS.filter(p => p.status === "received").length}건`} sub="완료 발주" />
           </div>
@@ -9371,7 +9371,7 @@ function PurchaseOrderHistoryScreen({ openSettings }) {
                     fontFamily: "var(--font-sans)", fontSize: 12, padding: "5px 12px",
                     border: `1px solid ${typeFilter === t.key ? "var(--jade-500)" : "var(--border-default)"}`,
                     background: typeFilter === t.key ? "var(--brand-subtle)" : "var(--bg-surface)",
-                    color: typeFilter === t.key ? "var(--jade-700)" : "var(--text-secondary)",
+                    color: typeFilter === t.key ? "var(--text-brand)" : "var(--text-secondary)",
                     borderRadius: "var(--radius-full)", cursor: "pointer",
                     fontWeight: typeFilter === t.key ? 600 : 400,
                     display: "inline-flex", alignItems: "center", gap: 5,
@@ -9449,7 +9449,7 @@ function PurchaseOrderHistoryScreen({ openSettings }) {
                             display: "inline-flex", alignItems: "center", justifyContent: "center",
                             width: 24, height: 24, borderRadius: "var(--radius-sm)",
                             background: po.type === "herb" ? "var(--brand-muted)" : "var(--bg-raised)",
-                            color: po.type === "herb" ? "var(--jade-700)" : "var(--ink-600)",
+                            color: po.type === "herb" ? "var(--text-brand)" : "var(--text-secondary)",
                           }}>
                             <Icon name={po.type === "herb" ? "leaf" : "package"} size={12} />
                           </span>
@@ -9470,7 +9470,7 @@ function PurchaseOrderHistoryScreen({ openSettings }) {
                         <td style={{ padding: "10px 14px", fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-mono)" }}>{po.date}</td>
                         <td style={{ padding: "10px 14px", fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-mono)" }}>
                           {po.received ? (
-                            <span style={{ color: delayed ? "var(--cinnabar-700)" : "var(--text-secondary)" }}>
+                            <span style={{ color: delayed ? "var(--status-danger-text)" : "var(--text-secondary)" }}>
                               {po.received}
                               {delayed && <span style={{ marginLeft: 4, fontSize: 10 }}>(지연)</span>}
                             </span>
@@ -9501,7 +9501,7 @@ function PurchaseOrderHistoryScreen({ openSettings }) {
       {toast && (
         <div style={{
           position: "fixed", bottom: 20, left: "50%", transform: "translateX(-50%)",
-          background: "var(--ink-800)", color: "var(--bg-raised)",
+          background: "var(--text-primary)", color: "var(--bg-raised)",
           padding: "10px 18px", borderRadius: "var(--radius-md)",
           fontSize: 13, fontFamily: "var(--font-sans)", boxShadow: "var(--shadow-lg)",
           display: "flex", alignItems: "center", gap: 8, zIndex: 100,
@@ -9524,7 +9524,7 @@ function POKpi({ icon, label, value, sub, accent }) {
     }}>
       <div style={{
         width: 36, height: 36, borderRadius: "var(--radius-md)",
-        background: "var(--brand-subtle)", color: "var(--jade-700)",
+        background: "var(--brand-subtle)", color: "var(--text-brand)",
         display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
       }}>
         <Icon name={icon} size={16} />
@@ -9575,10 +9575,10 @@ function POStatusBar({ orders, statusFilter, onClick }) {
               onMouseEnter={e => { if (!active) e.currentTarget.style.background = "var(--bg-raised)"; }}
               onMouseLeave={e => { if (!active) e.currentTarget.style.background = "transparent"; }}>
               <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
-                <span style={{ fontSize: 22, fontWeight: 600, fontFamily: "var(--font-mono)", color: active ? "var(--jade-700)" : "var(--text-primary)", lineHeight: 1 }}>{s.count}</span>
+                <span style={{ fontSize: 22, fontWeight: 600, fontFamily: "var(--font-mono)", color: active ? "var(--text-brand)" : "var(--text-primary)", lineHeight: 1 }}>{s.count}</span>
                 <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>건</span>
               </div>
-              <div style={{ fontSize: 11, color: active ? "var(--jade-700)" : "var(--text-secondary)", marginTop: 3, fontWeight: active ? 600 : 400 }}>{s.label}</div>
+              <div style={{ fontSize: 11, color: active ? "var(--text-brand)" : "var(--text-secondary)", marginTop: 3, fontWeight: active ? 600 : 400 }}>{s.label}</div>
             </button>
             {i < counts.length - 1 && (
               <Icon name="chevron-right" size={14} style={{ color: "var(--ink-200)", flexShrink: 0 }} />
@@ -9640,7 +9640,7 @@ function PODetailPanel({ po, onToast }) {
                     }}></div>
                     <span style={{
                       fontSize: 9, fontWeight: isCurrent ? 600 : 400,
-                      color: reached ? "var(--jade-700)" : "var(--text-muted)",
+                      color: reached ? "var(--text-brand)" : "var(--text-muted)",
                       whiteSpace: "nowrap",
                     }}>{PO_STATUS[k].label}</span>
                   </div>
@@ -9654,8 +9654,8 @@ function PODetailPanel({ po, onToast }) {
         ) : (
           <div style={{
             padding: "8px 12px", marginTop: 10, background: po.status === "returned" ? "var(--status-danger-bg)" : "var(--bg-raised)",
-            border: `1px solid ${po.status === "returned" ? "var(--cinnabar-200)" : "var(--stone-300)"}`,
-            borderRadius: "var(--radius-md)", fontSize: 11, color: po.status === "returned" ? "var(--cinnabar-700)" : "var(--text-secondary)",
+            border: `1px solid ${po.status === "returned" ? "var(--status-danger-border)" : "var(--stone-300)"}`,
+            borderRadius: "var(--radius-md)", fontSize: 11, color: po.status === "returned" ? "var(--status-danger-text)" : "var(--text-secondary)",
           }}>{st.label} 처리된 발주입니다</div>
         )}
       </div>
@@ -9672,7 +9672,7 @@ function PODetailPanel({ po, onToast }) {
             <POFact
               label="실제 입고일"
               value={`${po.received}${lead ? ` · 리드 ${lead}일` : ""}`}
-              accent={po.expected && new Date(po.received) > new Date(po.expected) ? "var(--cinnabar-700)" : null}
+              accent={po.expected && new Date(po.received) > new Date(po.expected) ? "var(--status-danger-text)" : null}
             />
           )}
           <POFact label="담당자"   value={po.placedBy} />
@@ -9714,8 +9714,8 @@ function PODetailPanel({ po, onToast }) {
         {po.note && (
           <div style={{
             padding: "10px 12px", background: "var(--status-warning-bg)",
-            border: "1px solid var(--amber-200)", borderRadius: "var(--radius-md)",
-            fontSize: 12, color: "var(--amber-700)", lineHeight: 1.5,
+            border: "1px solid var(--status-warning-border)", borderRadius: "var(--radius-md)",
+            fontSize: 12, color: "var(--status-warning-text)", lineHeight: 1.5,
             display: "flex", gap: 8,
           }}>
             <Icon name="message-square" size={13} style={{ flexShrink: 0, marginTop: 2 }} />
@@ -9734,7 +9734,7 @@ function PODetailPanel({ po, onToast }) {
                   position: "absolute", left: -16, top: 4,
                   width: 11, height: 11, borderRadius: "50%",
                   background: i === po.timeline.length - 1 ? "var(--jade-500)" : "var(--bg-surface)",
-                  border: `2px solid ${i === po.timeline.length - 1 ? "var(--jade-200)" : "var(--border-default)"}`,
+                  border: `2px solid ${i === po.timeline.length - 1 ? "var(--brand-muted)" : "var(--border-default)"}`,
                 }}></div>
                 <div style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{t.date} · {t.who}</div>
                 <div style={{ fontSize: 12, color: "var(--text-primary)", marginTop: 1 }}>{t.text}</div>
@@ -9916,14 +9916,14 @@ function PurchaseOrderDraftScreen({ onClose, onSubmit, initialRecommendations })
         color: "white", padding: "10px 24px",
         display: "flex", alignItems: "center", gap: 12,
       }}>
-        <Icon name="sparkles" size={16} style={{ color: "var(--jade-200)" }} />
+        <Icon name="sparkles" size={16} style={{ color: "var(--brand-muted)" }} />
         <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.04em" }}>AI 추천 발주서 초안</div>
         <div style={{ width: 1, height: 14, background: "rgba(255,255,255,0.2)" }}></div>
-        <div style={{ fontSize: 11, color: "var(--jade-200)" }}>
+        <div style={{ fontSize: 11, color: "var(--brand-muted)" }}>
           공급처 {drafts.length}곳 · 총 {totalItems}품목 · 합계 {won(totalAll)} — 검토 후 승인 요청
         </div>
         <div style={{ flex: 1 }}></div>
-        <div style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--jade-200)" }}>
+        <div style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--brand-muted)" }}>
           작성 시각 {TODAY_STR} 14:32
         </div>
       </div>
@@ -9976,7 +9976,7 @@ function PurchaseOrderDraftScreen({ onClose, onSubmit, initialRecommendations })
       {toast && (
         <div style={{
           position: "fixed", bottom: 20, left: "50%", transform: "translateX(-50%)",
-          background: "var(--ink-800)", color: "var(--bg-raised)",
+          background: "var(--text-primary)", color: "var(--bg-raised)",
           padding: "10px 18px", borderRadius: "var(--radius-md)",
           fontSize: 13, fontFamily: "var(--font-sans)", boxShadow: "var(--shadow-lg)",
           display: "flex", alignItems: "center", gap: 8, zIndex: 100,
@@ -10033,7 +10033,7 @@ function PODraftSidebar({ drafts, selectedIdx, onSelect, totalAll }) {
             onMouseEnter={e => { if (!isSel) e.currentTarget.style.background = "var(--bg-raised)"; }}
             onMouseLeave={e => { if (!isSel) e.currentTarget.style.background = "transparent"; }}>
               <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 3 }}>
-                <span style={{ fontSize: 13, fontWeight: 600, color: isSel ? "var(--jade-800)" : "var(--text-primary)", fontFamily: "var(--font-sans)" }}>{d.supplier}</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: isSel ? "var(--text-brand)" : "var(--text-primary)", fontFamily: "var(--font-sans)" }}>{d.supplier}</span>
                 <span style={{ fontSize: 9, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{d.id}</span>
               </div>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
@@ -10042,16 +10042,16 @@ function PODraftSidebar({ drafts, selectedIdx, onSelect, totalAll }) {
               </div>
               <div style={{ display: "flex", gap: 5, marginTop: 6, flexWrap: "wrap" }}>
                 {urgent > 0 && (
-                  <span style={{ fontSize: 9, fontWeight: 600, background: "var(--status-danger-bg)", color: "var(--cinnabar-700)", padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>긴급 {urgent}</span>
+                  <span style={{ fontSize: 9, fontWeight: 600, background: "var(--status-danger-bg)", color: "var(--status-danger-text)", padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>긴급 {urgent}</span>
                 )}
                 {belowMin && (
                   <span title={`최소 발주 ${won(meta.minOrder)}`}
-                        style={{ fontSize: 9, fontWeight: 600, background: "var(--status-warning-bg)", color: "var(--amber-700)", padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>
+                        style={{ fontSize: 9, fontWeight: 600, background: "var(--status-warning-bg)", color: "var(--status-warning-text)", padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>
                     최소금액 미달
                   </span>
                 )}
                 {!urgent && !belowMin && (
-                  <span style={{ fontSize: 9, fontWeight: 500, background: "var(--brand-muted)", color: "var(--jade-700)", padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>준비됨</span>
+                  <span style={{ fontSize: 9, fontWeight: 500, background: "var(--brand-muted)", color: "var(--text-brand)", padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>준비됨</span>
                 )}
               </div>
             </div>
@@ -10080,7 +10080,7 @@ function PODraftEditor({ draft, draftIdx, activeItemKey, onSelectItem, onUpdateD
         <div style={{ display: "flex", alignItems: "flex-start", gap: 16 }}>
           <div style={{
             width: 44, height: 44, borderRadius: "var(--radius-md)",
-            background: "var(--brand-muted)", color: "var(--jade-700)",
+            background: "var(--brand-muted)", color: "var(--text-brand)",
             display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
           }}>
             <Icon name="building-2" size={20} />
@@ -10195,7 +10195,7 @@ function PODraftEditor({ draft, draftIdx, activeItemKey, onSelectItem, onUpdateD
                           display: "inline-flex", alignItems: "center", justifyContent: "center",
                           width: 22, height: 22, borderRadius: "var(--radius-sm)",
                           background: it.kind === "herb" ? "var(--brand-muted)" : "var(--bg-raised)",
-                          color: it.kind === "herb" ? "var(--jade-700)" : "var(--ink-600)",
+                          color: it.kind === "herb" ? "var(--text-brand)" : "var(--text-secondary)",
                           flexShrink: 0,
                         }}>
                           <Icon name={it.kind === "herb" ? "leaf" : "package"} size={11} />
@@ -10210,8 +10210,8 @@ function PODraftEditor({ draft, draftIdx, activeItemKey, onSelectItem, onUpdateD
                       <span style={{
                         display: "inline-block",
                         fontSize: 11, fontWeight: 600, fontFamily: "var(--font-sans)",
-                        color: it.urgency === "high" ? "var(--cinnabar-700)" :
-                               it.urgency === "med"  ? "var(--amber-700)" : "var(--jade-700)",
+                        color: it.urgency === "high" ? "var(--status-danger-text)" :
+                               it.urgency === "med"  ? "var(--status-warning-text)" : "var(--text-brand)",
                         padding: "2px 8px", borderRadius: "var(--radius-full)",
                         background: it.urgency === "high" ? "var(--status-danger-bg)" :
                                     it.urgency === "med"  ? "var(--status-warning-bg)" : "var(--brand-muted)",
@@ -10272,13 +10272,13 @@ function PODraftEditor({ draft, draftIdx, activeItemKey, onSelectItem, onUpdateD
       {belowMin && (
         <div style={{
           padding: "12px 16px", background: "var(--status-warning-bg)",
-          border: "1px solid var(--amber-200)", borderRadius: "var(--radius-md)",
+          border: "1px solid var(--status-warning-border)", borderRadius: "var(--radius-md)",
           display: "flex", alignItems: "flex-start", gap: 10,
         }}>
-          <Icon name="alert-triangle" size={15} style={{ color: "var(--amber-700)", flexShrink: 0, marginTop: 1 }} />
+          <Icon name="alert-triangle" size={15} style={{ color: "var(--status-warning-text)", flexShrink: 0, marginTop: 1 }} />
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 12, fontWeight: 600, color: "var(--amber-700)" }}>최소 발주 금액 미달</div>
-            <div style={{ fontSize: 11, color: "var(--amber-700)", marginTop: 2, lineHeight: 1.5 }}>
+            <div style={{ fontSize: 12, fontWeight: 600, color: "var(--status-warning-text)" }}>최소 발주 금액 미달</div>
+            <div style={{ fontSize: 11, color: "var(--status-warning-text)", marginTop: 2, lineHeight: 1.5 }}>
               {draft.supplier}의 최소 발주 금액은 {won(meta.minOrder)}입니다. 현재 {won(total)} — {won(meta.minOrder - total)} 더 필요합니다.
               승인은 가능하나 공급처 처리 시 배송비가 추가될 수 있습니다.
             </div>
@@ -10332,7 +10332,7 @@ function QtyStepper({ value, unit, kind, onChange, onReset }) {
         <Icon name="plus" size={11} />
       </button>
       <button onClick={onReset} title="추천 수량으로 복원"
-        style={{ ...stepBtn, marginLeft: 2, color: "var(--jade-700)" }}>
+        style={{ ...stepBtn, marginLeft: 2, color: "var(--text-brand)" }}>
         <Icon name="sparkles" size={10} />
       </button>
     </div>
@@ -10405,7 +10405,7 @@ function PODItemDetail({ item, draft }) {
             display: "inline-flex", alignItems: "center", justifyContent: "center",
             width: 30, height: 30, borderRadius: "var(--radius-md)",
             background: item.kind === "herb" ? "var(--brand-muted)" : "var(--bg-raised)",
-            color: item.kind === "herb" ? "var(--jade-700)" : "var(--ink-600)",
+            color: item.kind === "herb" ? "var(--text-brand)" : "var(--text-secondary)",
             flexShrink: 0,
           }}>
             <Icon name={item.kind === "herb" ? "leaf" : "package"} size={14} />
@@ -10422,17 +10422,17 @@ function PODItemDetail({ item, draft }) {
         padding: "12px 14px",
         background: item.urgency === "high" ? "var(--status-danger-bg)" :
                     item.urgency === "med"  ? "var(--status-warning-bg)" : "var(--brand-subtle)",
-        border: `1px solid ${item.urgency === "high" ? "var(--cinnabar-200)" : item.urgency === "med" ? "var(--amber-200)" : "var(--jade-200)"}`,
+        border: `1px solid ${item.urgency === "high" ? "var(--status-danger-border)" : item.urgency === "med" ? "var(--status-warning-border)" : "var(--brand-muted)"}`,
         borderRadius: "var(--radius-md)",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
           <Icon name="sparkles" size={12} style={{
-            color: item.urgency === "high" ? "var(--cinnabar-700)" :
-                   item.urgency === "med"  ? "var(--amber-700)" : "var(--jade-700)" }} />
+            color: item.urgency === "high" ? "var(--status-danger-text)" :
+                   item.urgency === "med"  ? "var(--status-warning-text)" : "var(--text-brand)" }} />
           <span style={{
             fontSize: 11, fontWeight: 700, letterSpacing: "0.04em",
-            color: item.urgency === "high" ? "var(--cinnabar-700)" :
-                   item.urgency === "med"  ? "var(--amber-700)" : "var(--jade-700)",
+            color: item.urgency === "high" ? "var(--status-danger-text)" :
+                   item.urgency === "med"  ? "var(--status-warning-text)" : "var(--text-brand)",
           }}>AI 추천 사유</span>
         </div>
         <div style={{ fontSize: 12, color: "var(--text-primary)", lineHeight: 1.6 }}>
@@ -10456,7 +10456,7 @@ function PODItemDetail({ item, draft }) {
             value={item.kind === "herb" ? fmtMass(item.monthly) : `${item.monthly} ${item.unit}`}
             mono />
           <PODFact label="잔여 일수" value={`${item.daysLeft}일`} mono
-            accent={item.daysLeft <= 7 ? "var(--cinnabar-700)" : item.daysLeft <= 14 ? "var(--amber-700)" : null} />
+            accent={item.daysLeft <= 7 ? "var(--status-danger-text)" : item.daysLeft <= 14 ? "var(--status-warning-text)" : null} />
         </div>
       </div>
 
@@ -10469,7 +10469,7 @@ function PODItemDetail({ item, draft }) {
             value={item.kind === "herb" ? fmtMass(stockAfter) : `${stockAfter} ${item.unit}`}
             mono />
           <PODFact label="다음 발주 예상" value={`${daysAfter}일 후`} mono
-            accent="var(--jade-700)" />
+            accent="var(--text-brand)" />
         </div>
       </div>
 
@@ -10486,12 +10486,12 @@ function PODItemDetail({ item, draft }) {
             <div key={i} style={{
               display: "flex", justifyContent: "space-between", padding: "6px 10px",
               background: p.current ? "var(--brand-subtle)" : "var(--bg-raised)",
-              border: `1px solid ${p.current ? "var(--jade-200)" : "var(--border-subtle)"}`,
+              border: `1px solid ${p.current ? "var(--brand-muted)" : "var(--border-subtle)"}`,
               borderRadius: "var(--radius-sm)",
               fontSize: 11, fontFamily: "var(--font-mono)",
             }}>
-              <span style={{ color: p.current ? "var(--jade-800)" : "var(--text-muted)" }}>{p.date}{p.current && " · 현재"}</span>
-              <span style={{ color: p.current ? "var(--jade-800)" : "var(--text-secondary)", fontWeight: p.current ? 600 : 400 }}>{won(p.price)} / {item.unit}</span>
+              <span style={{ color: p.current ? "var(--text-brand)" : "var(--text-muted)" }}>{p.date}{p.current && " · 현재"}</span>
+              <span style={{ color: p.current ? "var(--text-brand)" : "var(--text-secondary)", fontWeight: p.current ? 600 : 400 }}>{won(p.price)} / {item.unit}</span>
             </div>
           ))}
         </div>
@@ -10523,7 +10523,7 @@ function PODraftConfirmModal({ drafts, totalAll, totalItems, onClose, onConfirm 
         <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 16 }}>
           <div style={{
             width: 38, height: 38, borderRadius: "var(--radius-full)",
-            background: "var(--brand-muted)", color: "var(--jade-700)",
+            background: "var(--brand-muted)", color: "var(--text-brand)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
             <Icon name="send" size={18} />
@@ -10537,15 +10537,15 @@ function PODraftConfirmModal({ drafts, totalAll, totalItems, onClose, onConfirm 
         <div style={{ display: "flex", flexDirection: "column", gap: 1, background: "var(--border-subtle)", borderRadius: "var(--radius-md)", overflow: "hidden", border: "1px solid var(--border-subtle)" }}>
           <PODFact label="발주서 수" value={`${drafts.length}건`} />
           <PODFact label="품목" value={`${totalItems}건`} />
-          {urgentCount > 0 && <PODFact label="긴급 품목 포함" value={`${urgentCount}건`} accent="var(--cinnabar-700)" />}
+          {urgentCount > 0 && <PODFact label="긴급 품목 포함" value={`${urgentCount}건`} accent="var(--status-danger-text)" />}
           <PODFact label="총 발주 금액" value={won(totalAll)} bold />
         </div>
 
         {belowMinCount > 0 && (
           <div style={{
             marginTop: 14, padding: "10px 12px", background: "var(--status-warning-bg)",
-            border: "1px solid var(--amber-200)", borderRadius: "var(--radius-md)",
-            fontSize: 11, color: "var(--amber-700)", display: "flex", gap: 8,
+            border: "1px solid var(--status-warning-border)", borderRadius: "var(--radius-md)",
+            fontSize: 11, color: "var(--status-warning-text)", display: "flex", gap: 8,
           }}>
             <Icon name="alert-triangle" size={13} style={{ flexShrink: 0, marginTop: 1 }} />
             <span>{belowMinCount}개 발주서가 공급처 최소 금액에 미달합니다 — 배송비가 추가될 수 있습니다.</span>
@@ -11004,7 +11004,7 @@ function ExceptionPanel({ s, set, toggleArr }) {
                     fontFamily: "var(--font-sans)", fontSize: 12, padding: "5px 11px",
                     border: `1px solid ${sel ? "var(--cinnabar-400)" : "var(--border-default)"}`,
                     background: sel ? "var(--status-danger-bg)" : "var(--bg-surface)",
-                    color: sel ? "var(--cinnabar-700)" : "var(--text-secondary)",
+                    color: sel ? "var(--status-danger-text)" : "var(--text-secondary)",
                     borderRadius: "var(--radius-full)", cursor: "pointer",
                     fontWeight: sel ? 600 : 400,
                     textDecoration: sel ? "line-through" : "none",
@@ -11030,7 +11030,7 @@ function ExceptionPanel({ s, set, toggleArr }) {
                       fontFamily: "var(--font-sans)", fontSize: 12, padding: "5px 11px",
                       border: `1px solid ${sel ? "var(--cinnabar-400)" : "var(--border-default)"}`,
                       background: sel ? "var(--status-danger-bg)" : "var(--bg-surface)",
-                      color: sel ? "var(--cinnabar-700)" : "var(--text-secondary)",
+                      color: sel ? "var(--status-danger-text)" : "var(--text-secondary)",
                       borderRadius: "var(--radius-full)", cursor: "pointer",
                       fontWeight: sel ? 600 : 400,
                       textDecoration: sel ? "line-through" : "none",
@@ -11139,7 +11139,7 @@ function RSPreviewPanel({ preview, settings }) {
                         display: "inline-flex", alignItems: "center", justifyContent: "center",
                         width: 18, height: 18, borderRadius: "var(--radius-sm)",
                         background: i.kind === "herb" ? "var(--brand-muted)" : "var(--bg-raised)",
-                        color: i.kind === "herb" ? "var(--text-brand)" : "var(--ink-600)",
+                        color: i.kind === "herb" ? "var(--text-brand)" : "var(--text-secondary)",
                       }}>
                         <Icon name={i.kind === "herb" ? "leaf" : "package"} size={10} />
                       </span>
@@ -11156,7 +11156,7 @@ function RSPreviewPanel({ preview, settings }) {
                         fontSize: 9, padding: "2px 6px", borderRadius: "var(--radius-full)",
                         background: i.urgency === "high" ? "var(--status-danger-bg)" :
                                     i.urgency === "med"  ? "var(--status-warning-bg)" : "var(--bg-raised)",
-                        color:      i.urgency === "high" ? "var(--cinnabar-700)" :
+                        color:      i.urgency === "high" ? "var(--status-danger-text)" :
                                     i.urgency === "med"  ? "var(--status-warning-text)" : "var(--text-muted)",
                         fontWeight: 600, fontFamily: "var(--font-sans)",
                       }}>
@@ -11740,7 +11740,7 @@ function PeriodAndSummary({
               )}
             </SumLine>
             <SumLine label="청구 합계" bold>
-              <span style={{ fontFamily: "var(--font-mono)", fontWeight: 700, color: "var(--jade-700)", fontSize: 14 }}>
+              <span style={{ fontFamily: "var(--font-mono)", fontWeight: 700, color: "var(--text-brand)", fontSize: 14 }}>
                 {KRW2(summary.totalClaim)}
               </span>
             </SumLine>
@@ -11791,7 +11791,7 @@ function RadioRow({ checked, onClick, children }) {
       display: "flex", alignItems: "center", gap: 6,
       padding: "6px 8px", borderRadius: "var(--radius-sm)",
       background: checked ? "var(--brand-subtle)" : "transparent",
-      border: `1px solid ${checked ? "var(--jade-200)" : "transparent"}`,
+      border: `1px solid ${checked ? "var(--brand-muted)" : "transparent"}`,
       cursor: "pointer", transition: "all 0.12s",
     }}>
       <span style={{
@@ -11881,7 +11881,7 @@ function FilterBar({ search, setSearch, kindFilter, setKindFilter,
         display: "inline-flex", alignItems: "center", gap: 5,
         padding: "7px 12px", fontSize: 12, fontWeight: 500,
         background: errorOnly ? "var(--status-danger-bg)" : "var(--bg-surface)",
-        color: errorOnly ? "var(--cinnabar-700)" : "var(--text-secondary)",
+        color: errorOnly ? "var(--status-danger-text)" : "var(--text-secondary)",
         border: `1px solid ${errorOnly ? "var(--cinnabar-300)" : "var(--border-default)"}`,
         borderRadius: "var(--radius-md)",
         cursor: "pointer", fontFamily: "var(--font-sans)",
@@ -11922,7 +11922,7 @@ function FilterBar({ search, setSearch, kindFilter, setKindFilter,
             background: density === d.k ? "var(--bg-surface)" : "transparent",
             border: "none", borderRadius: "var(--radius-sm)",
             cursor: "pointer",
-            color: density === d.k ? "var(--jade-700)" : "var(--text-muted)",
+            color: density === d.k ? "var(--text-brand)" : "var(--text-muted)",
             display: "inline-flex", alignItems: "center",
             boxShadow: density === d.k ? "var(--shadow-sm)" : "none",
             transition: "all 0.12s",
@@ -12032,7 +12032,7 @@ function ClaimsTable({ type, items, selected, setSelected, excluded, setExcluded
               <span style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                 {isError && (
                   <span title={it.error.msg} style={{ marginRight: 4 }}>
-                    <Icon name="alert-triangle" size={12} style={{ color: "var(--cinnabar-700)" }} />
+                    <Icon name="alert-triangle" size={12} style={{ color: "var(--status-danger-text)" }} />
                   </span>
                 )}
                 <input type="checkbox"
@@ -12100,13 +12100,13 @@ function ClaimsTable({ type, items, selected, setSelected, excluded, setExcluded
                 <div style={{
                   gridColumn: "1 / -1",
                   marginTop: 4, padding: "4px 12px 4px 28px",
-                  fontSize: 11, color: "var(--cinnabar-800)",
+                  fontSize: 11, color: "var(--status-danger-text)",
                   fontFamily: "var(--font-sans)",
                   background: "var(--status-danger-bg)",
                   borderTop: "1px dashed var(--cinnabar-300)",
                   display: "flex", alignItems: "center", gap: 6,
                 }}>
-                  <span style={{ fontFamily: "var(--font-mono)", fontWeight: 700, fontSize: 10, color: "var(--cinnabar-800)" }}>{it.error.code}</span>
+                  <span style={{ fontFamily: "var(--font-mono)", fontWeight: 700, fontSize: 10, color: "var(--status-danger-text)" }}>{it.error.code}</span>
                   <span>{it.error.msg}</span>
                 </div>
               )}
@@ -12140,10 +12140,10 @@ function NumCell({ children, strong }) {
 }
 function KindBadge({ value }) {
   const colors = {
-    "보험": { bg: "var(--brand-subtle)", fg: "var(--jade-700)", bd: "var(--jade-200)" },
-    "의료급여": { bg: "var(--status-warning-bg)", fg: "var(--amber-700)", bd: "var(--amber-200)" },
-    "시범사업": { bg: "var(--status-warning-bg)", fg: "var(--amber-700)", bd: "var(--amber-200)" },
-    "자동차": { bg: "var(--status-danger-bg)", fg: "var(--cinnabar-700)", bd: "var(--cinnabar-200)" },
+    "보험": { bg: "var(--brand-subtle)", fg: "var(--text-brand)", bd: "var(--brand-muted)" },
+    "의료급여": { bg: "var(--status-warning-bg)", fg: "var(--status-warning-text)", bd: "var(--status-warning-border)" },
+    "시범사업": { bg: "var(--status-warning-bg)", fg: "var(--status-warning-text)", bd: "var(--status-warning-border)" },
+    "자동차": { bg: "var(--status-danger-bg)", fg: "var(--status-danger-text)", bd: "var(--status-danger-border)" },
   };
   const c = colors[value] || colors["보험"];
   return <span style={{
@@ -12193,8 +12193,8 @@ function ActionBar({ type, summary, selected, errorCount, onSubmitAll, onSubmitS
             display: "flex", flexDirection: "column",
             paddingLeft: 10, borderLeft: "1px solid var(--stone-300)",
           }}>
-            <span style={{ fontSize: 10, color: "var(--cinnabar-700)", letterSpacing: "0.04em" }}>오류</span>
-            <span style={{ fontFamily: "var(--font-mono)", fontSize: 14, fontWeight: 700, color: "var(--cinnabar-700)", lineHeight: 1.1 }}>
+            <span style={{ fontSize: 10, color: "var(--status-danger-text)", letterSpacing: "0.04em" }}>오류</span>
+            <span style={{ fontFamily: "var(--font-mono)", fontSize: 14, fontWeight: 700, color: "var(--status-danger-text)", lineHeight: 1.1 }}>
               {errorCount}건
             </span>
           </div>
@@ -12208,7 +12208,7 @@ function ActionBar({ type, summary, selected, errorCount, onSubmitAll, onSubmitS
         style={{
           padding: "10px 18px", fontSize: 13, fontWeight: 600,
           background: selected === 0 ? "var(--bg-raised)" : "var(--bg-surface)",
-          color: selected === 0 ? "var(--text-disabled)" : "var(--jade-700)",
+          color: selected === 0 ? "var(--text-disabled)" : "var(--text-brand)",
           border: `1px solid ${selected === 0 ? "var(--border-subtle)" : "var(--jade-300)"}`,
           borderRadius: "var(--radius-md)",
           cursor: selected === 0 ? "not-allowed" : "pointer",
@@ -12406,7 +12406,7 @@ function ClaimSubmissionFlow({ items, type, summary, onClose, scenario }) {
           <div style={{ flex: 1 }}>
             <div style={{
               fontSize: 11, fontWeight: 600, letterSpacing: "0.08em",
-              color: "var(--jade-200)", textTransform: "uppercase",
+              color: "var(--brand-muted)", textTransform: "uppercase",
               fontFamily: "var(--font-sans)",
             }}>심평원 진료비 청구 · HIRA Claim API</div>
             <div style={{
@@ -12434,8 +12434,8 @@ function ClaimSubmissionFlow({ items, type, summary, onClose, scenario }) {
           display: "flex", gap: 28,
         }}>
           <StripStat label="청구 건수" value={`${items.length}건`} />
-          <StripStat label="정상" value={`${totalNonError}건`} color="var(--jade-700)" />
-          <StripStat label="오류 의심" value={`${errorItems.length}건`} color={errorItems.length > 0 ? "var(--cinnabar-700)" : "var(--text-muted)"} />
+          <StripStat label="정상" value={`${totalNonError}건`} color="var(--text-brand)" />
+          <StripStat label="오류 의심" value={`${errorItems.length}건`} color={errorItems.length > 0 ? "var(--status-danger-text)" : "var(--text-muted)"} />
           <StripStat label="청구 합계" value={KRW2(totalAmount)} mono />
         </div>
 
@@ -12470,11 +12470,11 @@ function ClaimSubmissionFlow({ items, type, summary, onClose, scenario }) {
                 display: "flex", alignItems: "center", gap: 8,
                 padding: "6px 12px",
                 background: "var(--status-warning-bg)",
-                border: "1px solid var(--amber-200)",
+                border: "1px solid var(--status-warning-border)",
                 borderRadius: "var(--radius-md)",
               }}>
-                <Icon name="alert-circle" size={14} style={{ color: "var(--amber-700)" }} />
-                <span style={{ fontSize: 12, color: "var(--amber-700)", fontWeight: 500, fontFamily: "var(--font-sans)" }}>
+                <Icon name="alert-circle" size={14} style={{ color: "var(--status-warning-text)" }} />
+                <span style={{ fontSize: 12, color: "var(--status-warning-text)", fontWeight: 500, fontFamily: "var(--font-sans)" }}>
                   사전점검 결과 오류가 발견되었습니다. 진행 방식을 선택하세요.
                 </span>
               </div>
@@ -12511,11 +12511,11 @@ function ClaimSubmissionFlow({ items, type, summary, onClose, scenario }) {
                 display: "flex", alignItems: "center", gap: 8,
                 padding: "6px 12px",
                 background: "var(--brand-subtle)",
-                border: "1px solid var(--jade-200)",
+                border: "1px solid var(--brand-muted)",
                 borderRadius: "var(--radius-md)",
               }}>
-                <Icon name="check-circle-2" size={14} style={{ color: "var(--jade-700)" }} />
-                <span style={{ fontSize: 12, color: "var(--jade-700)", fontWeight: 600, fontFamily: "var(--font-sans)" }}>
+                <Icon name="check-circle-2" size={14} style={{ color: "var(--text-brand)" }} />
+                <span style={{ fontSize: 12, color: "var(--text-brand)", fontWeight: 600, fontFamily: "var(--font-sans)" }}>
                   실청구 완료 — 접수번호 HIRA-2026-{String(Math.floor(Math.random() * 90000) + 10000)}
                 </span>
               </div>
@@ -12562,9 +12562,9 @@ function StageRow({ stage, idx, status, isLast, expanded, details }) {
   const statusConfig = {
     pending: { icon: "circle", color: "var(--text-disabled)", bg: "var(--bg-raised)", label: "대기" },
     running: { icon: "loader-2", color: "var(--jade-600)", bg: "var(--brand-subtle)", label: "진행 중" },
-    success: { icon: "check", color: "var(--jade-700)", bg: "var(--brand-muted)", label: "완료" },
-    warning: { icon: "alert-triangle", color: "var(--amber-700)", bg: "var(--status-warning-bg)", label: "검토 필요" },
-    error:   { icon: "x", color: "var(--cinnabar-700)", bg: "var(--status-danger-bg)", label: "실패" },
+    success: { icon: "check", color: "var(--text-brand)", bg: "var(--brand-muted)", label: "완료" },
+    warning: { icon: "alert-triangle", color: "var(--status-warning-text)", bg: "var(--status-warning-bg)", label: "검토 필요" },
+    error:   { icon: "x", color: "var(--status-danger-text)", bg: "var(--status-danger-bg)", label: "실패" },
   };
   const s = statusConfig[status] || statusConfig.pending;
   const isActive = status === "running" || status === "warning";
@@ -12656,7 +12656,7 @@ function PretestResults({ results }) {
         borderBottom: "1px solid var(--border-subtle)",
         display: "flex", alignItems: "center", gap: 10,
       }}>
-        <Icon name="clipboard-check" size={13} style={{ color: "var(--jade-700)" }} />
+        <Icon name="clipboard-check" size={13} style={{ color: "var(--text-brand)" }} />
         <span style={{ fontSize: 12, fontWeight: 600, color: "var(--text-primary)" }}>
           심평원 점검 결과
         </span>
@@ -12667,7 +12667,7 @@ function PretestResults({ results }) {
       {errors.length === 0 ? (
         <div style={{
           padding: "16px 14px", textAlign: "center",
-          color: "var(--jade-700)", fontSize: 13, fontWeight: 500,
+          color: "var(--text-brand)", fontSize: 13, fontWeight: 500,
         }}>
           <Icon name="check-circle-2" size={18} style={{ color: "var(--jade-600)", marginBottom: 6 }} />
           <div>모든 명세서가 사전점검을 통과했습니다.</div>
@@ -12682,7 +12682,7 @@ function PretestResults({ results }) {
             }}>
               <span style={{
                 fontFamily: "var(--font-mono)", fontSize: 10, fontWeight: 700,
-                color: "#fff", background: "var(--cinnabar-700)",
+                color: "#fff", background: "var(--status-danger-text)",
                 padding: "2px 6px", borderRadius: "var(--radius-sm)",
                 flexShrink: 0, marginTop: 1,
               }}>{e.code}</span>
@@ -12948,8 +12948,8 @@ function InsuranceClaimScreen() {
 function PillStat({ icon, label, value, tone, mono }) {
   const tones = {
     neutral: { bg: "var(--bg-raised)", fg: "var(--text-secondary)", bd: "var(--border-subtle)", iconColor: "var(--text-muted)" },
-    brand:   { bg: "var(--brand-subtle)", fg: "var(--jade-700)", bd: "var(--jade-200)", iconColor: "var(--jade-600)" },
-    danger:  { bg: "var(--status-danger-bg)", fg: "var(--cinnabar-700)", bd: "var(--cinnabar-200)", iconColor: "var(--cinnabar-600)" },
+    brand:   { bg: "var(--brand-subtle)", fg: "var(--text-brand)", bd: "var(--brand-muted)", iconColor: "var(--jade-600)" },
+    danger:  { bg: "var(--status-danger-bg)", fg: "var(--status-danger-text)", bd: "var(--status-danger-border)", iconColor: "var(--cinnabar-600)" },
   };
   const t = tones[tone] || tones.neutral;
   return (
@@ -13039,12 +13039,12 @@ const PP_PATIENTS = [
 ];
 
 const PP_TAG_COLORS = {
-  "VIP":      { bg: "var(--status-warning-bg)",   color: "var(--amber-700)" },
-  "자보":     { bg: "var(--status-danger-bg)", color: "var(--cinnabar-700)" },
-  "초진":     { bg: "var(--brand-subtle)",     color: "var(--jade-700)" },
-  "갱년기":   { bg: "var(--status-warning-bg)",   color: "var(--amber-700)" },
-  "불면증":   { bg: "var(--stone-200)",   color: "var(--ink-600)" },
-  "산정특례": { bg: "var(--brand-muted)",    color: "var(--jade-700)" },
+  "VIP":      { bg: "var(--status-warning-bg)",   color: "var(--status-warning-text)" },
+  "자보":     { bg: "var(--status-danger-bg)", color: "var(--status-danger-text)" },
+  "초진":     { bg: "var(--brand-subtle)",     color: "var(--text-brand)" },
+  "갱년기":   { bg: "var(--status-warning-bg)",   color: "var(--status-warning-text)" },
+  "불면증":   { bg: "var(--bg-raised)",   color: "var(--text-secondary)" },
+  "산정특례": { bg: "var(--brand-muted)",    color: "var(--text-brand)" },
 };
 
 const TODAY_STR = "2026-05-16";
@@ -13097,7 +13097,7 @@ function PPRow({ patient, selected, onClick, onPick, isCurrent }) {
           <span style={{ fontSize: 11, color: "var(--text-muted)" }}>{patient.gender} · {patient.age}세</span>
           <span style={{ fontSize: 10.5, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{patient.rrn}</span>
           {isCurrent && (
-            <span style={{ fontSize: 9.5, fontWeight: 700, padding: "1px 6px", background: "var(--ink-100)", color: "var(--ink-600)", borderRadius: 999, letterSpacing: "0.04em" }}>현재</span>
+            <span style={{ fontSize: 9.5, fontWeight: 700, padding: "1px 6px", background: "var(--ink-100)", color: "var(--text-secondary)", borderRadius: 999, letterSpacing: "0.04em" }}>현재</span>
           )}
           {patient.tags && patient.tags.length > 0 && (
             <span style={{ display: "inline-flex", gap: 3 }}>
@@ -13114,7 +13114,7 @@ function PPRow({ patient, selected, onClick, onPick, isCurrent }) {
       <div style={{ textAlign: "right", display: "flex", flexDirection: "column", gap: 3, alignItems: "flex-end" }}>
         <div style={{
           fontSize: 10.5, fontFamily: "var(--font-mono)",
-          color: today ? "var(--jade-700)" : "var(--text-muted)",
+          color: today ? "var(--text-brand)" : "var(--text-muted)",
           fontWeight: today ? 600 : 400,
         }}>{patient.lastVisit}</div>
         <div style={{ fontSize: 9.5, color: today ? "var(--jade-600)" : "var(--text-muted)", letterSpacing: "0.04em" }}>
@@ -13194,11 +13194,11 @@ function PPPreview({ patient }) {
 
       <div style={{
         marginTop: 16, padding: "10px 12px", background: "var(--brand-subtle)",
-        border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)",
+        border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)",
         display: "flex", alignItems: "flex-start", gap: 8,
       }}>
-        <Icon name="info" size={13} style={{ color: "var(--jade-700)", marginTop: 1, flexShrink: 0 }} />
-        <div style={{ fontSize: 11.5, color: "var(--jade-700)", lineHeight: 1.55 }}>
+        <Icon name="info" size={13} style={{ color: "var(--text-brand)", marginTop: 1, flexShrink: 0 }} />
+        <div style={{ fontSize: 11.5, color: "var(--text-brand)", lineHeight: 1.55 }}>
           이 환자로 변경하면 입력 중인 서식 데이터가 새 환자 정보로 자동 갱신됩니다. 진단 내용은 그대로 유지됩니다.
         </div>
       </div>
@@ -13270,7 +13270,7 @@ function PatientPickerModal({ currentPatientId, onClose, onSelect }) {
         }}>
           <div>
             <div style={{ fontSize: 17, fontWeight: 700, color: "var(--text-primary)", display: "flex", alignItems: "center", gap: 8 }}>
-              <Icon name="user-round-search" size={17} style={{ color: "var(--jade-700)" }} />
+              <Icon name="user-round-search" size={17} style={{ color: "var(--text-brand)" }} />
               환자 변경
             </div>
             <div style={{ fontSize: 11.5, color: "var(--text-muted)", marginTop: 3 }}>
@@ -14052,13 +14052,13 @@ function InjuryEditor({ data, onChange, clinic, patient, onChangePatient }) {
     <div style={{ display: "flex", flexDirection: "column" }}>
       <PanelSection
         title="환자 정보"
-        right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--jade-700)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}>
+        right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--text-brand)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}>
           <Icon name="arrow-left-right" size={11} /> 환자 변경
         </button>}
       >
         <div style={{
           display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)",
-          border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)",
+          border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)",
         }}>
           <Avatar name={patient.name} size={34} />
           <div style={{ flex: 1 }}>
@@ -14109,7 +14109,7 @@ function InjuryEditor({ data, onChange, clinic, patient, onChangePatient }) {
           <MiniField label="질병분류기호 (KCD)">
             <div style={{ position: "relative" }}>
               <TextField value={data.icdCodes} onChange={set("icdCodes")} mono placeholder="S43.4, M75.1" />
-              <span style={{ position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", display: "inline-flex", alignItems: "center", gap: 3, fontSize: 10, color: "var(--jade-700)", background: "var(--brand-subtle)", padding: "2px 6px", borderRadius: 4, border: "1px solid var(--jade-200)" }}>
+              <span style={{ position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", display: "inline-flex", alignItems: "center", gap: 3, fontSize: 10, color: "var(--text-brand)", background: "var(--brand-subtle)", padding: "2px 6px", borderRadius: 4, border: "1px solid var(--brand-muted)" }}>
                 <Icon name="sparkles" size={9} /> AI 추천
               </span>
             </div>
@@ -14149,7 +14149,7 @@ function InjuryEditor({ data, onChange, clinic, patient, onChangePatient }) {
 
       <PanelSection
         title="치료 기간 및 향후 소견"
-        right={<button style={{ background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", color: "var(--jade-700)", padding: "3px 8px", borderRadius: 999, fontSize: 10.5, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}>
+        right={<button style={{ background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", color: "var(--text-brand)", padding: "3px 8px", borderRadius: 999, fontSize: 10.5, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}>
           <Icon name="wand-2" size={10} /> AI로 작성
         </button>}
       >
@@ -14608,8 +14608,8 @@ function ReferralEditor({ data, onChange, clinic, patient, onChangePatient }) {
   const set = (k) => (v) => onChange({ ...data, [k]: v });
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <PanelSection title="환자 정보" right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--jade-700)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}><Icon name="arrow-left-right" size={11} /> 환자 변경</button>}>
-        <div style={{ display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)" }}>
+      <PanelSection title="환자 정보" right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--text-brand)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}><Icon name="arrow-left-right" size={11} /> 환자 변경</button>}>
+        <div style={{ display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)" }}>
           <Avatar name={patient.name} size={34} />
           <div style={{ flex: 1 }}>
             <div style={{ display: "flex", gap: 8, alignItems: "baseline" }}>
@@ -14655,8 +14655,8 @@ function OpinionEditor({ data, onChange, clinic, patient, onChangePatient }) {
   const set = (k) => (v) => onChange({ ...data, [k]: v });
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <PanelSection title="환자 정보" right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--jade-700)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}><Icon name="arrow-left-right" size={11} /> 환자 변경</button>}>
-        <div style={{ display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)" }}>
+      <PanelSection title="환자 정보" right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--text-brand)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}><Icon name="arrow-left-right" size={11} /> 환자 변경</button>}>
+        <div style={{ display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)" }}>
           <Avatar name={patient.name} size={34} />
           <div style={{ flex: 1 }}>
             <div style={{ display: "flex", gap: 8, alignItems: "baseline" }}>
@@ -14678,7 +14678,7 @@ function OpinionEditor({ data, onChange, clinic, patient, onChangePatient }) {
           <MiniField label="진단 연월일"><TextField type="date" value={data.diagnosisDate} onChange={set("diagnosisDate")} mono /></MiniField>
         </div>
       </PanelSection>
-      <PanelSection title="소견 내용" right={<button style={{ background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", color: "var(--jade-700)", padding: "3px 8px", borderRadius: 999, fontSize: 10.5, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}><Icon name="wand-2" size={10} /> AI로 작성</button>}>
+      <PanelSection title="소견 내용" right={<button style={{ background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", color: "var(--text-brand)", padding: "3px 8px", borderRadius: 999, fontSize: 10.5, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}><Icon name="wand-2" size={10} /> AI로 작성</button>}>
         <TextArea rows={7} value={data.opinion} onChange={set("opinion")} placeholder="환자 상태 및 소견을 기재하십시오." />
       </PanelSection>
       <PanelSection title="발급">
@@ -14708,8 +14708,8 @@ function CertEditor({ data, onChange, patient, onChangePatient, certType }) {
   );
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <PanelSection title="환자 정보" right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--jade-700)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}><Icon name="arrow-left-right" size={11} /> 환자 변경</button>}>
-        <div style={{ display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)" }}>
+      <PanelSection title="환자 정보" right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--text-brand)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}><Icon name="arrow-left-right" size={11} /> 환자 변경</button>}>
+        <div style={{ display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)" }}>
           <Avatar name={patient.name} size={34} />
           <div style={{ flex: 1 }}>
             <div style={{ display: "flex", gap: 8, alignItems: "baseline" }}>
@@ -15031,11 +15031,11 @@ function BillingEditor({ data, onChange, patient, onChangePatient, label }) {
     <div style={{ display: "flex", flexDirection: "column" }}>
       <PanelSection
         title="환자 정보"
-        right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--jade-700)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}>
+        right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--text-brand)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}>
           <Icon name="arrow-left-right" size={11} /> 환자 변경
         </button>}
       >
-        <div style={{ display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)" }}>
+        <div style={{ display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)" }}>
           <Avatar name={patient.name} size={34} />
           <div style={{ flex: 1 }}>
             <div style={{ display: "flex", gap: 8, alignItems: "baseline" }}>
@@ -15067,9 +15067,9 @@ function BillingEditor({ data, onChange, patient, onChangePatient, label }) {
               </div>
             );
           })}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 10px", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-sm)", fontSize: 12, marginTop: 4 }}>
-            <span style={{ fontWeight: 600, color: "var(--jade-700)" }}>환자 납부 총액</span>
-            <span style={{ fontFamily: "var(--font-mono)", fontWeight: 700, color: "var(--jade-700)" }}>{(totalSelf + totalNon).toLocaleString("ko-KR")} 원</span>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 10px", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-sm)", fontSize: 12, marginTop: 4 }}>
+            <span style={{ fontWeight: 600, color: "var(--text-brand)" }}>환자 납부 총액</span>
+            <span style={{ fontFamily: "var(--font-mono)", fontWeight: 700, color: "var(--text-brand)" }}>{(totalSelf + totalNon).toLocaleString("ko-KR")} 원</span>
           </div>
         </div>
       </PanelSection>
@@ -15103,7 +15103,7 @@ function PlaceholderPreviewA4({ label, desc }) {
       }}>
         <Icon name="file-text" size={26} style={{ color: "var(--ink-400)" }} />
       </div>
-      <div style={{ fontFamily: "var(--font-serif)", fontSize: 24, color: "var(--ink-700)", letterSpacing: "0.4em", paddingLeft: "0.4em" }}>{label}</div>
+      <div style={{ fontFamily: "var(--font-serif)", fontSize: 24, color: "var(--text-primary)", letterSpacing: "0.4em", paddingLeft: "0.4em" }}>{label}</div>
       <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 8 }}>{desc}</div>
       <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 36, padding: "8px 16px", border: "1px solid var(--border-subtle)", borderRadius: 999, background: "var(--bg-raised)" }}>
         템플릿 준비 중 · 진단서 양식 우선 출시
@@ -15187,13 +15187,13 @@ function DiagnosisEditor({ data, onChange, clinic, patient, onChangePatient }) {
       {/* Patient context (read-only, auto-fetched) */}
       <PanelSection
         title="환자 정보"
-        right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--jade-700)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}>
+        right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--text-brand)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}>
           <Icon name="arrow-left-right" size={11} /> 환자 변경
         </button>}
       >
         <div style={{
           display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)",
-          border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)",
+          border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)",
         }}>
           <Avatar name={patient.name} size={34} />
           <div style={{ flex: 1 }}>
@@ -15246,7 +15246,7 @@ function DiagnosisEditor({ data, onChange, clinic, patient, onChangePatient }) {
           <MiniField label="질병분류기호 (KCD)">
             <div style={{ position: "relative" }}>
               <TextField value={data.icdCodes} onChange={set("icdCodes")} mono placeholder="S13.4, M54.2" />
-              <span style={{ position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", display: "inline-flex", alignItems: "center", gap: 3, fontSize: 10, color: "var(--jade-700)", background: "var(--brand-subtle)", padding: "2px 6px", borderRadius: 4, border: "1px solid var(--jade-200)" }}>
+              <span style={{ position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", display: "inline-flex", alignItems: "center", gap: 3, fontSize: 10, color: "var(--text-brand)", background: "var(--brand-subtle)", padding: "2px 6px", borderRadius: 4, border: "1px solid var(--brand-muted)" }}>
                 <Icon name="sparkles" size={9} /> AI 추천
               </span>
             </div>
@@ -15261,7 +15261,7 @@ function DiagnosisEditor({ data, onChange, clinic, patient, onChangePatient }) {
       {/* Treatment opinion */}
       <PanelSection
         title="치료 내용 및 향후 소견"
-        right={<button style={{ background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", color: "var(--jade-700)", padding: "3px 8px", borderRadius: 999, fontSize: 10.5, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}>
+        right={<button style={{ background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", color: "var(--text-brand)", padding: "3px 8px", borderRadius: 999, fontSize: 10.5, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}>
           <Icon name="wand-2" size={10} /> AI로 작성
         </button>}
       >
@@ -15455,7 +15455,7 @@ function MedicalFormScreen() {
               style={{
                 border: "none", background: "transparent", padding: "12px 12px 11px",
                 fontSize: 13, fontWeight: active ? 600 : 500,
-                color: active ? "var(--jade-700)" : "var(--text-secondary)",
+                color: active ? "var(--text-brand)" : "var(--text-secondary)",
                 borderBottom: `2px solid ${active ? "var(--jade-500)" : "transparent"}`,
                 cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 6,
                 marginBottom: -1, fontFamily: "var(--font-sans)",
@@ -15642,7 +15642,7 @@ function MedicalFormScreen() {
             <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{MF_HISTORY.length}건</span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <span style={{ fontSize: 11.5, fontWeight: 600, color: "var(--jade-700)" }}>전체 보기</span>
+            <span style={{ fontSize: 11.5, fontWeight: 600, color: "var(--text-brand)" }}>전체 보기</span>
             <Icon name={historyOpen ? "chevron-down" : "chevron-up"} size={14} style={{ color: "var(--text-muted)" }} />
           </div>
         </button>
@@ -15925,7 +15925,7 @@ function PatientInstructionModal({ patient, onClose }) {
           padding: "14px 22px", borderBottom: "1px solid var(--border-subtle)",
           background: "var(--bg-surface)", flexShrink: 0,
         }}>
-          <div style={{ width: 36, height: 36, borderRadius: "var(--radius-md)", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+          <div style={{ width: 36, height: 36, borderRadius: "var(--radius-md)", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
             <Icon name="sparkles" size={17} style={{ color: "var(--jade-600)" }} />
           </div>
           <div style={{ flex: 1, minWidth: 0 }}>
@@ -15943,9 +15943,9 @@ function PatientInstructionModal({ patient, onClose }) {
               {todayDx.map(dx => (
                 <span key={dx.code} style={{
                   display: "inline-flex", alignItems: "center", gap: 4,
-                  fontSize: 10, color: dx.primary ? "var(--jade-700)" : "var(--text-secondary)",
+                  fontSize: 10, color: dx.primary ? "var(--text-brand)" : "var(--text-secondary)",
                   background: dx.primary ? "var(--brand-subtle)" : "var(--bg-raised)",
-                  border: `1px solid ${dx.primary ? "var(--jade-200)" : "var(--border-subtle)"}`,
+                  border: `1px solid ${dx.primary ? "var(--brand-muted)" : "var(--border-subtle)"}`,
                   borderRadius: "var(--radius-full)", padding: "1px 7px",
                 }}>
                   <span style={{ fontFamily: "var(--font-mono)", fontWeight: 600 }}>{dx.code}</span>
@@ -16003,7 +16003,7 @@ function PatientInstructionModal({ patient, onClose }) {
                     <div style={{ fontSize: 11, color: "var(--text-muted)" }}>{p.dx}</div>
                     <div style={{ display: "flex", gap: 5, marginTop: 8 }}>
                       <button style={{ fontSize: 10, padding: "3px 9px", border: "1px solid var(--border-default)", background: "var(--bg-surface)", borderRadius: "var(--radius-sm)", cursor: "pointer", color: "var(--text-secondary)", fontFamily: "var(--font-sans)" }}>본문 보기</button>
-                      <button style={{ fontSize: 10, padding: "3px 9px", border: "1px solid var(--jade-300)", background: "var(--brand-subtle)", borderRadius: "var(--radius-sm)", cursor: "pointer", color: "var(--jade-700)", fontFamily: "var(--font-sans)", fontWeight: 500 }}>이 안내문으로 시작</button>
+                      <button style={{ fontSize: 10, padding: "3px 9px", border: "1px solid var(--jade-300)", background: "var(--brand-subtle)", borderRadius: "var(--radius-sm)", cursor: "pointer", color: "var(--text-brand)", fontFamily: "var(--font-sans)", fontWeight: 500 }}>이 안내문으로 시작</button>
                     </div>
                   </div>
                 ))}
@@ -16109,7 +16109,7 @@ function PatientInstructionModal({ patient, onClose }) {
                   <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 16px", borderBottom: "1px solid var(--border-subtle)", background: "var(--bg-raised)" }}>
                     <Icon name="grip-vertical" size={12} style={{ color: "var(--text-muted)", cursor: "grab" }} />
                     <div style={{ width: 22, height: 22, borderRadius: "var(--radius-sm)", background: "var(--brand-muted)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                      <Icon name={s.icon} size={12} style={{ color: "var(--jade-700)" }} />
+                      <Icon name={s.icon} size={12} style={{ color: "var(--text-brand)" }} />
                     </div>
                     <span style={{ fontSize: 13, fontWeight: 600 }}>{idx + 1}. {s.title}</span>
                     {s.custom && <Badge variant="neutral">자유 메모</Badge>}
@@ -16156,11 +16156,11 @@ function PatientInstructionModal({ patient, onClose }) {
                     )}
 
                     {showHanja && s.hanjaTerms.length > 0 && (
-                      <div style={{ marginTop: 10, padding: "8px 10px", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)", display: "flex", flexWrap: "wrap", gap: 8, alignItems: "flex-start" }}>
+                      <div style={{ marginTop: 10, padding: "8px 10px", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)", display: "flex", flexWrap: "wrap", gap: 8, alignItems: "flex-start" }}>
                         <Icon name="graduation-cap" size={11} style={{ color: "var(--jade-600)", marginTop: 2, flexShrink: 0 }} />
                         <div style={{ display: "flex", flexWrap: "wrap", gap: "4px 12px" }}>
                           {s.hanjaTerms.map(t => (
-                            <div key={t.term} style={{ fontSize: 10, color: "var(--jade-700)" }}>
+                            <div key={t.term} style={{ fontSize: 10, color: "var(--text-brand)" }}>
                               <strong>{t.term}({t.hanja})</strong> <span style={{ color: "var(--jade-600)" }}>· {t.desc}</span>
                             </div>
                           ))}
@@ -16223,7 +16223,7 @@ function PatientInstructionModal({ patient, onClose }) {
       {sentToast && (
         <div style={{
           position: "fixed", bottom: 40, left: "50%", transform: "translateX(-50%)",
-          background: "var(--ink-800)", color: "var(--bg-raised)",
+          background: "var(--text-primary)", color: "var(--bg-raised)",
           padding: "10px 18px", borderRadius: "var(--radius-md)",
           fontSize: 13, boxShadow: "var(--shadow-lg)",
           display: "flex", alignItems: "center", gap: 8, zIndex: 300,
@@ -16269,7 +16269,7 @@ function PIKakaoPreview({ sections, tone, length, patient, doctor, todayDate, cl
                 <div key={s.id}>
                   <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 3 }}>
                     <Icon name={s.icon} size={10} style={{ color: "var(--jade-600)" }} />
-                    <span style={{ fontSize: 10, fontWeight: 700, color: "var(--jade-700)" }}>{s.title}</span>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: "var(--text-brand)" }}>{s.title}</span>
                   </div>
                   <div style={{ fontSize: 10.5, lineHeight: 1.55, color: "#333" }}>
                     {s.body[tone][length].length > 100 ? s.body[tone][length].slice(0, 100) + "…" : s.body[tone][length]}
@@ -16277,21 +16277,21 @@ function PIKakaoPreview({ sections, tone, length, patient, doctor, todayDate, cl
                 </div>
               ))}
               {sections.length > 4 && (
-                <div style={{ textAlign: "center", padding: "6px 0", fontSize: 10, color: "var(--jade-700)", borderTop: "1px solid #eee" }}>
+                <div style={{ textAlign: "center", padding: "6px 0", fontSize: 10, color: "var(--text-brand)", borderTop: "1px solid #eee" }}>
                   ▼ 전체 안내문 열기 ({sections.length - 4}개 더)
                 </div>
               )}
             </div>
             <div style={{ borderTop: "1px solid #eee", padding: "8px 12px", display: "flex", gap: 6 }}>
-              <div style={{ flex: 1, padding: "5px 0", textAlign: "center", fontSize: 10, color: "var(--jade-700)", fontWeight: 500, border: "1px solid #e4e4e4", borderRadius: 6 }}>PDF 보기</div>
-              <div style={{ flex: 1, padding: "5px 0", textAlign: "center", fontSize: 10, color: "var(--jade-700)", fontWeight: 500, border: "1px solid #e4e4e4", borderRadius: 6 }}>예약 확인</div>
+              <div style={{ flex: 1, padding: "5px 0", textAlign: "center", fontSize: 10, color: "var(--text-brand)", fontWeight: 500, border: "1px solid #e4e4e4", borderRadius: 6 }}>PDF 보기</div>
+              <div style={{ flex: 1, padding: "5px 0", textAlign: "center", fontSize: 10, color: "var(--text-brand)", fontWeight: 500, border: "1px solid #e4e4e4", borderRadius: 6 }}>예약 확인</div>
             </div>
           </div>
 
           <div style={{ background: "white", padding: "8px 10px", borderRadius: "12px", maxWidth: "90%", fontSize: 11, lineHeight: 1.55, color: "#191919" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 3 }}>
               <Icon name="calendar-check" size={10} style={{ color: "var(--jade-600)" }} />
-              <strong style={{ fontSize: 10, color: "var(--jade-700)" }}>다음 예약</strong>
+              <strong style={{ fontSize: 10, color: "var(--text-brand)" }}>다음 예약</strong>
             </div>
             {nextAppt}<br />
             <span style={{ color: "var(--text-muted)" }}>변경 필요 시 답장 부탁드려요.</span>
@@ -16526,18 +16526,18 @@ const ROLE_GROUPS = [
 ];
 
 const STATUS_META = {
-  active:   { label: "재직",  bg: "var(--jade-50)",     color: "var(--jade-700)",     border: "var(--jade-200)",     dot: "var(--jade-500)" },
-  leave:    { label: "휴직",  bg: "var(--amber-100)",   color: "var(--amber-700)",    border: "var(--amber-200)",    dot: "var(--amber-500)" },
-  resigned: { label: "퇴직",  bg: "var(--stone-200)",   color: "var(--ink-600)",      border: "var(--stone-300)",    dot: "var(--ink-300)" },
+  active:   { label: "재직",  bg: "var(--brand-subtle)",     color: "var(--text-brand)",     border: "var(--brand-muted)",     dot: "var(--jade-500)" },
+  leave:    { label: "휴직",  bg: "var(--status-warning-bg)",   color: "var(--status-warning-text)",    border: "var(--status-warning-border)",    dot: "var(--amber-500)" },
+  resigned: { label: "퇴직",  bg: "var(--bg-raised)",   color: "var(--text-secondary)",      border: "var(--border-subtle)",    dot: "var(--ink-300)" },
 };
 
 const TODAY_STATUS_META = {
-  진료중:   { color: "var(--jade-700)",     bg: "var(--jade-100)",     dot: "var(--jade-500)" },
-  진료대기: { color: "var(--amber-700)",    bg: "var(--amber-100)",    dot: "var(--amber-500)" },
-  휴식:     { color: "var(--ink-600)",      bg: "var(--stone-200)",    dot: "var(--ink-300)" },
-  부재:     { color: "var(--cinnabar-700)", bg: "var(--cinnabar-100)", dot: "var(--cinnabar-500)" },
-  휴직:     { color: "var(--amber-700)",    bg: "var(--amber-100)",    dot: "var(--amber-500)" },
-  퇴직:     { color: "var(--ink-600)",      bg: "var(--stone-200)",    dot: "var(--ink-300)" },
+  진료중:   { color: "var(--text-brand)",     bg: "var(--brand-subtle)",     dot: "var(--jade-500)" },
+  진료대기: { color: "var(--status-warning-text)",    bg: "var(--status-warning-bg)",    dot: "var(--amber-500)" },
+  휴식:     { color: "var(--text-secondary)",      bg: "var(--bg-raised)",    dot: "var(--ink-300)" },
+  부재:     { color: "var(--status-danger-text)", bg: "var(--status-danger-bg)", dot: "var(--cinnabar-500)" },
+  휴직:     { color: "var(--status-warning-text)",    bg: "var(--status-warning-bg)",    dot: "var(--amber-500)" },
+  퇴직:     { color: "var(--text-secondary)",      bg: "var(--bg-raised)",    dot: "var(--ink-300)" },
 };
 
 Object.assign(window, { STAFF_MASTER, ROLE_GROUPS, STATUS_META, TODAY_STATUS_META });
@@ -16693,7 +16693,7 @@ function SRSectionCard({ step, icon, title, hint, children }) {
   return (
     <div style={{ background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-lg)", overflow: "hidden", flexShrink: 0 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 18px", borderBottom: "1px solid var(--border-subtle)", background: "var(--bg-raised)" }}>
-        <div style={{ width: 24, height: 24, borderRadius: "50%", background: "var(--brand-muted)", color: "var(--jade-700)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700 }}>{step}</div>
+        <div style={{ width: 24, height: 24, borderRadius: "50%", background: "var(--brand-muted)", color: "var(--text-brand)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700 }}>{step}</div>
         <Icon name={icon} size={15} style={{ color: "var(--jade-600)" }} />
         <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>{title}</span>
         {hint && <span style={{ marginLeft: "auto", fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>{hint}</span>}
@@ -16776,7 +16776,7 @@ function NewStaffModal({ onClose, onSubmit, initialData }) {
       }}>
         {/* Header */}
         <div style={{ display: "flex", alignItems: "center", gap: 14, padding: "16px 22px", background: "var(--bg-surface)", borderBottom: "1px solid var(--border-subtle)" }}>
-          <div style={{ width: 38, height: 38, borderRadius: "var(--radius-md)", background: "var(--brand-muted)", color: "var(--jade-700)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ width: 38, height: 38, borderRadius: "var(--radius-md)", background: "var(--brand-muted)", color: "var(--text-brand)", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <Icon name="user-plus" size={18} />
           </div>
           <div style={{ flex: 1 }}>
@@ -16945,7 +16945,7 @@ function NewStaffModal({ onClose, onSubmit, initialData }) {
                         padding: "5px 12px", borderRadius: "var(--radius-full)",
                         border: `1px solid ${active ? "var(--jade-300)" : "var(--border-default)"}`,
                         background: active ? "var(--brand-muted)" : "var(--bg-surface)",
-                        color: active ? "var(--jade-700)" : "var(--text-secondary)",
+                        color: active ? "var(--text-brand)" : "var(--text-secondary)",
                         fontSize: 12, fontWeight: active ? 600 : 400, cursor: "pointer",
                         fontFamily: "var(--font-sans)", transition: "all 0.12s",
                       }}>
@@ -16979,7 +16979,7 @@ function NewStaffModal({ onClose, onSubmit, initialData }) {
                       return (
                         <label key={p.key} style={{
                           display: "flex", alignItems: "center", gap: 10, padding: "8px 12px",
-                          border: `1px solid ${active ? "var(--jade-200)" : "var(--border-subtle)"}`,
+                          border: `1px solid ${active ? "var(--brand-muted)" : "var(--border-subtle)"}`,
                           background: active ? "var(--brand-subtle)" : "var(--bg-surface)",
                           borderRadius: "var(--radius-md)", cursor: "pointer",
                         }}>
@@ -17077,13 +17077,13 @@ function StaffFilterSidebar({ filter, setFilter, counts }) {
         display: "flex", alignItems: "center", gap: 8, padding: "7px 10px",
         borderRadius: "var(--radius-md)", cursor: "pointer",
         background: active ? "var(--brand-muted)" : "transparent",
-        color: active ? "var(--jade-700)" : "var(--text-secondary)",
+        color: active ? "var(--text-brand)" : "var(--text-secondary)",
         fontSize: 12, fontWeight: active ? 600 : 400,
         fontFamily: "var(--font-sans)", transition: "all 0.12s",
       }}>
         <Icon name={item.icon} size={13} style={item.color && !active ? { color: item.color } : undefined} />
         <span style={{ flex: 1 }}>{item.label}</span>
-        <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: active ? "var(--jade-700)" : "var(--text-muted)" }}>
+        <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: active ? "var(--text-brand)" : "var(--text-muted)" }}>
           {counts[item.key] ?? 0}
         </span>
       </div>
@@ -17222,11 +17222,11 @@ function ScheduleGrid({ schedule }) {
           <div key={d} style={{
             padding: "6px 4px", borderRadius: "var(--radius-sm)",
             background: off ? "var(--bg-raised)" : "var(--brand-subtle)",
-            border: `1px solid ${off ? "var(--border-subtle)" : "var(--jade-200)"}`,
+            border: `1px solid ${off ? "var(--border-subtle)" : "var(--brand-muted)"}`,
             textAlign: "center",
           }}>
-            <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.05em", color: off ? "var(--text-muted)" : "var(--jade-700)", fontFamily: "var(--font-sans)" }}>{d}</div>
-            <div style={{ fontSize: 10, fontFamily: "var(--font-mono)", color: off ? "var(--text-muted)" : "var(--jade-800)", marginTop: 2 }}>{v}</div>
+            <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.05em", color: off ? "var(--text-muted)" : "var(--text-brand)", fontFamily: "var(--font-sans)" }}>{d}</div>
+            <div style={{ fontSize: 10, fontFamily: "var(--font-mono)", color: off ? "var(--text-muted)" : "var(--text-brand)", marginTop: 2 }}>{v}</div>
           </div>
         );
       })}
@@ -17303,14 +17303,14 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
           <button key={t.k} onClick={() => setTab(t.k)} style={{
             padding: "10px 12px", border: "none", background: "transparent", cursor: "pointer",
             fontSize: 12, fontWeight: tab === t.k ? 600 : 400,
-            color: tab === t.k ? "var(--jade-700)" : "var(--text-muted)",
+            color: tab === t.k ? "var(--text-brand)" : "var(--text-muted)",
             borderBottom: `2px solid ${tab === t.k ? "var(--jade-500)" : "transparent"}`,
             display: "inline-flex", alignItems: "center", gap: 5,
             fontFamily: "var(--font-sans)", marginBottom: -1,
           }}>
             <Icon name={t.i} size={12} />{t.l}
             {t.count != null && (
-              <span style={{ fontSize: 10, fontWeight: 600, color: "var(--jade-700)", background: "var(--brand-muted)", padding: "0 5px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-mono)" }}>
+              <span style={{ fontSize: 10, fontWeight: 600, color: "var(--text-brand)", background: "var(--brand-muted)", padding: "0 5px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-mono)" }}>
                 {t.count}
               </span>
             )}
@@ -17356,10 +17356,10 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
               <ScheduleGrid schedule={staff.schedule} />
             </div>
 
-            <div style={{ background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)", padding: 12, display: "flex", alignItems: "center", gap: 12 }}>
+            <div style={{ background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)", padding: 12, display: "flex", alignItems: "center", gap: 12 }}>
               <Icon name="clock" size={18} style={{ color: "var(--jade-600)" }} />
               <div style={{ flex: 1 }}>
-                <div style={{ fontSize: 11, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-sans)" }}>오늘 근무</div>
+                <div style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-sans)" }}>오늘 근무</div>
                 <div style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-mono)", marginTop: 2 }}>{staff.todayHours}</div>
               </div>
               <TodayStatusPill status={staff.todayStatus} />
@@ -17404,7 +17404,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
                       padding: "4px 10px", borderRadius: "var(--radius-full)",
                       border: `1px solid ${active ? "var(--jade-300)" : "var(--border-default)"}`,
                       background: active ? "var(--brand-muted)" : "var(--bg-surface)",
-                      color: active ? "var(--jade-700)" : "var(--text-secondary)",
+                      color: active ? "var(--text-brand)" : "var(--text-secondary)",
                       fontSize: 11, fontWeight: active ? 600 : 400, cursor: "pointer",
                       fontFamily: "var(--font-sans)", transition: "all 0.12s",
                     }}>
@@ -17486,7 +17486,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
                     return (
                       <div key={p.key} style={{
                         display: "flex", alignItems: "center", gap: 10, padding: "9px 12px",
-                        border: `1px solid ${granted ? "var(--jade-200)" : "var(--border-subtle)"}`,
+                        border: `1px solid ${granted ? "var(--brand-muted)" : "var(--border-subtle)"}`,
                         background: granted ? "var(--brand-subtle)" : "var(--bg-surface)",
                         borderRadius: "var(--radius-md)",
                       }}>
@@ -17523,7 +17523,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
                       <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>
                         <span style={{ fontFamily: "var(--font-mono)" }}>{used}</span> / {total}일 사용
                       </span>
-                      <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>잔여 <span style={{ color: "var(--jade-700)", fontWeight: 600, fontFamily: "var(--font-mono)" }}>{total - used}일</span></span>
+                      <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>잔여 <span style={{ color: "var(--text-brand)", fontWeight: 600, fontFamily: "var(--font-mono)" }}>{total - used}일</span></span>
                     </div>
                     <div style={{ height: 6, background: "var(--bg-raised)", borderRadius: "var(--radius-full)", overflow: "hidden" }}>
                       <div style={{ width: `${pct}%`, height: "100%", background: "var(--jade-500)", borderRadius: "var(--radius-full)" }} />
@@ -17544,7 +17544,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
                   <div style={{ fontSize: 12, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>{staff.salary.type}</div>
                   <div style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>금액은 원장 권한으로만 조회 가능</div>
                 </div>
-                <button style={{ fontSize: 11, color: "var(--jade-700)", background: "transparent", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-sm)", padding: "3px 9px", cursor: "pointer", fontFamily: "var(--font-sans)" }}>조회</button>
+                <button style={{ fontSize: 11, color: "var(--text-brand)", background: "transparent", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-sm)", padding: "3px 9px", cursor: "pointer", fontFamily: "var(--font-sans)" }}>조회</button>
               </div>
             </div>
 
@@ -17613,9 +17613,9 @@ function SummaryTiles({ staff }) {
 
   const toneColor = (t) => ({
     neutral: { bg: "var(--bg-raised)",   icon: "var(--ink-500)",      val: "var(--text-primary)" },
-    brand:   { bg: "var(--brand-muted)",    icon: "var(--jade-700)",     val: "var(--jade-700)" },
-    warning: { bg: "var(--status-warning-bg)",   icon: "var(--amber-700)",    val: "var(--amber-700)" },
-    info:    { bg: "var(--status-danger-bg)", icon: "var(--cinnabar-700)", val: "var(--cinnabar-700)" },
+    brand:   { bg: "var(--brand-muted)",    icon: "var(--text-brand)",     val: "var(--text-brand)" },
+    warning: { bg: "var(--status-warning-bg)",   icon: "var(--status-warning-text)",    val: "var(--status-warning-text)" },
+    info:    { bg: "var(--status-danger-bg)", icon: "var(--status-danger-text)", val: "var(--status-danger-text)" },
   })[t];
 
   return (

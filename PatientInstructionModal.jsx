@@ -50,7 +50,7 @@ function PatientInstructionModal({ patient, onClose }) {
           padding: "14px 22px", borderBottom: "1px solid var(--border-subtle)",
           background: "var(--bg-surface)", flexShrink: 0,
         }}>
-          <div style={{ width: 36, height: 36, borderRadius: "var(--radius-md)", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+          <div style={{ width: 36, height: 36, borderRadius: "var(--radius-md)", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
             <Icon name="sparkles" size={17} style={{ color: "var(--jade-600)" }} />
           </div>
           <div style={{ flex: 1, minWidth: 0 }}>
@@ -68,9 +68,9 @@ function PatientInstructionModal({ patient, onClose }) {
               {todayDx.map(dx => (
                 <span key={dx.code} style={{
                   display: "inline-flex", alignItems: "center", gap: 4,
-                  fontSize: 10, color: dx.primary ? "var(--jade-700)" : "var(--text-secondary)",
+                  fontSize: 10, color: dx.primary ? "var(--text-brand)" : "var(--text-secondary)",
                   background: dx.primary ? "var(--brand-subtle)" : "var(--bg-raised)",
-                  border: `1px solid ${dx.primary ? "var(--jade-200)" : "var(--border-subtle)"}`,
+                  border: `1px solid ${dx.primary ? "var(--brand-muted)" : "var(--border-subtle)"}`,
                   borderRadius: "var(--radius-full)", padding: "1px 7px",
                 }}>
                   <span style={{ fontFamily: "var(--font-mono)", fontWeight: 600 }}>{dx.code}</span>
@@ -128,7 +128,7 @@ function PatientInstructionModal({ patient, onClose }) {
                     <div style={{ fontSize: 11, color: "var(--text-muted)" }}>{p.dx}</div>
                     <div style={{ display: "flex", gap: 5, marginTop: 8 }}>
                       <button style={{ fontSize: 10, padding: "3px 9px", border: "1px solid var(--border-default)", background: "var(--bg-surface)", borderRadius: "var(--radius-sm)", cursor: "pointer", color: "var(--text-secondary)", fontFamily: "var(--font-sans)" }}>본문 보기</button>
-                      <button style={{ fontSize: 10, padding: "3px 9px", border: "1px solid var(--jade-300)", background: "var(--brand-subtle)", borderRadius: "var(--radius-sm)", cursor: "pointer", color: "var(--jade-700)", fontFamily: "var(--font-sans)", fontWeight: 500 }}>이 안내문으로 시작</button>
+                      <button style={{ fontSize: 10, padding: "3px 9px", border: "1px solid var(--jade-300)", background: "var(--brand-subtle)", borderRadius: "var(--radius-sm)", cursor: "pointer", color: "var(--text-brand)", fontFamily: "var(--font-sans)", fontWeight: 500 }}>이 안내문으로 시작</button>
                     </div>
                   </div>
                 ))}
@@ -234,7 +234,7 @@ function PatientInstructionModal({ patient, onClose }) {
                   <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 16px", borderBottom: "1px solid var(--border-subtle)", background: "var(--bg-raised)" }}>
                     <Icon name="grip-vertical" size={12} style={{ color: "var(--text-muted)", cursor: "grab" }} />
                     <div style={{ width: 22, height: 22, borderRadius: "var(--radius-sm)", background: "var(--brand-muted)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                      <Icon name={s.icon} size={12} style={{ color: "var(--jade-700)" }} />
+                      <Icon name={s.icon} size={12} style={{ color: "var(--text-brand)" }} />
                     </div>
                     <span style={{ fontSize: 13, fontWeight: 600 }}>{idx + 1}. {s.title}</span>
                     {s.custom && <Badge variant="neutral">자유 메모</Badge>}
@@ -281,11 +281,11 @@ function PatientInstructionModal({ patient, onClose }) {
                     )}
 
                     {showHanja && s.hanjaTerms.length > 0 && (
-                      <div style={{ marginTop: 10, padding: "8px 10px", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)", display: "flex", flexWrap: "wrap", gap: 8, alignItems: "flex-start" }}>
+                      <div style={{ marginTop: 10, padding: "8px 10px", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)", display: "flex", flexWrap: "wrap", gap: 8, alignItems: "flex-start" }}>
                         <Icon name="graduation-cap" size={11} style={{ color: "var(--jade-600)", marginTop: 2, flexShrink: 0 }} />
                         <div style={{ display: "flex", flexWrap: "wrap", gap: "4px 12px" }}>
                           {s.hanjaTerms.map(t => (
-                            <div key={t.term} style={{ fontSize: 10, color: "var(--jade-700)" }}>
+                            <div key={t.term} style={{ fontSize: 10, color: "var(--text-brand)" }}>
                               <strong>{t.term}({t.hanja})</strong> <span style={{ color: "var(--jade-600)" }}>· {t.desc}</span>
                             </div>
                           ))}
@@ -348,7 +348,7 @@ function PatientInstructionModal({ patient, onClose }) {
       {sentToast && (
         <div style={{
           position: "fixed", bottom: 40, left: "50%", transform: "translateX(-50%)",
-          background: "var(--ink-800)", color: "var(--bg-raised)",
+          background: "var(--text-primary)", color: "var(--bg-raised)",
           padding: "10px 18px", borderRadius: "var(--radius-md)",
           fontSize: 13, boxShadow: "var(--shadow-lg)",
           display: "flex", alignItems: "center", gap: 8, zIndex: 300,
@@ -394,7 +394,7 @@ function PIKakaoPreview({ sections, tone, length, patient, doctor, todayDate, cl
                 <div key={s.id}>
                   <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 3 }}>
                     <Icon name={s.icon} size={10} style={{ color: "var(--jade-600)" }} />
-                    <span style={{ fontSize: 10, fontWeight: 700, color: "var(--jade-700)" }}>{s.title}</span>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: "var(--text-brand)" }}>{s.title}</span>
                   </div>
                   <div style={{ fontSize: 10.5, lineHeight: 1.55, color: "#333" }}>
                     {s.body[tone][length].length > 100 ? s.body[tone][length].slice(0, 100) + "…" : s.body[tone][length]}
@@ -402,21 +402,21 @@ function PIKakaoPreview({ sections, tone, length, patient, doctor, todayDate, cl
                 </div>
               ))}
               {sections.length > 4 && (
-                <div style={{ textAlign: "center", padding: "6px 0", fontSize: 10, color: "var(--jade-700)", borderTop: "1px solid #eee" }}>
+                <div style={{ textAlign: "center", padding: "6px 0", fontSize: 10, color: "var(--text-brand)", borderTop: "1px solid #eee" }}>
                   ▼ 전체 안내문 열기 ({sections.length - 4}개 더)
                 </div>
               )}
             </div>
             <div style={{ borderTop: "1px solid #eee", padding: "8px 12px", display: "flex", gap: 6 }}>
-              <div style={{ flex: 1, padding: "5px 0", textAlign: "center", fontSize: 10, color: "var(--jade-700)", fontWeight: 500, border: "1px solid #e4e4e4", borderRadius: 6 }}>PDF 보기</div>
-              <div style={{ flex: 1, padding: "5px 0", textAlign: "center", fontSize: 10, color: "var(--jade-700)", fontWeight: 500, border: "1px solid #e4e4e4", borderRadius: 6 }}>예약 확인</div>
+              <div style={{ flex: 1, padding: "5px 0", textAlign: "center", fontSize: 10, color: "var(--text-brand)", fontWeight: 500, border: "1px solid #e4e4e4", borderRadius: 6 }}>PDF 보기</div>
+              <div style={{ flex: 1, padding: "5px 0", textAlign: "center", fontSize: 10, color: "var(--text-brand)", fontWeight: 500, border: "1px solid #e4e4e4", borderRadius: 6 }}>예약 확인</div>
             </div>
           </div>
 
           <div style={{ background: "white", padding: "8px 10px", borderRadius: "12px", maxWidth: "90%", fontSize: 11, lineHeight: 1.55, color: "#191919" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 3 }}>
               <Icon name="calendar-check" size={10} style={{ color: "var(--jade-600)" }} />
-              <strong style={{ fontSize: 10, color: "var(--jade-700)" }}>다음 예약</strong>
+              <strong style={{ fontSize: 10, color: "var(--text-brand)" }}>다음 예약</strong>
             </div>
             {nextAppt}<br />
             <span style={{ color: "var(--text-muted)" }}>변경 필요 시 답장 부탁드려요.</span>

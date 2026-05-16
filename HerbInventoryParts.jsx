@@ -28,7 +28,7 @@ function HIKpiStrip({ herbs, alerts, openPOs }) {
       <HIKpi label="등록 약재" value={`${totalKinds}종`} sub="현재 활성 품목" />
       <HIKpi label="재고 가치" value={won(totalValue)} sub="현재 단가 기준" />
       <HIKpi label="주의 필요" value={`${lowCount}건`} sub="부족 · 임박 합계"
-        accent={lowCount ? "var(--cinnabar-700)" : undefined} />
+        accent={lowCount ? "var(--status-danger-text)" : undefined} />
       <HIKpi label="진행 중 발주" value={`${poInflight}건`} sub="입고 대기" />
     </div>
   );
@@ -72,7 +72,7 @@ function HIAICard({ suggestions, onApply, onDismiss, onOpenSettings }) {
               <tr key={s.id} style={{ borderTop: "1px solid var(--border-subtle)" }}>
                 <td style={{ padding: "7px 12px", fontSize: 13, fontWeight: 500, color: "var(--text-primary)" }}>{s.name}</td>
                 <td style={{ padding: "7px 12px", fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-mono)" }}>{fmtMass(s.monthly)}</td>
-                <td style={{ padding: "7px 12px", fontSize: 12, color: "var(--cinnabar-700)", fontFamily: "var(--font-mono)" }}>{s.daysLeft}일</td>
+                <td style={{ padding: "7px 12px", fontSize: 12, color: "var(--status-danger-text)", fontFamily: "var(--font-mono)" }}>{s.daysLeft}일</td>
                 <td style={{ padding: "7px 12px", fontSize: 12, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)" }}>{fmtMass(s.suggestQty)}</td>
                 <td style={{ padding: "7px 12px", fontSize: 12, color: "var(--text-primary)", fontFamily: "var(--font-mono)" }}>{won(s.suggestQty * s.unitPrice)}</td>
               </tr>
@@ -102,10 +102,10 @@ function HIAlertSection({ alerts, onPick }) {
     }}>
       <div style={{ padding: "10px 16px", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid var(--status-danger-border)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <Icon name="alert-triangle" size={15} style={{ color: "var(--cinnabar-700)" }} />
+          <Icon name="alert-triangle" size={15} style={{ color: "var(--status-danger-text)" }} />
           <span style={{ fontSize: 13, fontWeight: 600, color: "var(--status-danger-text)", fontFamily: "var(--font-sans)" }}>주의 필요 · {alerts.length}건</span>
         </div>
-        <span style={{ fontSize: 11, color: "var(--cinnabar-700)", fontFamily: "var(--font-sans)" }}>클릭 시 상세 패널 열기</span>
+        <span style={{ fontSize: 11, color: "var(--status-danger-text)", fontFamily: "var(--font-sans)" }}>클릭 시 상세 패널 열기</span>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 1, background: "var(--status-danger-border)" }}>
         {alerts.map(a => {
@@ -127,7 +127,7 @@ function HIAlertSection({ alerts, onPick }) {
               </div>
               <div style={{ fontSize: 11, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", display: "flex", justifyContent: "space-between" }}>
                 <span>{a.category} · {fmtMass(a.stock)}</span>
-                <span style={{ color: "var(--cinnabar-700)", fontFamily: "var(--font-mono)" }}>{reason}</span>
+                <span style={{ color: "var(--status-danger-text)", fontFamily: "var(--font-mono)" }}>{reason}</span>
               </div>
             </div>
           );

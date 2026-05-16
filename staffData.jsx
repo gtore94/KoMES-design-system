@@ -193,18 +193,18 @@ const ROLE_GROUPS = [
 ];
 
 const STATUS_META = {
-  active:   { label: "재직",  bg: "var(--jade-50)",     color: "var(--jade-700)",     border: "var(--jade-200)",     dot: "var(--jade-500)" },
-  leave:    { label: "휴직",  bg: "var(--amber-100)",   color: "var(--amber-700)",    border: "var(--amber-200)",    dot: "var(--amber-500)" },
-  resigned: { label: "퇴직",  bg: "var(--stone-200)",   color: "var(--ink-600)",      border: "var(--stone-300)",    dot: "var(--ink-300)" },
+  active:   { label: "재직",  bg: "var(--brand-subtle)",     color: "var(--text-brand)",     border: "var(--brand-muted)",     dot: "var(--jade-500)" },
+  leave:    { label: "휴직",  bg: "var(--status-warning-bg)",   color: "var(--status-warning-text)",    border: "var(--status-warning-border)",    dot: "var(--amber-500)" },
+  resigned: { label: "퇴직",  bg: "var(--bg-raised)",   color: "var(--text-secondary)",      border: "var(--border-subtle)",    dot: "var(--ink-300)" },
 };
 
 const TODAY_STATUS_META = {
-  진료중:   { color: "var(--jade-700)",     bg: "var(--jade-100)",     dot: "var(--jade-500)" },
-  진료대기: { color: "var(--amber-700)",    bg: "var(--amber-100)",    dot: "var(--amber-500)" },
-  휴식:     { color: "var(--ink-600)",      bg: "var(--stone-200)",    dot: "var(--ink-300)" },
-  부재:     { color: "var(--cinnabar-700)", bg: "var(--cinnabar-100)", dot: "var(--cinnabar-500)" },
-  휴직:     { color: "var(--amber-700)",    bg: "var(--amber-100)",    dot: "var(--amber-500)" },
-  퇴직:     { color: "var(--ink-600)",      bg: "var(--stone-200)",    dot: "var(--ink-300)" },
+  진료중:   { color: "var(--text-brand)",     bg: "var(--brand-subtle)",     dot: "var(--jade-500)" },
+  진료대기: { color: "var(--status-warning-text)",    bg: "var(--status-warning-bg)",    dot: "var(--amber-500)" },
+  휴식:     { color: "var(--text-secondary)",      bg: "var(--bg-raised)",    dot: "var(--ink-300)" },
+  부재:     { color: "var(--status-danger-text)", bg: "var(--status-danger-bg)", dot: "var(--cinnabar-500)" },
+  휴직:     { color: "var(--status-warning-text)",    bg: "var(--status-warning-bg)",    dot: "var(--amber-500)" },
+  퇴직:     { color: "var(--text-secondary)",      bg: "var(--bg-raised)",    dot: "var(--ink-300)" },
 };
 
 Object.assign(window, { STAFF_MASTER, ROLE_GROUPS, STATUS_META, TODAY_STATUS_META });

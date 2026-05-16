@@ -76,19 +76,19 @@ function PrescriptionScreen({ patient, onBack }) {
 
         {/* AI Suggestion banner */}
         {showAI && (
-          <div style={{ background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-lg)", padding: "14px 18px" }}>
+          <div style={{ background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-lg)", padding: "14px 18px" }}>
             <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 8 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <Icon name="sparkles" size={16} style={{ color: "var(--jade-600)" }} />
-                <span style={{ fontSize: 13, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-sans)" }}>AI 추천: {AI_SUGGESTION.name}</span>
-                <span style={{ fontSize: 12, background: "var(--brand-muted)", color: "var(--jade-700)", padding: "1px 7px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>적합도 {AI_SUGGESTION.confidence}%</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-sans)" }}>AI 추천: {AI_SUGGESTION.name}</span>
+                <span style={{ fontSize: 12, background: "var(--brand-muted)", color: "var(--text-brand)", padding: "1px 7px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>적합도 {AI_SUGGESTION.confidence}%</span>
               </div>
               <button onClick={() => setShowAI(false)} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--jade-400)", fontSize: 16, lineHeight: 1, padding: 0 }}>×</button>
             </div>
             <div style={{ fontSize: 12, color: "var(--jade-600)", fontFamily: "var(--font-sans)", marginBottom: 10, lineHeight: 1.5 }}>{AI_SUGGESTION.rationale}</div>
             <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 10 }}>
               {AI_SUGGESTION.herbs.map(h => (
-                <span key={h.name} style={{ fontSize: 11, background: "var(--brand-muted)", color: "var(--jade-700)", padding: "3px 9px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-mono)" }}>
+                <span key={h.name} style={{ fontSize: 11, background: "var(--brand-muted)", color: "var(--text-brand)", padding: "3px 9px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-mono)" }}>
                   {h.name} {h.dose}g
                 </span>
               ))}

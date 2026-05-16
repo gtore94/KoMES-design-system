@@ -112,14 +112,14 @@ function PurchaseOrderDraftScreen({ onClose, onSubmit, initialRecommendations })
         color: "white", padding: "10px 24px",
         display: "flex", alignItems: "center", gap: 12,
       }}>
-        <Icon name="sparkles" size={16} style={{ color: "var(--jade-200)" }} />
+        <Icon name="sparkles" size={16} style={{ color: "var(--brand-muted)" }} />
         <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.04em" }}>AI 추천 발주서 초안</div>
         <div style={{ width: 1, height: 14, background: "rgba(255,255,255,0.2)" }}></div>
-        <div style={{ fontSize: 11, color: "var(--jade-200)" }}>
+        <div style={{ fontSize: 11, color: "var(--brand-muted)" }}>
           공급처 {drafts.length}곳 · 총 {totalItems}품목 · 합계 {won(totalAll)} — 검토 후 승인 요청
         </div>
         <div style={{ flex: 1 }}></div>
-        <div style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--jade-200)" }}>
+        <div style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--brand-muted)" }}>
           작성 시각 {TODAY_STR} 14:32
         </div>
       </div>
@@ -172,7 +172,7 @@ function PurchaseOrderDraftScreen({ onClose, onSubmit, initialRecommendations })
       {toast && (
         <div style={{
           position: "fixed", bottom: 20, left: "50%", transform: "translateX(-50%)",
-          background: "var(--ink-800)", color: "var(--bg-raised)",
+          background: "var(--text-primary)", color: "var(--bg-raised)",
           padding: "10px 18px", borderRadius: "var(--radius-md)",
           fontSize: 13, fontFamily: "var(--font-sans)", boxShadow: "var(--shadow-lg)",
           display: "flex", alignItems: "center", gap: 8, zIndex: 100,
@@ -229,7 +229,7 @@ function PODraftSidebar({ drafts, selectedIdx, onSelect, totalAll }) {
             onMouseEnter={e => { if (!isSel) e.currentTarget.style.background = "var(--bg-raised)"; }}
             onMouseLeave={e => { if (!isSel) e.currentTarget.style.background = "transparent"; }}>
               <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 3 }}>
-                <span style={{ fontSize: 13, fontWeight: 600, color: isSel ? "var(--jade-800)" : "var(--text-primary)", fontFamily: "var(--font-sans)" }}>{d.supplier}</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: isSel ? "var(--text-brand)" : "var(--text-primary)", fontFamily: "var(--font-sans)" }}>{d.supplier}</span>
                 <span style={{ fontSize: 9, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{d.id}</span>
               </div>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
@@ -238,16 +238,16 @@ function PODraftSidebar({ drafts, selectedIdx, onSelect, totalAll }) {
               </div>
               <div style={{ display: "flex", gap: 5, marginTop: 6, flexWrap: "wrap" }}>
                 {urgent > 0 && (
-                  <span style={{ fontSize: 9, fontWeight: 600, background: "var(--status-danger-bg)", color: "var(--cinnabar-700)", padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>긴급 {urgent}</span>
+                  <span style={{ fontSize: 9, fontWeight: 600, background: "var(--status-danger-bg)", color: "var(--status-danger-text)", padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>긴급 {urgent}</span>
                 )}
                 {belowMin && (
                   <span title={`최소 발주 ${won(meta.minOrder)}`}
-                        style={{ fontSize: 9, fontWeight: 600, background: "var(--status-warning-bg)", color: "var(--amber-700)", padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>
+                        style={{ fontSize: 9, fontWeight: 600, background: "var(--status-warning-bg)", color: "var(--status-warning-text)", padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>
                     최소금액 미달
                   </span>
                 )}
                 {!urgent && !belowMin && (
-                  <span style={{ fontSize: 9, fontWeight: 500, background: "var(--brand-muted)", color: "var(--jade-700)", padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>준비됨</span>
+                  <span style={{ fontSize: 9, fontWeight: 500, background: "var(--brand-muted)", color: "var(--text-brand)", padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>준비됨</span>
                 )}
               </div>
             </div>
@@ -276,7 +276,7 @@ function PODraftEditor({ draft, draftIdx, activeItemKey, onSelectItem, onUpdateD
         <div style={{ display: "flex", alignItems: "flex-start", gap: 16 }}>
           <div style={{
             width: 44, height: 44, borderRadius: "var(--radius-md)",
-            background: "var(--brand-muted)", color: "var(--jade-700)",
+            background: "var(--brand-muted)", color: "var(--text-brand)",
             display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
           }}>
             <Icon name="building-2" size={20} />
@@ -391,7 +391,7 @@ function PODraftEditor({ draft, draftIdx, activeItemKey, onSelectItem, onUpdateD
                           display: "inline-flex", alignItems: "center", justifyContent: "center",
                           width: 22, height: 22, borderRadius: "var(--radius-sm)",
                           background: it.kind === "herb" ? "var(--brand-muted)" : "var(--bg-raised)",
-                          color: it.kind === "herb" ? "var(--jade-700)" : "var(--ink-600)",
+                          color: it.kind === "herb" ? "var(--text-brand)" : "var(--text-secondary)",
                           flexShrink: 0,
                         }}>
                           <Icon name={it.kind === "herb" ? "leaf" : "package"} size={11} />
@@ -406,8 +406,8 @@ function PODraftEditor({ draft, draftIdx, activeItemKey, onSelectItem, onUpdateD
                       <span style={{
                         display: "inline-block",
                         fontSize: 11, fontWeight: 600, fontFamily: "var(--font-sans)",
-                        color: it.urgency === "high" ? "var(--cinnabar-700)" :
-                               it.urgency === "med"  ? "var(--amber-700)" : "var(--jade-700)",
+                        color: it.urgency === "high" ? "var(--status-danger-text)" :
+                               it.urgency === "med"  ? "var(--status-warning-text)" : "var(--text-brand)",
                         padding: "2px 8px", borderRadius: "var(--radius-full)",
                         background: it.urgency === "high" ? "var(--status-danger-bg)" :
                                     it.urgency === "med"  ? "var(--status-warning-bg)" : "var(--brand-muted)",
@@ -468,13 +468,13 @@ function PODraftEditor({ draft, draftIdx, activeItemKey, onSelectItem, onUpdateD
       {belowMin && (
         <div style={{
           padding: "12px 16px", background: "var(--status-warning-bg)",
-          border: "1px solid var(--amber-200)", borderRadius: "var(--radius-md)",
+          border: "1px solid var(--status-warning-border)", borderRadius: "var(--radius-md)",
           display: "flex", alignItems: "flex-start", gap: 10,
         }}>
-          <Icon name="alert-triangle" size={15} style={{ color: "var(--amber-700)", flexShrink: 0, marginTop: 1 }} />
+          <Icon name="alert-triangle" size={15} style={{ color: "var(--status-warning-text)", flexShrink: 0, marginTop: 1 }} />
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 12, fontWeight: 600, color: "var(--amber-700)" }}>최소 발주 금액 미달</div>
-            <div style={{ fontSize: 11, color: "var(--amber-700)", marginTop: 2, lineHeight: 1.5 }}>
+            <div style={{ fontSize: 12, fontWeight: 600, color: "var(--status-warning-text)" }}>최소 발주 금액 미달</div>
+            <div style={{ fontSize: 11, color: "var(--status-warning-text)", marginTop: 2, lineHeight: 1.5 }}>
               {draft.supplier}의 최소 발주 금액은 {won(meta.minOrder)}입니다. 현재 {won(total)} — {won(meta.minOrder - total)} 더 필요합니다.
               승인은 가능하나 공급처 처리 시 배송비가 추가될 수 있습니다.
             </div>
@@ -528,7 +528,7 @@ function QtyStepper({ value, unit, kind, onChange, onReset }) {
         <Icon name="plus" size={11} />
       </button>
       <button onClick={onReset} title="추천 수량으로 복원"
-        style={{ ...stepBtn, marginLeft: 2, color: "var(--jade-700)" }}>
+        style={{ ...stepBtn, marginLeft: 2, color: "var(--text-brand)" }}>
         <Icon name="sparkles" size={10} />
       </button>
     </div>
@@ -601,7 +601,7 @@ function PODItemDetail({ item, draft }) {
             display: "inline-flex", alignItems: "center", justifyContent: "center",
             width: 30, height: 30, borderRadius: "var(--radius-md)",
             background: item.kind === "herb" ? "var(--brand-muted)" : "var(--bg-raised)",
-            color: item.kind === "herb" ? "var(--jade-700)" : "var(--ink-600)",
+            color: item.kind === "herb" ? "var(--text-brand)" : "var(--text-secondary)",
             flexShrink: 0,
           }}>
             <Icon name={item.kind === "herb" ? "leaf" : "package"} size={14} />
@@ -618,17 +618,17 @@ function PODItemDetail({ item, draft }) {
         padding: "12px 14px",
         background: item.urgency === "high" ? "var(--status-danger-bg)" :
                     item.urgency === "med"  ? "var(--status-warning-bg)" : "var(--brand-subtle)",
-        border: `1px solid ${item.urgency === "high" ? "var(--cinnabar-200)" : item.urgency === "med" ? "var(--amber-200)" : "var(--jade-200)"}`,
+        border: `1px solid ${item.urgency === "high" ? "var(--status-danger-border)" : item.urgency === "med" ? "var(--status-warning-border)" : "var(--brand-muted)"}`,
         borderRadius: "var(--radius-md)",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
           <Icon name="sparkles" size={12} style={{
-            color: item.urgency === "high" ? "var(--cinnabar-700)" :
-                   item.urgency === "med"  ? "var(--amber-700)" : "var(--jade-700)" }} />
+            color: item.urgency === "high" ? "var(--status-danger-text)" :
+                   item.urgency === "med"  ? "var(--status-warning-text)" : "var(--text-brand)" }} />
           <span style={{
             fontSize: 11, fontWeight: 700, letterSpacing: "0.04em",
-            color: item.urgency === "high" ? "var(--cinnabar-700)" :
-                   item.urgency === "med"  ? "var(--amber-700)" : "var(--jade-700)",
+            color: item.urgency === "high" ? "var(--status-danger-text)" :
+                   item.urgency === "med"  ? "var(--status-warning-text)" : "var(--text-brand)",
           }}>AI 추천 사유</span>
         </div>
         <div style={{ fontSize: 12, color: "var(--text-primary)", lineHeight: 1.6 }}>
@@ -652,7 +652,7 @@ function PODItemDetail({ item, draft }) {
             value={item.kind === "herb" ? fmtMass(item.monthly) : `${item.monthly} ${item.unit}`}
             mono />
           <PODFact label="잔여 일수" value={`${item.daysLeft}일`} mono
-            accent={item.daysLeft <= 7 ? "var(--cinnabar-700)" : item.daysLeft <= 14 ? "var(--amber-700)" : null} />
+            accent={item.daysLeft <= 7 ? "var(--status-danger-text)" : item.daysLeft <= 14 ? "var(--status-warning-text)" : null} />
         </div>
       </div>
 
@@ -665,7 +665,7 @@ function PODItemDetail({ item, draft }) {
             value={item.kind === "herb" ? fmtMass(stockAfter) : `${stockAfter} ${item.unit}`}
             mono />
           <PODFact label="다음 발주 예상" value={`${daysAfter}일 후`} mono
-            accent="var(--jade-700)" />
+            accent="var(--text-brand)" />
         </div>
       </div>
 
@@ -682,12 +682,12 @@ function PODItemDetail({ item, draft }) {
             <div key={i} style={{
               display: "flex", justifyContent: "space-between", padding: "6px 10px",
               background: p.current ? "var(--brand-subtle)" : "var(--bg-raised)",
-              border: `1px solid ${p.current ? "var(--jade-200)" : "var(--border-subtle)"}`,
+              border: `1px solid ${p.current ? "var(--brand-muted)" : "var(--border-subtle)"}`,
               borderRadius: "var(--radius-sm)",
               fontSize: 11, fontFamily: "var(--font-mono)",
             }}>
-              <span style={{ color: p.current ? "var(--jade-800)" : "var(--text-muted)" }}>{p.date}{p.current && " · 현재"}</span>
-              <span style={{ color: p.current ? "var(--jade-800)" : "var(--text-secondary)", fontWeight: p.current ? 600 : 400 }}>{won(p.price)} / {item.unit}</span>
+              <span style={{ color: p.current ? "var(--text-brand)" : "var(--text-muted)" }}>{p.date}{p.current && " · 현재"}</span>
+              <span style={{ color: p.current ? "var(--text-brand)" : "var(--text-secondary)", fontWeight: p.current ? 600 : 400 }}>{won(p.price)} / {item.unit}</span>
             </div>
           ))}
         </div>
@@ -719,7 +719,7 @@ function PODraftConfirmModal({ drafts, totalAll, totalItems, onClose, onConfirm 
         <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 16 }}>
           <div style={{
             width: 38, height: 38, borderRadius: "var(--radius-full)",
-            background: "var(--brand-muted)", color: "var(--jade-700)",
+            background: "var(--brand-muted)", color: "var(--text-brand)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
             <Icon name="send" size={18} />
@@ -733,15 +733,15 @@ function PODraftConfirmModal({ drafts, totalAll, totalItems, onClose, onConfirm 
         <div style={{ display: "flex", flexDirection: "column", gap: 1, background: "var(--border-subtle)", borderRadius: "var(--radius-md)", overflow: "hidden", border: "1px solid var(--border-subtle)" }}>
           <PODFact label="발주서 수" value={`${drafts.length}건`} />
           <PODFact label="품목" value={`${totalItems}건`} />
-          {urgentCount > 0 && <PODFact label="긴급 품목 포함" value={`${urgentCount}건`} accent="var(--cinnabar-700)" />}
+          {urgentCount > 0 && <PODFact label="긴급 품목 포함" value={`${urgentCount}건`} accent="var(--status-danger-text)" />}
           <PODFact label="총 발주 금액" value={won(totalAll)} bold />
         </div>
 
         {belowMinCount > 0 && (
           <div style={{
             marginTop: 14, padding: "10px 12px", background: "var(--status-warning-bg)",
-            border: "1px solid var(--amber-200)", borderRadius: "var(--radius-md)",
-            fontSize: 11, color: "var(--amber-700)", display: "flex", gap: 8,
+            border: "1px solid var(--status-warning-border)", borderRadius: "var(--radius-md)",
+            fontSize: 11, color: "var(--status-warning-text)", display: "flex", gap: 8,
           }}>
             <Icon name="alert-triangle" size={13} style={{ flexShrink: 0, marginTop: 1 }} />
             <span>{belowMinCount}개 발주서가 공급처 최소 금액에 미달합니다 — 배송비가 추가될 수 있습니다.</span>

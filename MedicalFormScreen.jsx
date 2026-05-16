@@ -673,13 +673,13 @@ function InjuryEditor({ data, onChange, clinic, patient, onChangePatient }) {
     <div style={{ display: "flex", flexDirection: "column" }}>
       <PanelSection
         title="환자 정보"
-        right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--jade-700)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}>
+        right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--text-brand)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}>
           <Icon name="arrow-left-right" size={11} /> 환자 변경
         </button>}
       >
         <div style={{
           display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)",
-          border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)",
+          border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)",
         }}>
           <Avatar name={patient.name} size={34} />
           <div style={{ flex: 1 }}>
@@ -730,7 +730,7 @@ function InjuryEditor({ data, onChange, clinic, patient, onChangePatient }) {
           <MiniField label="질병분류기호 (KCD)">
             <div style={{ position: "relative" }}>
               <TextField value={data.icdCodes} onChange={set("icdCodes")} mono placeholder="S43.4, M75.1" />
-              <span style={{ position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", display: "inline-flex", alignItems: "center", gap: 3, fontSize: 10, color: "var(--jade-700)", background: "var(--brand-subtle)", padding: "2px 6px", borderRadius: 4, border: "1px solid var(--jade-200)" }}>
+              <span style={{ position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", display: "inline-flex", alignItems: "center", gap: 3, fontSize: 10, color: "var(--text-brand)", background: "var(--brand-subtle)", padding: "2px 6px", borderRadius: 4, border: "1px solid var(--brand-muted)" }}>
                 <Icon name="sparkles" size={9} /> AI 추천
               </span>
             </div>
@@ -770,7 +770,7 @@ function InjuryEditor({ data, onChange, clinic, patient, onChangePatient }) {
 
       <PanelSection
         title="치료 기간 및 향후 소견"
-        right={<button style={{ background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", color: "var(--jade-700)", padding: "3px 8px", borderRadius: 999, fontSize: 10.5, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}>
+        right={<button style={{ background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", color: "var(--text-brand)", padding: "3px 8px", borderRadius: 999, fontSize: 10.5, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}>
           <Icon name="wand-2" size={10} /> AI로 작성
         </button>}
       >
@@ -1229,8 +1229,8 @@ function ReferralEditor({ data, onChange, clinic, patient, onChangePatient }) {
   const set = (k) => (v) => onChange({ ...data, [k]: v });
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <PanelSection title="환자 정보" right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--jade-700)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}><Icon name="arrow-left-right" size={11} /> 환자 변경</button>}>
-        <div style={{ display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)" }}>
+      <PanelSection title="환자 정보" right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--text-brand)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}><Icon name="arrow-left-right" size={11} /> 환자 변경</button>}>
+        <div style={{ display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)" }}>
           <Avatar name={patient.name} size={34} />
           <div style={{ flex: 1 }}>
             <div style={{ display: "flex", gap: 8, alignItems: "baseline" }}>
@@ -1276,8 +1276,8 @@ function OpinionEditor({ data, onChange, clinic, patient, onChangePatient }) {
   const set = (k) => (v) => onChange({ ...data, [k]: v });
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <PanelSection title="환자 정보" right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--jade-700)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}><Icon name="arrow-left-right" size={11} /> 환자 변경</button>}>
-        <div style={{ display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)" }}>
+      <PanelSection title="환자 정보" right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--text-brand)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}><Icon name="arrow-left-right" size={11} /> 환자 변경</button>}>
+        <div style={{ display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)" }}>
           <Avatar name={patient.name} size={34} />
           <div style={{ flex: 1 }}>
             <div style={{ display: "flex", gap: 8, alignItems: "baseline" }}>
@@ -1299,7 +1299,7 @@ function OpinionEditor({ data, onChange, clinic, patient, onChangePatient }) {
           <MiniField label="진단 연월일"><TextField type="date" value={data.diagnosisDate} onChange={set("diagnosisDate")} mono /></MiniField>
         </div>
       </PanelSection>
-      <PanelSection title="소견 내용" right={<button style={{ background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", color: "var(--jade-700)", padding: "3px 8px", borderRadius: 999, fontSize: 10.5, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}><Icon name="wand-2" size={10} /> AI로 작성</button>}>
+      <PanelSection title="소견 내용" right={<button style={{ background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", color: "var(--text-brand)", padding: "3px 8px", borderRadius: 999, fontSize: 10.5, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}><Icon name="wand-2" size={10} /> AI로 작성</button>}>
         <TextArea rows={7} value={data.opinion} onChange={set("opinion")} placeholder="환자 상태 및 소견을 기재하십시오." />
       </PanelSection>
       <PanelSection title="발급">
@@ -1329,8 +1329,8 @@ function CertEditor({ data, onChange, patient, onChangePatient, certType }) {
   );
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <PanelSection title="환자 정보" right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--jade-700)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}><Icon name="arrow-left-right" size={11} /> 환자 변경</button>}>
-        <div style={{ display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)" }}>
+      <PanelSection title="환자 정보" right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--text-brand)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}><Icon name="arrow-left-right" size={11} /> 환자 변경</button>}>
+        <div style={{ display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)" }}>
           <Avatar name={patient.name} size={34} />
           <div style={{ flex: 1 }}>
             <div style={{ display: "flex", gap: 8, alignItems: "baseline" }}>
@@ -1652,11 +1652,11 @@ function BillingEditor({ data, onChange, patient, onChangePatient, label }) {
     <div style={{ display: "flex", flexDirection: "column" }}>
       <PanelSection
         title="환자 정보"
-        right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--jade-700)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}>
+        right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--text-brand)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}>
           <Icon name="arrow-left-right" size={11} /> 환자 변경
         </button>}
       >
-        <div style={{ display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)" }}>
+        <div style={{ display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)" }}>
           <Avatar name={patient.name} size={34} />
           <div style={{ flex: 1 }}>
             <div style={{ display: "flex", gap: 8, alignItems: "baseline" }}>
@@ -1688,9 +1688,9 @@ function BillingEditor({ data, onChange, patient, onChangePatient, label }) {
               </div>
             );
           })}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 10px", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-sm)", fontSize: 12, marginTop: 4 }}>
-            <span style={{ fontWeight: 600, color: "var(--jade-700)" }}>환자 납부 총액</span>
-            <span style={{ fontFamily: "var(--font-mono)", fontWeight: 700, color: "var(--jade-700)" }}>{(totalSelf + totalNon).toLocaleString("ko-KR")} 원</span>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 10px", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-sm)", fontSize: 12, marginTop: 4 }}>
+            <span style={{ fontWeight: 600, color: "var(--text-brand)" }}>환자 납부 총액</span>
+            <span style={{ fontFamily: "var(--font-mono)", fontWeight: 700, color: "var(--text-brand)" }}>{(totalSelf + totalNon).toLocaleString("ko-KR")} 원</span>
           </div>
         </div>
       </PanelSection>
@@ -1724,7 +1724,7 @@ function PlaceholderPreviewA4({ label, desc }) {
       }}>
         <Icon name="file-text" size={26} style={{ color: "var(--ink-400)" }} />
       </div>
-      <div style={{ fontFamily: "var(--font-serif)", fontSize: 24, color: "var(--ink-700)", letterSpacing: "0.4em", paddingLeft: "0.4em" }}>{label}</div>
+      <div style={{ fontFamily: "var(--font-serif)", fontSize: 24, color: "var(--text-primary)", letterSpacing: "0.4em", paddingLeft: "0.4em" }}>{label}</div>
       <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 8 }}>{desc}</div>
       <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 36, padding: "8px 16px", border: "1px solid var(--border-subtle)", borderRadius: 999, background: "var(--bg-raised)" }}>
         템플릿 준비 중 · 진단서 양식 우선 출시
@@ -1808,13 +1808,13 @@ function DiagnosisEditor({ data, onChange, clinic, patient, onChangePatient }) {
       {/* Patient context (read-only, auto-fetched) */}
       <PanelSection
         title="환자 정보"
-        right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--jade-700)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}>
+        right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--text-brand)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}>
           <Icon name="arrow-left-right" size={11} /> 환자 변경
         </button>}
       >
         <div style={{
           display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)",
-          border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)",
+          border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)",
         }}>
           <Avatar name={patient.name} size={34} />
           <div style={{ flex: 1 }}>
@@ -1867,7 +1867,7 @@ function DiagnosisEditor({ data, onChange, clinic, patient, onChangePatient }) {
           <MiniField label="질병분류기호 (KCD)">
             <div style={{ position: "relative" }}>
               <TextField value={data.icdCodes} onChange={set("icdCodes")} mono placeholder="S13.4, M54.2" />
-              <span style={{ position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", display: "inline-flex", alignItems: "center", gap: 3, fontSize: 10, color: "var(--jade-700)", background: "var(--brand-subtle)", padding: "2px 6px", borderRadius: 4, border: "1px solid var(--jade-200)" }}>
+              <span style={{ position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", display: "inline-flex", alignItems: "center", gap: 3, fontSize: 10, color: "var(--text-brand)", background: "var(--brand-subtle)", padding: "2px 6px", borderRadius: 4, border: "1px solid var(--brand-muted)" }}>
                 <Icon name="sparkles" size={9} /> AI 추천
               </span>
             </div>
@@ -1882,7 +1882,7 @@ function DiagnosisEditor({ data, onChange, clinic, patient, onChangePatient }) {
       {/* Treatment opinion */}
       <PanelSection
         title="치료 내용 및 향후 소견"
-        right={<button style={{ background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", color: "var(--jade-700)", padding: "3px 8px", borderRadius: 999, fontSize: 10.5, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}>
+        right={<button style={{ background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", color: "var(--text-brand)", padding: "3px 8px", borderRadius: 999, fontSize: 10.5, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}>
           <Icon name="wand-2" size={10} /> AI로 작성
         </button>}
       >
@@ -2076,7 +2076,7 @@ function MedicalFormScreen() {
               style={{
                 border: "none", background: "transparent", padding: "12px 12px 11px",
                 fontSize: 13, fontWeight: active ? 600 : 500,
-                color: active ? "var(--jade-700)" : "var(--text-secondary)",
+                color: active ? "var(--text-brand)" : "var(--text-secondary)",
                 borderBottom: `2px solid ${active ? "var(--jade-500)" : "transparent"}`,
                 cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 6,
                 marginBottom: -1, fontFamily: "var(--font-sans)",
@@ -2263,7 +2263,7 @@ function MedicalFormScreen() {
             <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{MF_HISTORY.length}건</span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <span style={{ fontSize: 11.5, fontWeight: 600, color: "var(--jade-700)" }}>전체 보기</span>
+            <span style={{ fontSize: 11.5, fontWeight: 600, color: "var(--text-brand)" }}>전체 보기</span>
             <Icon name={historyOpen ? "chevron-down" : "chevron-up"} size={14} style={{ color: "var(--text-muted)" }} />
           </div>
         </button>

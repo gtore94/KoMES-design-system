@@ -7,7 +7,7 @@ const PO_STATUS = {
   pending:  { key: "pending",  label: "승인 대기", tone: "warning", color: "var(--amber-600)" },
   sent:     { key: "sent",     label: "발주 완료", tone: "brand",   color: "var(--jade-600)" },
   partial:  { key: "partial",  label: "부분 입고", tone: "brand",   color: "var(--jade-500)" },
-  received: { key: "received", label: "입고 완료", tone: "success", color: "var(--jade-700)" },
+  received: { key: "received", label: "입고 완료", tone: "success", color: "var(--text-brand)" },
   cancelled:{ key: "cancelled",label: "취소",     tone: "neutral", color: "var(--ink-400)" },
   returned: { key: "returned", label: "반품",     tone: "danger",  color: "var(--cinnabar-600)" },
 };

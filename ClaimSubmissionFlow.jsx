@@ -147,7 +147,7 @@ function ClaimSubmissionFlow({ items, type, summary, onClose, scenario }) {
           <div style={{ flex: 1 }}>
             <div style={{
               fontSize: 11, fontWeight: 600, letterSpacing: "0.08em",
-              color: "var(--jade-200)", textTransform: "uppercase",
+              color: "var(--brand-muted)", textTransform: "uppercase",
               fontFamily: "var(--font-sans)",
             }}>심평원 진료비 청구 · HIRA Claim API</div>
             <div style={{
@@ -175,8 +175,8 @@ function ClaimSubmissionFlow({ items, type, summary, onClose, scenario }) {
           display: "flex", gap: 28,
         }}>
           <StripStat label="청구 건수" value={`${items.length}건`} />
-          <StripStat label="정상" value={`${totalNonError}건`} color="var(--jade-700)" />
-          <StripStat label="오류 의심" value={`${errorItems.length}건`} color={errorItems.length > 0 ? "var(--cinnabar-700)" : "var(--text-muted)"} />
+          <StripStat label="정상" value={`${totalNonError}건`} color="var(--text-brand)" />
+          <StripStat label="오류 의심" value={`${errorItems.length}건`} color={errorItems.length > 0 ? "var(--status-danger-text)" : "var(--text-muted)"} />
           <StripStat label="청구 합계" value={KRW2(totalAmount)} mono />
         </div>
 
@@ -211,11 +211,11 @@ function ClaimSubmissionFlow({ items, type, summary, onClose, scenario }) {
                 display: "flex", alignItems: "center", gap: 8,
                 padding: "6px 12px",
                 background: "var(--status-warning-bg)",
-                border: "1px solid var(--amber-200)",
+                border: "1px solid var(--status-warning-border)",
                 borderRadius: "var(--radius-md)",
               }}>
-                <Icon name="alert-circle" size={14} style={{ color: "var(--amber-700)" }} />
-                <span style={{ fontSize: 12, color: "var(--amber-700)", fontWeight: 500, fontFamily: "var(--font-sans)" }}>
+                <Icon name="alert-circle" size={14} style={{ color: "var(--status-warning-text)" }} />
+                <span style={{ fontSize: 12, color: "var(--status-warning-text)", fontWeight: 500, fontFamily: "var(--font-sans)" }}>
                   사전점검 결과 오류가 발견되었습니다. 진행 방식을 선택하세요.
                 </span>
               </div>
@@ -252,11 +252,11 @@ function ClaimSubmissionFlow({ items, type, summary, onClose, scenario }) {
                 display: "flex", alignItems: "center", gap: 8,
                 padding: "6px 12px",
                 background: "var(--brand-subtle)",
-                border: "1px solid var(--jade-200)",
+                border: "1px solid var(--brand-muted)",
                 borderRadius: "var(--radius-md)",
               }}>
-                <Icon name="check-circle-2" size={14} style={{ color: "var(--jade-700)" }} />
-                <span style={{ fontSize: 12, color: "var(--jade-700)", fontWeight: 600, fontFamily: "var(--font-sans)" }}>
+                <Icon name="check-circle-2" size={14} style={{ color: "var(--text-brand)" }} />
+                <span style={{ fontSize: 12, color: "var(--text-brand)", fontWeight: 600, fontFamily: "var(--font-sans)" }}>
                   실청구 완료 — 접수번호 HIRA-2026-{String(Math.floor(Math.random() * 90000) + 10000)}
                 </span>
               </div>
@@ -303,9 +303,9 @@ function StageRow({ stage, idx, status, isLast, expanded, details }) {
   const statusConfig = {
     pending: { icon: "circle", color: "var(--text-disabled)", bg: "var(--bg-raised)", label: "대기" },
     running: { icon: "loader-2", color: "var(--jade-600)", bg: "var(--brand-subtle)", label: "진행 중" },
-    success: { icon: "check", color: "var(--jade-700)", bg: "var(--brand-muted)", label: "완료" },
-    warning: { icon: "alert-triangle", color: "var(--amber-700)", bg: "var(--status-warning-bg)", label: "검토 필요" },
-    error:   { icon: "x", color: "var(--cinnabar-700)", bg: "var(--status-danger-bg)", label: "실패" },
+    success: { icon: "check", color: "var(--text-brand)", bg: "var(--brand-muted)", label: "완료" },
+    warning: { icon: "alert-triangle", color: "var(--status-warning-text)", bg: "var(--status-warning-bg)", label: "검토 필요" },
+    error:   { icon: "x", color: "var(--status-danger-text)", bg: "var(--status-danger-bg)", label: "실패" },
   };
   const s = statusConfig[status] || statusConfig.pending;
   const isActive = status === "running" || status === "warning";
@@ -397,7 +397,7 @@ function PretestResults({ results }) {
         borderBottom: "1px solid var(--border-subtle)",
         display: "flex", alignItems: "center", gap: 10,
       }}>
-        <Icon name="clipboard-check" size={13} style={{ color: "var(--jade-700)" }} />
+        <Icon name="clipboard-check" size={13} style={{ color: "var(--text-brand)" }} />
         <span style={{ fontSize: 12, fontWeight: 600, color: "var(--text-primary)" }}>
           심평원 점검 결과
         </span>
@@ -408,7 +408,7 @@ function PretestResults({ results }) {
       {errors.length === 0 ? (
         <div style={{
           padding: "16px 14px", textAlign: "center",
-          color: "var(--jade-700)", fontSize: 13, fontWeight: 500,
+          color: "var(--text-brand)", fontSize: 13, fontWeight: 500,
         }}>
           <Icon name="check-circle-2" size={18} style={{ color: "var(--jade-600)", marginBottom: 6 }} />
           <div>모든 명세서가 사전점검을 통과했습니다.</div>
@@ -423,7 +423,7 @@ function PretestResults({ results }) {
             }}>
               <span style={{
                 fontFamily: "var(--font-mono)", fontSize: 10, fontWeight: 700,
-                color: "#fff", background: "var(--cinnabar-700)",
+                color: "#fff", background: "var(--status-danger-text)",
                 padding: "2px 6px", borderRadius: "var(--radius-sm)",
                 flexShrink: 0, marginTop: 1,
               }}>{e.code}</span>

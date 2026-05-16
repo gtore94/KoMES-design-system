@@ -77,10 +77,10 @@ const buildSeedSch = () => {
 
 // ── Status colors ──────────────────────────────────────────────
 const STATUS_SCH = {
-  "확정": { bg: "var(--brand-subtle)",       border: "var(--jade-300)",     text: "var(--jade-700)",   dot: "var(--jade-500)"   },
-  "대기": { bg: "var(--status-warning-bg)",  border: "var(--amber-200)",    text: "var(--amber-700)",  dot: "var(--amber-500)"  },
-  "노쇼": { bg: "var(--status-danger-bg)",   border: "var(--cinnabar-200)", text: "var(--cinnabar-700)", dot: "var(--cinnabar-600)" },
-  "취소": { bg: "var(--bg-raised)",          border: "var(--stone-300)",    text: "var(--text-muted)", dot: "var(--stone-700)"  },
+  "확정": { bg: "var(--brand-subtle)",       border: "var(--jade-300)",     text: "var(--text-brand)",   dot: "var(--jade-500)"   },
+  "대기": { bg: "var(--status-warning-bg)",  border: "var(--status-warning-border)",    text: "var(--status-warning-text)",  dot: "var(--amber-500)"  },
+  "노쇼": { bg: "var(--status-danger-bg)",   border: "var(--status-danger-border)", text: "var(--status-danger-text)", dot: "var(--cinnabar-600)" },
+  "취소": { bg: "var(--bg-raised)",          border: "var(--border-subtle)",    text: "var(--text-muted)", dot: "var(--text-secondary)"  },
 };
 
 // ── Helpers ────────────────────────────────────────────────────
@@ -126,7 +126,7 @@ function NewAppointmentModal({ initial, onClose, onSubmit }) {
         }}>
           <div style={{
             width: 36, height: 36, borderRadius: "var(--radius-md)",
-            background: "var(--brand-muted)", color: "var(--jade-700)",
+            background: "var(--brand-muted)", color: "var(--text-brand)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
             <Icon name="calendar-plus" size={17} />
@@ -276,7 +276,7 @@ function NewAppointmentModal({ initial, onClose, onSubmit }) {
           }}>
             <input type="checkbox" checked={d.notify} onChange={e => set("notify", e.target.checked)}
               style={{ accentColor: "var(--jade-500)" }} />
-            <span style={{ fontSize: 12, color: "var(--jade-700)", fontFamily: "var(--font-sans)" }}>
+            <span style={{ fontSize: 12, color: "var(--text-brand)", fontFamily: "var(--font-sans)" }}>
               예약 확정 SMS 발송
             </span>
             <span style={{ marginLeft: "auto", fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>
@@ -528,14 +528,14 @@ function WeekView({ date, appts, onCellClick, onApptClick, doctorFilter }) {
                 <span style={{
                   fontFamily: "var(--font-serif)",
                   fontSize: 18, fontWeight: isToday ? 600 : 400,
-                  color: isToday ? "var(--jade-700)" : "var(--text-primary)",
+                  color: isToday ? "var(--text-brand)" : "var(--text-primary)",
                   letterSpacing: "-0.01em",
                 }}>{d.getDate()}</span>
                 {dayCt > 0 && (
                   <span style={{
                     marginLeft: "auto",
                     fontSize: 10, fontWeight: 600,
-                    color: "var(--jade-700)", background: "var(--brand-muted)",
+                    color: "var(--text-brand)", background: "var(--brand-muted)",
                     borderRadius: "var(--radius-full)", padding: "1px 7px",
                     fontFamily: "var(--font-mono)",
                   }}>{dayCt}</span>
@@ -679,7 +679,7 @@ function MonthView({ date, appts, onCellClick, onDayClick, onApptClick, doctorFi
                 {dayAppts.length > 0 && (
                   <span style={{
                     fontSize: 10, fontWeight: 600,
-                    color: "var(--jade-700)", fontFamily: "var(--font-mono)",
+                    color: "var(--text-brand)", fontFamily: "var(--font-mono)",
                   }}>{dayAppts.length}건</span>
                 )}
               </div>

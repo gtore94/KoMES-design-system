@@ -38,7 +38,7 @@ function FilterBar({ search, setSearch, kindFilter, setKindFilter,
         display: "inline-flex", alignItems: "center", gap: 5,
         padding: "7px 12px", fontSize: 12, fontWeight: 500,
         background: errorOnly ? "var(--status-danger-bg)" : "var(--bg-surface)",
-        color: errorOnly ? "var(--cinnabar-700)" : "var(--text-secondary)",
+        color: errorOnly ? "var(--status-danger-text)" : "var(--text-secondary)",
         border: `1px solid ${errorOnly ? "var(--cinnabar-300)" : "var(--border-default)"}`,
         borderRadius: "var(--radius-md)",
         cursor: "pointer", fontFamily: "var(--font-sans)",
@@ -79,7 +79,7 @@ function FilterBar({ search, setSearch, kindFilter, setKindFilter,
             background: density === d.k ? "var(--bg-surface)" : "transparent",
             border: "none", borderRadius: "var(--radius-sm)",
             cursor: "pointer",
-            color: density === d.k ? "var(--jade-700)" : "var(--text-muted)",
+            color: density === d.k ? "var(--text-brand)" : "var(--text-muted)",
             display: "inline-flex", alignItems: "center",
             boxShadow: density === d.k ? "var(--shadow-sm)" : "none",
             transition: "all 0.12s",
@@ -189,7 +189,7 @@ function ClaimsTable({ type, items, selected, setSelected, excluded, setExcluded
               <span style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                 {isError && (
                   <span title={it.error.msg} style={{ marginRight: 4 }}>
-                    <Icon name="alert-triangle" size={12} style={{ color: "var(--cinnabar-700)" }} />
+                    <Icon name="alert-triangle" size={12} style={{ color: "var(--status-danger-text)" }} />
                   </span>
                 )}
                 <input type="checkbox"
@@ -257,13 +257,13 @@ function ClaimsTable({ type, items, selected, setSelected, excluded, setExcluded
                 <div style={{
                   gridColumn: "1 / -1",
                   marginTop: 4, padding: "4px 12px 4px 28px",
-                  fontSize: 11, color: "var(--cinnabar-800)",
+                  fontSize: 11, color: "var(--status-danger-text)",
                   fontFamily: "var(--font-sans)",
                   background: "var(--status-danger-bg)",
                   borderTop: "1px dashed var(--cinnabar-300)",
                   display: "flex", alignItems: "center", gap: 6,
                 }}>
-                  <span style={{ fontFamily: "var(--font-mono)", fontWeight: 700, fontSize: 10, color: "var(--cinnabar-800)" }}>{it.error.code}</span>
+                  <span style={{ fontFamily: "var(--font-mono)", fontWeight: 700, fontSize: 10, color: "var(--status-danger-text)" }}>{it.error.code}</span>
                   <span>{it.error.msg}</span>
                 </div>
               )}
@@ -297,10 +297,10 @@ function NumCell({ children, strong }) {
 }
 function KindBadge({ value }) {
   const colors = {
-    "보험": { bg: "var(--brand-subtle)", fg: "var(--jade-700)", bd: "var(--jade-200)" },
-    "의료급여": { bg: "var(--status-warning-bg)", fg: "var(--amber-700)", bd: "var(--amber-200)" },
-    "시범사업": { bg: "var(--status-warning-bg)", fg: "var(--amber-700)", bd: "var(--amber-200)" },
-    "자동차": { bg: "var(--status-danger-bg)", fg: "var(--cinnabar-700)", bd: "var(--cinnabar-200)" },
+    "보험": { bg: "var(--brand-subtle)", fg: "var(--text-brand)", bd: "var(--brand-muted)" },
+    "의료급여": { bg: "var(--status-warning-bg)", fg: "var(--status-warning-text)", bd: "var(--status-warning-border)" },
+    "시범사업": { bg: "var(--status-warning-bg)", fg: "var(--status-warning-text)", bd: "var(--status-warning-border)" },
+    "자동차": { bg: "var(--status-danger-bg)", fg: "var(--status-danger-text)", bd: "var(--status-danger-border)" },
   };
   const c = colors[value] || colors["보험"];
   return <span style={{
@@ -350,8 +350,8 @@ function ActionBar({ type, summary, selected, errorCount, onSubmitAll, onSubmitS
             display: "flex", flexDirection: "column",
             paddingLeft: 10, borderLeft: "1px solid var(--stone-300)",
           }}>
-            <span style={{ fontSize: 10, color: "var(--cinnabar-700)", letterSpacing: "0.04em" }}>오류</span>
-            <span style={{ fontFamily: "var(--font-mono)", fontSize: 14, fontWeight: 700, color: "var(--cinnabar-700)", lineHeight: 1.1 }}>
+            <span style={{ fontSize: 10, color: "var(--status-danger-text)", letterSpacing: "0.04em" }}>오류</span>
+            <span style={{ fontFamily: "var(--font-mono)", fontSize: 14, fontWeight: 700, color: "var(--status-danger-text)", lineHeight: 1.1 }}>
               {errorCount}건
             </span>
           </div>
@@ -365,7 +365,7 @@ function ActionBar({ type, summary, selected, errorCount, onSubmitAll, onSubmitS
         style={{
           padding: "10px 18px", fontSize: 13, fontWeight: 600,
           background: selected === 0 ? "var(--bg-raised)" : "var(--bg-surface)",
-          color: selected === 0 ? "var(--text-disabled)" : "var(--jade-700)",
+          color: selected === 0 ? "var(--text-disabled)" : "var(--text-brand)",
           border: `1px solid ${selected === 0 ? "var(--border-subtle)" : "var(--jade-300)"}`,
           borderRadius: "var(--radius-md)",
           cursor: selected === 0 ? "not-allowed" : "pointer",

@@ -201,7 +201,7 @@ function HerbInventoryScreen({ onNavigate, onOpenRecSettings, onCreateDrafts }) 
                         <td style={{ padding: "10px 14px", fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-mono)" }}>{h.lastIn}</td>
                         <td style={{ padding: "10px 14px" }}>
                           <div style={{ fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-mono)" }}>{h.expiry}</div>
-                          <div style={{ fontSize: 10, color: dExpiry <= 90 ? "var(--cinnabar-700)" : "var(--text-muted)", fontFamily: "var(--font-mono)", marginTop: 1 }}>D-{dExpiry}</div>
+                          <div style={{ fontSize: 10, color: dExpiry <= 90 ? "var(--status-danger-text)" : "var(--text-muted)", fontFamily: "var(--font-mono)", marginTop: 1 }}>D-{dExpiry}</div>
                         </td>
                         <td style={{ padding: "10px 14px" }}>
                           <div style={{ fontSize: 12, color: "var(--text-primary)" }}>{h.supplier}</div>
@@ -237,7 +237,7 @@ function HerbInventoryScreen({ onNavigate, onOpenRecSettings, onCreateDrafts }) 
       {toast && (
         <div style={{
           position: "fixed", bottom: 20, left: "50%", transform: "translateX(-50%)",
-          background: "var(--ink-800)", color: "var(--bg-raised)",
+          background: "var(--text-primary)", color: "var(--bg-raised)",
           padding: "10px 18px", borderRadius: "var(--radius-md)",
           fontSize: 13, fontFamily: "var(--font-sans)", boxShadow: "var(--shadow-lg)",
           display: "flex", alignItems: "center", gap: 8, zIndex: 100,
@@ -377,7 +377,7 @@ function HIDetailPanel({ herb, onIntake, onToast }) {
         <HIFact label="월 소비"    value={fmtMass(herb.monthly)} />
         <HIFact label="안전 임계치" value={fmtMass(herb.threshold)} />
         <HIFact label="최근 입고"   value={herb.lastIn} />
-        <HIFact label="유효기간"   value={`${herb.expiry} · D-${dExpiry}`} accent={dExpiry <= 90 ? "var(--cinnabar-700)" : undefined} />
+        <HIFact label="유효기간"   value={`${herb.expiry} · D-${dExpiry}`} accent={dExpiry <= 90 ? "var(--status-danger-text)" : undefined} />
         <HIFact label="보관 위치"  value={herb.location} />
       </div>
 
@@ -401,7 +401,7 @@ function HIDetailPanel({ herb, onIntake, onToast }) {
                     padding: "1px 6px", borderRadius: "var(--radius-sm)", textAlign: "center",
                   }}>{h.type}</span>
                   <span style={{ fontSize: 11, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{h.note}</span>
-                  <span style={{ fontSize: 12, fontFamily: "var(--font-mono)", color: h.qty > 0 ? "var(--jade-700)" : "var(--text-primary)" }}>
+                  <span style={{ fontSize: 12, fontFamily: "var(--font-mono)", color: h.qty > 0 ? "var(--text-brand)" : "var(--text-primary)" }}>
                     {h.qty > 0 ? "+" : ""}{h.qty}g
                   </span>
                 </div>

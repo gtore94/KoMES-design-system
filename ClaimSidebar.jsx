@@ -252,7 +252,7 @@ function PeriodAndSummary({
               )}
             </SumLine>
             <SumLine label="청구 합계" bold>
-              <span style={{ fontFamily: "var(--font-mono)", fontWeight: 700, color: "var(--jade-700)", fontSize: 14 }}>
+              <span style={{ fontFamily: "var(--font-mono)", fontWeight: 700, color: "var(--text-brand)", fontSize: 14 }}>
                 {KRW2(summary.totalClaim)}
               </span>
             </SumLine>
@@ -303,7 +303,7 @@ function RadioRow({ checked, onClick, children }) {
       display: "flex", alignItems: "center", gap: 6,
       padding: "6px 8px", borderRadius: "var(--radius-sm)",
       background: checked ? "var(--brand-subtle)" : "transparent",
-      border: `1px solid ${checked ? "var(--jade-200)" : "transparent"}`,
+      border: `1px solid ${checked ? "var(--brand-muted)" : "transparent"}`,
       cursor: "pointer", transition: "all 0.12s",
     }}>
       <span style={{

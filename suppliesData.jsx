@@ -74,9 +74,9 @@ const SUP_OPEN_POS = [
 
 // 카테고리 → 컬러 (배지/그리드 인디케이터)
 const SUP_CAT_COLOR = {
-  "의료":   { bg: "var(--jade-50)",     fg: "var(--jade-700)",     border: "var(--jade-200)" },
-  "포장재": { bg: "var(--amber-100)",   fg: "var(--amber-700)",    border: "var(--amber-200)" },
-  "사무":   { bg: "var(--stone-200)",   fg: "var(--ink-600)",      border: "var(--stone-300)" },
+  "의료":   { bg: "var(--brand-subtle)",     fg: "var(--text-brand)",     border: "var(--brand-muted)" },
+  "포장재": { bg: "var(--status-warning-bg)",   fg: "var(--status-warning-text)",    border: "var(--status-warning-border)" },
+  "사무":   { bg: "var(--bg-raised)",   fg: "var(--text-secondary)",      border: "var(--border-subtle)" },
   "청소":   { bg: "#E4EDF6",            fg: "#3D5A7A",             border: "#C9D8E8" },
 };
 

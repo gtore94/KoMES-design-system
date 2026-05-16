@@ -52,7 +52,7 @@ function HerbRegistrationModal({ onClose, onSubmit }) {
         }}>
           <div style={{
             width: 36, height: 36, borderRadius: "var(--radius-md)",
-            background: "var(--brand-muted)", color: "var(--jade-700)",
+            background: "var(--brand-muted)", color: "var(--text-brand)",
             display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
           }}>
             <Icon name="leaf" size={18} />
@@ -85,7 +85,7 @@ function HerbRegistrationModal({ onClose, onSubmit }) {
                         fontFamily: "var(--font-sans)", fontSize: 12, padding: "5px 10px",
                         border: `1px solid ${category === c.key ? "var(--jade-500)" : "var(--border-default)"}`,
                         background: category === c.key ? "var(--brand-subtle)" : "var(--bg-surface)",
-                        color: category === c.key ? "var(--jade-700)" : "var(--text-secondary)",
+                        color: category === c.key ? "var(--text-brand)" : "var(--text-secondary)",
                         borderRadius: "var(--radius-full)", cursor: "pointer",
                         fontWeight: category === c.key ? 600 : 400,
                       }}>{c.label}</button>
@@ -114,11 +114,11 @@ function HerbRegistrationModal({ onClose, onSubmit }) {
             {stockNum > 0 && upNum > 0 && (
               <div style={{
                 marginTop: 12, padding: "10px 14px", background: "var(--brand-subtle)",
-                border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)",
+                border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)",
                 display: "flex", justifyContent: "space-between", alignItems: "center",
               }}>
                 <span style={{ fontSize: 12, color: "var(--text-secondary)" }}>초기 재고가치</span>
-                <span style={{ fontSize: 15, fontWeight: 600, fontFamily: "var(--font-mono)", color: "var(--jade-800)" }}>{won(initValue)}</span>
+                <span style={{ fontSize: 15, fontWeight: 600, fontFamily: "var(--font-mono)", color: "var(--text-brand)" }}>{won(initValue)}</span>
               </div>
             )}
           </HRSection>
@@ -134,7 +134,7 @@ function HerbRegistrationModal({ onClose, onSubmit }) {
                         flex: 1, fontFamily: "var(--font-sans)", fontSize: 12, padding: "7px 0",
                         border: `1px solid ${storage === s ? "var(--jade-500)" : "var(--border-default)"}`,
                         background: storage === s ? "var(--brand-subtle)" : "var(--bg-surface)",
-                        color: storage === s ? "var(--jade-700)" : "var(--text-secondary)",
+                        color: storage === s ? "var(--text-brand)" : "var(--text-secondary)",
                         borderRadius: "var(--radius-md)", cursor: "pointer",
                         fontWeight: storage === s ? 600 : 400,
                       }}>{s}</button>
@@ -187,7 +187,7 @@ function HRSection({ title, sub, num, children }) {
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
         <div style={{
           width: 22, height: 22, borderRadius: "var(--radius-full)",
-          background: "var(--brand-muted)", color: "var(--jade-700)",
+          background: "var(--brand-muted)", color: "var(--text-brand)",
           display: "flex", alignItems: "center", justifyContent: "center",
           fontSize: 11, fontWeight: 700, fontFamily: "var(--font-mono)",
         }}>{num}</div>

@@ -22,7 +22,7 @@ function SPKpiStrip({ items, alerts, openPOs }) {
       <SPKpi label="등록 품목" value={`${items.length}종`} sub="활성 SKU" />
       <SPKpi label="재고 가치" value={won(totalValue)} sub="현재 단가 기준" />
       <SPKpi label="주의 필요" value={`${alerts.length}건`} sub="부족 · 임박 합계"
-        accent={alerts.length ? "var(--cinnabar-700)" : undefined} />
+        accent={alerts.length ? "var(--status-danger-text)" : undefined} />
       <SPKpi label="진행 중 발주" value={`${openPOs.length}건`} sub="입고 대기" />
     </div>
   );
@@ -66,7 +66,7 @@ function SPAICard({ suggestions, onApply, onDismiss, onOpenSettings }) {
                 <td style={{ padding: "7px 12px", fontSize: 13, fontWeight: 500, color: "var(--text-primary)" }}>{s.name}</td>
                 <td style={{ padding: "7px 12px", fontSize: 12, color: "var(--text-secondary)" }}>{s.supplier}</td>
                 <td style={{ padding: "7px 12px", fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-mono)" }}>{supFmt(s.monthly, s.unit)}</td>
-                <td style={{ padding: "7px 12px", fontSize: 12, color: "var(--cinnabar-700)", fontFamily: "var(--font-mono)" }}>{s.daysLeft}일</td>
+                <td style={{ padding: "7px 12px", fontSize: 12, color: "var(--status-danger-text)", fontFamily: "var(--font-mono)" }}>{s.daysLeft}일</td>
                 <td style={{ padding: "7px 12px", fontSize: 12, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)" }}>{supFmt(s.suggestQty, s.unit)}</td>
                 <td style={{ padding: "7px 12px", fontSize: 12, color: "var(--text-primary)", fontFamily: "var(--font-mono)" }}>{won(s.suggestQty * s.unitPrice)}</td>
               </tr>
@@ -95,10 +95,10 @@ function SPAlertSection({ alerts, onPick }) {
     }}>
       <div style={{ padding: "10px 16px", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid var(--status-danger-border)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <Icon name="alert-triangle" size={15} style={{ color: "var(--cinnabar-700)" }} />
+          <Icon name="alert-triangle" size={15} style={{ color: "var(--status-danger-text)" }} />
           <span style={{ fontSize: 13, fontWeight: 600, color: "var(--status-danger-text)", fontFamily: "var(--font-sans)" }}>주의 필요 · {alerts.length}건</span>
         </div>
-        <span style={{ fontSize: 11, color: "var(--cinnabar-700)", fontFamily: "var(--font-sans)" }}>클릭 시 상세 패널 열기</span>
+        <span style={{ fontSize: 11, color: "var(--status-danger-text)", fontFamily: "var(--font-sans)" }}>클릭 시 상세 패널 열기</span>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 1, background: "var(--status-danger-border)" }}>
         {alerts.map(a => {
@@ -120,7 +120,7 @@ function SPAlertSection({ alerts, onPick }) {
               </div>
               <div style={{ fontSize: 11, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", display: "flex", justifyContent: "space-between" }}>
                 <span>{a.category} · {supFmt(a.stock, a.unit)}</span>
-                <span style={{ color: "var(--cinnabar-700)", fontFamily: "var(--font-mono)" }}>{reason}</span>
+                <span style={{ color: "var(--status-danger-text)", fontFamily: "var(--font-mono)" }}>{reason}</span>
               </div>
             </div>
           );

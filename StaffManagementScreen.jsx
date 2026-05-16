@@ -27,13 +27,13 @@ function StaffFilterSidebar({ filter, setFilter, counts }) {
         display: "flex", alignItems: "center", gap: 8, padding: "7px 10px",
         borderRadius: "var(--radius-md)", cursor: "pointer",
         background: active ? "var(--brand-muted)" : "transparent",
-        color: active ? "var(--jade-700)" : "var(--text-secondary)",
+        color: active ? "var(--text-brand)" : "var(--text-secondary)",
         fontSize: 12, fontWeight: active ? 600 : 400,
         fontFamily: "var(--font-sans)", transition: "all 0.12s",
       }}>
         <Icon name={item.icon} size={13} style={item.color && !active ? { color: item.color } : undefined} />
         <span style={{ flex: 1 }}>{item.label}</span>
-        <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: active ? "var(--jade-700)" : "var(--text-muted)" }}>
+        <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: active ? "var(--text-brand)" : "var(--text-muted)" }}>
           {counts[item.key] ?? 0}
         </span>
       </div>
@@ -172,11 +172,11 @@ function ScheduleGrid({ schedule }) {
           <div key={d} style={{
             padding: "6px 4px", borderRadius: "var(--radius-sm)",
             background: off ? "var(--bg-raised)" : "var(--brand-subtle)",
-            border: `1px solid ${off ? "var(--border-subtle)" : "var(--jade-200)"}`,
+            border: `1px solid ${off ? "var(--border-subtle)" : "var(--brand-muted)"}`,
             textAlign: "center",
           }}>
-            <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.05em", color: off ? "var(--text-muted)" : "var(--jade-700)", fontFamily: "var(--font-sans)" }}>{d}</div>
-            <div style={{ fontSize: 10, fontFamily: "var(--font-mono)", color: off ? "var(--text-muted)" : "var(--jade-800)", marginTop: 2 }}>{v}</div>
+            <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.05em", color: off ? "var(--text-muted)" : "var(--text-brand)", fontFamily: "var(--font-sans)" }}>{d}</div>
+            <div style={{ fontSize: 10, fontFamily: "var(--font-mono)", color: off ? "var(--text-muted)" : "var(--text-brand)", marginTop: 2 }}>{v}</div>
           </div>
         );
       })}
@@ -253,14 +253,14 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
           <button key={t.k} onClick={() => setTab(t.k)} style={{
             padding: "10px 12px", border: "none", background: "transparent", cursor: "pointer",
             fontSize: 12, fontWeight: tab === t.k ? 600 : 400,
-            color: tab === t.k ? "var(--jade-700)" : "var(--text-muted)",
+            color: tab === t.k ? "var(--text-brand)" : "var(--text-muted)",
             borderBottom: `2px solid ${tab === t.k ? "var(--jade-500)" : "transparent"}`,
             display: "inline-flex", alignItems: "center", gap: 5,
             fontFamily: "var(--font-sans)", marginBottom: -1,
           }}>
             <Icon name={t.i} size={12} />{t.l}
             {t.count != null && (
-              <span style={{ fontSize: 10, fontWeight: 600, color: "var(--jade-700)", background: "var(--brand-muted)", padding: "0 5px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-mono)" }}>
+              <span style={{ fontSize: 10, fontWeight: 600, color: "var(--text-brand)", background: "var(--brand-muted)", padding: "0 5px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-mono)" }}>
                 {t.count}
               </span>
             )}
@@ -306,10 +306,10 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
               <ScheduleGrid schedule={staff.schedule} />
             </div>
 
-            <div style={{ background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)", padding: 12, display: "flex", alignItems: "center", gap: 12 }}>
+            <div style={{ background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)", padding: 12, display: "flex", alignItems: "center", gap: 12 }}>
               <Icon name="clock" size={18} style={{ color: "var(--jade-600)" }} />
               <div style={{ flex: 1 }}>
-                <div style={{ fontSize: 11, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-sans)" }}>오늘 근무</div>
+                <div style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-sans)" }}>오늘 근무</div>
                 <div style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-mono)", marginTop: 2 }}>{staff.todayHours}</div>
               </div>
               <TodayStatusPill status={staff.todayStatus} />
@@ -354,7 +354,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
                       padding: "4px 10px", borderRadius: "var(--radius-full)",
                       border: `1px solid ${active ? "var(--jade-300)" : "var(--border-default)"}`,
                       background: active ? "var(--brand-muted)" : "var(--bg-surface)",
-                      color: active ? "var(--jade-700)" : "var(--text-secondary)",
+                      color: active ? "var(--text-brand)" : "var(--text-secondary)",
                       fontSize: 11, fontWeight: active ? 600 : 400, cursor: "pointer",
                       fontFamily: "var(--font-sans)", transition: "all 0.12s",
                     }}>
@@ -436,7 +436,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
                     return (
                       <div key={p.key} style={{
                         display: "flex", alignItems: "center", gap: 10, padding: "9px 12px",
-                        border: `1px solid ${granted ? "var(--jade-200)" : "var(--border-subtle)"}`,
+                        border: `1px solid ${granted ? "var(--brand-muted)" : "var(--border-subtle)"}`,
                         background: granted ? "var(--brand-subtle)" : "var(--bg-surface)",
                         borderRadius: "var(--radius-md)",
                       }}>
@@ -473,7 +473,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
                       <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>
                         <span style={{ fontFamily: "var(--font-mono)" }}>{used}</span> / {total}일 사용
                       </span>
-                      <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>잔여 <span style={{ color: "var(--jade-700)", fontWeight: 600, fontFamily: "var(--font-mono)" }}>{total - used}일</span></span>
+                      <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>잔여 <span style={{ color: "var(--text-brand)", fontWeight: 600, fontFamily: "var(--font-mono)" }}>{total - used}일</span></span>
                     </div>
                     <div style={{ height: 6, background: "var(--bg-raised)", borderRadius: "var(--radius-full)", overflow: "hidden" }}>
                       <div style={{ width: `${pct}%`, height: "100%", background: "var(--jade-500)", borderRadius: "var(--radius-full)" }} />
@@ -494,7 +494,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
                   <div style={{ fontSize: 12, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>{staff.salary.type}</div>
                   <div style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>금액은 원장 권한으로만 조회 가능</div>
                 </div>
-                <button style={{ fontSize: 11, color: "var(--jade-700)", background: "transparent", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-sm)", padding: "3px 9px", cursor: "pointer", fontFamily: "var(--font-sans)" }}>조회</button>
+                <button style={{ fontSize: 11, color: "var(--text-brand)", background: "transparent", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-sm)", padding: "3px 9px", cursor: "pointer", fontFamily: "var(--font-sans)" }}>조회</button>
               </div>
             </div>
 
@@ -563,9 +563,9 @@ function SummaryTiles({ staff }) {
 
   const toneColor = (t) => ({
     neutral: { bg: "var(--bg-raised)",   icon: "var(--ink-500)",      val: "var(--text-primary)" },
-    brand:   { bg: "var(--brand-muted)",    icon: "var(--jade-700)",     val: "var(--jade-700)" },
-    warning: { bg: "var(--status-warning-bg)",   icon: "var(--amber-700)",    val: "var(--amber-700)" },
-    info:    { bg: "var(--status-danger-bg)", icon: "var(--cinnabar-700)", val: "var(--cinnabar-700)" },
+    brand:   { bg: "var(--brand-muted)",    icon: "var(--text-brand)",     val: "var(--text-brand)" },
+    warning: { bg: "var(--status-warning-bg)",   icon: "var(--status-warning-text)",    val: "var(--status-warning-text)" },
+    info:    { bg: "var(--status-danger-bg)", icon: "var(--status-danger-text)", val: "var(--status-danger-text)" },
   })[t];
 
   return (

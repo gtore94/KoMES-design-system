@@ -118,7 +118,7 @@ function SupplyRegistrationModal({ onClose, onSubmit }) {
                       fontFamily: "var(--font-sans)", fontSize: 12, padding: "5px 12px",
                       border: `1px solid ${unit === u ? "var(--jade-500)" : "var(--border-default)"}`,
                       background: unit === u ? "var(--brand-subtle)" : "var(--bg-surface)",
-                      color: unit === u ? "var(--jade-700)" : "var(--text-secondary)",
+                      color: unit === u ? "var(--text-brand)" : "var(--text-secondary)",
                       borderRadius: "var(--radius-full)", cursor: "pointer",
                       fontWeight: unit === u ? 600 : 400,
                     }}>{u}</button>
@@ -176,7 +176,7 @@ function SupplyRegistrationModal({ onClose, onSubmit }) {
                       fontFamily: "var(--font-sans)", fontSize: 12, padding: "6px 14px",
                       border: `1px solid ${hasExpiry ? "var(--jade-500)" : "var(--border-default)"}`,
                       background: hasExpiry ? "var(--brand-subtle)" : "var(--bg-surface)",
-                      color: hasExpiry ? "var(--jade-700)" : "var(--text-secondary)",
+                      color: hasExpiry ? "var(--text-brand)" : "var(--text-secondary)",
                       borderRadius: "var(--radius-md)", cursor: "pointer",
                       fontWeight: hasExpiry ? 600 : 400,
                     }}>유효기간 있음</button>
@@ -185,7 +185,7 @@ function SupplyRegistrationModal({ onClose, onSubmit }) {
                       fontFamily: "var(--font-sans)", fontSize: 12, padding: "6px 14px",
                       border: `1px solid ${!hasExpiry ? "var(--jade-500)" : "var(--border-default)"}`,
                       background: !hasExpiry ? "var(--brand-subtle)" : "var(--bg-surface)",
-                      color: !hasExpiry ? "var(--jade-700)" : "var(--text-secondary)",
+                      color: !hasExpiry ? "var(--text-brand)" : "var(--text-secondary)",
                       borderRadius: "var(--radius-md)", cursor: "pointer",
                       fontWeight: !hasExpiry ? 600 : 400,
                     }}>해당 없음</button>

@@ -19,12 +19,12 @@ const PP_PATIENTS = [
 ];
 
 const PP_TAG_COLORS = {
-  "VIP":      { bg: "var(--status-warning-bg)",   color: "var(--amber-700)" },
-  "자보":     { bg: "var(--status-danger-bg)", color: "var(--cinnabar-700)" },
-  "초진":     { bg: "var(--brand-subtle)",     color: "var(--jade-700)" },
-  "갱년기":   { bg: "var(--status-warning-bg)",   color: "var(--amber-700)" },
-  "불면증":   { bg: "var(--stone-200)",   color: "var(--ink-600)" },
-  "산정특례": { bg: "var(--brand-muted)",    color: "var(--jade-700)" },
+  "VIP":      { bg: "var(--status-warning-bg)",   color: "var(--status-warning-text)" },
+  "자보":     { bg: "var(--status-danger-bg)", color: "var(--status-danger-text)" },
+  "초진":     { bg: "var(--brand-subtle)",     color: "var(--text-brand)" },
+  "갱년기":   { bg: "var(--status-warning-bg)",   color: "var(--status-warning-text)" },
+  "불면증":   { bg: "var(--bg-raised)",   color: "var(--text-secondary)" },
+  "산정특례": { bg: "var(--brand-muted)",    color: "var(--text-brand)" },
 };
 
 const TODAY_STR = "2026-05-16";

@@ -55,9 +55,9 @@ function WaitChip({ mins, stage }) {
     <span style={{
       display: "inline-flex", alignItems: "center", gap: 3,
       fontSize: 10, fontFamily: "var(--font-mono)",
-      color: urgent ? "var(--cinnabar-700)" : "var(--text-muted)",
+      color: urgent ? "var(--status-danger-text)" : "var(--text-muted)",
       background: urgent ? "var(--status-danger-bg)" : "var(--bg-raised)",
-      border: `1px solid ${urgent ? "var(--cinnabar-200)" : "var(--border-subtle)"}`,
+      border: `1px solid ${urgent ? "var(--status-danger-border)" : "var(--border-subtle)"}`,
       borderRadius: "var(--radius-full)", padding: "1px 7px",
     }}>
       <Icon name="clock" size={9} />
@@ -77,7 +77,7 @@ function PatientCard({ patient, stage, onSelect, onAdvance }) {
       onMouseLeave={() => setHovered(false)}
       style={{
         background: hovered ? "var(--brand-subtle)" : "var(--bg-surface)",
-        border: `1px solid ${hovered ? "var(--jade-200)" : "var(--border-subtle)"}`,
+        border: `1px solid ${hovered ? "var(--brand-muted)" : "var(--border-subtle)"}`,
         borderRadius: "var(--radius-md)",
         padding: "10px 12px",
         cursor: "pointer",
@@ -108,7 +108,7 @@ function PatientCard({ patient, stage, onSelect, onAdvance }) {
             fontSize: 10, fontWeight: 600, letterSpacing: "0.04em",
             color: patient.visitType === "초진" ? "var(--cinnabar-600)" : "var(--jade-600)",
             background: patient.visitType === "초진" ? "var(--status-danger-bg)" : "var(--brand-subtle)",
-            border: `1px solid ${patient.visitType === "초진" ? "var(--cinnabar-200)" : "var(--jade-200)"}`,
+            border: `1px solid ${patient.visitType === "초진" ? "var(--status-danger-border)" : "var(--brand-muted)"}`,
             borderRadius: "var(--radius-full)", padding: "2px 7px",
             fontFamily: "var(--font-sans)",
           }}>{patient.visitType}</span>
@@ -128,8 +128,8 @@ function PatientCard({ patient, stage, onSelect, onAdvance }) {
             onClick={e => { e.stopPropagation(); onAdvance(patient.id, nextStage); }}
             style={{
               display: "flex", alignItems: "center", gap: 4,
-              fontSize: 11, fontWeight: 500, color: "var(--jade-700)",
-              background: "var(--brand-muted)", border: "1px solid var(--jade-200)",
+              fontSize: 11, fontWeight: 500, color: "var(--text-brand)",
+              background: "var(--brand-muted)", border: "1px solid var(--brand-muted)",
               borderRadius: "var(--radius-sm)", padding: "3px 9px",
               cursor: "pointer", fontFamily: "var(--font-sans)", transition: "all 0.12s",
             }}
@@ -400,7 +400,7 @@ function PatientListScreen({ onSelectPatient }) {
                           fontSize: 10, fontWeight: 600,
                           color: p.visitType === "초진" ? "var(--cinnabar-600)" : "var(--jade-600)",
                           background: p.visitType === "초진" ? "var(--status-danger-bg)" : "var(--brand-subtle)",
-                          border: `1px solid ${p.visitType === "초진" ? "var(--cinnabar-200)" : "var(--jade-200)"}`,
+                          border: `1px solid ${p.visitType === "초진" ? "var(--status-danger-border)" : "var(--brand-muted)"}`,
                           borderRadius: "var(--radius-full)", padding: "2px 7px", fontFamily: "var(--font-sans)",
                         }}>{p.visitType}</span>
                         {p.insurance === "자보" && (
@@ -413,7 +413,7 @@ function PatientListScreen({ onSelectPatient }) {
                         )}
                         {NEXT_STAGE[p.stage] && (
                           <button onClick={e => { e.stopPropagation(); advanceStage(p.id, NEXT_STAGE[p.stage]); }}
-                            style={{ fontSize: 11, color: "var(--jade-700)", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-sm)", padding: "3px 9px", cursor: "pointer", fontFamily: "var(--font-sans)", whiteSpace: "nowrap" }}>
+                            style={{ fontSize: 11, color: "var(--text-brand)", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-sm)", padding: "3px 9px", cursor: "pointer", fontFamily: "var(--font-sans)", whiteSpace: "nowrap" }}>
                             {NEXT_STAGE[p.stage]} →
                           </button>
                         )}

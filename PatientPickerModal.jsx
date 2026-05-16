@@ -39,7 +39,7 @@ function PPRow({ patient, selected, onClick, onPick, isCurrent }) {
           <span style={{ fontSize: 11, color: "var(--text-muted)" }}>{patient.gender} · {patient.age}세</span>
           <span style={{ fontSize: 10.5, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{patient.rrn}</span>
           {isCurrent && (
-            <span style={{ fontSize: 9.5, fontWeight: 700, padding: "1px 6px", background: "var(--ink-100)", color: "var(--ink-600)", borderRadius: 999, letterSpacing: "0.04em" }}>현재</span>
+            <span style={{ fontSize: 9.5, fontWeight: 700, padding: "1px 6px", background: "var(--ink-100)", color: "var(--text-secondary)", borderRadius: 999, letterSpacing: "0.04em" }}>현재</span>
           )}
           {patient.tags && patient.tags.length > 0 && (
             <span style={{ display: "inline-flex", gap: 3 }}>
@@ -56,7 +56,7 @@ function PPRow({ patient, selected, onClick, onPick, isCurrent }) {
       <div style={{ textAlign: "right", display: "flex", flexDirection: "column", gap: 3, alignItems: "flex-end" }}>
         <div style={{
           fontSize: 10.5, fontFamily: "var(--font-mono)",
-          color: today ? "var(--jade-700)" : "var(--text-muted)",
+          color: today ? "var(--text-brand)" : "var(--text-muted)",
           fontWeight: today ? 600 : 400,
         }}>{patient.lastVisit}</div>
         <div style={{ fontSize: 9.5, color: today ? "var(--jade-600)" : "var(--text-muted)", letterSpacing: "0.04em" }}>
@@ -136,11 +136,11 @@ function PPPreview({ patient }) {
 
       <div style={{
         marginTop: 16, padding: "10px 12px", background: "var(--brand-subtle)",
-        border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)",
+        border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)",
         display: "flex", alignItems: "flex-start", gap: 8,
       }}>
-        <Icon name="info" size={13} style={{ color: "var(--jade-700)", marginTop: 1, flexShrink: 0 }} />
-        <div style={{ fontSize: 11.5, color: "var(--jade-700)", lineHeight: 1.55 }}>
+        <Icon name="info" size={13} style={{ color: "var(--text-brand)", marginTop: 1, flexShrink: 0 }} />
+        <div style={{ fontSize: 11.5, color: "var(--text-brand)", lineHeight: 1.55 }}>
           이 환자로 변경하면 입력 중인 서식 데이터가 새 환자 정보로 자동 갱신됩니다. 진단 내용은 그대로 유지됩니다.
         </div>
       </div>
@@ -212,7 +212,7 @@ function PatientPickerModal({ currentPatientId, onClose, onSelect }) {
         }}>
           <div>
             <div style={{ fontSize: 17, fontWeight: 700, color: "var(--text-primary)", display: "flex", alignItems: "center", gap: 8 }}>
-              <Icon name="user-round-search" size={17} style={{ color: "var(--jade-700)" }} />
+              <Icon name="user-round-search" size={17} style={{ color: "var(--text-brand)" }} />
               환자 변경
             </div>
             <div style={{ fontSize: 11.5, color: "var(--text-muted)", marginTop: 3 }}>

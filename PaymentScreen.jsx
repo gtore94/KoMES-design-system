@@ -84,15 +84,15 @@ function QueueRow({ p, selected, onSelect }) {
           display: "inline-flex", alignItems: "center", gap: 3,
           fontSize: 10, fontWeight: 600, padding: "1px 7px",
           borderRadius: "var(--radius-full)",
-          color: p.visit === "초진" ? "var(--cinnabar-700)" : "var(--jade-700)",
+          color: p.visit === "초진" ? "var(--status-danger-text)" : "var(--text-brand)",
           background: p.visit === "초진" ? "var(--status-danger-bg)" : "var(--brand-subtle)",
-          border: `1px solid ${p.visit === "초진" ? "var(--cinnabar-200)" : "var(--jade-200)"}`,
+          border: `1px solid ${p.visit === "초진" ? "var(--status-danger-border)" : "var(--brand-muted)"}`,
           fontFamily: "var(--font-sans)",
         }}>{p.visit}</span>
         <span style={{
           marginLeft: "auto",
           fontSize: 13, fontWeight: 700,
-          color: isPending ? "var(--cinnabar-700)" : "var(--text-muted)",
+          color: isPending ? "var(--status-danger-text)" : "var(--text-muted)",
           fontFamily: "var(--font-mono)",
           textDecoration: isPending ? "none" : "line-through",
         }}>
@@ -106,7 +106,7 @@ function QueueRow({ p, selected, onSelect }) {
         <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>
           {p.gender}/{p.age}세
         </span>
-        <span style={{ marginLeft: "auto", fontSize: 10, fontFamily: "var(--font-mono)", color: isPending ? "var(--amber-700)" : "var(--jade-700)" }}>
+        <span style={{ marginLeft: "auto", fontSize: 10, fontFamily: "var(--font-mono)", color: isPending ? "var(--status-warning-text)" : "var(--text-brand)" }}>
           {isPending ? `대기 ${p.chargeTime}` : `완료 ${p.paidAt} · ${p.paidBy}`}
         </span>
       </div>
@@ -133,7 +133,7 @@ function PayMethodBtn({ icon, label, hint, primary, onClick, disabled }) {
       <div style={{
         width: 36, height: 36, borderRadius: "var(--radius-md)",
         background: primary ? "rgba(255,255,255,0.2)" : "var(--brand-subtle)",
-        color: primary ? "#fff" : "var(--jade-700)",
+        color: primary ? "#fff" : "var(--text-brand)",
         display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
       }}>
         <Icon name={icon} size={18} />
@@ -208,27 +208,27 @@ function PaymentScreen() {
         actions={<>
           <div style={{
             display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 12px",
-            background: "var(--status-warning-bg)", border: "1px solid var(--amber-200)",
+            background: "var(--status-warning-bg)", border: "1px solid var(--status-warning-border)",
             borderRadius: "var(--radius-full)",
           }}>
-            <Icon name="clock" size={13} style={{ color: "var(--amber-700)" }} />
-            <span style={{ fontSize: 12, fontWeight: 600, color: "var(--amber-700)", fontFamily: "var(--font-sans)" }}>
+            <Icon name="clock" size={13} style={{ color: "var(--status-warning-text)" }} />
+            <span style={{ fontSize: 12, fontWeight: 600, color: "var(--status-warning-text)", fontFamily: "var(--font-sans)" }}>
               대기 {pendingCount}건
             </span>
-            <span style={{ fontSize: 12, fontWeight: 700, color: "var(--amber-700)", fontFamily: "var(--font-mono)" }}>
+            <span style={{ fontSize: 12, fontWeight: 700, color: "var(--status-warning-text)", fontFamily: "var(--font-mono)" }}>
               {KRW(pendingTotal)}
             </span>
           </div>
           <div style={{
             display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 12px",
-            background: "var(--brand-subtle)", border: "1px solid var(--jade-200)",
+            background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)",
             borderRadius: "var(--radius-full)",
           }}>
-            <Icon name="check-circle-2" size={13} style={{ color: "var(--jade-700)" }} />
-            <span style={{ fontSize: 12, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-sans)" }}>
+            <Icon name="check-circle-2" size={13} style={{ color: "var(--text-brand)" }} />
+            <span style={{ fontSize: 12, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-sans)" }}>
               완료 {doneCount}건
             </span>
-            <span style={{ fontSize: 12, fontWeight: 700, color: "var(--jade-700)", fontFamily: "var(--font-mono)" }}>
+            <span style={{ fontSize: 12, fontWeight: 700, color: "var(--text-brand)", fontFamily: "var(--font-mono)" }}>
               {KRW(doneTotal)}
             </span>
           </div>
@@ -361,8 +361,8 @@ function PaymentScreen() {
                       <span key={d.code} style={{
                         display: "inline-flex", alignItems: "center", gap: 6,
                         padding: "4px 10px", fontSize: 12,
-                        background: "var(--brand-subtle)", border: "1px solid var(--jade-200)",
-                        color: "var(--jade-700)", borderRadius: "var(--radius-full)",
+                        background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)",
+                        color: "var(--text-brand)", borderRadius: "var(--radius-full)",
                         fontFamily: "var(--font-sans)",
                       }}>
                         <span style={{ fontFamily: "var(--font-mono)", fontWeight: 600 }}>{d.code}</span>
@@ -403,7 +403,7 @@ function PaymentScreen() {
                           fontSize: 10, fontWeight: 600, padding: "2px 8px",
                           borderRadius: "var(--radius-sm)",
                           background: it.kind === "한약" ? "var(--status-warning-bg)" : it.kind === "시술" ? "var(--brand-subtle)" : "var(--bg-raised)",
-                          color: it.kind === "한약" ? "var(--amber-700)" : it.kind === "시술" ? "var(--jade-700)" : "var(--text-secondary)",
+                          color: it.kind === "한약" ? "var(--status-warning-text)" : it.kind === "시술" ? "var(--text-brand)" : "var(--text-secondary)",
                           fontFamily: "var(--font-sans)",
                           width: "fit-content",
                         }}>{it.kind}</span>
@@ -534,8 +534,8 @@ function PaymentScreen() {
                   )}
                   {amounts.discount > 0 && (
                     <div style={{ display: "flex", justifyContent: "space-between", paddingTop: 6, borderTop: "1px dashed var(--border-default)" }}>
-                      <span style={{ fontSize: 12, color: "var(--cinnabar-700)", fontFamily: "var(--font-sans)" }}>할인액</span>
-                      <span style={{ fontSize: 13, fontWeight: 600, color: "var(--cinnabar-700)", fontFamily: "var(--font-mono)" }}>
+                      <span style={{ fontSize: 12, color: "var(--status-danger-text)", fontFamily: "var(--font-sans)" }}>할인액</span>
+                      <span style={{ fontSize: 13, fontWeight: 600, color: "var(--status-danger-text)", fontFamily: "var(--font-mono)" }}>
                         -{KRW(amounts.discount)}
                       </span>
                     </div>
@@ -551,16 +551,16 @@ function PaymentScreen() {
                 padding: "14px 16px",
               }}>
                 <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between" }}>
-                  <span style={{ fontSize: 13, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-sans)" }}>
+                  <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-sans)" }}>
                     최종 수납액
                   </span>
-                  <span style={{ fontSize: 26, fontWeight: 700, color: "var(--jade-800)", fontFamily: "var(--font-serif)", letterSpacing: "-0.02em" }}>
+                  <span style={{ fontSize: 26, fontWeight: 700, color: "var(--text-brand)", fontFamily: "var(--font-serif)", letterSpacing: "-0.02em" }}>
                     {KRW(amounts.net)}
                   </span>
                 </div>
                 {selected.status === "완료" && (
                   <div style={{
-                    marginTop: 8, fontSize: 11, color: "var(--jade-700)", fontFamily: "var(--font-sans)",
+                    marginTop: 8, fontSize: 11, color: "var(--text-brand)", fontFamily: "var(--font-sans)",
                     display: "flex", alignItems: "center", gap: 5,
                   }}>
                     <Icon name="check-circle-2" size={12} />
@@ -627,12 +627,12 @@ function PaymentScreen() {
                 <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>{selected.name} ({selected.chartNo})</span>
               </div>
               <div style={{
-                background: "var(--brand-subtle)", border: "1px solid var(--jade-200)",
+                background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)",
                 borderRadius: "var(--radius-md)", padding: "14px 16px",
                 display: "flex", alignItems: "baseline", justifyContent: "space-between",
               }}>
-                <span style={{ fontSize: 13, color: "var(--jade-700)", fontWeight: 600 }}>수납 금액</span>
-                <span style={{ fontSize: 24, fontWeight: 700, color: "var(--jade-800)", fontFamily: "var(--font-serif)", letterSpacing: "-0.02em" }}>
+                <span style={{ fontSize: 13, color: "var(--text-brand)", fontWeight: 600 }}>수납 금액</span>
+                <span style={{ fontSize: 24, fontWeight: 700, color: "var(--text-brand)", fontFamily: "var(--font-serif)", letterSpacing: "-0.02em" }}>
                   {KRW(amounts.net)}
                 </span>
               </div>

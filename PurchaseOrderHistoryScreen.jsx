@@ -83,7 +83,7 @@ function PurchaseOrderHistoryScreen({ openSettings }) {
           <div style={{ padding: "16px 24px 0", display: "flex", gap: 12 }}>
             <POKpi icon="receipt" label="이번 달 발주" value={`${kpi.monthCount}건`} sub={won(kpi.monthValue)} />
             <POKpi icon="truck"   label="진행 중"     value={`${kpi.inflight}건`} sub="입고 대기"
-              accent={kpi.inflight > 0 ? "var(--jade-700)" : null} />
+              accent={kpi.inflight > 0 ? "var(--text-brand)" : null} />
             <POKpi icon="timer"   label="평균 리드타임" value={`${kpi.avgLead}일`} sub="최근 완료 발주 기준" />
             <POKpi icon="check-circle" label="이번 분기 입고" value={`${PURCHASE_ORDERS.filter(p => p.status === "received").length}건`} sub="완료 발주" />
           </div>
@@ -125,7 +125,7 @@ function PurchaseOrderHistoryScreen({ openSettings }) {
                     fontFamily: "var(--font-sans)", fontSize: 12, padding: "5px 12px",
                     border: `1px solid ${typeFilter === t.key ? "var(--jade-500)" : "var(--border-default)"}`,
                     background: typeFilter === t.key ? "var(--brand-subtle)" : "var(--bg-surface)",
-                    color: typeFilter === t.key ? "var(--jade-700)" : "var(--text-secondary)",
+                    color: typeFilter === t.key ? "var(--text-brand)" : "var(--text-secondary)",
                     borderRadius: "var(--radius-full)", cursor: "pointer",
                     fontWeight: typeFilter === t.key ? 600 : 400,
                     display: "inline-flex", alignItems: "center", gap: 5,
@@ -203,7 +203,7 @@ function PurchaseOrderHistoryScreen({ openSettings }) {
                             display: "inline-flex", alignItems: "center", justifyContent: "center",
                             width: 24, height: 24, borderRadius: "var(--radius-sm)",
                             background: po.type === "herb" ? "var(--brand-muted)" : "var(--bg-raised)",
-                            color: po.type === "herb" ? "var(--jade-700)" : "var(--ink-600)",
+                            color: po.type === "herb" ? "var(--text-brand)" : "var(--text-secondary)",
                           }}>
                             <Icon name={po.type === "herb" ? "leaf" : "package"} size={12} />
                           </span>
@@ -224,7 +224,7 @@ function PurchaseOrderHistoryScreen({ openSettings }) {
                         <td style={{ padding: "10px 14px", fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-mono)" }}>{po.date}</td>
                         <td style={{ padding: "10px 14px", fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-mono)" }}>
                           {po.received ? (
-                            <span style={{ color: delayed ? "var(--cinnabar-700)" : "var(--text-secondary)" }}>
+                            <span style={{ color: delayed ? "var(--status-danger-text)" : "var(--text-secondary)" }}>
                               {po.received}
                               {delayed && <span style={{ marginLeft: 4, fontSize: 10 }}>(지연)</span>}
                             </span>
@@ -255,7 +255,7 @@ function PurchaseOrderHistoryScreen({ openSettings }) {
       {toast && (
         <div style={{
           position: "fixed", bottom: 20, left: "50%", transform: "translateX(-50%)",
-          background: "var(--ink-800)", color: "var(--bg-raised)",
+          background: "var(--text-primary)", color: "var(--bg-raised)",
           padding: "10px 18px", borderRadius: "var(--radius-md)",
           fontSize: 13, fontFamily: "var(--font-sans)", boxShadow: "var(--shadow-lg)",
           display: "flex", alignItems: "center", gap: 8, zIndex: 100,
@@ -278,7 +278,7 @@ function POKpi({ icon, label, value, sub, accent }) {
     }}>
       <div style={{
         width: 36, height: 36, borderRadius: "var(--radius-md)",
-        background: "var(--brand-subtle)", color: "var(--jade-700)",
+        background: "var(--brand-subtle)", color: "var(--text-brand)",
         display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
       }}>
         <Icon name={icon} size={16} />
@@ -329,10 +329,10 @@ function POStatusBar({ orders, statusFilter, onClick }) {
               onMouseEnter={e => { if (!active) e.currentTarget.style.background = "var(--bg-raised)"; }}
               onMouseLeave={e => { if (!active) e.currentTarget.style.background = "transparent"; }}>
               <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
-                <span style={{ fontSize: 22, fontWeight: 600, fontFamily: "var(--font-mono)", color: active ? "var(--jade-700)" : "var(--text-primary)", lineHeight: 1 }}>{s.count}</span>
+                <span style={{ fontSize: 22, fontWeight: 600, fontFamily: "var(--font-mono)", color: active ? "var(--text-brand)" : "var(--text-primary)", lineHeight: 1 }}>{s.count}</span>
                 <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>건</span>
               </div>
-              <div style={{ fontSize: 11, color: active ? "var(--jade-700)" : "var(--text-secondary)", marginTop: 3, fontWeight: active ? 600 : 400 }}>{s.label}</div>
+              <div style={{ fontSize: 11, color: active ? "var(--text-brand)" : "var(--text-secondary)", marginTop: 3, fontWeight: active ? 600 : 400 }}>{s.label}</div>
             </button>
             {i < counts.length - 1 && (
               <Icon name="chevron-right" size={14} style={{ color: "var(--ink-200)", flexShrink: 0 }} />
@@ -394,7 +394,7 @@ function PODetailPanel({ po, onToast }) {
                     }}></div>
                     <span style={{
                       fontSize: 9, fontWeight: isCurrent ? 600 : 400,
-                      color: reached ? "var(--jade-700)" : "var(--text-muted)",
+                      color: reached ? "var(--text-brand)" : "var(--text-muted)",
                       whiteSpace: "nowrap",
                     }}>{PO_STATUS[k].label}</span>
                   </div>
@@ -408,8 +408,8 @@ function PODetailPanel({ po, onToast }) {
         ) : (
           <div style={{
             padding: "8px 12px", marginTop: 10, background: po.status === "returned" ? "var(--status-danger-bg)" : "var(--bg-raised)",
-            border: `1px solid ${po.status === "returned" ? "var(--cinnabar-200)" : "var(--stone-300)"}`,
-            borderRadius: "var(--radius-md)", fontSize: 11, color: po.status === "returned" ? "var(--cinnabar-700)" : "var(--text-secondary)",
+            border: `1px solid ${po.status === "returned" ? "var(--status-danger-border)" : "var(--stone-300)"}`,
+            borderRadius: "var(--radius-md)", fontSize: 11, color: po.status === "returned" ? "var(--status-danger-text)" : "var(--text-secondary)",
           }}>{st.label} 처리된 발주입니다</div>
         )}
       </div>
@@ -426,7 +426,7 @@ function PODetailPanel({ po, onToast }) {
             <POFact
               label="실제 입고일"
               value={`${po.received}${lead ? ` · 리드 ${lead}일` : ""}`}
-              accent={po.expected && new Date(po.received) > new Date(po.expected) ? "var(--cinnabar-700)" : null}
+              accent={po.expected && new Date(po.received) > new Date(po.expected) ? "var(--status-danger-text)" : null}
             />
           )}
           <POFact label="담당자"   value={po.placedBy} />
@@ -468,8 +468,8 @@ function PODetailPanel({ po, onToast }) {
         {po.note && (
           <div style={{
             padding: "10px 12px", background: "var(--status-warning-bg)",
-            border: "1px solid var(--amber-200)", borderRadius: "var(--radius-md)",
-            fontSize: 12, color: "var(--amber-700)", lineHeight: 1.5,
+            border: "1px solid var(--status-warning-border)", borderRadius: "var(--radius-md)",
+            fontSize: 12, color: "var(--status-warning-text)", lineHeight: 1.5,
             display: "flex", gap: 8,
           }}>
             <Icon name="message-square" size={13} style={{ flexShrink: 0, marginTop: 2 }} />
@@ -488,7 +488,7 @@ function PODetailPanel({ po, onToast }) {
                   position: "absolute", left: -16, top: 4,
                   width: 11, height: 11, borderRadius: "50%",
                   background: i === po.timeline.length - 1 ? "var(--jade-500)" : "var(--bg-surface)",
-                  border: `2px solid ${i === po.timeline.length - 1 ? "var(--jade-200)" : "var(--border-default)"}`,
+                  border: `2px solid ${i === po.timeline.length - 1 ? "var(--brand-muted)" : "var(--border-default)"}`,
                 }}></div>
                 <div style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{t.date} · {t.who}</div>
                 <div style={{ fontSize: 12, color: "var(--text-primary)", marginTop: 1 }}>{t.text}</div>
