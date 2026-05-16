@@ -3634,6 +3634,7 @@ function VisitCard({ visit }) {
 function PatientChartScreen({ patient, onBack, onPrescribe, onNavigate }) {
   const scrollRef = useRefChart(null);
   const [instructionOpen, setInstructionOpen] = useStateChart(false);
+  const [prescriptionOpen, setPrescriptionOpen] = useStateChart(false);
 
   if (!patient) {
     return (
@@ -3655,7 +3656,7 @@ function PatientChartScreen({ patient, onBack, onPrescribe, onNavigate }) {
         subtitle={`${patient.gender} · ${patient.age}세 · ${patient.dob} · ${patient.phone}`}
         actions={<>
           <Button variant="secondary" size="sm" icon="arrow-left" onClick={onBack}>목록</Button>
-          <Button variant="primary" icon="file-plus" onClick={onPrescribe}>신규 처방</Button>
+          <Button variant="primary" icon="file-plus" onClick={() => setPrescriptionOpen(true)}>신규 처방</Button>
         </>}
       />
 
@@ -3762,6 +3763,24 @@ function PatientChartScreen({ patient, onBack, onPrescribe, onNavigate }) {
           patient={patient}
           onClose={() => setInstructionOpen(false)}
         />
+      )}
+
+      {prescriptionOpen && (
+        <div onClick={() => setPrescriptionOpen(false)} style={{
+          position: "fixed", inset: 0, background: "var(--bg-overlay)",
+          backdropFilter: "blur(2px)", zIndex: 200,
+          display: "flex", alignItems: "center", justifyContent: "center", padding: 24,
+          fontFamily: "var(--font-sans)",
+        }}>
+          <div onClick={e => e.stopPropagation()} style={{
+            width: "100%", maxWidth: 1100, height: "100%", maxHeight: "92vh",
+            background: "var(--bg-surface)", borderRadius: "var(--radius-xl)",
+            boxShadow: "var(--shadow-xl)", overflow: "hidden",
+            display: "flex", flexDirection: "column",
+          }}>
+            <PrescriptionScreen patient={patient} onBack={() => setPrescriptionOpen(false)} />
+          </div>
+        </div>
       )}
     </div>
   );
