@@ -3402,7 +3402,7 @@ function ActingOrderBlock({ orders, editable }) {
             background: o.done ? "var(--bg-raised)" : "var(--bg-surface)",
             border: `1px solid ${o.done ? "var(--border-subtle)" : "var(--border-default)"}`,
             cursor: editable ? "pointer" : "default",
-            opacity: o.done ? 0.65 : 1, transition: "all 0.12s",
+            transition: "all 0.12s",
           }}>
             <div style={{ width: 18, height: 18, borderRadius: "var(--radius-sm)", border: `2px solid ${o.done ? "var(--jade-400)" : "var(--border-default)"}`, background: o.done ? "var(--jade-400)" : "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "all 0.12s" }}>
               {o.done && <Icon name="check" size={11} style={{ color: "white" }} />}
@@ -3573,7 +3573,7 @@ function VisitCard({ visit }) {
                         {visit.actingOrders.map((o, i) => {
                           const typeInfo = ACTING_TYPES.find(t => t.key === o.type) || ACTING_TYPES[0];
                           return (
-                            <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, padding: "6px 10px", background: o.done ? "var(--bg-raised)" : "var(--bg-surface)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-sm)", opacity: o.done ? 0.7 : 1 }}>
+                            <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, padding: "6px 10px", background: o.done ? "var(--bg-raised)" : "var(--bg-surface)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-sm)" }}>
                               <span style={{ fontSize: 10, fontWeight: 700, color: typeInfo.color, background: `${typeInfo.color}28`, padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)", flexShrink: 0 }}>{o.type}</span>
                               <span style={{ fontSize: 12, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flex: 1, textDecoration: o.done ? "line-through" : "none" }}>{o.sites}</span>
                               <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{o.count}침 · {o.duration}분</span>
