@@ -67,7 +67,7 @@ const SOAP_AUTOCOMPLETE = {
 // ── 자보 경과 배너 ───────────────────────────────────────────────
 // 사용 한도(추나 20회 / 첩약 21일분)는 progress bar로 시각화.
 // "8주 보장 종료" 같은 잘못된 정보는 표시하지 않음.
-function AutoInsuranceBar({ injuryDate, today = new Date(), chunaUsed = 7, herbDaysUsed = 14 }) {
+function AutoInsuranceBar({ injuryDate, today = new Date(), chunaUsed = 7, herbDaysUsed = 14, yakchimUsedWeek = 2, seupUsedWeek = 1 }) {
   if (!injuryDate) return null;
   const d0 = new Date(injuryDate);
   const days = Math.max(0, Math.floor((today - d0) / (1000 * 60 * 60 * 24)));
@@ -83,10 +83,16 @@ function AutoInsuranceBar({ injuryDate, today = new Date(), chunaUsed = 7, herbD
   // 사용 한도
   const CHUNA_MAX = 20;
   const HERB_MAX = 21;
+  const YAKCHIM_WEEK_MAX = 3;
+  const SEUP_WEEK_MAX = 3;
   const chunaPct = Math.min(chunaUsed / CHUNA_MAX, 1) * 100;
   const herbPct = Math.min(herbDaysUsed / HERB_MAX, 1) * 100;
+  const yakchimPct = Math.min(yakchimUsedWeek / YAKCHIM_WEEK_MAX, 1) * 100;
+  const seupPct = Math.min(seupUsedWeek / SEUP_WEEK_MAX, 1) * 100;
   const chunaWarn = chunaUsed >= CHUNA_MAX * 0.8;
   const herbWarn = herbDaysUsed >= HERB_MAX * 0.8;
+  const yakchimWarn = yakchimUsedWeek >= YAKCHIM_WEEK_MAX;
+  const seupWarn = seupUsedWeek >= SEUP_WEEK_MAX;
 
   return (
     <div style={{
@@ -133,7 +139,7 @@ function AutoInsuranceBar({ injuryDate, today = new Date(), chunaUsed = 7, herbD
       <div style={{ width: 1, background: "rgba(255,255,255,0.12)", flexShrink: 0 }} />
 
       {/* RIGHT: 사용 한도 progress bars */}
-      <div style={{ flex: 1, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18, alignItems: "center", minWidth: 0 }}>
+      <div style={{ flex: 1, display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px 18px", alignItems: "center", minWidth: 0 }}>
         <UsageBar
           icon="hand"
           label="추나요법"
@@ -153,6 +159,26 @@ function AutoInsuranceBar({ injuryDate, today = new Date(), chunaUsed = 7, herbD
           pct={herbPct}
           warn={herbWarn}
           hint="처방 1건 21일분"
+        />
+        <UsageBar
+          icon="syringe"
+          label="약침"
+          used={yakchimUsedWeek}
+          max={YAKCHIM_WEEK_MAX}
+          unit="회"
+          pct={yakchimPct}
+          warn={yakchimWarn}
+          hint="주 3회 한도"
+        />
+        <UsageBar
+          icon="droplets"
+          label="습부항"
+          used={seupUsedWeek}
+          max={SEUP_WEEK_MAX}
+          unit="회"
+          pct={seupPct}
+          warn={seupWarn}
+          hint="주 3회 한도"
         />
       </div>
     </div>
