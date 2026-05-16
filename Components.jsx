@@ -102,6 +102,9 @@ function Sidebar({ activeScreen, onNavigate }) {
       { key: "schedule", icon: "calendar",          label: "예약 관리" },
       { key: "payment",  icon: "credit-card",       label: "수납" },
     ]},
+    { label: "청구", items: [
+      { key: "claim",    icon: "file-text",         label: "보험 청구" },
+    ]},
     { label: "처방", items: [
       { key: "prescriptions", icon: "flask-conical", label: "처방 관리" },
       { key: "inventory",     icon: "package",        label: "약재 재고" },
