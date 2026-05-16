@@ -183,22 +183,25 @@ function ThemeCard({ value, label, hint, active, onSelect, preview }) {
 
 const THEME_PREVIEWS = {
   light: {
-    bg: "var(--stone-50)", border: "var(--border-subtle)",
-    dot1: "var(--cinnabar-600)", dot2: "var(--amber-500)", dot3: "var(--brand)",
-    line1: "var(--ink-700)", line2: "var(--ink-300)",
-    pill: "var(--jade-100)", pillText: "var(--text-brand)",
+    className: "theme-preview-light",
+    bg: "var(--bg-page)", border: "var(--border-subtle)",
+    dot1: "var(--text-danger)", dot2: "var(--amber-500)", dot3: "var(--brand)",
+    line1: "var(--text-primary)", line2: "var(--text-muted)",
+    pill: "var(--brand-muted)", pillText: "var(--text-brand)",
   },
   dark: {
-    bg: "var(--ink-900)", border: "var(--ink-700)",
-    dot1: "var(--cinnabar-400)", dot2: "var(--amber-400)", dot3: "var(--jade-300)",
-    line1: "var(--ink-50)", line2: "var(--ink-400)",
-    pill: "var(--brand-muted)", pillText: "var(--jade-300)",
+    className: "theme-preview-dark",
+    bg: "var(--bg-page)", border: "var(--border-subtle)",
+    dot1: "var(--text-danger)", dot2: "var(--amber-400)", dot3: "var(--brand)",
+    line1: "var(--text-primary)", line2: "var(--text-muted)",
+    pill: "var(--brand-muted)", pillText: "var(--text-brand)",
   },
   auto: {
-    bg: "linear-gradient(120deg, var(--stone-50) 0%, var(--stone-50) 48%, var(--ink-900) 52%, var(--ink-900) 100%)",
-    border: "var(--ink-300)",
-    dot1: "var(--cinnabar-600)", dot2: "var(--amber-500)", dot3: "var(--jade-300)",
-    line1: "var(--ink-400)", line2: "var(--ink-400)",
+    className: "theme-preview-auto",
+    bg: "linear-gradient(120deg, var(--theme-preview-light-bg) 0%, var(--theme-preview-light-bg) 48%, var(--theme-preview-dark-bg) 52%, var(--theme-preview-dark-bg) 100%)",
+    border: "var(--theme-preview-border)",
+    dot1: "var(--cinnabar-600)", dot2: "var(--amber-500)", dot3: "var(--brand)",
+    line1: "var(--text-muted)", line2: "var(--text-muted)",
     pill: "var(--brand-muted)", pillText: "var(--brand)",
   },
 };

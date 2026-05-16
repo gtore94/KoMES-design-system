@@ -521,6 +521,89 @@
 }
 
 /* ============================================================
+   THEME-PREVIEW SCOPES — lock semantic tokens to the previewed
+   theme so the swatch renders as that theme regardless of the
+   currently-active theme. Brand-related tokens reference the
+   --jade-* palette, so they still adapt to [data-color="navy"].
+   ============================================================ */
+.theme-preview-light {
+  --bg-page:        var(--stone-50);
+  --bg-surface:     #FFFFFF;
+  --bg-raised:      var(--stone-100);
+  --bg-sunken:      var(--stone-200);
+  --text-primary:   var(--ink-800);
+  --text-secondary: var(--ink-500);
+  --text-muted:     var(--ink-300);
+  --text-disabled:  var(--ink-200);
+  --text-brand:     var(--jade-700);
+  --text-danger:    var(--cinnabar-600);
+  --border-subtle:  var(--stone-300);
+  --border-default: var(--stone-400);
+  --border-strong:  var(--ink-200);
+  --brand:          var(--jade-500);
+  --brand-hover:    var(--jade-600);
+  --brand-active:   var(--jade-700);
+  --brand-subtle:   var(--jade-50);
+  --brand-muted:    var(--jade-100);
+}
+
+.theme-preview-dark {
+  --bg-page:        #0B1413;
+  --bg-surface:     #131F1D;
+  --bg-raised:      #1A2826;
+  --bg-sunken:      #070D0C;
+  --text-primary:   var(--ink-50);
+  --text-secondary: var(--ink-200);
+  --text-muted:     var(--ink-300);
+  --text-disabled:  var(--ink-500);
+  --text-brand:     var(--jade-300);
+  --text-danger:    var(--cinnabar-400);
+  --border-subtle:  #1F302D;
+  --border-default: var(--ink-700);
+  --border-strong:  var(--ink-600);
+  --brand:          var(--jade-400);
+  --brand-hover:    var(--jade-300);
+  --brand-active:   var(--jade-200);
+  --brand-subtle:   rgba(var(--brand-rgb), 0.12);
+  --brand-muted:    rgba(var(--brand-rgb), 0.22);
+}
+
+/* When navy color is active, light/dark/auto previews use navy-tinted text */
+[data-color="navy"] .theme-preview-light {
+  --text-primary:   var(--navy-800);
+  --text-secondary: var(--navy-500);
+  --text-muted:     var(--navy-300);
+}
+
+[data-color="navy"] .theme-preview-dark {
+  --bg-page:        #080F1C;
+  --bg-surface:     #0E1A2E;
+  --bg-raised:      #16263F;
+  --border-subtle:  #1A2D45;
+  --text-primary:   var(--navy-50);
+  --text-secondary: var(--navy-200);
+  --text-muted:     var(--navy-300);
+  --brand:          #5878A3;
+  --brand-hover:    #8298BF;
+  --brand-active:   #B3C0D7;
+  --brand-subtle:   rgba(53, 90, 130, 0.15);
+  --brand-muted:    rgba(53, 90, 130, 0.28);
+  --text-brand:     #8298BF;
+}
+
+.theme-preview-auto {
+  --theme-preview-light-bg: var(--stone-50);
+  --theme-preview-dark-bg:  #0B1413;
+  --theme-preview-border:   var(--ink-300);
+}
+[data-color="navy"] .theme-preview-auto {
+  --theme-preview-light-bg: var(--navy-50);
+  --theme-preview-dark-bg:  #080F1C;
+  --theme-preview-border:   var(--navy-300);
+  --text-muted: var(--navy-300);
+}
+
+/* ============================================================
    COLOR-PREVIEW SCOPES — keep each preview swatch in its
    own canonical palette regardless of the active color theme.
    ============================================================ */
