@@ -161,7 +161,7 @@ function Sidebar({ activeScreen, onNavigate }) {
           <div style={{ width: 30, height: 30, background: "var(--jade-500)", borderRadius: "var(--radius-sm)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
             <span style={{ fontFamily: "var(--font-serif)", fontSize: 15, fontWeight: 600, color: "white" }}>K</span>
           </div>
-          <span style={{ fontFamily: "var(--font-serif)", fontSize: 15, fontWeight: 400, color: "var(--bg-raised)", letterSpacing: "-0.01em", whiteSpace: "nowrap" }}>KoMES</span>
+          <span style={{ fontFamily: "var(--font-serif)", fontSize: 15, fontWeight: 400, color: "var(--stone-50)", letterSpacing: "-0.01em", whiteSpace: "nowrap" }}>KoMES</span>
         </div>
         <div key="collapse-btn" onClick={() => setCollapsed(true)} style={{ cursor: "pointer", color: "var(--ink-300)", display: "flex", alignItems: "center", padding: 3, borderRadius: "var(--radius-sm)" }}>
           <Icon name="chevron-left" size={13} />
