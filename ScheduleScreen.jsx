@@ -14,7 +14,7 @@ for (let h = 9; h < 19; h++) {
 
 // Mock doctors (rooms)
 const DOCTORS_SCH = [
-  { id: "d1", name: "김민준 원장", room: "진료실 1", color: "#4A7C6F", bg: "var(--doc-d1-bg)", border: "var(--doc-d1-border)" },
+  { id: "d1", name: "김민준 원장", room: "진료실 1", color: "#6B9E90", bg: "var(--doc-d1-bg)", border: "var(--doc-d1-border)" },
   { id: "d2", name: "이지영 원장", room: "진료실 2", color: "#B5873E", bg: "var(--doc-d2-bg)", border: "var(--doc-d2-border)" },
   { id: "d3", name: "박서윤 부원장", room: "치료실 A", color: "#5A6E8A", bg: "var(--doc-d3-bg)", border: "var(--doc-d3-border)" },
 ];

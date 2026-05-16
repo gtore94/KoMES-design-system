@@ -2672,13 +2672,13 @@ const PATIENT_BY_ID = PATIENT_MASTER.reduce((a, p) => (a[p.id] = p, a), {});
 const RELATION_TYPES = [
   { key: "배우자",   icon: "heart",    color: "#C4594B" },
   { key: "부모",     icon: "user",     color: "#5A6E8A" },
-  { key: "자녀",     icon: "smile",    color: "#3A7065" },
-  { key: "형제자매", icon: "users",    color: "#4A7C6F" },
+  { key: "자녀",     icon: "smile",    color: "#5C8B7E" },
+  { key: "형제자매", icon: "users",    color: "#6B9E90" },
   { key: "친구",     icon: "user-plus", color: "#9A8E82" },
   { key: "지인",     icon: "user-plus", color: "#9A8E82" },
   { key: "지인 소개", icon: "share-2", color: "#B5873E" },
   { key: "직장 동료", icon: "briefcase", color: "#5A6E8A" },
-  { key: "기타",     icon: "circle",   color: "#7A6E60" },
+  { key: "기타",     icon: "circle",   color: "#9A8E82" },
 ];
 
 const TAG_COLORS = {
@@ -3981,7 +3981,7 @@ for (let h = 9; h < 19; h++) {
 
 // Mock doctors (rooms)
 const DOCTORS_SCH = [
-  { id: "d1", name: "김민준 원장", room: "진료실 1", color: "#4A7C6F", bg: "var(--doc-d1-bg)", border: "var(--doc-d1-border)" },
+  { id: "d1", name: "김민준 원장", room: "진료실 1", color: "#6B9E90", bg: "var(--doc-d1-bg)", border: "var(--doc-d1-border)" },
   { id: "d2", name: "이지영 원장", room: "진료실 2", color: "#B5873E", bg: "var(--doc-d2-bg)", border: "var(--doc-d2-border)" },
   { id: "d3", name: "박서윤 부원장", room: "치료실 A", color: "#5A6E8A", bg: "var(--doc-d3-bg)", border: "var(--doc-d3-border)" },
 ];
@@ -16346,7 +16346,7 @@ const STAFF_MASTER = [
     salary: { type: "월급제", visible: false },
     leaveBalance: { annual: 15, used: 4 },
     note: "대표원장. 매주 목요일 외부 자문.",
-    color: "#3A7065",
+    color: "#5C8B7E",
     todayStatus: "진료중", // 진료중 | 진료대기 | 휴식 | 부재
     todayPatients: 14,
   },
@@ -16361,7 +16361,7 @@ const STAFF_MASTER = [
     salary: { type: "월급제", visible: false },
     leaveBalance: { annual: 15, used: 6 },
     note: "",
-    color: "#4A7C6F",
+    color: "#6B9E90",
     todayStatus: "진료중",
     todayPatients: 11,
   },
@@ -16466,7 +16466,7 @@ const STAFF_MASTER = [
     salary: { type: "월급제", visible: false },
     leaveBalance: { annual: 15, used: 4 },
     note: "",
-    color: "#7A6E60",
+    color: "#9A8E82",
     todayStatus: "진료중",
     todayPatients: null,
   },
@@ -16496,7 +16496,7 @@ const STAFF_MASTER = [
     salary: { type: "월급제", visible: false },
     leaveBalance: { annual: 12, used: 1 },
     note: "야간 진료 담당.",
-    color: "#4A7C6F",
+    color: "#6B9E90",
     todayStatus: "진료대기",
     todayPatients: 0,
   },
@@ -16518,11 +16518,11 @@ const STAFF_MASTER = [
 ];
 
 const ROLE_GROUPS = [
-  { key: "doctor",     label: "한의사",     icon: "stethoscope",   color: "#3A7065" },
+  { key: "doctor",     label: "한의사",     icon: "stethoscope",   color: "#5C8B7E" },
   { key: "nurse",      label: "간호직",     icon: "heart-pulse",   color: "#C4974B" },
   { key: "admin",      label: "원무·행정", icon: "clipboard-list", color: "#5A6E8A" },
   { key: "therapist",  label: "물리치료사", icon: "hand-helping",   color: "#B5873E" },
-  { key: "pharmacist", label: "한약사",     icon: "flask-conical", color: "#7A6E60" },
+  { key: "pharmacist", label: "한약사",     icon: "flask-conical", color: "#9A8E82" },
 ];
 
 const STATUS_META = {

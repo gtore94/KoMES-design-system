@@ -13,7 +13,7 @@ const STAFF_MASTER = [
     salary: { type: "월급제", visible: false },
     leaveBalance: { annual: 15, used: 4 },
     note: "대표원장. 매주 목요일 외부 자문.",
-    color: "#3A7065",
+    color: "#5C8B7E",
     todayStatus: "진료중", // 진료중 | 진료대기 | 휴식 | 부재
     todayPatients: 14,
   },
@@ -28,7 +28,7 @@ const STAFF_MASTER = [
     salary: { type: "월급제", visible: false },
     leaveBalance: { annual: 15, used: 6 },
     note: "",
-    color: "#4A7C6F",
+    color: "#6B9E90",
     todayStatus: "진료중",
     todayPatients: 11,
   },
@@ -133,7 +133,7 @@ const STAFF_MASTER = [
     salary: { type: "월급제", visible: false },
     leaveBalance: { annual: 15, used: 4 },
     note: "",
-    color: "#7A6E60",
+    color: "#9A8E82",
     todayStatus: "진료중",
     todayPatients: null,
   },
@@ -163,7 +163,7 @@ const STAFF_MASTER = [
     salary: { type: "월급제", visible: false },
     leaveBalance: { annual: 12, used: 1 },
     note: "야간 진료 담당.",
-    color: "#4A7C6F",
+    color: "#6B9E90",
     todayStatus: "진료대기",
     todayPatients: 0,
   },
@@ -185,11 +185,11 @@ const STAFF_MASTER = [
 ];
 
 const ROLE_GROUPS = [
-  { key: "doctor",     label: "한의사",     icon: "stethoscope",   color: "#3A7065" },
+  { key: "doctor",     label: "한의사",     icon: "stethoscope",   color: "#5C8B7E" },
   { key: "nurse",      label: "간호직",     icon: "heart-pulse",   color: "#C4974B" },
   { key: "admin",      label: "원무·행정", icon: "clipboard-list", color: "#5A6E8A" },
   { key: "therapist",  label: "물리치료사", icon: "hand-helping",   color: "#B5873E" },
-  { key: "pharmacist", label: "한약사",     icon: "flask-conical", color: "#7A6E60" },
+  { key: "pharmacist", label: "한약사",     icon: "flask-conical", color: "#9A8E82" },
 ];
 
 const STATUS_META = {
