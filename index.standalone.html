@@ -7204,7 +7204,7 @@ function HIDetailPanel({ herb, onIntake, onToast }) {
                   <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{h.date}</span>
                   <span style={{
                     fontSize: 10, fontWeight: 600, fontFamily: "var(--font-sans)",
-                    color: h.type === "입고" ? "var(--jade-700)" : h.type === "사용" ? "var(--ink-600)" : "var(--amber-700)",
+                    color: h.type === "입고" ? "var(--text-brand)" : h.type === "사용" ? "var(--text-secondary)" : "var(--status-warning-text)",
                     background: h.type === "입고" ? "var(--brand-muted)" : h.type === "사용" ? "var(--bg-raised)" : "var(--status-warning-bg)",
                     padding: "1px 6px", borderRadius: "var(--radius-sm)", textAlign: "center",
                   }}>{h.type}</span>
@@ -8739,7 +8739,7 @@ function SPDetailPanel({ item, onIntake, onToast }) {
                   <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{h.date}</span>
                   <span style={{
                     fontSize: 10, fontWeight: 600, fontFamily: "var(--font-sans)",
-                    color: h.type === "입고" ? "var(--jade-700)" : h.type === "사용" ? "var(--ink-600)" : "var(--amber-700)",
+                    color: h.type === "입고" ? "var(--text-brand)" : h.type === "사용" ? "var(--text-secondary)" : "var(--status-warning-text)",
                     background: h.type === "입고" ? "var(--brand-muted)" : h.type === "사용" ? "var(--bg-raised)" : "var(--status-warning-bg)",
                     padding: "1px 6px", borderRadius: "var(--radius-sm)", textAlign: "center",
                   }}>{h.type}</span>
