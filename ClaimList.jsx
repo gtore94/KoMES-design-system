@@ -119,14 +119,14 @@ function ClaimsTable({ type, items, selected, setSelected, excluded, setExcluded
   // columns differ per type
   let cols, header;
   if (type === "health") {
-    cols = "32px 80px 88px 80px 96px 70px 50px 48px 100px 90px 64px 56px";
-    header = ["", "명세서", "진료일", "환자명", "주민번호", "진료의", "종류", "내원", "건보청구액", "본인부담금", "급여총액", "제외"];
+    cols = "32px 80px 88px 80px 96px 70px 50px 48px 100px 90px 64px 2px 56px";
+    header = ["", "명세서", "진료일", "환자명", "주민번호", "진료의", "종류", "내원", "건보청구액", "본인부담금", "급여총액", "sep", "제외"];
   } else if (type === "herbal") {
-    cols = "32px 80px 88px 80px 96px 70px 80px 60px 110px 90px 56px";
-    header = ["", "명세서", "진료일", "환자명", "주민번호", "진료의", "처방", "일수", "약재비", "진찰료", "제외"];
+    cols = "32px 80px 88px 80px 96px 70px 80px 60px 110px 90px 2px 56px";
+    header = ["", "명세서", "진료일", "환자명", "주민번호", "진료의", "처방", "일수", "약재비", "진찰료", "sep", "제외"];
   } else {
-    cols = "32px 80px 88px 80px 96px 70px 110px 110px 100px 56px";
-    header = ["", "청구서", "진료일", "환자명", "주민번호", "진료의", "보험사", "사고번호", "청구액", "제외"];
+    cols = "32px 80px 88px 80px 96px 70px 110px 110px 100px 2px 56px";
+    header = ["", "청구서", "진료일", "환자명", "주민번호", "진료의", "보험사", "사고번호", "청구액", "sep", "제외"];
   }
 
   const rowHeight = density === "compact" ? 34 : 42;
@@ -149,7 +149,9 @@ function ClaimsTable({ type, items, selected, setSelected, excluded, setExcluded
               style={{ accentColor: "var(--jade-500)", cursor: "pointer", width: 14, height: 14 }} />
           </span>
           {header.slice(1).map((h, i) => {
-            // numeric right-align (last few cols based on type)
+            if (h === "sep") return (
+              <span key={i} style={{ alignSelf: "stretch", borderLeft: "2px solid var(--border-default)" }} />
+            );
             const numericIdx = type === "health" ? [7, 8, 9, 10] : type === "herbal" ? [7, 8, 9] : [8];
             const isNum = numericIdx.includes(i + 1);
             return <span key={i} style={{ textAlign: isNum ? "right" : "left", display: "block" }}>{h}</span>;
@@ -234,6 +236,9 @@ function ClaimsTable({ type, items, selected, setSelected, excluded, setExcluded
                 <Mono small>{it.accidentNo}</Mono>
                 <NumCell strong>{NUM(it.claimAmount)}</NumCell>
               </>)}
+
+              {/* Column separator */}
+              <span style={{ alignSelf: "stretch", borderLeft: "2px solid var(--stone-200)" }} />
 
               {/* 제외 button */}
               <span style={{ display: "flex", justifyContent: "center" }}>
