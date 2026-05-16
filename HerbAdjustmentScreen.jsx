@@ -75,12 +75,12 @@ function HerbAdjustmentScreen({ onClose, onSubmit }) {
         display: "flex", alignItems: "center", gap: 12,
         boxShadow: "0 2px 4px rgba(17,30,28,0.1)",
       }}>
-        <Icon name="clipboard-check" size={16} style={{ color: "var(--brand-muted)" }} />
+        <Icon name="clipboard-check" size={16} style={{ color: "var(--stone-300)" }} />
         <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.04em" }}>재고 실사 모드</div>
         <div style={{ width: 1, height: 14, background: "rgba(255,255,255,0.2)" }}></div>
-        <div style={{ fontSize: 11, color: "var(--brand-muted)" }}>약재 · 시스템 재고와 실측 수량의 차이를 보정합니다</div>
+        <div style={{ fontSize: 11, color: "var(--stone-300)" }}>약재 · 시스템 재고와 실측 수량의 차이를 보정합니다</div>
         <div style={{ flex: 1 }}></div>
-        <div style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--brand-muted)" }}>
+        <div style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--stone-300)" }}>
           담당 김민준 · 2026-05-16 14:32
         </div>
       </div>

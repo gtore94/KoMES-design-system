@@ -112,14 +112,14 @@ function PurchaseOrderDraftScreen({ onClose, onSubmit, initialRecommendations })
         color: "white", padding: "10px 24px",
         display: "flex", alignItems: "center", gap: 12,
       }}>
-        <Icon name="sparkles" size={16} style={{ color: "var(--brand-muted)" }} />
+        <Icon name="sparkles" size={16} style={{ color: "var(--stone-300)" }} />
         <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.04em" }}>AI 추천 발주서 초안</div>
         <div style={{ width: 1, height: 14, background: "rgba(255,255,255,0.2)" }}></div>
-        <div style={{ fontSize: 11, color: "var(--brand-muted)" }}>
+        <div style={{ fontSize: 11, color: "var(--stone-300)" }}>
           공급처 {drafts.length}곳 · 총 {totalItems}품목 · 합계 {won(totalAll)} — 검토 후 승인 요청
         </div>
         <div style={{ flex: 1 }}></div>
-        <div style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--brand-muted)" }}>
+        <div style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--stone-300)" }}>
           작성 시각 {TODAY_STR} 14:32
         </div>
       </div>
