@@ -94,10 +94,11 @@ function Input({ label, value, onChange, placeholder, type = "text", hint, error
 
 // ── Sidebar ─────────────────────────────────────────────────────
 function Sidebar({ activeScreen, onNavigate }) {
+  const [collapsed, setCollapsed] = React.useState(false);
+
   const navGroups = [
     { label: "진료", items: [
       { key: "patients", icon: "layout-dashboard", label: "진료 현황" },
-
       { key: "registry", icon: "users",            label: "환자 관리" },
       { key: "schedule", icon: "calendar",          label: "예약 관리" },
       { key: "payment",  icon: "credit-card",       label: "수납" },
@@ -119,59 +120,71 @@ function Sidebar({ activeScreen, onNavigate }) {
     ]},
   ];
 
-  const sidebarStyles = {
-    root: { width: 220, background: "var(--ink-800)", display: "flex", flexDirection: "column", flexShrink: 0, height: "100%" },
-    logo: { display: "flex", alignItems: "center", gap: 10, padding: "14px 14px 12px", borderBottom: "1px solid rgba(255,255,255,0.08)" },
-    mark: { width: 30, height: 30, background: "var(--jade-500)", borderRadius: "var(--radius-sm)", display: "flex", alignItems: "center", justifyContent: "center" },
-    markLetter: { fontFamily: "var(--font-serif)", fontSize: 15, fontWeight: 600, color: "white" },
-    brandName: { fontFamily: "var(--font-serif)", fontSize: 15, fontWeight: 400, color: "var(--stone-50)", letterSpacing: "-0.01em" },
-    section: { padding: "10px 8px 2px" },
-    sectionLabel: { fontSize: 9, fontWeight: 700, letterSpacing: "0.1em", color: "var(--ink-300)", textTransform: "uppercase", padding: "0 6px", marginBottom: 3 },
-    footer: { marginTop: "auto", padding: "10px 8px", borderTop: "1px solid rgba(255,255,255,0.08)" },
-  };
-
-  return <div style={sidebarStyles.root}>
-    <div style={sidebarStyles.logo}>
-      <div style={sidebarStyles.mark}><span style={sidebarStyles.markLetter}>K</span></div>
-      <span style={sidebarStyles.brandName}>KoMES</span>
+  const navItem = (key, icon, label, isActive) => (
+    <div key={key} onClick={() => onNavigate(key)} title={collapsed ? label : undefined}
+      style={{
+        display: "flex", alignItems: "center", justifyContent: collapsed ? "center" : "flex-start",
+        gap: collapsed ? 0 : 8, padding: collapsed ? "8px 0" : "7px 8px",
+        borderRadius: "var(--radius-md)", cursor: "pointer",
+        background: isActive ? "var(--jade-600)" : "transparent",
+        color: isActive ? "white" : "var(--ink-200)",
+        fontSize: 13, fontWeight: isActive ? 500 : 400,
+        transition: "background 0.12s ease, color 0.12s ease", fontFamily: "var(--font-sans)",
+      }}>
+      <Icon name={icon} size={15} />
+      {!collapsed && label}
     </div>
-    {navGroups.map(g => (
-      <div key={g.label} style={sidebarStyles.section}>
-        <div style={sidebarStyles.sectionLabel}>{g.label}</div>
-        {g.items.map(item => (
-          <div key={item.key} onClick={() => onNavigate(item.key)}
-            style={{
-              display: "flex", alignItems: "center", gap: 8, padding: "7px 8px",
-              borderRadius: "var(--radius-md)", cursor: "pointer",
-              background: activeScreen === item.key ? "var(--jade-600)" : "transparent",
-              color: activeScreen === item.key ? "white" : "var(--ink-200)",
-              fontSize: 13, fontWeight: activeScreen === item.key ? 500 : 400,
-              transition: "all 0.12s ease", fontFamily: "var(--font-sans)",
-            }}>
-            <Icon name={item.icon} size={15} />
-            {item.label}
+  );
+
+  return <div style={{
+    width: collapsed ? 56 : 220, background: "var(--ink-800)",
+    display: "flex", flexDirection: "column", flexShrink: 0, height: "100%",
+    transition: "width 0.2s ease", overflow: "hidden",
+  }}>
+    {collapsed ? (
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "12px 0 10px", borderBottom: "1px solid rgba(255,255,255,0.08)", gap: 8, flexShrink: 0 }}>
+        <div style={{ width: 30, height: 30, background: "var(--jade-500)", borderRadius: "var(--radius-sm)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <span style={{ fontFamily: "var(--font-serif)", fontSize: 15, fontWeight: 600, color: "white" }}>K</span>
+        </div>
+        <div onClick={() => setCollapsed(false)} style={{ cursor: "pointer", color: "var(--ink-300)", display: "flex", alignItems: "center", padding: 2, borderRadius: "var(--radius-sm)" }}>
+          <Icon name="chevron-right" size={13} />
+        </div>
+      </div>
+    ) : (
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 14px 12px", borderBottom: "1px solid rgba(255,255,255,0.08)", flexShrink: 0 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <div style={{ width: 30, height: 30, background: "var(--jade-500)", borderRadius: "var(--radius-sm)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+            <span style={{ fontFamily: "var(--font-serif)", fontSize: 15, fontWeight: 600, color: "white" }}>K</span>
           </div>
-        ))}
+          <span style={{ fontFamily: "var(--font-serif)", fontSize: 15, fontWeight: 400, color: "var(--stone-50)", letterSpacing: "-0.01em", whiteSpace: "nowrap" }}>KoMES</span>
+        </div>
+        <div onClick={() => setCollapsed(true)} style={{ cursor: "pointer", color: "var(--ink-300)", display: "flex", alignItems: "center", padding: 3, borderRadius: "var(--radius-sm)" }}>
+          <Icon name="chevron-left" size={13} />
+        </div>
+      </div>
+    )}
+
+    {navGroups.map(g => (
+      <div key={g.label} style={{ padding: collapsed ? "10px 4px 2px" : "10px 8px 2px" }}>
+        {!collapsed && <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.1em", color: "var(--ink-300)", textTransform: "uppercase", padding: "0 6px", marginBottom: 3 }}>{g.label}</div>}
+        {g.items.map(item => navItem(item.key, item.icon, item.label, activeScreen === item.key))}
       </div>
     ))}
-    <div style={sidebarStyles.section}>
-      <div onClick={() => onNavigate("settings")} style={{
-        display: "flex", alignItems: "center", gap: 8, padding: "7px 8px",
-        borderRadius: "var(--radius-md)", cursor: "pointer",
-        background: activeScreen === "settings" ? "var(--jade-600)" : "transparent",
-        color: "var(--ink-200)", fontSize: 13, fontFamily: "var(--font-sans)",
-      }}>
-        <Icon name="settings" size={15} />설정
-      </div>
+
+    <div style={{ padding: collapsed ? "10px 4px 2px" : "10px 8px 2px" }}>
+      {navItem("settings", "settings", "설정", activeScreen === "settings")}
     </div>
-    <div style={sidebarStyles.footer}>
-      <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "6px 6px", borderRadius: "var(--radius-md)", cursor: "pointer" }}>
+
+    <div style={{ marginTop: "auto", padding: collapsed ? "10px 4px" : "10px 8px", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: collapsed ? "center" : "flex-start", gap: collapsed ? 0 : 8, padding: "6px 6px", borderRadius: "var(--radius-md)", cursor: "pointer" }}>
         <Avatar name="김" size={26} />
-        <div>
-          <div style={{ fontSize: 12, color: "var(--stone-100)", fontWeight: 500, fontFamily: "var(--font-sans)" }}>김민준</div>
-          <div style={{ fontSize: 10, color: "var(--ink-300)", fontFamily: "var(--font-sans)" }}>원장</div>
-        </div>
-        <Icon name="chevrons-up-down" size={13} style={{ marginLeft: "auto", color: "var(--ink-300)" }} />
+        {!collapsed && <>
+          <div>
+            <div style={{ fontSize: 12, color: "var(--stone-100)", fontWeight: 500, fontFamily: "var(--font-sans)" }}>김민준</div>
+            <div style={{ fontSize: 10, color: "var(--ink-300)", fontFamily: "var(--font-sans)" }}>원장</div>
+          </div>
+          <Icon name="chevrons-up-down" size={13} style={{ marginLeft: "auto", color: "var(--ink-300)" }} />
+        </>}
       </div>
     </div>
   </div>;
