@@ -32,8 +32,14 @@
   "hotPaths": [
     {
       "path": "index.standalone.html",
-      "accessCount": 48,
-      "lastAccessed": 1778911282864,
+      "accessCount": 52,
+      "lastAccessed": 1778915190968,
+      "type": "file"
+    },
+    {
+      "path": "MedicalFormScreen.jsx",
+      "accessCount": 43,
+      "lastAccessed": 1778924336414,
       "type": "file"
     },
     {
@@ -44,14 +50,38 @@
     },
     {
       "path": "Components.jsx",
-      "accessCount": 19,
-      "lastAccessed": 1778911706160,
+      "accessCount": 21,
+      "lastAccessed": 1778915362724,
+      "type": "file"
+    },
+    {
+      "path": "ChartActingPanel.jsx",
+      "accessCount": 12,
+      "lastAccessed": 1778915887981,
       "type": "file"
     },
     {
       "path": "index.html",
-      "accessCount": 9,
-      "lastAccessed": 1778912338814,
+      "accessCount": 11,
+      "lastAccessed": 1778916100730,
+      "type": "file"
+    },
+    {
+      "path": "PatientChartScreen.jsx",
+      "accessCount": 8,
+      "lastAccessed": 1778917688266,
+      "type": "file"
+    },
+    {
+      "path": "ClaimList.jsx",
+      "accessCount": 8,
+      "lastAccessed": 1778925008462,
+      "type": "file"
+    },
+    {
+      "path": "StaffManagementScreen.jsx",
+      "accessCount": 5,
+      "lastAccessed": 1778925439257,
       "type": "file"
     },
     {
@@ -67,6 +97,12 @@
       "type": "file"
     },
     {
+      "path": "InsuranceClaimScreen.jsx",
+      "accessCount": 2,
+      "lastAccessed": 1778924603009,
+      "type": "file"
+    },
+    {
       "path": "PrescriptionScreen.jsx",
       "accessCount": 1,
       "lastAccessed": 1778892539449,
@@ -79,21 +115,9 @@
       "type": "file"
     },
     {
-      "path": "InsuranceClaimScreen.jsx",
-      "accessCount": 1,
-      "lastAccessed": 1778893448510,
-      "type": "file"
-    },
-    {
       "path": "claimData.jsx",
       "accessCount": 1,
       "lastAccessed": 1778893448850,
-      "type": "file"
-    },
-    {
-      "path": "ClaimList.jsx",
-      "accessCount": 1,
-      "lastAccessed": 1778893453195,
       "type": "file"
     },
     {
@@ -160,6 +184,24 @@
       "path": "915912",
       "accessCount": 1,
       "lastAccessed": 1778912423574,
+      "type": "file"
+    },
+    {
+      "path": "LeftRail.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1778915106218,
+      "type": "file"
+    },
+    {
+      "path": "doc forms/진료확인서.jpeg",
+      "accessCount": 1,
+      "lastAccessed": 1778917799195,
+      "type": "file"
+    },
+    {
+      "path": "doc forms/상해진단서.png",
+      "accessCount": 1,
+      "lastAccessed": 1778921892657,
       "type": "file"
     }
   ],

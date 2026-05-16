@@ -13,7 +13,9 @@
       "Bash(git -C \"/Users/jaehoon/Downloads/KoMES design system/\" status)",
       "Bash(git *)",
       "Bash(grep -n \"babel\\\\|script.*src\\\\|htm\\\\|html\\\\`\" \"/Users/jaehoon/Downloads/KoMES design system/index.standalone.html\")",
-      "Bash(node *)"
+      "Bash(node *)",
+      "Bash(pdftotext \"/Users/jaehoon/Downloads/KoMES design system/doc forms/상해진단서.pdf\" -)",
+      "Bash(python3 *)"
     ]
   }
 }

@@ -99,7 +99,6 @@ function Sidebar({ activeScreen, onNavigate }) {
   const navGroups = [
     { label: "진료", items: [
       { key: "patients", icon: "layout-dashboard", label: "진료 현황" },
-      { key: "chart",    icon: "stethoscope",       label: "진료 차트" },
       { key: "registry", icon: "users",            label: "환자 관리" },
       { key: "schedule", icon: "calendar",          label: "예약 관리" },
       { key: "payment",  icon: "credit-card",       label: "수납" },
@@ -119,9 +118,6 @@ function Sidebar({ activeScreen, onNavigate }) {
     { label: "분석", items: [
       { key: "stats", icon: "bar-chart-2", label: "통계" },
       { key: "ai",    icon: "sparkles",    label: "AI 분석" },
-    ]},
-    { label: "조직", items: [
-      { key: "staff", icon: "user-cog", label: "직원 관리" },
     ]},
   ];
 
