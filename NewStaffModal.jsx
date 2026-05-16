@@ -142,8 +142,29 @@ function SRSectionCard({ step, icon, title, hint, children }) {
 }
 
 // ── Main Modal ──────────────────────────────────────────────────────
-function NewStaffModal({ onClose, onSubmit }) {
-  const [d, setD] = useStateSR(initialSR);
+function staffToForm(s) {
+  if (!s) return initialSR;
+  return {
+    ...initialSR,
+    name: s.name ?? "",
+    gender: s.gender ?? "여",
+    birth: s.birth ?? "", rrnTail: "",
+    phone: s.phone ?? "", email: s.email ?? "",
+    postcode: "", address: s.address ?? "", addressDetail: "",
+    role: s.role ?? "한의사", roleKey: s.roleKey ?? "doctor", dept: s.dept ?? "진료부",
+    specialty: s.specialty ?? "", workType: s.workType ?? "정규직",
+    licenses: Array.isArray(s.licenses) ? s.licenses.join(", ") : (s.licenses ?? ""),
+    joinDate: s.joinDate ?? "2026-05-16",
+    schedule: s.schedule ? { ...DEFAULT_SCHEDULE_SR, ...s.schedule } : { ...DEFAULT_SCHEDULE_SR },
+    permissions: s.permissions ? [...s.permissions] : [],
+    salaryType: s.salary?.type ?? "월급제",
+    note: s.note ?? "",
+  };
+}
+
+function NewStaffModal({ onClose, onSubmit, initialData }) {
+  const [d, setD] = useStateSR(() => staffToForm(initialData));
+  const isEdit = !!initialData;
   const set = (k, v) => setD(prev => ({ ...prev, [k]: v }));
 
   const togglePermission = (key) => {
@@ -197,9 +218,9 @@ function NewStaffModal({ onClose, onSubmit }) {
             <Icon name="user-plus" size={18} />
           </div>
           <div style={{ flex: 1 }}>
-            <div style={{ fontFamily: "var(--font-serif)", fontSize: 18, fontWeight: 500, color: "var(--text-primary)", letterSpacing: "-0.01em" }}>신규 직원 등록</div>
+            <div style={{ fontFamily: "var(--font-serif)", fontSize: 18, fontWeight: 500, color: "var(--text-primary)", letterSpacing: "-0.01em" }}>{isEdit ? "직원 정보 수정" : "신규 직원 등록"}</div>
             <div style={{ fontSize: 11, color: "var(--text-muted)" }}>
-              필수 항목 {filled}/{required.length} 입력됨 · 등록 후 즉시 직원 목록에 추가됩니다
+              {isEdit ? `${initialData.name} · 필수 항목 ${filled}/${required.length} 입력됨` : `필수 항목 ${filled}/${required.length} 입력됨 · 등록 후 즉시 직원 목록에 추가됩니다`}
             </div>
           </div>
           <button onClick={onClose} style={{ width: 28, height: 28, display: "inline-flex", alignItems: "center", justifyContent: "center", background: "transparent", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-sm)", cursor: "pointer", color: "var(--text-secondary)" }}>
@@ -398,7 +419,7 @@ function NewStaffModal({ onClose, onSubmit }) {
         <div style={{ padding: "12px 22px", background: "var(--bg-surface)", borderTop: "1px solid var(--border-subtle)", display: "flex", alignItems: "center", gap: 10 }}>
           <span style={{ fontSize: 11, color: "var(--text-muted)", display: "flex", alignItems: "center", gap: 5 }}>
             <Icon name="info" size={12} />
-            등록 즉시 직원 목록에 추가됩니다.
+            {isEdit ? "변경 사항이 즉시 반영됩니다." : "등록 즉시 직원 목록에 추가됩니다."}
           </span>
           <div style={{ flex: 1 }} />
           <button onClick={onClose} style={{ padding: "8px 16px", fontSize: 13, fontWeight: 500, background: "transparent", border: "1px solid var(--border-default)", borderRadius: "var(--radius-md)", color: "var(--text-secondary)", cursor: "pointer", fontFamily: "var(--font-sans)" }}>
@@ -416,7 +437,7 @@ function NewStaffModal({ onClose, onSubmit }) {
               display: "inline-flex", alignItems: "center", gap: 6,
               boxShadow: allRequired ? "var(--shadow-sm)" : "none",
             }}>
-            <Icon name="user-plus" size={13} />직원 등록
+            <Icon name={isEdit ? "save" : "user-plus"} size={13} />{isEdit ? "수정 완료" : "직원 등록"}
           </button>
         </div>
       </div>

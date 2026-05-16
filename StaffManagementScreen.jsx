@@ -185,7 +185,7 @@ function ScheduleGrid({ schedule }) {
 }
 
 // ── Detail Panel ─────────────────────────────────────────────────
-function StaffDetailPanel({ staff, onClose }) {
+function StaffDetailPanel({ staff, onClose, onEdit }) {
   const [tab, setTab] = useStateStaff("profile"); // profile | schedule | permissions | hr
   useEffectStaff(() => setTab("profile"), [staff.id]);
   const statusMeta = STATUS_META[staff.status];
@@ -232,7 +232,7 @@ function StaffDetailPanel({ staff, onClose }) {
 
         {/* Actions */}
         <div style={{ display: "flex", gap: 6, marginTop: 12 }}>
-          <button style={{ flex: 1, padding: "7px 10px", background: "var(--jade-500)", color: "#fff", border: "none", borderRadius: "var(--radius-md)", fontSize: 12, fontWeight: 600, cursor: "pointer", fontFamily: "var(--font-sans)", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 5 }}>
+          <button onClick={() => onEdit && onEdit(staff)} style={{ flex: 1, padding: "7px 10px", background: "var(--jade-500)", color: "#fff", border: "none", borderRadius: "var(--radius-md)", fontSize: 12, fontWeight: 600, cursor: "pointer", fontFamily: "var(--font-sans)", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 5 }}>
             <Icon name="pencil" size={12} />정보 수정
           </button>
           <button style={{ padding: "7px 10px", background: "var(--bg-surface)", color: "var(--text-primary)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-md)", fontSize: 12, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-sans)", display: "inline-flex", alignItems: "center", gap: 5 }}>
@@ -572,6 +572,7 @@ function StaffManagementScreen() {
   const [view, setView] = useStateStaff("list"); // list | cards
   const [selectedId, setSelectedId] = useStateStaff(staff[0]?.id);
   const [showNewStaff, setShowNewStaff] = useStateStaff(false);
+  const [editStaff, setEditStaff] = useStateStaff(null);
 
   const counts = useMemoStaff(() => {
     const c = {
@@ -761,6 +762,7 @@ function StaffManagementScreen() {
           <StaffDetailPanel
             staff={selected}
             onClose={() => setSelectedId(null)}
+            onEdit={s => setEditStaff(s)}
           />
         )}
       </div>
@@ -769,6 +771,13 @@ function StaffManagementScreen() {
         <NewStaffModal
           onClose={() => setShowNewStaff(false)}
           onSubmit={() => setShowNewStaff(false)}
+        />
+      )}
+      {editStaff && (
+        <NewStaffModal
+          initialData={editStaff}
+          onClose={() => setEditStaff(null)}
+          onSubmit={() => setEditStaff(null)}
         />
       )}
     </div>
