@@ -89,7 +89,7 @@ body {
 <script>
 (function () {
   "use strict";
-  const { useState, useRef, useEffect } = React;
+  const { useState, useRef, useEffect, useMemo } = React;
   const html = htm.bind(React.createElement);
   const F = React.Fragment;
 
@@ -3575,6 +3575,921 @@ body {
     </div>`;
   }
 
+  // ════════════════════════════════════════════════════════════════
+  // ScheduleScreen — 예약 관리
+  // ════════════════════════════════════════════════════════════════
+
+  const KO_WEEKDAYS_SCH = ["일", "월", "화", "수", "목", "금", "토"];
+  const KO_MONTHS_SCH = ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"];
+
+  const HOURS_SCH = [];
+  for (let h = 9; h < 19; h++) {
+    HOURS_SCH.push(`${String(h).padStart(2, "0")}:00`);
+    HOURS_SCH.push(`${String(h).padStart(2, "0")}:30`);
+  }
+
+  const DOCTORS_SCH = [
+    { id: "d1", name: "김민준 원장", room: "진료실 1", color: "#4A7C6F", bg: "#EEF8F6", border: "#B3D8D1" },
+    { id: "d2", name: "이지영 원장", room: "진료실 2", color: "#B5873E", bg: "#FAF2E4", border: "#F0DFC0" },
+    { id: "d3", name: "박서윤 부원장", room: "치료실 A", color: "#5A6E8A", bg: "#EEF1F6", border: "#CFD7E3" },
+  ];
+
+  const TREATMENTS_SCH = [
+    { key: "초진", mins: 40 },
+    { key: "재진", mins: 20 },
+    { key: "침치료", mins: 30 },
+    { key: "약침", mins: 25 },
+    { key: "추나", mins: 40 },
+    { key: "한약 상담", mins: 30 },
+  ];
+
+  const TODAY_SCH = new Date(2026, 4, 10);
+
+  const ymdSch = (d) => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+  const startOfWeekSch = (d) => {
+    const x = new Date(d); x.setHours(0,0,0,0);
+    x.setDate(x.getDate() - x.getDay());
+    return x;
+  };
+  const addDaysSch = (d, n) => { const x = new Date(d); x.setDate(x.getDate()+n); return x; };
+
+  const buildSeedSch = () => {
+    const wkStart = startOfWeekSch(TODAY_SCH);
+    const seed = [];
+    let id = 1;
+    seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 1)), start: "09:30", mins: 20, doctor: "d1", patient: "한지민", chief: "어지러움", visit: "재진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 1)), start: "10:30", mins: 30, doctor: "d2", patient: "장우성", chief: "허리 통증", visit: "초진", status: "확정", insurance: "자보" });
+    seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 1)), start: "14:00", mins: 40, doctor: "d1", patient: "송재호", chief: "경항통", visit: "재진", status: "확정", insurance: "자보" });
+    seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 2)), start: "10:00", mins: 30, doctor: "d3", patient: "안세영", chief: "요통", visit: "재진", status: "대기", insurance: "자보" });
+    seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 2)), start: "11:30", mins: 25, doctor: "d2", patient: "정유미", chief: "생리통", visit: "재진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 2)), start: "15:30", mins: 40, doctor: "d1", patient: "오세훈", chief: "어깨 통증", visit: "재진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 3)), start: "09:00", mins: 40, doctor: "d1", patient: "이민호", chief: "소화불량", visit: "초진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 3)), start: "13:30", mins: 20, doctor: "d2", patient: "박지현", chief: "불면증", visit: "재진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 3)), start: "16:00", mins: 30, doctor: "d3", patient: "강민재", chief: "무릎 통증", visit: "재진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 4)), start: "10:30", mins: 30, doctor: "d1", patient: "윤지영", chief: "피부 트러블", visit: "초진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 4)), start: "14:30", mins: 40, doctor: "d2", patient: "최동욱", chief: "비염", visit: "재진", status: "노쇼", insurance: "건보" });
+    seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 5)), start: "09:30", mins: 25, doctor: "d1", patient: "임소연", chief: "갱년기", visit: "재진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 5)), start: "11:00", mins: 30, doctor: "d3", patient: "홍길동", chief: "두통", visit: "재진", status: "확정", insurance: "자보" });
+    seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 5)), start: "16:30", mins: 40, doctor: "d2", patient: "김수진", chief: "요통, 피로", visit: "재진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: ymdSch(addDaysSch(wkStart, 6)), start: "10:00", mins: 30, doctor: "d1", patient: "장태호", chief: "목 통증", visit: "초진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: "2026-05-11", start: "09:30", mins: 30, doctor: "d1", patient: "남궁민", chief: "두통", visit: "재진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: "2026-05-11", start: "14:00", mins: 30, doctor: "d2", patient: "조혜린", chief: "어지럼증", visit: "재진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: "2026-05-12", start: "10:00", mins: 25, doctor: "d3", patient: "이수민", chief: "관절통", visit: "초진", status: "대기", insurance: "건보" });
+    seed.push({ id: id++, date: "2026-05-13", start: "15:30", mins: 30, doctor: "d1", patient: "조현우", chief: "재진", visit: "재진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: "2026-05-14", start: "11:00", mins: 40, doctor: "d2", patient: "백수정", chief: "한약 상담", visit: "재진", status: "확정", insurance: "건보" });
+    seed.push({ id: id++, date: "2026-05-15", start: "16:00", mins: 30, doctor: "d1", patient: "권보라", chief: "요통", visit: "재진", status: "확정", insurance: "건보" });
+    return seed;
+  };
+
+  const STATUS_SCH = {
+    "확정": { bg: "var(--jade-50)",      border: "var(--jade-300)",      text: "var(--jade-700)",    dot: "var(--jade-500)"    },
+    "대기": { bg: "var(--amber-100)",    border: "var(--amber-200)",     text: "var(--amber-700)",   dot: "var(--amber-500)"   },
+    "노쇼": { bg: "var(--cinnabar-100)", border: "var(--cinnabar-200)",  text: "var(--cinnabar-700)",dot: "var(--cinnabar-600)" },
+    "취소": { bg: "var(--stone-100)",    border: "var(--stone-300)",     text: "var(--text-muted)",  dot: "var(--stone-700)"   },
+  };
+
+  const minsFromTimeSch = (t) => { const [h,m] = t.split(":").map(Number); return h*60+m; };
+  const timeFromMinsSch = (m) => `${String(Math.floor(m/60)).padStart(2,"0")}:${String(m%60).padStart(2,"0")}`;
+
+  const apptLblSch = {
+    fontSize: 11, fontWeight: 600, color: "var(--text-secondary)",
+    marginBottom: 5, fontFamily: "var(--font-sans)",
+    letterSpacing: "0.02em",
+  };
+  const apptInputSch = {
+    width: "100%", padding: "8px 11px", fontSize: 13,
+    fontFamily: "var(--font-sans)", color: "var(--text-primary)",
+    background: "var(--bg-surface)", border: "1px solid var(--border-default)",
+    borderRadius: "var(--radius-md)", outline: "none",
+    boxSizing: "border-box",
+  };
+  const detailRowSch = { display: "flex", alignItems: "center", gap: 10 };
+  const detailKeySch = { fontSize: 11, fontWeight: 600, color: "var(--text-muted)", letterSpacing: "0.04em", textTransform: "uppercase", fontFamily: "var(--font-sans)", width: 50, flexShrink: 0 };
+  const detailValSch = { fontSize: 13, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flex: 1 };
+  const navIconBtnSch = {
+    width: 28, height: 28, display: "inline-flex", alignItems: "center", justifyContent: "center",
+    background: "var(--bg-surface)", border: "1px solid var(--border-subtle)",
+    borderRadius: "var(--radius-md)", cursor: "pointer", color: "var(--text-secondary)",
+  };
+
+  function layoutApptsSch(appts) {
+    if (!appts.length) return [];
+    const sorted = [...appts].sort((a, b) => minsFromTimeSch(a.start) - minsFromTimeSch(b.start));
+    const colAssign = new Array(sorted.length).fill(0);
+    const colEnds = [];
+    for (let i = 0; i < sorted.length; i++) {
+      const s = minsFromTimeSch(sorted[i].start);
+      const e = s + sorted[i].mins;
+      let c = 0;
+      while (c < colEnds.length && colEnds[c] > s) c++;
+      colAssign[i] = c;
+      colEnds[c] = e;
+    }
+    return sorted.map((a, i) => {
+      const s = minsFromTimeSch(a.start);
+      const e = s + a.mins;
+      let maxCol = colAssign[i];
+      for (let j = 0; j < sorted.length; j++) {
+        if (i === j) continue;
+        const s2 = minsFromTimeSch(sorted[j].start);
+        const e2 = s2 + sorted[j].mins;
+        if (s < e2 && e > s2) maxCol = Math.max(maxCol, colAssign[j]);
+      }
+      return { ...a, col: colAssign[i], totalCols: maxCol + 1 };
+    });
+  }
+
+  function NewAppointmentModal({ initial, onClose, onSubmit }) {
+    const [d, setD] = useState({
+      date: initial?.date || ymdSch(TODAY_SCH),
+      start: initial?.start || "10:00",
+      doctor: initial?.doctor || "d1",
+      patient: "",
+      visit: "재진",
+      treatment: "재진",
+      chief: "",
+      insurance: "건보",
+      phone: "",
+      notify: true,
+    });
+    const set = (k, v) => setD(p => ({ ...p, [k]: v }));
+    const treatmentMins = (TREATMENTS_SCH.find(t => t.key === d.treatment) || TREATMENTS_SCH[0]).mins;
+
+    return html`<div onClick=${onClose} style=${{
+      position: "fixed", inset: 0, zIndex: 100,
+      background: "var(--bg-overlay)", backdropFilter: "blur(4px)",
+      display: "flex", alignItems: "center", justifyContent: "center",
+      padding: 24,
+    }}>
+      <div onClick=${e => e.stopPropagation()} style=${{
+        width: "100%", maxWidth: 560,
+        background: "var(--bg-page)",
+        borderRadius: "var(--radius-xl)", overflow: "hidden",
+        boxShadow: "var(--shadow-xl)",
+        display: "flex", flexDirection: "column",
+      }}>
+        <div style=${{
+          display: "flex", alignItems: "center", gap: 12,
+          padding: "16px 20px", background: "var(--bg-surface)",
+          borderBottom: "1px solid var(--border-subtle)",
+        }}>
+          <div style=${{
+            width: 36, height: 36, borderRadius: "var(--radius-md)",
+            background: "var(--jade-100)", color: "var(--jade-700)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }}>
+            <${Icon} name="calendar-plus" size=${17} />
+          </div>
+          <div style=${{ flex: 1 }}>
+            <div style=${{ fontFamily: "var(--font-serif)", fontSize: 17, fontWeight: 500, color: "var(--text-primary)", letterSpacing: "-0.01em" }}>
+              새 예약
+            </div>
+            <div style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>
+              날짜·시간·환자 정보를 입력해 예약을 추가합니다
+            </div>
+          </div>
+          <button onClick=${onClose} style=${{
+            width: 28, height: 28, borderRadius: "var(--radius-sm)",
+            background: "transparent", border: "1px solid var(--border-subtle)",
+            cursor: "pointer", color: "var(--text-secondary)",
+            display: "inline-flex", alignItems: "center", justifyContent: "center",
+          }}>
+            <${Icon} name="x" size=${15} />
+          </button>
+        </div>
+        <div style=${{ padding: 20, display: "flex", flexDirection: "column", gap: 14, maxHeight: "70vh", overflowY: "auto" }}>
+          <div style=${{ display: "grid", gridTemplateColumns: "1.2fr 1fr 1fr", gap: 10 }}>
+            <div>
+              <div style=${apptLblSch}>날짜</div>
+              <input type="date" value=${d.date} onChange=${e => set("date", e.target.value)} style=${apptInputSch} />
+            </div>
+            <div>
+              <div style=${apptLblSch}>시작 시간</div>
+              <select value=${d.start} onChange=${e => set("start", e.target.value)} style=${apptInputSch}>
+                ${HOURS_SCH.map(h => html`<option key=${h} value=${h}>${h}</option>`)}
+              </select>
+            </div>
+            <div>
+              <div style=${apptLblSch}>소요 시간</div>
+              <div style=${{
+                ...apptInputSch, background: "var(--stone-100)",
+                color: "var(--text-secondary)", fontFamily: "var(--font-mono)",
+                display: "flex", alignItems: "center",
+              }}>${treatmentMins}분</div>
+            </div>
+          </div>
+          <div>
+            <div style=${apptLblSch}>담당의 / 진료실</div>
+            <div style=${{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 6 }}>
+              ${DOCTORS_SCH.map(doc => {
+                const sel = d.doctor === doc.id;
+                return html`<button key=${doc.id} onClick=${() => set("doctor", doc.id)} style=${{
+                  padding: "9px 10px", borderRadius: "var(--radius-md)",
+                  border: `1px solid ${sel ? doc.color : "var(--border-subtle)"}`,
+                  background: sel ? doc.bg : "var(--bg-surface)",
+                  cursor: "pointer", textAlign: "left",
+                  fontFamily: "var(--font-sans)",
+                  transition: "all 0.12s",
+                }}>
+                  <div style=${{ display: "flex", alignItems: "center", gap: 6 }}>
+                    <span style=${{ width: 8, height: 8, borderRadius: "50%", background: doc.color, flexShrink: 0 }} />
+                    <span style=${{ fontSize: 12, fontWeight: 600, color: sel ? doc.color : "var(--text-primary)" }}>
+                      ${doc.name}
+                    </span>
+                  </div>
+                  <div style=${{ fontSize: 10, color: "var(--text-muted)", marginTop: 2, paddingLeft: 14 }}>${doc.room}</div>
+                </button>`;
+              })}
+            </div>
+          </div>
+          <div style=${{ display: "grid", gridTemplateColumns: "1.5fr 1fr", gap: 10 }}>
+            <div>
+              <div style=${apptLblSch}>진료 / 시술 항목</div>
+              <select value=${d.treatment} onChange=${e => set("treatment", e.target.value)} style=${apptInputSch}>
+                ${TREATMENTS_SCH.map(t => html`<option key=${t.key} value=${t.key}>${t.key} · ${t.mins}분</option>`)}
+              </select>
+            </div>
+            <div>
+              <div style=${apptLblSch}>방문 구분</div>
+              <div style=${{ display: "flex", background: "var(--stone-100)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", padding: 2, gap: 2 }}>
+                ${["초진", "재진"].map(v => html`<button key=${v} onClick=${() => set("visit", v)} style=${{
+                  flex: 1, padding: "6px 10px", border: "none", cursor: "pointer",
+                  background: d.visit === v ? "var(--bg-surface)" : "transparent",
+                  color: d.visit === v ? "var(--text-primary)" : "var(--text-muted)",
+                  fontWeight: d.visit === v ? 600 : 400,
+                  boxShadow: d.visit === v ? "var(--shadow-sm)" : "none",
+                  borderRadius: "var(--radius-sm)", fontSize: 12,
+                  fontFamily: "var(--font-sans)",
+                }}>${v}</button>`)}
+              </div>
+            </div>
+          </div>
+          <div>
+            <div style=${apptLblSch}>환자 검색</div>
+            <div style=${{ position: "relative" }}>
+              <span style=${{ position: "absolute", left: 10, top: "50%", transform: "translateY(-50%)", color: "var(--text-muted)", display: "flex" }}>
+                <${Icon} name="search" size=${14} />
+              </span>
+              <input value=${d.patient} onChange=${e => set("patient", e.target.value)}
+                placeholder="이름, 차트번호, 전화번호로 검색"
+                style=${{ ...apptInputSch, paddingLeft: 32 }} />
+            </div>
+          </div>
+          <div style=${{ display: "grid", gridTemplateColumns: "1.4fr 1fr", gap: 10 }}>
+            <div>
+              <div style=${apptLblSch}>연락처</div>
+              <input value=${d.phone} onChange=${e => set("phone", e.target.value)}
+                placeholder="010-0000-0000"
+                style=${{ ...apptInputSch, fontFamily: "var(--font-mono)" }} />
+            </div>
+            <div>
+              <div style=${apptLblSch}>보험</div>
+              <select value=${d.insurance} onChange=${e => set("insurance", e.target.value)} style=${apptInputSch}>
+                <option value="건보">건강보험</option>
+                <option value="자보">자동차보험</option>
+                <option value="산재">산재</option>
+                <option value="일반">일반(비급여)</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <div style=${apptLblSch}>예약 사유 / 메모</div>
+            <textarea value=${d.chief} onChange=${e => set("chief", e.target.value)}
+              placeholder="예: 허리 통증 재진, MRI 결과 상담"
+              style=${{ ...apptInputSch, minHeight: 56, resize: "vertical", padding: "9px 11px" }} />
+          </div>
+          <label style=${{
+            display: "flex", alignItems: "center", gap: 8,
+            padding: "10px 12px", background: "var(--jade-50)",
+            border: "1px solid var(--jade-100)", borderRadius: "var(--radius-md)",
+            cursor: "pointer",
+          }}>
+            <input type="checkbox" checked=${d.notify} onChange=${e => set("notify", e.target.checked)}
+              style=${{ accentColor: "var(--jade-500)" }} />
+            <span style=${{ fontSize: 12, color: "var(--jade-700)", fontFamily: "var(--font-sans)" }}>
+              예약 확정 SMS 발송
+            </span>
+            <span style=${{ marginLeft: "auto", fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>
+              D-${Math.max(0, Math.round((new Date(d.date) - new Date(ymdSch(TODAY_SCH)))/86400000))}
+            </span>
+          </label>
+        </div>
+        <div style=${{
+          padding: "12px 20px", background: "var(--bg-surface)",
+          borderTop: "1px solid var(--border-subtle)",
+          display: "flex", gap: 8, justifyContent: "flex-end",
+        }}>
+          <button onClick=${onClose} style=${{
+            padding: "8px 16px", fontSize: 13, fontWeight: 500,
+            background: "transparent", border: "1px solid var(--border-default)",
+            borderRadius: "var(--radius-md)", color: "var(--text-secondary)",
+            cursor: "pointer", fontFamily: "var(--font-sans)",
+          }}>취소</button>
+          <button onClick=${() => onSubmit && onSubmit({ ...d, mins: treatmentMins, status: "확정" })}
+            disabled=${!d.patient}
+            style=${{
+              padding: "8px 18px", fontSize: 13, fontWeight: 600,
+              background: d.patient ? "var(--jade-500)" : "var(--stone-300)",
+              border: "none", borderRadius: "var(--radius-md)", color: "#fff",
+              cursor: d.patient ? "pointer" : "not-allowed",
+              fontFamily: "var(--font-sans)",
+              display: "inline-flex", alignItems: "center", gap: 6,
+              boxShadow: d.patient ? "var(--shadow-sm)" : "none",
+            }}>
+            <${Icon} name="calendar-check" size=${13} />예약 등록
+          </button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function ApptBlockSch({ appt, onClick, hourHeightPx, col = 0, totalCols = 1 }) {
+    const startMin = minsFromTimeSch(appt.start);
+    const top = ((startMin - 9*60) / 60) * hourHeightPx;
+    const height = (appt.mins / 60) * hourHeightPx;
+    const doc = DOCTORS_SCH.find(x => x.id === appt.doctor);
+    const status = STATUS_SCH[appt.status] || STATUS_SCH["확정"];
+    const leftPct = (col / totalCols * 100).toFixed(1);
+    const rightPct = ((totalCols - col - 1) / totalCols * 100).toFixed(1);
+    return html`<div onClick=${(e) => { e.stopPropagation(); onClick && onClick(appt); }}
+      style=${{
+        position: "absolute",
+        left: `calc(${leftPct}% + 2px)`,
+        right: `calc(${rightPct}% + 2px)`,
+        top: top + 2, height: Math.max(height - 4, 22),
+        background: doc.bg,
+        border: `1px solid ${doc.border}`,
+        borderLeft: `3px solid ${doc.color}`,
+        borderRadius: "var(--radius-sm)",
+        padding: "4px 6px",
+        cursor: "pointer",
+        overflow: "hidden",
+        whiteSpace: "nowrap",
+        fontFamily: "var(--font-sans)",
+        opacity: appt.status === "노쇼" || appt.status === "취소" ? 0.6 : 1,
+        textDecoration: appt.status === "취소" ? "line-through" : "none",
+      }}>
+      <div style=${{ display: "flex", alignItems: "center", gap: 4, overflow: "hidden", whiteSpace: "nowrap" }}>
+        <span style=${{ fontSize: 9, fontFamily: "var(--font-mono)", fontWeight: 600, color: doc.color, flexShrink: 0 }}>
+          ${appt.start}
+        </span>
+        <span style=${{ width: 4, height: 4, borderRadius: "50%", background: status.dot, flexShrink: 0 }} />
+        <span style=${{ fontSize: 11, fontWeight: 600, color: "var(--text-primary)", overflow: "hidden", textOverflow: "ellipsis", flex: 1, minWidth: 0 }}>
+          ${appt.patient}
+        </span>
+      </div>
+      ${height > 36 && html`<div style=${{ fontSize: 10, color: "var(--text-muted)", lineHeight: 1.3, marginTop: 2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+        ${appt.chief}
+      </div>`}
+    </div>`;
+  }
+
+  function DayViewSch({ date, appts, onCellClick, onApptClick, doctorFilter }) {
+    const HOUR_PX = 56;
+    const dayStr = ymdSch(date);
+    const todays = appts.filter(a => a.date === dayStr && (!doctorFilter || a.doctor === doctorFilter));
+    const visibleDocs = doctorFilter ? DOCTORS_SCH.filter(d => d.id === doctorFilter) : DOCTORS_SCH;
+
+    return html`<div style=${{ display: "flex", flexDirection: "column", flex: 1, minHeight: 0 }}>
+      <div style=${{
+        display: "grid",
+        gridTemplateColumns: `64px repeat(${visibleDocs.length}, 1fr)`,
+        borderBottom: "1px solid var(--border-subtle)",
+        background: "var(--bg-surface)",
+        flexShrink: 0,
+      }}>
+        <div style=${{ padding: "10px 8px", fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)", textAlign: "right" }}>시간</div>
+        ${visibleDocs.map(doc => html`<div key=${doc.id} style=${{
+          padding: "10px 14px",
+          borderLeft: "1px solid var(--border-subtle)",
+          display: "flex", alignItems: "center", gap: 8,
+        }}>
+          <span style=${{ width: 9, height: 9, borderRadius: "50%", background: doc.color }} />
+          <div>
+            <div style=${{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>${doc.name}</div>
+            <div style=${{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>
+              ${doc.room} · 예약 ${todays.filter(a => a.doctor === doc.id).length}건
+            </div>
+          </div>
+        </div>`)}
+      </div>
+      <div style=${{ flex: 1, overflowY: "auto", background: "var(--bg-surface)" }}>
+        <div style=${{
+          display: "grid",
+          gridTemplateColumns: `64px repeat(${visibleDocs.length}, 1fr)`,
+          position: "relative",
+        }}>
+          <div>
+            ${Array.from({ length: 10 }).map((_, i) => html`<div key=${i} style=${{
+              height: HOUR_PX, padding: "4px 8px",
+              borderTop: "1px solid var(--stone-200)",
+              fontSize: 10, color: "var(--text-muted)",
+              fontFamily: "var(--font-mono)", textAlign: "right",
+            }}>${String(9+i).padStart(2,"0")}:00</div>`)}
+          </div>
+          ${visibleDocs.map(doc => html`<div key=${doc.id} style=${{
+            position: "relative",
+            borderLeft: "1px solid var(--border-subtle)",
+          }}>
+            ${Array.from({ length: 10 }).map((_, i) => html`<div key=${i}
+              onClick=${() => onCellClick && onCellClick({ date: dayStr, start: `${String(9+i).padStart(2,"0")}:00`, doctor: doc.id })}
+              style=${{
+                height: HOUR_PX,
+                borderTop: "1px solid var(--stone-200)",
+                cursor: "pointer",
+                position: "relative",
+              }}>
+              <div style=${{
+                position: "absolute", top: HOUR_PX/2, left: 0, right: 0,
+                borderTop: "1px dashed var(--stone-200)",
+              }} />
+            </div>`)}
+            ${layoutApptsSch(todays.filter(a => a.doctor === doc.id)).map(a => html`<${ApptBlockSch} key=${a.id} appt=${a} onClick=${onApptClick} hourHeightPx=${HOUR_PX} col=${a.col} totalCols=${a.totalCols} />`)}
+          </div>`)}
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function WeekViewSch({ date, appts, onCellClick, onApptClick, doctorFilter }) {
+    const HOUR_PX = 52;
+    const wkStart = startOfWeekSch(date);
+    const days = Array.from({ length: 7 }, (_, i) => addDaysSch(wkStart, i));
+    const todayStr = ymdSch(TODAY_SCH);
+    const filtered = doctorFilter ? appts.filter(a => a.doctor === doctorFilter) : appts;
+
+    return html`<div style=${{ display: "flex", flexDirection: "column", flex: 1, minHeight: 0 }}>
+      <div style=${{
+        display: "grid",
+        gridTemplateColumns: `56px repeat(7, 1fr)`,
+        borderBottom: "1px solid var(--border-subtle)",
+        background: "var(--bg-surface)",
+        flexShrink: 0,
+      }}>
+        <div style=${{ padding: "10px 6px", fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)", textAlign: "right" }}>시간</div>
+        ${days.map((d, i) => {
+          const isToday = ymdSch(d) === todayStr;
+          const dayCt = filtered.filter(a => a.date === ymdSch(d)).length;
+          return html`<div key=${i} style=${{
+            padding: "8px 10px",
+            borderLeft: "1px solid var(--border-subtle)",
+            background: isToday ? "var(--jade-50)" : "transparent",
+          }}>
+            <div style=${{ display: "flex", alignItems: "baseline", gap: 6 }}>
+              <span style=${{
+                fontSize: 10, fontWeight: 600,
+                color: i === 0 ? "var(--cinnabar-600)" : i === 6 ? "var(--jade-600)" : "var(--text-muted)",
+                fontFamily: "var(--font-sans)",
+              }}>${KO_WEEKDAYS_SCH[i]}</span>
+              <span style=${{
+                fontFamily: "var(--font-serif)",
+                fontSize: 18, fontWeight: isToday ? 600 : 400,
+                color: isToday ? "var(--jade-700)" : "var(--text-primary)",
+                letterSpacing: "-0.01em",
+              }}>${d.getDate()}</span>
+              ${dayCt > 0 && html`<span style=${{
+                marginLeft: "auto",
+                fontSize: 10, fontWeight: 600,
+                color: "var(--jade-700)", background: "var(--jade-100)",
+                borderRadius: "var(--radius-full)", padding: "1px 7px",
+                fontFamily: "var(--font-mono)",
+              }}>${dayCt}</span>`}
+            </div>
+          </div>`;
+        })}
+      </div>
+      <div style=${{ flex: 1, overflowY: "auto", background: "var(--bg-surface)" }}>
+        <div style=${{
+          display: "grid",
+          gridTemplateColumns: `56px repeat(7, 1fr)`,
+          position: "relative",
+        }}>
+          <div>
+            ${Array.from({ length: 10 }).map((_, i) => html`<div key=${i} style=${{
+              height: HOUR_PX, padding: "4px 8px",
+              borderTop: "1px solid var(--stone-200)",
+              fontSize: 10, color: "var(--text-muted)",
+              fontFamily: "var(--font-mono)", textAlign: "right",
+            }}>${String(9+i).padStart(2,"0")}:00</div>`)}
+          </div>
+          ${days.map((d, di) => {
+            const dayStr = ymdSch(d);
+            const isToday = dayStr === todayStr;
+            const dayAppts = filtered.filter(a => a.date === dayStr);
+            return html`<div key=${di} style=${{
+              position: "relative",
+              borderLeft: "1px solid var(--border-subtle)",
+              background: isToday ? "rgba(74,124,111,0.03)" : "transparent",
+            }}>
+              ${Array.from({ length: 10 }).map((_, hi) => html`<div key=${hi}
+                onClick=${() => onCellClick && onCellClick({ date: dayStr, start: `${String(9+hi).padStart(2,"0")}:00` })}
+                style=${{
+                  height: HOUR_PX,
+                  borderTop: "1px solid var(--stone-200)",
+                  cursor: "pointer", position: "relative",
+                }}>
+                <div style=${{
+                  position: "absolute", top: HOUR_PX/2, left: 0, right: 0,
+                  borderTop: "1px dashed var(--stone-200)",
+                }} />
+              </div>`)}
+              ${layoutApptsSch(dayAppts).map(a => html`<${ApptBlockSch} key=${a.id} appt=${a} onClick=${onApptClick} hourHeightPx=${HOUR_PX} col=${a.col} totalCols=${a.totalCols} />`)}
+            </div>`;
+          })}
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function MonthViewSch({ date, appts, onDayClick, onApptClick, doctorFilter }) {
+    const view = { y: date.getFullYear(), m: date.getMonth() };
+    const filtered = doctorFilter ? appts.filter(a => a.doctor === doctorFilter) : appts;
+
+    const cells = useMemo(() => {
+      const first = new Date(view.y, view.m, 1);
+      const last = new Date(view.y, view.m + 1, 0);
+      const startWk = first.getDay();
+      const days = last.getDate();
+      const prevDays = new Date(view.y, view.m, 0).getDate();
+      const out = [];
+      for (let i = startWk - 1; i >= 0; i--) {
+        const d = new Date(view.y, view.m - 1, prevDays - i);
+        out.push({ d, muted: true });
+      }
+      for (let dn = 1; dn <= days; dn++) {
+        out.push({ d: new Date(view.y, view.m, dn), muted: false });
+      }
+      while (out.length % 7 !== 0) {
+        const last = out[out.length - 1].d;
+        out.push({ d: new Date(last.getFullYear(), last.getMonth(), last.getDate()+1), muted: true });
+      }
+      return out;
+    }, [view.y, view.m]);
+
+    const todayStr = ymdSch(TODAY_SCH);
+
+    return html`<div style=${{ display: "flex", flexDirection: "column", flex: 1, minHeight: 0, background: "var(--bg-surface)" }}>
+      <div style=${{
+        display: "grid", gridTemplateColumns: "repeat(7, 1fr)",
+        borderBottom: "1px solid var(--border-subtle)",
+        background: "var(--stone-50)", flexShrink: 0,
+      }}>
+        ${KO_WEEKDAYS_SCH.map((w, i) => html`<div key=${w} style=${{
+          padding: "8px 10px",
+          borderLeft: i > 0 ? "1px solid var(--border-subtle)" : "none",
+          fontSize: 11, fontWeight: 700,
+          color: i === 0 ? "var(--cinnabar-600)" : i === 6 ? "var(--jade-600)" : "var(--text-secondary)",
+          fontFamily: "var(--font-sans)", letterSpacing: "0.04em",
+        }}>${w}요일</div>`)}
+      </div>
+      <div style=${{ flex: 1, display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gridAutoRows: "1fr", overflowY: "auto" }}>
+        ${cells.map((c, i) => {
+          const dayStr = ymdSch(c.d);
+          const dayAppts = filtered.filter(a => a.date === dayStr);
+          const isToday = dayStr === todayStr;
+          const dow = c.d.getDay();
+          return html`<div key=${i}
+            onClick=${() => onDayClick && onDayClick(c.d)}
+            style=${{
+              minHeight: 110,
+              borderTop: i >= 7 ? "1px solid var(--stone-200)" : "none",
+              borderLeft: i % 7 !== 0 ? "1px solid var(--stone-200)" : "none",
+              background: c.muted ? "var(--stone-50)" : isToday ? "var(--jade-50)" : "var(--bg-surface)",
+              padding: "6px 8px",
+              cursor: c.muted ? "default" : "pointer",
+              display: "flex", flexDirection: "column", gap: 3,
+              opacity: c.muted ? 0.4 : 1,
+              position: "relative",
+            }}>
+            <div style=${{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <span style=${{
+                fontFamily: "var(--font-mono)",
+                fontSize: 12, fontWeight: isToday ? 700 : 500,
+                color: isToday ? "#fff" : dow === 0 ? "var(--cinnabar-600)" : dow === 6 ? "var(--jade-600)" : "var(--text-primary)",
+                background: isToday ? "var(--jade-500)" : "transparent",
+                borderRadius: "50%",
+                width: 22, height: 22,
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}>${c.d.getDate()}</span>
+              ${dayAppts.length > 0 && html`<span style=${{
+                fontSize: 10, fontWeight: 600,
+                color: "var(--jade-700)", fontFamily: "var(--font-mono)",
+              }}>${dayAppts.length}건</span>`}
+            </div>
+            <div style=${{ display: "flex", flexDirection: "column", gap: 2, overflow: "hidden" }}>
+              ${dayAppts.slice(0, 3).map(a => {
+                const doc = DOCTORS_SCH.find(x => x.id === a.doctor);
+                return html`<div key=${a.id} onClick=${(e) => { e.stopPropagation(); onApptClick && onApptClick(a); }}
+                  style=${{
+                    display: "flex", alignItems: "center", gap: 5,
+                    padding: "2px 5px",
+                    background: doc.bg, borderLeft: `2px solid ${doc.color}`,
+                    borderRadius: 2, fontSize: 10,
+                    fontFamily: "var(--font-sans)",
+                    whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
+                  }}>
+                  <span style=${{ fontFamily: "var(--font-mono)", color: doc.color, fontWeight: 600, flexShrink: 0 }}>
+                    ${a.start}
+                  </span>
+                  <span style=${{ color: "var(--text-primary)", fontWeight: 500, overflow: "hidden", textOverflow: "ellipsis" }}>${a.patient}</span>
+                </div>`;
+              })}
+              ${dayAppts.length > 3 && html`<div style=${{ fontSize: 10, color: "var(--text-muted)", paddingLeft: 5, fontFamily: "var(--font-sans)" }}>
+                +${dayAppts.length - 3}건 더
+              </div>`}
+            </div>
+          </div>`;
+        })}
+      </div>
+    </div>`;
+  }
+
+  function ApptDetailSch({ appt, onClose, onChangeStatus }) {
+    if (!appt) return null;
+    const doc = DOCTORS_SCH.find(x => x.id === appt.doctor);
+    const status = STATUS_SCH[appt.status] || STATUS_SCH["확정"];
+    const endMin = minsFromTimeSch(appt.start) + appt.mins;
+    return html`<div onClick=${onClose} style=${{
+      position: "fixed", inset: 0, zIndex: 80,
+      background: "rgba(17,30,28,0.3)",
+      display: "flex", justifyContent: "flex-end",
+    }}>
+      <div onClick=${e => e.stopPropagation()} style=${{
+        width: 380, height: "100%",
+        background: "var(--bg-surface)",
+        boxShadow: "var(--shadow-xl)",
+        display: "flex", flexDirection: "column",
+      }}>
+        <div style=${{
+          padding: "16px 20px",
+          borderBottom: "1px solid var(--border-subtle)",
+          display: "flex", alignItems: "center", gap: 12,
+          background: doc.bg, borderLeft: `4px solid ${doc.color}`,
+        }}>
+          <${Avatar} name=${appt.patient} size=${40} />
+          <div style=${{ flex: 1 }}>
+            <div style=${{ fontFamily: "var(--font-serif)", fontSize: 18, fontWeight: 500, color: "var(--text-primary)" }}>
+              ${appt.patient}
+            </div>
+            <div style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>
+              ${appt.visit} · ${appt.insurance}
+            </div>
+          </div>
+          <button onClick=${onClose} style=${{
+            width: 28, height: 28, borderRadius: "var(--radius-sm)",
+            background: "rgba(255,255,255,0.6)", border: "1px solid var(--border-subtle)",
+            cursor: "pointer", color: "var(--text-secondary)",
+            display: "inline-flex", alignItems: "center", justifyContent: "center",
+          }}>
+            <${Icon} name="x" size=${15} />
+          </button>
+        </div>
+        <div style=${{ flex: 1, overflowY: "auto", padding: 20, display: "flex", flexDirection: "column", gap: 14 }}>
+          <div style=${detailRowSch}>
+            <${Icon} name="calendar" size=${14} style=${{ color: "var(--text-muted)" }} />
+            <span style=${detailKeySch}>날짜</span>
+            <span style=${detailValSch}>${appt.date}</span>
+          </div>
+          <div style=${detailRowSch}>
+            <${Icon} name="clock" size=${14} style=${{ color: "var(--text-muted)" }} />
+            <span style=${detailKeySch}>시간</span>
+            <span style=${detailValSch}>${appt.start} – ${timeFromMinsSch(endMin)} (${appt.mins}분)</span>
+          </div>
+          <div style=${detailRowSch}>
+            <${Icon} name="stethoscope" size=${14} style=${{ color: "var(--text-muted)" }} />
+            <span style=${detailKeySch}>담당의</span>
+            <span style=${detailValSch}>${doc.name} · ${doc.room}</span>
+          </div>
+          <div style=${detailRowSch}>
+            <${Icon} name="file-text" size=${14} style=${{ color: "var(--text-muted)" }} />
+            <span style=${detailKeySch}>주소증</span>
+            <span style=${detailValSch}>${appt.chief}</span>
+          </div>
+          <div style=${detailRowSch}>
+            <${Icon} name="circle-dot" size=${14} style=${{ color: status.dot }} />
+            <span style=${detailKeySch}>상태</span>
+            <span style=${{
+              ...detailValSch, color: status.text, background: status.bg,
+              border: `1px solid ${status.border}`,
+              borderRadius: "var(--radius-full)", padding: "2px 10px",
+              fontSize: 11, fontWeight: 600,
+            }}>${appt.status}</span>
+          </div>
+          <div style=${{
+            marginTop: 4, padding: 12,
+            background: "var(--stone-50)", border: "1px solid var(--border-subtle)",
+            borderRadius: "var(--radius-md)",
+            display: "flex", flexDirection: "column", gap: 6,
+          }}>
+            <div style=${{ fontSize: 10, fontWeight: 700, color: "var(--text-muted)", letterSpacing: "0.08em", textTransform: "uppercase", fontFamily: "var(--font-sans)" }}>
+              상태 변경
+            </div>
+            <div style=${{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 6 }}>
+              ${Object.keys(STATUS_SCH).map(s => {
+                const sc = STATUS_SCH[s];
+                const sel = appt.status === s;
+                return html`<button key=${s} onClick=${() => onChangeStatus && onChangeStatus(appt.id, s)} style=${{
+                  padding: "6px 4px", borderRadius: "var(--radius-sm)",
+                  border: `1px solid ${sel ? sc.border : "var(--border-subtle)"}`,
+                  background: sel ? sc.bg : "var(--bg-surface)",
+                  color: sel ? sc.text : "var(--text-secondary)",
+                  fontSize: 11, fontWeight: sel ? 600 : 400,
+                  cursor: "pointer", fontFamily: "var(--font-sans)",
+                  display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 4,
+                }}>
+                  <span style=${{ width: 6, height: 6, borderRadius: "50%", background: sc.dot }} />
+                  ${s}
+                </button>`;
+              })}
+            </div>
+          </div>
+        </div>
+        <div style=${{
+          padding: 14, borderTop: "1px solid var(--border-subtle)",
+          display: "flex", gap: 8,
+        }}>
+          <button style=${{
+            flex: 1, padding: "8px 12px", fontSize: 12, fontWeight: 500,
+            background: "transparent", border: "1px solid var(--border-default)",
+            borderRadius: "var(--radius-md)", color: "var(--text-secondary)",
+            cursor: "pointer", fontFamily: "var(--font-sans)",
+            display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 5,
+          }}><${Icon} name="message-circle" size=${12} />SMS 발송</button>
+          <button style=${{
+            flex: 1, padding: "8px 12px", fontSize: 12, fontWeight: 600,
+            background: "var(--jade-500)", border: "none",
+            borderRadius: "var(--radius-md)", color: "#fff",
+            cursor: "pointer", fontFamily: "var(--font-sans)",
+            display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 5,
+          }}><${Icon} name="user-check" size=${12} />접수 처리</button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function ScheduleScreen() {
+    const [appts, setAppts] = useState(() => {
+      try {
+        const saved = localStorage.getItem("komes_appts_v1");
+        return saved ? JSON.parse(saved) : buildSeedSch();
+      } catch { return buildSeedSch(); }
+    });
+    useEffect(() => { localStorage.setItem("komes_appts_v1", JSON.stringify(appts)); }, [appts]);
+
+    const [view, setView] = useState("week");
+    const [date, setDate] = useState(TODAY_SCH);
+    const [doctorFilter, setDoctorFilter] = useState("");
+    const [showNew, setShowNew] = useState(false);
+    const [newInitial, setNewInitial] = useState(null);
+    const [selectedAppt, setSelectedAppt] = useState(null);
+
+    const goPrev = () => {
+      if (view === "day") setDate(addDaysSch(date, -1));
+      else if (view === "week") setDate(addDaysSch(date, -7));
+      else setDate(new Date(date.getFullYear(), date.getMonth() - 1, 1));
+    };
+    const goNext = () => {
+      if (view === "day") setDate(addDaysSch(date, 1));
+      else if (view === "week") setDate(addDaysSch(date, 7));
+      else setDate(new Date(date.getFullYear(), date.getMonth() + 1, 1));
+    };
+
+    const headerLabel = (() => {
+      if (view === "day") return `${date.getFullYear()}년 ${KO_MONTHS_SCH[date.getMonth()]} ${date.getDate()}일 (${KO_WEEKDAYS_SCH[date.getDay()]})`;
+      if (view === "week") {
+        const s = startOfWeekSch(date), e = addDaysSch(s, 6);
+        return `${s.getFullYear()}년 ${s.getMonth()+1}월 ${s.getDate()}일 — ${e.getDate()}일`;
+      }
+      return `${date.getFullYear()}년 ${KO_MONTHS_SCH[date.getMonth()]}`;
+    })();
+
+    const periodAppts = (() => {
+      if (view === "day") return appts.filter(a => a.date === ymdSch(date));
+      if (view === "week") {
+        const s = startOfWeekSch(date), e = addDaysSch(s, 6);
+        return appts.filter(a => a.date >= ymdSch(s) && a.date <= ymdSch(e));
+      }
+      const my = `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,"0")}`;
+      return appts.filter(a => a.date.startsWith(my));
+    })();
+    const periodFiltered = doctorFilter ? periodAppts.filter(a => a.doctor === doctorFilter) : periodAppts;
+    const newCnt = periodFiltered.filter(a => a.visit === "초진").length;
+    const reCnt = periodFiltered.filter(a => a.visit === "재진").length;
+    const noShowCnt = periodFiltered.filter(a => a.status === "노쇼").length;
+
+    const onCellClick = (init) => { setNewInitial(init); setShowNew(true); };
+    const onNewSubmit = (a) => {
+      setAppts(prev => [...prev, { ...a, id: Math.max(0, ...prev.map(x => x.id)) + 1 }]);
+      setShowNew(false);
+    };
+    const onChangeStatus = (id, status) => {
+      setAppts(prev => prev.map(a => a.id === id ? { ...a, status } : a));
+      setSelectedAppt(prev => prev ? { ...prev, status } : null);
+    };
+
+    return html`<div style=${{ display: "flex", flexDirection: "column", height: "100%", background: "var(--bg-page)" }}>
+      <${TopBar}
+        title="예약 관리"
+        subtitle=${`${headerLabel} · 총 ${periodFiltered.length}건 (초진 ${newCnt} · 재진 ${reCnt}${noShowCnt ? ` · 노쇼 ${noShowCnt}` : ""})`}
+        actions=${html`<${F}>
+          <div style=${{ display: "flex", background: "var(--stone-200)", borderRadius: "var(--radius-md)", padding: 2, gap: 2 }}>
+            ${[
+              { key: "day", l: "일간" },
+              { key: "week", l: "주간" },
+              { key: "month", l: "월간" },
+            ].map(v => html`<button key=${v.key} onClick=${() => setView(v.key)} style=${{
+              padding: "5px 14px", border: "none", cursor: "pointer", borderRadius: "var(--radius-sm)",
+              background: view === v.key ? "var(--bg-surface)" : "transparent",
+              boxShadow: view === v.key ? "var(--shadow-sm)" : "none",
+              color: view === v.key ? "var(--text-primary)" : "var(--text-muted)",
+              fontWeight: view === v.key ? 600 : 400, fontSize: 12, fontFamily: "var(--font-sans)",
+            }}>${v.l}</button>`)}
+          </div>
+          <${Button} variant="primary" icon="calendar-plus" onClick=${() => { setNewInitial(null); setShowNew(true); }}>새 예약</${Button}>
+        </${F}>`}
+      />
+      <div style=${{ flex: 1, display: "flex", flexDirection: "column", minHeight: 0 }}>
+        <div style=${{
+          display: "flex", alignItems: "center", gap: 12,
+          padding: "10px 24px",
+          background: "var(--bg-surface)",
+          borderBottom: "1px solid var(--border-subtle)", flexShrink: 0,
+        }}>
+          <div style=${{ display: "flex", alignItems: "center", gap: 4 }}>
+            <button onClick=${goPrev} style=${navIconBtnSch}><${Icon} name="chevron-left" size=${16} /></button>
+            <button onClick=${() => setDate(TODAY_SCH)} style=${{
+              padding: "5px 12px", fontSize: 12, fontWeight: 500,
+              background: "var(--bg-surface)", border: "1px solid var(--border-default)",
+              borderRadius: "var(--radius-md)", color: "var(--text-secondary)",
+              cursor: "pointer", fontFamily: "var(--font-sans)",
+            }}>오늘</button>
+            <button onClick=${goNext} style=${navIconBtnSch}><${Icon} name="chevron-right" size=${16} /></button>
+          </div>
+          <div style=${{
+            fontFamily: "var(--font-serif)", fontSize: 18, fontWeight: 500,
+            color: "var(--text-primary)", letterSpacing: "-0.01em",
+          }}>${headerLabel}</div>
+          <div style=${{ flex: 1 }} />
+          <div style=${{ display: "flex", alignItems: "center", gap: 6 }}>
+            <span style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)", letterSpacing: "0.04em" }}>담당의</span>
+            <button onClick=${() => setDoctorFilter("")} style=${{
+              padding: "4px 10px", fontSize: 11, fontWeight: doctorFilter === "" ? 600 : 400,
+              background: doctorFilter === "" ? "var(--jade-500)" : "var(--bg-surface)",
+              color: doctorFilter === "" ? "#fff" : "var(--text-secondary)",
+              border: `1px solid ${doctorFilter === "" ? "var(--jade-500)" : "var(--border-subtle)"}`,
+              borderRadius: "var(--radius-full)", cursor: "pointer", fontFamily: "var(--font-sans)",
+            }}>전체</button>
+            ${DOCTORS_SCH.map(doc => {
+              const sel = doctorFilter === doc.id;
+              return html`<button key=${doc.id} onClick=${() => setDoctorFilter(doc.id)} style=${{
+                padding: "4px 10px", fontSize: 11, fontWeight: sel ? 600 : 400,
+                background: sel ? doc.bg : "var(--bg-surface)",
+                color: sel ? doc.color : "var(--text-secondary)",
+                border: `1px solid ${sel ? doc.color : "var(--border-subtle)"}`,
+                borderRadius: "var(--radius-full)", cursor: "pointer", fontFamily: "var(--font-sans)",
+                display: "inline-flex", alignItems: "center", gap: 5,
+              }}>
+                <span style=${{ width: 6, height: 6, borderRadius: "50%", background: doc.color }} />
+                ${doc.name}
+              </button>`;
+            })}
+          </div>
+        </div>
+        <div style=${{ flex: 1, minHeight: 0, padding: "0 24px 16px", display: "flex", flexDirection: "column" }}>
+          <div style=${{
+            flex: 1, minHeight: 0, marginTop: 16,
+            background: "var(--bg-surface)",
+            border: "1px solid var(--border-subtle)",
+            borderRadius: "var(--radius-lg)",
+            overflow: "hidden",
+            display: "flex", flexDirection: "column",
+            boxShadow: "var(--shadow-sm)",
+          }}>
+            ${view === "day"   && html`<${DayViewSch}   date=${date} appts=${appts} onCellClick=${onCellClick} onApptClick=${setSelectedAppt} doctorFilter=${doctorFilter} />`}
+            ${view === "week"  && html`<${WeekViewSch}  date=${date} appts=${appts} onCellClick=${onCellClick} onApptClick=${setSelectedAppt} doctorFilter=${doctorFilter} />`}
+            ${view === "month" && html`<${MonthViewSch} date=${date} appts=${appts} onApptClick=${setSelectedAppt} onDayClick=${(d) => { setDate(d); setView("day"); }} doctorFilter=${doctorFilter} />`}
+          </div>
+          <div style=${{ display: "flex", gap: 14, padding: "10px 4px", flexShrink: 0 }}>
+            ${Object.keys(STATUS_SCH).map(s => {
+              const sc = STATUS_SCH[s];
+              return html`<div key=${s} style=${{ display: "inline-flex", alignItems: "center", gap: 5 }}>
+                <span style=${{ width: 8, height: 8, borderRadius: "50%", background: sc.dot }} />
+                <span style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>${s}</span>
+              </div>`;
+            })}
+            <div style=${{ width: 1, height: 14, background: "var(--border-subtle)" }} />
+            ${DOCTORS_SCH.map(doc => html`<div key=${doc.id} style=${{ display: "inline-flex", alignItems: "center", gap: 5 }}>
+              <span style=${{ width: 10, height: 10, borderRadius: 2, background: doc.bg, border: `2px solid ${doc.color}` }} />
+              <span style=${{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>${doc.name}</span>
+            </div>`)}
+          </div>
+        </div>
+      </div>
+      ${showNew && html`<${NewAppointmentModal} initial=${newInitial} onClose=${() => setShowNew(false)} onSubmit=${onNewSubmit} />`}
+      ${selectedAppt && html`<${ApptDetailSch} appt=${selectedAppt} onClose=${() => setSelectedAppt(null)} onChangeStatus=${onChangeStatus} />`}
+    </div>`;
+  }
+
   function App() {
     const [nav, setNav] = useState(() => localStorage.getItem("komes_nav") || "patients");
     const [selectedPatient, setSelectedPatient] = useState(null);
@@ -3609,6 +4524,7 @@ body {
       if (nav === "claim")     return html`<${InsuranceClaimScreen} />`;
       if (nav === "inventory") return html`<${HerbInventoryScreen} />`;
       if (nav === "supplies")  return html`<${SuppliesScreen} />`;
+      if (nav === "schedule")  return html`<${ScheduleScreen} />`;
       const labels = {
         schedule: "예약 관리",
         registry: "환자 관리", payment: "수납",
