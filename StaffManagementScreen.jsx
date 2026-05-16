@@ -571,6 +571,7 @@ function StaffManagementScreen() {
   const [sort, setSort] = useStateStaff("role"); // role | join | name | tenure
   const [view, setView] = useStateStaff("list"); // list | cards
   const [selectedId, setSelectedId] = useStateStaff(staff[0]?.id);
+  const [showNewStaff, setShowNewStaff] = useStateStaff(false);
 
   const counts = useMemoStaff(() => {
     const c = {
@@ -627,7 +628,7 @@ function StaffManagementScreen() {
           </div>
           <Button variant="secondary" size="sm" icon="calendar-days">근무표</Button>
           <Button variant="secondary" size="sm" icon="download">내보내기</Button>
-          <Button variant="primary" icon="user-plus">직원 등록</Button>
+          <Button variant="primary" icon="user-plus" onClick={() => setShowNewStaff(true)}>직원 등록</Button>
         </>}
       />
 
@@ -763,6 +764,13 @@ function StaffManagementScreen() {
           />
         )}
       </div>
+
+      {showNewStaff && (
+        <NewStaffModal
+          onClose={() => setShowNewStaff(false)}
+          onSubmit={() => setShowNewStaff(false)}
+        />
+      )}
     </div>
   );
 }
