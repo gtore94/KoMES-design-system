@@ -1988,7 +1988,33 @@ function MedicalFormScreen() {
   const [patient, setPatient] = useStateMF(MF_PATIENT);
   const [pickerOpen, setPickerOpen] = useStateMF(false);
   const [historyOpen, setHistoryOpen] = useStateMF(false);
+  const [panelWidth, setPanelWidth] = useStateMF(400);
   const stageRef = useRefMF(null);
+  const isDragging = useRefMF(false);
+
+  useEffectMF(() => {
+    const onMouseMove = (e) => {
+      if (!isDragging.current) return;
+      const bodyEl = stageRef.current?.parentElement;
+      if (!bodyEl) return;
+      const rect = bodyEl.getBoundingClientRect();
+      const newWidth = Math.max(280, Math.min(700, rect.right - e.clientX));
+      setPanelWidth(newWidth);
+    };
+    const onMouseUp = () => {
+      if (isDragging.current) {
+        isDragging.current = false;
+        document.body.style.cursor = "";
+        document.body.style.userSelect = "";
+      }
+    };
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
+    return () => {
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
+    };
+  }, []);
 
   const handlePatientChange = (newPatient) => {
     setPatient({
@@ -2123,10 +2149,32 @@ function MedicalFormScreen() {
           </div>
         </div>
 
+        {/* Resize divider */}
+        <div
+          onMouseDown={(e) => {
+            e.preventDefault();
+            isDragging.current = true;
+            document.body.style.cursor = "col-resize";
+            document.body.style.userSelect = "none";
+          }}
+          style={{ width: 5, flexShrink: 0, cursor: "col-resize", position: "relative", zIndex: 10, background: "transparent" }}
+        >
+          <div style={{
+            position: "absolute", inset: 0,
+            borderLeft: "1px solid var(--border-subtle)",
+            transition: "border-color 0.15s",
+          }} />
+          <div style={{
+            position: "absolute", top: "50%", left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 3, height: 28, borderRadius: 2,
+            background: "var(--border-default)", opacity: 0.6,
+          }} />
+        </div>
+
         {/* Right panel */}
         <div style={{
-          width: 400, background: "var(--bg-surface)",
-          borderLeft: "1px solid var(--border-subtle)",
+          width: panelWidth, background: "var(--bg-surface)",
           display: "flex", flexDirection: "column", flexShrink: 0,
         }}>
           <div style={{ padding: "14px 18px", borderBottom: "1px solid var(--border-subtle)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
