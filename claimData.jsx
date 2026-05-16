@@ -165,14 +165,14 @@ const CLAIM_TYPES = [
     label: "첩약 건강보험 시범사업",
     sublabel: "한약 첩약 시범사업 대상자",
     icon: "leaf",
-    pillColor: "var(--amber-600)",
+    pillColor: "var(--amber-700)",
   },
   {
     key: "auto",
     label: "자동차보험",
     sublabel: "교통사고 진료비 청구",
     icon: "car",
-    pillColor: "var(--cinnabar-600)",
+    pillColor: "var(--cinnabar-700)",
   },
 ];
 
