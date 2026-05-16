@@ -263,6 +263,37 @@ function DiagnosisSection({ initialDx = [] }) {
         </button>
       </div>
 
+      {/* AI 추천 상병 */}
+      {!adding && aiSuggestions.length > 0 && (
+        <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 10, flexWrap: "wrap" }}>
+          <Icon name="sparkles" size={11} style={{ color: "var(--jade-600)" }} />
+          <span style={{ fontSize: 10, fontWeight: 700, color: "var(--text-brand)", letterSpacing: "0.04em", textTransform: "uppercase", fontFamily: "var(--font-sans)" }}>AI 추천</span>
+          {aiSuggestions.map(s => (
+            <button key={s.code} onClick={() => addDx(s)} style={{
+              display: "inline-flex", alignItems: "center", gap: 5,
+              fontSize: 11, color: "var(--text-brand)",
+              background: "var(--brand-subtle)", border: "1px dashed var(--jade-300)",
+              borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "3px 9px",
+              cursor: "pointer", fontFamily: "var(--font-sans)",
+            }}>
+              <Icon name="plus" size={10} />
+              <span style={{ fontFamily: "var(--font-mono)", fontWeight: 600 }}>{s.code}</span>
+              <span>{s.name}</span>
+            </button>
+          ))}
+          <button onClick={() => aiSuggestions.forEach(s => addDx(s))} style={{
+            display: "inline-flex", alignItems: "center", gap: 4,
+            fontSize: 11, fontWeight: 600, color: "var(--text-on-brand)",
+            background: "var(--jade-500)", border: "none",
+            borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "3px 10px",
+            cursor: "pointer", fontFamily: "var(--font-sans)",
+          }}>
+            <Icon name="plus" size={10} />모두 추가
+          </button>
+          <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>· 환자 주소증 + 과거 패턴 기반</span>
+        </div>
+      )}
+
       {/* 등록된 상병 */}
       {dx.length > 0 && (
         <div style={{ display: "flex", flexDirection: "column", gap: 5, marginBottom: adding ? 12 : 0 }}>
@@ -291,28 +322,6 @@ function DiagnosisSection({ initialDx = [] }) {
               </button>
             </div>
           ))}
-        </div>
-      )}
-
-      {/* AI 추천 상병 */}
-      {!adding && aiSuggestions.length > 0 && (
-        <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 10, flexWrap: "wrap" }}>
-          <Icon name="sparkles" size={11} style={{ color: "var(--jade-600)" }} />
-          <span style={{ fontSize: 10, fontWeight: 700, color: "var(--text-brand)", letterSpacing: "0.04em", textTransform: "uppercase", fontFamily: "var(--font-sans)" }}>AI 추천</span>
-          {aiSuggestions.map(s => (
-            <button key={s.code} onClick={() => addDx(s)} style={{
-              display: "inline-flex", alignItems: "center", gap: 5,
-              fontSize: 11, color: "var(--text-brand)",
-              background: "var(--brand-subtle)", border: "1px dashed var(--jade-300)",
-              borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "3px 9px",
-              cursor: "pointer", fontFamily: "var(--font-sans)",
-            }}>
-              <Icon name="plus" size={10} />
-              <span style={{ fontFamily: "var(--font-mono)", fontWeight: 600 }}>{s.code}</span>
-              <span>{s.name}</span>
-            </button>
-          ))}
-          <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>· 환자 주소증 + 과거 패턴 기반</span>
         </div>
       )}
 
@@ -480,6 +489,42 @@ function ActingOrderPanel({ injuryDate, today = new Date() }) {
         </button>
       </div>
 
+      {/* AI 추천 액팅 */}
+      {!showCatalog && phase && (() => {
+        const aiOrders = ACTING_ORDER_CATALOG
+          .filter(c => c.allowedPhases.includes(phase) && !orders.find(o => o.code === c.code) && ["40080", "40300"].includes(c.code))
+          .slice(0, 3);
+        if (!aiOrders.length) return null;
+        return (
+          <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 10, flexWrap: "wrap" }}>
+            <Icon name="sparkles" size={11} style={{ color: "var(--jade-600)" }} />
+            <span style={{ fontSize: 10, fontWeight: 700, color: "var(--text-brand)", letterSpacing: "0.04em", textTransform: "uppercase", fontFamily: "var(--font-sans)" }}>AI 추천</span>
+            {aiOrders.map(c => (
+              <button key={c.code} onClick={() => addOrder(c)} style={{
+                display: "inline-flex", alignItems: "center", gap: 5,
+                fontSize: 11, color: c.color,
+                background: `${c.color}12`, border: `1px dashed ${c.color}55`,
+                borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "3px 9px",
+                cursor: "pointer", fontFamily: "var(--font-sans)",
+              }}>
+                <Icon name="plus" size={10} />
+                {c.key}
+              </button>
+            ))}
+            <button onClick={() => aiOrders.forEach(c => addOrder(c))} style={{
+              display: "inline-flex", alignItems: "center", gap: 4,
+              fontSize: 11, fontWeight: 600, color: "var(--text-on-brand)",
+              background: "var(--jade-500)", border: "none",
+              borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "3px 10px",
+              cursor: "pointer", fontFamily: "var(--font-sans)",
+            }}>
+              <Icon name="plus" size={10} />모두 추가
+            </button>
+            <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>· 상병 + 경과 단계 기반</span>
+          </div>
+        );
+      })()}
+
       {/* 등록된 액팅 오더 */}
       <div style={{ display: "flex", flexDirection: "column", gap: 5, marginBottom: showCatalog ? 12 : 0 }}>
         {orders.map((o, i) => {
@@ -520,30 +565,6 @@ function ActingOrderPanel({ injuryDate, today = new Date() }) {
           );
         })}
       </div>
-
-      {/* AI 추천 액팅 */}
-      {!showCatalog && phase && (
-        <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 10, flexWrap: "wrap" }}>
-          <Icon name="sparkles" size={11} style={{ color: "var(--jade-600)" }} />
-          <span style={{ fontSize: 10, fontWeight: 700, color: "var(--text-brand)", letterSpacing: "0.04em", textTransform: "uppercase", fontFamily: "var(--font-sans)" }}>AI 추천</span>
-          {ACTING_ORDER_CATALOG
-            .filter(c => c.allowedPhases.includes(phase) && !orders.find(o => o.code === c.code) && ["40080", "40300"].includes(c.code))
-            .slice(0, 3)
-            .map(c => (
-              <button key={c.code} onClick={() => addOrder(c)} style={{
-                display: "inline-flex", alignItems: "center", gap: 5,
-                fontSize: 11, color: c.color,
-                background: `${c.color}12`, border: `1px dashed ${c.color}55`,
-                borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "3px 9px",
-                cursor: "pointer", fontFamily: "var(--font-sans)",
-              }}>
-                <Icon name="plus" size={10} />
-                {c.key}
-              </button>
-            ))}
-          <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>· 상병 + 경과 단계 기반</span>
-        </div>
-      )}
 
       {/* 카탈로그 */}
       {showCatalog && (
@@ -735,6 +756,39 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
         }}>{isAuto ? "자동차보험" : insurance}</span>
       </div>
 
+      {/* AI 추천 */}
+      {!showCatalog && phase && (() => {
+        const aiOrders = ACTING_ORDER_CATALOG
+          .filter(c => c.allowedPhases.includes(phase) && !orders.find(o => o.code === c.code) && ["40080", "40300"].includes(c.code));
+        if (!aiOrders.length) return null;
+        return (
+          <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 10, flexWrap: "wrap" }}>
+            <Icon name="sparkles" size={10} style={{ color: "var(--jade-600)" }} />
+            <span style={{ fontSize: 9, fontWeight: 700, color: "var(--text-brand)", letterSpacing: "0.04em", textTransform: "uppercase", fontFamily: "var(--font-sans)" }}>AI 추천</span>
+            {aiOrders.map(c => (
+              <button key={c.code} onClick={() => addOrder(c)} style={{
+                display: "inline-flex", alignItems: "center", gap: 3,
+                fontSize: 10, color: c.color,
+                background: `${c.color}12`, border: `1px dashed ${c.color}55`,
+                borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 7px",
+                cursor: "pointer", fontFamily: "var(--font-sans)",
+              }}>
+                <Icon name="plus" size={9} />{c.short}
+              </button>
+            ))}
+            <button onClick={() => aiOrders.forEach(c => addOrder(c))} style={{
+              display: "inline-flex", alignItems: "center", gap: 3,
+              fontSize: 10, fontWeight: 600, color: "var(--text-on-brand)",
+              background: "var(--jade-500)", border: "none",
+              borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 8px",
+              cursor: "pointer", fontFamily: "var(--font-sans)",
+            }}>
+              <Icon name="plus" size={9} />모두 추가
+            </button>
+          </div>
+        );
+      })()}
+
       {/* 등록된 오더 */}
       <div style={{ display: "flex", flexDirection: "column", gap: 4, marginBottom: 8 }}>
         {items.map((it, i) => (
@@ -819,26 +873,6 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
         </div>
       )}
 
-      {/* AI 추천 */}
-      {!showCatalog && phase && (
-        <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 12, flexWrap: "wrap" }}>
-          <Icon name="sparkles" size={10} style={{ color: "var(--jade-600)" }} />
-          <span style={{ fontSize: 9, fontWeight: 700, color: "var(--text-brand)", letterSpacing: "0.04em", textTransform: "uppercase", fontFamily: "var(--font-sans)" }}>AI 추천</span>
-          {ACTING_ORDER_CATALOG
-            .filter(c => c.allowedPhases.includes(phase) && !orders.find(o => o.code === c.code) && ["40080", "40300"].includes(c.code))
-            .map(c => (
-              <button key={c.code} onClick={() => addOrder(c)} style={{
-                display: "inline-flex", alignItems: "center", gap: 3,
-                fontSize: 10, color: c.color,
-                background: `${c.color}12`, border: `1px dashed ${c.color}55`,
-                borderRadius: "var(--radius-full)", whiteSpace: "nowrap", padding: "2px 7px",
-                cursor: "pointer", fontFamily: "var(--font-sans)",
-              }}>
-                <Icon name="plus" size={9} />{c.short}
-              </button>
-            ))}
-        </div>
-      )}
 
       {/* 청구 합계 */}
       <div style={{
