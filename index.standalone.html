@@ -67,6 +67,8 @@
   --doc-d1-bg: #EEF8F6; --doc-d1-border: #B3D8D1;
   --doc-d2-bg: #FAF2E4; --doc-d2-border: #F0DFC0;
   --doc-d3-bg: #EEF1F6; --doc-d3-border: #CFD7E3;
+  --claim-herbal-pill: var(--amber-500);
+  --claim-auto-pill:   var(--cinnabar-500);
 }
 
 /* ── Dark theme overrides ──────────────────────────────────── */
@@ -122,6 +124,8 @@
   --doc-d1-bg: #101E1C; --doc-d1-border: #1A3330;
   --doc-d2-bg: #1D1810; --doc-d2-border: #2D2418;
   --doc-d3-bg: #141C2B; --doc-d3-border: #1E2D45;
+  --claim-herbal-pill: var(--amber-700);
+  --claim-auto-pill:   var(--cinnabar-700);
 }
 
 /* ── Navy color — jade scale → navy (light mode) ───── */
@@ -12018,14 +12022,14 @@ const CLAIM_TYPES = [
     label: "첩약 건강보험 시범사업",
     sublabel: "한약 첩약 시범사업 대상자",
     icon: "leaf",
-    pillColor: "var(--amber-700)",
+    pillColor: "var(--claim-herbal-pill)",
   },
   {
     key: "auto",
     label: "자동차보험",
     sublabel: "교통사고 진료비 청구",
     icon: "car",
-    pillColor: "var(--cinnabar-700)",
+    pillColor: "var(--claim-auto-pill)",
   },
 ];
 
