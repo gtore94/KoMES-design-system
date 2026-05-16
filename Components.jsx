@@ -99,9 +99,11 @@ function Sidebar({ activeScreen, onNavigate }) {
   const navGroups = [
     { label: "진료", items: [
       { key: "patients", icon: "layout-dashboard", label: "진료 현황" },
+      { key: "chart",    icon: "stethoscope",       label: "진료 차트" },
       { key: "registry", icon: "users",            label: "환자 관리" },
       { key: "schedule", icon: "calendar",          label: "예약 관리" },
       { key: "payment",  icon: "credit-card",       label: "수납" },
+      { key: "forms",    icon: "file-signature",    label: "서식 발급" },
     ]},
     { label: "청구", items: [
       { key: "claim",    icon: "file-text",         label: "보험 청구" },
