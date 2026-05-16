@@ -273,7 +273,7 @@ function VisitCard({ visit }) {
                   <div style={{ flex: 1 }} />
                   <div style={{ display: "flex", gap: 5 }}>
                     {visit.actingOrders.map((o, i) => (
-                      <span key={i} style={{ fontSize: 10, color: "var(--text-muted)", background: "var(--stone-200)", borderRadius: "var(--radius-full)", padding: "1px 7px", fontFamily: "var(--font-sans)" }}>{o.type}</span>
+                      <span key={i} style={{ fontSize: 10, color: "var(--text-muted)", background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-full)", padding: "1px 7px", fontFamily: "var(--font-sans)" }}>{o.type}</span>
                     ))}
                     {visit.rxOrders.map((r, i) => (
                       <span key={i} style={{ fontSize: 10, color: "var(--text-brand)", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-full)", padding: "1px 7px", fontFamily: "var(--font-sans)" }}>{r.name}</span>
