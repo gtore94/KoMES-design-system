@@ -147,7 +147,7 @@ function ClaimSubmissionFlow({ items, type, summary, onClose, scenario }) {
           <div style={{ flex: 1 }}>
             <div style={{
               fontSize: 11, fontWeight: 600, letterSpacing: "0.08em",
-              color: "var(--brand-muted)", textTransform: "uppercase",
+              color: "var(--stone-300)", textTransform: "uppercase",
               fontFamily: "var(--font-sans)",
             }}>심평원 진료비 청구 · HIRA Claim API</div>
             <div style={{

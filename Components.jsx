@@ -185,7 +185,7 @@ function Sidebar({ activeScreen, onNavigate }) {
         <Avatar name="김" size={26} />
         {!collapsed && <>
           <div>
-            <div style={{ fontSize: 12, color: "var(--bg-raised)", fontWeight: 500, fontFamily: "var(--font-sans)" }}>김민준</div>
+            <div style={{ fontSize: 12, color: "var(--stone-50)", fontWeight: 500, fontFamily: "var(--font-sans)" }}>김민준</div>
             <div style={{ fontSize: 10, color: "var(--ink-300)", fontFamily: "var(--font-sans)" }}>원장</div>
           </div>
           <Icon name="chevrons-up-down" size={13} style={{ marginLeft: "auto", color: "var(--ink-300)" }} />
