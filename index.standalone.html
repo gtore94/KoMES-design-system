@@ -5967,17 +5967,17 @@ function HIAlertSection({ alerts, onPick }) {
   if (!alerts.length) return null;
   return (
     <div style={{
-      background: "var(--status-danger-bg)", border: "1px solid var(--cinnabar-200)",
+      background: "var(--status-danger-bg)", border: "1px solid var(--status-danger-border)",
       borderRadius: "var(--radius-lg)", overflow: "hidden",
     }}>
-      <div style={{ padding: "10px 16px", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid var(--cinnabar-200)" }}>
+      <div style={{ padding: "10px 16px", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid var(--status-danger-border)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <Icon name="alert-triangle" size={15} style={{ color: "var(--cinnabar-700)" }} />
-          <span style={{ fontSize: 13, fontWeight: 600, color: "var(--cinnabar-800)", fontFamily: "var(--font-sans)" }}>주의 필요 · {alerts.length}건</span>
+          <span style={{ fontSize: 13, fontWeight: 600, color: "var(--status-danger-text)", fontFamily: "var(--font-sans)" }}>주의 필요 · {alerts.length}건</span>
         </div>
         <span style={{ fontSize: 11, color: "var(--cinnabar-700)", fontFamily: "var(--font-sans)" }}>클릭 시 상세 패널 열기</span>
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 1, background: "var(--cinnabar-200)" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 1, background: "var(--status-danger-border)" }}>
         {alerts.map(a => {
           const st = herbStatus(a);
           const dExpiry = daysUntil(a.expiry);
@@ -7472,17 +7472,17 @@ function SPAlertSection({ alerts, onPick }) {
   if (!alerts.length) return null;
   return (
     <div style={{
-      background: "var(--status-danger-bg)", border: "1px solid var(--cinnabar-200)",
+      background: "var(--status-danger-bg)", border: "1px solid var(--status-danger-border)",
       borderRadius: "var(--radius-lg)", overflow: "hidden",
     }}>
-      <div style={{ padding: "10px 16px", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid var(--cinnabar-200)" }}>
+      <div style={{ padding: "10px 16px", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid var(--status-danger-border)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <Icon name="alert-triangle" size={15} style={{ color: "var(--cinnabar-700)" }} />
-          <span style={{ fontSize: 13, fontWeight: 600, color: "var(--cinnabar-800)", fontFamily: "var(--font-sans)" }}>주의 필요 · {alerts.length}건</span>
+          <span style={{ fontSize: 13, fontWeight: 600, color: "var(--status-danger-text)", fontFamily: "var(--font-sans)" }}>주의 필요 · {alerts.length}건</span>
         </div>
         <span style={{ fontSize: 11, color: "var(--cinnabar-700)", fontFamily: "var(--font-sans)" }}>클릭 시 상세 패널 열기</span>
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 1, background: "var(--cinnabar-200)" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 1, background: "var(--status-danger-border)" }}>
         {alerts.map(a => {
           const st = supStatus(a);
           const dExpiry = a.expiry ? daysUntil(a.expiry) : null;
