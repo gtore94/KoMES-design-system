@@ -152,7 +152,8 @@ function ClaimsTable({ type, items, selected, setSelected, excluded, setExcluded
             // numeric right-align (last few cols based on type)
             const numericIdx = type === "health" ? [7, 8, 9, 10] : type === "herbal" ? [7, 8, 9] : [8];
             const isNum = numericIdx.includes(i + 1);
-            return <span key={i} style={{ textAlign: isNum ? "right" : "left", display: "block" }}>{h}</span>;
+            const isLast = i === header.length - 2;
+            return <span key={i} style={{ textAlign: isLast ? "center" : isNum ? "right" : "left", display: "block" }}>{h}</span>;
           })}
         </div>
 
