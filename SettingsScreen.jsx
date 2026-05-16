@@ -193,6 +193,12 @@ const THEME_PREVIEWS = {
     line1: "#6B7E7B", line2: "#6B7E7B",
     pill: "rgba(74,124,111,0.18)", pillText: "#4A7C6F",
   },
+  navy: {
+    bg: "#EEF1F7", border: "#B3C0D7",
+    dot1: "#C4594B", dot2: "#C4974B", dot3: "#355A82",
+    line1: "#1E3252", line2: "#5878A3",
+    pill: "#D6DEEB", pillText: "#1E3252",
+  },
 };
 
 /* ────────────────────────────────────────────────────────────
@@ -344,7 +350,7 @@ function SettingsScreen() {
                   <div style={{ padding: "18px 22px 20px" }}>
                     <div style={{
                       display: "grid",
-                      gridTemplateColumns: "repeat(3, 1fr)",
+                      gridTemplateColumns: "repeat(4, 1fr)",
                       gap: 12,
                     }}>
                       <ThemeCard value="light" label="라이트" hint="기본 한지 톤"
@@ -353,6 +359,9 @@ function SettingsScreen() {
                       <ThemeCard value="dark" label="다크" hint="야간 진료·당직용"
                         active={theme === "dark"} onSelect={setTheme}
                         preview={THEME_PREVIEWS.dark} />
+                      <ThemeCard value="navy" label="네이비" hint="청색 브랜드 톤"
+                        active={theme === "navy"} onSelect={setTheme}
+                        preview={THEME_PREVIEWS.navy} />
                       <ThemeCard value="auto" label="시스템" hint="OS 설정을 따름"
                         active={theme === "auto"} onSelect={setTheme}
                         preview={THEME_PREVIEWS.auto} />
