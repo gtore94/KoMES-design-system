@@ -319,7 +319,7 @@ function ActionBar({ type, summary, selected, errorCount, onSubmitAll, onSubmitS
       padding: "12px 18px",
       background: "var(--bg-surface)",
       borderTop: "1px solid var(--border-subtle)",
-      boxShadow: "0 -2px 8px rgba(17, 30, 28, 0.04)",
+      boxShadow: "0 -2px 8px rgba(var(--ink-900-rgb), 0.04)",
       flexShrink: 0,
     }}>
       {/* Secondary records (건보/첩약만) */}
@@ -378,7 +378,7 @@ function ActionBar({ type, summary, selected, errorCount, onSubmitAll, onSubmitS
 
       <button onClick={onSubmitAll} style={{
         padding: "10px 22px", fontSize: 14, fontWeight: 600,
-        background: "var(--jade-500)", color: "#fff",
+        background: "var(--jade-500)", color: "var(--text-on-brand)",
         border: "none",
         borderRadius: "var(--radius-md)",
         cursor: "pointer", fontFamily: "var(--font-sans)",

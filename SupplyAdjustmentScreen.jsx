@@ -61,13 +61,13 @@ function SupplyAdjustmentScreen({ onClose, onSubmit }) {
     <div style={{ display: "flex", flexDirection: "column", height: "100%", background: "var(--bg-page)" }}>
       <div style={{
         background: "linear-gradient(90deg, var(--jade-800) 0%, var(--jade-700) 100%)",
-        color: "white", padding: "10px 24px",
+        color: "var(--text-on-brand)", padding: "10px 24px",
         display: "flex", alignItems: "center", gap: 12,
-        boxShadow: "0 2px 4px rgba(17,30,28,0.1)",
+        boxShadow: "0 2px 4px rgba(var(--ink-900-rgb), 0.1)",
       }}>
         <Icon name="clipboard-check" size={16} style={{ color: "var(--stone-300)" }} />
         <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.04em" }}>재고 실사 모드</div>
-        <div style={{ width: 1, height: 14, background: "rgba(255,255,255,0.2)" }}></div>
+        <div style={{ width: 1, height: 14, background: "var(--overlay-white-20)" }}></div>
         <div style={{ fontSize: 11, color: "var(--stone-300)" }}>소모품 · 의료·포장재·사무·청소 품목의 실사를 진행합니다</div>
         <div style={{ flex: 1 }}></div>
         <div style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--stone-300)" }}>

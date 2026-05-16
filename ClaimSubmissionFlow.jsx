@@ -134,12 +134,12 @@ function ClaimSubmissionFlow({ items, type, summary, onClose, scenario }) {
         <div style={{
           padding: "20px 28px",
           background: "linear-gradient(135deg, var(--jade-700), var(--jade-800))",
-          color: "#fff",
+          color: "var(--text-on-brand)",
           display: "flex", alignItems: "center", gap: 14,
         }}>
           <div style={{
             width: 42, height: 42, borderRadius: "var(--radius-md)",
-            background: "rgba(255,255,255,0.15)",
+            background: "var(--overlay-white-15)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
             <Icon name="send-horizonal" size={20} />
@@ -159,8 +159,8 @@ function ClaimSubmissionFlow({ items, type, summary, onClose, scenario }) {
           </div>
           <button onClick={() => onClose("cancel")} style={{
             width: 32, height: 32, borderRadius: "var(--radius-md)",
-            background: "rgba(255,255,255,0.1)", border: "none",
-            color: "rgba(255,255,255,0.8)", cursor: "pointer",
+            background: "var(--overlay-white-10)", border: "none",
+            color: "var(--overlay-white-80)", cursor: "pointer",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
             <Icon name="x" size={16} />
@@ -423,7 +423,7 @@ function PretestResults({ results }) {
             }}>
               <span style={{
                 fontFamily: "var(--font-mono)", fontSize: 10, fontWeight: 700,
-                color: "#fff", background: "var(--status-danger-text)",
+                color: "var(--text-on-brand)", background: "var(--status-danger-text)",
                 padding: "2px 6px", borderRadius: "var(--radius-sm)",
                 flexShrink: 0, marginTop: 1,
               }}>{e.code}</span>
@@ -454,7 +454,7 @@ const ftrBtnSecondary = {
 };
 const ftrBtnPrimary = {
   padding: "8px 16px", fontSize: 12, fontWeight: 600,
-  background: "var(--jade-500)", color: "#fff",
+  background: "var(--jade-500)", color: "var(--text-on-brand)",
   border: "none",
   borderRadius: "var(--radius-md)",
   cursor: "pointer", fontFamily: "var(--font-sans)",

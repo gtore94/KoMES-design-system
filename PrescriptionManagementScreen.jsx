@@ -3,11 +3,11 @@ const { useState: useStateRxM, useMemo: useMemoRxM } = React;
 
 // ── Workflow columns ────────────────────────────────────────────────
 const RX_COLUMNS = [
-  { key: "received",   label: "접수",     icon: "inbox",          color: "#5A6E8A", bg: "var(--board-appt-bg)",  border: "var(--board-appt-border)",  next: "dispensing" },
-  { key: "dispensing", label: "조제중",   icon: "flask-conical",  color: "#B5873E", bg: "var(--board-wait-bg)",  border: "var(--board-wait-border)",  next: ["pickup", "shipping"] },
-  { key: "pickup",     label: "픽업 대기", icon: "shopping-bag",  color: "#3A7065", bg: "var(--board-treat-bg)", border: "var(--board-treat-border)", next: "completed" },
-  { key: "shipping",   label: "배송중",   icon: "truck",          color: "#5A7EA0", bg: "var(--board-pay-bg)",   border: "var(--board-pay-border)",   next: "completed" },
-  { key: "completed",  label: "완료",     icon: "check-circle-2", color: "#6B8C7A", bg: "var(--bg-raised)",      border: "var(--border-subtle)",      next: null },
+  { key: "received",   label: "접수",     icon: "inbox",          color: "var(--accent-slate)", bg: "var(--board-appt-bg)",  border: "var(--board-appt-border)",  next: "dispensing" },
+  { key: "dispensing", label: "조제중",   icon: "flask-conical",  color: "var(--accent-bronze)", bg: "var(--board-wait-bg)",  border: "var(--board-wait-border)",  next: ["pickup", "shipping"] },
+  { key: "pickup",     label: "픽업 대기", icon: "shopping-bag",  color: "var(--jade-600)", bg: "var(--board-treat-bg)", border: "var(--board-treat-border)", next: "completed" },
+  { key: "shipping",   label: "배송중",   icon: "truck",          color: "var(--accent-marine)", bg: "var(--board-pay-bg)",   border: "var(--board-pay-border)",   next: "completed" },
+  { key: "completed",  label: "완료",     icon: "check-circle-2", color: "var(--brand)", bg: "var(--bg-raised)",      border: "var(--border-subtle)",      next: null },
 ];
 
 // ── Sample prescriptions ────────────────────────────────────────────

@@ -75,7 +75,7 @@ function PPChip({ active, onClick, children, count }) {
       padding: "5px 11px", borderRadius: 999,
       border: `1px solid ${active ? "var(--jade-500)" : "var(--border-subtle)"}`,
       background: active ? "var(--jade-500)" : "var(--bg-surface)",
-      color: active ? "white" : "var(--text-secondary)",
+      color: active ? "var(--text-on-brand)" : "var(--text-secondary)",
       fontSize: 11.5, fontWeight: active ? 600 : 500, cursor: "pointer",
       fontFamily: "var(--font-sans)", transition: "all 0.12s ease",
     }}>
@@ -84,8 +84,8 @@ function PPChip({ active, onClick, children, count }) {
         <span style={{
           fontSize: 10, fontWeight: 700, fontFamily: "var(--font-mono)",
           padding: "0 5px", borderRadius: 8,
-          background: active ? "rgba(255,255,255,0.22)" : "var(--bg-raised)",
-          color: active ? "white" : "var(--text-muted)",
+          background: active ? "var(--overlay-white-22)" : "var(--bg-raised)",
+          color: active ? "var(--text-on-brand)" : "var(--text-muted)",
         }}>{count}</span>
       )}
     </button>

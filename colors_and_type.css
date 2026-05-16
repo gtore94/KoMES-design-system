@@ -1,6 +1,7 @@
 /* ============================================================
    KoMES Design System — Colors & Typography
    AI-assisted EMR for Traditional Korean Medicine Clinics
+   Single source of truth for tokens (light + dark + color themes)
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -64,6 +65,42 @@
   --amber-200: #F0DFC0;
   --amber-100: #FAF2E4;
 
+  /* Navy — alternate brand palette */
+  --navy-900: #0E1A2E;
+  --navy-800: #16263F;
+  --navy-700: #1E3252;
+  --navy-600: #294569;
+  --navy-500: #355A82;
+  --navy-400: #5878A3;
+  --navy-300: #8298BF;
+  --navy-200: #B3C0D7;
+  --navy-100: #D6DEEB;
+  --navy-50:  #EEF1F7;
+
+  /* ============================================================
+     ACCENT PALETTE — categorical hues for stages, roles, relations
+     ============================================================ */
+  --accent-pine:    #5C8B7E;   /* 체침 / 자녀 / doctor */
+  --accent-slate:   #5A6E8A;   /* 복잡추나 / 부모 / pharmacist */
+  --accent-bronze:  #B5873E;   /* 지인소개 / therapist */
+  --accent-marine:  #6082AF;   /* shipping / cleaning supply */
+
+  /* ============================================================
+     RGB TRIPLETS — for rgba(var(--*-rgb), alpha) overlays
+     Theme overrides keep translucent surfaces in sync with brand swaps.
+     ============================================================ */
+  --white-rgb:         255, 255, 255;
+  --black-rgb:         0, 0, 0;
+  --ink-900-rgb:       17, 30, 28;
+  --brand-rgb:         74, 124, 111;        /* jade-500 */
+  --jade-400-rgb:      107, 158, 144;
+  --ink-400-rgb:       107, 126, 123;
+  --amber-500-rgb:     196, 151, 75;
+  --stone-700-rgb:     154, 142, 130;
+  --accent-pine-rgb:   92, 139, 126;
+  --accent-slate-rgb:  90, 110, 138;
+  --accent-marine-rgb: 96, 130, 175;
+
   /* ============================================================
      SEMANTIC COLOR TOKENS
      ============================================================ */
@@ -85,6 +122,11 @@
   --text-danger:    var(--cinnabar-600);
   --text-warning:   var(--amber-600);
 
+  /* Text on filled brand/accent surfaces — does NOT theme-flip */
+  --text-on-brand:  #FFFFFF;
+  --text-on-accent: #FFFFFF;
+  --text-on-fill:   #FFFFFF;
+
   /* Borders */
   --border-subtle:  var(--stone-300);
   --border-default: var(--stone-400);
@@ -98,29 +140,138 @@
   --brand-active:   var(--jade-700);
   --brand-subtle:   var(--jade-50);
   --brand-muted:    var(--jade-100);
+  --brand-tint:     rgba(var(--brand-rgb), 0.03);
 
   /* Status */
-  --status-success-bg:   var(--jade-50);
-  --status-success-text: var(--jade-700);
+  --status-success-bg:     var(--jade-50);
+  --status-success-text:   var(--jade-700);
   --status-success-border: var(--jade-200);
-  --status-warning-bg:   var(--amber-100);
-  --status-warning-text: var(--amber-700);
+  --status-warning-bg:     var(--amber-100);
+  --status-warning-text:   var(--amber-700);
   --status-warning-border: var(--amber-200);
-  --status-danger-bg:    var(--cinnabar-100);
-  --status-danger-text:  var(--cinnabar-700);
-  --status-danger-border: var(--cinnabar-200);
-  --status-neutral-bg:   var(--stone-100);
-  --status-neutral-text: var(--ink-600);
+  --status-danger-bg:      var(--cinnabar-100);
+  --status-danger-text:    var(--cinnabar-700);
+  --status-danger-border:  var(--cinnabar-200);
+  --status-neutral-bg:     var(--stone-100);
+  --status-neutral-text:   var(--ink-600);
   --status-neutral-border: var(--stone-300);
+
+  /* ============================================================
+     SURFACE-TIE TOKENS — derived translucent variants
+     Used for stage chips, kanban accents, today-highlights.
+     ============================================================ */
+  --accent-pine-bg:     rgba(var(--accent-pine-rgb), 0.14);
+  --accent-pine-border: rgba(var(--accent-pine-rgb), 0.34);
+  --accent-slate-bg:    rgba(var(--accent-slate-rgb), 0.12);
+  --accent-slate-border:rgba(var(--accent-slate-rgb), 0.32);
+  --accent-marine-bg:   rgba(var(--accent-marine-rgb), 0.12);
+  --accent-marine-border:rgba(var(--accent-marine-rgb), 0.30);
+  --jade-400-bg:        rgba(var(--jade-400-rgb), 0.14);
+  --jade-400-border:    rgba(var(--jade-400-rgb), 0.34);
+  --amber-500-bg:       rgba(var(--amber-500-rgb), 0.12);
+  --amber-500-border:   rgba(var(--amber-500-rgb), 0.32);
+  --ink-400-bg:         rgba(var(--ink-400-rgb), 0.14);
+  --ink-400-border:     rgba(var(--ink-400-rgb), 0.32);
+  --stone-700-bg:       rgba(var(--stone-700-rgb), 0.14);
+  --stone-700-border:   rgba(var(--stone-700-rgb), 0.32);
+
+  /* Overlays — translucent white over filled dark/brand surfaces */
+  --overlay-white-08: rgba(255, 255, 255, 0.08);
+  --overlay-white-10: rgba(255, 255, 255, 0.10);
+  --overlay-white-12: rgba(255, 255, 255, 0.12);
+  --overlay-white-15: rgba(255, 255, 255, 0.15);
+  --overlay-white-20: rgba(255, 255, 255, 0.20);
+  --overlay-white-22: rgba(255, 255, 255, 0.22);
+  --overlay-white-60: rgba(255, 255, 255, 0.60);
+  --overlay-white-80: rgba(255, 255, 255, 0.80);
+  --overlay-white-85: rgba(255, 255, 255, 0.85);
+  --overlay-white-95: rgba(255, 255, 255, 0.95);
+
+  /* Scrims — translucent black */
+  --scrim-black-03: rgba(0, 0, 0, 0.03);
+  --scrim-black-04: rgba(0, 0, 0, 0.04);
+  --scrim-black-08: rgba(0, 0, 0, 0.08);
+  --scrim-black-15: rgba(0, 0, 0, 0.15);
+  --scrim-black-20: rgba(0, 0, 0, 0.20);
+
+  /* ============================================================
+     SIDEBAR / RAIL
+     ============================================================ */
+  --sidebar-bg:          var(--ink-800);
+  --sidebar-active:      var(--jade-600);
+  --rail-bg:             var(--bg-surface);
+  --rail-surface:        var(--bg-surface);
+  --rail-text:           var(--text-primary);
+  --rail-text-secondary: var(--text-secondary);
+  --rail-text-muted:     var(--text-muted);
+  --rail-border:         var(--border-subtle);
+  --rail-stripe:         var(--stone-100);
+  --rail-divider:        var(--stone-200);
+
+  /* ============================================================
+     KANBAN BOARD — column backgrounds
+     ============================================================ */
+  --board-appt-bg:   #EEF1F6;   --board-appt-border:  #CFD7E3;
+  --board-wait-bg:   #FAF2E4;   --board-wait-border:  #F0DFC0;
+  --board-treat-bg:  #EAF4F1;   --board-treat-border: #B3D8D1;
+  --board-pay-bg:    #F5F0E8;   --board-pay-border:   #E4DDD4;
+
+  /* ============================================================
+     APPOINTMENT DOC CARDS
+     ============================================================ */
+  --doc-d1-bg: #EEF8F6;  --doc-d1-border: #B3D8D1;
+  --doc-d2-bg: #FAF2E4;  --doc-d2-border: #F0DFC0;
+  --doc-d3-bg: #EEF1F6;  --doc-d3-border: #CFD7E3;
+
+  /* ============================================================
+     CLAIM PILLS
+     ============================================================ */
+  --claim-herbal-pill: #DBA53D;
+  --claim-auto-pill:   var(--cinnabar-500);
+
+  /* ============================================================
+     A4 FORM / PRINT PREVIEW
+     Form colors stay light-mode values; dark mode dims via
+     `.a4-paper { filter: brightness(0.82) }` rather than overrides.
+     ============================================================ */
+  --form-table-header-bg:    #F2EFE8;
+  --form-border:             #111111;
+  --form-border-soft:        #CCCCCC;
+  --form-border-divider:     #BBBBBB;
+  --form-border-light:       #E8E8E4;
+  --form-cell-alt-bg:        #FAFAF8;
+  --form-total-row-bg:       #E4EDE4;
+  --form-rule:               #777777;
+  --form-seal:               var(--cinnabar-700);
+  --form-payment-bg:         #F0F5F0;
+  --form-payment-border:     #3A6B50;
+  --form-payment-text:       #1C5C3A;
+  --form-covered-bg:         #EBF5EB;
+  --form-covered-text:       #1A6B2A;
+  --form-covered-border:     #C2E0C2;
+  --form-covered-total-text: #1A4A2A;
+  --form-noncovered-bg:       #FFF5E6;
+  --form-noncovered-text:     #8B4A00;
+  --form-noncovered-border:   #F0D0A0;
+  --form-noncovered-total-text: #7A3A00;
+
+  /* ============================================================
+     PATIENT INSTRUCTION (printout / chat-bubble preview)
+     ============================================================ */
+  --instruction-banner-bg:   #9BBBD4;
+  --instruction-banner-text: #191919;
+  --instruction-paper-text:  #333333;
+  --instruction-paper-muted: #888888;
 
   /* ============================================================
      SHADOWS & ELEVATION
      ============================================================ */
-  --shadow-sm:  0 1px 2px rgba(17, 30, 28, 0.06), 0 1px 4px rgba(17, 30, 28, 0.04);
-  --shadow-md:  0 2px 8px rgba(17, 30, 28, 0.08), 0 1px 3px rgba(17, 30, 28, 0.05);
-  --shadow-lg:  0 4px 16px rgba(17, 30, 28, 0.10), 0 2px 6px rgba(17, 30, 28, 0.06);
-  --shadow-xl:  0 8px 32px rgba(17, 30, 28, 0.12), 0 4px 12px rgba(17, 30, 28, 0.07);
+  --shadow-sm:    0 1px 2px rgba(17, 30, 28, 0.06), 0 1px 4px rgba(17, 30, 28, 0.04);
+  --shadow-md:    0 2px 8px rgba(17, 30, 28, 0.08), 0 1px 3px rgba(17, 30, 28, 0.05);
+  --shadow-lg:    0 4px 16px rgba(17, 30, 28, 0.10), 0 2px 6px rgba(17, 30, 28, 0.06);
+  --shadow-xl:    0 8px 32px rgba(17, 30, 28, 0.12), 0 4px 12px rgba(17, 30, 28, 0.07);
   --shadow-inner: inset 0 1px 3px rgba(17, 30, 28, 0.08);
+  --shadow-paper: 0 12px 40px rgba(17, 30, 28, 0.15), 0 2px 8px rgba(17, 30, 28, 0.08);
 
   /* ============================================================
      BORDER RADIUS
@@ -179,19 +330,222 @@
   /* ============================================================
      TYPOGRAPHY — Weights
      ============================================================ */
-  --weight-light:   300;
-  --weight-regular: 400;
-  --weight-medium:  500;
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
   --weight-semibold: 600;
-  --weight-bold:    700;
+  --weight-bold:     700;
 
   /* ============================================================
      TRANSITIONS
      ============================================================ */
-  --transition-fast:   all 0.12s ease;
-  --transition-base:   all 0.20s ease;
-  --transition-slow:   all 0.35s ease;
-  --easing-out-quart:  cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-fast:  all 0.12s ease;
+  --transition-base:  all 0.20s ease;
+  --transition-slow:  all 0.35s ease;
+  --easing-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* ============================================================
+   DARK THEME OVERRIDES
+   ============================================================ */
+[data-theme="dark"] {
+  --bg-page:    #0B1413;
+  --bg-surface: #131F1D;
+  --bg-raised:  #1A2826;
+  --bg-sunken:  #070D0C;
+  --bg-overlay: rgba(0, 0, 0, 0.62);
+
+  --text-primary:   var(--ink-50);
+  --text-secondary: var(--ink-200);
+  --text-muted:     var(--ink-300);
+  --text-disabled:  var(--ink-500);
+  --text-inverse:   var(--ink-800);
+  --text-brand:     var(--jade-300);
+  --text-danger:    var(--cinnabar-400);
+  --text-warning:   var(--amber-400);
+
+  --border-subtle:  #1F302D;
+  --border-default: var(--ink-700);
+  --border-strong:  var(--ink-600);
+  --border-brand:   var(--jade-500);
+  --border-danger:  var(--cinnabar-600);
+
+  --brand:          var(--jade-400);
+  --brand-hover:    var(--jade-300);
+  --brand-active:   var(--jade-200);
+  --brand-subtle:   rgba(var(--brand-rgb), 0.12);
+  --brand-muted:    rgba(var(--brand-rgb), 0.22);
+  --brand-rgb:      107, 158, 144;        /* jade-400 in dark */
+
+  --status-success-bg:     rgba(var(--brand-rgb), 0.14);
+  --status-success-text:   var(--jade-300);
+  --status-success-border: rgba(var(--brand-rgb), 0.35);
+  --status-warning-bg:     rgba(var(--amber-500-rgb), 0.12);
+  --status-warning-text:   var(--amber-400);
+  --status-warning-border: rgba(var(--amber-500-rgb), 0.30);
+  --status-danger-bg:      rgba(196, 89, 75, 0.12);
+  --status-danger-text:    var(--cinnabar-400);
+  --status-danger-border:  rgba(196, 89, 75, 0.30);
+  --status-neutral-bg:     #1A2826;
+  --status-neutral-text:   var(--ink-200);
+  --status-neutral-border: var(--ink-700);
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.40), 0 1px 4px rgba(0,0,0,0.25);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.28);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,0.50), 0 2px 6px rgba(0,0,0,0.30);
+  --shadow-xl: 0 8px 32px rgba(0,0,0,0.55), 0 4px 12px rgba(0,0,0,0.32);
+
+  --board-appt-bg:   #141C2B;  --board-appt-border:  #1E2D45;
+  --board-wait-bg:   #1D1810;  --board-wait-border:  #2D2418;
+  --board-treat-bg:  #101E1C;  --board-treat-border: #1A3330;
+  --board-pay-bg:    #1A1510;  --board-pay-border:   #2A2218;
+
+  --doc-d1-bg: #101E1C;  --doc-d1-border: #1A3330;
+  --doc-d2-bg: #1D1810;  --doc-d2-border: #2D2418;
+  --doc-d3-bg: #141C2B;  --doc-d3-border: #1E2D45;
+
+  --claim-herbal-pill: var(--amber-700);
+  --claim-auto-pill:   #7A3835;
+}
+
+/* ============================================================
+   NAVY COLOR — jade scale → navy (light mode)
+   ============================================================ */
+[data-color="navy"] {
+  --sidebar-bg:          var(--navy-800);
+  --sidebar-active:      var(--navy-400);
+  --rail-bg:             #FFFFFF;
+  --rail-surface:        var(--navy-50);
+  --rail-text:           var(--navy-800);
+  --rail-text-secondary: var(--navy-500);
+  --rail-text-muted:     var(--navy-300);
+  --rail-border:         var(--navy-100);
+
+  --jade-900: #0E1A2E; --jade-800: #1C3560; --jade-700: #234478; --jade-600: #294569;
+  --jade-500: #355A82; --jade-400: #5878A3; --jade-300: #8298BF; --jade-200: #B3C0D7;
+  --jade-100: #D6DEEB; --jade-50:  #EEF1F7;
+
+  --brand:        #355A82;
+  --brand-hover:  #294569;
+  --brand-active: #1E3252;
+  --brand-subtle: #EEF1F7;
+  --brand-muted:  #D6DEEB;
+  --brand-rgb:    53, 90, 130;
+  --text-brand:   #1E3252;
+  --border-brand: #355A82;
+
+  --status-success-bg:     #EEF1F7;
+  --status-success-text:   #1E3252;
+  --status-success-border: #B3C0D7;
+
+  /* board column backgrounds — navy-tinted instead of jade/amber-tinted */
+  --board-appt-bg:   #EEF1F7;  --board-appt-border:  #CDD5E8;
+  --board-treat-bg:  #EBF0F8;  --board-treat-border: #C3CEDF;
+
+  /* doc appointment card backgrounds — navy-tinted for d1 */
+  --doc-d1-bg:  #EEF1F7;  --doc-d1-border: #CDD5E8;
+}
+
+/* ============================================================
+   NAVY COLOR — dark mode override
+   ============================================================ */
+[data-theme="dark"][data-color="navy"] {
+  --bg-page:    #080F1C;
+  --bg-surface: #0E1A2E;
+  --bg-raised:  #16263F;
+  --bg-sunken:  #040810;
+  --border-subtle:  #1A2D45;
+
+  /* board columns: restore dark values (navy overrode light) */
+  --board-appt-bg:   #141C2B;  --board-appt-border:  #1E2D45;
+  --board-treat-bg:  #101E1C;  --board-treat-border: #1A3330;
+
+  /* doc-d1 card: restore dark value */
+  --doc-d1-bg: #101E1C;  --doc-d1-border: #1A3330;
+
+  /* dark rail for dark navy mode */
+  --rail-bg:             #0E1A2E;
+  --rail-surface:        #16263F;
+  --rail-text:           var(--navy-50);
+  --rail-text-secondary: var(--navy-200);
+  --rail-text-muted:     var(--navy-300);
+  --rail-border:         #16263F;
+  --rail-stripe:         rgba(255,255,255,0.04);
+  --rail-divider:        rgba(255,255,255,0.07);
+
+  /* bump jade scale so gradients stand out from bg-raised */
+  --jade-900: #0F1F38;
+  --jade-800: #1E3C6A;
+  --jade-700: #265080;
+
+  --brand:        #5878A3;
+  --brand-hover:  #8298BF;
+  --brand-active: #B3C0D7;
+  --brand-subtle: rgba(53, 90, 130, 0.15);
+  --brand-muted:  rgba(53, 90, 130, 0.28);
+  --brand-rgb:    88, 120, 163;
+  --text-brand:   #8298BF;
+  --border-brand: #355A82;
+
+  --status-success-bg:     rgba(53, 90, 130, 0.14);
+  --status-success-text:   #8298BF;
+  --status-success-border: rgba(53, 90, 130, 0.35);
+}
+
+/* ============================================================
+   A4 PAPER PREVIEW — always renders in light-mode tokens
+   so the preview looks like real paper, regardless of dark mode.
+   Scoped CSS variable overrides cascade to every child element
+   that uses these semantic tokens.
+   ============================================================ */
+.a4-paper {
+  --bg-page:        var(--stone-50);
+  --bg-surface:     #FFFFFF;
+  --bg-raised:      var(--stone-100);
+  --bg-sunken:      var(--stone-200);
+  --text-primary:   var(--ink-800);
+  --text-secondary: var(--ink-500);
+  --text-muted:     var(--ink-300);
+  --text-disabled:  var(--ink-200);
+  --text-brand:     var(--jade-700);
+  --text-danger:    var(--cinnabar-600);
+  --text-warning:   var(--amber-600);
+  --border-subtle:  var(--stone-300);
+  --border-default: var(--stone-400);
+  --border-strong:  var(--ink-200);
+  --border-brand:   var(--jade-500);
+}
+
+[data-theme="dark"] .a4-paper {
+  filter: brightness(0.82);
+}
+
+/* ============================================================
+   COLOR-PREVIEW SCOPES — keep each preview swatch in its
+   own canonical palette regardless of the active color theme.
+   ============================================================ */
+.color-preview-jade {
+  --jade-900: #1A3C34;  --jade-800: #2A5548;  --jade-700: #2E5C52;
+  --jade-600: #3A7065;  --jade-500: #4A7C6F;  --jade-400: #6B9E90;
+  --jade-300: #8DBFB3;  --jade-200: #B3D8D1;  --jade-100: #D4EDE9;
+  --jade-50:  #EEF8F6;
+  --brand:        var(--jade-500);
+  --brand-hover:  var(--jade-600);
+  --brand-active: var(--jade-700);
+  --brand-subtle: var(--jade-50);
+  --brand-muted:  var(--jade-100);
+  --text-brand:   var(--jade-700);
+  --border-brand: var(--jade-500);
+}
+
+/* ============================================================
+   MOTION REDUCTION
+   ============================================================ */
+[data-reduce-motion="true"] *,
+[data-reduce-motion="true"] *::before,
+[data-reduce-motion="true"] *::after {
+  animation-duration: 0.001ms !important;
+  transition-duration: 0.001ms !important;
 }
 
 /* ============================================================
@@ -303,7 +657,8 @@
 /* ============================================================
    BASE RESET
    ============================================================ */
-*, *::before, *::after { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, #root { height: 100%; }
 
 body {
   font-family: var(--font-sans);

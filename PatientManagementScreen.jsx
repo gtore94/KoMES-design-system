@@ -25,15 +25,15 @@ const PATIENT_MASTER = [
 const PATIENT_BY_ID = PATIENT_MASTER.reduce((a, p) => (a[p.id] = p, a), {});
 
 const RELATION_TYPES = [
-  { key: "배우자",   icon: "heart",    color: "#C4594B" },
-  { key: "부모",     icon: "user",     color: "#5A6E8A" },
-  { key: "자녀",     icon: "smile",    color: "#5C8B7E" },
-  { key: "형제자매", icon: "users",    color: "#6B9E90" },
-  { key: "친구",     icon: "user-plus", color: "#9A8E82" },
-  { key: "지인",     icon: "user-plus", color: "#9A8E82" },
-  { key: "지인 소개", icon: "share-2", color: "#B5873E" },
-  { key: "직장 동료", icon: "briefcase", color: "#5A6E8A" },
-  { key: "기타",     icon: "circle",   color: "#9A8E82" },
+  { key: "배우자",   icon: "heart",    color: "var(--cinnabar-600)" },
+  { key: "부모",     icon: "user",     color: "var(--accent-slate)" },
+  { key: "자녀",     icon: "smile",    color: "var(--accent-pine)" },
+  { key: "형제자매", icon: "users",    color: "var(--jade-400)" },
+  { key: "친구",     icon: "user-plus", color: "var(--stone-700)" },
+  { key: "지인",     icon: "user-plus", color: "var(--stone-700)" },
+  { key: "지인 소개", icon: "share-2", color: "var(--accent-bronze)" },
+  { key: "직장 동료", icon: "briefcase", color: "var(--accent-slate)" },
+  { key: "기타",     icon: "circle",   color: "var(--stone-700)" },
 ];
 
 const TAG_COLORS = {
@@ -383,7 +383,7 @@ function PatientDetailPanel({ patient, onClose, onSelectPatient, onOpenChart, al
         {/* Action */}
         <button onClick={() => onOpenChart(patient)} style={{
           width: "100%", marginTop: 12, padding: "8px 12px",
-          background: "var(--jade-500)", color: "#fff",
+          background: "var(--jade-500)", color: "var(--text-on-brand)",
           border: "none", borderRadius: "var(--radius-md)",
           fontSize: 13, fontWeight: 600, cursor: "pointer",
           fontFamily: "var(--font-sans)",

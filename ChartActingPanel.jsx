@@ -26,18 +26,18 @@ const DIAGNOSIS_CATALOG = [
 // phase: 1=급성기(0–7일), 2=아급성기(8–28일), 3=만성기(29일+)
 // allowedPhases: 자보 환자에서 청구 가능한 경과 단계
 const ACTING_ORDER_CATALOG = [
-  { code: "40020", key: "경혈 침술 1부위",        short: "침-1",    icon: "zap",         color: "#5C8B7E", allowedPhases: [1,2,3], default: true,  duration: 15, fee: 4920 },
-  { code: "40021", key: "경혈 침술 2부위",        short: "침-2",    icon: "zap",         color: "#5C8B7E", allowedPhases: [1,2,3], default: true,  duration: 15, fee: 6210 },
-  { code: "40022", key: "경혈 침술 3부위",        short: "침-3",    icon: "zap",         color: "#5C8B7E", allowedPhases: [2,3],   default: false, duration: 20, autoOnly: true, note: "자보 한정", fee: 7480 },
-  { code: "40080", key: "침전기 자극술",          short: "전침",    icon: "activity",    color: "#6B9E90", allowedPhases: [1,2,3], default: false, duration: 15, fee: 2860 },
-  { code: "40090", key: "직접구",                 short: "직접구",  icon: "flame",       color: "#B47A28", allowedPhases: [1,2,3], default: false, duration: 10, fee: 1830 },
-  { code: "40091", key: "간접구",                 short: "간접구",  icon: "flame",       color: "#C4974B", allowedPhases: [1,2,3], default: false, duration: 10, fee: 2200 },
-  { code: "40095", key: "기기구",                 short: "기기구",  icon: "thermometer", color: "#D4756A", allowedPhases: [1,2,3], default: false, duration: 10, fee: 2750 },
-  { code: "40300", key: "건식부항(유관법)",       short: "건부항",  icon: "circle-dot",  color: "#C4594B", allowedPhases: [1,2,3], default: false, duration: 10, fee: 5530 },
-  { code: "40310", key: "습식부항(자락관법)",     short: "습부항",  icon: "droplets",    color: "#D4756A", allowedPhases: [1,2],   default: false, duration: 10, note: "급성·아급성기", fee: 6840 },
-  { code: "40320", key: "약침술",                 short: "약침",    icon: "syringe",     color: "#4A7C6F", allowedPhases: [1,2,3], default: false, duration: 10, fee: 11540 },
-  { code: "40400", key: "추나요법(단순)",         short: "추나-단", icon: "hand",        color: "#6B7E7B", allowedPhases: [2,3],   default: false, duration: 15, note: "1주 이후 권장", fee: 14750 },
-  { code: "40401", key: "추나요법(복잡)",         short: "추나-복", icon: "hands",       color: "#5A6E8A", allowedPhases: [2,3],   default: false, duration: 30, fee: 32100 },
+  { code: "40020", key: "경혈 침술 1부위",        short: "침-1",    icon: "zap",         color: "var(--accent-pine)", allowedPhases: [1,2,3], default: true,  duration: 15, fee: 4920 },
+  { code: "40021", key: "경혈 침술 2부위",        short: "침-2",    icon: "zap",         color: "var(--accent-pine)", allowedPhases: [1,2,3], default: true,  duration: 15, fee: 6210 },
+  { code: "40022", key: "경혈 침술 3부위",        short: "침-3",    icon: "zap",         color: "var(--accent-pine)", allowedPhases: [2,3],   default: false, duration: 20, autoOnly: true, note: "자보 한정", fee: 7480 },
+  { code: "40080", key: "침전기 자극술",          short: "전침",    icon: "activity",    color: "var(--jade-400)", allowedPhases: [1,2,3], default: false, duration: 15, fee: 2860 },
+  { code: "40090", key: "직접구",                 short: "직접구",  icon: "flame",       color: "var(--amber-600)", allowedPhases: [1,2,3], default: false, duration: 10, fee: 1830 },
+  { code: "40091", key: "간접구",                 short: "간접구",  icon: "flame",       color: "var(--amber-500)", allowedPhases: [1,2,3], default: false, duration: 10, fee: 2200 },
+  { code: "40095", key: "기기구",                 short: "기기구",  icon: "thermometer", color: "var(--cinnabar-500)", allowedPhases: [1,2,3], default: false, duration: 10, fee: 2750 },
+  { code: "40300", key: "건식부항(유관법)",       short: "건부항",  icon: "circle-dot",  color: "var(--cinnabar-600)", allowedPhases: [1,2,3], default: false, duration: 10, fee: 5530 },
+  { code: "40310", key: "습식부항(자락관법)",     short: "습부항",  icon: "droplets",    color: "var(--cinnabar-500)", allowedPhases: [1,2],   default: false, duration: 10, note: "급성·아급성기", fee: 6840 },
+  { code: "40320", key: "약침술",                 short: "약침",    icon: "syringe",     color: "var(--brand)", allowedPhases: [1,2,3], default: false, duration: 10, fee: 11540 },
+  { code: "40400", key: "추나요법(단순)",         short: "추나-단", icon: "hand",        color: "var(--ink-400)", allowedPhases: [2,3],   default: false, duration: 15, note: "1주 이후 권장", fee: 14750 },
+  { code: "40401", key: "추나요법(복잡)",         short: "추나-복", icon: "hands",       color: "var(--accent-slate)", allowedPhases: [2,3],   default: false, duration: 30, fee: 32100 },
 ];
 
 // ── AI 자동완성 스니펫 (의사 작성 패턴 기반) ─────────────────────
@@ -104,7 +104,7 @@ function AutoInsuranceBar({ injuryDate, today = new Date(), chunaUsed = 7, herbD
       <div style={{ display: "flex", alignItems: "center", gap: 10, flexShrink: 0 }}>
         <div style={{
           width: 36, height: 36, borderRadius: "var(--radius-md)",
-          background: "rgba(255,255,255,0.1)",
+          background: "var(--overlay-white-10)",
           display: "flex", alignItems: "center", justifyContent: "center",
         }}>
           <Icon name="car" size={18} style={{ color: "var(--stone-50)" }} />
@@ -135,7 +135,7 @@ function AutoInsuranceBar({ injuryDate, today = new Date(), chunaUsed = 7, herbD
       </div>
 
       {/* divider */}
-      <div style={{ width: 1, background: "rgba(255,255,255,0.12)", flexShrink: 0 }} />
+      <div style={{ width: 1, background: "var(--overlay-white-12)", flexShrink: 0 }} />
 
       {/* RIGHT: 사용 한도 progress bars */}
       <div style={{ flex: 1, display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px 18px", alignItems: "center", minWidth: 0 }}>
@@ -204,7 +204,7 @@ function UsageBar({ icon, label, used, max, unit, pct, warn, hint }) {
           <span style={{ fontSize: 10, color: "var(--stone-300)", fontWeight: 400, marginLeft: 2 }}>{unit}</span>
         </span>
       </div>
-      <div style={{ position: "relative", height: 6, background: "rgba(255,255,255,0.12)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", overflow: "hidden" }}>
+      <div style={{ position: "relative", height: 6, background: "var(--overlay-white-12)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", overflow: "hidden" }}>
         <div style={{
           width: `${pct}%`, height: "100%",
           background: barColor,
@@ -275,7 +275,7 @@ function DiagnosisSection({ initialDx = [] }) {
             }}>
               <span style={{
                 fontSize: 9, fontWeight: 700, padding: "2px 6px",
-                color: d.primary ? "#fff" : "var(--text-muted)",
+                color: d.primary ? "var(--text-on-brand)" : "var(--text-muted)",
                 background: d.primary ? "var(--jade-500)" : "var(--bg-raised)",
                 borderRadius: "var(--radius-sm)", letterSpacing: "0.04em",
                 fontFamily: "var(--font-sans)",
@@ -500,7 +500,7 @@ function ActingOrderPanel({ injuryDate, today = new Date() }) {
                 display: "flex", alignItems: "center", justifyContent: "center",
                 flexShrink: 0, cursor: "pointer",
               }}>
-                {o.done && <Icon name="check" size={10} style={{ color: "white" }} />}
+                {o.done && <Icon name="check" size={10} style={{ color: "var(--text-on-brand)" }} />}
               </div>
               <span style={{ fontSize: 9, fontWeight: 600, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{cat.code}</span>
               <span style={{ fontSize: 11, fontWeight: 700, color: cat.color, background: `${cat.color}18`, padding: "2px 7px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)", flexShrink: 0 }}>
@@ -675,7 +675,7 @@ function ActingBillingPanel({ orders = null, insurance = "건강보험" }) {
 
       <button style={{
         width: "100%", marginTop: 10, padding: "8px 12px",
-        background: "var(--jade-500)", color: "#fff", border: "none",
+        background: "var(--jade-500)", color: "var(--text-on-brand)", border: "none",
         borderRadius: "var(--radius-md)", fontSize: 12, fontWeight: 600,
         cursor: "pointer", fontFamily: "var(--font-sans)",
         display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 6,
@@ -751,7 +751,7 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
               background: it.done ? "var(--jade-400)" : "transparent",
               display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer",
             }}>
-              {it.done && <Icon name="check" size={9} style={{ color: "white" }} />}
+              {it.done && <Icon name="check" size={9} style={{ color: "var(--text-on-brand)" }} />}
             </div>
             <span style={{ fontSize: 9, fontWeight: 700, color: "var(--text-muted)", fontFamily: "var(--font-mono)", flexShrink: 0 }}>{it.code}</span>
             <span style={{ fontSize: 11, fontWeight: 600, color: it.color, background: `${it.color}18`, padding: "1px 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)", flexShrink: 0 }}>
@@ -882,7 +882,7 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
         </button>
         <button style={{
           flex: 1.4, padding: "8px 10px",
-          background: "var(--jade-500)", color: "#fff", border: "none",
+          background: "var(--jade-500)", color: "var(--text-on-brand)", border: "none",
           borderRadius: "var(--radius-md)", fontSize: 12, fontWeight: 600,
           cursor: "pointer", fontFamily: "var(--font-sans)",
           display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 5,

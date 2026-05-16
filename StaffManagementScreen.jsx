@@ -233,7 +233,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
 
         {/* Actions */}
         <div style={{ display: "flex", gap: 6, marginTop: 12 }}>
-          <button onClick={() => onEdit && onEdit(staff)} style={{ flex: 1, padding: "7px 10px", background: "var(--jade-500)", color: "#fff", border: "none", borderRadius: "var(--radius-md)", fontSize: 12, fontWeight: 600, cursor: "pointer", fontFamily: "var(--font-sans)", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 5 }}>
+          <button onClick={() => onEdit && onEdit(staff)} style={{ flex: 1, padding: "7px 10px", background: "var(--jade-500)", color: "var(--text-on-brand)", border: "none", borderRadius: "var(--radius-md)", fontSize: 12, fontWeight: 600, cursor: "pointer", fontFamily: "var(--font-sans)", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 5 }}>
             <Icon name="pencil" size={12} />정보 수정
           </button>
           <button style={{ padding: "7px 10px", background: "var(--bg-surface)", color: "var(--text-primary)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-md)", fontSize: 12, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-sans)", display: "inline-flex", alignItems: "center", gap: 5 }}>
@@ -540,8 +540,8 @@ function Toggle({ on, onChange }) {
     }}>
       <span style={{
         position: "absolute", top: 2, left: val ? 16 : 2,
-        width: 14, height: 14, borderRadius: "50%", background: "#fff",
-        boxShadow: "0 1px 2px rgba(0,0,0,0.2)", transition: "left 0.12s",
+        width: 14, height: 14, borderRadius: "50%", background: "var(--text-on-brand)",
+        boxShadow: "0 1px 2px var(--scrim-black-20)", transition: "left 0.12s",
       }} />
     </button>
   );

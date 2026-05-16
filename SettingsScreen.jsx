@@ -121,7 +121,7 @@ function ThemeCard({ value, label, hint, active, onSelect, preview }) {
         minWidth: 0,
       }}>
       {/* Mini preview */}
-      <div style={{
+      <div className={preview.className} style={{
         height: 100, borderRadius: "var(--radius-md)",
         background: preview.bg,
         border: `1px solid ${preview.border}`,
@@ -183,38 +183,39 @@ function ThemeCard({ value, label, hint, active, onSelect, preview }) {
 
 const THEME_PREVIEWS = {
   light: {
-    bg: "#FDFAF5", border: "#E4DDD4",
-    dot1: "#C4594B", dot2: "#C4974B", dot3: "#4A7C6F",
-    line1: "#2A3C3A", line2: "#8A9E9A",
-    pill: "#D4EDE9", pillText: "#2E5C52",
+    bg: "var(--stone-50)", border: "var(--border-subtle)",
+    dot1: "var(--cinnabar-600)", dot2: "var(--amber-500)", dot3: "var(--brand)",
+    line1: "var(--ink-700)", line2: "var(--ink-300)",
+    pill: "var(--jade-100)", pillText: "var(--text-brand)",
   },
   dark: {
-    bg: "#0B1413", border: "#2A3C3A",
-    dot1: "#E09690", dot2: "#D4AE78", dot3: "#8DBFB3",
-    line1: "#EEF4F3", line2: "#6B7E7B",
-    pill: "rgba(74,124,111,0.18)", pillText: "#8DBFB3",
+    bg: "var(--ink-900)", border: "var(--ink-700)",
+    dot1: "var(--cinnabar-400)", dot2: "var(--amber-400)", dot3: "var(--jade-300)",
+    line1: "var(--ink-50)", line2: "var(--ink-400)",
+    pill: "var(--brand-muted)", pillText: "var(--jade-300)",
   },
   auto: {
-    bg: "linear-gradient(120deg, #FDFAF5 0%, #FDFAF5 48%, #0B1413 52%, #0B1413 100%)",
-    border: "#8A9E9A",
-    dot1: "#C4594B", dot2: "#C4974B", dot3: "#8DBFB3",
-    line1: "#6B7E7B", line2: "#6B7E7B",
-    pill: "rgba(74,124,111,0.18)", pillText: "#4A7C6F",
+    bg: "linear-gradient(120deg, var(--stone-50) 0%, var(--stone-50) 48%, var(--ink-900) 52%, var(--ink-900) 100%)",
+    border: "var(--ink-300)",
+    dot1: "var(--cinnabar-600)", dot2: "var(--amber-500)", dot3: "var(--jade-300)",
+    line1: "var(--ink-400)", line2: "var(--ink-400)",
+    pill: "var(--brand-muted)", pillText: "var(--brand)",
   },
 };
 
 const COLOR_PREVIEWS = {
   jade: {
-    bg: "#D4EDE9", border: "#9ECEC5",
-    dot1: "#2E5C52", dot2: "#4A7C6F", dot3: "#B5D9D3",
-    line1: "#2E5C52", line2: "#4A7C6F",
-    pill: "#4A7C6F", pillText: "#FDFAF5",
+    className: "color-preview-jade",
+    bg: "var(--jade-100)", border: "var(--jade-300)",
+    dot1: "var(--text-brand)", dot2: "var(--brand)", dot3: "var(--jade-200)",
+    line1: "var(--text-brand)", line2: "var(--brand)",
+    pill: "var(--brand)", pillText: "var(--stone-50)",
   },
   navy: {
-    bg: "#D6DEEB", border: "#8298BF",
-    dot1: "#1E3252", dot2: "#355A82", dot3: "#8298BF",
-    line1: "#1E3252", line2: "#5878A3",
-    pill: "#355A82", pillText: "#EEF1F7",
+    bg: "var(--navy-100)", border: "var(--navy-300)",
+    dot1: "var(--navy-700)", dot2: "var(--navy-500)", dot3: "var(--navy-300)",
+    line1: "var(--navy-700)", line2: "var(--navy-400)",
+    pill: "var(--navy-500)", pillText: "var(--navy-50)",
   },
 };
 
@@ -238,8 +239,8 @@ function Toggle({ checked, onChange, label }) {
         position: "absolute", top: 2,
         left: checked ? 18 : 2,
         width: 18, height: 18, borderRadius: "50%",
-        background: "#fff",
-        boxShadow: "0 1px 3px rgba(17,30,28,0.20)",
+        background: "var(--text-on-brand)",
+        boxShadow: "0 1px 3px rgba(var(--ink-900-rgb), 0.20)",
         transition: "left 0.18s ease",
       }} />
     </button>

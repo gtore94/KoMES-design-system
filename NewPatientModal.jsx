@@ -424,7 +424,7 @@ function NewPatientModal({ onClose, onSubmit }) {
                 }));
               }} style={{
                 height: 36, padding: "0 14px",
-                background: "var(--jade-500)", color: "#fff",
+                background: "var(--jade-500)", color: "var(--text-on-brand)",
                 border: "none", borderRadius: "var(--radius-md)",
                 fontSize: 12, fontWeight: 600, cursor: "pointer",
                 fontFamily: "var(--font-sans)",
@@ -545,7 +545,7 @@ function NewPatientModal({ onClose, onSubmit }) {
               padding: "8px 18px", fontSize: 13, fontWeight: 600,
               background: allRequired ? "var(--jade-500)" : "var(--stone-300)",
               border: "none", borderRadius: "var(--radius-md)",
-              color: "#fff",
+              color: "var(--text-on-brand)",
               cursor: allRequired ? "pointer" : "not-allowed",
               fontFamily: "var(--font-sans)",
               display: "inline-flex", alignItems: "center", gap: 6,

@@ -77,7 +77,7 @@ const SUP_CAT_COLOR = {
   "의료":   { bg: "var(--brand-subtle)",     fg: "var(--text-brand)",     border: "var(--brand-muted)" },
   "포장재": { bg: "var(--status-warning-bg)",   fg: "var(--status-warning-text)",    border: "var(--status-warning-border)" },
   "사무":   { bg: "var(--bg-raised)",   fg: "var(--text-secondary)",      border: "var(--border-subtle)" },
-  "청소":   { bg: "rgba(96, 130, 175, 0.12)", fg: "#6082AF",      border: "rgba(96, 130, 175, 0.30)" },
+  "청소":   { bg: "var(--accent-marine-bg)", fg: "var(--accent-marine)",      border: "var(--accent-marine-border)" },
 };
 
 // 상태 판정

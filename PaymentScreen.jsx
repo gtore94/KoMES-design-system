@@ -132,23 +132,23 @@ function PayMethodBtn({ icon, label, hint, primary, onClick, disabled }) {
     }}>
       <div style={{
         width: 36, height: 36, borderRadius: "var(--radius-md)",
-        background: primary ? "rgba(255,255,255,0.2)" : "var(--brand-subtle)",
-        color: primary ? "#fff" : "var(--text-brand)",
+        background: primary ? "var(--overlay-white-20)" : "var(--brand-subtle)",
+        color: primary ? "var(--text-on-brand)" : "var(--text-brand)",
         display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
       }}>
         <Icon name={icon} size={18} />
       </div>
       <div style={{ flex: 1, textAlign: "left" }}>
-        <div style={{ fontSize: 14, fontWeight: 600, color: primary ? "#fff" : "var(--text-primary)" }}>
+        <div style={{ fontSize: 14, fontWeight: 600, color: primary ? "var(--text-on-brand)" : "var(--text-primary)" }}>
           {label}
         </div>
         {hint && (
-          <div style={{ fontSize: 11, color: primary ? "rgba(255,255,255,0.8)" : "var(--text-muted)", marginTop: 2 }}>
+          <div style={{ fontSize: 11, color: primary ? "var(--overlay-white-80)" : "var(--text-muted)", marginTop: 2 }}>
             {hint}
           </div>
         )}
       </div>
-      <Icon name="chevron-right" size={16} style={{ color: primary ? "#fff" : "var(--text-muted)" }} />
+      <Icon name="chevron-right" size={16} style={{ color: primary ? "var(--text-on-brand)" : "var(--text-muted)" }} />
     </button>
   );
 }
@@ -277,7 +277,7 @@ function PaymentScreen() {
                     fontSize: 10, fontWeight: 700, padding: "1px 7px",
                     borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                     background: active ? t.color : "var(--bg-raised)",
-                    color: active ? "#fff" : "var(--text-muted)",
+                    color: active ? "var(--text-on-brand)" : "var(--text-muted)",
                     fontFamily: "var(--font-mono)",
                   }}>{t.n}</span>
                 </button>
@@ -502,7 +502,7 @@ function PaymentScreen() {
                         style={{
                           flex: 1, padding: "5px 8px", fontSize: 11, fontWeight: 600,
                           background: selected.discountType === o.k ? "var(--jade-500)" : "var(--bg-surface)",
-                          color: selected.discountType === o.k ? "#fff" : "var(--text-secondary)",
+                          color: selected.discountType === o.k ? "var(--text-on-brand)" : "var(--text-secondary)",
                           border: `1px solid ${selected.discountType === o.k ? "var(--jade-500)" : "var(--border-default)"}`,
                           borderRadius: "var(--radius-sm)",
                           cursor: selected.status === "완료" ? "not-allowed" : "pointer",
@@ -591,7 +591,7 @@ function PaymentScreen() {
                   <button style={completedActionBtn}>
                     <Icon name="rotate-ccw" size={14} />수납 취소
                   </button>
-                  <button style={{ ...completedActionBtn, background: "var(--jade-500)", color: "#fff", border: "none" }}>
+                  <button style={{ ...completedActionBtn, background: "var(--jade-500)", color: "var(--text-on-brand)", border: "none" }}>
                     <Icon name="printer" size={14} />영수증 출력
                   </button>
                 </div>
@@ -656,7 +656,7 @@ function PaymentScreen() {
               <button onClick={() => handlePay(confirmMethod)} style={{
                 padding: "8px 18px", fontSize: 13, fontWeight: 600,
                 background: "var(--jade-500)", border: "none",
-                borderRadius: "var(--radius-md)", color: "#fff",
+                borderRadius: "var(--radius-md)", color: "var(--text-on-brand)",
                 cursor: "pointer", fontFamily: "var(--font-sans)",
                 display: "inline-flex", alignItems: "center", gap: 6,
                 boxShadow: "var(--shadow-sm)",

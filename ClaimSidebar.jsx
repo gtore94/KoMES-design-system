@@ -31,7 +31,7 @@ function ClaimTypeTabs({ active, onChange, counts }) {
             <div style={{
               width: 28, height: 28, borderRadius: "var(--radius-md)",
               background: isActive ? t.pillColor : "var(--bg-raised)",
-              color: isActive ? "#fff" : "var(--text-muted)",
+              color: isActive ? "var(--text-on-brand)" : "var(--text-muted)",
               display: "flex", alignItems: "center", justifyContent: "center",
               transition: "all 0.12s",
             }}>
@@ -52,7 +52,7 @@ function ClaimTypeTabs({ active, onChange, counts }) {
               fontSize: 11, fontWeight: 700, padding: "2px 8px",
               borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
               background: isActive ? t.pillColor : "var(--bg-raised)",
-              color: isActive ? "#fff" : "var(--text-muted)",
+              color: isActive ? "var(--text-on-brand)" : "var(--text-muted)",
               fontFamily: "var(--font-mono)", marginLeft: 4,
             }}>{counts[t.key]}</span>
           </button>
@@ -161,7 +161,7 @@ function PeriodAndSummary({
         <button onClick={onLoadClaims} style={{
           padding: "11px 14px",
           background: loaded ? "var(--bg-surface)" : "var(--jade-500)",
-          color: loaded ? "var(--text-secondary)" : "#fff",
+          color: loaded ? "var(--text-secondary)" : "var(--text-on-brand)",
           border: loaded ? "1px solid var(--border-default)" : "none",
           borderRadius: "var(--radius-md)",
           fontFamily: "var(--font-sans)", fontSize: 13, fontWeight: 600,
@@ -324,7 +324,7 @@ function RadioRow({ checked, onClick, children }) {
 const pillBtn = (active) => ({
   flex: 1, padding: "6px 8px", fontSize: 12, fontWeight: 500,
   background: active ? "var(--jade-500)" : "var(--bg-surface)",
-  color: active ? "#fff" : "var(--text-secondary)",
+  color: active ? "var(--text-on-brand)" : "var(--text-secondary)",
   border: `1px solid ${active ? "var(--jade-500)" : "var(--border-default)"}`,
   borderRadius: "var(--radius-sm)",
   cursor: "pointer", fontFamily: "var(--font-sans)",

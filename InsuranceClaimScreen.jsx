@@ -272,7 +272,7 @@ function EmptyState({ type, onLoad }) {
       </div>
       <button onClick={onLoad} style={{
         marginTop: 6, padding: "10px 22px", fontSize: 13, fontWeight: 600,
-        background: "var(--jade-500)", color: "#fff",
+        background: "var(--jade-500)", color: "var(--text-on-brand)",
         border: "none", borderRadius: "var(--radius-md)",
         cursor: "pointer", fontFamily: "var(--font-sans)",
         display: "inline-flex", alignItems: "center", gap: 8,

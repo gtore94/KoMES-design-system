@@ -69,13 +69,13 @@ const HISTORY = [
 ];
 
 const ACTING_TYPES = [
-  { key: "체침",   icon: "zap",        color: "#5C8B7E" },
-  { key: "전침",   icon: "activity",   color: "#6B9E90" },
-  { key: "약침",   icon: "syringe",    color: "#4A7C6F" },
-  { key: "뜸",     icon: "flame",      color: "#C4974B" },
-  { key: "부항",   icon: "droplets",   color: "#D4756A" },
-  { key: "추나",   icon: "hand",       color: "#8A9E9A" },
-  { key: "레이저", icon: "scan-line",  color: "#6B7E7B" },
+  { key: "체침",   icon: "zap",        color: "var(--accent-pine)" },
+  { key: "전침",   icon: "activity",   color: "var(--jade-400)" },
+  { key: "약침",   icon: "syringe",    color: "var(--brand)" },
+  { key: "뜸",     icon: "flame",      color: "var(--amber-500)" },
+  { key: "부항",   icon: "droplets",   color: "var(--cinnabar-500)" },
+  { key: "추나",   icon: "hand",       color: "var(--ink-300)" },
+  { key: "레이저", icon: "scan-line",  color: "var(--ink-400)" },
 ];
 
 // ── Section Header ───────────────────────────────────────────────
@@ -123,7 +123,7 @@ function ActingOrderBlock({ orders, editable }) {
             transition: "all 0.12s",
           }}>
             <div style={{ width: 18, height: 18, borderRadius: "var(--radius-sm)", border: `2px solid ${o.done ? "var(--jade-400)" : "var(--border-default)"}`, background: o.done ? "var(--jade-400)" : "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "all 0.12s" }}>
-              {o.done && <Icon name="check" size={11} style={{ color: "white" }} />}
+              {o.done && <Icon name="check" size={11} style={{ color: "var(--text-on-brand)" }} />}
             </div>
             <span style={{ fontSize: 11, fontWeight: 700, color: typeInfo.color, background: `${typeInfo.color}28`, padding: "2px 7px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)", flexShrink: 0 }}>{o.type}</span>
             <span style={{ fontSize: 13, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flex: 1, textDecoration: o.done ? "line-through" : "none" }}>{o.sites}</span>
@@ -139,11 +139,11 @@ function ActingOrderBlock({ orders, editable }) {
       )}
       {editable && adding && (
         <div style={{ display: "flex", gap: 8, alignItems: "center", padding: "8px 12px", borderRadius: "var(--radius-md)", border: "1px solid var(--border-brand)", background: "var(--brand-subtle)" }}>
-          <select value={newType} onChange={e => setNewType(e.target.value)} style={{ fontSize: 12, fontFamily: "var(--font-sans)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-sm)", padding: "4px 6px", background: "white", color: "var(--text-primary)" }}>
+          <select value={newType} onChange={e => setNewType(e.target.value)} style={{ fontSize: 12, fontFamily: "var(--font-sans)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-sm)", padding: "4px 6px", background: "var(--bg-surface)", color: "var(--text-primary)" }}>
             {ACTING_TYPES.map(t => <option key={t.key}>{t.key}</option>)}
           </select>
           <input value={newSites} onChange={e => setNewSites(e.target.value)} placeholder="부위 입력..." style={{ flex: 1, fontSize: 13, fontFamily: "var(--font-sans)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-sm)", padding: "5px 8px", outline: "none" }} />
-          <button onClick={addItem} style={{ fontSize: 12, color: "white", background: "var(--jade-500)", border: "none", borderRadius: "var(--radius-sm)", padding: "5px 10px", cursor: "pointer", fontFamily: "var(--font-sans)" }}>추가</button>
+          <button onClick={addItem} style={{ fontSize: 12, color: "var(--text-on-brand)", background: "var(--jade-500)", border: "none", borderRadius: "var(--radius-sm)", padding: "5px 10px", cursor: "pointer", fontFamily: "var(--font-sans)" }}>추가</button>
           <button onClick={() => setAdding(false)} style={{ fontSize: 12, color: "var(--text-muted)", background: "none", border: "none", cursor: "pointer" }}>취소</button>
         </div>
       )}

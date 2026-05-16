@@ -56,10 +56,10 @@ function Button({ variant = "primary", size = "md", onClick, children, disabled,
     md: { fontSize: 13, padding: "8px 16px", borderRadius: "var(--radius-md)" },
   };
   const variants = {
-    primary:   { background: "var(--jade-500)", color: "white", boxShadow: "var(--shadow-sm)" },
+    primary:   { background: "var(--jade-500)", color: "var(--text-on-brand)", boxShadow: "var(--shadow-sm)" },
     secondary: { background: "var(--bg-surface)", color: "var(--text-primary)", border: "1px solid var(--border-default)", boxShadow: "var(--shadow-sm)" },
     ghost:     { background: "transparent", color: "var(--text-brand)" },
-    danger:    { background: "var(--cinnabar-600)", color: "white" },
+    danger:    { background: "var(--cinnabar-600)", color: "var(--text-on-brand)" },
   };
   return <button onClick={onClick} disabled={disabled} style={{ ...base, ...sizes[size], ...variants[variant] }}>
     {icon && <Icon name={icon} size={13} />}
@@ -132,7 +132,7 @@ function Sidebar({ activeScreen, onNavigate }) {
         gap: collapsed ? 0 : 8, padding: collapsed ? "8px 0" : "7px 8px",
         borderRadius: "var(--radius-md)", cursor: "pointer",
         background: isActive ? "var(--sidebar-active)" : "transparent",
-        color: isActive ? "white" : "var(--ink-200)",
+        color: isActive ? "var(--text-on-brand)" : "var(--ink-200)",
         fontSize: 13, fontWeight: isActive ? 500 : 400,
         transition: "background 0.12s ease, color 0.12s ease", fontFamily: "var(--font-sans)",
       }}>
@@ -147,19 +147,19 @@ function Sidebar({ activeScreen, onNavigate }) {
     transition: "width 0.2s ease", overflow: "hidden",
   }}>
     {collapsed ? (
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "12px 0 10px", borderBottom: "1px solid rgba(255,255,255,0.08)", gap: 8, flexShrink: 0 }}>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "12px 0 10px", borderBottom: "1px solid var(--overlay-white-08)", gap: 8, flexShrink: 0 }}>
         <div style={{ width: 30, height: 30, background: "var(--jade-500)", borderRadius: "var(--radius-sm)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <span style={{ fontFamily: "var(--font-serif)", fontSize: 15, fontWeight: 600, color: "white" }}>K</span>
+          <span style={{ fontFamily: "var(--font-serif)", fontSize: 15, fontWeight: 600, color: "var(--text-on-brand)" }}>K</span>
         </div>
         <div key="expand-btn" onClick={() => setCollapsed(false)} style={{ cursor: "pointer", color: "var(--ink-300)", display: "flex", alignItems: "center", padding: 2, borderRadius: "var(--radius-sm)" }}>
           <Icon name="chevron-right" size={13} />
         </div>
       </div>
     ) : (
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 14px 12px", borderBottom: "1px solid rgba(255,255,255,0.08)", flexShrink: 0 }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 14px 12px", borderBottom: "1px solid var(--overlay-white-08)", flexShrink: 0 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{ width: 30, height: 30, background: "var(--jade-500)", borderRadius: "var(--radius-sm)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-            <span style={{ fontFamily: "var(--font-serif)", fontSize: 15, fontWeight: 600, color: "white" }}>K</span>
+            <span style={{ fontFamily: "var(--font-serif)", fontSize: 15, fontWeight: 600, color: "var(--text-on-brand)" }}>K</span>
           </div>
           <span style={{ fontFamily: "var(--font-serif)", fontSize: 15, fontWeight: 400, color: "var(--stone-50)", letterSpacing: "-0.01em", whiteSpace: "nowrap" }}>KoMES</span>
         </div>
@@ -180,7 +180,7 @@ function Sidebar({ activeScreen, onNavigate }) {
       {navItem("settings", "settings", "설정", activeScreen === "settings")}
     </div>
 
-    <div style={{ marginTop: "auto", padding: collapsed ? "10px 4px" : "10px 8px", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+    <div style={{ marginTop: "auto", padding: collapsed ? "10px 4px" : "10px 8px", borderTop: "1px solid var(--overlay-white-08)" }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: collapsed ? "center" : "flex-start", gap: collapsed ? 0 : 8, padding: "6px 6px", borderRadius: "var(--radius-md)", cursor: "pointer" }}>
         <Avatar name="김" size={26} />
         {!collapsed && <>

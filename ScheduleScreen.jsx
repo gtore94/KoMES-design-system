@@ -14,9 +14,9 @@ for (let h = 9; h < 19; h++) {
 
 // Mock doctors (rooms)
 const DOCTORS_SCH = [
-  { id: "d1", name: "김민준 원장", room: "진료실 1", color: "#6B9E90", bg: "var(--doc-d1-bg)", border: "var(--doc-d1-border)" },
-  { id: "d2", name: "이지영 원장", room: "진료실 2", color: "#B5873E", bg: "var(--doc-d2-bg)", border: "var(--doc-d2-border)" },
-  { id: "d3", name: "박서윤 부원장", room: "치료실 A", color: "#5A6E8A", bg: "var(--doc-d3-bg)", border: "var(--doc-d3-border)" },
+  { id: "d1", name: "김민준 원장", room: "진료실 1", color: "var(--jade-400)", bg: "var(--doc-d1-bg)", border: "var(--doc-d1-border)" },
+  { id: "d2", name: "이지영 원장", room: "진료실 2", color: "var(--accent-bronze)", bg: "var(--doc-d2-bg)", border: "var(--doc-d2-border)" },
+  { id: "d3", name: "박서윤 부원장", room: "치료실 A", color: "var(--accent-slate)", bg: "var(--doc-d3-bg)", border: "var(--doc-d3-border)" },
 ];
 
 // Treatment types
@@ -302,7 +302,7 @@ function NewAppointmentModal({ initial, onClose, onSubmit }) {
             style={{
               padding: "8px 18px", fontSize: 13, fontWeight: 600,
               background: d.patient ? "var(--jade-500)" : "var(--stone-300)",
-              border: "none", borderRadius: "var(--radius-md)", color: "#fff",
+              border: "none", borderRadius: "var(--radius-md)", color: "var(--text-on-brand)",
               cursor: d.patient ? "pointer" : "not-allowed",
               fontFamily: "var(--font-sans)",
               display: "inline-flex", alignItems: "center", gap: 6,
@@ -571,7 +571,7 @@ function WeekView({ date, appts, onCellClick, onApptClick, doctorFilter }) {
               <div key={di} style={{
                 position: "relative",
                 borderLeft: "1px solid var(--border-subtle)",
-                background: isToday ? "rgba(74,124,111,0.03)" : "transparent",
+                background: isToday ? "var(--brand-tint)" : "transparent",
               }}>
                 {Array.from({ length: 10 }).map((_, hi) => (
                   <div key={hi}
@@ -670,7 +670,7 @@ function MonthView({ date, appts, onCellClick, onDayClick, onApptClick, doctorFi
                 <span style={{
                   fontFamily: "var(--font-mono)",
                   fontSize: 12, fontWeight: isToday ? 700 : 500,
-                  color: isToday ? "#fff" : dow === 0 ? "var(--cinnabar-600)" : dow === 6 ? "var(--jade-600)" : "var(--text-primary)",
+                  color: isToday ? "var(--text-on-brand)" : dow === 0 ? "var(--cinnabar-600)" : dow === 6 ? "var(--jade-600)" : "var(--text-primary)",
                   background: isToday ? "var(--jade-500)" : "transparent",
                   borderRadius: "50%",
                   width: 22, height: 22,
@@ -726,7 +726,7 @@ function ApptDetail({ appt, onClose, onChangeStatus }) {
   return (
     <div onClick={onClose} style={{
       position: "fixed", inset: 0, zIndex: 80,
-      background: "rgba(17,30,28,0.3)",
+      background: "rgba(var(--ink-900-rgb), 0.3)",
       display: "flex", justifyContent: "flex-end",
     }}>
       <div onClick={e => e.stopPropagation()} style={{
@@ -752,7 +752,7 @@ function ApptDetail({ appt, onClose, onChangeStatus }) {
           </div>
           <button onClick={onClose} style={{
             width: 28, height: 28, borderRadius: "var(--radius-sm)",
-            background: "rgba(255,255,255,0.6)", border: "1px solid var(--border-subtle)",
+            background: "var(--overlay-white-60)", border: "1px solid var(--border-subtle)",
             cursor: "pointer", color: "var(--text-secondary)",
             display: "inline-flex", alignItems: "center", justifyContent: "center",
           }}>
@@ -836,7 +836,7 @@ function ApptDetail({ appt, onClose, onChangeStatus }) {
           <button style={{
             flex: 1, padding: "8px 12px", fontSize: 12, fontWeight: 600,
             background: "var(--jade-500)", border: "none",
-            borderRadius: "var(--radius-md)", color: "#fff",
+            borderRadius: "var(--radius-md)", color: "var(--text-on-brand)",
             cursor: "pointer", fontFamily: "var(--font-sans)",
             display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 5,
           }}><Icon name="user-check" size={12} />접수 처리</button>
@@ -969,7 +969,7 @@ function ScheduleScreen() {
             <button onClick={() => setDoctorFilter("")} style={{
               padding: "4px 10px", fontSize: 11, fontWeight: doctorFilter === "" ? 600 : 400,
               background: doctorFilter === "" ? "var(--jade-500)" : "var(--bg-surface)",
-              color: doctorFilter === "" ? "#fff" : "var(--text-secondary)",
+              color: doctorFilter === "" ? "var(--text-on-brand)" : "var(--text-secondary)",
               border: `1px solid ${doctorFilter === "" ? "var(--jade-500)" : "var(--border-subtle)"}`,
               borderRadius: "var(--radius-full)", whiteSpace: "nowrap", cursor: "pointer", fontFamily: "var(--font-sans)",
             }}>전체</button>

@@ -482,7 +482,7 @@ function NewStaffModal({ onClose, onSubmit, initialData }) {
             style={{
               padding: "8px 18px", fontSize: 13, fontWeight: 600,
               background: allRequired ? "var(--jade-500)" : "var(--stone-300)",
-              border: "none", borderRadius: "var(--radius-md)", color: "#fff",
+              border: "none", borderRadius: "var(--radius-md)", color: "var(--text-on-brand)",
               cursor: allRequired ? "pointer" : "not-allowed",
               fontFamily: "var(--font-sans)",
               display: "inline-flex", alignItems: "center", gap: 6,

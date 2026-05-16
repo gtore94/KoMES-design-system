@@ -5,73 +5,356 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KoMES — UI Kit (Standalone)</title>
 <style>
+/* ============================================================
+   KoMES Design System — Colors & Typography
+   AI-assisted EMR for Traditional Korean Medicine Clinics
+   Single source of truth for tokens (light + dark + color themes)
+   ============================================================ */
+
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ============================================================
+   COLOR TOKENS — Base Palette
+   ============================================================ */
 :root {
-  --ink-900: #111E1C; --ink-800: #1C2B2B; --ink-700: #2A3C3A; --ink-600: #3A4F4C;
-  --ink-500: #4A5E5B; --ink-400: #6B7E7B; --ink-300: #8A9E9A; --ink-200: #B5C5C2;
-  --ink-100: #D8E4E2; --ink-50:  #EEF4F3;
-  --jade-900: #1A3C34; --jade-800: #2A5548; --jade-700: #2E5C52; --jade-600: #3A7065;
-  --jade-500: #4A7C6F; --jade-400: #6B9E90; --jade-300: #8DBFB3; --jade-200: #B3D8D1;
-  --jade-100: #D4EDE9; --jade-50:  #EEF8F6;
-  --stone-900: #5C5248; --stone-800: #7A6E62; --stone-700: #9A8E82; --stone-600: #B8AFA4;
-  --stone-500: #CEC6BC; --stone-400: #D8D0C4; --stone-300: #E4DDD4; --stone-200: #EDE7D9;
-  --stone-100: #F5F0E8; --stone-50:  #FDFAF5;
-  --cinnabar-900: #6B1A14; --cinnabar-800: #922420; --cinnabar-700: #B03028;
-  --cinnabar-600: #C4594B; --cinnabar-500: #D4756A; --cinnabar-400: #E09690;
-  --cinnabar-300: #EBB8B3; --cinnabar-200: #F3D4D1; --cinnabar-100: #FAEDEC;
-  --amber-700: #8C5A1A; --amber-600: #B47A28; --amber-500: #C4974B; --amber-400: #D4AE78;
-  --amber-200: #F0DFC0; --amber-100: #FAF2E4;
-  --navy-900: #0E1A2E; --navy-800: #16263F; --navy-700: #1E3252; --navy-600: #294569;
-  --navy-500: #355A82; --navy-400: #5878A3; --navy-300: #8298BF; --navy-200: #B3C0D7;
-  --navy-100: #D6DEEB; --navy-50:  #EEF1F7;
-  --bg-page: var(--stone-50); --bg-surface: #FFFFFF;
-  --bg-raised: var(--stone-100); --bg-sunken: var(--stone-200);
-  --bg-overlay: rgba(17, 30, 28, 0.48);
-  --text-primary: var(--ink-800); --text-secondary: var(--ink-500);
-  --text-muted: var(--ink-300); --text-disabled: var(--ink-200);
-  --text-inverse: var(--stone-50); --text-brand: var(--jade-700);
-  --text-danger: var(--cinnabar-600); --text-warning: var(--amber-600);
-  --border-subtle: var(--stone-300); --border-default: var(--stone-400);
-  --border-strong: var(--ink-200); --border-brand: var(--jade-500);
-  --border-danger: var(--cinnabar-400);
-  --brand: var(--jade-500); --brand-hover: var(--jade-600);
-  --brand-active: var(--jade-700); --brand-subtle: var(--jade-50);
-  --brand-muted: var(--jade-100);
-  --status-success-bg: var(--jade-50); --status-success-text: var(--jade-700); --status-success-border: var(--jade-200);
-  --status-warning-bg: var(--amber-100); --status-warning-text: var(--amber-700); --status-warning-border: var(--amber-200);
-  --status-danger-bg: var(--cinnabar-100); --status-danger-text: var(--cinnabar-700); --status-danger-border: var(--cinnabar-200);
-  --status-neutral-bg: var(--stone-100); --status-neutral-text: var(--ink-600); --status-neutral-border: var(--stone-300);
-  --shadow-sm:  0 1px 2px rgba(17, 30, 28, 0.06), 0 1px 4px rgba(17, 30, 28, 0.04);
-  --shadow-md:  0 2px 8px rgba(17, 30, 28, 0.08), 0 1px 3px rgba(17, 30, 28, 0.05);
-  --shadow-lg:  0 4px 16px rgba(17, 30, 28, 0.10), 0 2px 6px rgba(17, 30, 28, 0.06);
-  --shadow-xl:  0 8px 32px rgba(17, 30, 28, 0.12), 0 4px 12px rgba(17, 30, 28, 0.07);
-  --radius-xs: 2px; --radius-sm: 4px; --radius-md: 8px; --radius-lg: 12px;
-  --radius-xl: 16px; --radius-2xl: 24px; --radius-full: 9999px;
-  --font-serif: 'Noto Serif KR', 'Georgia', serif;
-  --font-sans: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
-  --font-mono: 'JetBrains Mono', 'Menlo', monospace;
-  --sidebar-bg: var(--ink-800);
-  --sidebar-active: var(--jade-600);
-  --rail-bg: var(--bg-surface);
-  --rail-surface: var(--bg-surface);
-  --rail-text: var(--text-primary);
+  /* Ink — deep forest ink, primary text */
+  --ink-900: #111E1C;
+  --ink-800: #1C2B2B;
+  --ink-700: #2A3C3A;
+  --ink-600: #3A4F4C;
+  --ink-500: #4A5E5B;
+  --ink-400: #6B7E7B;
+  --ink-300: #8A9E9A;
+  --ink-200: #B5C5C2;
+  --ink-100: #D8E4E2;
+  --ink-50:  #EEF4F3;
+
+  /* Jade — celadon green, primary brand */
+  --jade-900: #1A3C34;
+  --jade-800: #2A5548;
+  --jade-700: #2E5C52;
+  --jade-600: #3A7065;
+  --jade-500: #4A7C6F;
+  --jade-400: #6B9E90;
+  --jade-300: #8DBFB3;
+  --jade-200: #B3D8D1;
+  --jade-100: #D4EDE9;
+  --jade-50:  #EEF8F6;
+
+  /* Stone — warm cream/hanji paper backgrounds */
+  --stone-900: #5C5248;
+  --stone-800: #7A6E62;
+  --stone-700: #9A8E82;
+  --stone-600: #B8AFA4;
+  --stone-500: #CEC6BC;
+  --stone-400: #D8D0C4;
+  --stone-300: #E4DDD4;
+  --stone-200: #EDE7D9;
+  --stone-100: #F5F0E8;
+  --stone-50:  #FDFAF5;
+
+  /* Cinnabar — Korean red, alerts & accents */
+  --cinnabar-900: #6B1A14;
+  --cinnabar-800: #922420;
+  --cinnabar-700: #B03028;
+  --cinnabar-600: #C4594B;
+  --cinnabar-500: #D4756A;
+  --cinnabar-400: #E09690;
+  --cinnabar-300: #EBB8B3;
+  --cinnabar-200: #F3D4D1;
+  --cinnabar-100: #FAEDEC;
+
+  /* Amber — warm gold, warnings */
+  --amber-700: #8C5A1A;
+  --amber-600: #B47A28;
+  --amber-500: #C4974B;
+  --amber-400: #D4AE78;
+  --amber-200: #F0DFC0;
+  --amber-100: #FAF2E4;
+
+  /* Navy — alternate brand palette */
+  --navy-900: #0E1A2E;
+  --navy-800: #16263F;
+  --navy-700: #1E3252;
+  --navy-600: #294569;
+  --navy-500: #355A82;
+  --navy-400: #5878A3;
+  --navy-300: #8298BF;
+  --navy-200: #B3C0D7;
+  --navy-100: #D6DEEB;
+  --navy-50:  #EEF1F7;
+
+  /* ============================================================
+     ACCENT PALETTE — categorical hues for stages, roles, relations
+     ============================================================ */
+  --accent-pine:    #5C8B7E;   /* 체침 / 자녀 / doctor */
+  --accent-slate:   #5A6E8A;   /* 복잡추나 / 부모 / pharmacist */
+  --accent-bronze:  #B5873E;   /* 지인소개 / therapist */
+  --accent-marine:  #6082AF;   /* shipping / cleaning supply */
+
+  /* ============================================================
+     RGB TRIPLETS — for rgba(var(--*-rgb), alpha) overlays
+     Theme overrides keep translucent surfaces in sync with brand swaps.
+     ============================================================ */
+  --white-rgb:         255, 255, 255;
+  --black-rgb:         0, 0, 0;
+  --ink-900-rgb:       17, 30, 28;
+  --brand-rgb:         74, 124, 111;        /* jade-500 */
+  --jade-400-rgb:      107, 158, 144;
+  --ink-400-rgb:       107, 126, 123;
+  --amber-500-rgb:     196, 151, 75;
+  --stone-700-rgb:     154, 142, 130;
+  --accent-pine-rgb:   92, 139, 126;
+  --accent-slate-rgb:  90, 110, 138;
+  --accent-marine-rgb: 96, 130, 175;
+
+  /* ============================================================
+     SEMANTIC COLOR TOKENS
+     ============================================================ */
+
+  /* Backgrounds */
+  --bg-page:       var(--stone-50);
+  --bg-surface:    #FFFFFF;
+  --bg-raised:     var(--stone-100);
+  --bg-sunken:     var(--stone-200);
+  --bg-overlay:    rgba(17, 30, 28, 0.48);
+
+  /* Text */
+  --text-primary:   var(--ink-800);
+  --text-secondary: var(--ink-500);
+  --text-muted:     var(--ink-300);
+  --text-disabled:  var(--ink-200);
+  --text-inverse:   var(--stone-50);
+  --text-brand:     var(--jade-700);
+  --text-danger:    var(--cinnabar-600);
+  --text-warning:   var(--amber-600);
+
+  /* Text on filled brand/accent surfaces — does NOT theme-flip */
+  --text-on-brand:  #FFFFFF;
+  --text-on-accent: #FFFFFF;
+  --text-on-fill:   #FFFFFF;
+
+  /* Borders */
+  --border-subtle:  var(--stone-300);
+  --border-default: var(--stone-400);
+  --border-strong:  var(--ink-200);
+  --border-brand:   var(--jade-500);
+  --border-danger:  var(--cinnabar-400);
+
+  /* Interactive — Brand */
+  --brand:          var(--jade-500);
+  --brand-hover:    var(--jade-600);
+  --brand-active:   var(--jade-700);
+  --brand-subtle:   var(--jade-50);
+  --brand-muted:    var(--jade-100);
+  --brand-tint:     rgba(var(--brand-rgb), 0.03);
+
+  /* Status */
+  --status-success-bg:     var(--jade-50);
+  --status-success-text:   var(--jade-700);
+  --status-success-border: var(--jade-200);
+  --status-warning-bg:     var(--amber-100);
+  --status-warning-text:   var(--amber-700);
+  --status-warning-border: var(--amber-200);
+  --status-danger-bg:      var(--cinnabar-100);
+  --status-danger-text:    var(--cinnabar-700);
+  --status-danger-border:  var(--cinnabar-200);
+  --status-neutral-bg:     var(--stone-100);
+  --status-neutral-text:   var(--ink-600);
+  --status-neutral-border: var(--stone-300);
+
+  /* ============================================================
+     SURFACE-TIE TOKENS — derived translucent variants
+     Used for stage chips, kanban accents, today-highlights.
+     ============================================================ */
+  --accent-pine-bg:     rgba(var(--accent-pine-rgb), 0.14);
+  --accent-pine-border: rgba(var(--accent-pine-rgb), 0.34);
+  --accent-slate-bg:    rgba(var(--accent-slate-rgb), 0.12);
+  --accent-slate-border:rgba(var(--accent-slate-rgb), 0.32);
+  --accent-marine-bg:   rgba(var(--accent-marine-rgb), 0.12);
+  --accent-marine-border:rgba(var(--accent-marine-rgb), 0.30);
+  --jade-400-bg:        rgba(var(--jade-400-rgb), 0.14);
+  --jade-400-border:    rgba(var(--jade-400-rgb), 0.34);
+  --amber-500-bg:       rgba(var(--amber-500-rgb), 0.12);
+  --amber-500-border:   rgba(var(--amber-500-rgb), 0.32);
+  --ink-400-bg:         rgba(var(--ink-400-rgb), 0.14);
+  --ink-400-border:     rgba(var(--ink-400-rgb), 0.32);
+  --stone-700-bg:       rgba(var(--stone-700-rgb), 0.14);
+  --stone-700-border:   rgba(var(--stone-700-rgb), 0.32);
+
+  /* Overlays — translucent white over filled dark/brand surfaces */
+  --overlay-white-08: rgba(255, 255, 255, 0.08);
+  --overlay-white-10: rgba(255, 255, 255, 0.10);
+  --overlay-white-12: rgba(255, 255, 255, 0.12);
+  --overlay-white-15: rgba(255, 255, 255, 0.15);
+  --overlay-white-20: rgba(255, 255, 255, 0.20);
+  --overlay-white-22: rgba(255, 255, 255, 0.22);
+  --overlay-white-60: rgba(255, 255, 255, 0.60);
+  --overlay-white-80: rgba(255, 255, 255, 0.80);
+  --overlay-white-85: rgba(255, 255, 255, 0.85);
+  --overlay-white-95: rgba(255, 255, 255, 0.95);
+
+  /* Scrims — translucent black */
+  --scrim-black-03: rgba(0, 0, 0, 0.03);
+  --scrim-black-04: rgba(0, 0, 0, 0.04);
+  --scrim-black-08: rgba(0, 0, 0, 0.08);
+  --scrim-black-15: rgba(0, 0, 0, 0.15);
+  --scrim-black-20: rgba(0, 0, 0, 0.20);
+
+  /* ============================================================
+     SIDEBAR / RAIL
+     ============================================================ */
+  --sidebar-bg:          var(--ink-800);
+  --sidebar-active:      var(--jade-600);
+  --rail-bg:             var(--bg-surface);
+  --rail-surface:        var(--bg-surface);
+  --rail-text:           var(--text-primary);
   --rail-text-secondary: var(--text-secondary);
-  --rail-text-muted: var(--text-muted);
-  --rail-border: var(--border-subtle);
-  --rail-stripe: var(--stone-100);
-  --rail-divider: var(--stone-200);
-  --board-appt-bg: #EEF1F6;  --board-appt-border: #CFD7E3;
-  --board-wait-bg: #FAF2E4;  --board-wait-border: #F0DFC0;
-  --board-treat-bg: #EAF4F1; --board-treat-border: #B3D8D1;
-  --board-pay-bg: #F5F0E8;   --board-pay-border: #E4DDD4;
-  --doc-d1-bg: #EEF8F6; --doc-d1-border: #B3D8D1;
-  --doc-d2-bg: #FAF2E4; --doc-d2-border: #F0DFC0;
-  --doc-d3-bg: #EEF1F6; --doc-d3-border: #CFD7E3;
+  --rail-text-muted:     var(--text-muted);
+  --rail-border:         var(--border-subtle);
+  --rail-stripe:         var(--stone-100);
+  --rail-divider:        var(--stone-200);
+
+  /* ============================================================
+     KANBAN BOARD — column backgrounds
+     ============================================================ */
+  --board-appt-bg:   #EEF1F6;   --board-appt-border:  #CFD7E3;
+  --board-wait-bg:   #FAF2E4;   --board-wait-border:  #F0DFC0;
+  --board-treat-bg:  #EAF4F1;   --board-treat-border: #B3D8D1;
+  --board-pay-bg:    #F5F0E8;   --board-pay-border:   #E4DDD4;
+
+  /* ============================================================
+     APPOINTMENT DOC CARDS
+     ============================================================ */
+  --doc-d1-bg: #EEF8F6;  --doc-d1-border: #B3D8D1;
+  --doc-d2-bg: #FAF2E4;  --doc-d2-border: #F0DFC0;
+  --doc-d3-bg: #EEF1F6;  --doc-d3-border: #CFD7E3;
+
+  /* ============================================================
+     CLAIM PILLS
+     ============================================================ */
   --claim-herbal-pill: #DBA53D;
   --claim-auto-pill:   var(--cinnabar-500);
+
+  /* ============================================================
+     A4 FORM / PRINT PREVIEW
+     Form colors stay light-mode values; dark mode dims via
+     `.a4-paper { filter: brightness(0.82) }` rather than overrides.
+     ============================================================ */
+  --form-table-header-bg:    #F2EFE8;
+  --form-border:             #111111;
+  --form-border-soft:        #CCCCCC;
+  --form-border-divider:     #BBBBBB;
+  --form-border-light:       #E8E8E4;
+  --form-cell-alt-bg:        #FAFAF8;
+  --form-total-row-bg:       #E4EDE4;
+  --form-rule:               #777777;
+  --form-seal:               var(--cinnabar-700);
+  --form-payment-bg:         #F0F5F0;
+  --form-payment-border:     #3A6B50;
+  --form-payment-text:       #1C5C3A;
+  --form-covered-bg:         #EBF5EB;
+  --form-covered-text:       #1A6B2A;
+  --form-covered-border:     #C2E0C2;
+  --form-covered-total-text: #1A4A2A;
+  --form-noncovered-bg:       #FFF5E6;
+  --form-noncovered-text:     #8B4A00;
+  --form-noncovered-border:   #F0D0A0;
+  --form-noncovered-total-text: #7A3A00;
+
+  /* ============================================================
+     PATIENT INSTRUCTION (printout / chat-bubble preview)
+     ============================================================ */
+  --instruction-banner-bg:   #9BBBD4;
+  --instruction-banner-text: #191919;
+  --instruction-paper-text:  #333333;
+  --instruction-paper-muted: #888888;
+
+  /* ============================================================
+     SHADOWS & ELEVATION
+     ============================================================ */
+  --shadow-sm:    0 1px 2px rgba(17, 30, 28, 0.06), 0 1px 4px rgba(17, 30, 28, 0.04);
+  --shadow-md:    0 2px 8px rgba(17, 30, 28, 0.08), 0 1px 3px rgba(17, 30, 28, 0.05);
+  --shadow-lg:    0 4px 16px rgba(17, 30, 28, 0.10), 0 2px 6px rgba(17, 30, 28, 0.06);
+  --shadow-xl:    0 8px 32px rgba(17, 30, 28, 0.12), 0 4px 12px rgba(17, 30, 28, 0.07);
+  --shadow-inner: inset 0 1px 3px rgba(17, 30, 28, 0.08);
+  --shadow-paper: 0 12px 40px rgba(17, 30, 28, 0.15), 0 2px 8px rgba(17, 30, 28, 0.08);
+
+  /* ============================================================
+     BORDER RADIUS
+     ============================================================ */
+  --radius-xs:   2px;
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-2xl:  24px;
+  --radius-full: 9999px;
+
+  /* ============================================================
+     SPACING SCALE
+     ============================================================ */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* ============================================================
+     TYPOGRAPHY — Font Families
+     ============================================================ */
+  --font-serif:  'Noto Serif KR', 'Georgia', serif;
+  --font-sans:   'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
+  --font-mono:   'JetBrains Mono', 'Menlo', monospace;
+
+  /* ============================================================
+     TYPOGRAPHY — Scale
+     ============================================================ */
+  --text-xs:   11px;
+  --text-sm:   13px;
+  --text-base: 15px;
+  --text-md:   16px;
+  --text-lg:   18px;
+  --text-xl:   22px;
+  --text-2xl:  28px;
+  --text-3xl:  36px;
+  --text-4xl:  48px;
+
+  /* ============================================================
+     TYPOGRAPHY — Line Heights
+     ============================================================ */
+  --leading-tight:  1.2;
+  --leading-snug:   1.4;
+  --leading-normal: 1.6;
+  --leading-loose:  1.8;
+
+  /* ============================================================
+     TYPOGRAPHY — Weights
+     ============================================================ */
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* ============================================================
+     TRANSITIONS
+     ============================================================ */
+  --transition-fast:  all 0.12s ease;
+  --transition-base:  all 0.20s ease;
+  --transition-slow:  all 0.35s ease;
+  --easing-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* ── Dark theme overrides ──────────────────────────────────── */
+/* ============================================================
+   DARK THEME OVERRIDES
+   ============================================================ */
 [data-theme="dark"] {
   --bg-page:    #0B1413;
   --bg-surface: #131F1D;
@@ -97,15 +380,16 @@
   --brand:          var(--jade-400);
   --brand-hover:    var(--jade-300);
   --brand-active:   var(--jade-200);
-  --brand-subtle:   rgba(74, 124, 111, 0.12);
-  --brand-muted:    rgba(74, 124, 111, 0.22);
+  --brand-subtle:   rgba(var(--brand-rgb), 0.12);
+  --brand-muted:    rgba(var(--brand-rgb), 0.22);
+  --brand-rgb:      107, 158, 144;        /* jade-400 in dark */
 
-  --status-success-bg:     rgba(74, 124, 111, 0.14);
+  --status-success-bg:     rgba(var(--brand-rgb), 0.14);
   --status-success-text:   var(--jade-300);
-  --status-success-border: rgba(74, 124, 111, 0.35);
-  --status-warning-bg:     rgba(196, 151, 75, 0.12);
+  --status-success-border: rgba(var(--brand-rgb), 0.35);
+  --status-warning-bg:     rgba(var(--amber-500-rgb), 0.12);
   --status-warning-text:   var(--amber-400);
-  --status-warning-border: rgba(196, 151, 75, 0.30);
+  --status-warning-border: rgba(var(--amber-500-rgb), 0.30);
   --status-danger-bg:      rgba(196, 89, 75, 0.12);
   --status-danger-text:    var(--cinnabar-400);
   --status-danger-border:  rgba(196, 89, 75, 0.30);
@@ -117,60 +401,76 @@
   --shadow-md: 0 2px 8px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.28);
   --shadow-lg: 0 4px 16px rgba(0,0,0,0.50), 0 2px 6px rgba(0,0,0,0.30);
   --shadow-xl: 0 8px 32px rgba(0,0,0,0.55), 0 4px 12px rgba(0,0,0,0.32);
-  --board-appt-bg: #141C2B;  --board-appt-border: #1E2D45;
-  --board-wait-bg: #1D1810;  --board-wait-border: #2D2418;
-  --board-treat-bg: #101E1C; --board-treat-border: #1A3330;
-  --board-pay-bg: #1A1510;   --board-pay-border: #2A2218;
-  --doc-d1-bg: #101E1C; --doc-d1-border: #1A3330;
-  --doc-d2-bg: #1D1810; --doc-d2-border: #2D2418;
-  --doc-d3-bg: #141C2B; --doc-d3-border: #1E2D45;
+
+  --board-appt-bg:   #141C2B;  --board-appt-border:  #1E2D45;
+  --board-wait-bg:   #1D1810;  --board-wait-border:  #2D2418;
+  --board-treat-bg:  #101E1C;  --board-treat-border: #1A3330;
+  --board-pay-bg:    #1A1510;  --board-pay-border:   #2A2218;
+
+  --doc-d1-bg: #101E1C;  --doc-d1-border: #1A3330;
+  --doc-d2-bg: #1D1810;  --doc-d2-border: #2D2418;
+  --doc-d3-bg: #141C2B;  --doc-d3-border: #1E2D45;
+
   --claim-herbal-pill: var(--amber-700);
   --claim-auto-pill:   #7A3835;
 }
 
-/* ── Navy color — jade scale → navy (light mode) ───── */
+/* ============================================================
+   NAVY COLOR — jade scale → navy (light mode)
+   ============================================================ */
 [data-color="navy"] {
-  --sidebar-bg: var(--navy-800);
-  --sidebar-active: var(--navy-400);
-  --rail-bg: #FFFFFF;
-  --rail-surface: var(--navy-50);
-  --rail-text: var(--navy-800);
+  --sidebar-bg:          var(--navy-800);
+  --sidebar-active:      var(--navy-400);
+  --rail-bg:             #FFFFFF;
+  --rail-surface:        var(--navy-50);
+  --rail-text:           var(--navy-800);
   --rail-text-secondary: var(--navy-500);
-  --rail-text-muted: var(--navy-300);
-  --rail-border: var(--navy-100);
+  --rail-text-muted:     var(--navy-300);
+  --rail-border:         var(--navy-100);
+
   --jade-900: #0E1A2E; --jade-800: #1C3560; --jade-700: #234478; --jade-600: #294569;
   --jade-500: #355A82; --jade-400: #5878A3; --jade-300: #8298BF; --jade-200: #B3C0D7;
   --jade-100: #D6DEEB; --jade-50:  #EEF1F7;
+
   --brand:        #355A82;
   --brand-hover:  #294569;
   --brand-active: #1E3252;
   --brand-subtle: #EEF1F7;
   --brand-muted:  #D6DEEB;
+  --brand-rgb:    53, 90, 130;
   --text-brand:   #1E3252;
   --border-brand: #355A82;
+
   --status-success-bg:     #EEF1F7;
   --status-success-text:   #1E3252;
   --status-success-border: #B3C0D7;
+
   /* board column backgrounds — navy-tinted instead of jade/amber-tinted */
-  --board-appt-bg:   #EEF1F7; --board-appt-border:  #CDD5E8;
-  --board-treat-bg:  #EBF0F8; --board-treat-border: #C3CEDF;
-  /* doc appointment card backgrounds — navy-tinted for d1, keep others */
-  --doc-d1-bg:  #EEF1F7; --doc-d1-border: #CDD5E8;
+  --board-appt-bg:   #EEF1F7;  --board-appt-border:  #CDD5E8;
+  --board-treat-bg:  #EBF0F8;  --board-treat-border: #C3CEDF;
+
+  /* doc appointment card backgrounds — navy-tinted for d1 */
+  --doc-d1-bg:  #EEF1F7;  --doc-d1-border: #CDD5E8;
 }
 
-/* ── Navy color — dark mode override ─────────────── */
+/* ============================================================
+   NAVY COLOR — dark mode override
+   ============================================================ */
 [data-theme="dark"][data-color="navy"] {
   --bg-page:    #080F1C;
   --bg-surface: #0E1A2E;
   --bg-raised:  #16263F;
   --bg-sunken:  #040810;
   --border-subtle:  #1A2D45;
-  /* board columns: use jade dark values (navy overrides light, this restores dark) */
-  --board-appt-bg:   #141C2B; --board-appt-border:  #1E2D45;
-  --board-treat-bg:  #101E1C; --board-treat-border: #1A3330;
+
+  /* board columns: restore dark values (navy overrode light) */
+  --board-appt-bg:   #141C2B;  --board-appt-border:  #1E2D45;
+  --board-treat-bg:  #101E1C;  --board-treat-border: #1A3330;
+
   /* doc-d1 card: restore dark value */
-  --doc-d1-bg: #101E1C; --doc-d1-border: #1A3330;
-  /* restore dark rail for dark navy mode */
+  --doc-d1-bg: #101E1C;  --doc-d1-border: #1A3330;
+
+  /* dark rail for dark navy mode */
   --rail-bg:             #0E1A2E;
   --rail-surface:        #16263F;
   --rail-text:           var(--navy-50);
@@ -179,45 +479,210 @@
   --rail-border:         #16263F;
   --rail-stripe:         rgba(255,255,255,0.04);
   --rail-divider:        rgba(255,255,255,0.07);
-  /* bump jade scale so gradients stand out from bg-raised (#16263F) */
+
+  /* bump jade scale so gradients stand out from bg-raised */
   --jade-900: #0F1F38;
   --jade-800: #1E3C6A;
   --jade-700: #265080;
-  --brand:          #5878A3;
-  --brand-hover:    #8298BF;
-  --brand-active:   #B3C0D7;
-  --brand-subtle:   rgba(53, 90, 130, 0.15);
-  --brand-muted:    rgba(53, 90, 130, 0.28);
-  --text-brand:     #8298BF;
-  --border-brand:   #355A82;
+
+  --brand:        #5878A3;
+  --brand-hover:  #8298BF;
+  --brand-active: #B3C0D7;
+  --brand-subtle: rgba(53, 90, 130, 0.15);
+  --brand-muted:  rgba(53, 90, 130, 0.28);
+  --brand-rgb:    88, 120, 163;
+  --text-brand:   #8298BF;
+  --border-brand: #355A82;
+
   --status-success-bg:     rgba(53, 90, 130, 0.14);
   --status-success-text:   #8298BF;
   --status-success-border: rgba(53, 90, 130, 0.35);
+}
+
+/* ============================================================
+   A4 PAPER PREVIEW — always renders in light-mode tokens
+   so the preview looks like real paper, regardless of dark mode.
+   Scoped CSS variable overrides cascade to every child element
+   that uses these semantic tokens.
+   ============================================================ */
+.a4-paper {
+  --bg-page:        var(--stone-50);
+  --bg-surface:     #FFFFFF;
+  --bg-raised:      var(--stone-100);
+  --bg-sunken:      var(--stone-200);
+  --text-primary:   var(--ink-800);
+  --text-secondary: var(--ink-500);
+  --text-muted:     var(--ink-300);
+  --text-disabled:  var(--ink-200);
+  --text-brand:     var(--jade-700);
+  --text-danger:    var(--cinnabar-600);
+  --text-warning:   var(--amber-600);
+  --border-subtle:  var(--stone-300);
+  --border-default: var(--stone-400);
+  --border-strong:  var(--ink-200);
+  --border-brand:   var(--jade-500);
 }
 
 [data-theme="dark"] .a4-paper {
   filter: brightness(0.82);
 }
 
+/* ============================================================
+   COLOR-PREVIEW SCOPES — keep each preview swatch in its
+   own canonical palette regardless of the active color theme.
+   ============================================================ */
+.color-preview-jade {
+  --jade-900: #1A3C34;  --jade-800: #2A5548;  --jade-700: #2E5C52;
+  --jade-600: #3A7065;  --jade-500: #4A7C6F;  --jade-400: #6B9E90;
+  --jade-300: #8DBFB3;  --jade-200: #B3D8D1;  --jade-100: #D4EDE9;
+  --jade-50:  #EEF8F6;
+  --brand:        var(--jade-500);
+  --brand-hover:  var(--jade-600);
+  --brand-active: var(--jade-700);
+  --brand-subtle: var(--jade-50);
+  --brand-muted:  var(--jade-100);
+  --text-brand:   var(--jade-700);
+  --border-brand: var(--jade-500);
+}
+
+/* ============================================================
+   MOTION REDUCTION
+   ============================================================ */
 [data-reduce-motion="true"] *,
 [data-reduce-motion="true"] *::before,
 [data-reduce-motion="true"] *::after {
   animation-duration: 0.001ms !important;
   transition-duration: 0.001ms !important;
 }
+
+/* ============================================================
+   SEMANTIC TYPOGRAPHY CLASSES
+   ============================================================ */
+
+.t-display-xl {
+  font-family: var(--font-serif);
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-light);
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.t-display {
+  font-family: var(--font-serif);
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+  letter-spacing: -0.015em;
+}
+
+.t-heading-xl {
+  font-family: var(--font-serif);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.t-heading {
+  font-family: var(--font-sans);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  color: var(--text-primary);
+}
+
+.t-subheading {
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
+  color: var(--text-primary);
+}
+
+.t-body-lg {
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  color: var(--text-primary);
+}
+
+.t-body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  color: var(--text-primary);
+}
+
+.t-body-sm {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  color: var(--text-secondary);
+}
+
+.t-label {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
+  color: var(--text-secondary);
+  letter-spacing: 0.01em;
+}
+
+.t-label-xs {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.t-caption {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  color: var(--text-muted);
+}
+
+.t-mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  color: var(--text-primary);
+}
+
+/* ============================================================
+   BASE RESET
+   ============================================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body, #root { height: 100%; }
-body { font-family: var(--font-sans); background-color: var(--bg-page); color: var(--text-primary); -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  color: var(--text-primary);
+  background-color: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
 </style>
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-<style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body, #root { height: 100%; }
-  body { background: var(--bg-page); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
-</style>
 </head>
 <body>
 <div id="root"></div>
@@ -282,10 +747,10 @@ function Button({ variant = "primary", size = "md", onClick, children, disabled,
     md: { fontSize: 13, padding: "8px 16px", borderRadius: "var(--radius-md)" },
   };
   const variants = {
-    primary:   { background: "var(--jade-500)", color: "white", boxShadow: "var(--shadow-sm)" },
+    primary:   { background: "var(--jade-500)", color: "var(--text-on-brand)", boxShadow: "var(--shadow-sm)" },
     secondary: { background: "var(--bg-surface)", color: "var(--text-primary)", border: "1px solid var(--border-default)", boxShadow: "var(--shadow-sm)" },
     ghost:     { background: "transparent", color: "var(--text-brand)" },
-    danger:    { background: "var(--cinnabar-600)", color: "white" },
+    danger:    { background: "var(--cinnabar-600)", color: "var(--text-on-brand)" },
   };
   return <button onClick={onClick} disabled={disabled} style={{ ...base, ...sizes[size], ...variants[variant] }}>
     {icon && <Icon name={icon} size={13} />}
@@ -358,7 +823,7 @@ function Sidebar({ activeScreen, onNavigate }) {
         gap: collapsed ? 0 : 8, padding: collapsed ? "8px 0" : "7px 8px",
         borderRadius: "var(--radius-md)", cursor: "pointer",
         background: isActive ? "var(--sidebar-active)" : "transparent",
-        color: isActive ? "white" : "var(--ink-200)",
+        color: isActive ? "var(--text-on-brand)" : "var(--ink-200)",
         fontSize: 13, fontWeight: isActive ? 500 : 400,
         transition: "background 0.12s ease, color 0.12s ease", fontFamily: "var(--font-sans)",
       }}>
@@ -373,19 +838,19 @@ function Sidebar({ activeScreen, onNavigate }) {
     transition: "width 0.2s ease", overflow: "hidden",
   }}>
     {collapsed ? (
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "12px 0 10px", borderBottom: "1px solid rgba(255,255,255,0.08)", gap: 8, flexShrink: 0 }}>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "12px 0 10px", borderBottom: "1px solid var(--overlay-white-08)", gap: 8, flexShrink: 0 }}>
         <div style={{ width: 30, height: 30, background: "var(--jade-500)", borderRadius: "var(--radius-sm)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <span style={{ fontFamily: "var(--font-serif)", fontSize: 15, fontWeight: 600, color: "white" }}>K</span>
+          <span style={{ fontFamily: "var(--font-serif)", fontSize: 15, fontWeight: 600, color: "var(--text-on-brand)" }}>K</span>
         </div>
         <div key="expand-btn" onClick={() => setCollapsed(false)} style={{ cursor: "pointer", color: "var(--ink-300)", display: "flex", alignItems: "center", padding: 2, borderRadius: "var(--radius-sm)" }}>
           <Icon name="chevron-right" size={13} />
         </div>
       </div>
     ) : (
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 14px 12px", borderBottom: "1px solid rgba(255,255,255,0.08)", flexShrink: 0 }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 14px 12px", borderBottom: "1px solid var(--overlay-white-08)", flexShrink: 0 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{ width: 30, height: 30, background: "var(--jade-500)", borderRadius: "var(--radius-sm)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-            <span style={{ fontFamily: "var(--font-serif)", fontSize: 15, fontWeight: 600, color: "white" }}>K</span>
+            <span style={{ fontFamily: "var(--font-serif)", fontSize: 15, fontWeight: 600, color: "var(--text-on-brand)" }}>K</span>
           </div>
           <span style={{ fontFamily: "var(--font-serif)", fontSize: 15, fontWeight: 400, color: "var(--stone-50)", letterSpacing: "-0.01em", whiteSpace: "nowrap" }}>KoMES</span>
         </div>
@@ -406,7 +871,7 @@ function Sidebar({ activeScreen, onNavigate }) {
       {navItem("settings", "settings", "설정", activeScreen === "settings")}
     </div>
 
-    <div style={{ marginTop: "auto", padding: collapsed ? "10px 4px" : "10px 8px", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+    <div style={{ marginTop: "auto", padding: collapsed ? "10px 4px" : "10px 8px", borderTop: "1px solid var(--overlay-white-08)" }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: collapsed ? "center" : "flex-start", gap: collapsed ? 0 : 8, padding: "6px 6px", borderRadius: "var(--radius-md)", cursor: "pointer" }}>
         <Avatar name="김" size={26} />
         {!collapsed && <>
@@ -546,7 +1011,7 @@ function MiniCalendar() {
               <span style={{
                 fontSize: 12, fontWeight: sel || td ? 600 : 400,
                 fontFamily: "var(--font-mono)",
-                color: sel ? "#fff"
+                color: sel ? "var(--text-on-brand)"
                   : cell.muted ? "var(--rail-text-muted)"
                   : dow === 0 ? "var(--cinnabar-600)"
                   : dow === 6 ? "var(--jade-600)"
@@ -559,7 +1024,7 @@ function MiniCalendar() {
                   {Array.from({ length: Math.min(density, 3) }).map((_, k) => (
                     <span key={k} style={{
                       width: 3, height: 3, borderRadius: "50%",
-                      background: sel ? "rgba(255,255,255,0.85)" : "var(--jade-500)",
+                      background: sel ? "var(--overlay-white-85)" : "var(--jade-500)",
                     }} />
                   ))}
                 </div>
@@ -619,7 +1084,7 @@ function TaskItem({ task, onToggle }) {
         background: task.done ? "var(--jade-500)" : "transparent",
         display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
       }}>
-        {task.done && <Icon name="check" size={9} style={{ color: "#fff" }} />}
+        {task.done && <Icon name="check" size={9} style={{ color: "var(--text-on-brand)" }} />}
       </div>
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{
@@ -1170,7 +1635,7 @@ function NewPatientModal({ onClose, onSubmit }) {
                 }));
               }} style={{
                 height: 36, padding: "0 14px",
-                background: "var(--jade-500)", color: "#fff",
+                background: "var(--jade-500)", color: "var(--text-on-brand)",
                 border: "none", borderRadius: "var(--radius-md)",
                 fontSize: 12, fontWeight: 600, cursor: "pointer",
                 fontFamily: "var(--font-sans)",
@@ -1291,7 +1756,7 @@ function NewPatientModal({ onClose, onSubmit }) {
               padding: "8px 18px", fontSize: 13, fontWeight: 600,
               background: allRequired ? "var(--jade-500)" : "var(--stone-300)",
               border: "none", borderRadius: "var(--radius-md)",
-              color: "#fff",
+              color: "var(--text-on-brand)",
               cursor: allRequired ? "pointer" : "not-allowed",
               fontFamily: "var(--font-sans)",
               display: "inline-flex", alignItems: "center", gap: 6,
@@ -1344,18 +1809,18 @@ const DIAGNOSIS_CATALOG = [
 // phase: 1=급성기(0–7일), 2=아급성기(8–28일), 3=만성기(29일+)
 // allowedPhases: 자보 환자에서 청구 가능한 경과 단계
 const ACTING_ORDER_CATALOG = [
-  { code: "40020", key: "경혈 침술 1부위",        short: "침-1",    icon: "zap",         color: "#5C8B7E", allowedPhases: [1,2,3], default: true,  duration: 15, fee: 4920 },
-  { code: "40021", key: "경혈 침술 2부위",        short: "침-2",    icon: "zap",         color: "#5C8B7E", allowedPhases: [1,2,3], default: true,  duration: 15, fee: 6210 },
-  { code: "40022", key: "경혈 침술 3부위",        short: "침-3",    icon: "zap",         color: "#5C8B7E", allowedPhases: [2,3],   default: false, duration: 20, autoOnly: true, note: "자보 한정", fee: 7480 },
-  { code: "40080", key: "침전기 자극술",          short: "전침",    icon: "activity",    color: "#6B9E90", allowedPhases: [1,2,3], default: false, duration: 15, fee: 2860 },
-  { code: "40090", key: "직접구",                 short: "직접구",  icon: "flame",       color: "#B47A28", allowedPhases: [1,2,3], default: false, duration: 10, fee: 1830 },
-  { code: "40091", key: "간접구",                 short: "간접구",  icon: "flame",       color: "#C4974B", allowedPhases: [1,2,3], default: false, duration: 10, fee: 2200 },
-  { code: "40095", key: "기기구",                 short: "기기구",  icon: "thermometer", color: "#D4756A", allowedPhases: [1,2,3], default: false, duration: 10, fee: 2750 },
-  { code: "40300", key: "건식부항(유관법)",       short: "건부항",  icon: "circle-dot",  color: "#C4594B", allowedPhases: [1,2,3], default: false, duration: 10, fee: 5530 },
-  { code: "40310", key: "습식부항(자락관법)",     short: "습부항",  icon: "droplets",    color: "#D4756A", allowedPhases: [1,2],   default: false, duration: 10, note: "급성·아급성기", fee: 6840 },
-  { code: "40320", key: "약침술",                 short: "약침",    icon: "syringe",     color: "#4A7C6F", allowedPhases: [1,2,3], default: false, duration: 10, fee: 11540 },
-  { code: "40400", key: "추나요법(단순)",         short: "추나-단", icon: "hand",        color: "#6B7E7B", allowedPhases: [2,3],   default: false, duration: 15, note: "1주 이후 권장", fee: 14750 },
-  { code: "40401", key: "추나요법(복잡)",         short: "추나-복", icon: "hands",       color: "#5A6E8A", allowedPhases: [2,3],   default: false, duration: 30, fee: 32100 },
+  { code: "40020", key: "경혈 침술 1부위",        short: "침-1",    icon: "zap",         color: "var(--accent-pine)", allowedPhases: [1,2,3], default: true,  duration: 15, fee: 4920 },
+  { code: "40021", key: "경혈 침술 2부위",        short: "침-2",    icon: "zap",         color: "var(--accent-pine)", allowedPhases: [1,2,3], default: true,  duration: 15, fee: 6210 },
+  { code: "40022", key: "경혈 침술 3부위",        short: "침-3",    icon: "zap",         color: "var(--accent-pine)", allowedPhases: [2,3],   default: false, duration: 20, autoOnly: true, note: "자보 한정", fee: 7480 },
+  { code: "40080", key: "침전기 자극술",          short: "전침",    icon: "activity",    color: "var(--jade-400)", allowedPhases: [1,2,3], default: false, duration: 15, fee: 2860 },
+  { code: "40090", key: "직접구",                 short: "직접구",  icon: "flame",       color: "var(--amber-600)", allowedPhases: [1,2,3], default: false, duration: 10, fee: 1830 },
+  { code: "40091", key: "간접구",                 short: "간접구",  icon: "flame",       color: "var(--amber-500)", allowedPhases: [1,2,3], default: false, duration: 10, fee: 2200 },
+  { code: "40095", key: "기기구",                 short: "기기구",  icon: "thermometer", color: "var(--cinnabar-500)", allowedPhases: [1,2,3], default: false, duration: 10, fee: 2750 },
+  { code: "40300", key: "건식부항(유관법)",       short: "건부항",  icon: "circle-dot",  color: "var(--cinnabar-600)", allowedPhases: [1,2,3], default: false, duration: 10, fee: 5530 },
+  { code: "40310", key: "습식부항(자락관법)",     short: "습부항",  icon: "droplets",    color: "var(--cinnabar-500)", allowedPhases: [1,2],   default: false, duration: 10, note: "급성·아급성기", fee: 6840 },
+  { code: "40320", key: "약침술",                 short: "약침",    icon: "syringe",     color: "var(--brand)", allowedPhases: [1,2,3], default: false, duration: 10, fee: 11540 },
+  { code: "40400", key: "추나요법(단순)",         short: "추나-단", icon: "hand",        color: "var(--ink-400)", allowedPhases: [2,3],   default: false, duration: 15, note: "1주 이후 권장", fee: 14750 },
+  { code: "40401", key: "추나요법(복잡)",         short: "추나-복", icon: "hands",       color: "var(--accent-slate)", allowedPhases: [2,3],   default: false, duration: 30, fee: 32100 },
 ];
 
 // ── AI 자동완성 스니펫 (의사 작성 패턴 기반) ─────────────────────
@@ -1422,7 +1887,7 @@ function AutoInsuranceBar({ injuryDate, today = new Date(), chunaUsed = 7, herbD
       <div style={{ display: "flex", alignItems: "center", gap: 10, flexShrink: 0 }}>
         <div style={{
           width: 36, height: 36, borderRadius: "var(--radius-md)",
-          background: "rgba(255,255,255,0.1)",
+          background: "var(--overlay-white-10)",
           display: "flex", alignItems: "center", justifyContent: "center",
         }}>
           <Icon name="car" size={18} style={{ color: "var(--stone-50)" }} />
@@ -1453,7 +1918,7 @@ function AutoInsuranceBar({ injuryDate, today = new Date(), chunaUsed = 7, herbD
       </div>
 
       {/* divider */}
-      <div style={{ width: 1, background: "rgba(255,255,255,0.12)", flexShrink: 0 }} />
+      <div style={{ width: 1, background: "var(--overlay-white-12)", flexShrink: 0 }} />
 
       {/* RIGHT: 사용 한도 progress bars */}
       <div style={{ flex: 1, display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px 18px", alignItems: "center", minWidth: 0 }}>
@@ -1522,7 +1987,7 @@ function UsageBar({ icon, label, used, max, unit, pct, warn, hint }) {
           <span style={{ fontSize: 10, color: "var(--stone-300)", fontWeight: 400, marginLeft: 2 }}>{unit}</span>
         </span>
       </div>
-      <div style={{ position: "relative", height: 6, background: "rgba(255,255,255,0.12)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", overflow: "hidden" }}>
+      <div style={{ position: "relative", height: 6, background: "var(--overlay-white-12)", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", overflow: "hidden" }}>
         <div style={{
           width: `${pct}%`, height: "100%",
           background: barColor,
@@ -1593,7 +2058,7 @@ function DiagnosisSection({ initialDx = [] }) {
             }}>
               <span style={{
                 fontSize: 9, fontWeight: 700, padding: "2px 6px",
-                color: d.primary ? "#fff" : "var(--text-muted)",
+                color: d.primary ? "var(--text-on-brand)" : "var(--text-muted)",
                 background: d.primary ? "var(--jade-500)" : "var(--bg-raised)",
                 borderRadius: "var(--radius-sm)", letterSpacing: "0.04em",
                 fontFamily: "var(--font-sans)",
@@ -1818,7 +2283,7 @@ function ActingOrderPanel({ injuryDate, today = new Date() }) {
                 display: "flex", alignItems: "center", justifyContent: "center",
                 flexShrink: 0, cursor: "pointer",
               }}>
-                {o.done && <Icon name="check" size={10} style={{ color: "white" }} />}
+                {o.done && <Icon name="check" size={10} style={{ color: "var(--text-on-brand)" }} />}
               </div>
               <span style={{ fontSize: 9, fontWeight: 600, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{cat.code}</span>
               <span style={{ fontSize: 11, fontWeight: 700, color: cat.color, background: `${cat.color}18`, padding: "2px 7px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)", flexShrink: 0 }}>
@@ -1993,7 +2458,7 @@ function ActingBillingPanel({ orders = null, insurance = "건강보험" }) {
 
       <button style={{
         width: "100%", marginTop: 10, padding: "8px 12px",
-        background: "var(--jade-500)", color: "#fff", border: "none",
+        background: "var(--jade-500)", color: "var(--text-on-brand)", border: "none",
         borderRadius: "var(--radius-md)", fontSize: 12, fontWeight: 600,
         cursor: "pointer", fontFamily: "var(--font-sans)",
         display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 6,
@@ -2069,7 +2534,7 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
               background: it.done ? "var(--jade-400)" : "transparent",
               display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer",
             }}>
-              {it.done && <Icon name="check" size={9} style={{ color: "white" }} />}
+              {it.done && <Icon name="check" size={9} style={{ color: "var(--text-on-brand)" }} />}
             </div>
             <span style={{ fontSize: 9, fontWeight: 700, color: "var(--text-muted)", fontFamily: "var(--font-mono)", flexShrink: 0 }}>{it.code}</span>
             <span style={{ fontSize: 11, fontWeight: 600, color: it.color, background: `${it.color}18`, padding: "1px 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)", flexShrink: 0 }}>
@@ -2200,7 +2665,7 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
         </button>
         <button style={{
           flex: 1.4, padding: "8px 10px",
-          background: "var(--jade-500)", color: "#fff", border: "none",
+          background: "var(--jade-500)", color: "var(--text-on-brand)", border: "none",
           borderRadius: "var(--radius-md)", fontSize: 12, fontWeight: 600,
           cursor: "pointer", fontFamily: "var(--font-sans)",
           display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 5,
@@ -2243,13 +2708,13 @@ const PATIENTS = [
 ];
 
 const STAGES = [
-  { key: "예약",     icon: "calendar-clock", color: "#5A6E8A", bg: "rgba(90, 110, 138, 0.12)",  border: "rgba(90, 110, 138, 0.32)",  label: "예약" },
-  { key: "진료대기", icon: "clock",         color: "#C4974B", bg: "rgba(196, 151, 75, 0.12)", border: "rgba(196, 151, 75, 0.32)", label: "진료 대기" },
-  { key: "진료실",   icon: "stethoscope",   color: "#5C8B7E", bg: "rgba(92, 139, 126, 0.14)", border: "rgba(92, 139, 126, 0.34)", label: "진료 중" },
-  { key: "치료대기", icon: "hourglass",     color: "#6B7E7B", bg: "rgba(107, 126, 123, 0.14)", border: "rgba(107, 126, 123, 0.32)", label: "치료 대기" },
-  { key: "치료실",   icon: "activity",      color: "#6B9E90", bg: "rgba(107, 158, 144, 0.14)", border: "rgba(107, 158, 144, 0.34)", label: "치료 중" },
-  { key: "수납대기", icon: "credit-card",   color: "#9A8E82", bg: "rgba(154, 142, 130, 0.14)", border: "rgba(154, 142, 130, 0.32)", label: "수납 대기" },
-  { key: "수납완료", icon: "check-circle-2",color: "#4A7C6F", bg: "rgba(74, 124, 111, 0.16)", border: "rgba(74, 124, 111, 0.36)", label: "수납 완료" },
+  { key: "예약",     icon: "calendar-clock", color: "var(--accent-slate)", bg: "var(--accent-slate-bg)",  border: "var(--accent-slate-border)",  label: "예약" },
+  { key: "진료대기", icon: "clock",         color: "var(--amber-500)", bg: "var(--amber-500-bg)", border: "var(--amber-500-border)", label: "진료 대기" },
+  { key: "진료실",   icon: "stethoscope",   color: "var(--accent-pine)", bg: "var(--accent-pine-bg)", border: "var(--accent-pine-border)", label: "진료 중" },
+  { key: "치료대기", icon: "hourglass",     color: "var(--ink-400)", bg: "var(--ink-400-bg)", border: "var(--ink-400-border)", label: "치료 대기" },
+  { key: "치료실",   icon: "activity",      color: "var(--jade-400)", bg: "var(--jade-400-bg)", border: "var(--jade-400-border)", label: "치료 중" },
+  { key: "수납대기", icon: "credit-card",   color: "var(--stone-700)", bg: "var(--stone-700-bg)", border: "var(--stone-700-border)", label: "수납 대기" },
+  { key: "수납완료", icon: "check-circle-2",color: "var(--brand)", bg: "var(--brand-muted)", border: "var(--border-brand)", label: "수납 완료" },
 ];
 
 const STAGE_BY_KEY = STAGES.reduce((a, s) => (a[s.key] = s, a), {});
@@ -2257,10 +2722,10 @@ const STAGE_BY_KEY = STAGES.reduce((a, s) => (a[s.key] = s, a), {});
 // High-level groupings for the dashboard board.
 // Each group bundles its sub-stages and uses a single column color identity.
 const GROUPS = [
-  { key: "예약", label: "예약", icon: "calendar-clock", color: "#5A6E8A", bg: "var(--board-appt-bg)",  border: "var(--board-appt-border)",  subStages: ["예약"] },
-  { key: "대기", label: "대기", icon: "clock",          color: "#B5873E", bg: "var(--board-wait-bg)",  border: "var(--board-wait-border)",  subStages: ["진료대기", "치료대기"] },
-  { key: "치료", label: "치료", icon: "activity",       color: "#3A7065", bg: "var(--board-treat-bg)", border: "var(--board-treat-border)", subStages: ["진료실", "치료실"] },
-  { key: "수납", label: "수납", icon: "credit-card",    color: "#7A6E60", bg: "var(--board-pay-bg)",   border: "var(--board-pay-border)",   subStages: ["수납대기", "수납완료"] },
+  { key: "예약", label: "예약", icon: "calendar-clock", color: "var(--accent-slate)", bg: "var(--board-appt-bg)",  border: "var(--board-appt-border)",  subStages: ["예약"] },
+  { key: "대기", label: "대기", icon: "clock",          color: "var(--accent-bronze)", bg: "var(--board-wait-bg)",  border: "var(--board-wait-border)",  subStages: ["진료대기", "치료대기"] },
+  { key: "치료", label: "치료", icon: "activity",       color: "var(--jade-600)", bg: "var(--board-treat-bg)", border: "var(--board-treat-border)", subStages: ["진료실", "치료실"] },
+  { key: "수납", label: "수납", icon: "credit-card",    color: "var(--stone-800)", bg: "var(--board-pay-bg)",   border: "var(--board-pay-border)",   subStages: ["수납대기", "수납완료"] },
 ];
 
 const NEXT_STAGE = {
@@ -2366,7 +2831,7 @@ function PatientCard({ patient, stage, onSelect, onAdvance }) {
                 style={{
                   display: "flex", alignItems: "center", gap: 4,
                   fontSize: 11, fontWeight: 500,
-                  color: hoveredBtn === "next" ? "#fff" : "var(--text-brand)",
+                  color: hoveredBtn === "next" ? "var(--text-on-brand)" : "var(--text-brand)",
                   background: hoveredBtn === "next" ? "var(--brand)" : "var(--brand-muted)",
                   border: `1px solid ${hoveredBtn === "next" ? "var(--brand)" : "var(--brand-muted)"}`,
                   borderRadius: "var(--radius-sm)", padding: "3px 9px",
@@ -2382,7 +2847,7 @@ function PatientCard({ patient, stage, onSelect, onAdvance }) {
                 style={{
                   display: "flex", alignItems: "center", gap: 4,
                   fontSize: 11, fontWeight: 500,
-                  color: hoveredBtn === "skip" ? "#fff" : "var(--text-brand)",
+                  color: hoveredBtn === "skip" ? "var(--text-on-brand)" : "var(--text-brand)",
                   background: hoveredBtn === "skip" ? "var(--brand)" : "var(--brand-muted)",
                   border: `1px solid ${hoveredBtn === "skip" ? "var(--brand)" : "var(--brand-muted)"}`,
                   borderRadius: "var(--radius-sm)", padding: "3px 9px",
@@ -2406,13 +2871,13 @@ function SubStageSection({ stage, patients, onSelect, onAdvance, showDivider, is
       onDrop={e => { e.preventDefault(); const id = Number(e.dataTransfer.getData("patientId")); if (id) onDrop(id, stage.key); setDragOver(null); }}
       style={{
         flex: isLast ? 1 : undefined,
-        background: isOver ? "rgba(0,0,0,0.04)" : "transparent",
+        background: isOver ? "var(--scrim-black-04)" : "transparent",
         transition: "background 0.12s ease",
       }}>
       <div style={{
         display: "flex", alignItems: "center", gap: 6,
         padding: "8px 12px 6px",
-        borderTop: showDivider ? "1px dashed rgba(0,0,0,0.08)" : "none",
+        borderTop: showDivider ? "1px dashed var(--scrim-black-08)" : "none",
       }}>
         <Icon name={stage.icon} size={11} style={{ color: stage.color }} />
         <span style={{
@@ -2431,9 +2896,9 @@ function SubStageSection({ stage, patients, onSelect, onAdvance, showDivider, is
             fontSize: 10, color: stage.color, opacity: isOver ? 0.9 : 0.4,
             textAlign: "center", padding: "8px 0",
             fontFamily: "var(--font-sans)",
-            border: `1px dashed ${isOver ? stage.color : "rgba(0,0,0,0.08)"}`,
+            border: `1px dashed ${isOver ? stage.color : "var(--scrim-black-08)"}`,
             borderRadius: "var(--radius-sm)",
-            background: isOver ? "rgba(0,0,0,0.03)" : "transparent",
+            background: isOver ? "var(--scrim-black-03)" : "transparent",
           }}>{isOver ? "여기에 놓기" : "—"}</div>
         )}
         {patients.map(p => (
@@ -2466,7 +2931,7 @@ function GroupColumn({ group, patients, onSelect, onAdvance, dragOver, setDragOv
         padding: "12px 14px",
         borderBottom: `1px solid ${group.border}`,
         display: "flex", alignItems: "center", justifyContent: "space-between",
-        background: "rgba(0,0,0,0.04)",
+        background: "var(--scrim-black-04)",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <Icon name={group.icon} size={16} style={{ color: group.color }} />
@@ -2477,7 +2942,7 @@ function GroupColumn({ group, patients, onSelect, onAdvance, dragOver, setDragOv
         </div>
         <span style={{
           fontSize: 11, fontWeight: 700,
-          background: group.color, color: "#fff",
+          background: group.color, color: "var(--text-on-brand)",
           borderRadius: "var(--radius-full)", whiteSpace: "nowrap", minWidth: 22, height: 22,
           padding: "0 7px",
           display: "flex", alignItems: "center", justifyContent: "center",
@@ -2750,15 +3215,15 @@ const PATIENT_MASTER = [
 const PATIENT_BY_ID = PATIENT_MASTER.reduce((a, p) => (a[p.id] = p, a), {});
 
 const RELATION_TYPES = [
-  { key: "배우자",   icon: "heart",    color: "#C4594B" },
-  { key: "부모",     icon: "user",     color: "#5A6E8A" },
-  { key: "자녀",     icon: "smile",    color: "#5C8B7E" },
-  { key: "형제자매", icon: "users",    color: "#6B9E90" },
-  { key: "친구",     icon: "user-plus", color: "#9A8E82" },
-  { key: "지인",     icon: "user-plus", color: "#9A8E82" },
-  { key: "지인 소개", icon: "share-2", color: "#B5873E" },
-  { key: "직장 동료", icon: "briefcase", color: "#5A6E8A" },
-  { key: "기타",     icon: "circle",   color: "#9A8E82" },
+  { key: "배우자",   icon: "heart",    color: "var(--cinnabar-600)" },
+  { key: "부모",     icon: "user",     color: "var(--accent-slate)" },
+  { key: "자녀",     icon: "smile",    color: "var(--accent-pine)" },
+  { key: "형제자매", icon: "users",    color: "var(--jade-400)" },
+  { key: "친구",     icon: "user-plus", color: "var(--stone-700)" },
+  { key: "지인",     icon: "user-plus", color: "var(--stone-700)" },
+  { key: "지인 소개", icon: "share-2", color: "var(--accent-bronze)" },
+  { key: "직장 동료", icon: "briefcase", color: "var(--accent-slate)" },
+  { key: "기타",     icon: "circle",   color: "var(--stone-700)" },
 ];
 
 const TAG_COLORS = {
@@ -3108,7 +3573,7 @@ function PatientDetailPanel({ patient, onClose, onSelectPatient, onOpenChart, al
         {/* Action */}
         <button onClick={() => onOpenChart(patient)} style={{
           width: "100%", marginTop: 12, padding: "8px 12px",
-          background: "var(--jade-500)", color: "#fff",
+          background: "var(--jade-500)", color: "var(--text-on-brand)",
           border: "none", borderRadius: "var(--radius-md)",
           fontSize: 13, fontWeight: 600, cursor: "pointer",
           fontFamily: "var(--font-sans)",
@@ -3431,13 +3896,13 @@ const HISTORY = [
 ];
 
 const ACTING_TYPES = [
-  { key: "체침",   icon: "zap",        color: "#5C8B7E" },
-  { key: "전침",   icon: "activity",   color: "#6B9E90" },
-  { key: "약침",   icon: "syringe",    color: "#4A7C6F" },
-  { key: "뜸",     icon: "flame",      color: "#C4974B" },
-  { key: "부항",   icon: "droplets",   color: "#D4756A" },
-  { key: "추나",   icon: "hand",       color: "#8A9E9A" },
-  { key: "레이저", icon: "scan-line",  color: "#6B7E7B" },
+  { key: "체침",   icon: "zap",        color: "var(--accent-pine)" },
+  { key: "전침",   icon: "activity",   color: "var(--jade-400)" },
+  { key: "약침",   icon: "syringe",    color: "var(--brand)" },
+  { key: "뜸",     icon: "flame",      color: "var(--amber-500)" },
+  { key: "부항",   icon: "droplets",   color: "var(--cinnabar-500)" },
+  { key: "추나",   icon: "hand",       color: "var(--ink-300)" },
+  { key: "레이저", icon: "scan-line",  color: "var(--ink-400)" },
 ];
 
 // ── Section Header ───────────────────────────────────────────────
@@ -3485,7 +3950,7 @@ function ActingOrderBlock({ orders, editable }) {
             transition: "all 0.12s",
           }}>
             <div style={{ width: 18, height: 18, borderRadius: "var(--radius-sm)", border: `2px solid ${o.done ? "var(--jade-400)" : "var(--border-default)"}`, background: o.done ? "var(--jade-400)" : "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "all 0.12s" }}>
-              {o.done && <Icon name="check" size={11} style={{ color: "white" }} />}
+              {o.done && <Icon name="check" size={11} style={{ color: "var(--text-on-brand)" }} />}
             </div>
             <span style={{ fontSize: 11, fontWeight: 700, color: typeInfo.color, background: `${typeInfo.color}28`, padding: "2px 7px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)", flexShrink: 0 }}>{o.type}</span>
             <span style={{ fontSize: 13, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flex: 1, textDecoration: o.done ? "line-through" : "none" }}>{o.sites}</span>
@@ -3501,11 +3966,11 @@ function ActingOrderBlock({ orders, editable }) {
       )}
       {editable && adding && (
         <div style={{ display: "flex", gap: 8, alignItems: "center", padding: "8px 12px", borderRadius: "var(--radius-md)", border: "1px solid var(--border-brand)", background: "var(--brand-subtle)" }}>
-          <select value={newType} onChange={e => setNewType(e.target.value)} style={{ fontSize: 12, fontFamily: "var(--font-sans)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-sm)", padding: "4px 6px", background: "white", color: "var(--text-primary)" }}>
+          <select value={newType} onChange={e => setNewType(e.target.value)} style={{ fontSize: 12, fontFamily: "var(--font-sans)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-sm)", padding: "4px 6px", background: "var(--bg-surface)", color: "var(--text-primary)" }}>
             {ACTING_TYPES.map(t => <option key={t.key}>{t.key}</option>)}
           </select>
           <input value={newSites} onChange={e => setNewSites(e.target.value)} placeholder="부위 입력..." style={{ flex: 1, fontSize: 13, fontFamily: "var(--font-sans)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-sm)", padding: "5px 8px", outline: "none" }} />
-          <button onClick={addItem} style={{ fontSize: 12, color: "white", background: "var(--jade-500)", border: "none", borderRadius: "var(--radius-sm)", padding: "5px 10px", cursor: "pointer", fontFamily: "var(--font-sans)" }}>추가</button>
+          <button onClick={addItem} style={{ fontSize: 12, color: "var(--text-on-brand)", background: "var(--jade-500)", border: "none", borderRadius: "var(--radius-sm)", padding: "5px 10px", cursor: "pointer", fontFamily: "var(--font-sans)" }}>추가</button>
           <button onClick={() => setAdding(false)} style={{ fontSize: 12, color: "var(--text-muted)", background: "none", border: "none", cursor: "pointer" }}>취소</button>
         </div>
       )}
@@ -4069,11 +4534,11 @@ const { useState: useStateRxM, useMemo: useMemoRxM } = React;
 
 // ── Workflow columns ────────────────────────────────────────────────
 const RX_COLUMNS = [
-  { key: "received",   label: "접수",     icon: "inbox",          color: "#5A6E8A", bg: "var(--board-appt-bg)",  border: "var(--board-appt-border)",  next: "dispensing" },
-  { key: "dispensing", label: "조제중",   icon: "flask-conical",  color: "#B5873E", bg: "var(--board-wait-bg)",  border: "var(--board-wait-border)",  next: ["pickup", "shipping"] },
-  { key: "pickup",     label: "픽업 대기", icon: "shopping-bag",  color: "#3A7065", bg: "var(--board-treat-bg)", border: "var(--board-treat-border)", next: "completed" },
-  { key: "shipping",   label: "배송중",   icon: "truck",          color: "#5A7EA0", bg: "var(--board-pay-bg)",   border: "var(--board-pay-border)",   next: "completed" },
-  { key: "completed",  label: "완료",     icon: "check-circle-2", color: "#6B8C7A", bg: "var(--bg-raised)",      border: "var(--border-subtle)",      next: null },
+  { key: "received",   label: "접수",     icon: "inbox",          color: "var(--accent-slate)", bg: "var(--board-appt-bg)",  border: "var(--board-appt-border)",  next: "dispensing" },
+  { key: "dispensing", label: "조제중",   icon: "flask-conical",  color: "var(--accent-bronze)", bg: "var(--board-wait-bg)",  border: "var(--board-wait-border)",  next: ["pickup", "shipping"] },
+  { key: "pickup",     label: "픽업 대기", icon: "shopping-bag",  color: "var(--jade-600)", bg: "var(--board-treat-bg)", border: "var(--board-treat-border)", next: "completed" },
+  { key: "shipping",   label: "배송중",   icon: "truck",          color: "var(--accent-marine)", bg: "var(--board-pay-bg)",   border: "var(--board-pay-border)",   next: "completed" },
+  { key: "completed",  label: "완료",     icon: "check-circle-2", color: "var(--brand)", bg: "var(--bg-raised)",      border: "var(--border-subtle)",      next: null },
 ];
 
 // ── Sample prescriptions ────────────────────────────────────────────
@@ -4597,9 +5062,9 @@ for (let h = 9; h < 19; h++) {
 
 // Mock doctors (rooms)
 const DOCTORS_SCH = [
-  { id: "d1", name: "김민준 원장", room: "진료실 1", color: "#6B9E90", bg: "var(--doc-d1-bg)", border: "var(--doc-d1-border)" },
-  { id: "d2", name: "이지영 원장", room: "진료실 2", color: "#B5873E", bg: "var(--doc-d2-bg)", border: "var(--doc-d2-border)" },
-  { id: "d3", name: "박서윤 부원장", room: "치료실 A", color: "#5A6E8A", bg: "var(--doc-d3-bg)", border: "var(--doc-d3-border)" },
+  { id: "d1", name: "김민준 원장", room: "진료실 1", color: "var(--jade-400)", bg: "var(--doc-d1-bg)", border: "var(--doc-d1-border)" },
+  { id: "d2", name: "이지영 원장", room: "진료실 2", color: "var(--accent-bronze)", bg: "var(--doc-d2-bg)", border: "var(--doc-d2-border)" },
+  { id: "d3", name: "박서윤 부원장", room: "치료실 A", color: "var(--accent-slate)", bg: "var(--doc-d3-bg)", border: "var(--doc-d3-border)" },
 ];
 
 // Treatment types
@@ -4885,7 +5350,7 @@ function NewAppointmentModal({ initial, onClose, onSubmit }) {
             style={{
               padding: "8px 18px", fontSize: 13, fontWeight: 600,
               background: d.patient ? "var(--jade-500)" : "var(--stone-300)",
-              border: "none", borderRadius: "var(--radius-md)", color: "#fff",
+              border: "none", borderRadius: "var(--radius-md)", color: "var(--text-on-brand)",
               cursor: d.patient ? "pointer" : "not-allowed",
               fontFamily: "var(--font-sans)",
               display: "inline-flex", alignItems: "center", gap: 6,
@@ -5154,7 +5619,7 @@ function WeekView({ date, appts, onCellClick, onApptClick, doctorFilter }) {
               <div key={di} style={{
                 position: "relative",
                 borderLeft: "1px solid var(--border-subtle)",
-                background: isToday ? "rgba(74,124,111,0.03)" : "transparent",
+                background: isToday ? "var(--brand-tint)" : "transparent",
               }}>
                 {Array.from({ length: 10 }).map((_, hi) => (
                   <div key={hi}
@@ -5253,7 +5718,7 @@ function MonthView({ date, appts, onCellClick, onDayClick, onApptClick, doctorFi
                 <span style={{
                   fontFamily: "var(--font-mono)",
                   fontSize: 12, fontWeight: isToday ? 700 : 500,
-                  color: isToday ? "#fff" : dow === 0 ? "var(--cinnabar-600)" : dow === 6 ? "var(--jade-600)" : "var(--text-primary)",
+                  color: isToday ? "var(--text-on-brand)" : dow === 0 ? "var(--cinnabar-600)" : dow === 6 ? "var(--jade-600)" : "var(--text-primary)",
                   background: isToday ? "var(--jade-500)" : "transparent",
                   borderRadius: "50%",
                   width: 22, height: 22,
@@ -5309,7 +5774,7 @@ function ApptDetail({ appt, onClose, onChangeStatus }) {
   return (
     <div onClick={onClose} style={{
       position: "fixed", inset: 0, zIndex: 80,
-      background: "rgba(17,30,28,0.3)",
+      background: "rgba(var(--ink-900-rgb), 0.3)",
       display: "flex", justifyContent: "flex-end",
     }}>
       <div onClick={e => e.stopPropagation()} style={{
@@ -5335,7 +5800,7 @@ function ApptDetail({ appt, onClose, onChangeStatus }) {
           </div>
           <button onClick={onClose} style={{
             width: 28, height: 28, borderRadius: "var(--radius-sm)",
-            background: "rgba(255,255,255,0.6)", border: "1px solid var(--border-subtle)",
+            background: "var(--overlay-white-60)", border: "1px solid var(--border-subtle)",
             cursor: "pointer", color: "var(--text-secondary)",
             display: "inline-flex", alignItems: "center", justifyContent: "center",
           }}>
@@ -5419,7 +5884,7 @@ function ApptDetail({ appt, onClose, onChangeStatus }) {
           <button style={{
             flex: 1, padding: "8px 12px", fontSize: 12, fontWeight: 600,
             background: "var(--jade-500)", border: "none",
-            borderRadius: "var(--radius-md)", color: "#fff",
+            borderRadius: "var(--radius-md)", color: "var(--text-on-brand)",
             cursor: "pointer", fontFamily: "var(--font-sans)",
             display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 5,
           }}><Icon name="user-check" size={12} />접수 처리</button>
@@ -5552,7 +6017,7 @@ function ScheduleScreen() {
             <button onClick={() => setDoctorFilter("")} style={{
               padding: "4px 10px", fontSize: 11, fontWeight: doctorFilter === "" ? 600 : 400,
               background: doctorFilter === "" ? "var(--jade-500)" : "var(--bg-surface)",
-              color: doctorFilter === "" ? "#fff" : "var(--text-secondary)",
+              color: doctorFilter === "" ? "var(--text-on-brand)" : "var(--text-secondary)",
               border: `1px solid ${doctorFilter === "" ? "var(--jade-500)" : "var(--border-subtle)"}`,
               borderRadius: "var(--radius-full)", whiteSpace: "nowrap", cursor: "pointer", fontFamily: "var(--font-sans)",
             }}>전체</button>
@@ -5768,23 +6233,23 @@ function PayMethodBtn({ icon, label, hint, primary, onClick, disabled }) {
     }}>
       <div style={{
         width: 36, height: 36, borderRadius: "var(--radius-md)",
-        background: primary ? "rgba(255,255,255,0.2)" : "var(--brand-subtle)",
-        color: primary ? "#fff" : "var(--text-brand)",
+        background: primary ? "var(--overlay-white-20)" : "var(--brand-subtle)",
+        color: primary ? "var(--text-on-brand)" : "var(--text-brand)",
         display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
       }}>
         <Icon name={icon} size={18} />
       </div>
       <div style={{ flex: 1, textAlign: "left" }}>
-        <div style={{ fontSize: 14, fontWeight: 600, color: primary ? "#fff" : "var(--text-primary)" }}>
+        <div style={{ fontSize: 14, fontWeight: 600, color: primary ? "var(--text-on-brand)" : "var(--text-primary)" }}>
           {label}
         </div>
         {hint && (
-          <div style={{ fontSize: 11, color: primary ? "rgba(255,255,255,0.8)" : "var(--text-muted)", marginTop: 2 }}>
+          <div style={{ fontSize: 11, color: primary ? "var(--overlay-white-80)" : "var(--text-muted)", marginTop: 2 }}>
             {hint}
           </div>
         )}
       </div>
-      <Icon name="chevron-right" size={16} style={{ color: primary ? "#fff" : "var(--text-muted)" }} />
+      <Icon name="chevron-right" size={16} style={{ color: primary ? "var(--text-on-brand)" : "var(--text-muted)" }} />
     </button>
   );
 }
@@ -5913,7 +6378,7 @@ function PaymentScreen() {
                     fontSize: 10, fontWeight: 700, padding: "1px 7px",
                     borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
                     background: active ? t.color : "var(--bg-raised)",
-                    color: active ? "#fff" : "var(--text-muted)",
+                    color: active ? "var(--text-on-brand)" : "var(--text-muted)",
                     fontFamily: "var(--font-mono)",
                   }}>{t.n}</span>
                 </button>
@@ -6138,7 +6603,7 @@ function PaymentScreen() {
                         style={{
                           flex: 1, padding: "5px 8px", fontSize: 11, fontWeight: 600,
                           background: selected.discountType === o.k ? "var(--jade-500)" : "var(--bg-surface)",
-                          color: selected.discountType === o.k ? "#fff" : "var(--text-secondary)",
+                          color: selected.discountType === o.k ? "var(--text-on-brand)" : "var(--text-secondary)",
                           border: `1px solid ${selected.discountType === o.k ? "var(--jade-500)" : "var(--border-default)"}`,
                           borderRadius: "var(--radius-sm)",
                           cursor: selected.status === "완료" ? "not-allowed" : "pointer",
@@ -6227,7 +6692,7 @@ function PaymentScreen() {
                   <button style={completedActionBtn}>
                     <Icon name="rotate-ccw" size={14} />수납 취소
                   </button>
-                  <button style={{ ...completedActionBtn, background: "var(--jade-500)", color: "#fff", border: "none" }}>
+                  <button style={{ ...completedActionBtn, background: "var(--jade-500)", color: "var(--text-on-brand)", border: "none" }}>
                     <Icon name="printer" size={14} />영수증 출력
                   </button>
                 </div>
@@ -6292,7 +6757,7 @@ function PaymentScreen() {
               <button onClick={() => handlePay(confirmMethod)} style={{
                 padding: "8px 18px", fontSize: 13, fontWeight: 600,
                 background: "var(--jade-500)", border: "none",
-                borderRadius: "var(--radius-md)", color: "#fff",
+                borderRadius: "var(--radius-md)", color: "var(--text-on-brand)",
                 cursor: "pointer", fontFamily: "var(--font-sans)",
                 display: "inline-flex", alignItems: "center", gap: 6,
                 boxShadow: "var(--shadow-sm)",
@@ -6949,13 +7414,13 @@ function HerbAdjustmentScreen({ onClose, onSubmit }) {
       {/* Mode banner */}
       <div style={{
         background: "linear-gradient(90deg, var(--jade-800) 0%, var(--jade-700) 100%)",
-        color: "white", padding: "10px 24px",
+        color: "var(--text-on-brand)", padding: "10px 24px",
         display: "flex", alignItems: "center", gap: 12,
-        boxShadow: "0 2px 4px rgba(17,30,28,0.1)",
+        boxShadow: "0 2px 4px rgba(var(--ink-900-rgb), 0.1)",
       }}>
         <Icon name="clipboard-check" size={16} style={{ color: "var(--stone-300)" }} />
         <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.04em" }}>재고 실사 모드</div>
-        <div style={{ width: 1, height: 14, background: "rgba(255,255,255,0.2)" }}></div>
+        <div style={{ width: 1, height: 14, background: "var(--overlay-white-20)" }}></div>
         <div style={{ fontSize: 11, color: "var(--stone-300)" }}>약재 · 시스템 재고와 실측 수량의 차이를 보정합니다</div>
         <div style={{ flex: 1 }}></div>
         <div style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--stone-300)" }}>
@@ -7966,7 +8431,7 @@ const SUP_CAT_COLOR = {
   "의료":   { bg: "var(--brand-subtle)",     fg: "var(--text-brand)",     border: "var(--brand-muted)" },
   "포장재": { bg: "var(--status-warning-bg)",   fg: "var(--status-warning-text)",    border: "var(--status-warning-border)" },
   "사무":   { bg: "var(--bg-raised)",   fg: "var(--text-secondary)",      border: "var(--border-subtle)" },
-  "청소":   { bg: "rgba(96, 130, 175, 0.12)", fg: "#6082AF",      border: "rgba(96, 130, 175, 0.30)" },
+  "청소":   { bg: "var(--accent-marine-bg)", fg: "var(--accent-marine)",      border: "var(--accent-marine-border)" },
 };
 
 // 상태 판정
@@ -8499,13 +8964,13 @@ function SupplyAdjustmentScreen({ onClose, onSubmit }) {
     <div style={{ display: "flex", flexDirection: "column", height: "100%", background: "var(--bg-page)" }}>
       <div style={{
         background: "linear-gradient(90deg, var(--jade-800) 0%, var(--jade-700) 100%)",
-        color: "white", padding: "10px 24px",
+        color: "var(--text-on-brand)", padding: "10px 24px",
         display: "flex", alignItems: "center", gap: 12,
-        boxShadow: "0 2px 4px rgba(17,30,28,0.1)",
+        boxShadow: "0 2px 4px rgba(var(--ink-900-rgb), 0.1)",
       }}>
         <Icon name="clipboard-check" size={16} style={{ color: "var(--stone-300)" }} />
         <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.04em" }}>재고 실사 모드</div>
-        <div style={{ width: 1, height: 14, background: "rgba(255,255,255,0.2)" }}></div>
+        <div style={{ width: 1, height: 14, background: "var(--overlay-white-20)" }}></div>
         <div style={{ fontSize: 11, color: "var(--stone-300)" }}>소모품 · 의료·포장재·사무·청소 품목의 실사를 진행합니다</div>
         <div style={{ flex: 1 }}></div>
         <div style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--stone-300)" }}>
@@ -10529,12 +10994,12 @@ function PurchaseOrderDraftScreen({ onClose, onSubmit, initialRecommendations })
       {/* Mode banner */}
       <div style={{
         background: "linear-gradient(90deg, var(--jade-800) 0%, var(--jade-700) 100%)",
-        color: "white", padding: "10px 24px",
+        color: "var(--text-on-brand)", padding: "10px 24px",
         display: "flex", alignItems: "center", gap: 12,
       }}>
         <Icon name="sparkles" size={16} style={{ color: "var(--stone-300)" }} />
         <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.04em" }}>AI 추천 발주서 초안</div>
-        <div style={{ width: 1, height: 14, background: "rgba(255,255,255,0.2)" }}></div>
+        <div style={{ width: 1, height: 14, background: "var(--overlay-white-20)" }}></div>
         <div style={{ fontSize: 11, color: "var(--stone-300)" }}>
           공급처 {drafts.length}곳 · 총 {totalItems}품목 · 합계 {won(totalAll)} — 검토 후 승인 요청
         </div>
@@ -11867,8 +12332,8 @@ function RSToggle({ label, desc, value, onChange }) {
       }}>
         <div style={{
           position: "absolute", top: 2, left: value ? 18 : 2,
-          width: 16, height: 16, borderRadius: "50%", background: "white",
-          transition: "left 0.12s ease", boxShadow: "0 1px 3px rgba(0,0,0,0.15)",
+          width: 16, height: 16, borderRadius: "50%", background: "var(--bg-surface)",
+          transition: "left 0.12s ease", boxShadow: "0 1px 3px var(--scrim-black-15)",
         }}></div>
       </div>
     </div>
@@ -12135,7 +12600,7 @@ function ClaimTypeTabs({ active, onChange, counts }) {
             <div style={{
               width: 28, height: 28, borderRadius: "var(--radius-md)",
               background: isActive ? t.pillColor : "var(--bg-raised)",
-              color: isActive ? "#fff" : "var(--text-muted)",
+              color: isActive ? "var(--text-on-brand)" : "var(--text-muted)",
               display: "flex", alignItems: "center", justifyContent: "center",
               transition: "all 0.12s",
             }}>
@@ -12156,7 +12621,7 @@ function ClaimTypeTabs({ active, onChange, counts }) {
               fontSize: 11, fontWeight: 700, padding: "2px 8px",
               borderRadius: "var(--radius-full)", whiteSpace: "nowrap",
               background: isActive ? t.pillColor : "var(--bg-raised)",
-              color: isActive ? "#fff" : "var(--text-muted)",
+              color: isActive ? "var(--text-on-brand)" : "var(--text-muted)",
               fontFamily: "var(--font-mono)", marginLeft: 4,
             }}>{counts[t.key]}</span>
           </button>
@@ -12265,7 +12730,7 @@ function PeriodAndSummary({
         <button onClick={onLoadClaims} style={{
           padding: "11px 14px",
           background: loaded ? "var(--bg-surface)" : "var(--jade-500)",
-          color: loaded ? "var(--text-secondary)" : "#fff",
+          color: loaded ? "var(--text-secondary)" : "var(--text-on-brand)",
           border: loaded ? "1px solid var(--border-default)" : "none",
           borderRadius: "var(--radius-md)",
           fontFamily: "var(--font-sans)", fontSize: 13, fontWeight: 600,
@@ -12428,7 +12893,7 @@ function RadioRow({ checked, onClick, children }) {
 const pillBtn = (active) => ({
   flex: 1, padding: "6px 8px", fontSize: 12, fontWeight: 500,
   background: active ? "var(--jade-500)" : "var(--bg-surface)",
-  color: active ? "#fff" : "var(--text-secondary)",
+  color: active ? "var(--text-on-brand)" : "var(--text-secondary)",
   border: `1px solid ${active ? "var(--jade-500)" : "var(--border-default)"}`,
   borderRadius: "var(--radius-sm)",
   cursor: "pointer", fontFamily: "var(--font-sans)",
@@ -12778,7 +13243,7 @@ function ActionBar({ type, summary, selected, errorCount, onSubmitAll, onSubmitS
       padding: "12px 18px",
       background: "var(--bg-surface)",
       borderTop: "1px solid var(--border-subtle)",
-      boxShadow: "0 -2px 8px rgba(17, 30, 28, 0.04)",
+      boxShadow: "0 -2px 8px rgba(var(--ink-900-rgb), 0.04)",
       flexShrink: 0,
     }}>
       {/* Secondary records (건보/첩약만) */}
@@ -12837,7 +13302,7 @@ function ActionBar({ type, summary, selected, errorCount, onSubmitAll, onSubmitS
 
       <button onClick={onSubmitAll} style={{
         padding: "10px 22px", fontSize: 14, fontWeight: 600,
-        background: "var(--jade-500)", color: "#fff",
+        background: "var(--jade-500)", color: "var(--text-on-brand)",
         border: "none",
         borderRadius: "var(--radius-md)",
         cursor: "pointer", fontFamily: "var(--font-sans)",
@@ -13009,12 +13474,12 @@ function ClaimSubmissionFlow({ items, type, summary, onClose, scenario }) {
         <div style={{
           padding: "20px 28px",
           background: "linear-gradient(135deg, var(--jade-700), var(--jade-800))",
-          color: "#fff",
+          color: "var(--text-on-brand)",
           display: "flex", alignItems: "center", gap: 14,
         }}>
           <div style={{
             width: 42, height: 42, borderRadius: "var(--radius-md)",
-            background: "rgba(255,255,255,0.15)",
+            background: "var(--overlay-white-15)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
             <Icon name="send-horizonal" size={20} />
@@ -13034,8 +13499,8 @@ function ClaimSubmissionFlow({ items, type, summary, onClose, scenario }) {
           </div>
           <button onClick={() => onClose("cancel")} style={{
             width: 32, height: 32, borderRadius: "var(--radius-md)",
-            background: "rgba(255,255,255,0.1)", border: "none",
-            color: "rgba(255,255,255,0.8)", cursor: "pointer",
+            background: "var(--overlay-white-10)", border: "none",
+            color: "var(--overlay-white-80)", cursor: "pointer",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
             <Icon name="x" size={16} />
@@ -13298,7 +13763,7 @@ function PretestResults({ results }) {
             }}>
               <span style={{
                 fontFamily: "var(--font-mono)", fontSize: 10, fontWeight: 700,
-                color: "#fff", background: "var(--status-danger-text)",
+                color: "var(--text-on-brand)", background: "var(--status-danger-text)",
                 padding: "2px 6px", borderRadius: "var(--radius-sm)",
                 flexShrink: 0, marginTop: 1,
               }}>{e.code}</span>
@@ -13329,7 +13794,7 @@ const ftrBtnSecondary = {
 };
 const ftrBtnPrimary = {
   padding: "8px 16px", fontSize: 12, fontWeight: 600,
-  background: "var(--jade-500)", color: "#fff",
+  background: "var(--jade-500)", color: "var(--text-on-brand)",
   border: "none",
   borderRadius: "var(--radius-md)",
   cursor: "pointer", fontFamily: "var(--font-sans)",
@@ -13616,7 +14081,7 @@ function EmptyState({ type, onLoad }) {
       </div>
       <button onClick={onLoad} style={{
         marginTop: 6, padding: "10px 22px", fontSize: 13, fontWeight: 600,
-        background: "var(--jade-500)", color: "#fff",
+        background: "var(--jade-500)", color: "var(--text-on-brand)",
         border: "none", borderRadius: "var(--radius-md)",
         cursor: "pointer", fontFamily: "var(--font-sans)",
         display: "inline-flex", alignItems: "center", gap: 8,
@@ -13749,7 +14214,7 @@ function PPChip({ active, onClick, children, count }) {
       padding: "5px 11px", borderRadius: 999,
       border: `1px solid ${active ? "var(--jade-500)" : "var(--border-subtle)"}`,
       background: active ? "var(--jade-500)" : "var(--bg-surface)",
-      color: active ? "white" : "var(--text-secondary)",
+      color: active ? "var(--text-on-brand)" : "var(--text-secondary)",
       fontSize: 11.5, fontWeight: active ? 600 : 500, cursor: "pointer",
       fontFamily: "var(--font-sans)", transition: "all 0.12s ease",
     }}>
@@ -13758,8 +14223,8 @@ function PPChip({ active, onClick, children, count }) {
         <span style={{
           fontSize: 10, fontWeight: 700, fontFamily: "var(--font-mono)",
           padding: "0 5px", borderRadius: 8,
-          background: active ? "rgba(255,255,255,0.22)" : "var(--bg-raised)",
-          color: active ? "white" : "var(--text-muted)",
+          background: active ? "var(--overlay-white-22)" : "var(--bg-raised)",
+          color: active ? "var(--text-on-brand)" : "var(--text-muted)",
         }}>{count}</span>
       )}
     </button>
@@ -14202,61 +14667,61 @@ function DiagnosisPreviewA4({ data, clinic, patient }) {
   const Chk = ({ on }) => (
     <span style={{
       display: "inline-flex", alignItems: "center", justifyContent: "center",
-      width: 13, height: 13, border: "1.2px solid #111", marginRight: 4,
+      width: 13, height: 13, border: "1.2px solid var(--form-border)", marginRight: 4,
       fontSize: 11, lineHeight: 1, fontFamily: "var(--font-serif)",
       verticalAlign: "middle",
     }}>{on ? "√" : ""}</span>
   );
 
   const td = {
-    padding: "6px 8px", borderBottom: "1px solid #111", borderRight: "1px solid #111",
-    fontSize: 11.5, verticalAlign: "middle", color: "#111", lineHeight: 1.55,
+    padding: "6px 8px", borderBottom: "1px solid var(--form-border)", borderRight: "1px solid var(--form-border)",
+    fontSize: 11.5, verticalAlign: "middle", color: "var(--form-border)", lineHeight: 1.55,
   };
   const lh = { // label header (left column shaded)
-    ...td, background: "#F2EFE8", textAlign: "center", fontWeight: 500,
-    width: 110, color: "#1C2B2B",
+    ...td, background: "var(--form-table-header-bg)", textAlign: "center", fontWeight: 500,
+    width: 110, color: "var(--text-primary)",
   };
   const lhWide = { ...lh, width: 130 };
 
   return (
     <div className="a4-paper" style={{
-      width: 794, minHeight: 1123, background: "white", color: "#111",
+      width: 794, minHeight: 1123, background: "var(--bg-surface)", color: "var(--form-border)",
       padding: "42px 56px 36px", fontFamily: "var(--font-sans)",
-      boxShadow: "0 12px 40px rgba(17, 30, 28, 0.15), 0 2px 8px rgba(17,30,28,0.08)",
+      boxShadow: "var(--shadow-paper)",
       position: "relative",
     }}>
       {/* Top meta strip */}
       <div style={{
         display: "flex", justifyContent: "space-between", alignItems: "baseline",
-        fontSize: 10, color: "#1C2B2B", marginBottom: 4,
+        fontSize: 10, color: "var(--text-primary)", marginBottom: 4,
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <span style={{ display: "inline-block", width: 14, height: 10, background: "#111" }}></span>
+          <span style={{ display: "inline-block", width: 14, height: 10, background: "var(--form-border)" }}></span>
           <span>의료법 시행규칙 [별지 제5호의2서식]</span>
         </div>
-        <div style={{ fontSize: 9.5, color: "#3A4F4C" }}>&lt;개정 2019. 9. 27.&gt;</div>
+        <div style={{ fontSize: 9.5, color: "var(--text-secondary)" }}>&lt;개정 2019. 9. 27.&gt;</div>
       </div>
 
       {/* Title */}
       <div style={{
         textAlign: "center", fontFamily: "var(--font-serif)",
         fontSize: 30, fontWeight: 600, letterSpacing: "1.2em",
-        margin: "26px 0 22px", paddingLeft: "1.2em", color: "#0E1A18",
+        margin: "26px 0 22px", paddingLeft: "1.2em", color: "var(--ink-900)",
       }}>진 단 서</div>
 
       {/* Registry strip */}
       <div style={{
         display: "flex", justifyContent: "flex-end", gap: 0,
-        marginBottom: 6, fontSize: 10.5, color: "#1C2B2B",
+        marginBottom: 6, fontSize: 10.5, color: "var(--text-primary)",
       }}>
-        <div style={{ border: "1px solid #111", borderRight: "none", padding: "4px 10px", background: "#F2EFE8", fontWeight: 500 }}>등록번호</div>
-        <div style={{ border: "1px solid #111", padding: "4px 14px", minWidth: 130, fontFamily: "var(--font-mono)", letterSpacing: "0.05em" }}>{data.registry || "\u00A0"}</div>
-        <div style={{ border: "1px solid #111", borderLeft: "none", padding: "4px 10px", background: "#F2EFE8", fontWeight: 500 }}>연번호</div>
-        <div style={{ border: "1px solid #111", borderLeft: "none", padding: "4px 14px", minWidth: 110, fontFamily: "var(--font-mono)", letterSpacing: "0.05em" }}>{data.serial || "\u00A0"}</div>
+        <div style={{ border: "1px solid var(--form-border)", borderRight: "none", padding: "4px 10px", background: "var(--form-table-header-bg)", fontWeight: 500 }}>등록번호</div>
+        <div style={{ border: "1px solid var(--form-border)", padding: "4px 14px", minWidth: 130, fontFamily: "var(--font-mono)", letterSpacing: "0.05em" }}>{data.registry || "\u00A0"}</div>
+        <div style={{ border: "1px solid var(--form-border)", borderLeft: "none", padding: "4px 10px", background: "var(--form-table-header-bg)", fontWeight: 500 }}>연번호</div>
+        <div style={{ border: "1px solid var(--form-border)", borderLeft: "none", padding: "4px 14px", minWidth: 110, fontFamily: "var(--font-mono)", letterSpacing: "0.05em" }}>{data.serial || "\u00A0"}</div>
       </div>
 
       {/* Main table */}
-      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid #111", borderLeft: "1px solid #111", marginBottom: 18 }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid var(--form-border)", borderLeft: "1px solid var(--form-border)", marginBottom: 18 }}>
         <tbody>
           <tr>
             <td style={lh}>환자의 성명</td>
@@ -14266,11 +14731,11 @@ function DiagnosisPreviewA4({ data, clinic, patient }) {
           </tr>
           <tr>
             <td style={lh}>환자의 주소</td>
-            <td colSpan={3} style={td}>{patient.address} &nbsp;&nbsp;<span style={{ color: "#3A4F4C" }}>(전화번호: {patient.phone})</span></td>
+            <td colSpan={3} style={td}>{patient.address} &nbsp;&nbsp;<span style={{ color: "var(--text-secondary)" }}>(전화번호: {patient.phone})</span></td>
           </tr>
           <tr>
             <td style={lh} rowSpan={2}>병 &nbsp;명</td>
-            <td style={{ ...td, borderRight: "1px solid #111", paddingTop: 8, paddingBottom: 8 }}>
+            <td style={{ ...td, borderRight: "1px solid var(--form-border)", paddingTop: 8, paddingBottom: 8 }}>
               <div style={{ display: "flex", gap: 22, alignItems: "center" }}>
                 <span><Chk on={data.judgment === "clinical"} /> 임상적 추정</span>
                 <span><Chk on={data.judgment === "final"} /> 최 종 진 단</span>
@@ -14326,14 +14791,14 @@ function DiagnosisPreviewA4({ data, clinic, patient }) {
             <td colSpan={3} style={td}>{data.purpose}</td>
           </tr>
           <tr>
-            <td style={{ ...lh, borderBottom: "1.5px solid #111" }}>비 &nbsp;고</td>
-            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid #111", minHeight: 36, whiteSpace: "pre-wrap" }}>{data.remarks || "\u00A0"}</td>
+            <td style={{ ...lh, borderBottom: "1.5px solid var(--form-border)" }}>비 &nbsp;고</td>
+            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid var(--form-border)", minHeight: 36, whiteSpace: "pre-wrap" }}>{data.remarks || "\u00A0"}</td>
           </tr>
         </tbody>
       </table>
 
       {/* Certification statement */}
-      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "#0E1A18", marginBottom: 18 }}>
+      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "var(--ink-900)", marginBottom: 18 }}>
         「의료법」 제17조 및 같은 법 시행규칙 제9조제1항에 따라 위와 같이 진단합니다.
       </div>
 
@@ -14345,14 +14810,14 @@ function DiagnosisPreviewA4({ data, clinic, patient }) {
       </div>
 
       {/* Issuer block */}
-      <div style={{ fontSize: 12, lineHeight: 2.1, color: "#0E1A18", paddingLeft: 4 }}>
+      <div style={{ fontSize: 12, lineHeight: 2.1, color: "var(--ink-900)", paddingLeft: 4 }}>
         <div style={{ display: "flex", gap: 14 }}>
-          <span style={{ minWidth: 92, color: "#1C2B2B" }}>의료기관 명칭:</span>
-          <span style={{ flex: 1, borderBottom: "0.7px solid #111", paddingBottom: 2 }}>{clinic.name}</span>
+          <span style={{ minWidth: 92, color: "var(--text-primary)" }}>의료기관 명칭:</span>
+          <span style={{ flex: 1, borderBottom: "0.7px solid var(--form-border)", paddingBottom: 2 }}>{clinic.name}</span>
         </div>
         <div style={{ display: "flex", gap: 14 }}>
-          <span style={{ minWidth: 92, color: "#1C2B2B" }}>주소:</span>
-          <span style={{ flex: 1, borderBottom: "0.7px solid #111", paddingBottom: 2 }}>{clinic.address}</span>
+          <span style={{ minWidth: 92, color: "var(--text-primary)" }}>주소:</span>
+          <span style={{ flex: 1, borderBottom: "0.7px solid var(--form-border)", paddingBottom: 2 }}>{clinic.address}</span>
         </div>
         <div style={{ display: "flex", gap: 18, alignItems: "center", marginTop: 4 }}>
           <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
@@ -14365,20 +14830,20 @@ function DiagnosisPreviewA4({ data, clinic, patient }) {
             <Chk on={clinic.doctorRole === "han"} />한의사
           </span>
           <span style={{ marginLeft: 12 }}>면허번호&nbsp;&nbsp;제&nbsp;
-            <span style={{ fontFamily: "var(--font-mono)", borderBottom: "0.7px solid #111", padding: "0 14px" }}>{clinic.license}</span>
+            <span style={{ fontFamily: "var(--font-mono)", borderBottom: "0.7px solid var(--form-border)", padding: "0 14px" }}>{clinic.license}</span>
             &nbsp;호
           </span>
         </div>
         <div style={{ display: "flex", gap: 14, alignItems: "center", marginTop: 6 }}>
-          <span style={{ minWidth: 92, color: "#1C2B2B" }}>성 &nbsp;명:</span>
-          <span style={{ flex: 1, borderBottom: "0.7px solid #111", paddingBottom: 2, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <span style={{ minWidth: 92, color: "var(--text-primary)" }}>성 &nbsp;명:</span>
+          <span style={{ flex: 1, borderBottom: "0.7px solid var(--form-border)", paddingBottom: 2, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <span style={{ fontFamily: "var(--font-serif)", fontSize: 14, fontWeight: 500 }}>{clinic.doctorName}</span>
             <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <span style={{ color: "#3A4F4C", fontSize: 11 }}>(서명 또는 인)</span>
+              <span style={{ color: "var(--text-secondary)", fontSize: 11 }}>(서명 또는 인)</span>
               <span style={{
                 display: "inline-flex", alignItems: "center", justifyContent: "center",
-                width: 38, height: 38, border: "2px solid #B03028", borderRadius: "50%",
-                color: "#B03028", fontFamily: "var(--font-serif)", fontWeight: 700,
+                width: 38, height: 38, border: "2px solid var(--form-seal)", borderRadius: "50%",
+                color: "var(--form-seal)", fontFamily: "var(--font-serif)", fontWeight: 700,
                 fontSize: 13, letterSpacing: "-0.05em",
               }}>{clinic.doctorName[0]}印</span>
             </span>
@@ -14388,10 +14853,10 @@ function DiagnosisPreviewA4({ data, clinic, patient }) {
 
       {/* Writer guide footer */}
       <div style={{
-        marginTop: 32, paddingTop: 12, borderTop: "0.5px solid #777",
-        fontSize: 9, lineHeight: 1.6, color: "#3A4F4C",
+        marginTop: 32, paddingTop: 12, borderTop: "0.5px solid var(--form-rule)",
+        fontSize: 9, lineHeight: 1.6, color: "var(--text-secondary)",
       }}>
-        <div style={{ fontWeight: 600, color: "#1C2B2B", marginBottom: 4, letterSpacing: "0.3em", textAlign: "center" }}>작 성 방 법</div>
+        <div style={{ fontWeight: 600, color: "var(--text-primary)", marginBottom: 4, letterSpacing: "0.3em", textAlign: "center" }}>작 성 방 법</div>
         <div style={{ display: "flex", gap: 4 }}>
           <span>1.</span>
           <span>환자의 인적사항은 진찰한 의사, 치과의사 또는 한의사가 주민등록증, 기간 만료 전 여권, 운전면허증, 공무원증, 국립ㆍ공립대학 학생증, 군무원증, 건강보험증, 외국인등록증 등 국가공인 신분증(환자가 미성년자인 경우에는 주민등록등본ㆍ초본, 학생증 등으로 대체 가능합니다)과 대조하여 확인하고 서명 또는 날인합니다.</span>
@@ -14403,7 +14868,7 @@ function DiagnosisPreviewA4({ data, clinic, patient }) {
       </div>
 
       <div style={{
-        position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "#6B7E7B",
+        position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "var(--ink-400)",
       }}>210mm×297mm[백상지 80g/㎡]</div>
     </div>
   );
@@ -14422,18 +14887,18 @@ function InjuryPreviewA4({ data, clinic, patient }) {
   const Chk = ({ on }) => (
     <span style={{
       display: "inline-flex", alignItems: "center", justifyContent: "center",
-      width: 13, height: 13, border: "1.2px solid #111", marginRight: 4,
+      width: 13, height: 13, border: "1.2px solid var(--form-border)", marginRight: 4,
       fontSize: 11, lineHeight: 1, fontFamily: "var(--font-serif)", verticalAlign: "middle",
     }}>{on ? "√" : ""}</span>
   );
 
   const td = {
-    padding: "5px 8px", borderBottom: "1px solid #111", borderRight: "1px solid #111",
-    fontSize: 11, verticalAlign: "middle", color: "#111", lineHeight: 1.5,
+    padding: "5px 8px", borderBottom: "1px solid var(--form-border)", borderRight: "1px solid var(--form-border)",
+    fontSize: 11, verticalAlign: "middle", color: "var(--form-border)", lineHeight: 1.5,
   };
   const lh = {
-    ...td, background: "#F2EFE8", textAlign: "center", fontWeight: 500,
-    width: 126, color: "#1C2B2B", fontSize: 10.5,
+    ...td, background: "var(--form-table-header-bg)", textAlign: "center", fontWeight: 500,
+    width: 126, color: "var(--text-primary)", fontSize: 10.5,
   };
 
   const YMD = ({ p }) => (
@@ -14446,39 +14911,39 @@ function InjuryPreviewA4({ data, clinic, patient }) {
 
   return (
     <div className="a4-paper" style={{
-      width: 794, minHeight: 1123, background: "white", color: "#111",
+      width: 794, minHeight: 1123, background: "var(--bg-surface)", color: "var(--form-border)",
       padding: "42px 56px 36px", fontFamily: "var(--font-sans)",
-      boxShadow: "0 12px 40px rgba(17, 30, 28, 0.15), 0 2px 8px rgba(17,30,28,0.08)",
+      boxShadow: "var(--shadow-paper)",
       position: "relative",
     }}>
       <div style={{
         display: "flex", justifyContent: "space-between", alignItems: "baseline",
-        fontSize: 10, color: "#1C2B2B", marginBottom: 4,
+        fontSize: 10, color: "var(--text-primary)", marginBottom: 4,
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <span style={{ display: "inline-block", width: 14, height: 10, background: "#111" }}></span>
+          <span style={{ display: "inline-block", width: 14, height: 10, background: "var(--form-border)" }}></span>
           <span>의료법 시행규칙 [별지 제5호의3서식]</span>
         </div>
-        <div style={{ fontSize: 9.5, color: "#3A4F4C" }}>&lt;개정 2019. 9. 27.&gt;</div>
+        <div style={{ fontSize: 9.5, color: "var(--text-secondary)" }}>&lt;개정 2019. 9. 27.&gt;</div>
       </div>
 
       <div style={{
         textAlign: "center", fontFamily: "var(--font-serif)",
         fontSize: 30, fontWeight: 600, letterSpacing: "1.2em",
-        margin: "18px 0 16px", paddingLeft: "1.2em", color: "#0E1A18",
+        margin: "18px 0 16px", paddingLeft: "1.2em", color: "var(--ink-900)",
       }}>상 해 진 단 서</div>
 
       <div style={{
         display: "flex", justifyContent: "flex-end", gap: 0,
-        marginBottom: 6, fontSize: 10.5, color: "#1C2B2B",
+        marginBottom: 6, fontSize: 10.5, color: "var(--text-primary)",
       }}>
-        <div style={{ border: "1px solid #111", borderRight: "none", padding: "4px 10px", background: "#F2EFE8", fontWeight: 500 }}>등록번호</div>
-        <div style={{ border: "1px solid #111", padding: "4px 14px", minWidth: 130, fontFamily: "var(--font-mono)", letterSpacing: "0.05em" }}>{data.registry || " "}</div>
-        <div style={{ border: "1px solid #111", borderLeft: "none", padding: "4px 10px", background: "#F2EFE8", fontWeight: 500 }}>면&nbsp;번&nbsp;호</div>
-        <div style={{ border: "1px solid #111", borderLeft: "none", padding: "4px 14px", minWidth: 110, fontFamily: "var(--font-mono)", letterSpacing: "0.05em" }}>{data.serial || " "}</div>
+        <div style={{ border: "1px solid var(--form-border)", borderRight: "none", padding: "4px 10px", background: "var(--form-table-header-bg)", fontWeight: 500 }}>등록번호</div>
+        <div style={{ border: "1px solid var(--form-border)", padding: "4px 14px", minWidth: 130, fontFamily: "var(--font-mono)", letterSpacing: "0.05em" }}>{data.registry || " "}</div>
+        <div style={{ border: "1px solid var(--form-border)", borderLeft: "none", padding: "4px 10px", background: "var(--form-table-header-bg)", fontWeight: 500 }}>면&nbsp;번&nbsp;호</div>
+        <div style={{ border: "1px solid var(--form-border)", borderLeft: "none", padding: "4px 14px", minWidth: 110, fontFamily: "var(--font-mono)", letterSpacing: "0.05em" }}>{data.serial || " "}</div>
       </div>
 
-      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid #111", borderLeft: "1px solid #111", marginBottom: 14 }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid var(--form-border)", borderLeft: "1px solid var(--form-border)", marginBottom: 14 }}>
         <tbody>
           <tr>
             <td style={lh}>환자의 성명</td>
@@ -14489,11 +14954,11 @@ function InjuryPreviewA4({ data, clinic, patient }) {
           <tr>
             <td style={lh}>환자의 주소</td>
             <td colSpan={2} style={td}>{patient.address}</td>
-            <td style={td}><span style={{ color: "#3A4F4C" }}>(전화번호 : </span>{patient.phone}<span style={{ color: "#3A4F4C" }}>)</span></td>
+            <td style={td}><span style={{ color: "var(--text-secondary)" }}>(전화번호 : </span>{patient.phone}<span style={{ color: "var(--text-secondary)" }}>)</span></td>
           </tr>
           <tr>
             <td style={lh} rowSpan={2}>병&nbsp;&nbsp;&nbsp;&nbsp;명</td>
-            <td style={{ ...td, borderRight: "1px solid #111" }}>
+            <td style={{ ...td, borderRight: "1px solid var(--form-border)" }}>
               <div style={{ display: "flex", gap: 18, alignItems: "center" }}>
                 <span><Chk on={data.judgment === "clinical"} /> 임상적 추정</span>
                 <span><Chk on={data.judgment === "final"} /> 최 종 진 단</span>
@@ -14554,7 +15019,7 @@ function InjuryPreviewA4({ data, clinic, patient }) {
             <td colSpan={3} style={td}>
               <YMD p={txStart} /> 부터&nbsp;&nbsp;&nbsp;
               <YMD p={txEnd} /> 까지&nbsp;&nbsp;
-              <span style={{ color: "#3A4F4C", fontSize: 10.5 }}>(진단일부터&nbsp;
+              <span style={{ color: "var(--text-secondary)", fontSize: 10.5 }}>(진단일부터&nbsp;
                 <span style={{ fontFamily: "var(--font-mono)" }}>{data.treatmentDays || "__"}</span> 일간)
               </span>
             </td>
@@ -14573,13 +15038,13 @@ function InjuryPreviewA4({ data, clinic, patient }) {
             </td>
           </tr>
           <tr>
-            <td style={{ ...lh, borderBottom: "1.5px solid #111" }}>비&nbsp;&nbsp;&nbsp;&nbsp;고</td>
-            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid #111", minHeight: 30 }}>{data.remarks || " "}</td>
+            <td style={{ ...lh, borderBottom: "1.5px solid var(--form-border)" }}>비&nbsp;&nbsp;&nbsp;&nbsp;고</td>
+            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid var(--form-border)", minHeight: 30 }}>{data.remarks || " "}</td>
           </tr>
         </tbody>
       </table>
 
-      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "#0E1A18", marginBottom: 14 }}>
+      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "var(--ink-900)", marginBottom: 14 }}>
         「의료법」 제17조 및 같은 법 시행규칙 제9조제2항에 따라 위와 같이 진단합니다.
       </div>
 
@@ -14589,14 +15054,14 @@ function InjuryPreviewA4({ data, clinic, patient }) {
         <span style={{ fontFamily: "var(--font-mono)" }}>{iss.d || "__"}</span> 일
       </div>
 
-      <div style={{ fontSize: 12, lineHeight: 2.1, color: "#0E1A18", paddingLeft: 4 }}>
+      <div style={{ fontSize: 12, lineHeight: 2.1, color: "var(--ink-900)", paddingLeft: 4 }}>
         <div style={{ display: "flex", gap: 14 }}>
-          <span style={{ minWidth: 92, color: "#1C2B2B" }}>의료기관 명칭:</span>
-          <span style={{ flex: 1, borderBottom: "0.7px solid #111", paddingBottom: 2 }}>{clinic.name}</span>
+          <span style={{ minWidth: 92, color: "var(--text-primary)" }}>의료기관 명칭:</span>
+          <span style={{ flex: 1, borderBottom: "0.7px solid var(--form-border)", paddingBottom: 2 }}>{clinic.name}</span>
         </div>
         <div style={{ display: "flex", gap: 14 }}>
-          <span style={{ minWidth: 92, color: "#1C2B2B" }}>주소:</span>
-          <span style={{ flex: 1, borderBottom: "0.7px solid #111", paddingBottom: 2 }}>{clinic.address}</span>
+          <span style={{ minWidth: 92, color: "var(--text-primary)" }}>주소:</span>
+          <span style={{ flex: 1, borderBottom: "0.7px solid var(--form-border)", paddingBottom: 2 }}>{clinic.address}</span>
         </div>
         <div style={{ display: "flex", gap: 18, alignItems: "center", marginTop: 4 }}>
           <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
@@ -14609,20 +15074,20 @@ function InjuryPreviewA4({ data, clinic, patient }) {
             <Chk on={clinic.doctorRole === "han"} />한의사
           </span>
           <span style={{ marginLeft: 12 }}>면허번호&nbsp;&nbsp;제&nbsp;
-            <span style={{ fontFamily: "var(--font-mono)", borderBottom: "0.7px solid #111", padding: "0 14px" }}>{clinic.license}</span>
+            <span style={{ fontFamily: "var(--font-mono)", borderBottom: "0.7px solid var(--form-border)", padding: "0 14px" }}>{clinic.license}</span>
             &nbsp;호
           </span>
         </div>
         <div style={{ display: "flex", gap: 14, alignItems: "center", marginTop: 6 }}>
-          <span style={{ minWidth: 92, color: "#1C2B2B" }}>성 &nbsp;명:</span>
-          <span style={{ flex: 1, borderBottom: "0.7px solid #111", paddingBottom: 2, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <span style={{ minWidth: 92, color: "var(--text-primary)" }}>성 &nbsp;명:</span>
+          <span style={{ flex: 1, borderBottom: "0.7px solid var(--form-border)", paddingBottom: 2, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <span style={{ fontFamily: "var(--font-serif)", fontSize: 14, fontWeight: 500 }}>{clinic.doctorName}</span>
             <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <span style={{ color: "#3A4F4C", fontSize: 11 }}>(서명 또는 인)</span>
+              <span style={{ color: "var(--text-secondary)", fontSize: 11 }}>(서명 또는 인)</span>
               <span style={{
                 display: "inline-flex", alignItems: "center", justifyContent: "center",
-                width: 38, height: 38, border: "2px solid #B03028", borderRadius: "50%",
-                color: "#B03028", fontFamily: "var(--font-serif)", fontWeight: 700,
+                width: 38, height: 38, border: "2px solid var(--form-seal)", borderRadius: "50%",
+                color: "var(--form-seal)", fontFamily: "var(--font-serif)", fontWeight: 700,
                 fontSize: 13, letterSpacing: "-0.05em",
               }}>{clinic.doctorName[0]}印</span>
             </span>
@@ -14631,10 +15096,10 @@ function InjuryPreviewA4({ data, clinic, patient }) {
       </div>
 
       <div style={{
-        marginTop: 24, paddingTop: 10, borderTop: "0.5px solid #777",
-        fontSize: 9, lineHeight: 1.6, color: "#3A4F4C",
+        marginTop: 24, paddingTop: 10, borderTop: "0.5px solid var(--form-rule)",
+        fontSize: 9, lineHeight: 1.6, color: "var(--text-secondary)",
       }}>
-        <div style={{ fontWeight: 600, color: "#1C2B2B", marginBottom: 4, letterSpacing: "0.3em", textAlign: "center" }}>작 성 방 법</div>
+        <div style={{ fontWeight: 600, color: "var(--text-primary)", marginBottom: 4, letterSpacing: "0.3em", textAlign: "center" }}>작 성 방 법</div>
         <div style={{ display: "flex", gap: 4 }}>
           <span>1.</span>
           <span>환자의 인적사항은 진찰한 의사, 치과의사 또는 한의사가 주민등록증, 기간 만료 전 여권, 운전면허증, 공무원증, 국립ㆍ공립대학 학생증, 군무원증, 건강보험증, 외국인등록증 등 국가공인 신분증(환자가 미성년자인 경우에는 주민등록등본ㆍ초본, 학생증 등으로 대체 가능합니다)과 대조하여 확인하고 서명 또는 날인합니다.</span>
@@ -14645,7 +15110,7 @@ function InjuryPreviewA4({ data, clinic, patient }) {
         </div>
       </div>
 
-      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "#6B7E7B" }}>
+      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "var(--ink-400)" }}>
         210mm×297mm[백상지 80g/㎡]
       </div>
     </div>
@@ -14815,37 +15280,37 @@ function InjuryEditor({ data, onChange, clinic, patient, onChangePatient }) {
 }
 
 // ── Shared A4 helpers ─────────────────────────────────────────────
-const A4_TD = { padding: "6px 8px", borderBottom: "1px solid #111", borderRight: "1px solid #111", fontSize: 11.5, verticalAlign: "middle", color: "#111", lineHeight: 1.55 };
-const A4_LH = { ...A4_TD, background: "#F2EFE8", textAlign: "center", fontWeight: 500, width: 120, color: "#1C2B2B" };
+const A4_TD = { padding: "6px 8px", borderBottom: "1px solid var(--form-border)", borderRight: "1px solid var(--form-border)", fontSize: 11.5, verticalAlign: "middle", color: "var(--form-border)", lineHeight: 1.55 };
+const A4_LH = { ...A4_TD, background: "var(--form-table-header-bg)", textAlign: "center", fontWeight: 500, width: 120, color: "var(--text-primary)" };
 
 function A4Chk({ on }) {
-  return <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 13, height: 13, border: "1.2px solid #111", marginRight: 4, fontSize: 11, lineHeight: 1, fontFamily: "var(--font-serif)", verticalAlign: "middle" }}>{on ? "√" : ""}</span>;
+  return <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 13, height: 13, border: "1.2px solid var(--form-border)", marginRight: 4, fontSize: 11, lineHeight: 1, fontFamily: "var(--font-serif)", verticalAlign: "middle" }}>{on ? "√" : ""}</span>;
 }
 
 function A4IssuerBlock({ clinic }) {
   return (
-    <div style={{ fontSize: 12, lineHeight: 2.1, color: "#0E1A18", paddingLeft: 4 }}>
+    <div style={{ fontSize: 12, lineHeight: 2.1, color: "var(--ink-900)", paddingLeft: 4 }}>
       <div style={{ display: "flex", gap: 14 }}>
-        <span style={{ minWidth: 92, color: "#1C2B2B" }}>의료기관 명칭:</span>
-        <span style={{ flex: 1, borderBottom: "0.7px solid #111", paddingBottom: 2 }}>{clinic.name}</span>
+        <span style={{ minWidth: 92, color: "var(--text-primary)" }}>의료기관 명칭:</span>
+        <span style={{ flex: 1, borderBottom: "0.7px solid var(--form-border)", paddingBottom: 2 }}>{clinic.name}</span>
       </div>
       <div style={{ display: "flex", gap: 14 }}>
-        <span style={{ minWidth: 92, color: "#1C2B2B" }}>주소:</span>
-        <span style={{ flex: 1, borderBottom: "0.7px solid #111", paddingBottom: 2 }}>{clinic.address}</span>
+        <span style={{ minWidth: 92, color: "var(--text-primary)" }}>주소:</span>
+        <span style={{ flex: 1, borderBottom: "0.7px solid var(--form-border)", paddingBottom: 2 }}>{clinic.address}</span>
       </div>
       <div style={{ display: "flex", gap: 18, alignItems: "center", marginTop: 4 }}>
         <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}><A4Chk on={clinic.doctorRole === "doc"} />의사</span>
         <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}><A4Chk on={clinic.doctorRole === "dent"} />치과의사</span>
         <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}><A4Chk on={clinic.doctorRole === "han"} />한의사</span>
-        <span style={{ marginLeft: 12 }}>면허번호&nbsp;&nbsp;제&nbsp;<span style={{ fontFamily: "var(--font-mono)", borderBottom: "0.7px solid #111", padding: "0 14px" }}>{clinic.license}</span>&nbsp;호</span>
+        <span style={{ marginLeft: 12 }}>면허번호&nbsp;&nbsp;제&nbsp;<span style={{ fontFamily: "var(--font-mono)", borderBottom: "0.7px solid var(--form-border)", padding: "0 14px" }}>{clinic.license}</span>&nbsp;호</span>
       </div>
       <div style={{ display: "flex", gap: 14, alignItems: "center", marginTop: 6 }}>
-        <span style={{ minWidth: 92, color: "#1C2B2B" }}>성 &nbsp;명:</span>
-        <span style={{ flex: 1, borderBottom: "0.7px solid #111", paddingBottom: 2, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <span style={{ minWidth: 92, color: "var(--text-primary)" }}>성 &nbsp;명:</span>
+        <span style={{ flex: 1, borderBottom: "0.7px solid var(--form-border)", paddingBottom: 2, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <span style={{ fontFamily: "var(--font-serif)", fontSize: 14, fontWeight: 500 }}>{clinic.doctorName}</span>
           <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{ color: "#3A4F4C", fontSize: 11 }}>(서명 또는 인)</span>
-            <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 38, height: 38, border: "2px solid #B03028", borderRadius: "50%", color: "#B03028", fontFamily: "var(--font-serif)", fontWeight: 700, fontSize: 13, letterSpacing: "-0.05em" }}>{clinic.doctorName[0]}印</span>
+            <span style={{ color: "var(--text-secondary)", fontSize: 11 }}>(서명 또는 인)</span>
+            <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 38, height: 38, border: "2px solid var(--form-seal)", borderRadius: "50%", color: "var(--form-seal)", fontFamily: "var(--font-serif)", fontWeight: 700, fontSize: 13, letterSpacing: "-0.05em" }}>{clinic.doctorName[0]}印</span>
           </span>
         </span>
       </div>
@@ -14880,16 +15345,16 @@ function ReferralPreviewA4({ data, clinic, patient }) {
   const td = A4_TD, lh = A4_LH;
 
   return (
-    <div className="a4-paper" style={{ width: 794, minHeight: 1123, background: "white", color: "#111", padding: "42px 56px 36px", fontFamily: "var(--font-sans)", boxShadow: "0 12px 40px rgba(17,30,28,0.15), 0 2px 8px rgba(17,30,28,0.08)", position: "relative" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: 10, color: "#1C2B2B", marginBottom: 4 }}>
+    <div className="a4-paper" style={{ width: 794, minHeight: 1123, background: "var(--bg-surface)", color: "var(--form-border)", padding: "42px 56px 36px", fontFamily: "var(--font-sans)", boxShadow: "var(--shadow-paper)", position: "relative" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: 10, color: "var(--text-primary)", marginBottom: 4 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <span style={{ display: "inline-block", width: 14, height: 10, background: "#111" }}></span>
+          <span style={{ display: "inline-block", width: 14, height: 10, background: "var(--form-border)" }}></span>
           <span>의료법 시행규칙 [별지 제12호서식]</span>
         </div>
-        <div style={{ fontSize: 9.5, color: "#3A4F4C" }}>&lt;개정 2016. 1. 4.&gt;</div>
+        <div style={{ fontSize: 9.5, color: "var(--text-secondary)" }}>&lt;개정 2016. 1. 4.&gt;</div>
       </div>
 
-      <div style={{ textAlign: "center", fontFamily: "var(--font-serif)", fontSize: 30, fontWeight: 600, letterSpacing: "1.2em", margin: "22px 0 20px", paddingLeft: "1.2em", color: "#0E1A18" }}>진 료 의 뢰 서</div>
+      <div style={{ textAlign: "center", fontFamily: "var(--font-serif)", fontSize: 30, fontWeight: 600, letterSpacing: "1.2em", margin: "22px 0 20px", paddingLeft: "1.2em", color: "var(--ink-900)" }}>진 료 의 뢰 서</div>
 
       <div style={{ fontSize: 13, marginBottom: 14, lineHeight: 2.2 }}>
         <div>
@@ -14897,14 +15362,14 @@ function ReferralPreviewA4({ data, clinic, patient }) {
           <span style={{ fontFamily: "var(--font-serif)", fontSize: 14 }}>{data.toClinicName}</span>
           {data.toDoctor && <span>&nbsp;&nbsp;{data.toDoctor} 선생님 귀하</span>}
         </div>
-        {data.toAddress && <div style={{ fontSize: 11.5, color: "#3A4F4C", marginLeft: 52 }}>{data.toAddress}</div>}
+        {data.toAddress && <div style={{ fontSize: 11.5, color: "var(--text-secondary)", marginLeft: 52 }}>{data.toAddress}</div>}
       </div>
 
-      <div style={{ fontSize: 12.5, lineHeight: 1.7, color: "#1C2B2B", marginBottom: 16 }}>
+      <div style={{ fontSize: 12.5, lineHeight: 1.7, color: "var(--text-primary)", marginBottom: 16 }}>
         아래와 같이 환자를 의뢰하오니 진료하여 주시기 바랍니다.
       </div>
 
-      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid #111", borderLeft: "1px solid #111", marginBottom: 20 }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid var(--form-border)", borderLeft: "1px solid var(--form-border)", marginBottom: 20 }}>
         <tbody>
           <tr>
             <td style={lh}>환자의 성명</td>
@@ -14914,7 +15379,7 @@ function ReferralPreviewA4({ data, clinic, patient }) {
           </tr>
           <tr>
             <td style={lh}>환자의 주소</td>
-            <td colSpan={3} style={td}>{patient.address}&nbsp;&nbsp;<span style={{ color: "#3A4F4C" }}>(전화번호: {patient.phone})</span></td>
+            <td colSpan={3} style={td}>{patient.address}&nbsp;&nbsp;<span style={{ color: "var(--text-secondary)" }}>(전화번호: {patient.phone})</span></td>
           </tr>
           <tr>
             <td style={lh}>병&nbsp;&nbsp;&nbsp;&nbsp;명</td>
@@ -14939,18 +15404,18 @@ function ReferralPreviewA4({ data, clinic, patient }) {
             <td colSpan={3} style={{ ...td, whiteSpace: "pre-wrap", minHeight: 64, height: 64, verticalAlign: "top", paddingTop: 8 }}>{data.requestContent}</td>
           </tr>
           <tr>
-            <td style={{ ...lh, borderBottom: "1.5px solid #111" }}>비&nbsp;&nbsp;&nbsp;&nbsp;고</td>
-            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid #111", minHeight: 32 }}>{data.remarks || " "}</td>
+            <td style={{ ...lh, borderBottom: "1.5px solid var(--form-border)" }}>비&nbsp;&nbsp;&nbsp;&nbsp;고</td>
+            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid var(--form-border)", minHeight: 32 }}>{data.remarks || " "}</td>
           </tr>
         </tbody>
       </table>
 
-      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "#0E1A18", marginBottom: 14 }}>
+      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "var(--ink-900)", marginBottom: 14 }}>
         「의료법」 제17조 및 같은 법 시행규칙 제12조에 따라 위와 같이 진료를 의뢰합니다.
       </div>
       <A4DateLine p={iss} />
       <A4IssuerBlock clinic={clinic} />
-      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "#6B7E7B" }}>210mm×297mm[백상지 80g/㎡]</div>
+      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "var(--ink-400)" }}>210mm×297mm[백상지 80g/㎡]</div>
     </div>
   );
 }
@@ -14963,21 +15428,21 @@ function OpinionPreviewA4({ data, clinic, patient }) {
   const td = A4_TD, lh = A4_LH;
 
   return (
-    <div className="a4-paper" style={{ width: 794, minHeight: 1123, background: "white", color: "#111", padding: "42px 56px 36px", fontFamily: "var(--font-sans)", boxShadow: "0 12px 40px rgba(17,30,28,0.15), 0 2px 8px rgba(17,30,28,0.08)", position: "relative" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 26, paddingBottom: 14, borderBottom: "2px solid #1C2B2B" }}>
+    <div className="a4-paper" style={{ width: 794, minHeight: 1123, background: "var(--bg-surface)", color: "var(--form-border)", padding: "42px 56px 36px", fontFamily: "var(--font-sans)", boxShadow: "var(--shadow-paper)", position: "relative" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 26, paddingBottom: 14, borderBottom: "2px solid var(--text-primary)" }}>
         <div>
-          <div style={{ fontSize: 17, fontWeight: 700, color: "#0E1A18", fontFamily: "var(--font-serif)" }}>{clinic.name}</div>
-          <div style={{ fontSize: 11, color: "#3A4F4C", marginTop: 3 }}>{clinic.address}</div>
+          <div style={{ fontSize: 17, fontWeight: 700, color: "var(--ink-900)", fontFamily: "var(--font-serif)" }}>{clinic.name}</div>
+          <div style={{ fontSize: 11, color: "var(--text-secondary)", marginTop: 3 }}>{clinic.address}</div>
         </div>
-        <div style={{ textAlign: "right", fontSize: 10.5, color: "#3A4F4C", lineHeight: 1.9 }}>
+        <div style={{ textAlign: "right", fontSize: 10.5, color: "var(--text-secondary)", lineHeight: 1.9 }}>
           <div>한의사 면허 제 {clinic.license} 호</div>
           <div>{clinic.doctorName}</div>
         </div>
       </div>
 
-      <div style={{ textAlign: "center", fontFamily: "var(--font-serif)", fontSize: 30, fontWeight: 600, letterSpacing: "1.4em", margin: "0 0 28px", paddingLeft: "1.4em", color: "#0E1A18" }}>소 견 서</div>
+      <div style={{ textAlign: "center", fontFamily: "var(--font-serif)", fontSize: 30, fontWeight: 600, letterSpacing: "1.4em", margin: "0 0 28px", paddingLeft: "1.4em", color: "var(--ink-900)" }}>소 견 서</div>
 
-      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid #111", borderLeft: "1px solid #111", marginBottom: 24 }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid var(--form-border)", borderLeft: "1px solid var(--form-border)", marginBottom: 24 }}>
         <tbody>
           <tr>
             <td style={lh}>환자의 성명</td>
@@ -14987,7 +15452,7 @@ function OpinionPreviewA4({ data, clinic, patient }) {
           </tr>
           <tr>
             <td style={lh}>환자의 주소</td>
-            <td colSpan={3} style={td}>{patient.address}&nbsp;&nbsp;<span style={{ color: "#3A4F4C" }}>(전화번호: {patient.phone})</span></td>
+            <td colSpan={3} style={td}>{patient.address}&nbsp;&nbsp;<span style={{ color: "var(--text-secondary)" }}>(전화번호: {patient.phone})</span></td>
           </tr>
           <tr>
             <td style={lh}>진단명</td>
@@ -15002,21 +15467,21 @@ function OpinionPreviewA4({ data, clinic, patient }) {
             <td style={td}><A4YMD p={dx} /></td>
           </tr>
           <tr>
-            <td style={{ ...lh, borderBottom: "1.5px solid #111" }}>용&nbsp;&nbsp;&nbsp;&nbsp;도</td>
-            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid #111" }}>{data.purpose}</td>
+            <td style={{ ...lh, borderBottom: "1.5px solid var(--form-border)" }}>용&nbsp;&nbsp;&nbsp;&nbsp;도</td>
+            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid var(--form-border)" }}>{data.purpose}</td>
           </tr>
         </tbody>
       </table>
 
       <div style={{ marginBottom: 28 }}>
-        <div style={{ fontSize: 11, fontWeight: 700, color: "#1C2B2B", marginBottom: 8, letterSpacing: "0.15em", textAlign: "center" }}>[ 소 견 내 용 ]</div>
-        <div style={{ border: "1px solid #111", padding: "16px 18px", minHeight: 240, fontSize: 12.5, lineHeight: 2.1, color: "#111", whiteSpace: "pre-wrap" }}>{data.opinion}</div>
+        <div style={{ fontSize: 11, fontWeight: 700, color: "var(--text-primary)", marginBottom: 8, letterSpacing: "0.15em", textAlign: "center" }}>[ 소 견 내 용 ]</div>
+        <div style={{ border: "1px solid var(--form-border)", padding: "16px 18px", minHeight: 240, fontSize: 12.5, lineHeight: 2.1, color: "var(--form-border)", whiteSpace: "pre-wrap" }}>{data.opinion}</div>
       </div>
 
-      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "#0E1A18", marginBottom: 14 }}>위와 같이 소견서를 작성합니다.</div>
+      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "var(--ink-900)", marginBottom: 14 }}>위와 같이 소견서를 작성합니다.</div>
       <A4DateLine p={iss} />
       <A4IssuerBlock clinic={clinic} />
-      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "#6B7E7B" }}>210mm×297mm[백상지 80g/㎡]</div>
+      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "var(--ink-400)" }}>210mm×297mm[백상지 80g/㎡]</div>
     </div>
   );
 }
@@ -15029,18 +15494,18 @@ function TreatmentProofPreviewA4({ data, clinic, patient }) {
   const td = A4_TD, lh = A4_LH;
 
   return (
-    <div className="a4-paper" style={{ width: 794, minHeight: 1123, background: "white", color: "#111", padding: "42px 56px 36px", fontFamily: "var(--font-sans)", boxShadow: "0 12px 40px rgba(17,30,28,0.15), 0 2px 8px rgba(17,30,28,0.08)", position: "relative" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: 10, color: "#1C2B2B", marginBottom: 4 }}>
+    <div className="a4-paper" style={{ width: 794, minHeight: 1123, background: "var(--bg-surface)", color: "var(--form-border)", padding: "42px 56px 36px", fontFamily: "var(--font-sans)", boxShadow: "var(--shadow-paper)", position: "relative" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: 10, color: "var(--text-primary)", marginBottom: 4 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <span style={{ display: "inline-block", width: 14, height: 10, background: "#111" }}></span>
+          <span style={{ display: "inline-block", width: 14, height: 10, background: "var(--form-border)" }}></span>
           <span>의료법 시행규칙 [별지 제7호서식]</span>
         </div>
-        <div style={{ fontSize: 9.5, color: "#3A4F4C" }}>&lt;개정 2019. 9. 27.&gt;</div>
+        <div style={{ fontSize: 9.5, color: "var(--text-secondary)" }}>&lt;개정 2019. 9. 27.&gt;</div>
       </div>
 
-      <div style={{ textAlign: "center", fontFamily: "var(--font-serif)", fontSize: 28, fontWeight: 600, letterSpacing: "1em", margin: "26px 0 22px", paddingLeft: "1em", color: "#0E1A18" }}>진 료 확 인 서</div>
+      <div style={{ textAlign: "center", fontFamily: "var(--font-serif)", fontSize: 28, fontWeight: 600, letterSpacing: "1em", margin: "26px 0 22px", paddingLeft: "1em", color: "var(--ink-900)" }}>진 료 확 인 서</div>
 
-      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid #111", borderLeft: "1px solid #111", marginBottom: 20 }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid var(--form-border)", borderLeft: "1px solid var(--form-border)", marginBottom: 20 }}>
         <tbody>
           <tr>
             <td style={lh}>환자의 성명</td>
@@ -15050,7 +15515,7 @@ function TreatmentProofPreviewA4({ data, clinic, patient }) {
           </tr>
           <tr>
             <td style={lh}>환자의 주소</td>
-            <td colSpan={3} style={td}>{patient.address}&nbsp;&nbsp;<span style={{ color: "#3A4F4C" }}>(전화번호: {patient.phone})</span></td>
+            <td colSpan={3} style={td}>{patient.address}&nbsp;&nbsp;<span style={{ color: "var(--text-secondary)" }}>(전화번호: {patient.phone})</span></td>
           </tr>
           <tr>
             <td style={lh}>병&nbsp;&nbsp;&nbsp;&nbsp;명</td>
@@ -15069,16 +15534,16 @@ function TreatmentProofPreviewA4({ data, clinic, patient }) {
             <td colSpan={3} style={td}>{data.purpose}</td>
           </tr>
           <tr>
-            <td style={{ ...lh, borderBottom: "1.5px solid #111" }}>비&nbsp;&nbsp;&nbsp;&nbsp;고</td>
-            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid #111", minHeight: 36 }}>{data.remarks || " "}</td>
+            <td style={{ ...lh, borderBottom: "1.5px solid var(--form-border)" }}>비&nbsp;&nbsp;&nbsp;&nbsp;고</td>
+            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid var(--form-border)", minHeight: 36 }}>{data.remarks || " "}</td>
           </tr>
         </tbody>
       </table>
 
-      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "#0E1A18", marginBottom: 14 }}>위와 같이 진료하였음을 확인합니다.</div>
+      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "var(--ink-900)", marginBottom: 14 }}>위와 같이 진료하였음을 확인합니다.</div>
       <A4DateLine p={iss} />
       <A4IssuerBlock clinic={clinic} />
-      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "#6B7E7B" }}>210mm×297mm[백상지 80g/㎡]</div>
+      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "var(--ink-400)" }}>210mm×297mm[백상지 80g/㎡]</div>
     </div>
   );
 }
@@ -15091,18 +15556,18 @@ function AdmissionProofPreviewA4({ data, clinic, patient }) {
   const td = A4_TD, lh = A4_LH;
 
   return (
-    <div className="a4-paper" style={{ width: 794, minHeight: 1123, background: "white", color: "#111", padding: "42px 56px 36px", fontFamily: "var(--font-sans)", boxShadow: "0 12px 40px rgba(17,30,28,0.15), 0 2px 8px rgba(17,30,28,0.08)", position: "relative" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: 10, color: "#1C2B2B", marginBottom: 4 }}>
+    <div className="a4-paper" style={{ width: 794, minHeight: 1123, background: "var(--bg-surface)", color: "var(--form-border)", padding: "42px 56px 36px", fontFamily: "var(--font-sans)", boxShadow: "var(--shadow-paper)", position: "relative" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: 10, color: "var(--text-primary)", marginBottom: 4 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <span style={{ display: "inline-block", width: 14, height: 10, background: "#111" }}></span>
+          <span style={{ display: "inline-block", width: 14, height: 10, background: "var(--form-border)" }}></span>
           <span>의료법 시행규칙 [별지 제8호서식]</span>
         </div>
-        <div style={{ fontSize: 9.5, color: "#3A4F4C" }}>&lt;개정 2019. 9. 27.&gt;</div>
+        <div style={{ fontSize: 9.5, color: "var(--text-secondary)" }}>&lt;개정 2019. 9. 27.&gt;</div>
       </div>
 
-      <div style={{ textAlign: "center", fontFamily: "var(--font-serif)", fontSize: 26, fontWeight: 600, letterSpacing: "0.8em", margin: "26px 0 22px", paddingLeft: "0.8em", color: "#0E1A18" }}>입 퇴 원 확 인 서</div>
+      <div style={{ textAlign: "center", fontFamily: "var(--font-serif)", fontSize: 26, fontWeight: 600, letterSpacing: "0.8em", margin: "26px 0 22px", paddingLeft: "0.8em", color: "var(--ink-900)" }}>입 퇴 원 확 인 서</div>
 
-      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid #111", borderLeft: "1px solid #111", marginBottom: 20 }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid var(--form-border)", borderLeft: "1px solid var(--form-border)", marginBottom: 20 }}>
         <tbody>
           <tr>
             <td style={lh}>환자의 성명</td>
@@ -15112,7 +15577,7 @@ function AdmissionProofPreviewA4({ data, clinic, patient }) {
           </tr>
           <tr>
             <td style={lh}>환자의 주소</td>
-            <td colSpan={3} style={td}>{patient.address}&nbsp;&nbsp;<span style={{ color: "#3A4F4C" }}>(전화번호: {patient.phone})</span></td>
+            <td colSpan={3} style={td}>{patient.address}&nbsp;&nbsp;<span style={{ color: "var(--text-secondary)" }}>(전화번호: {patient.phone})</span></td>
           </tr>
           <tr>
             <td style={lh}>병&nbsp;&nbsp;&nbsp;&nbsp;명</td>
@@ -15133,16 +15598,16 @@ function AdmissionProofPreviewA4({ data, clinic, patient }) {
             <td colSpan={3} style={td}>{data.purpose}</td>
           </tr>
           <tr>
-            <td style={{ ...lh, borderBottom: "1.5px solid #111" }}>비&nbsp;&nbsp;&nbsp;&nbsp;고</td>
-            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid #111", minHeight: 36 }}>{data.remarks || " "}</td>
+            <td style={{ ...lh, borderBottom: "1.5px solid var(--form-border)" }}>비&nbsp;&nbsp;&nbsp;&nbsp;고</td>
+            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid var(--form-border)", minHeight: 36 }}>{data.remarks || " "}</td>
           </tr>
         </tbody>
       </table>
 
-      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "#0E1A18", marginBottom: 14 }}>위와 같이 입원·퇴원하였음을 확인합니다.</div>
+      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "var(--ink-900)", marginBottom: 14 }}>위와 같이 입원·퇴원하였음을 확인합니다.</div>
       <A4DateLine p={iss} />
       <A4IssuerBlock clinic={clinic} />
-      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "#6B7E7B" }}>210mm×297mm[백상지 80g/㎡]</div>
+      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "var(--ink-400)" }}>210mm×297mm[백상지 80g/㎡]</div>
     </div>
   );
 }
@@ -15155,18 +15620,18 @@ function OutpatientProofPreviewA4({ data, clinic, patient }) {
   const td = A4_TD, lh = A4_LH;
 
   return (
-    <div className="a4-paper" style={{ width: 794, minHeight: 1123, background: "white", color: "#111", padding: "42px 56px 36px", fontFamily: "var(--font-sans)", boxShadow: "0 12px 40px rgba(17,30,28,0.15), 0 2px 8px rgba(17,30,28,0.08)", position: "relative" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: 10, color: "#1C2B2B", marginBottom: 4 }}>
+    <div className="a4-paper" style={{ width: 794, minHeight: 1123, background: "var(--bg-surface)", color: "var(--form-border)", padding: "42px 56px 36px", fontFamily: "var(--font-sans)", boxShadow: "var(--shadow-paper)", position: "relative" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: 10, color: "var(--text-primary)", marginBottom: 4 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <span style={{ display: "inline-block", width: 14, height: 10, background: "#111" }}></span>
+          <span style={{ display: "inline-block", width: 14, height: 10, background: "var(--form-border)" }}></span>
           <span>통원확인서</span>
         </div>
-        <div style={{ fontSize: 9.5, color: "#3A4F4C" }}>&lt;{data.issueDate}&gt;</div>
+        <div style={{ fontSize: 9.5, color: "var(--text-secondary)" }}>&lt;{data.issueDate}&gt;</div>
       </div>
 
-      <div style={{ textAlign: "center", fontFamily: "var(--font-serif)", fontSize: 28, fontWeight: 600, letterSpacing: "1em", margin: "26px 0 22px", paddingLeft: "1em", color: "#0E1A18" }}>통 원 확 인 서</div>
+      <div style={{ textAlign: "center", fontFamily: "var(--font-serif)", fontSize: 28, fontWeight: 600, letterSpacing: "1em", margin: "26px 0 22px", paddingLeft: "1em", color: "var(--ink-900)" }}>통 원 확 인 서</div>
 
-      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid #111", borderLeft: "1px solid #111", marginBottom: 20 }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid var(--form-border)", borderLeft: "1px solid var(--form-border)", marginBottom: 20 }}>
         <tbody>
           <tr>
             <td style={lh}>환자의 성명</td>
@@ -15176,7 +15641,7 @@ function OutpatientProofPreviewA4({ data, clinic, patient }) {
           </tr>
           <tr>
             <td style={lh}>환자의 주소</td>
-            <td colSpan={3} style={td}>{patient.address}&nbsp;&nbsp;<span style={{ color: "#3A4F4C" }}>(전화번호: {patient.phone})</span></td>
+            <td colSpan={3} style={td}>{patient.address}&nbsp;&nbsp;<span style={{ color: "var(--text-secondary)" }}>(전화번호: {patient.phone})</span></td>
           </tr>
           <tr>
             <td style={lh}>병&nbsp;&nbsp;&nbsp;&nbsp;명</td>
@@ -15205,16 +15670,16 @@ function OutpatientProofPreviewA4({ data, clinic, patient }) {
             <td colSpan={3} style={td}>{data.purpose}</td>
           </tr>
           <tr>
-            <td style={{ ...lh, borderBottom: "1.5px solid #111" }}>비&nbsp;&nbsp;&nbsp;&nbsp;고</td>
-            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid #111", minHeight: 36 }}>{data.remarks || " "}</td>
+            <td style={{ ...lh, borderBottom: "1.5px solid var(--form-border)" }}>비&nbsp;&nbsp;&nbsp;&nbsp;고</td>
+            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid var(--form-border)", minHeight: 36 }}>{data.remarks || " "}</td>
           </tr>
         </tbody>
       </table>
 
-      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "#0E1A18", marginBottom: 14 }}>위와 같이 통원 치료하였음을 확인합니다.</div>
+      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "var(--ink-900)", marginBottom: 14 }}>위와 같이 통원 치료하였음을 확인합니다.</div>
       <A4DateLine p={iss} />
       <A4IssuerBlock clinic={clinic} />
-      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "#6B7E7B" }}>210mm×297mm[백상지 80g/㎡]</div>
+      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "var(--ink-400)" }}>210mm×297mm[백상지 80g/㎡]</div>
     </div>
   );
 }
@@ -15385,33 +15850,33 @@ function FeeDetailPreviewA4({ patient, clinic, meta }) {
   const patientTotal = totalSelf + totalNon;
 
   const th = {
-    padding: "7px 8px", background: "#F2EFE8", borderBottom: "1px solid #111",
-    borderRight: "1px solid #111", fontSize: 11, fontWeight: 600, color: "#1C2B2B", textAlign: "center",
+    padding: "7px 8px", background: "var(--form-table-header-bg)", borderBottom: "1px solid var(--form-border)",
+    borderRight: "1px solid var(--form-border)", fontSize: 11, fontWeight: 600, color: "var(--text-primary)", textAlign: "center",
   };
   const td = {
-    padding: "6px 10px", borderBottom: "1px solid #CCC", borderRight: "1px solid #CCC",
-    fontSize: 11.5, verticalAlign: "middle", color: "#111",
+    padding: "6px 10px", borderBottom: "1px solid var(--form-border-soft)", borderRight: "1px solid var(--form-border-soft)",
+    fontSize: 11.5, verticalAlign: "middle", color: "var(--form-border)",
   };
   const numTd = { ...td, textAlign: "right", fontFamily: "var(--font-mono)", fontSize: 11 };
-  const totTh = { ...th, background: "#E4EDE4", fontWeight: 700, fontSize: 12, borderBottom: "1.5px solid #111" };
-  const totTd = { ...numTd, background: "#E4EDE4", fontWeight: 700, borderBottom: "1.5px solid #111" };
+  const totTh = { ...th, background: "var(--form-total-row-bg)", fontWeight: 700, fontSize: 12, borderBottom: "1.5px solid var(--form-border)" };
+  const totTd = { ...numTd, background: "var(--form-total-row-bg)", fontWeight: 700, borderBottom: "1.5px solid var(--form-border)" };
 
   return (
     <div className="a4-paper" style={{
-      width: 794, minHeight: 1123, background: "white", color: "#111",
+      width: 794, minHeight: 1123, background: "var(--bg-surface)", color: "var(--form-border)",
       padding: "48px 56px 40px", fontFamily: "var(--font-sans)",
-      boxShadow: "0 12px 40px rgba(17, 30, 28, 0.15), 0 2px 8px rgba(17,30,28,0.08)",
+      boxShadow: "var(--shadow-paper)",
       position: "relative",
     }}>
       <div style={{ textAlign: "center", marginBottom: 26 }}>
-        <div style={{ fontFamily: "var(--font-serif)", fontSize: 26, fontWeight: 600, letterSpacing: "0.7em", paddingLeft: "0.7em", color: "#0E1A18", marginBottom: 5 }}>
+        <div style={{ fontFamily: "var(--font-serif)", fontSize: 26, fontWeight: 600, letterSpacing: "0.7em", paddingLeft: "0.7em", color: "var(--ink-900)", marginBottom: 5 }}>
           진료비 세부내역서
         </div>
-        <div style={{ fontSize: 10, color: "#3A4F4C" }}>의료법 시행규칙 제17조의2에 의거 발급</div>
+        <div style={{ fontSize: 10, color: "var(--text-secondary)" }}>의료법 시행규칙 제17조의2에 의거 발급</div>
       </div>
 
       {/* Info grid */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", border: "1px solid #111", marginBottom: 22 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", border: "1px solid var(--form-border)", marginBottom: 22 }}>
         {[
           ["의료기관", clinic.name],
           ["발급일", meta.issueDate],
@@ -15424,17 +15889,17 @@ function FeeDetailPreviewA4({ patient, clinic, meta }) {
         ].map(([label, value], i) => (
           <div key={i} style={{
             display: "flex",
-            borderBottom: i < 6 ? "1px solid #CCC" : "none",
-            borderRight: i % 2 === 0 ? "1px solid #CCC" : "none",
+            borderBottom: i < 6 ? "1px solid var(--form-border-soft)" : "none",
+            borderRight: i % 2 === 0 ? "1px solid var(--form-border-soft)" : "none",
           }}>
-            <div style={{ width: 88, padding: "6px 10px", background: "#F2EFE8", fontSize: 10.5, fontWeight: 600, color: "#1C2B2B", flexShrink: 0 }}>{label}</div>
+            <div style={{ width: 88, padding: "6px 10px", background: "var(--form-table-header-bg)", fontSize: 10.5, fontWeight: 600, color: "var(--text-primary)", flexShrink: 0 }}>{label}</div>
             <div style={{ flex: 1, padding: "6px 10px", fontSize: 11 }}>{value}</div>
           </div>
         ))}
       </div>
 
       {/* Fee table */}
-      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid #111", borderLeft: "1px solid #111", marginBottom: 22 }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid var(--form-border)", borderLeft: "1px solid var(--form-border)", marginBottom: 22 }}>
         <thead>
           <tr>
             <th style={{ ...th, width: 160, textAlign: "left" }} rowSpan={2}>항목 구분</th>
@@ -15477,44 +15942,44 @@ function FeeDetailPreviewA4({ patient, clinic, meta }) {
           { label: "급여 본인부담금",   value: totalSelf, sub: "본인 직접 납부" },
           { label: "비급여 본인부담금", value: totalNon,  sub: "급여 미적용 항목" },
         ].map(({ label, value, sub }) => (
-          <div key={label} style={{ border: "1px solid var(--border-subtle)", borderRadius: 8, padding: "12px 14px", background: "#FAFAF8" }}>
-            <div style={{ fontSize: 10.5, color: "#3A4F4C", marginBottom: 3 }}>{label}</div>
-            <div style={{ fontSize: 17, fontWeight: 700, fontFamily: "var(--font-mono)", color: "#0E1A18" }}>
+          <div key={label} style={{ border: "1px solid var(--border-subtle)", borderRadius: 8, padding: "12px 14px", background: "var(--form-cell-alt-bg)" }}>
+            <div style={{ fontSize: 10.5, color: "var(--text-secondary)", marginBottom: 3 }}>{label}</div>
+            <div style={{ fontSize: 17, fontWeight: 700, fontFamily: "var(--font-mono)", color: "var(--ink-900)" }}>
               {value.toLocaleString("ko-KR")} <span style={{ fontSize: 11, fontWeight: 500 }}>원</span>
             </div>
-            <div style={{ fontSize: 9.5, color: "#6B7E7B", marginTop: 2 }}>{sub}</div>
+            <div style={{ fontSize: 9.5, color: "var(--ink-400)", marginTop: 2 }}>{sub}</div>
           </div>
         ))}
       </div>
 
       {/* Patient total */}
       <div style={{
-        background: "#F0F5F0", border: "1.5px solid #3A6B50", borderRadius: 10,
+        background: "var(--form-payment-bg)", border: "1.5px solid var(--form-payment-border)", borderRadius: 10,
         padding: "14px 22px", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24,
       }}>
         <div>
-          <div style={{ fontSize: 13, fontWeight: 600, color: "#1C2B2B" }}>환자 납부 총액</div>
-          <div style={{ fontSize: 10.5, color: "#3A4F4C", marginTop: 1 }}>급여 본인부담 + 비급여 합산</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>환자 납부 총액</div>
+          <div style={{ fontSize: 10.5, color: "var(--text-secondary)", marginTop: 1 }}>급여 본인부담 + 비급여 합산</div>
         </div>
-        <div style={{ fontSize: 22, fontWeight: 800, fontFamily: "var(--font-mono)", color: "#1C5C3A" }}>
+        <div style={{ fontSize: 22, fontWeight: 800, fontFamily: "var(--font-mono)", color: "var(--form-payment-text)" }}>
           {patientTotal.toLocaleString("ko-KR")} <span style={{ fontSize: 13 }}>원</span>
         </div>
       </div>
 
-      <div style={{ fontSize: 10, color: "#3A4F4C", lineHeight: 1.8, borderTop: "0.5px solid #CCC", paddingTop: 10, marginBottom: 20 }}>
-        <div style={{ fontWeight: 600, marginBottom: 3, color: "#1C2B2B" }}>유의사항</div>
+      <div style={{ fontSize: 10, color: "var(--text-secondary)", lineHeight: 1.8, borderTop: "0.5px solid var(--form-border-soft)", paddingTop: 10, marginBottom: 20 }}>
+        <div style={{ fontWeight: 600, marginBottom: 3, color: "var(--text-primary)" }}>유의사항</div>
         <div>1. 본 내역서는 의료법 시행규칙 제17조의2에 의거하여 발급됩니다.</div>
         <div>2. 급여 항목의 공단 부담금은 건강보험공단에 직접 청구하며, 환자는 본인부담금만 납부합니다.</div>
         <div>3. 비급여 항목은 건강보험이 적용되지 않으며, 전액 본인이 부담합니다.</div>
         <div>4. 이의가 있으실 경우 원무과 또는 건강보험심사평가원(☎1644-2000)에 문의하시기 바랍니다.</div>
       </div>
 
-      <div style={{ textAlign: "right", fontSize: 11, color: "#1C2B2B", lineHeight: 2 }}>
+      <div style={{ textAlign: "right", fontSize: 11, color: "var(--text-primary)", lineHeight: 2 }}>
         <div>{clinic.name}</div>
-        <div style={{ color: "#3A4F4C" }}>한의사 {clinic.doctorName} <span style={{ fontSize: 10 }}>(서명)</span></div>
+        <div style={{ color: "var(--text-secondary)" }}>한의사 {clinic.doctorName} <span style={{ fontSize: 10 }}>(서명)</span></div>
       </div>
 
-      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "#6B7E7B" }}>210mm×297mm[백상지 80g/㎡]</div>
+      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "var(--ink-400)" }}>210mm×297mm[백상지 80g/㎡]</div>
     </div>
   );
 }
@@ -15532,36 +15997,36 @@ function CalcDetailPreviewA4({ patient, clinic, meta }) {
   const nonCovTotal   = MF_CALC_ITEMS.filter(i => i.type === "비급여").reduce((s, i) => s + i.total, 0);
 
   const th = {
-    padding: "6px 7px", background: "#F2EFE8", borderBottom: "1px solid #111",
-    borderRight: "1px solid #CCC", fontSize: 10.5, fontWeight: 600, color: "#1C2B2B", textAlign: "center",
+    padding: "6px 7px", background: "var(--form-table-header-bg)", borderBottom: "1px solid var(--form-border)",
+    borderRight: "1px solid var(--form-border-soft)", fontSize: 10.5, fontWeight: 600, color: "var(--text-primary)", textAlign: "center",
   };
   const td = {
-    padding: "5px 7px", borderBottom: "1px solid #E8E8E4", borderRight: "1px solid #E8E8E4",
-    fontSize: 10.5, verticalAlign: "middle", color: "#111",
+    padding: "5px 7px", borderBottom: "1px solid var(--form-border-light)", borderRight: "1px solid var(--form-border-light)",
+    fontSize: 10.5, verticalAlign: "middle", color: "var(--form-border)",
   };
   const numTd = { ...td, textAlign: "right", fontFamily: "var(--font-mono)", fontSize: 10 };
 
   return (
     <div className="a4-paper" style={{
-      width: 794, minHeight: 1123, background: "white", color: "#111",
+      width: 794, minHeight: 1123, background: "var(--bg-surface)", color: "var(--form-border)",
       padding: "40px 48px 36px", fontFamily: "var(--font-sans)",
-      boxShadow: "0 12px 40px rgba(17, 30, 28, 0.15), 0 2px 8px rgba(17,30,28,0.08)",
+      boxShadow: "var(--shadow-paper)",
       position: "relative",
     }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 20 }}>
         <div>
-          <div style={{ fontFamily: "var(--font-serif)", fontSize: 22, fontWeight: 600, letterSpacing: "0.5em", paddingLeft: "0.5em", color: "#0E1A18" }}>세부산정내역</div>
-          <div style={{ fontSize: 10, color: "#3A4F4C", marginTop: 4 }}>진료비 항목별 세부 산정 내역서</div>
+          <div style={{ fontFamily: "var(--font-serif)", fontSize: 22, fontWeight: 600, letterSpacing: "0.5em", paddingLeft: "0.5em", color: "var(--ink-900)" }}>세부산정내역</div>
+          <div style={{ fontSize: 10, color: "var(--text-secondary)", marginTop: 4 }}>진료비 항목별 세부 산정 내역서</div>
         </div>
-        <div style={{ textAlign: "right", fontSize: 11, lineHeight: 2, color: "#1C2B2B" }}>
-          <div><span style={{ color: "#3A4F4C" }}>환자: </span>{patient.name} ({patient.rrn})</div>
-          <div><span style={{ color: "#3A4F4C" }}>차트: </span>{patient.chartNo} · {patient.phone}</div>
-          <div><span style={{ color: "#3A4F4C" }}>기간: </span>{meta.startDate} ~ {meta.endDate}</div>
-          <div><span style={{ color: "#3A4F4C" }}>의료기관: </span>{clinic.name}</div>
+        <div style={{ textAlign: "right", fontSize: 11, lineHeight: 2, color: "var(--text-primary)" }}>
+          <div><span style={{ color: "var(--text-secondary)" }}>환자: </span>{patient.name} ({patient.rrn})</div>
+          <div><span style={{ color: "var(--text-secondary)" }}>차트: </span>{patient.chartNo} · {patient.phone}</div>
+          <div><span style={{ color: "var(--text-secondary)" }}>기간: </span>{meta.startDate} ~ {meta.endDate}</div>
+          <div><span style={{ color: "var(--text-secondary)" }}>의료기관: </span>{clinic.name}</div>
         </div>
       </div>
 
-      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid #111", borderLeft: "1px solid #CCC", marginBottom: 16 }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid var(--form-border)", borderLeft: "1px solid var(--form-border-soft)", marginBottom: 16 }}>
         <thead>
           <tr>
             <th style={{ ...th, width: 50 }}>진료일</th>
@@ -15570,48 +16035,48 @@ function CalcDetailPreviewA4({ patient, clinic, meta }) {
             <th style={{ ...th, width: 48 }}>구분</th>
             <th style={{ ...th, width: 34 }}>횟수</th>
             <th style={{ ...th, width: 74 }}>단가(원)</th>
-            <th style={{ ...th, width: 82, borderRight: "1px solid #111" }}>금액(원)</th>
+            <th style={{ ...th, width: 82, borderRight: "1px solid var(--form-border)" }}>금액(원)</th>
           </tr>
         </thead>
         <tbody>
           {Object.entries(grouped).map(([date, items]) =>
             items.map((item, j) => (
-              <tr key={`${date}-${j}`} style={{ borderBottom: j === items.length - 1 ? "1px solid #BBB" : undefined }}>
-                <td style={{ ...td, fontFamily: "var(--font-mono)", fontSize: 10, textAlign: "center", color: "#3A4F4C", background: "#FAFAF8", borderBottom: j === items.length - 1 ? "1px solid #BBB" : td.borderBottom }}>
+              <tr key={`${date}-${j}`} style={{ borderBottom: j === items.length - 1 ? "1px solid var(--form-border-divider)" : undefined }}>
+                <td style={{ ...td, fontFamily: "var(--font-mono)", fontSize: 10, textAlign: "center", color: "var(--text-secondary)", background: "var(--form-cell-alt-bg)", borderBottom: j === items.length - 1 ? "1px solid var(--form-border-divider)" : td.borderBottom }}>
                   {j === 0 ? date : ""}
                 </td>
-                <td style={{ ...td, fontFamily: "var(--font-mono)", fontSize: 10, color: "#3A4F4C" }}>{item.code}</td>
+                <td style={{ ...td, fontFamily: "var(--font-mono)", fontSize: 10, color: "var(--text-secondary)" }}>{item.code}</td>
                 <td style={td}>{item.name}</td>
                 <td style={{ ...td, textAlign: "center" }}>
                   <span style={{
                     display: "inline-block", padding: "1px 5px", borderRadius: 4, fontSize: 9.5, fontWeight: 600,
-                    background: item.type === "급여" ? "#EBF5EB" : "#FFF5E6",
-                    color: item.type === "급여" ? "#1A6B2A" : "#8B4A00",
-                    border: `1px solid ${item.type === "급여" ? "#C2E0C2" : "#F0D0A0"}`,
+                    background: item.type === "급여" ? "var(--form-covered-bg)" : "var(--form-noncovered-bg)",
+                    color: item.type === "급여" ? "var(--form-covered-text)" : "var(--form-noncovered-text)",
+                    border: `1px solid ${item.type === "급여" ? "var(--form-covered-border)" : "var(--form-noncovered-border)"}`,
                   }}>{item.type}</span>
                 </td>
                 <td style={numTd}>{item.count}</td>
                 <td style={numTd}>{item.unit.toLocaleString("ko-KR")}</td>
-                <td style={{ ...numTd, borderRight: "1px solid #CCC" }}>{item.total.toLocaleString("ko-KR")}</td>
+                <td style={{ ...numTd, borderRight: "1px solid var(--form-border-soft)" }}>{item.total.toLocaleString("ko-KR")}</td>
               </tr>
             ))
           )}
-          <tr style={{ borderTop: "1.5px solid #111" }}>
-            <td colSpan={5} style={{ ...td, background: "#F2EFE8", fontWeight: 700, borderRight: "none", borderBottom: "1.5px solid #111" }}>합&nbsp;&nbsp;&nbsp;계</td>
-            <td style={{ ...numTd, background: "#F2EFE8", fontWeight: 700, borderBottom: "1.5px solid #111" }}></td>
-            <td style={{ ...numTd, background: "#F2EFE8", fontWeight: 700, borderRight: "1px solid #CCC", borderBottom: "1.5px solid #111" }}>{grandTotal.toLocaleString("ko-KR")}</td>
+          <tr style={{ borderTop: "1.5px solid var(--form-border)" }}>
+            <td colSpan={5} style={{ ...td, background: "var(--form-table-header-bg)", fontWeight: 700, borderRight: "none", borderBottom: "1.5px solid var(--form-border)" }}>합&nbsp;&nbsp;&nbsp;계</td>
+            <td style={{ ...numTd, background: "var(--form-table-header-bg)", fontWeight: 700, borderBottom: "1.5px solid var(--form-border)" }}></td>
+            <td style={{ ...numTd, background: "var(--form-table-header-bg)", fontWeight: 700, borderRight: "1px solid var(--form-border-soft)", borderBottom: "1.5px solid var(--form-border)" }}>{grandTotal.toLocaleString("ko-KR")}</td>
           </tr>
         </tbody>
       </table>
 
       <div style={{ display: "flex", gap: 10, marginBottom: 22 }}>
         {[
-          { label: "총 진료비",   value: grandTotal,   color: "#1C2B2B" },
-          { label: "급여 합계",   value: coveredTotal, color: "#1A4A2A" },
-          { label: "비급여 합계", value: nonCovTotal,  color: "#7A3A00" },
+          { label: "총 진료비",   value: grandTotal,   color: "var(--text-primary)" },
+          { label: "급여 합계",   value: coveredTotal, color: "var(--form-covered-total-text)" },
+          { label: "비급여 합계", value: nonCovTotal,  color: "var(--form-noncovered-total-text)" },
         ].map(({ label, value, color }) => (
-          <div key={label} style={{ flex: 1, border: "1px solid var(--border-subtle)", borderRadius: 8, padding: "10px 14px", background: "#FAFAF8" }}>
-            <div style={{ fontSize: 10, color: "#3A4F4C", marginBottom: 3 }}>{label}</div>
+          <div key={label} style={{ flex: 1, border: "1px solid var(--border-subtle)", borderRadius: 8, padding: "10px 14px", background: "var(--form-cell-alt-bg)" }}>
+            <div style={{ fontSize: 10, color: "var(--text-secondary)", marginBottom: 3 }}>{label}</div>
             <div style={{ fontSize: 16, fontWeight: 700, fontFamily: "var(--font-mono)", color }}>
               {value.toLocaleString("ko-KR")} <span style={{ fontSize: 10, fontWeight: 500 }}>원</span>
             </div>
@@ -15619,19 +16084,19 @@ function CalcDetailPreviewA4({ patient, clinic, meta }) {
         ))}
       </div>
 
-      <div style={{ fontSize: 9.5, color: "#3A4F4C", lineHeight: 1.8, borderTop: "0.5px solid #CCC", paddingTop: 10, marginBottom: 18 }}>
-        <div style={{ fontWeight: 600, marginBottom: 3, color: "#1C2B2B" }}>유의사항</div>
+      <div style={{ fontSize: 9.5, color: "var(--text-secondary)", lineHeight: 1.8, borderTop: "0.5px solid var(--form-border-soft)", paddingTop: 10, marginBottom: 18 }}>
+        <div style={{ fontWeight: 600, marginBottom: 3, color: "var(--text-primary)" }}>유의사항</div>
         <div>1. 본 내역은 건강보험 청구 기준으로 산정된 금액이며, 실제 납부액은 급여 본인부담금과 비급여 금액의 합산입니다.</div>
         <div>2. 급여 항목의 본인부담률은 외래 30%, 입원 20%가 적용됩니다(경감 대상자 별도).</div>
         <div>3. 세부 내역에 이의가 있으실 경우 원무과에 문의하시기 바랍니다.</div>
       </div>
 
-      <div style={{ textAlign: "right", fontSize: 11, color: "#1C2B2B", lineHeight: 2 }}>
+      <div style={{ textAlign: "right", fontSize: 11, color: "var(--text-primary)", lineHeight: 2 }}>
         <div>발급일: {meta.issueDate}</div>
         <div>{clinic.name} · 한의사 {clinic.doctorName}</div>
       </div>
 
-      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "#6B7E7B" }}>210mm×297mm[백상지 80g/㎡]</div>
+      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "var(--ink-400)" }}>210mm×297mm[백상지 80g/㎡]</div>
     </div>
   );
 }
@@ -15708,9 +16173,9 @@ function BillingEditor({ data, onChange, patient, onChangePatient, label }) {
 function PlaceholderPreviewA4({ label, desc }) {
   return (
     <div style={{
-      width: 794, minHeight: 1123, background: "white", color: "#111",
+      width: 794, minHeight: 1123, background: "var(--bg-surface)", color: "var(--form-border)",
       padding: 56, fontFamily: "var(--font-sans)",
-      boxShadow: "0 12px 40px rgba(17, 30, 28, 0.15), 0 2px 8px rgba(17,30,28,0.08)",
+      boxShadow: "var(--shadow-paper)",
       display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column",
     }}>
       <div style={{
@@ -16669,7 +17134,7 @@ function PatientInstructionModal({ patient, onClose }) {
                   <div style={{ fontSize: 9, color: "var(--text-muted)" }}>의학·한방 용어 자동 설명</div>
                 </div>
                 <div style={{ width: 28, height: 16, borderRadius: 9, background: showHanja ? "var(--jade-500)" : "var(--stone-400)", position: "relative", flexShrink: 0, transition: "background 0.12s" }}>
-                  <div style={{ position: "absolute", top: 2, left: showHanja ? 14 : 2, width: 12, height: 12, borderRadius: "50%", background: "white", transition: "left 0.12s" }} />
+                  <div style={{ position: "absolute", top: 2, left: showHanja ? 14 : 2, width: 12, height: 12, borderRadius: "50%", background: "var(--bg-surface)", transition: "left 0.12s" }} />
                 </div>
               </div>
             </div>
@@ -16857,25 +17322,25 @@ function PIKakaoPreview({ sections, tone, length, patient, doctor, todayDate, cl
   const name = patient?.name || "환자";
   return (
     <div style={{
-      background: "#9BBBD4", borderRadius: "var(--radius-lg)", padding: "10px 8px",
+      background: "var(--instruction-banner-bg)", borderRadius: "var(--radius-lg)", padding: "10px 8px",
       minHeight: "100%", display: "flex", flexDirection: "column", gap: 6,
     }}>
-      <div style={{ textAlign: "center", fontSize: 9, color: "rgba(255,255,255,0.85)", padding: "2px 0 6px" }}>
+      <div style={{ textAlign: "center", fontSize: 9, color: "var(--overlay-white-85)", padding: "2px 0 6px" }}>
         오늘 오후 5:24
       </div>
       <div style={{ display: "flex", alignItems: "flex-end", gap: 5 }}>
         <div style={{ width: 26, height: 26, borderRadius: "50%", background: "var(--jade-500)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-          <span style={{ fontFamily: "var(--font-serif)", fontSize: 11, color: "white", fontWeight: 600 }}>솔</span>
+          <span style={{ fontFamily: "var(--font-serif)", fontSize: 11, color: "var(--text-on-brand)", fontWeight: 600 }}>솔</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 3, flex: 1, alignItems: "flex-start" }}>
-          <div style={{ fontSize: 9, color: "rgba(255,255,255,0.95)" }}>{clinic}</div>
+          <div style={{ fontSize: 9, color: "var(--overlay-white-95)" }}>{clinic}</div>
 
-          <div style={{ background: "white", padding: "8px 10px", borderRadius: "0 12px 12px 12px", maxWidth: "90%", fontSize: 11, lineHeight: 1.55, color: "#191919" }}>
+          <div style={{ background: "var(--bg-surface)", padding: "8px 10px", borderRadius: "0 12px 12px 12px", maxWidth: "90%", fontSize: 11, lineHeight: 1.55, color: "var(--instruction-banner-text)" }}>
             {name}님, 오늘 진료해주신 {doctor}입니다 :) 오늘 진료 안내문을 보내드려요.
           </div>
 
-          <div style={{ background: "white", borderRadius: 12, maxWidth: "100%", width: "100%", overflow: "hidden", boxShadow: "0 1px 2px rgba(0,0,0,0.08)" }}>
-            <div style={{ padding: "10px 12px", background: "linear-gradient(135deg, #4A7C6F 0%, #3A7065 100%)", color: "white" }}>
+          <div style={{ background: "var(--bg-surface)", borderRadius: 12, maxWidth: "100%", width: "100%", overflow: "hidden", boxShadow: "0 1px 2px var(--scrim-black-08)" }}>
+            <div style={{ padding: "10px 12px", background: "linear-gradient(135deg, var(--brand) 0%, var(--jade-600) 100%)", color: "var(--text-on-brand)" }}>
               <div style={{ fontSize: 9, opacity: 0.85, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 2 }}>SOLDAM CLINIC</div>
               <div style={{ fontSize: 13, fontWeight: 600, fontFamily: "var(--font-serif)" }}>{name}님 진료 안내</div>
               <div style={{ fontSize: 9, opacity: 0.85, marginTop: 2 }}>{todayDate} · {doctor}</div>
@@ -16887,24 +17352,24 @@ function PIKakaoPreview({ sections, tone, length, patient, doctor, todayDate, cl
                     <Icon name={s.icon} size={10} style={{ color: "var(--jade-600)" }} />
                     <span style={{ fontSize: 10, fontWeight: 700, color: "var(--text-brand)" }}>{s.title}</span>
                   </div>
-                  <div style={{ fontSize: 10.5, lineHeight: 1.55, color: "#333" }}>
+                  <div style={{ fontSize: 10.5, lineHeight: 1.55, color: "var(--instruction-paper-text)" }}>
                     {s.body[tone][length].length > 100 ? s.body[tone][length].slice(0, 100) + "…" : s.body[tone][length]}
                   </div>
                 </div>
               ))}
               {sections.length > 4 && (
-                <div style={{ textAlign: "center", padding: "6px 0", fontSize: 10, color: "var(--text-brand)", borderTop: "1px solid #eee" }}>
+                <div style={{ textAlign: "center", padding: "6px 0", fontSize: 10, color: "var(--text-brand)", borderTop: "1px solid var(--form-border-light)" }}>
                   ▼ 전체 안내문 열기 ({sections.length - 4}개 더)
                 </div>
               )}
             </div>
-            <div style={{ borderTop: "1px solid #eee", padding: "8px 12px", display: "flex", gap: 6 }}>
-              <div style={{ flex: 1, padding: "5px 0", textAlign: "center", fontSize: 10, color: "var(--text-brand)", fontWeight: 500, border: "1px solid #e4e4e4", borderRadius: 6 }}>PDF 보기</div>
-              <div style={{ flex: 1, padding: "5px 0", textAlign: "center", fontSize: 10, color: "var(--text-brand)", fontWeight: 500, border: "1px solid #e4e4e4", borderRadius: 6 }}>예약 확인</div>
+            <div style={{ borderTop: "1px solid var(--form-border-light)", padding: "8px 12px", display: "flex", gap: 6 }}>
+              <div style={{ flex: 1, padding: "5px 0", textAlign: "center", fontSize: 10, color: "var(--text-brand)", fontWeight: 500, border: "1px solid var(--border-subtle)", borderRadius: 6 }}>PDF 보기</div>
+              <div style={{ flex: 1, padding: "5px 0", textAlign: "center", fontSize: 10, color: "var(--text-brand)", fontWeight: 500, border: "1px solid var(--border-subtle)", borderRadius: 6 }}>예약 확인</div>
             </div>
           </div>
 
-          <div style={{ background: "white", padding: "8px 10px", borderRadius: "12px", maxWidth: "90%", fontSize: 11, lineHeight: 1.55, color: "#191919" }}>
+          <div style={{ background: "var(--bg-surface)", padding: "8px 10px", borderRadius: "12px", maxWidth: "90%", fontSize: 11, lineHeight: 1.55, color: "var(--instruction-banner-text)" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 3 }}>
               <Icon name="calendar-check" size={10} style={{ color: "var(--jade-600)" }} />
               <strong style={{ fontSize: 10, color: "var(--text-brand)" }}>다음 예약</strong>
@@ -16923,18 +17388,18 @@ function PIPdfPreview({ sections, tone, length, patient, doctor, todayDate }) {
   const name = patient?.name || "환자";
   return (
     <div style={{
-      background: "white", borderRadius: 2, padding: "16px 18px",
-      boxShadow: "var(--shadow-md)", fontSize: 9, lineHeight: 1.55, color: "#333",
+      background: "var(--bg-surface)", borderRadius: 2, padding: "16px 18px",
+      boxShadow: "var(--shadow-md)", fontSize: 9, lineHeight: 1.55, color: "var(--instruction-paper-text)",
       minHeight: 480,
     }}>
       <div style={{ paddingBottom: 10, borderBottom: "1.5px solid var(--ink-800)", marginBottom: 12 }}>
         <div style={{ fontSize: 7, fontWeight: 700, letterSpacing: "0.12em", color: "var(--jade-600)", marginBottom: 3 }}>SOLDAM CLINIC · 진료 안내문</div>
-        <div style={{ fontSize: 15, fontFamily: "var(--font-serif)", fontWeight: 500, color: "#1c2b2b", marginBottom: 4 }}>{name}님 진료 안내</div>
-        <div style={{ fontSize: 8, color: "#888" }}>진료일 · {todayDate}  |  담당 · {doctor}</div>
+        <div style={{ fontSize: 15, fontFamily: "var(--font-serif)", fontWeight: 500, color: "var(--text-primary)", marginBottom: 4 }}>{name}님 진료 안내</div>
+        <div style={{ fontSize: 8, color: "var(--instruction-paper-muted)" }}>진료일 · {todayDate}  |  담당 · {doctor}</div>
       </div>
       {sections.map((s, idx) => (
         <div key={s.id} style={{ marginBottom: 10 }}>
-          <div style={{ fontSize: 10, fontWeight: 700, color: "#1c2b2b", marginBottom: 3 }}>{idx + 1}. {s.title}</div>
+          <div style={{ fontSize: 10, fontWeight: 700, color: "var(--text-primary)", marginBottom: 3 }}>{idx + 1}. {s.title}</div>
           <div style={{ fontSize: 8.5, lineHeight: 1.6 }}>{s.body[tone][length]}</div>
         </div>
       ))}
@@ -16962,7 +17427,7 @@ const STAFF_MASTER = [
     salary: { type: "월급제", visible: false },
     leaveBalance: { annual: 15, used: 4 },
     note: "대표원장. 매주 목요일 외부 자문.",
-    color: "#5C8B7E",
+    color: "var(--accent-pine)",
     todayStatus: "진료중", // 진료중 | 진료대기 | 휴식 | 부재
     todayPatients: 14,
   },
@@ -16977,7 +17442,7 @@ const STAFF_MASTER = [
     salary: { type: "월급제", visible: false },
     leaveBalance: { annual: 15, used: 6 },
     note: "",
-    color: "#6B9E90",
+    color: "var(--jade-400)",
     todayStatus: "진료중",
     todayPatients: 11,
   },
@@ -16992,7 +17457,7 @@ const STAFF_MASTER = [
     salary: { type: "월급제", visible: false },
     leaveBalance: { annual: 15, used: 8 },
     note: "간호팀 리더. 신규 입사자 교육 담당.",
-    color: "#C4974B",
+    color: "var(--amber-500)",
     todayStatus: "진료중",
     todayPatients: 24,
   },
@@ -17007,7 +17472,7 @@ const STAFF_MASTER = [
     salary: { type: "월급제", visible: false },
     leaveBalance: { annual: 12, used: 3 },
     note: "",
-    color: "#C4974B",
+    color: "var(--amber-500)",
     todayStatus: "진료중",
     todayPatients: 16,
   },
@@ -17022,7 +17487,7 @@ const STAFF_MASTER = [
     salary: { type: "월급제", visible: false },
     leaveBalance: { annual: 15, used: 7 },
     note: "원무팀 리더. 보험 청구 총괄.",
-    color: "#5A6E8A",
+    color: "var(--accent-slate)",
     todayStatus: "진료중",
     todayPatients: null,
   },
@@ -17037,7 +17502,7 @@ const STAFF_MASTER = [
     salary: { type: "월급제", visible: false },
     leaveBalance: { annual: 12, used: 2 },
     note: "",
-    color: "#5A6E8A",
+    color: "var(--accent-slate)",
     todayStatus: "휴식",
     todayPatients: null,
   },
@@ -17052,7 +17517,7 @@ const STAFF_MASTER = [
     salary: { type: "월급제", visible: false },
     leaveBalance: { annual: 12, used: 5 },
     note: "",
-    color: "#B5873E",
+    color: "var(--accent-bronze)",
     todayStatus: "진료중",
     todayPatients: 9,
   },
@@ -17067,7 +17532,7 @@ const STAFF_MASTER = [
     salary: { type: "월급제", visible: false },
     leaveBalance: { annual: 12, used: 12 },
     note: "출산 휴가 중 (2026-03-04 ~ 2026-09-04).",
-    color: "#C4974B",
+    color: "var(--amber-500)",
     todayStatus: "휴직",
     todayPatients: null,
   },
@@ -17082,7 +17547,7 @@ const STAFF_MASTER = [
     salary: { type: "월급제", visible: false },
     leaveBalance: { annual: 15, used: 4 },
     note: "",
-    color: "#9A8E82",
+    color: "var(--stone-700)",
     todayStatus: "진료중",
     todayPatients: null,
   },
@@ -17097,7 +17562,7 @@ const STAFF_MASTER = [
     salary: { type: "시급제", visible: false },
     leaveBalance: { annual: 8, used: 1 },
     note: "오후 근무.",
-    color: "#5A6E8A",
+    color: "var(--accent-slate)",
     todayStatus: "진료대기",
     todayPatients: null,
   },
@@ -17112,7 +17577,7 @@ const STAFF_MASTER = [
     salary: { type: "월급제", visible: false },
     leaveBalance: { annual: 12, used: 1 },
     note: "야간 진료 담당.",
-    color: "#6B9E90",
+    color: "var(--jade-400)",
     todayStatus: "진료대기",
     todayPatients: 0,
   },
@@ -17127,18 +17592,18 @@ const STAFF_MASTER = [
     salary: { type: "월급제", visible: false },
     leaveBalance: { annual: 0, used: 0 },
     note: "2026-02-28 퇴사. 이직.",
-    color: "#9A8E82",
+    color: "var(--stone-700)",
     todayStatus: "퇴직",
     todayPatients: null,
   },
 ];
 
 const ROLE_GROUPS = [
-  { key: "doctor",     label: "한의사",     icon: "stethoscope",   color: "#5C8B7E" },
-  { key: "nurse",      label: "간호직",     icon: "heart-pulse",   color: "#C4974B" },
-  { key: "admin",      label: "원무·행정", icon: "clipboard-list", color: "#5A6E8A" },
-  { key: "therapist",  label: "물리치료사", icon: "hand-helping",   color: "#B5873E" },
-  { key: "pharmacist", label: "한약사",     icon: "flask-conical", color: "#9A8E82" },
+  { key: "doctor",     label: "한의사",     icon: "stethoscope",   color: "var(--accent-pine)" },
+  { key: "nurse",      label: "간호직",     icon: "heart-pulse",   color: "var(--amber-500)" },
+  { key: "admin",      label: "원무·행정", icon: "clipboard-list", color: "var(--accent-slate)" },
+  { key: "therapist",  label: "물리치료사", icon: "hand-helping",   color: "var(--accent-bronze)" },
+  { key: "pharmacist", label: "한약사",     icon: "flask-conical", color: "var(--stone-700)" },
 ];
 
 const STATUS_META = {
@@ -17645,7 +18110,7 @@ function NewStaffModal({ onClose, onSubmit, initialData }) {
             style={{
               padding: "8px 18px", fontSize: 13, fontWeight: 600,
               background: allRequired ? "var(--jade-500)" : "var(--stone-300)",
-              border: "none", borderRadius: "var(--radius-md)", color: "#fff",
+              border: "none", borderRadius: "var(--radius-md)", color: "var(--text-on-brand)",
               cursor: allRequired ? "pointer" : "not-allowed",
               fontFamily: "var(--font-sans)",
               display: "inline-flex", alignItems: "center", gap: 6,
@@ -17899,7 +18364,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
 
         {/* Actions */}
         <div style={{ display: "flex", gap: 6, marginTop: 12 }}>
-          <button onClick={() => onEdit && onEdit(staff)} style={{ flex: 1, padding: "7px 10px", background: "var(--jade-500)", color: "#fff", border: "none", borderRadius: "var(--radius-md)", fontSize: 12, fontWeight: 600, cursor: "pointer", fontFamily: "var(--font-sans)", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 5 }}>
+          <button onClick={() => onEdit && onEdit(staff)} style={{ flex: 1, padding: "7px 10px", background: "var(--jade-500)", color: "var(--text-on-brand)", border: "none", borderRadius: "var(--radius-md)", fontSize: 12, fontWeight: 600, cursor: "pointer", fontFamily: "var(--font-sans)", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 5 }}>
             <Icon name="pencil" size={12} />정보 수정
           </button>
           <button style={{ padding: "7px 10px", background: "var(--bg-surface)", color: "var(--text-primary)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-md)", fontSize: 12, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-sans)", display: "inline-flex", alignItems: "center", gap: 5 }}>
@@ -18206,8 +18671,8 @@ function Toggle({ on, onChange }) {
     }}>
       <span style={{
         position: "absolute", top: 2, left: val ? 16 : 2,
-        width: 14, height: 14, borderRadius: "50%", background: "#fff",
-        boxShadow: "0 1px 2px rgba(0,0,0,0.2)", transition: "left 0.12s",
+        width: 14, height: 14, borderRadius: "50%", background: "var(--text-on-brand)",
+        boxShadow: "0 1px 2px var(--scrim-black-20)", transition: "left 0.12s",
       }} />
     </button>
   );
@@ -18615,7 +19080,7 @@ function ThemeCard({ value, label, hint, active, onSelect, preview }) {
         minWidth: 0,
       }}>
       {/* Mini preview */}
-      <div style={{
+      <div className={preview.className} style={{
         height: 100, borderRadius: "var(--radius-md)",
         background: preview.bg,
         border: `1px solid ${preview.border}`,
@@ -18677,38 +19142,39 @@ function ThemeCard({ value, label, hint, active, onSelect, preview }) {
 
 const THEME_PREVIEWS = {
   light: {
-    bg: "#FDFAF5", border: "#E4DDD4",
-    dot1: "#C4594B", dot2: "#C4974B", dot3: "#4A7C6F",
-    line1: "#2A3C3A", line2: "#8A9E9A",
-    pill: "#D4EDE9", pillText: "#2E5C52",
+    bg: "var(--stone-50)", border: "var(--border-subtle)",
+    dot1: "var(--cinnabar-600)", dot2: "var(--amber-500)", dot3: "var(--brand)",
+    line1: "var(--ink-700)", line2: "var(--ink-300)",
+    pill: "var(--jade-100)", pillText: "var(--text-brand)",
   },
   dark: {
-    bg: "#0B1413", border: "#2A3C3A",
-    dot1: "#E09690", dot2: "#D4AE78", dot3: "#8DBFB3",
-    line1: "#EEF4F3", line2: "#6B7E7B",
-    pill: "rgba(74,124,111,0.18)", pillText: "#8DBFB3",
+    bg: "var(--ink-900)", border: "var(--ink-700)",
+    dot1: "var(--cinnabar-400)", dot2: "var(--amber-400)", dot3: "var(--jade-300)",
+    line1: "var(--ink-50)", line2: "var(--ink-400)",
+    pill: "var(--brand-muted)", pillText: "var(--jade-300)",
   },
   auto: {
-    bg: "linear-gradient(120deg, #FDFAF5 0%, #FDFAF5 48%, #0B1413 52%, #0B1413 100%)",
-    border: "#8A9E9A",
-    dot1: "#C4594B", dot2: "#C4974B", dot3: "#8DBFB3",
-    line1: "#6B7E7B", line2: "#6B7E7B",
-    pill: "rgba(74,124,111,0.18)", pillText: "#4A7C6F",
+    bg: "linear-gradient(120deg, var(--stone-50) 0%, var(--stone-50) 48%, var(--ink-900) 52%, var(--ink-900) 100%)",
+    border: "var(--ink-300)",
+    dot1: "var(--cinnabar-600)", dot2: "var(--amber-500)", dot3: "var(--jade-300)",
+    line1: "var(--ink-400)", line2: "var(--ink-400)",
+    pill: "var(--brand-muted)", pillText: "var(--brand)",
   },
 };
 
 const COLOR_PREVIEWS = {
   jade: {
-    bg: "#D4EDE9", border: "#9ECEC5",
-    dot1: "#2E5C52", dot2: "#4A7C6F", dot3: "#B5D9D3",
-    line1: "#2E5C52", line2: "#4A7C6F",
-    pill: "#4A7C6F", pillText: "#FDFAF5",
+    className: "color-preview-jade",
+    bg: "var(--jade-100)", border: "var(--jade-300)",
+    dot1: "var(--text-brand)", dot2: "var(--brand)", dot3: "var(--jade-200)",
+    line1: "var(--text-brand)", line2: "var(--brand)",
+    pill: "var(--brand)", pillText: "var(--stone-50)",
   },
   navy: {
-    bg: "#D6DEEB", border: "#8298BF",
-    dot1: "#1E3252", dot2: "#355A82", dot3: "#8298BF",
-    line1: "#1E3252", line2: "#5878A3",
-    pill: "#355A82", pillText: "#EEF1F7",
+    bg: "var(--navy-100)", border: "var(--navy-300)",
+    dot1: "var(--navy-700)", dot2: "var(--navy-500)", dot3: "var(--navy-300)",
+    line1: "var(--navy-700)", line2: "var(--navy-400)",
+    pill: "var(--navy-500)", pillText: "var(--navy-50)",
   },
 };
 
@@ -18732,8 +19198,8 @@ function Toggle({ checked, onChange, label }) {
         position: "absolute", top: 2,
         left: checked ? 18 : 2,
         width: 18, height: 18, borderRadius: "50%",
-        background: "#fff",
-        boxShadow: "0 1px 3px rgba(17,30,28,0.20)",
+        background: "var(--text-on-brand)",
+        boxShadow: "0 1px 3px rgba(var(--ink-900-rgb), 0.20)",
         transition: "left 0.18s ease",
       }} />
     </button>

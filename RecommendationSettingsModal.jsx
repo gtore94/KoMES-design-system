@@ -628,8 +628,8 @@ function RSToggle({ label, desc, value, onChange }) {
       }}>
         <div style={{
           position: "absolute", top: 2, left: value ? 18 : 2,
-          width: 16, height: 16, borderRadius: "50%", background: "white",
-          transition: "left 0.12s ease", boxShadow: "0 1px 3px rgba(0,0,0,0.15)",
+          width: 16, height: 16, borderRadius: "50%", background: "var(--bg-surface)",
+          transition: "left 0.12s ease", boxShadow: "0 1px 3px var(--scrim-black-15)",
         }}></div>
       </div>
     </div>

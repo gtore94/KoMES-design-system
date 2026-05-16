@@ -60,6 +60,18 @@ def main():
     head_end = html.index('<script type="text/babel" src=')
     head = html[:head_end].replace("KoMES — UI Kit", "KoMES — UI Kit (Standalone)")
 
+    # Inline external CSS — standalone has no external links.
+    css_link_re = re.compile(r'<link\s+rel="stylesheet"\s+href="([^"]+\.css)"\s*/?>')
+    def inline_css(m):
+        css_path = m.group(1)
+        if not os.path.exists(css_path):
+            print(f"  ✗  MISSING CSS: {css_path}", file=sys.stderr)
+            return m.group(0)
+        with open(css_path) as cf:
+            print(f"  ✓  inlined CSS: {css_path}")
+            return f"<style>\n{cf.read()}\n</style>"
+    head = css_link_re.sub(inline_css, head)
+
     # App script: last inline <script type="text/babel"> block
     last = html.rindex('<script type="text/babel">')
     app_script = html[last : html.index("</script>", last) + len("</script>")]

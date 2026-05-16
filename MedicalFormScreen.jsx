@@ -207,61 +207,61 @@ function DiagnosisPreviewA4({ data, clinic, patient }) {
   const Chk = ({ on }) => (
     <span style={{
       display: "inline-flex", alignItems: "center", justifyContent: "center",
-      width: 13, height: 13, border: "1.2px solid #111", marginRight: 4,
+      width: 13, height: 13, border: "1.2px solid var(--form-border)", marginRight: 4,
       fontSize: 11, lineHeight: 1, fontFamily: "var(--font-serif)",
       verticalAlign: "middle",
     }}>{on ? "√" : ""}</span>
   );
 
   const td = {
-    padding: "6px 8px", borderBottom: "1px solid #111", borderRight: "1px solid #111",
-    fontSize: 11.5, verticalAlign: "middle", color: "#111", lineHeight: 1.55,
+    padding: "6px 8px", borderBottom: "1px solid var(--form-border)", borderRight: "1px solid var(--form-border)",
+    fontSize: 11.5, verticalAlign: "middle", color: "var(--form-border)", lineHeight: 1.55,
   };
   const lh = { // label header (left column shaded)
-    ...td, background: "#F2EFE8", textAlign: "center", fontWeight: 500,
-    width: 110, color: "#1C2B2B",
+    ...td, background: "var(--form-table-header-bg)", textAlign: "center", fontWeight: 500,
+    width: 110, color: "var(--text-primary)",
   };
   const lhWide = { ...lh, width: 130 };
 
   return (
     <div className="a4-paper" style={{
-      width: 794, minHeight: 1123, background: "white", color: "#111",
+      width: 794, minHeight: 1123, background: "var(--bg-surface)", color: "var(--form-border)",
       padding: "42px 56px 36px", fontFamily: "var(--font-sans)",
-      boxShadow: "0 12px 40px rgba(17, 30, 28, 0.15), 0 2px 8px rgba(17,30,28,0.08)",
+      boxShadow: "var(--shadow-paper)",
       position: "relative",
     }}>
       {/* Top meta strip */}
       <div style={{
         display: "flex", justifyContent: "space-between", alignItems: "baseline",
-        fontSize: 10, color: "#1C2B2B", marginBottom: 4,
+        fontSize: 10, color: "var(--text-primary)", marginBottom: 4,
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <span style={{ display: "inline-block", width: 14, height: 10, background: "#111" }}></span>
+          <span style={{ display: "inline-block", width: 14, height: 10, background: "var(--form-border)" }}></span>
           <span>의료법 시행규칙 [별지 제5호의2서식]</span>
         </div>
-        <div style={{ fontSize: 9.5, color: "#3A4F4C" }}>&lt;개정 2019. 9. 27.&gt;</div>
+        <div style={{ fontSize: 9.5, color: "var(--text-secondary)" }}>&lt;개정 2019. 9. 27.&gt;</div>
       </div>
 
       {/* Title */}
       <div style={{
         textAlign: "center", fontFamily: "var(--font-serif)",
         fontSize: 30, fontWeight: 600, letterSpacing: "1.2em",
-        margin: "26px 0 22px", paddingLeft: "1.2em", color: "#0E1A18",
+        margin: "26px 0 22px", paddingLeft: "1.2em", color: "var(--ink-900)",
       }}>진 단 서</div>
 
       {/* Registry strip */}
       <div style={{
         display: "flex", justifyContent: "flex-end", gap: 0,
-        marginBottom: 6, fontSize: 10.5, color: "#1C2B2B",
+        marginBottom: 6, fontSize: 10.5, color: "var(--text-primary)",
       }}>
-        <div style={{ border: "1px solid #111", borderRight: "none", padding: "4px 10px", background: "#F2EFE8", fontWeight: 500 }}>등록번호</div>
-        <div style={{ border: "1px solid #111", padding: "4px 14px", minWidth: 130, fontFamily: "var(--font-mono)", letterSpacing: "0.05em" }}>{data.registry || "\u00A0"}</div>
-        <div style={{ border: "1px solid #111", borderLeft: "none", padding: "4px 10px", background: "#F2EFE8", fontWeight: 500 }}>연번호</div>
-        <div style={{ border: "1px solid #111", borderLeft: "none", padding: "4px 14px", minWidth: 110, fontFamily: "var(--font-mono)", letterSpacing: "0.05em" }}>{data.serial || "\u00A0"}</div>
+        <div style={{ border: "1px solid var(--form-border)", borderRight: "none", padding: "4px 10px", background: "var(--form-table-header-bg)", fontWeight: 500 }}>등록번호</div>
+        <div style={{ border: "1px solid var(--form-border)", padding: "4px 14px", minWidth: 130, fontFamily: "var(--font-mono)", letterSpacing: "0.05em" }}>{data.registry || "\u00A0"}</div>
+        <div style={{ border: "1px solid var(--form-border)", borderLeft: "none", padding: "4px 10px", background: "var(--form-table-header-bg)", fontWeight: 500 }}>연번호</div>
+        <div style={{ border: "1px solid var(--form-border)", borderLeft: "none", padding: "4px 14px", minWidth: 110, fontFamily: "var(--font-mono)", letterSpacing: "0.05em" }}>{data.serial || "\u00A0"}</div>
       </div>
 
       {/* Main table */}
-      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid #111", borderLeft: "1px solid #111", marginBottom: 18 }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid var(--form-border)", borderLeft: "1px solid var(--form-border)", marginBottom: 18 }}>
         <tbody>
           <tr>
             <td style={lh}>환자의 성명</td>
@@ -271,11 +271,11 @@ function DiagnosisPreviewA4({ data, clinic, patient }) {
           </tr>
           <tr>
             <td style={lh}>환자의 주소</td>
-            <td colSpan={3} style={td}>{patient.address} &nbsp;&nbsp;<span style={{ color: "#3A4F4C" }}>(전화번호: {patient.phone})</span></td>
+            <td colSpan={3} style={td}>{patient.address} &nbsp;&nbsp;<span style={{ color: "var(--text-secondary)" }}>(전화번호: {patient.phone})</span></td>
           </tr>
           <tr>
             <td style={lh} rowSpan={2}>병 &nbsp;명</td>
-            <td style={{ ...td, borderRight: "1px solid #111", paddingTop: 8, paddingBottom: 8 }}>
+            <td style={{ ...td, borderRight: "1px solid var(--form-border)", paddingTop: 8, paddingBottom: 8 }}>
               <div style={{ display: "flex", gap: 22, alignItems: "center" }}>
                 <span><Chk on={data.judgment === "clinical"} /> 임상적 추정</span>
                 <span><Chk on={data.judgment === "final"} /> 최 종 진 단</span>
@@ -331,14 +331,14 @@ function DiagnosisPreviewA4({ data, clinic, patient }) {
             <td colSpan={3} style={td}>{data.purpose}</td>
           </tr>
           <tr>
-            <td style={{ ...lh, borderBottom: "1.5px solid #111" }}>비 &nbsp;고</td>
-            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid #111", minHeight: 36, whiteSpace: "pre-wrap" }}>{data.remarks || "\u00A0"}</td>
+            <td style={{ ...lh, borderBottom: "1.5px solid var(--form-border)" }}>비 &nbsp;고</td>
+            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid var(--form-border)", minHeight: 36, whiteSpace: "pre-wrap" }}>{data.remarks || "\u00A0"}</td>
           </tr>
         </tbody>
       </table>
 
       {/* Certification statement */}
-      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "#0E1A18", marginBottom: 18 }}>
+      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "var(--ink-900)", marginBottom: 18 }}>
         「의료법」 제17조 및 같은 법 시행규칙 제9조제1항에 따라 위와 같이 진단합니다.
       </div>
 
@@ -350,14 +350,14 @@ function DiagnosisPreviewA4({ data, clinic, patient }) {
       </div>
 
       {/* Issuer block */}
-      <div style={{ fontSize: 12, lineHeight: 2.1, color: "#0E1A18", paddingLeft: 4 }}>
+      <div style={{ fontSize: 12, lineHeight: 2.1, color: "var(--ink-900)", paddingLeft: 4 }}>
         <div style={{ display: "flex", gap: 14 }}>
-          <span style={{ minWidth: 92, color: "#1C2B2B" }}>의료기관 명칭:</span>
-          <span style={{ flex: 1, borderBottom: "0.7px solid #111", paddingBottom: 2 }}>{clinic.name}</span>
+          <span style={{ minWidth: 92, color: "var(--text-primary)" }}>의료기관 명칭:</span>
+          <span style={{ flex: 1, borderBottom: "0.7px solid var(--form-border)", paddingBottom: 2 }}>{clinic.name}</span>
         </div>
         <div style={{ display: "flex", gap: 14 }}>
-          <span style={{ minWidth: 92, color: "#1C2B2B" }}>주소:</span>
-          <span style={{ flex: 1, borderBottom: "0.7px solid #111", paddingBottom: 2 }}>{clinic.address}</span>
+          <span style={{ minWidth: 92, color: "var(--text-primary)" }}>주소:</span>
+          <span style={{ flex: 1, borderBottom: "0.7px solid var(--form-border)", paddingBottom: 2 }}>{clinic.address}</span>
         </div>
         <div style={{ display: "flex", gap: 18, alignItems: "center", marginTop: 4 }}>
           <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
@@ -370,20 +370,20 @@ function DiagnosisPreviewA4({ data, clinic, patient }) {
             <Chk on={clinic.doctorRole === "han"} />한의사
           </span>
           <span style={{ marginLeft: 12 }}>면허번호&nbsp;&nbsp;제&nbsp;
-            <span style={{ fontFamily: "var(--font-mono)", borderBottom: "0.7px solid #111", padding: "0 14px" }}>{clinic.license}</span>
+            <span style={{ fontFamily: "var(--font-mono)", borderBottom: "0.7px solid var(--form-border)", padding: "0 14px" }}>{clinic.license}</span>
             &nbsp;호
           </span>
         </div>
         <div style={{ display: "flex", gap: 14, alignItems: "center", marginTop: 6 }}>
-          <span style={{ minWidth: 92, color: "#1C2B2B" }}>성 &nbsp;명:</span>
-          <span style={{ flex: 1, borderBottom: "0.7px solid #111", paddingBottom: 2, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <span style={{ minWidth: 92, color: "var(--text-primary)" }}>성 &nbsp;명:</span>
+          <span style={{ flex: 1, borderBottom: "0.7px solid var(--form-border)", paddingBottom: 2, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <span style={{ fontFamily: "var(--font-serif)", fontSize: 14, fontWeight: 500 }}>{clinic.doctorName}</span>
             <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <span style={{ color: "#3A4F4C", fontSize: 11 }}>(서명 또는 인)</span>
+              <span style={{ color: "var(--text-secondary)", fontSize: 11 }}>(서명 또는 인)</span>
               <span style={{
                 display: "inline-flex", alignItems: "center", justifyContent: "center",
-                width: 38, height: 38, border: "2px solid #B03028", borderRadius: "50%",
-                color: "#B03028", fontFamily: "var(--font-serif)", fontWeight: 700,
+                width: 38, height: 38, border: "2px solid var(--form-seal)", borderRadius: "50%",
+                color: "var(--form-seal)", fontFamily: "var(--font-serif)", fontWeight: 700,
                 fontSize: 13, letterSpacing: "-0.05em",
               }}>{clinic.doctorName[0]}印</span>
             </span>
@@ -393,10 +393,10 @@ function DiagnosisPreviewA4({ data, clinic, patient }) {
 
       {/* Writer guide footer */}
       <div style={{
-        marginTop: 32, paddingTop: 12, borderTop: "0.5px solid #777",
-        fontSize: 9, lineHeight: 1.6, color: "#3A4F4C",
+        marginTop: 32, paddingTop: 12, borderTop: "0.5px solid var(--form-rule)",
+        fontSize: 9, lineHeight: 1.6, color: "var(--text-secondary)",
       }}>
-        <div style={{ fontWeight: 600, color: "#1C2B2B", marginBottom: 4, letterSpacing: "0.3em", textAlign: "center" }}>작 성 방 법</div>
+        <div style={{ fontWeight: 600, color: "var(--text-primary)", marginBottom: 4, letterSpacing: "0.3em", textAlign: "center" }}>작 성 방 법</div>
         <div style={{ display: "flex", gap: 4 }}>
           <span>1.</span>
           <span>환자의 인적사항은 진찰한 의사, 치과의사 또는 한의사가 주민등록증, 기간 만료 전 여권, 운전면허증, 공무원증, 국립ㆍ공립대학 학생증, 군무원증, 건강보험증, 외국인등록증 등 국가공인 신분증(환자가 미성년자인 경우에는 주민등록등본ㆍ초본, 학생증 등으로 대체 가능합니다)과 대조하여 확인하고 서명 또는 날인합니다.</span>
@@ -408,7 +408,7 @@ function DiagnosisPreviewA4({ data, clinic, patient }) {
       </div>
 
       <div style={{
-        position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "#6B7E7B",
+        position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "var(--ink-400)",
       }}>210mm×297mm[백상지 80g/㎡]</div>
     </div>
   );
@@ -427,18 +427,18 @@ function InjuryPreviewA4({ data, clinic, patient }) {
   const Chk = ({ on }) => (
     <span style={{
       display: "inline-flex", alignItems: "center", justifyContent: "center",
-      width: 13, height: 13, border: "1.2px solid #111", marginRight: 4,
+      width: 13, height: 13, border: "1.2px solid var(--form-border)", marginRight: 4,
       fontSize: 11, lineHeight: 1, fontFamily: "var(--font-serif)", verticalAlign: "middle",
     }}>{on ? "√" : ""}</span>
   );
 
   const td = {
-    padding: "5px 8px", borderBottom: "1px solid #111", borderRight: "1px solid #111",
-    fontSize: 11, verticalAlign: "middle", color: "#111", lineHeight: 1.5,
+    padding: "5px 8px", borderBottom: "1px solid var(--form-border)", borderRight: "1px solid var(--form-border)",
+    fontSize: 11, verticalAlign: "middle", color: "var(--form-border)", lineHeight: 1.5,
   };
   const lh = {
-    ...td, background: "#F2EFE8", textAlign: "center", fontWeight: 500,
-    width: 126, color: "#1C2B2B", fontSize: 10.5,
+    ...td, background: "var(--form-table-header-bg)", textAlign: "center", fontWeight: 500,
+    width: 126, color: "var(--text-primary)", fontSize: 10.5,
   };
 
   const YMD = ({ p }) => (
@@ -451,39 +451,39 @@ function InjuryPreviewA4({ data, clinic, patient }) {
 
   return (
     <div className="a4-paper" style={{
-      width: 794, minHeight: 1123, background: "white", color: "#111",
+      width: 794, minHeight: 1123, background: "var(--bg-surface)", color: "var(--form-border)",
       padding: "42px 56px 36px", fontFamily: "var(--font-sans)",
-      boxShadow: "0 12px 40px rgba(17, 30, 28, 0.15), 0 2px 8px rgba(17,30,28,0.08)",
+      boxShadow: "var(--shadow-paper)",
       position: "relative",
     }}>
       <div style={{
         display: "flex", justifyContent: "space-between", alignItems: "baseline",
-        fontSize: 10, color: "#1C2B2B", marginBottom: 4,
+        fontSize: 10, color: "var(--text-primary)", marginBottom: 4,
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <span style={{ display: "inline-block", width: 14, height: 10, background: "#111" }}></span>
+          <span style={{ display: "inline-block", width: 14, height: 10, background: "var(--form-border)" }}></span>
           <span>의료법 시행규칙 [별지 제5호의3서식]</span>
         </div>
-        <div style={{ fontSize: 9.5, color: "#3A4F4C" }}>&lt;개정 2019. 9. 27.&gt;</div>
+        <div style={{ fontSize: 9.5, color: "var(--text-secondary)" }}>&lt;개정 2019. 9. 27.&gt;</div>
       </div>
 
       <div style={{
         textAlign: "center", fontFamily: "var(--font-serif)",
         fontSize: 30, fontWeight: 600, letterSpacing: "1.2em",
-        margin: "18px 0 16px", paddingLeft: "1.2em", color: "#0E1A18",
+        margin: "18px 0 16px", paddingLeft: "1.2em", color: "var(--ink-900)",
       }}>상 해 진 단 서</div>
 
       <div style={{
         display: "flex", justifyContent: "flex-end", gap: 0,
-        marginBottom: 6, fontSize: 10.5, color: "#1C2B2B",
+        marginBottom: 6, fontSize: 10.5, color: "var(--text-primary)",
       }}>
-        <div style={{ border: "1px solid #111", borderRight: "none", padding: "4px 10px", background: "#F2EFE8", fontWeight: 500 }}>등록번호</div>
-        <div style={{ border: "1px solid #111", padding: "4px 14px", minWidth: 130, fontFamily: "var(--font-mono)", letterSpacing: "0.05em" }}>{data.registry || " "}</div>
-        <div style={{ border: "1px solid #111", borderLeft: "none", padding: "4px 10px", background: "#F2EFE8", fontWeight: 500 }}>면&nbsp;번&nbsp;호</div>
-        <div style={{ border: "1px solid #111", borderLeft: "none", padding: "4px 14px", minWidth: 110, fontFamily: "var(--font-mono)", letterSpacing: "0.05em" }}>{data.serial || " "}</div>
+        <div style={{ border: "1px solid var(--form-border)", borderRight: "none", padding: "4px 10px", background: "var(--form-table-header-bg)", fontWeight: 500 }}>등록번호</div>
+        <div style={{ border: "1px solid var(--form-border)", padding: "4px 14px", minWidth: 130, fontFamily: "var(--font-mono)", letterSpacing: "0.05em" }}>{data.registry || " "}</div>
+        <div style={{ border: "1px solid var(--form-border)", borderLeft: "none", padding: "4px 10px", background: "var(--form-table-header-bg)", fontWeight: 500 }}>면&nbsp;번&nbsp;호</div>
+        <div style={{ border: "1px solid var(--form-border)", borderLeft: "none", padding: "4px 14px", minWidth: 110, fontFamily: "var(--font-mono)", letterSpacing: "0.05em" }}>{data.serial || " "}</div>
       </div>
 
-      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid #111", borderLeft: "1px solid #111", marginBottom: 14 }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid var(--form-border)", borderLeft: "1px solid var(--form-border)", marginBottom: 14 }}>
         <tbody>
           <tr>
             <td style={lh}>환자의 성명</td>
@@ -494,11 +494,11 @@ function InjuryPreviewA4({ data, clinic, patient }) {
           <tr>
             <td style={lh}>환자의 주소</td>
             <td colSpan={2} style={td}>{patient.address}</td>
-            <td style={td}><span style={{ color: "#3A4F4C" }}>(전화번호 : </span>{patient.phone}<span style={{ color: "#3A4F4C" }}>)</span></td>
+            <td style={td}><span style={{ color: "var(--text-secondary)" }}>(전화번호 : </span>{patient.phone}<span style={{ color: "var(--text-secondary)" }}>)</span></td>
           </tr>
           <tr>
             <td style={lh} rowSpan={2}>병&nbsp;&nbsp;&nbsp;&nbsp;명</td>
-            <td style={{ ...td, borderRight: "1px solid #111" }}>
+            <td style={{ ...td, borderRight: "1px solid var(--form-border)" }}>
               <div style={{ display: "flex", gap: 18, alignItems: "center" }}>
                 <span><Chk on={data.judgment === "clinical"} /> 임상적 추정</span>
                 <span><Chk on={data.judgment === "final"} /> 최 종 진 단</span>
@@ -559,7 +559,7 @@ function InjuryPreviewA4({ data, clinic, patient }) {
             <td colSpan={3} style={td}>
               <YMD p={txStart} /> 부터&nbsp;&nbsp;&nbsp;
               <YMD p={txEnd} /> 까지&nbsp;&nbsp;
-              <span style={{ color: "#3A4F4C", fontSize: 10.5 }}>(진단일부터&nbsp;
+              <span style={{ color: "var(--text-secondary)", fontSize: 10.5 }}>(진단일부터&nbsp;
                 <span style={{ fontFamily: "var(--font-mono)" }}>{data.treatmentDays || "__"}</span> 일간)
               </span>
             </td>
@@ -578,13 +578,13 @@ function InjuryPreviewA4({ data, clinic, patient }) {
             </td>
           </tr>
           <tr>
-            <td style={{ ...lh, borderBottom: "1.5px solid #111" }}>비&nbsp;&nbsp;&nbsp;&nbsp;고</td>
-            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid #111", minHeight: 30 }}>{data.remarks || " "}</td>
+            <td style={{ ...lh, borderBottom: "1.5px solid var(--form-border)" }}>비&nbsp;&nbsp;&nbsp;&nbsp;고</td>
+            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid var(--form-border)", minHeight: 30 }}>{data.remarks || " "}</td>
           </tr>
         </tbody>
       </table>
 
-      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "#0E1A18", marginBottom: 14 }}>
+      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "var(--ink-900)", marginBottom: 14 }}>
         「의료법」 제17조 및 같은 법 시행규칙 제9조제2항에 따라 위와 같이 진단합니다.
       </div>
 
@@ -594,14 +594,14 @@ function InjuryPreviewA4({ data, clinic, patient }) {
         <span style={{ fontFamily: "var(--font-mono)" }}>{iss.d || "__"}</span> 일
       </div>
 
-      <div style={{ fontSize: 12, lineHeight: 2.1, color: "#0E1A18", paddingLeft: 4 }}>
+      <div style={{ fontSize: 12, lineHeight: 2.1, color: "var(--ink-900)", paddingLeft: 4 }}>
         <div style={{ display: "flex", gap: 14 }}>
-          <span style={{ minWidth: 92, color: "#1C2B2B" }}>의료기관 명칭:</span>
-          <span style={{ flex: 1, borderBottom: "0.7px solid #111", paddingBottom: 2 }}>{clinic.name}</span>
+          <span style={{ minWidth: 92, color: "var(--text-primary)" }}>의료기관 명칭:</span>
+          <span style={{ flex: 1, borderBottom: "0.7px solid var(--form-border)", paddingBottom: 2 }}>{clinic.name}</span>
         </div>
         <div style={{ display: "flex", gap: 14 }}>
-          <span style={{ minWidth: 92, color: "#1C2B2B" }}>주소:</span>
-          <span style={{ flex: 1, borderBottom: "0.7px solid #111", paddingBottom: 2 }}>{clinic.address}</span>
+          <span style={{ minWidth: 92, color: "var(--text-primary)" }}>주소:</span>
+          <span style={{ flex: 1, borderBottom: "0.7px solid var(--form-border)", paddingBottom: 2 }}>{clinic.address}</span>
         </div>
         <div style={{ display: "flex", gap: 18, alignItems: "center", marginTop: 4 }}>
           <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
@@ -614,20 +614,20 @@ function InjuryPreviewA4({ data, clinic, patient }) {
             <Chk on={clinic.doctorRole === "han"} />한의사
           </span>
           <span style={{ marginLeft: 12 }}>면허번호&nbsp;&nbsp;제&nbsp;
-            <span style={{ fontFamily: "var(--font-mono)", borderBottom: "0.7px solid #111", padding: "0 14px" }}>{clinic.license}</span>
+            <span style={{ fontFamily: "var(--font-mono)", borderBottom: "0.7px solid var(--form-border)", padding: "0 14px" }}>{clinic.license}</span>
             &nbsp;호
           </span>
         </div>
         <div style={{ display: "flex", gap: 14, alignItems: "center", marginTop: 6 }}>
-          <span style={{ minWidth: 92, color: "#1C2B2B" }}>성 &nbsp;명:</span>
-          <span style={{ flex: 1, borderBottom: "0.7px solid #111", paddingBottom: 2, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <span style={{ minWidth: 92, color: "var(--text-primary)" }}>성 &nbsp;명:</span>
+          <span style={{ flex: 1, borderBottom: "0.7px solid var(--form-border)", paddingBottom: 2, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <span style={{ fontFamily: "var(--font-serif)", fontSize: 14, fontWeight: 500 }}>{clinic.doctorName}</span>
             <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <span style={{ color: "#3A4F4C", fontSize: 11 }}>(서명 또는 인)</span>
+              <span style={{ color: "var(--text-secondary)", fontSize: 11 }}>(서명 또는 인)</span>
               <span style={{
                 display: "inline-flex", alignItems: "center", justifyContent: "center",
-                width: 38, height: 38, border: "2px solid #B03028", borderRadius: "50%",
-                color: "#B03028", fontFamily: "var(--font-serif)", fontWeight: 700,
+                width: 38, height: 38, border: "2px solid var(--form-seal)", borderRadius: "50%",
+                color: "var(--form-seal)", fontFamily: "var(--font-serif)", fontWeight: 700,
                 fontSize: 13, letterSpacing: "-0.05em",
               }}>{clinic.doctorName[0]}印</span>
             </span>
@@ -636,10 +636,10 @@ function InjuryPreviewA4({ data, clinic, patient }) {
       </div>
 
       <div style={{
-        marginTop: 24, paddingTop: 10, borderTop: "0.5px solid #777",
-        fontSize: 9, lineHeight: 1.6, color: "#3A4F4C",
+        marginTop: 24, paddingTop: 10, borderTop: "0.5px solid var(--form-rule)",
+        fontSize: 9, lineHeight: 1.6, color: "var(--text-secondary)",
       }}>
-        <div style={{ fontWeight: 600, color: "#1C2B2B", marginBottom: 4, letterSpacing: "0.3em", textAlign: "center" }}>작 성 방 법</div>
+        <div style={{ fontWeight: 600, color: "var(--text-primary)", marginBottom: 4, letterSpacing: "0.3em", textAlign: "center" }}>작 성 방 법</div>
         <div style={{ display: "flex", gap: 4 }}>
           <span>1.</span>
           <span>환자의 인적사항은 진찰한 의사, 치과의사 또는 한의사가 주민등록증, 기간 만료 전 여권, 운전면허증, 공무원증, 국립ㆍ공립대학 학생증, 군무원증, 건강보험증, 외국인등록증 등 국가공인 신분증(환자가 미성년자인 경우에는 주민등록등본ㆍ초본, 학생증 등으로 대체 가능합니다)과 대조하여 확인하고 서명 또는 날인합니다.</span>
@@ -650,7 +650,7 @@ function InjuryPreviewA4({ data, clinic, patient }) {
         </div>
       </div>
 
-      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "#6B7E7B" }}>
+      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "var(--ink-400)" }}>
         210mm×297mm[백상지 80g/㎡]
       </div>
     </div>
@@ -820,37 +820,37 @@ function InjuryEditor({ data, onChange, clinic, patient, onChangePatient }) {
 }
 
 // ── Shared A4 helpers ─────────────────────────────────────────────
-const A4_TD = { padding: "6px 8px", borderBottom: "1px solid #111", borderRight: "1px solid #111", fontSize: 11.5, verticalAlign: "middle", color: "#111", lineHeight: 1.55 };
-const A4_LH = { ...A4_TD, background: "#F2EFE8", textAlign: "center", fontWeight: 500, width: 120, color: "#1C2B2B" };
+const A4_TD = { padding: "6px 8px", borderBottom: "1px solid var(--form-border)", borderRight: "1px solid var(--form-border)", fontSize: 11.5, verticalAlign: "middle", color: "var(--form-border)", lineHeight: 1.55 };
+const A4_LH = { ...A4_TD, background: "var(--form-table-header-bg)", textAlign: "center", fontWeight: 500, width: 120, color: "var(--text-primary)" };
 
 function A4Chk({ on }) {
-  return <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 13, height: 13, border: "1.2px solid #111", marginRight: 4, fontSize: 11, lineHeight: 1, fontFamily: "var(--font-serif)", verticalAlign: "middle" }}>{on ? "√" : ""}</span>;
+  return <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 13, height: 13, border: "1.2px solid var(--form-border)", marginRight: 4, fontSize: 11, lineHeight: 1, fontFamily: "var(--font-serif)", verticalAlign: "middle" }}>{on ? "√" : ""}</span>;
 }
 
 function A4IssuerBlock({ clinic }) {
   return (
-    <div style={{ fontSize: 12, lineHeight: 2.1, color: "#0E1A18", paddingLeft: 4 }}>
+    <div style={{ fontSize: 12, lineHeight: 2.1, color: "var(--ink-900)", paddingLeft: 4 }}>
       <div style={{ display: "flex", gap: 14 }}>
-        <span style={{ minWidth: 92, color: "#1C2B2B" }}>의료기관 명칭:</span>
-        <span style={{ flex: 1, borderBottom: "0.7px solid #111", paddingBottom: 2 }}>{clinic.name}</span>
+        <span style={{ minWidth: 92, color: "var(--text-primary)" }}>의료기관 명칭:</span>
+        <span style={{ flex: 1, borderBottom: "0.7px solid var(--form-border)", paddingBottom: 2 }}>{clinic.name}</span>
       </div>
       <div style={{ display: "flex", gap: 14 }}>
-        <span style={{ minWidth: 92, color: "#1C2B2B" }}>주소:</span>
-        <span style={{ flex: 1, borderBottom: "0.7px solid #111", paddingBottom: 2 }}>{clinic.address}</span>
+        <span style={{ minWidth: 92, color: "var(--text-primary)" }}>주소:</span>
+        <span style={{ flex: 1, borderBottom: "0.7px solid var(--form-border)", paddingBottom: 2 }}>{clinic.address}</span>
       </div>
       <div style={{ display: "flex", gap: 18, alignItems: "center", marginTop: 4 }}>
         <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}><A4Chk on={clinic.doctorRole === "doc"} />의사</span>
         <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}><A4Chk on={clinic.doctorRole === "dent"} />치과의사</span>
         <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}><A4Chk on={clinic.doctorRole === "han"} />한의사</span>
-        <span style={{ marginLeft: 12 }}>면허번호&nbsp;&nbsp;제&nbsp;<span style={{ fontFamily: "var(--font-mono)", borderBottom: "0.7px solid #111", padding: "0 14px" }}>{clinic.license}</span>&nbsp;호</span>
+        <span style={{ marginLeft: 12 }}>면허번호&nbsp;&nbsp;제&nbsp;<span style={{ fontFamily: "var(--font-mono)", borderBottom: "0.7px solid var(--form-border)", padding: "0 14px" }}>{clinic.license}</span>&nbsp;호</span>
       </div>
       <div style={{ display: "flex", gap: 14, alignItems: "center", marginTop: 6 }}>
-        <span style={{ minWidth: 92, color: "#1C2B2B" }}>성 &nbsp;명:</span>
-        <span style={{ flex: 1, borderBottom: "0.7px solid #111", paddingBottom: 2, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <span style={{ minWidth: 92, color: "var(--text-primary)" }}>성 &nbsp;명:</span>
+        <span style={{ flex: 1, borderBottom: "0.7px solid var(--form-border)", paddingBottom: 2, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <span style={{ fontFamily: "var(--font-serif)", fontSize: 14, fontWeight: 500 }}>{clinic.doctorName}</span>
           <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{ color: "#3A4F4C", fontSize: 11 }}>(서명 또는 인)</span>
-            <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 38, height: 38, border: "2px solid #B03028", borderRadius: "50%", color: "#B03028", fontFamily: "var(--font-serif)", fontWeight: 700, fontSize: 13, letterSpacing: "-0.05em" }}>{clinic.doctorName[0]}印</span>
+            <span style={{ color: "var(--text-secondary)", fontSize: 11 }}>(서명 또는 인)</span>
+            <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 38, height: 38, border: "2px solid var(--form-seal)", borderRadius: "50%", color: "var(--form-seal)", fontFamily: "var(--font-serif)", fontWeight: 700, fontSize: 13, letterSpacing: "-0.05em" }}>{clinic.doctorName[0]}印</span>
           </span>
         </span>
       </div>
@@ -885,16 +885,16 @@ function ReferralPreviewA4({ data, clinic, patient }) {
   const td = A4_TD, lh = A4_LH;
 
   return (
-    <div className="a4-paper" style={{ width: 794, minHeight: 1123, background: "white", color: "#111", padding: "42px 56px 36px", fontFamily: "var(--font-sans)", boxShadow: "0 12px 40px rgba(17,30,28,0.15), 0 2px 8px rgba(17,30,28,0.08)", position: "relative" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: 10, color: "#1C2B2B", marginBottom: 4 }}>
+    <div className="a4-paper" style={{ width: 794, minHeight: 1123, background: "var(--bg-surface)", color: "var(--form-border)", padding: "42px 56px 36px", fontFamily: "var(--font-sans)", boxShadow: "var(--shadow-paper)", position: "relative" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: 10, color: "var(--text-primary)", marginBottom: 4 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <span style={{ display: "inline-block", width: 14, height: 10, background: "#111" }}></span>
+          <span style={{ display: "inline-block", width: 14, height: 10, background: "var(--form-border)" }}></span>
           <span>의료법 시행규칙 [별지 제12호서식]</span>
         </div>
-        <div style={{ fontSize: 9.5, color: "#3A4F4C" }}>&lt;개정 2016. 1. 4.&gt;</div>
+        <div style={{ fontSize: 9.5, color: "var(--text-secondary)" }}>&lt;개정 2016. 1. 4.&gt;</div>
       </div>
 
-      <div style={{ textAlign: "center", fontFamily: "var(--font-serif)", fontSize: 30, fontWeight: 600, letterSpacing: "1.2em", margin: "22px 0 20px", paddingLeft: "1.2em", color: "#0E1A18" }}>진 료 의 뢰 서</div>
+      <div style={{ textAlign: "center", fontFamily: "var(--font-serif)", fontSize: 30, fontWeight: 600, letterSpacing: "1.2em", margin: "22px 0 20px", paddingLeft: "1.2em", color: "var(--ink-900)" }}>진 료 의 뢰 서</div>
 
       <div style={{ fontSize: 13, marginBottom: 14, lineHeight: 2.2 }}>
         <div>
@@ -902,14 +902,14 @@ function ReferralPreviewA4({ data, clinic, patient }) {
           <span style={{ fontFamily: "var(--font-serif)", fontSize: 14 }}>{data.toClinicName}</span>
           {data.toDoctor && <span>&nbsp;&nbsp;{data.toDoctor} 선생님 귀하</span>}
         </div>
-        {data.toAddress && <div style={{ fontSize: 11.5, color: "#3A4F4C", marginLeft: 52 }}>{data.toAddress}</div>}
+        {data.toAddress && <div style={{ fontSize: 11.5, color: "var(--text-secondary)", marginLeft: 52 }}>{data.toAddress}</div>}
       </div>
 
-      <div style={{ fontSize: 12.5, lineHeight: 1.7, color: "#1C2B2B", marginBottom: 16 }}>
+      <div style={{ fontSize: 12.5, lineHeight: 1.7, color: "var(--text-primary)", marginBottom: 16 }}>
         아래와 같이 환자를 의뢰하오니 진료하여 주시기 바랍니다.
       </div>
 
-      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid #111", borderLeft: "1px solid #111", marginBottom: 20 }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid var(--form-border)", borderLeft: "1px solid var(--form-border)", marginBottom: 20 }}>
         <tbody>
           <tr>
             <td style={lh}>환자의 성명</td>
@@ -919,7 +919,7 @@ function ReferralPreviewA4({ data, clinic, patient }) {
           </tr>
           <tr>
             <td style={lh}>환자의 주소</td>
-            <td colSpan={3} style={td}>{patient.address}&nbsp;&nbsp;<span style={{ color: "#3A4F4C" }}>(전화번호: {patient.phone})</span></td>
+            <td colSpan={3} style={td}>{patient.address}&nbsp;&nbsp;<span style={{ color: "var(--text-secondary)" }}>(전화번호: {patient.phone})</span></td>
           </tr>
           <tr>
             <td style={lh}>병&nbsp;&nbsp;&nbsp;&nbsp;명</td>
@@ -944,18 +944,18 @@ function ReferralPreviewA4({ data, clinic, patient }) {
             <td colSpan={3} style={{ ...td, whiteSpace: "pre-wrap", minHeight: 64, height: 64, verticalAlign: "top", paddingTop: 8 }}>{data.requestContent}</td>
           </tr>
           <tr>
-            <td style={{ ...lh, borderBottom: "1.5px solid #111" }}>비&nbsp;&nbsp;&nbsp;&nbsp;고</td>
-            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid #111", minHeight: 32 }}>{data.remarks || " "}</td>
+            <td style={{ ...lh, borderBottom: "1.5px solid var(--form-border)" }}>비&nbsp;&nbsp;&nbsp;&nbsp;고</td>
+            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid var(--form-border)", minHeight: 32 }}>{data.remarks || " "}</td>
           </tr>
         </tbody>
       </table>
 
-      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "#0E1A18", marginBottom: 14 }}>
+      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "var(--ink-900)", marginBottom: 14 }}>
         「의료법」 제17조 및 같은 법 시행규칙 제12조에 따라 위와 같이 진료를 의뢰합니다.
       </div>
       <A4DateLine p={iss} />
       <A4IssuerBlock clinic={clinic} />
-      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "#6B7E7B" }}>210mm×297mm[백상지 80g/㎡]</div>
+      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "var(--ink-400)" }}>210mm×297mm[백상지 80g/㎡]</div>
     </div>
   );
 }
@@ -968,21 +968,21 @@ function OpinionPreviewA4({ data, clinic, patient }) {
   const td = A4_TD, lh = A4_LH;
 
   return (
-    <div className="a4-paper" style={{ width: 794, minHeight: 1123, background: "white", color: "#111", padding: "42px 56px 36px", fontFamily: "var(--font-sans)", boxShadow: "0 12px 40px rgba(17,30,28,0.15), 0 2px 8px rgba(17,30,28,0.08)", position: "relative" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 26, paddingBottom: 14, borderBottom: "2px solid #1C2B2B" }}>
+    <div className="a4-paper" style={{ width: 794, minHeight: 1123, background: "var(--bg-surface)", color: "var(--form-border)", padding: "42px 56px 36px", fontFamily: "var(--font-sans)", boxShadow: "var(--shadow-paper)", position: "relative" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 26, paddingBottom: 14, borderBottom: "2px solid var(--text-primary)" }}>
         <div>
-          <div style={{ fontSize: 17, fontWeight: 700, color: "#0E1A18", fontFamily: "var(--font-serif)" }}>{clinic.name}</div>
-          <div style={{ fontSize: 11, color: "#3A4F4C", marginTop: 3 }}>{clinic.address}</div>
+          <div style={{ fontSize: 17, fontWeight: 700, color: "var(--ink-900)", fontFamily: "var(--font-serif)" }}>{clinic.name}</div>
+          <div style={{ fontSize: 11, color: "var(--text-secondary)", marginTop: 3 }}>{clinic.address}</div>
         </div>
-        <div style={{ textAlign: "right", fontSize: 10.5, color: "#3A4F4C", lineHeight: 1.9 }}>
+        <div style={{ textAlign: "right", fontSize: 10.5, color: "var(--text-secondary)", lineHeight: 1.9 }}>
           <div>한의사 면허 제 {clinic.license} 호</div>
           <div>{clinic.doctorName}</div>
         </div>
       </div>
 
-      <div style={{ textAlign: "center", fontFamily: "var(--font-serif)", fontSize: 30, fontWeight: 600, letterSpacing: "1.4em", margin: "0 0 28px", paddingLeft: "1.4em", color: "#0E1A18" }}>소 견 서</div>
+      <div style={{ textAlign: "center", fontFamily: "var(--font-serif)", fontSize: 30, fontWeight: 600, letterSpacing: "1.4em", margin: "0 0 28px", paddingLeft: "1.4em", color: "var(--ink-900)" }}>소 견 서</div>
 
-      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid #111", borderLeft: "1px solid #111", marginBottom: 24 }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid var(--form-border)", borderLeft: "1px solid var(--form-border)", marginBottom: 24 }}>
         <tbody>
           <tr>
             <td style={lh}>환자의 성명</td>
@@ -992,7 +992,7 @@ function OpinionPreviewA4({ data, clinic, patient }) {
           </tr>
           <tr>
             <td style={lh}>환자의 주소</td>
-            <td colSpan={3} style={td}>{patient.address}&nbsp;&nbsp;<span style={{ color: "#3A4F4C" }}>(전화번호: {patient.phone})</span></td>
+            <td colSpan={3} style={td}>{patient.address}&nbsp;&nbsp;<span style={{ color: "var(--text-secondary)" }}>(전화번호: {patient.phone})</span></td>
           </tr>
           <tr>
             <td style={lh}>진단명</td>
@@ -1007,21 +1007,21 @@ function OpinionPreviewA4({ data, clinic, patient }) {
             <td style={td}><A4YMD p={dx} /></td>
           </tr>
           <tr>
-            <td style={{ ...lh, borderBottom: "1.5px solid #111" }}>용&nbsp;&nbsp;&nbsp;&nbsp;도</td>
-            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid #111" }}>{data.purpose}</td>
+            <td style={{ ...lh, borderBottom: "1.5px solid var(--form-border)" }}>용&nbsp;&nbsp;&nbsp;&nbsp;도</td>
+            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid var(--form-border)" }}>{data.purpose}</td>
           </tr>
         </tbody>
       </table>
 
       <div style={{ marginBottom: 28 }}>
-        <div style={{ fontSize: 11, fontWeight: 700, color: "#1C2B2B", marginBottom: 8, letterSpacing: "0.15em", textAlign: "center" }}>[ 소 견 내 용 ]</div>
-        <div style={{ border: "1px solid #111", padding: "16px 18px", minHeight: 240, fontSize: 12.5, lineHeight: 2.1, color: "#111", whiteSpace: "pre-wrap" }}>{data.opinion}</div>
+        <div style={{ fontSize: 11, fontWeight: 700, color: "var(--text-primary)", marginBottom: 8, letterSpacing: "0.15em", textAlign: "center" }}>[ 소 견 내 용 ]</div>
+        <div style={{ border: "1px solid var(--form-border)", padding: "16px 18px", minHeight: 240, fontSize: 12.5, lineHeight: 2.1, color: "var(--form-border)", whiteSpace: "pre-wrap" }}>{data.opinion}</div>
       </div>
 
-      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "#0E1A18", marginBottom: 14 }}>위와 같이 소견서를 작성합니다.</div>
+      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "var(--ink-900)", marginBottom: 14 }}>위와 같이 소견서를 작성합니다.</div>
       <A4DateLine p={iss} />
       <A4IssuerBlock clinic={clinic} />
-      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "#6B7E7B" }}>210mm×297mm[백상지 80g/㎡]</div>
+      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "var(--ink-400)" }}>210mm×297mm[백상지 80g/㎡]</div>
     </div>
   );
 }
@@ -1034,18 +1034,18 @@ function TreatmentProofPreviewA4({ data, clinic, patient }) {
   const td = A4_TD, lh = A4_LH;
 
   return (
-    <div className="a4-paper" style={{ width: 794, minHeight: 1123, background: "white", color: "#111", padding: "42px 56px 36px", fontFamily: "var(--font-sans)", boxShadow: "0 12px 40px rgba(17,30,28,0.15), 0 2px 8px rgba(17,30,28,0.08)", position: "relative" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: 10, color: "#1C2B2B", marginBottom: 4 }}>
+    <div className="a4-paper" style={{ width: 794, minHeight: 1123, background: "var(--bg-surface)", color: "var(--form-border)", padding: "42px 56px 36px", fontFamily: "var(--font-sans)", boxShadow: "var(--shadow-paper)", position: "relative" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: 10, color: "var(--text-primary)", marginBottom: 4 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <span style={{ display: "inline-block", width: 14, height: 10, background: "#111" }}></span>
+          <span style={{ display: "inline-block", width: 14, height: 10, background: "var(--form-border)" }}></span>
           <span>의료법 시행규칙 [별지 제7호서식]</span>
         </div>
-        <div style={{ fontSize: 9.5, color: "#3A4F4C" }}>&lt;개정 2019. 9. 27.&gt;</div>
+        <div style={{ fontSize: 9.5, color: "var(--text-secondary)" }}>&lt;개정 2019. 9. 27.&gt;</div>
       </div>
 
-      <div style={{ textAlign: "center", fontFamily: "var(--font-serif)", fontSize: 28, fontWeight: 600, letterSpacing: "1em", margin: "26px 0 22px", paddingLeft: "1em", color: "#0E1A18" }}>진 료 확 인 서</div>
+      <div style={{ textAlign: "center", fontFamily: "var(--font-serif)", fontSize: 28, fontWeight: 600, letterSpacing: "1em", margin: "26px 0 22px", paddingLeft: "1em", color: "var(--ink-900)" }}>진 료 확 인 서</div>
 
-      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid #111", borderLeft: "1px solid #111", marginBottom: 20 }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid var(--form-border)", borderLeft: "1px solid var(--form-border)", marginBottom: 20 }}>
         <tbody>
           <tr>
             <td style={lh}>환자의 성명</td>
@@ -1055,7 +1055,7 @@ function TreatmentProofPreviewA4({ data, clinic, patient }) {
           </tr>
           <tr>
             <td style={lh}>환자의 주소</td>
-            <td colSpan={3} style={td}>{patient.address}&nbsp;&nbsp;<span style={{ color: "#3A4F4C" }}>(전화번호: {patient.phone})</span></td>
+            <td colSpan={3} style={td}>{patient.address}&nbsp;&nbsp;<span style={{ color: "var(--text-secondary)" }}>(전화번호: {patient.phone})</span></td>
           </tr>
           <tr>
             <td style={lh}>병&nbsp;&nbsp;&nbsp;&nbsp;명</td>
@@ -1074,16 +1074,16 @@ function TreatmentProofPreviewA4({ data, clinic, patient }) {
             <td colSpan={3} style={td}>{data.purpose}</td>
           </tr>
           <tr>
-            <td style={{ ...lh, borderBottom: "1.5px solid #111" }}>비&nbsp;&nbsp;&nbsp;&nbsp;고</td>
-            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid #111", minHeight: 36 }}>{data.remarks || " "}</td>
+            <td style={{ ...lh, borderBottom: "1.5px solid var(--form-border)" }}>비&nbsp;&nbsp;&nbsp;&nbsp;고</td>
+            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid var(--form-border)", minHeight: 36 }}>{data.remarks || " "}</td>
           </tr>
         </tbody>
       </table>
 
-      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "#0E1A18", marginBottom: 14 }}>위와 같이 진료하였음을 확인합니다.</div>
+      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "var(--ink-900)", marginBottom: 14 }}>위와 같이 진료하였음을 확인합니다.</div>
       <A4DateLine p={iss} />
       <A4IssuerBlock clinic={clinic} />
-      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "#6B7E7B" }}>210mm×297mm[백상지 80g/㎡]</div>
+      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "var(--ink-400)" }}>210mm×297mm[백상지 80g/㎡]</div>
     </div>
   );
 }
@@ -1096,18 +1096,18 @@ function AdmissionProofPreviewA4({ data, clinic, patient }) {
   const td = A4_TD, lh = A4_LH;
 
   return (
-    <div className="a4-paper" style={{ width: 794, minHeight: 1123, background: "white", color: "#111", padding: "42px 56px 36px", fontFamily: "var(--font-sans)", boxShadow: "0 12px 40px rgba(17,30,28,0.15), 0 2px 8px rgba(17,30,28,0.08)", position: "relative" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: 10, color: "#1C2B2B", marginBottom: 4 }}>
+    <div className="a4-paper" style={{ width: 794, minHeight: 1123, background: "var(--bg-surface)", color: "var(--form-border)", padding: "42px 56px 36px", fontFamily: "var(--font-sans)", boxShadow: "var(--shadow-paper)", position: "relative" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: 10, color: "var(--text-primary)", marginBottom: 4 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <span style={{ display: "inline-block", width: 14, height: 10, background: "#111" }}></span>
+          <span style={{ display: "inline-block", width: 14, height: 10, background: "var(--form-border)" }}></span>
           <span>의료법 시행규칙 [별지 제8호서식]</span>
         </div>
-        <div style={{ fontSize: 9.5, color: "#3A4F4C" }}>&lt;개정 2019. 9. 27.&gt;</div>
+        <div style={{ fontSize: 9.5, color: "var(--text-secondary)" }}>&lt;개정 2019. 9. 27.&gt;</div>
       </div>
 
-      <div style={{ textAlign: "center", fontFamily: "var(--font-serif)", fontSize: 26, fontWeight: 600, letterSpacing: "0.8em", margin: "26px 0 22px", paddingLeft: "0.8em", color: "#0E1A18" }}>입 퇴 원 확 인 서</div>
+      <div style={{ textAlign: "center", fontFamily: "var(--font-serif)", fontSize: 26, fontWeight: 600, letterSpacing: "0.8em", margin: "26px 0 22px", paddingLeft: "0.8em", color: "var(--ink-900)" }}>입 퇴 원 확 인 서</div>
 
-      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid #111", borderLeft: "1px solid #111", marginBottom: 20 }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid var(--form-border)", borderLeft: "1px solid var(--form-border)", marginBottom: 20 }}>
         <tbody>
           <tr>
             <td style={lh}>환자의 성명</td>
@@ -1117,7 +1117,7 @@ function AdmissionProofPreviewA4({ data, clinic, patient }) {
           </tr>
           <tr>
             <td style={lh}>환자의 주소</td>
-            <td colSpan={3} style={td}>{patient.address}&nbsp;&nbsp;<span style={{ color: "#3A4F4C" }}>(전화번호: {patient.phone})</span></td>
+            <td colSpan={3} style={td}>{patient.address}&nbsp;&nbsp;<span style={{ color: "var(--text-secondary)" }}>(전화번호: {patient.phone})</span></td>
           </tr>
           <tr>
             <td style={lh}>병&nbsp;&nbsp;&nbsp;&nbsp;명</td>
@@ -1138,16 +1138,16 @@ function AdmissionProofPreviewA4({ data, clinic, patient }) {
             <td colSpan={3} style={td}>{data.purpose}</td>
           </tr>
           <tr>
-            <td style={{ ...lh, borderBottom: "1.5px solid #111" }}>비&nbsp;&nbsp;&nbsp;&nbsp;고</td>
-            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid #111", minHeight: 36 }}>{data.remarks || " "}</td>
+            <td style={{ ...lh, borderBottom: "1.5px solid var(--form-border)" }}>비&nbsp;&nbsp;&nbsp;&nbsp;고</td>
+            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid var(--form-border)", minHeight: 36 }}>{data.remarks || " "}</td>
           </tr>
         </tbody>
       </table>
 
-      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "#0E1A18", marginBottom: 14 }}>위와 같이 입원·퇴원하였음을 확인합니다.</div>
+      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "var(--ink-900)", marginBottom: 14 }}>위와 같이 입원·퇴원하였음을 확인합니다.</div>
       <A4DateLine p={iss} />
       <A4IssuerBlock clinic={clinic} />
-      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "#6B7E7B" }}>210mm×297mm[백상지 80g/㎡]</div>
+      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "var(--ink-400)" }}>210mm×297mm[백상지 80g/㎡]</div>
     </div>
   );
 }
@@ -1160,18 +1160,18 @@ function OutpatientProofPreviewA4({ data, clinic, patient }) {
   const td = A4_TD, lh = A4_LH;
 
   return (
-    <div className="a4-paper" style={{ width: 794, minHeight: 1123, background: "white", color: "#111", padding: "42px 56px 36px", fontFamily: "var(--font-sans)", boxShadow: "0 12px 40px rgba(17,30,28,0.15), 0 2px 8px rgba(17,30,28,0.08)", position: "relative" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: 10, color: "#1C2B2B", marginBottom: 4 }}>
+    <div className="a4-paper" style={{ width: 794, minHeight: 1123, background: "var(--bg-surface)", color: "var(--form-border)", padding: "42px 56px 36px", fontFamily: "var(--font-sans)", boxShadow: "var(--shadow-paper)", position: "relative" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: 10, color: "var(--text-primary)", marginBottom: 4 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <span style={{ display: "inline-block", width: 14, height: 10, background: "#111" }}></span>
+          <span style={{ display: "inline-block", width: 14, height: 10, background: "var(--form-border)" }}></span>
           <span>통원확인서</span>
         </div>
-        <div style={{ fontSize: 9.5, color: "#3A4F4C" }}>&lt;{data.issueDate}&gt;</div>
+        <div style={{ fontSize: 9.5, color: "var(--text-secondary)" }}>&lt;{data.issueDate}&gt;</div>
       </div>
 
-      <div style={{ textAlign: "center", fontFamily: "var(--font-serif)", fontSize: 28, fontWeight: 600, letterSpacing: "1em", margin: "26px 0 22px", paddingLeft: "1em", color: "#0E1A18" }}>통 원 확 인 서</div>
+      <div style={{ textAlign: "center", fontFamily: "var(--font-serif)", fontSize: 28, fontWeight: 600, letterSpacing: "1em", margin: "26px 0 22px", paddingLeft: "1em", color: "var(--ink-900)" }}>통 원 확 인 서</div>
 
-      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid #111", borderLeft: "1px solid #111", marginBottom: 20 }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid var(--form-border)", borderLeft: "1px solid var(--form-border)", marginBottom: 20 }}>
         <tbody>
           <tr>
             <td style={lh}>환자의 성명</td>
@@ -1181,7 +1181,7 @@ function OutpatientProofPreviewA4({ data, clinic, patient }) {
           </tr>
           <tr>
             <td style={lh}>환자의 주소</td>
-            <td colSpan={3} style={td}>{patient.address}&nbsp;&nbsp;<span style={{ color: "#3A4F4C" }}>(전화번호: {patient.phone})</span></td>
+            <td colSpan={3} style={td}>{patient.address}&nbsp;&nbsp;<span style={{ color: "var(--text-secondary)" }}>(전화번호: {patient.phone})</span></td>
           </tr>
           <tr>
             <td style={lh}>병&nbsp;&nbsp;&nbsp;&nbsp;명</td>
@@ -1210,16 +1210,16 @@ function OutpatientProofPreviewA4({ data, clinic, patient }) {
             <td colSpan={3} style={td}>{data.purpose}</td>
           </tr>
           <tr>
-            <td style={{ ...lh, borderBottom: "1.5px solid #111" }}>비&nbsp;&nbsp;&nbsp;&nbsp;고</td>
-            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid #111", minHeight: 36 }}>{data.remarks || " "}</td>
+            <td style={{ ...lh, borderBottom: "1.5px solid var(--form-border)" }}>비&nbsp;&nbsp;&nbsp;&nbsp;고</td>
+            <td colSpan={3} style={{ ...td, borderBottom: "1.5px solid var(--form-border)", minHeight: 36 }}>{data.remarks || " "}</td>
           </tr>
         </tbody>
       </table>
 
-      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "#0E1A18", marginBottom: 14 }}>위와 같이 통원 치료하였음을 확인합니다.</div>
+      <div style={{ fontSize: 12.5, lineHeight: 1.75, color: "var(--ink-900)", marginBottom: 14 }}>위와 같이 통원 치료하였음을 확인합니다.</div>
       <A4DateLine p={iss} />
       <A4IssuerBlock clinic={clinic} />
-      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "#6B7E7B" }}>210mm×297mm[백상지 80g/㎡]</div>
+      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "var(--ink-400)" }}>210mm×297mm[백상지 80g/㎡]</div>
     </div>
   );
 }
@@ -1390,33 +1390,33 @@ function FeeDetailPreviewA4({ patient, clinic, meta }) {
   const patientTotal = totalSelf + totalNon;
 
   const th = {
-    padding: "7px 8px", background: "#F2EFE8", borderBottom: "1px solid #111",
-    borderRight: "1px solid #111", fontSize: 11, fontWeight: 600, color: "#1C2B2B", textAlign: "center",
+    padding: "7px 8px", background: "var(--form-table-header-bg)", borderBottom: "1px solid var(--form-border)",
+    borderRight: "1px solid var(--form-border)", fontSize: 11, fontWeight: 600, color: "var(--text-primary)", textAlign: "center",
   };
   const td = {
-    padding: "6px 10px", borderBottom: "1px solid #CCC", borderRight: "1px solid #CCC",
-    fontSize: 11.5, verticalAlign: "middle", color: "#111",
+    padding: "6px 10px", borderBottom: "1px solid var(--form-border-soft)", borderRight: "1px solid var(--form-border-soft)",
+    fontSize: 11.5, verticalAlign: "middle", color: "var(--form-border)",
   };
   const numTd = { ...td, textAlign: "right", fontFamily: "var(--font-mono)", fontSize: 11 };
-  const totTh = { ...th, background: "#E4EDE4", fontWeight: 700, fontSize: 12, borderBottom: "1.5px solid #111" };
-  const totTd = { ...numTd, background: "#E4EDE4", fontWeight: 700, borderBottom: "1.5px solid #111" };
+  const totTh = { ...th, background: "var(--form-total-row-bg)", fontWeight: 700, fontSize: 12, borderBottom: "1.5px solid var(--form-border)" };
+  const totTd = { ...numTd, background: "var(--form-total-row-bg)", fontWeight: 700, borderBottom: "1.5px solid var(--form-border)" };
 
   return (
     <div className="a4-paper" style={{
-      width: 794, minHeight: 1123, background: "white", color: "#111",
+      width: 794, minHeight: 1123, background: "var(--bg-surface)", color: "var(--form-border)",
       padding: "48px 56px 40px", fontFamily: "var(--font-sans)",
-      boxShadow: "0 12px 40px rgba(17, 30, 28, 0.15), 0 2px 8px rgba(17,30,28,0.08)",
+      boxShadow: "var(--shadow-paper)",
       position: "relative",
     }}>
       <div style={{ textAlign: "center", marginBottom: 26 }}>
-        <div style={{ fontFamily: "var(--font-serif)", fontSize: 26, fontWeight: 600, letterSpacing: "0.7em", paddingLeft: "0.7em", color: "#0E1A18", marginBottom: 5 }}>
+        <div style={{ fontFamily: "var(--font-serif)", fontSize: 26, fontWeight: 600, letterSpacing: "0.7em", paddingLeft: "0.7em", color: "var(--ink-900)", marginBottom: 5 }}>
           진료비 세부내역서
         </div>
-        <div style={{ fontSize: 10, color: "#3A4F4C" }}>의료법 시행규칙 제17조의2에 의거 발급</div>
+        <div style={{ fontSize: 10, color: "var(--text-secondary)" }}>의료법 시행규칙 제17조의2에 의거 발급</div>
       </div>
 
       {/* Info grid */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", border: "1px solid #111", marginBottom: 22 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", border: "1px solid var(--form-border)", marginBottom: 22 }}>
         {[
           ["의료기관", clinic.name],
           ["발급일", meta.issueDate],
@@ -1429,17 +1429,17 @@ function FeeDetailPreviewA4({ patient, clinic, meta }) {
         ].map(([label, value], i) => (
           <div key={i} style={{
             display: "flex",
-            borderBottom: i < 6 ? "1px solid #CCC" : "none",
-            borderRight: i % 2 === 0 ? "1px solid #CCC" : "none",
+            borderBottom: i < 6 ? "1px solid var(--form-border-soft)" : "none",
+            borderRight: i % 2 === 0 ? "1px solid var(--form-border-soft)" : "none",
           }}>
-            <div style={{ width: 88, padding: "6px 10px", background: "#F2EFE8", fontSize: 10.5, fontWeight: 600, color: "#1C2B2B", flexShrink: 0 }}>{label}</div>
+            <div style={{ width: 88, padding: "6px 10px", background: "var(--form-table-header-bg)", fontSize: 10.5, fontWeight: 600, color: "var(--text-primary)", flexShrink: 0 }}>{label}</div>
             <div style={{ flex: 1, padding: "6px 10px", fontSize: 11 }}>{value}</div>
           </div>
         ))}
       </div>
 
       {/* Fee table */}
-      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid #111", borderLeft: "1px solid #111", marginBottom: 22 }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid var(--form-border)", borderLeft: "1px solid var(--form-border)", marginBottom: 22 }}>
         <thead>
           <tr>
             <th style={{ ...th, width: 160, textAlign: "left" }} rowSpan={2}>항목 구분</th>
@@ -1482,44 +1482,44 @@ function FeeDetailPreviewA4({ patient, clinic, meta }) {
           { label: "급여 본인부담금",   value: totalSelf, sub: "본인 직접 납부" },
           { label: "비급여 본인부담금", value: totalNon,  sub: "급여 미적용 항목" },
         ].map(({ label, value, sub }) => (
-          <div key={label} style={{ border: "1px solid var(--border-subtle)", borderRadius: 8, padding: "12px 14px", background: "#FAFAF8" }}>
-            <div style={{ fontSize: 10.5, color: "#3A4F4C", marginBottom: 3 }}>{label}</div>
-            <div style={{ fontSize: 17, fontWeight: 700, fontFamily: "var(--font-mono)", color: "#0E1A18" }}>
+          <div key={label} style={{ border: "1px solid var(--border-subtle)", borderRadius: 8, padding: "12px 14px", background: "var(--form-cell-alt-bg)" }}>
+            <div style={{ fontSize: 10.5, color: "var(--text-secondary)", marginBottom: 3 }}>{label}</div>
+            <div style={{ fontSize: 17, fontWeight: 700, fontFamily: "var(--font-mono)", color: "var(--ink-900)" }}>
               {value.toLocaleString("ko-KR")} <span style={{ fontSize: 11, fontWeight: 500 }}>원</span>
             </div>
-            <div style={{ fontSize: 9.5, color: "#6B7E7B", marginTop: 2 }}>{sub}</div>
+            <div style={{ fontSize: 9.5, color: "var(--ink-400)", marginTop: 2 }}>{sub}</div>
           </div>
         ))}
       </div>
 
       {/* Patient total */}
       <div style={{
-        background: "#F0F5F0", border: "1.5px solid #3A6B50", borderRadius: 10,
+        background: "var(--form-payment-bg)", border: "1.5px solid var(--form-payment-border)", borderRadius: 10,
         padding: "14px 22px", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24,
       }}>
         <div>
-          <div style={{ fontSize: 13, fontWeight: 600, color: "#1C2B2B" }}>환자 납부 총액</div>
-          <div style={{ fontSize: 10.5, color: "#3A4F4C", marginTop: 1 }}>급여 본인부담 + 비급여 합산</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>환자 납부 총액</div>
+          <div style={{ fontSize: 10.5, color: "var(--text-secondary)", marginTop: 1 }}>급여 본인부담 + 비급여 합산</div>
         </div>
-        <div style={{ fontSize: 22, fontWeight: 800, fontFamily: "var(--font-mono)", color: "#1C5C3A" }}>
+        <div style={{ fontSize: 22, fontWeight: 800, fontFamily: "var(--font-mono)", color: "var(--form-payment-text)" }}>
           {patientTotal.toLocaleString("ko-KR")} <span style={{ fontSize: 13 }}>원</span>
         </div>
       </div>
 
-      <div style={{ fontSize: 10, color: "#3A4F4C", lineHeight: 1.8, borderTop: "0.5px solid #CCC", paddingTop: 10, marginBottom: 20 }}>
-        <div style={{ fontWeight: 600, marginBottom: 3, color: "#1C2B2B" }}>유의사항</div>
+      <div style={{ fontSize: 10, color: "var(--text-secondary)", lineHeight: 1.8, borderTop: "0.5px solid var(--form-border-soft)", paddingTop: 10, marginBottom: 20 }}>
+        <div style={{ fontWeight: 600, marginBottom: 3, color: "var(--text-primary)" }}>유의사항</div>
         <div>1. 본 내역서는 의료법 시행규칙 제17조의2에 의거하여 발급됩니다.</div>
         <div>2. 급여 항목의 공단 부담금은 건강보험공단에 직접 청구하며, 환자는 본인부담금만 납부합니다.</div>
         <div>3. 비급여 항목은 건강보험이 적용되지 않으며, 전액 본인이 부담합니다.</div>
         <div>4. 이의가 있으실 경우 원무과 또는 건강보험심사평가원(☎1644-2000)에 문의하시기 바랍니다.</div>
       </div>
 
-      <div style={{ textAlign: "right", fontSize: 11, color: "#1C2B2B", lineHeight: 2 }}>
+      <div style={{ textAlign: "right", fontSize: 11, color: "var(--text-primary)", lineHeight: 2 }}>
         <div>{clinic.name}</div>
-        <div style={{ color: "#3A4F4C" }}>한의사 {clinic.doctorName} <span style={{ fontSize: 10 }}>(서명)</span></div>
+        <div style={{ color: "var(--text-secondary)" }}>한의사 {clinic.doctorName} <span style={{ fontSize: 10 }}>(서명)</span></div>
       </div>
 
-      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "#6B7E7B" }}>210mm×297mm[백상지 80g/㎡]</div>
+      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "var(--ink-400)" }}>210mm×297mm[백상지 80g/㎡]</div>
     </div>
   );
 }
@@ -1537,36 +1537,36 @@ function CalcDetailPreviewA4({ patient, clinic, meta }) {
   const nonCovTotal   = MF_CALC_ITEMS.filter(i => i.type === "비급여").reduce((s, i) => s + i.total, 0);
 
   const th = {
-    padding: "6px 7px", background: "#F2EFE8", borderBottom: "1px solid #111",
-    borderRight: "1px solid #CCC", fontSize: 10.5, fontWeight: 600, color: "#1C2B2B", textAlign: "center",
+    padding: "6px 7px", background: "var(--form-table-header-bg)", borderBottom: "1px solid var(--form-border)",
+    borderRight: "1px solid var(--form-border-soft)", fontSize: 10.5, fontWeight: 600, color: "var(--text-primary)", textAlign: "center",
   };
   const td = {
-    padding: "5px 7px", borderBottom: "1px solid #E8E8E4", borderRight: "1px solid #E8E8E4",
-    fontSize: 10.5, verticalAlign: "middle", color: "#111",
+    padding: "5px 7px", borderBottom: "1px solid var(--form-border-light)", borderRight: "1px solid var(--form-border-light)",
+    fontSize: 10.5, verticalAlign: "middle", color: "var(--form-border)",
   };
   const numTd = { ...td, textAlign: "right", fontFamily: "var(--font-mono)", fontSize: 10 };
 
   return (
     <div className="a4-paper" style={{
-      width: 794, minHeight: 1123, background: "white", color: "#111",
+      width: 794, minHeight: 1123, background: "var(--bg-surface)", color: "var(--form-border)",
       padding: "40px 48px 36px", fontFamily: "var(--font-sans)",
-      boxShadow: "0 12px 40px rgba(17, 30, 28, 0.15), 0 2px 8px rgba(17,30,28,0.08)",
+      boxShadow: "var(--shadow-paper)",
       position: "relative",
     }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 20 }}>
         <div>
-          <div style={{ fontFamily: "var(--font-serif)", fontSize: 22, fontWeight: 600, letterSpacing: "0.5em", paddingLeft: "0.5em", color: "#0E1A18" }}>세부산정내역</div>
-          <div style={{ fontSize: 10, color: "#3A4F4C", marginTop: 4 }}>진료비 항목별 세부 산정 내역서</div>
+          <div style={{ fontFamily: "var(--font-serif)", fontSize: 22, fontWeight: 600, letterSpacing: "0.5em", paddingLeft: "0.5em", color: "var(--ink-900)" }}>세부산정내역</div>
+          <div style={{ fontSize: 10, color: "var(--text-secondary)", marginTop: 4 }}>진료비 항목별 세부 산정 내역서</div>
         </div>
-        <div style={{ textAlign: "right", fontSize: 11, lineHeight: 2, color: "#1C2B2B" }}>
-          <div><span style={{ color: "#3A4F4C" }}>환자: </span>{patient.name} ({patient.rrn})</div>
-          <div><span style={{ color: "#3A4F4C" }}>차트: </span>{patient.chartNo} · {patient.phone}</div>
-          <div><span style={{ color: "#3A4F4C" }}>기간: </span>{meta.startDate} ~ {meta.endDate}</div>
-          <div><span style={{ color: "#3A4F4C" }}>의료기관: </span>{clinic.name}</div>
+        <div style={{ textAlign: "right", fontSize: 11, lineHeight: 2, color: "var(--text-primary)" }}>
+          <div><span style={{ color: "var(--text-secondary)" }}>환자: </span>{patient.name} ({patient.rrn})</div>
+          <div><span style={{ color: "var(--text-secondary)" }}>차트: </span>{patient.chartNo} · {patient.phone}</div>
+          <div><span style={{ color: "var(--text-secondary)" }}>기간: </span>{meta.startDate} ~ {meta.endDate}</div>
+          <div><span style={{ color: "var(--text-secondary)" }}>의료기관: </span>{clinic.name}</div>
         </div>
       </div>
 
-      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid #111", borderLeft: "1px solid #CCC", marginBottom: 16 }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", borderTop: "1.5px solid var(--form-border)", borderLeft: "1px solid var(--form-border-soft)", marginBottom: 16 }}>
         <thead>
           <tr>
             <th style={{ ...th, width: 50 }}>진료일</th>
@@ -1575,48 +1575,48 @@ function CalcDetailPreviewA4({ patient, clinic, meta }) {
             <th style={{ ...th, width: 48 }}>구분</th>
             <th style={{ ...th, width: 34 }}>횟수</th>
             <th style={{ ...th, width: 74 }}>단가(원)</th>
-            <th style={{ ...th, width: 82, borderRight: "1px solid #111" }}>금액(원)</th>
+            <th style={{ ...th, width: 82, borderRight: "1px solid var(--form-border)" }}>금액(원)</th>
           </tr>
         </thead>
         <tbody>
           {Object.entries(grouped).map(([date, items]) =>
             items.map((item, j) => (
-              <tr key={`${date}-${j}`} style={{ borderBottom: j === items.length - 1 ? "1px solid #BBB" : undefined }}>
-                <td style={{ ...td, fontFamily: "var(--font-mono)", fontSize: 10, textAlign: "center", color: "#3A4F4C", background: "#FAFAF8", borderBottom: j === items.length - 1 ? "1px solid #BBB" : td.borderBottom }}>
+              <tr key={`${date}-${j}`} style={{ borderBottom: j === items.length - 1 ? "1px solid var(--form-border-divider)" : undefined }}>
+                <td style={{ ...td, fontFamily: "var(--font-mono)", fontSize: 10, textAlign: "center", color: "var(--text-secondary)", background: "var(--form-cell-alt-bg)", borderBottom: j === items.length - 1 ? "1px solid var(--form-border-divider)" : td.borderBottom }}>
                   {j === 0 ? date : ""}
                 </td>
-                <td style={{ ...td, fontFamily: "var(--font-mono)", fontSize: 10, color: "#3A4F4C" }}>{item.code}</td>
+                <td style={{ ...td, fontFamily: "var(--font-mono)", fontSize: 10, color: "var(--text-secondary)" }}>{item.code}</td>
                 <td style={td}>{item.name}</td>
                 <td style={{ ...td, textAlign: "center" }}>
                   <span style={{
                     display: "inline-block", padding: "1px 5px", borderRadius: 4, fontSize: 9.5, fontWeight: 600,
-                    background: item.type === "급여" ? "#EBF5EB" : "#FFF5E6",
-                    color: item.type === "급여" ? "#1A6B2A" : "#8B4A00",
-                    border: `1px solid ${item.type === "급여" ? "#C2E0C2" : "#F0D0A0"}`,
+                    background: item.type === "급여" ? "var(--form-covered-bg)" : "var(--form-noncovered-bg)",
+                    color: item.type === "급여" ? "var(--form-covered-text)" : "var(--form-noncovered-text)",
+                    border: `1px solid ${item.type === "급여" ? "var(--form-covered-border)" : "var(--form-noncovered-border)"}`,
                   }}>{item.type}</span>
                 </td>
                 <td style={numTd}>{item.count}</td>
                 <td style={numTd}>{item.unit.toLocaleString("ko-KR")}</td>
-                <td style={{ ...numTd, borderRight: "1px solid #CCC" }}>{item.total.toLocaleString("ko-KR")}</td>
+                <td style={{ ...numTd, borderRight: "1px solid var(--form-border-soft)" }}>{item.total.toLocaleString("ko-KR")}</td>
               </tr>
             ))
           )}
-          <tr style={{ borderTop: "1.5px solid #111" }}>
-            <td colSpan={5} style={{ ...td, background: "#F2EFE8", fontWeight: 700, borderRight: "none", borderBottom: "1.5px solid #111" }}>합&nbsp;&nbsp;&nbsp;계</td>
-            <td style={{ ...numTd, background: "#F2EFE8", fontWeight: 700, borderBottom: "1.5px solid #111" }}></td>
-            <td style={{ ...numTd, background: "#F2EFE8", fontWeight: 700, borderRight: "1px solid #CCC", borderBottom: "1.5px solid #111" }}>{grandTotal.toLocaleString("ko-KR")}</td>
+          <tr style={{ borderTop: "1.5px solid var(--form-border)" }}>
+            <td colSpan={5} style={{ ...td, background: "var(--form-table-header-bg)", fontWeight: 700, borderRight: "none", borderBottom: "1.5px solid var(--form-border)" }}>합&nbsp;&nbsp;&nbsp;계</td>
+            <td style={{ ...numTd, background: "var(--form-table-header-bg)", fontWeight: 700, borderBottom: "1.5px solid var(--form-border)" }}></td>
+            <td style={{ ...numTd, background: "var(--form-table-header-bg)", fontWeight: 700, borderRight: "1px solid var(--form-border-soft)", borderBottom: "1.5px solid var(--form-border)" }}>{grandTotal.toLocaleString("ko-KR")}</td>
           </tr>
         </tbody>
       </table>
 
       <div style={{ display: "flex", gap: 10, marginBottom: 22 }}>
         {[
-          { label: "총 진료비",   value: grandTotal,   color: "#1C2B2B" },
-          { label: "급여 합계",   value: coveredTotal, color: "#1A4A2A" },
-          { label: "비급여 합계", value: nonCovTotal,  color: "#7A3A00" },
+          { label: "총 진료비",   value: grandTotal,   color: "var(--text-primary)" },
+          { label: "급여 합계",   value: coveredTotal, color: "var(--form-covered-total-text)" },
+          { label: "비급여 합계", value: nonCovTotal,  color: "var(--form-noncovered-total-text)" },
         ].map(({ label, value, color }) => (
-          <div key={label} style={{ flex: 1, border: "1px solid var(--border-subtle)", borderRadius: 8, padding: "10px 14px", background: "#FAFAF8" }}>
-            <div style={{ fontSize: 10, color: "#3A4F4C", marginBottom: 3 }}>{label}</div>
+          <div key={label} style={{ flex: 1, border: "1px solid var(--border-subtle)", borderRadius: 8, padding: "10px 14px", background: "var(--form-cell-alt-bg)" }}>
+            <div style={{ fontSize: 10, color: "var(--text-secondary)", marginBottom: 3 }}>{label}</div>
             <div style={{ fontSize: 16, fontWeight: 700, fontFamily: "var(--font-mono)", color }}>
               {value.toLocaleString("ko-KR")} <span style={{ fontSize: 10, fontWeight: 500 }}>원</span>
             </div>
@@ -1624,19 +1624,19 @@ function CalcDetailPreviewA4({ patient, clinic, meta }) {
         ))}
       </div>
 
-      <div style={{ fontSize: 9.5, color: "#3A4F4C", lineHeight: 1.8, borderTop: "0.5px solid #CCC", paddingTop: 10, marginBottom: 18 }}>
-        <div style={{ fontWeight: 600, marginBottom: 3, color: "#1C2B2B" }}>유의사항</div>
+      <div style={{ fontSize: 9.5, color: "var(--text-secondary)", lineHeight: 1.8, borderTop: "0.5px solid var(--form-border-soft)", paddingTop: 10, marginBottom: 18 }}>
+        <div style={{ fontWeight: 600, marginBottom: 3, color: "var(--text-primary)" }}>유의사항</div>
         <div>1. 본 내역은 건강보험 청구 기준으로 산정된 금액이며, 실제 납부액은 급여 본인부담금과 비급여 금액의 합산입니다.</div>
         <div>2. 급여 항목의 본인부담률은 외래 30%, 입원 20%가 적용됩니다(경감 대상자 별도).</div>
         <div>3. 세부 내역에 이의가 있으실 경우 원무과에 문의하시기 바랍니다.</div>
       </div>
 
-      <div style={{ textAlign: "right", fontSize: 11, color: "#1C2B2B", lineHeight: 2 }}>
+      <div style={{ textAlign: "right", fontSize: 11, color: "var(--text-primary)", lineHeight: 2 }}>
         <div>발급일: {meta.issueDate}</div>
         <div>{clinic.name} · 한의사 {clinic.doctorName}</div>
       </div>
 
-      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "#6B7E7B" }}>210mm×297mm[백상지 80g/㎡]</div>
+      <div style={{ position: "absolute", right: 24, bottom: 12, fontSize: 8.5, color: "var(--ink-400)" }}>210mm×297mm[백상지 80g/㎡]</div>
     </div>
   );
 }
@@ -1713,9 +1713,9 @@ function BillingEditor({ data, onChange, patient, onChangePatient, label }) {
 function PlaceholderPreviewA4({ label, desc }) {
   return (
     <div style={{
-      width: 794, minHeight: 1123, background: "white", color: "#111",
+      width: 794, minHeight: 1123, background: "var(--bg-surface)", color: "var(--form-border)",
       padding: 56, fontFamily: "var(--font-sans)",
-      boxShadow: "0 12px 40px rgba(17, 30, 28, 0.15), 0 2px 8px rgba(17,30,28,0.08)",
+      boxShadow: "var(--shadow-paper)",
       display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column",
     }}>
       <div style={{

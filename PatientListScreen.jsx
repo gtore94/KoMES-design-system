@@ -19,13 +19,13 @@ const PATIENTS = [
 ];
 
 const STAGES = [
-  { key: "예약",     icon: "calendar-clock", color: "#5A6E8A", bg: "rgba(90, 110, 138, 0.12)",  border: "rgba(90, 110, 138, 0.32)",  label: "예약" },
-  { key: "진료대기", icon: "clock",         color: "#C4974B", bg: "rgba(196, 151, 75, 0.12)", border: "rgba(196, 151, 75, 0.32)", label: "진료 대기" },
-  { key: "진료실",   icon: "stethoscope",   color: "#5C8B7E", bg: "rgba(92, 139, 126, 0.14)", border: "rgba(92, 139, 126, 0.34)", label: "진료 중" },
-  { key: "치료대기", icon: "hourglass",     color: "#6B7E7B", bg: "rgba(107, 126, 123, 0.14)", border: "rgba(107, 126, 123, 0.32)", label: "치료 대기" },
-  { key: "치료실",   icon: "activity",      color: "#6B9E90", bg: "rgba(107, 158, 144, 0.14)", border: "rgba(107, 158, 144, 0.34)", label: "치료 중" },
-  { key: "수납대기", icon: "credit-card",   color: "#9A8E82", bg: "rgba(154, 142, 130, 0.14)", border: "rgba(154, 142, 130, 0.32)", label: "수납 대기" },
-  { key: "수납완료", icon: "check-circle-2",color: "#4A7C6F", bg: "rgba(74, 124, 111, 0.16)", border: "rgba(74, 124, 111, 0.36)", label: "수납 완료" },
+  { key: "예약",     icon: "calendar-clock", color: "var(--accent-slate)", bg: "var(--accent-slate-bg)",  border: "var(--accent-slate-border)",  label: "예약" },
+  { key: "진료대기", icon: "clock",         color: "var(--amber-500)", bg: "var(--amber-500-bg)", border: "var(--amber-500-border)", label: "진료 대기" },
+  { key: "진료실",   icon: "stethoscope",   color: "var(--accent-pine)", bg: "var(--accent-pine-bg)", border: "var(--accent-pine-border)", label: "진료 중" },
+  { key: "치료대기", icon: "hourglass",     color: "var(--ink-400)", bg: "var(--ink-400-bg)", border: "var(--ink-400-border)", label: "치료 대기" },
+  { key: "치료실",   icon: "activity",      color: "var(--jade-400)", bg: "var(--jade-400-bg)", border: "var(--jade-400-border)", label: "치료 중" },
+  { key: "수납대기", icon: "credit-card",   color: "var(--stone-700)", bg: "var(--stone-700-bg)", border: "var(--stone-700-border)", label: "수납 대기" },
+  { key: "수납완료", icon: "check-circle-2",color: "var(--brand)", bg: "var(--brand-muted)", border: "var(--border-brand)", label: "수납 완료" },
 ];
 
 const STAGE_BY_KEY = STAGES.reduce((a, s) => (a[s.key] = s, a), {});
@@ -33,10 +33,10 @@ const STAGE_BY_KEY = STAGES.reduce((a, s) => (a[s.key] = s, a), {});
 // High-level groupings for the dashboard board.
 // Each group bundles its sub-stages and uses a single column color identity.
 const GROUPS = [
-  { key: "예약", label: "예약", icon: "calendar-clock", color: "#5A6E8A", bg: "var(--board-appt-bg)",  border: "var(--board-appt-border)",  subStages: ["예약"] },
-  { key: "대기", label: "대기", icon: "clock",          color: "#B5873E", bg: "var(--board-wait-bg)",  border: "var(--board-wait-border)",  subStages: ["진료대기", "치료대기"] },
-  { key: "치료", label: "치료", icon: "activity",       color: "#3A7065", bg: "var(--board-treat-bg)", border: "var(--board-treat-border)", subStages: ["진료실", "치료실"] },
-  { key: "수납", label: "수납", icon: "credit-card",    color: "#7A6E60", bg: "var(--board-pay-bg)",   border: "var(--board-pay-border)",   subStages: ["수납대기", "수납완료"] },
+  { key: "예약", label: "예약", icon: "calendar-clock", color: "var(--accent-slate)", bg: "var(--board-appt-bg)",  border: "var(--board-appt-border)",  subStages: ["예약"] },
+  { key: "대기", label: "대기", icon: "clock",          color: "var(--accent-bronze)", bg: "var(--board-wait-bg)",  border: "var(--board-wait-border)",  subStages: ["진료대기", "치료대기"] },
+  { key: "치료", label: "치료", icon: "activity",       color: "var(--jade-600)", bg: "var(--board-treat-bg)", border: "var(--board-treat-border)", subStages: ["진료실", "치료실"] },
+  { key: "수납", label: "수납", icon: "credit-card",    color: "var(--stone-800)", bg: "var(--board-pay-bg)",   border: "var(--board-pay-border)",   subStages: ["수납대기", "수납완료"] },
 ];
 
 const NEXT_STAGE = {
@@ -142,7 +142,7 @@ function PatientCard({ patient, stage, onSelect, onAdvance }) {
                 style={{
                   display: "flex", alignItems: "center", gap: 4,
                   fontSize: 11, fontWeight: 500,
-                  color: hoveredBtn === "next" ? "#fff" : "var(--text-brand)",
+                  color: hoveredBtn === "next" ? "var(--text-on-brand)" : "var(--text-brand)",
                   background: hoveredBtn === "next" ? "var(--brand)" : "var(--brand-muted)",
                   border: `1px solid ${hoveredBtn === "next" ? "var(--brand)" : "var(--brand-muted)"}`,
                   borderRadius: "var(--radius-sm)", padding: "3px 9px",
@@ -158,7 +158,7 @@ function PatientCard({ patient, stage, onSelect, onAdvance }) {
                 style={{
                   display: "flex", alignItems: "center", gap: 4,
                   fontSize: 11, fontWeight: 500,
-                  color: hoveredBtn === "skip" ? "#fff" : "var(--text-brand)",
+                  color: hoveredBtn === "skip" ? "var(--text-on-brand)" : "var(--text-brand)",
                   background: hoveredBtn === "skip" ? "var(--brand)" : "var(--brand-muted)",
                   border: `1px solid ${hoveredBtn === "skip" ? "var(--brand)" : "var(--brand-muted)"}`,
                   borderRadius: "var(--radius-sm)", padding: "3px 9px",
@@ -182,13 +182,13 @@ function SubStageSection({ stage, patients, onSelect, onAdvance, showDivider, is
       onDrop={e => { e.preventDefault(); const id = Number(e.dataTransfer.getData("patientId")); if (id) onDrop(id, stage.key); setDragOver(null); }}
       style={{
         flex: isLast ? 1 : undefined,
-        background: isOver ? "rgba(0,0,0,0.04)" : "transparent",
+        background: isOver ? "var(--scrim-black-04)" : "transparent",
         transition: "background 0.12s ease",
       }}>
       <div style={{
         display: "flex", alignItems: "center", gap: 6,
         padding: "8px 12px 6px",
-        borderTop: showDivider ? "1px dashed rgba(0,0,0,0.08)" : "none",
+        borderTop: showDivider ? "1px dashed var(--scrim-black-08)" : "none",
       }}>
         <Icon name={stage.icon} size={11} style={{ color: stage.color }} />
         <span style={{
@@ -207,9 +207,9 @@ function SubStageSection({ stage, patients, onSelect, onAdvance, showDivider, is
             fontSize: 10, color: stage.color, opacity: isOver ? 0.9 : 0.4,
             textAlign: "center", padding: "8px 0",
             fontFamily: "var(--font-sans)",
-            border: `1px dashed ${isOver ? stage.color : "rgba(0,0,0,0.08)"}`,
+            border: `1px dashed ${isOver ? stage.color : "var(--scrim-black-08)"}`,
             borderRadius: "var(--radius-sm)",
-            background: isOver ? "rgba(0,0,0,0.03)" : "transparent",
+            background: isOver ? "var(--scrim-black-03)" : "transparent",
           }}>{isOver ? "여기에 놓기" : "—"}</div>
         )}
         {patients.map(p => (
@@ -242,7 +242,7 @@ function GroupColumn({ group, patients, onSelect, onAdvance, dragOver, setDragOv
         padding: "12px 14px",
         borderBottom: `1px solid ${group.border}`,
         display: "flex", alignItems: "center", justifyContent: "space-between",
-        background: "rgba(0,0,0,0.04)",
+        background: "var(--scrim-black-04)",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <Icon name={group.icon} size={16} style={{ color: group.color }} />
@@ -253,7 +253,7 @@ function GroupColumn({ group, patients, onSelect, onAdvance, dragOver, setDragOv
         </div>
         <span style={{
           fontSize: 11, fontWeight: 700,
-          background: group.color, color: "#fff",
+          background: group.color, color: "var(--text-on-brand)",
           borderRadius: "var(--radius-full)", whiteSpace: "nowrap", minWidth: 22, height: 22,
           padding: "0 7px",
           display: "flex", alignItems: "center", justifyContent: "center",

@@ -178,7 +178,7 @@ function PatientInstructionModal({ patient, onClose }) {
                   <div style={{ fontSize: 9, color: "var(--text-muted)" }}>의학·한방 용어 자동 설명</div>
                 </div>
                 <div style={{ width: 28, height: 16, borderRadius: 9, background: showHanja ? "var(--jade-500)" : "var(--stone-400)", position: "relative", flexShrink: 0, transition: "background 0.12s" }}>
-                  <div style={{ position: "absolute", top: 2, left: showHanja ? 14 : 2, width: 12, height: 12, borderRadius: "50%", background: "white", transition: "left 0.12s" }} />
+                  <div style={{ position: "absolute", top: 2, left: showHanja ? 14 : 2, width: 12, height: 12, borderRadius: "50%", background: "var(--bg-surface)", transition: "left 0.12s" }} />
                 </div>
               </div>
             </div>
@@ -366,25 +366,25 @@ function PIKakaoPreview({ sections, tone, length, patient, doctor, todayDate, cl
   const name = patient?.name || "환자";
   return (
     <div style={{
-      background: "#9BBBD4", borderRadius: "var(--radius-lg)", padding: "10px 8px",
+      background: "var(--instruction-banner-bg)", borderRadius: "var(--radius-lg)", padding: "10px 8px",
       minHeight: "100%", display: "flex", flexDirection: "column", gap: 6,
     }}>
-      <div style={{ textAlign: "center", fontSize: 9, color: "rgba(255,255,255,0.85)", padding: "2px 0 6px" }}>
+      <div style={{ textAlign: "center", fontSize: 9, color: "var(--overlay-white-85)", padding: "2px 0 6px" }}>
         오늘 오후 5:24
       </div>
       <div style={{ display: "flex", alignItems: "flex-end", gap: 5 }}>
         <div style={{ width: 26, height: 26, borderRadius: "50%", background: "var(--jade-500)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-          <span style={{ fontFamily: "var(--font-serif)", fontSize: 11, color: "white", fontWeight: 600 }}>솔</span>
+          <span style={{ fontFamily: "var(--font-serif)", fontSize: 11, color: "var(--text-on-brand)", fontWeight: 600 }}>솔</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 3, flex: 1, alignItems: "flex-start" }}>
-          <div style={{ fontSize: 9, color: "rgba(255,255,255,0.95)" }}>{clinic}</div>
+          <div style={{ fontSize: 9, color: "var(--overlay-white-95)" }}>{clinic}</div>
 
-          <div style={{ background: "white", padding: "8px 10px", borderRadius: "0 12px 12px 12px", maxWidth: "90%", fontSize: 11, lineHeight: 1.55, color: "#191919" }}>
+          <div style={{ background: "var(--bg-surface)", padding: "8px 10px", borderRadius: "0 12px 12px 12px", maxWidth: "90%", fontSize: 11, lineHeight: 1.55, color: "var(--instruction-banner-text)" }}>
             {name}님, 오늘 진료해주신 {doctor}입니다 :) 오늘 진료 안내문을 보내드려요.
           </div>
 
-          <div style={{ background: "white", borderRadius: 12, maxWidth: "100%", width: "100%", overflow: "hidden", boxShadow: "0 1px 2px rgba(0,0,0,0.08)" }}>
-            <div style={{ padding: "10px 12px", background: "linear-gradient(135deg, #4A7C6F 0%, #3A7065 100%)", color: "white" }}>
+          <div style={{ background: "var(--bg-surface)", borderRadius: 12, maxWidth: "100%", width: "100%", overflow: "hidden", boxShadow: "0 1px 2px var(--scrim-black-08)" }}>
+            <div style={{ padding: "10px 12px", background: "linear-gradient(135deg, var(--brand) 0%, var(--jade-600) 100%)", color: "var(--text-on-brand)" }}>
               <div style={{ fontSize: 9, opacity: 0.85, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 2 }}>SOLDAM CLINIC</div>
               <div style={{ fontSize: 13, fontWeight: 600, fontFamily: "var(--font-serif)" }}>{name}님 진료 안내</div>
               <div style={{ fontSize: 9, opacity: 0.85, marginTop: 2 }}>{todayDate} · {doctor}</div>
@@ -396,24 +396,24 @@ function PIKakaoPreview({ sections, tone, length, patient, doctor, todayDate, cl
                     <Icon name={s.icon} size={10} style={{ color: "var(--jade-600)" }} />
                     <span style={{ fontSize: 10, fontWeight: 700, color: "var(--text-brand)" }}>{s.title}</span>
                   </div>
-                  <div style={{ fontSize: 10.5, lineHeight: 1.55, color: "#333" }}>
+                  <div style={{ fontSize: 10.5, lineHeight: 1.55, color: "var(--instruction-paper-text)" }}>
                     {s.body[tone][length].length > 100 ? s.body[tone][length].slice(0, 100) + "…" : s.body[tone][length]}
                   </div>
                 </div>
               ))}
               {sections.length > 4 && (
-                <div style={{ textAlign: "center", padding: "6px 0", fontSize: 10, color: "var(--text-brand)", borderTop: "1px solid #eee" }}>
+                <div style={{ textAlign: "center", padding: "6px 0", fontSize: 10, color: "var(--text-brand)", borderTop: "1px solid var(--form-border-light)" }}>
                   ▼ 전체 안내문 열기 ({sections.length - 4}개 더)
                 </div>
               )}
             </div>
-            <div style={{ borderTop: "1px solid #eee", padding: "8px 12px", display: "flex", gap: 6 }}>
-              <div style={{ flex: 1, padding: "5px 0", textAlign: "center", fontSize: 10, color: "var(--text-brand)", fontWeight: 500, border: "1px solid #e4e4e4", borderRadius: 6 }}>PDF 보기</div>
-              <div style={{ flex: 1, padding: "5px 0", textAlign: "center", fontSize: 10, color: "var(--text-brand)", fontWeight: 500, border: "1px solid #e4e4e4", borderRadius: 6 }}>예약 확인</div>
+            <div style={{ borderTop: "1px solid var(--form-border-light)", padding: "8px 12px", display: "flex", gap: 6 }}>
+              <div style={{ flex: 1, padding: "5px 0", textAlign: "center", fontSize: 10, color: "var(--text-brand)", fontWeight: 500, border: "1px solid var(--border-subtle)", borderRadius: 6 }}>PDF 보기</div>
+              <div style={{ flex: 1, padding: "5px 0", textAlign: "center", fontSize: 10, color: "var(--text-brand)", fontWeight: 500, border: "1px solid var(--border-subtle)", borderRadius: 6 }}>예약 확인</div>
             </div>
           </div>
 
-          <div style={{ background: "white", padding: "8px 10px", borderRadius: "12px", maxWidth: "90%", fontSize: 11, lineHeight: 1.55, color: "#191919" }}>
+          <div style={{ background: "var(--bg-surface)", padding: "8px 10px", borderRadius: "12px", maxWidth: "90%", fontSize: 11, lineHeight: 1.55, color: "var(--instruction-banner-text)" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 3 }}>
               <Icon name="calendar-check" size={10} style={{ color: "var(--jade-600)" }} />
               <strong style={{ fontSize: 10, color: "var(--text-brand)" }}>다음 예약</strong>
@@ -432,18 +432,18 @@ function PIPdfPreview({ sections, tone, length, patient, doctor, todayDate }) {
   const name = patient?.name || "환자";
   return (
     <div style={{
-      background: "white", borderRadius: 2, padding: "16px 18px",
-      boxShadow: "var(--shadow-md)", fontSize: 9, lineHeight: 1.55, color: "#333",
+      background: "var(--bg-surface)", borderRadius: 2, padding: "16px 18px",
+      boxShadow: "var(--shadow-md)", fontSize: 9, lineHeight: 1.55, color: "var(--instruction-paper-text)",
       minHeight: 480,
     }}>
       <div style={{ paddingBottom: 10, borderBottom: "1.5px solid var(--ink-800)", marginBottom: 12 }}>
         <div style={{ fontSize: 7, fontWeight: 700, letterSpacing: "0.12em", color: "var(--jade-600)", marginBottom: 3 }}>SOLDAM CLINIC · 진료 안내문</div>
-        <div style={{ fontSize: 15, fontFamily: "var(--font-serif)", fontWeight: 500, color: "#1c2b2b", marginBottom: 4 }}>{name}님 진료 안내</div>
-        <div style={{ fontSize: 8, color: "#888" }}>진료일 · {todayDate}  |  담당 · {doctor}</div>
+        <div style={{ fontSize: 15, fontFamily: "var(--font-serif)", fontWeight: 500, color: "var(--text-primary)", marginBottom: 4 }}>{name}님 진료 안내</div>
+        <div style={{ fontSize: 8, color: "var(--instruction-paper-muted)" }}>진료일 · {todayDate}  |  담당 · {doctor}</div>
       </div>
       {sections.map((s, idx) => (
         <div key={s.id} style={{ marginBottom: 10 }}>
-          <div style={{ fontSize: 10, fontWeight: 700, color: "#1c2b2b", marginBottom: 3 }}>{idx + 1}. {s.title}</div>
+          <div style={{ fontSize: 10, fontWeight: 700, color: "var(--text-primary)", marginBottom: 3 }}>{idx + 1}. {s.title}</div>
           <div style={{ fontSize: 8.5, lineHeight: 1.6 }}>{s.body[tone][length]}</div>
         </div>
       ))}

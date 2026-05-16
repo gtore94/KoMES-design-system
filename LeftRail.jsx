@@ -99,7 +99,7 @@ function MiniCalendar() {
               <span style={{
                 fontSize: 12, fontWeight: sel || td ? 600 : 400,
                 fontFamily: "var(--font-mono)",
-                color: sel ? "#fff"
+                color: sel ? "var(--text-on-brand)"
                   : cell.muted ? "var(--rail-text-muted)"
                   : dow === 0 ? "var(--cinnabar-600)"
                   : dow === 6 ? "var(--jade-600)"
@@ -112,7 +112,7 @@ function MiniCalendar() {
                   {Array.from({ length: Math.min(density, 3) }).map((_, k) => (
                     <span key={k} style={{
                       width: 3, height: 3, borderRadius: "50%",
-                      background: sel ? "rgba(255,255,255,0.85)" : "var(--jade-500)",
+                      background: sel ? "var(--overlay-white-85)" : "var(--jade-500)",
                     }} />
                   ))}
                 </div>
@@ -172,7 +172,7 @@ function TaskItem({ task, onToggle }) {
         background: task.done ? "var(--jade-500)" : "transparent",
         display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
       }}>
-        {task.done && <Icon name="check" size={9} style={{ color: "#fff" }} />}
+        {task.done && <Icon name="check" size={9} style={{ color: "var(--text-on-brand)" }} />}
       </div>
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{
