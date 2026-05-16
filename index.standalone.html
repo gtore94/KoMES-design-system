@@ -10717,7 +10717,7 @@ function RecommendationSettingsModal({ onClose, onSave, initial = REC_DEFAULTS }
         }}>
           <div style={{
             width: 38, height: 38, borderRadius: "var(--radius-md)",
-            background: "var(--brand-muted)", color: "var(--jade-700)",
+            background: "var(--brand-muted)", color: "var(--text-brand)",
             display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
           }}>
             <Icon name="sparkles" size={18} />
@@ -10749,7 +10749,7 @@ function RecommendationSettingsModal({ onClose, onSave, initial = REC_DEFAULTS }
                   style={{
                     background: "none", border: "none", cursor: "pointer",
                     padding: "12px 14px", fontFamily: "var(--font-sans)", fontSize: 12,
-                    color: tab === t.key ? "var(--jade-700)" : "var(--text-secondary)",
+                    color: tab === t.key ? "var(--text-brand)" : "var(--text-secondary)",
                     fontWeight: tab === t.key ? 600 : 400,
                     borderBottom: `2px solid ${tab === t.key ? "var(--jade-500)" : "transparent"}`,
                     display: "inline-flex", alignItems: "center", gap: 6,
@@ -10809,7 +10809,7 @@ function TriggerPanel({ s, set }) {
                 flex: 1, padding: "14px 12px", fontFamily: "var(--font-sans)", fontSize: 13,
                 border: `2px solid ${s.scope === o.key ? "var(--jade-500)" : "var(--border-default)"}`,
                 background: s.scope === o.key ? "var(--brand-subtle)" : "var(--bg-surface)",
-                color: s.scope === o.key ? "var(--jade-700)" : "var(--text-secondary)",
+                color: s.scope === o.key ? "var(--text-brand)" : "var(--text-secondary)",
                 borderRadius: "var(--radius-md)", cursor: "pointer",
                 fontWeight: s.scope === o.key ? 600 : 400,
                 display: "flex", flexDirection: "column", alignItems: "center", gap: 6,
@@ -10959,11 +10959,11 @@ function AlertPanel({ s, set }) {
         {s.autoApprove && (
           <div style={{
             marginTop: 14, padding: "14px 16px", background: "var(--status-warning-bg)",
-            border: "1px solid var(--amber-200)", borderRadius: "var(--radius-md)",
+            border: "1px solid var(--status-warning-border)", borderRadius: "var(--radius-md)",
           }}>
             <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
-              <Icon name="alert-triangle" size={13} style={{ color: "var(--amber-700)", flexShrink: 0, marginTop: 2 }} />
-              <div style={{ fontSize: 12, color: "var(--amber-700)", lineHeight: 1.5 }}>
+              <Icon name="alert-triangle" size={13} style={{ color: "var(--status-warning-text)", flexShrink: 0, marginTop: 2 }} />
+              <div style={{ fontSize: 12, color: "var(--status-warning-text)", lineHeight: 1.5 }}>
                 자동 발주는 회계 기록 책임을 발생시킬 수 있습니다. 한도와 공급처를 신중히 설정하세요.
               </div>
             </div>
@@ -11075,7 +11075,7 @@ function RSPreviewPanel({ preview, settings }) {
   return (
     <div style={{ flex: "1 1 44%", background: "var(--bg-raised)", display: "flex", flexDirection: "column", minWidth: 0 }}>
       <div style={{ padding: "14px 20px", borderBottom: "1px solid var(--border-subtle)", display: "flex", alignItems: "center", gap: 8 }}>
-        <Icon name="eye" size={14} style={{ color: "var(--jade-700)" }} />
+        <Icon name="eye" size={14} style={{ color: "var(--text-brand)" }} />
         <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>실시간 미리보기</span>
         <div style={{ flex: 1 }}></div>
         <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>지금 적용하면 이렇게 나옵니다</span>
@@ -11116,16 +11116,16 @@ function RSPreviewPanel({ preview, settings }) {
                 <div style={{
                   padding: "10px 14px", display: "flex", justifyContent: "space-between",
                   alignItems: "center", background: "var(--brand-subtle)",
-                  borderBottom: "1px solid var(--jade-200)",
+                  borderBottom: "1px solid var(--brand-muted)",
                 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <Icon name="building" size={13} style={{ color: "var(--jade-700)" }} />
-                    <span style={{ fontSize: 13, fontWeight: 600, color: "var(--jade-800)" }}>{g.supplier}</span>
-                    <span style={{ fontSize: 10, fontFamily: "var(--font-mono)", color: "var(--jade-700)", background: "var(--brand-muted)", padding: "1px 6px", borderRadius: "var(--radius-full)" }}>
+                    <Icon name="building" size={13} style={{ color: "var(--text-brand)" }} />
+                    <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-brand)" }}>{g.supplier}</span>
+                    <span style={{ fontSize: 10, fontFamily: "var(--font-mono)", color: "var(--text-brand)", background: "var(--brand-muted)", padding: "1px 6px", borderRadius: "var(--radius-full)" }}>
                       {g.items.length}품목
                     </span>
                   </div>
-                  <span style={{ fontSize: 12, fontFamily: "var(--font-mono)", fontWeight: 600, color: "var(--jade-800)" }}>{won(g.total)}</span>
+                  <span style={{ fontSize: 12, fontFamily: "var(--font-mono)", fontWeight: 600, color: "var(--text-brand)" }}>{won(g.total)}</span>
                 </div>
                 <div>
                   {g.items.map((i, idx) => (
@@ -11139,7 +11139,7 @@ function RSPreviewPanel({ preview, settings }) {
                         display: "inline-flex", alignItems: "center", justifyContent: "center",
                         width: 18, height: 18, borderRadius: "var(--radius-sm)",
                         background: i.kind === "herb" ? "var(--brand-muted)" : "var(--bg-raised)",
-                        color: i.kind === "herb" ? "var(--jade-700)" : "var(--ink-600)",
+                        color: i.kind === "herb" ? "var(--text-brand)" : "var(--ink-600)",
                       }}>
                         <Icon name={i.kind === "herb" ? "leaf" : "package"} size={10} />
                       </span>
@@ -11157,7 +11157,7 @@ function RSPreviewPanel({ preview, settings }) {
                         background: i.urgency === "high" ? "var(--status-danger-bg)" :
                                     i.urgency === "med"  ? "var(--status-warning-bg)" : "var(--bg-raised)",
                         color:      i.urgency === "high" ? "var(--cinnabar-700)" :
-                                    i.urgency === "med"  ? "var(--amber-700)" : "var(--text-muted)",
+                                    i.urgency === "med"  ? "var(--status-warning-text)" : "var(--text-muted)",
                         fontWeight: 600, fontFamily: "var(--font-sans)",
                       }}>
                         {i.urgency === "high" ? "긴급" : i.urgency === "med" ? "주의" : "정상"}
@@ -11201,7 +11201,7 @@ function RSSlider({ label, desc, value, min, max, step, unit, decimals = 0, mark
     <div style={{ padding: "12px 0" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 4 }}>
         <span style={{ fontSize: 13, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>{label}</span>
-        <span style={{ fontSize: 18, fontWeight: 600, fontFamily: "var(--font-mono)", color: "var(--jade-700)" }}>
+        <span style={{ fontSize: 18, fontWeight: 600, fontFamily: "var(--font-mono)", color: "var(--text-brand)" }}>
           {decimals ? value.toFixed(decimals) : value} <span style={{ fontSize: 12, color: "var(--text-muted)", fontWeight: 400 }}>{unit}</span>
         </span>
       </div>
@@ -11235,7 +11235,7 @@ function RSToggle({ label, desc, value, onChange }) {
     <div onClick={() => onChange(!value)} style={{
       display: "flex", alignItems: "center", justifyContent: "space-between",
       padding: "12px 14px",
-      border: `1px solid ${value ? "var(--jade-300)" : "var(--border-subtle)"}`,
+      border: `1px solid ${value ? "var(--brand-muted)" : "var(--border-subtle)"}`,
       background: value ? "var(--brand-subtle)" : "var(--bg-surface)",
       borderRadius: "var(--radius-md)", cursor: "pointer",
       transition: "all 0.12s ease",
@@ -11261,8 +11261,8 @@ function RSToggle({ label, desc, value, onChange }) {
 
 function RSStatCard({ label, value, sub, icon, tone, small }) {
   const tones = {
-    brand:   { bg: "var(--brand-subtle)",     border: "var(--jade-200)",     fg: "var(--jade-700)" },
-    warning: { bg: "var(--status-warning-bg)",   border: "var(--amber-200)",    fg: "var(--amber-700)" },
+    brand:   { bg: "var(--brand-subtle)",     border: "var(--brand-muted)",     fg: "var(--text-brand)" },
+    warning: { bg: "var(--status-warning-bg)",   border: "var(--status-warning-border)",    fg: "var(--status-warning-text)" },
     default: { bg: "var(--bg-surface)",  border: "var(--border-subtle)", fg: "var(--text-primary)" },
   };
   const t = tones[tone] || tones.default;
@@ -11285,7 +11285,7 @@ const chip = (sel) => ({
   fontFamily: "var(--font-sans)", fontSize: 12, padding: "5px 11px",
   border: `1px solid ${sel ? "var(--jade-500)" : "var(--border-default)"}`,
   background: sel ? "var(--brand-subtle)" : "var(--bg-surface)",
-  color: sel ? "var(--jade-700)" : "var(--text-secondary)",
+  color: sel ? "var(--text-brand)" : "var(--text-secondary)",
   borderRadius: "var(--radius-md)", cursor: "pointer",
   fontWeight: sel ? 600 : 400,
 });
