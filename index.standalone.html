@@ -1319,16 +1319,16 @@ const DIAGNOSIS_CATALOG = [
 // phase: 1=급성기(0–7일), 2=아급성기(8–28일), 3=만성기(29일+)
 // allowedPhases: 자보 환자에서 청구 가능한 경과 단계
 const ACTING_ORDER_CATALOG = [
-  { code: "40020", key: "경혈 침술 1부위",        short: "침-1",    icon: "zap",         color: "#3A7065", allowedPhases: [1,2,3], default: true,  duration: 15, fee: 4920 },
-  { code: "40021", key: "경혈 침술 2부위",        short: "침-2",    icon: "zap",         color: "#3A7065", allowedPhases: [1,2,3], default: true,  duration: 15, fee: 6210 },
-  { code: "40022", key: "경혈 침술 3부위",        short: "침-3",    icon: "zap",         color: "#3A7065", allowedPhases: [2,3],   default: false, duration: 20, autoOnly: true, note: "자보 한정", fee: 7480 },
-  { code: "40080", key: "침전기 자극술",          short: "전침",    icon: "activity",    color: "#4A7C6F", allowedPhases: [1,2,3], default: false, duration: 15, fee: 2860 },
+  { code: "40020", key: "경혈 침술 1부위",        short: "침-1",    icon: "zap",         color: "#5C8B7E", allowedPhases: [1,2,3], default: true,  duration: 15, fee: 4920 },
+  { code: "40021", key: "경혈 침술 2부위",        short: "침-2",    icon: "zap",         color: "#5C8B7E", allowedPhases: [1,2,3], default: true,  duration: 15, fee: 6210 },
+  { code: "40022", key: "경혈 침술 3부위",        short: "침-3",    icon: "zap",         color: "#5C8B7E", allowedPhases: [2,3],   default: false, duration: 20, autoOnly: true, note: "자보 한정", fee: 7480 },
+  { code: "40080", key: "침전기 자극술",          short: "전침",    icon: "activity",    color: "#6B9E90", allowedPhases: [1,2,3], default: false, duration: 15, fee: 2860 },
   { code: "40090", key: "직접구",                 short: "직접구",  icon: "flame",       color: "#B47A28", allowedPhases: [1,2,3], default: false, duration: 10, fee: 1830 },
   { code: "40091", key: "간접구",                 short: "간접구",  icon: "flame",       color: "#C4974B", allowedPhases: [1,2,3], default: false, duration: 10, fee: 2200 },
   { code: "40095", key: "기기구",                 short: "기기구",  icon: "thermometer", color: "#D4756A", allowedPhases: [1,2,3], default: false, duration: 10, fee: 2750 },
   { code: "40300", key: "건식부항(유관법)",       short: "건부항",  icon: "circle-dot",  color: "#C4594B", allowedPhases: [1,2,3], default: false, duration: 10, fee: 5530 },
-  { code: "40310", key: "습식부항(자락관법)",     short: "습부항",  icon: "droplets",    color: "#B03028", allowedPhases: [1,2],   default: false, duration: 10, note: "급성·아급성기", fee: 6840 },
-  { code: "40320", key: "약침술",                 short: "약침",    icon: "syringe",     color: "#2E5C52", allowedPhases: [1,2,3], default: false, duration: 10, fee: 11540 },
+  { code: "40310", key: "습식부항(자락관법)",     short: "습부항",  icon: "droplets",    color: "#D4756A", allowedPhases: [1,2],   default: false, duration: 10, note: "급성·아급성기", fee: 6840 },
+  { code: "40320", key: "약침술",                 short: "약침",    icon: "syringe",     color: "#4A7C6F", allowedPhases: [1,2,3], default: false, duration: 10, fee: 11540 },
   { code: "40400", key: "추나요법(단순)",         short: "추나-단", icon: "hand",        color: "#6B7E7B", allowedPhases: [2,3],   default: false, duration: 15, note: "1주 이후 권장", fee: 14750 },
   { code: "40401", key: "추나요법(복잡)",         short: "추나-복", icon: "hands",       color: "#5A6E8A", allowedPhases: [2,3],   default: false, duration: 30, fee: 32100 },
 ];
