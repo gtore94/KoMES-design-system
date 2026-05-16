@@ -35,7 +35,7 @@ function HerbRegistrationModal({ onClose, onSubmit }) {
 
   return (
     <div onClick={onClose} style={{
-      position: "fixed", inset: 0, background: "var(--bg-overlay)",
+      position: "fixed", inset: 0, background: "var(--bg-overlay)", backdropFilter: "blur(2px)",
       display: "flex", alignItems: "center", justifyContent: "center", zIndex: 200,
       fontFamily: "var(--font-sans)",
     }}>
