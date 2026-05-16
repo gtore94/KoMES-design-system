@@ -117,7 +117,7 @@ function ActingOrderBlock({ orders, editable }) {
           <div key={i} onClick={() => toggleDone(i)} style={{
             display: "flex", alignItems: "center", gap: 10,
             padding: "8px 12px", borderRadius: "var(--radius-md)",
-            background: o.done ? "var(--stone-100)" : "var(--bg-surface)",
+            background: o.done ? "var(--bg-raised)" : "var(--bg-surface)",
             border: `1px solid ${o.done ? "var(--border-subtle)" : "var(--border-default)"}`,
             cursor: editable ? "pointer" : "default",
             opacity: o.done ? 0.65 : 1, transition: "all 0.12s",
@@ -138,7 +138,7 @@ function ActingOrderBlock({ orders, editable }) {
         </button>
       )}
       {editable && adding && (
-        <div style={{ display: "flex", gap: 8, alignItems: "center", padding: "8px 12px", borderRadius: "var(--radius-md)", border: "1px solid var(--border-brand)", background: "var(--jade-50)" }}>
+        <div style={{ display: "flex", gap: 8, alignItems: "center", padding: "8px 12px", borderRadius: "var(--radius-md)", border: "1px solid var(--border-brand)", background: "var(--brand-subtle)" }}>
           <select value={newType} onChange={e => setNewType(e.target.value)} style={{ fontSize: 12, fontFamily: "var(--font-sans)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-sm)", padding: "4px 6px", background: "white", color: "var(--text-primary)" }}>
             {ACTING_TYPES.map(t => <option key={t.key}>{t.key}</option>)}
           </select>
@@ -167,7 +167,7 @@ function SoapBlock({ data, editable }) {
           <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.07em", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: 4, fontFamily: "var(--font-sans)" }}>{f.label}</div>
           {editable ? (
             <textarea value={vals[f.key]} onChange={e => setVals(prev => ({ ...prev, [f.key]: e.target.value }))}
-              rows={f.rows} style={{ width: "100%", fontFamily: "var(--font-sans)", fontSize: 13, color: "var(--text-primary)", background: "var(--stone-50)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-md)", padding: "7px 10px", outline: "none", resize: "vertical", lineHeight: 1.6, boxSizing: "border-box" }} />
+              rows={f.rows} style={{ width: "100%", fontFamily: "var(--font-sans)", fontSize: 13, color: "var(--text-primary)", background: "var(--bg-raised)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-md)", padding: "7px 10px", outline: "none", resize: "vertical", lineHeight: 1.6, boxSizing: "border-box" }} />
           ) : (
             <div style={{ fontSize: 13, color: "var(--text-primary)", lineHeight: 1.7, fontFamily: "var(--font-sans)", whiteSpace: "pre-line" }}>{vals[f.key]}</div>
           )}
@@ -182,7 +182,7 @@ function RxOrderBlock({ orders, onPrescribe }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
       {orders.map((rx, i) => (
-        <div key={i} style={{ background: "var(--stone-50)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", padding: "10px 14px" }}>
+        <div key={i} style={{ background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", padding: "10px 14px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
             <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>{rx.name}</span>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
@@ -228,7 +228,7 @@ function VisitCard({ visit }) {
           <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)", flexShrink: 0 }}>담당: {visit.doctor}</span>
           {/* Inline diagnosis summary */}
           {!visit.isToday && (
-            <span style={{ fontSize: 11, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", background: "var(--stone-100)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-full)", padding: "1px 9px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: 200 }}>
+            <span style={{ fontSize: 11, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-full)", padding: "1px 9px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: 200 }}>
               {visit.soap.a}
             </span>
           )}
@@ -243,7 +243,7 @@ function VisitCard({ visit }) {
                 ? <SoapBlockAI data={visit.soap} editable={true} />
                 : <SoapBlock data={visit.soap} editable={false} />}
               {visit.aiNote && (
-                <div style={{ marginTop: 12, padding: "9px 12px", background: "var(--jade-50)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)", display: "flex", gap: 8, alignItems: "flex-start" }}>
+                <div style={{ marginTop: 12, padding: "9px 12px", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)", display: "flex", gap: 8, alignItems: "flex-start" }}>
                   <Icon name="sparkles" size={13} style={{ color: "var(--jade-600)", marginTop: 1, flexShrink: 0 }} />
                   <span style={{ fontSize: 12, color: "var(--jade-700)", fontFamily: "var(--font-sans)" }}><strong>AI 추천</strong> {visit.aiNote}</span>
                 </div>
@@ -252,7 +252,7 @@ function VisitCard({ visit }) {
 
             {/* Past orders — collapsible sub-section */}
             {!visit.isToday && (
-              <div style={{ background: "var(--stone-50)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", overflow: "hidden" }}>
+              <div style={{ background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", overflow: "hidden" }}>
                 <div onClick={() => setOrdersOpen(!ordersOpen)}
                   style={{ display: "flex", alignItems: "center", gap: 8, padding: "8px 14px", cursor: "pointer", borderBottom: ordersOpen ? "1px solid var(--border-subtle)" : "none", flexWrap: "wrap" }}>
                   <Icon name="clipboard-check" size={13} style={{ color: "var(--text-muted)" }} />
@@ -262,7 +262,7 @@ function VisitCard({ visit }) {
                     <span key={di} style={{
                       display: "inline-flex", alignItems: "center", gap: 4,
                       fontSize: 10, color: dx.primary ? "var(--jade-700)" : "var(--text-secondary)",
-                      background: dx.primary ? "var(--jade-50)" : "var(--stone-100)",
+                      background: dx.primary ? "var(--brand-subtle)" : "var(--bg-raised)",
                       border: `1px solid ${dx.primary ? "var(--jade-200)" : "var(--border-subtle)"}`,
                       borderRadius: "var(--radius-full)", padding: "1px 8px", fontFamily: "var(--font-sans)",
                     }}>
@@ -276,7 +276,7 @@ function VisitCard({ visit }) {
                       <span key={i} style={{ fontSize: 10, color: "var(--text-muted)", background: "var(--stone-200)", borderRadius: "var(--radius-full)", padding: "1px 7px", fontFamily: "var(--font-sans)" }}>{o.type}</span>
                     ))}
                     {visit.rxOrders.map((r, i) => (
-                      <span key={i} style={{ fontSize: 10, color: "var(--jade-700)", background: "var(--jade-50)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-full)", padding: "1px 7px", fontFamily: "var(--font-sans)" }}>{r.name}</span>
+                      <span key={i} style={{ fontSize: 10, color: "var(--jade-700)", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-full)", padding: "1px 7px", fontFamily: "var(--font-sans)" }}>{r.name}</span>
                     ))}
                   </div>
                   <Icon name={ordersOpen ? "chevron-up" : "chevron-down"} size={13} style={{ color: "var(--text-muted)", flexShrink: 0 }} />
@@ -291,7 +291,7 @@ function VisitCard({ visit }) {
                         {visit.actingOrders.map((o, i) => {
                           const typeInfo = ACTING_TYPES.find(t => t.key === o.type) || ACTING_TYPES[0];
                           return (
-                            <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, padding: "6px 10px", background: o.done ? "var(--stone-100)" : "var(--bg-surface)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-sm)", opacity: o.done ? 0.7 : 1 }}>
+                            <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, padding: "6px 10px", background: o.done ? "var(--bg-raised)" : "var(--bg-surface)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-sm)", opacity: o.done ? 0.7 : 1 }}>
                               <span style={{ fontSize: 10, fontWeight: 700, color: typeInfo.color, background: `${typeInfo.color}18`, padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)", flexShrink: 0 }}>{o.type}</span>
                               <span style={{ fontSize: 12, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flex: 1, textDecoration: o.done ? "line-through" : "none" }}>{o.sites}</span>
                               <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{o.count}침 · {o.duration}분</span>
@@ -446,7 +446,7 @@ function PatientChartScreen({ patient, onBack, onPrescribe, onNavigate }) {
                 { icon: "sparkles",       label: "환자 안내문 작성(AI 보조)", onClick: () => setInstructionOpen(true) },
                 { icon: "calendar-plus",  label: "예약 추가",       onClick: () => onNavigate && onNavigate("schedule") },
               ].map(a => (
-                <button key={a.label} onClick={a.onClick} style={{ display: "flex", alignItems: "center", gap: 8, padding: "7px 10px", borderRadius: "var(--radius-md)", border: "1px solid var(--border-subtle)", background: "var(--stone-50)", cursor: "pointer", fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", transition: "all 0.12s" }}>
+                <button key={a.label} onClick={a.onClick} style={{ display: "flex", alignItems: "center", gap: 8, padding: "7px 10px", borderRadius: "var(--radius-md)", border: "1px solid var(--border-subtle)", background: "var(--bg-raised)", cursor: "pointer", fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", transition: "all 0.12s" }}>
                   <Icon name={a.icon} size={13} style={{ color: "var(--text-muted)" }} />{a.label}
                 </button>
               ))}
