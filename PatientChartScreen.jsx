@@ -441,8 +441,8 @@ function PatientChartScreen({ patient, onBack, onPrescribe }) {
           <div style={{ padding: "14px 16px", background: "var(--bg-surface)", marginTop: 8 }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
               {[
-                { icon: "printer",       label: "차트 인쇄" },
-                { icon: "file-down",     label: "PDF 내보내기" },
+                { icon: "file-signature", label: "서식 발급" },
+                { icon: "printer",       label: "환자 안내문 출력" },
                 { icon: "calendar-plus", label: "예약 추가" },
               ].map(a => (
                 <button key={a.label} style={{ display: "flex", alignItems: "center", gap: 8, padding: "7px 10px", borderRadius: "var(--radius-md)", border: "1px solid var(--border-subtle)", background: "var(--stone-50)", cursor: "pointer", fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", transition: "all 0.12s" }}>
