@@ -77,6 +77,18 @@
   --navy-100: #D6DEEB;
   --navy-50:  #EEF1F7;
 
+  /* Pink — rose / sakura warm-pink brand palette */
+  --pink-900: #5C2538;
+  --pink-800: #7A2F47;
+  --pink-700: #983A58;
+  --pink-600: #B5527A;
+  --pink-500: #D26389;
+  --pink-400: #E58FAA;
+  --pink-300: #EFB3C5;
+  --pink-200: #F5D0DB;
+  --pink-100: #FBE7EC;
+  --pink-50:  #FDF3F6;
+
   /* ============================================================
      ACCENT PALETTE — categorical hues for stages, roles, relations
      ============================================================ */
@@ -493,6 +505,91 @@
 }
 
 /* ============================================================
+   PINK COLOR — jade scale → pink (light mode)
+   ============================================================ */
+[data-color="pink"] {
+  --sidebar-bg:          var(--pink-800);
+  --sidebar-active:      var(--pink-400);
+  --rail-bg:             #FFFFFF;
+  --rail-surface:        var(--pink-50);
+  --rail-text:           var(--pink-800);
+  --rail-text-secondary: var(--pink-500);
+  --rail-text-muted:     var(--pink-300);
+  --rail-border:         var(--pink-100);
+
+  --jade-900: #5C2538; --jade-800: #7A2F47; --jade-700: #983A58;
+  --jade-600: #B5527A; --jade-500: #D26389; --jade-400: #E58FAA;
+  --jade-300: #EFB3C5; --jade-200: #F5D0DB; --jade-100: #FBE7EC;
+  --jade-50:  #FDF3F6;
+
+  --brand:        #D26389;
+  --brand-hover:  #B5527A;
+  --brand-active: #983A58;
+  --brand-subtle: #FDF3F6;
+  --brand-muted:  #FBE7EC;
+  --brand-rgb:    210, 99, 137;
+  --text-brand:   #983A58;
+  --border-brand: #D26389;
+
+  --status-success-bg:     #FDF3F6;
+  --status-success-text:   #983A58;
+  --status-success-border: #F5D0DB;
+
+  /* board column backgrounds — pink-tinted instead of jade-tinted */
+  --board-appt-bg:   #FDF3F6;  --board-appt-border:  #F0CAD7;
+  --board-treat-bg:  #FBE7EC;  --board-treat-border: #EFB3C5;
+
+  /* doc appointment card backgrounds — pink-tinted for d1 */
+  --doc-d1-bg:  #FDF3F6;  --doc-d1-border: #F0CAD7;
+}
+
+/* ============================================================
+   PINK COLOR — dark mode override
+   ============================================================ */
+[data-theme="dark"][data-color="pink"] {
+  --bg-page:    #2A1320;
+  --bg-surface: #371C2A;
+  --bg-raised:  #45253A;
+  --bg-sunken:  #1A0A14;
+  --border-subtle:  #4A2840;
+
+  /* board columns: restore dark values */
+  --board-appt-bg:   #371C2A;  --board-appt-border:  #4A2840;
+  --board-treat-bg:  #371C2A;  --board-treat-border: #4A2840;
+
+  /* doc-d1 card: restore dark value */
+  --doc-d1-bg: #371C2A;  --doc-d1-border: #4A2840;
+
+  /* dark rail for dark pink mode */
+  --rail-bg:             #371C2A;
+  --rail-surface:        #45253A;
+  --rail-text:           var(--pink-50);
+  --rail-text-secondary: var(--pink-200);
+  --rail-text-muted:     var(--pink-300);
+  --rail-border:         #45253A;
+  --rail-stripe:         rgba(255,255,255,0.04);
+  --rail-divider:        rgba(255,255,255,0.07);
+
+  /* bump jade scale so gradients stand out from bg-raised */
+  --jade-900: #371C2A;
+  --jade-800: #4A2840;
+  --jade-700: #5E3450;
+
+  --brand:        #E58FAA;
+  --brand-hover:  #EFB3C5;
+  --brand-active: #F5D0DB;
+  --brand-subtle: rgba(210, 99, 137, 0.15);
+  --brand-muted:  rgba(210, 99, 137, 0.28);
+  --brand-rgb:    229, 143, 170;
+  --text-brand:   #EFB3C5;
+  --border-brand: #D26389;
+
+  --status-success-bg:     rgba(210, 99, 137, 0.14);
+  --status-success-text:   #EFB3C5;
+  --status-success-border: rgba(210, 99, 137, 0.35);
+}
+
+/* ============================================================
    A4 PAPER PREVIEW — always renders in light-mode tokens
    so the preview looks like real paper, regardless of dark mode.
    Scoped CSS variable overrides cascade to every child element
@@ -591,6 +688,29 @@
   --text-brand:     #8298BF;
 }
 
+/* When pink color is active, light/dark/auto previews use pink-tinted text */
+[data-color="pink"] .theme-preview-light {
+  --text-primary:   var(--pink-800);
+  --text-secondary: var(--pink-500);
+  --text-muted:     var(--pink-300);
+}
+
+[data-color="pink"] .theme-preview-dark {
+  --bg-page:        #2A1320;
+  --bg-surface:     #371C2A;
+  --bg-raised:      #45253A;
+  --border-subtle:  #4A2840;
+  --text-primary:   var(--pink-50);
+  --text-secondary: var(--pink-200);
+  --text-muted:     var(--pink-300);
+  --brand:          #E58FAA;
+  --brand-hover:    #EFB3C5;
+  --brand-active:   #F5D0DB;
+  --brand-subtle:   rgba(210, 99, 137, 0.15);
+  --brand-muted:    rgba(210, 99, 137, 0.28);
+  --text-brand:     #EFB3C5;
+}
+
 .theme-preview-auto {
   --theme-preview-light-bg: var(--stone-50);
   --theme-preview-dark-bg:  #0B1413;
@@ -602,6 +722,12 @@
   --theme-preview-border:   var(--navy-300);
   --text-muted: var(--navy-300);
 }
+[data-color="pink"] .theme-preview-auto {
+  --theme-preview-light-bg: var(--pink-50);
+  --theme-preview-dark-bg:  #2A1320;
+  --theme-preview-border:   var(--pink-300);
+  --text-muted: var(--pink-300);
+}
 
 /* ============================================================
    COLOR-PREVIEW SCOPES — keep each preview swatch in its
@@ -612,6 +738,20 @@
   --jade-600: #3A7065;  --jade-500: #4A7C6F;  --jade-400: #6B9E90;
   --jade-300: #8DBFB3;  --jade-200: #B3D8D1;  --jade-100: #D4EDE9;
   --jade-50:  #EEF8F6;
+  --brand:        var(--jade-500);
+  --brand-hover:  var(--jade-600);
+  --brand-active: var(--jade-700);
+  --brand-subtle: var(--jade-50);
+  --brand-muted:  var(--jade-100);
+  --text-brand:   var(--jade-700);
+  --border-brand: var(--jade-500);
+}
+
+.color-preview-pink {
+  --jade-900: #5C2538;  --jade-800: #7A2F47;  --jade-700: #983A58;
+  --jade-600: #B5527A;  --jade-500: #D26389;  --jade-400: #E58FAA;
+  --jade-300: #EFB3C5;  --jade-200: #F5D0DB;  --jade-100: #FBE7EC;
+  --jade-50:  #FDF3F6;
   --brand:        var(--jade-500);
   --brand-hover:  var(--jade-600);
   --brand-active: var(--jade-700);

@@ -20,8 +20,8 @@ function applyTheme(theme) {
 }
 
 function applyColor(color) {
-  if (color === "navy") {
-    document.documentElement.setAttribute("data-color", "navy");
+  if (color && color !== "jade") {
+    document.documentElement.setAttribute("data-color", color);
   } else {
     document.documentElement.removeAttribute("data-color");
   }
@@ -220,6 +220,13 @@ const COLOR_PREVIEWS = {
     line1: "var(--navy-700)", line2: "var(--navy-400)",
     pill: "var(--navy-500)", pillText: "var(--navy-50)",
   },
+  pink: {
+    className: "color-preview-pink",
+    bg: "var(--jade-100)", border: "var(--jade-300)",
+    dot1: "var(--text-brand)", dot2: "var(--brand)", dot3: "var(--jade-200)",
+    line1: "var(--text-brand)", line2: "var(--brand)",
+    pill: "var(--brand)", pillText: "var(--stone-50)",
+  },
 };
 
 /* ────────────────────────────────────────────────────────────
@@ -398,13 +405,16 @@ function SettingsScreen() {
                       textTransform: "uppercase", color: "var(--text-muted)",
                       marginTop: 20, marginBottom: 10,
                     }}>색상</div>
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 12 }}>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12 }}>
                       <ThemeCard value="jade" label="재이드" hint="클래식 한의 톤"
                         active={color === "jade"} onSelect={setColor}
                         preview={COLOR_PREVIEWS.jade} />
                       <ThemeCard value="navy" label="네이비" hint="청색 브랜드 톤"
                         active={color === "navy"} onSelect={setColor}
                         preview={COLOR_PREVIEWS.navy} />
+                      <ThemeCard value="pink" label="핑크" hint="벚꽃 톤"
+                        active={color === "pink"} onSelect={setColor}
+                        preview={COLOR_PREVIEWS.pink} />
                     </div>
 
                     <div style={{
@@ -422,11 +432,15 @@ function SettingsScreen() {
                         theme === "dark" ? "다크" : "시스템 자동"
                       }</strong>
                       {" · "}
-                      <strong style={{ fontWeight: 600 }}>{color === "navy" ? "네이비" : "재이드"}</strong>
+                      <strong style={{ fontWeight: 600 }}>{
+                        color === "navy" ? "네이비" :
+                        color === "pink" ? "핑크" :
+                        "재이드"
+                      }</strong>
                       <span style={{
                         marginLeft: "auto", fontFamily: "var(--font-mono)",
                         fontSize: 11, opacity: 0.75,
-                      }}>data-theme={theme}{color === "navy" ? " · navy" : ""}</span>
+                      }}>data-theme={theme}{color !== "jade" ? ` · ${color}` : ""}</span>
                     </div>
                   </div>
                 </SettingsSection>
