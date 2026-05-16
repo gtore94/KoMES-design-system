@@ -110,7 +110,8 @@ function Sidebar({ activeScreen, onNavigate }) {
       { key: "inventory",     icon: "package",        label: "약재 재고" },
     ]},
     { label: "비품/운영", items: [
-      { key: "supplies", icon: "boxes", label: "소모품" },
+      { key: "supplies", icon: "boxes",          label: "소모품" },
+      { key: "orders",   icon: "clipboard-list", label: "발주 이력" },
     ]},
     { label: "분석", items: [
       { key: "stats", icon: "bar-chart-2", label: "통계" },
