@@ -150,7 +150,7 @@ function App() {
       if (screen === SCREENS.prescribe && selectedPatient) {
         return <PrescriptionScreen patient={selectedPatient} onBack={handleNavBack} />;
       }
-      return <PatientChartScreen patient={selectedPatient} onBack={handleNavBack} onPrescribe={handlePrescribe} />;
+      return <PatientChartScreen patient={selectedPatient} onBack={handleNavBack} onPrescribe={handlePrescribe} onNavigate={handleNavigate} />;
     }
     if (nav === "registry") {
       return <PatientManagementScreen onOpenChart={handleSelectPatient} />;
