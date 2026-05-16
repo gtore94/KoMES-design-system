@@ -2290,10 +2290,14 @@ function WaitChip({ mins, stage }) {
   );
 }
 
+const SKIP_STAGE = { "예약": "치료대기" };
+
 function PatientCard({ patient, stage, onSelect, onAdvance }) {
   const [hovered, setHovered] = useStateDash(false);
   const [dragging, setDragging] = useStateDash(false);
+  const [hoveredBtn, setHoveredBtn] = useStateDash(null);
   const nextStage = NEXT_STAGE[patient.stage];
+  const skipStage = SKIP_STAGE[patient.stage] || null;
   const isDone = patient.stage === "수납완료";
 
   return (
@@ -2330,7 +2334,7 @@ function PatientCard({ patient, stage, onSelect, onAdvance }) {
         {patient.chief}
       </div>
 
-      <div style={{ paddingLeft: 34, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+      <div style={{ paddingLeft: 34, display: "flex", flexDirection: "column", gap: 6 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
           <span style={{
             fontSize: 10, fontWeight: 600, letterSpacing: "0.04em",
@@ -2349,23 +2353,45 @@ function PatientCard({ patient, stage, onSelect, onAdvance }) {
               fontFamily: "var(--font-sans)",
             }}>자보</span>
           )}
+          {isDone && <Icon name="check-circle-2" size={14} style={{ color: "var(--jade-500)", marginLeft: "auto" }} />}
         </div>
 
-        {nextStage && hovered && (
-          <button
-            onClick={e => { e.stopPropagation(); onAdvance(patient.id, nextStage); }}
-            style={{
-              display: "flex", alignItems: "center", gap: 4,
-              fontSize: 11, fontWeight: 500, color: "var(--text-brand)",
-              background: "var(--brand-muted)", border: "1px solid var(--brand-muted)",
-              borderRadius: "var(--radius-sm)", padding: "3px 9px",
-              cursor: "pointer", fontFamily: "var(--font-sans)", transition: "all 0.12s",
-            }}
-          >
-            {nextStage} →
-          </button>
+        {(nextStage || skipStage) && hovered && (
+          <div style={{ display: "flex", gap: 4 }}>
+            {nextStage && (
+              <button
+                onClick={e => { e.stopPropagation(); onAdvance(patient.id, nextStage); }}
+                onMouseEnter={() => setHoveredBtn("next")}
+                onMouseLeave={() => setHoveredBtn(null)}
+                style={{
+                  display: "flex", alignItems: "center", gap: 4,
+                  fontSize: 11, fontWeight: 500,
+                  color: hoveredBtn === "next" ? "#fff" : "var(--text-brand)",
+                  background: hoveredBtn === "next" ? "var(--brand)" : "var(--brand-muted)",
+                  border: `1px solid ${hoveredBtn === "next" ? "var(--brand)" : "var(--brand-muted)"}`,
+                  borderRadius: "var(--radius-sm)", padding: "3px 9px",
+                  cursor: "pointer", fontFamily: "var(--font-sans)", transition: "all 0.12s",
+                }}
+              >{nextStage} →</button>
+            )}
+            {skipStage && (
+              <button
+                onClick={e => { e.stopPropagation(); onAdvance(patient.id, skipStage); }}
+                onMouseEnter={() => setHoveredBtn("skip")}
+                onMouseLeave={() => setHoveredBtn(null)}
+                style={{
+                  display: "flex", alignItems: "center", gap: 4,
+                  fontSize: 11, fontWeight: 500,
+                  color: hoveredBtn === "skip" ? "#fff" : "var(--text-brand)",
+                  background: hoveredBtn === "skip" ? "var(--brand)" : "var(--brand-muted)",
+                  border: `1px solid ${hoveredBtn === "skip" ? "var(--brand)" : "var(--brand-muted)"}`,
+                  borderRadius: "var(--radius-sm)", padding: "3px 9px",
+                  cursor: "pointer", fontFamily: "var(--font-sans)", transition: "all 0.12s",
+                }}
+              >{skipStage} →</button>
+            )}
+          </div>
         )}
-        {isDone && <Icon name="check-circle-2" size={14} style={{ color: "var(--jade-500)" }} />}
       </div>
     </div>
   );
