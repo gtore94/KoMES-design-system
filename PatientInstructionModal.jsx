@@ -50,7 +50,7 @@ function PatientInstructionModal({ patient, onClose }) {
           padding: "14px 22px", borderBottom: "1px solid var(--border-subtle)",
           background: "var(--bg-surface)", flexShrink: 0,
         }}>
-          <div style={{ width: 36, height: 36, borderRadius: "var(--radius-md)", background: "var(--jade-50)", border: "1px solid var(--jade-200)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+          <div style={{ width: 36, height: 36, borderRadius: "var(--radius-md)", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
             <Icon name="sparkles" size={17} style={{ color: "var(--jade-600)" }} />
           </div>
           <div style={{ flex: 1, minWidth: 0 }}>
@@ -69,7 +69,7 @@ function PatientInstructionModal({ patient, onClose }) {
                 <span key={dx.code} style={{
                   display: "inline-flex", alignItems: "center", gap: 4,
                   fontSize: 10, color: dx.primary ? "var(--jade-700)" : "var(--text-secondary)",
-                  background: dx.primary ? "var(--jade-50)" : "var(--stone-100)",
+                  background: dx.primary ? "var(--brand-subtle)" : "var(--bg-raised)",
                   border: `1px solid ${dx.primary ? "var(--jade-200)" : "var(--border-subtle)"}`,
                   borderRadius: "var(--radius-full)", padding: "1px 7px",
                 }}>
@@ -117,9 +117,9 @@ function PatientInstructionModal({ patient, onClose }) {
               </div>
               <div style={{ overflowY: "auto", padding: "0 14px 14px", display: "flex", flexDirection: "column", gap: 8 }}>
                 {PAST_INSTRUCTIONS.map((p, i) => (
-                  <div key={i} style={{ padding: "10px 12px", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", background: "var(--stone-50)", cursor: "pointer", transition: "background 0.12s" }}
-                       onMouseEnter={e => e.currentTarget.style.background = "var(--jade-50)"}
-                       onMouseLeave={e => e.currentTarget.style.background = "var(--stone-50)"}>
+                  <div key={i} style={{ padding: "10px 12px", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", background: "var(--bg-raised)", cursor: "pointer", transition: "background 0.12s" }}
+                       onMouseEnter={e => e.currentTarget.style.background = "var(--brand-subtle)"}
+                       onMouseLeave={e => e.currentTarget.style.background = "var(--bg-raised)"}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 5 }}>
                       <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{p.date}</span>
                       <Badge variant={p.similarity > 90 ? "brand" : p.similarity > 75 ? "success" : "neutral"}>유사도 {p.similarity}%</Badge>
@@ -128,7 +128,7 @@ function PatientInstructionModal({ patient, onClose }) {
                     <div style={{ fontSize: 11, color: "var(--text-muted)" }}>{p.dx}</div>
                     <div style={{ display: "flex", gap: 5, marginTop: 8 }}>
                       <button style={{ fontSize: 10, padding: "3px 9px", border: "1px solid var(--border-default)", background: "var(--bg-surface)", borderRadius: "var(--radius-sm)", cursor: "pointer", color: "var(--text-secondary)", fontFamily: "var(--font-sans)" }}>본문 보기</button>
-                      <button style={{ fontSize: 10, padding: "3px 9px", border: "1px solid var(--jade-300)", background: "var(--jade-50)", borderRadius: "var(--radius-sm)", cursor: "pointer", color: "var(--jade-700)", fontFamily: "var(--font-sans)", fontWeight: 500 }}>이 안내문으로 시작</button>
+                      <button style={{ fontSize: 10, padding: "3px 9px", border: "1px solid var(--jade-300)", background: "var(--brand-subtle)", borderRadius: "var(--radius-sm)", cursor: "pointer", color: "var(--jade-700)", fontFamily: "var(--font-sans)", fontWeight: 500 }}>이 안내문으로 시작</button>
                     </div>
                   </div>
                 ))}
@@ -137,14 +137,14 @@ function PatientInstructionModal({ patient, onClose }) {
           )}
 
           {/* COL 1: Section list + style controls */}
-          <div style={{ width: 240, flexShrink: 0, borderRight: "1px solid var(--border-subtle)", background: "var(--stone-50)", display: "flex", flexDirection: "column", overflow: "hidden" }}>
+          <div style={{ width: 240, flexShrink: 0, borderRight: "1px solid var(--border-subtle)", background: "var(--bg-raised)", display: "flex", flexDirection: "column", overflow: "hidden" }}>
 
             {/* Style controls */}
             <div style={{ padding: "14px 16px", borderBottom: "1px solid var(--border-subtle)", background: "var(--bg-surface)", display: "flex", flexDirection: "column", gap: 12 }}>
               <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.07em", color: "var(--text-muted)", textTransform: "uppercase" }}>스타일</div>
               <div>
                 <div style={{ fontSize: 10, color: "var(--text-muted)", marginBottom: 4 }}>톤</div>
-                <div style={{ display: "flex", gap: 3, background: "var(--stone-100)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-sm)", padding: 2 }}>
+                <div style={{ display: "flex", gap: 3, background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-sm)", padding: 2 }}>
                   {[["warm", "친근함"], ["formal", "공식"]].map(([k, v]) => (
                     <div key={k} onClick={() => setTone(k)} style={{
                       flex: 1, textAlign: "center", padding: "4px 0", fontSize: 11,
@@ -159,7 +159,7 @@ function PatientInstructionModal({ patient, onClose }) {
               </div>
               <div>
                 <div style={{ fontSize: 10, color: "var(--text-muted)", marginBottom: 4 }}>길이</div>
-                <div style={{ display: "flex", gap: 3, background: "var(--stone-100)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-sm)", padding: 2 }}>
+                <div style={{ display: "flex", gap: 3, background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-sm)", padding: 2 }}>
                   {[["short", "간단"], ["normal", "보통"], ["detailed", "상세"]].map(([k, v]) => (
                     <div key={k} onClick={() => setLength(k)} style={{
                       flex: 1, textAlign: "center", padding: "4px 0", fontSize: 11,
@@ -212,7 +212,7 @@ function PatientInstructionModal({ patient, onClose }) {
           </div>
 
           {/* COL 2: Section cards (editor) */}
-          <div style={{ flex: 1, overflow: "hidden", display: "flex", flexDirection: "column", background: "var(--stone-50)" }}>
+          <div style={{ flex: 1, overflow: "hidden", display: "flex", flexDirection: "column", background: "var(--bg-raised)" }}>
             <div style={{
               padding: "10px 22px", borderBottom: "1px solid var(--border-subtle)",
               background: "var(--bg-surface)", display: "flex", alignItems: "center", gap: 8, fontSize: 11, color: "var(--text-muted)", flexShrink: 0,
@@ -231,9 +231,9 @@ function PatientInstructionModal({ patient, onClose }) {
                   transition: "border-color 0.15s, box-shadow 0.15s",
                   overflow: "hidden",
                 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 16px", borderBottom: "1px solid var(--border-subtle)", background: "var(--stone-50)" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 16px", borderBottom: "1px solid var(--border-subtle)", background: "var(--bg-raised)" }}>
                     <Icon name="grip-vertical" size={12} style={{ color: "var(--text-muted)", cursor: "grab" }} />
-                    <div style={{ width: 22, height: 22, borderRadius: "var(--radius-sm)", background: "var(--jade-100)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                    <div style={{ width: 22, height: 22, borderRadius: "var(--radius-sm)", background: "var(--brand-muted)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                       <Icon name={s.icon} size={12} style={{ color: "var(--jade-700)" }} />
                     </div>
                     <span style={{ fontSize: 13, fontWeight: 600 }}>{idx + 1}. {s.title}</span>
@@ -270,7 +270,7 @@ function PatientInstructionModal({ patient, onClose }) {
                           <button key={c.label} style={{
                             display: "inline-flex", alignItems: "center", gap: 4,
                             fontSize: 10, padding: "3px 8px", borderRadius: "var(--radius-full)",
-                            background: "var(--stone-50)", border: "1px solid var(--border-subtle)",
+                            background: "var(--bg-raised)", border: "1px solid var(--border-subtle)",
                             color: "var(--text-secondary)", cursor: "pointer", fontFamily: "var(--font-sans)",
                           }}>
                             <Icon name={c.icon} size={10} />
@@ -281,7 +281,7 @@ function PatientInstructionModal({ patient, onClose }) {
                     )}
 
                     {showHanja && s.hanjaTerms.length > 0 && (
-                      <div style={{ marginTop: 10, padding: "8px 10px", background: "var(--jade-50)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)", display: "flex", flexWrap: "wrap", gap: 8, alignItems: "flex-start" }}>
+                      <div style={{ marginTop: 10, padding: "8px 10px", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)", display: "flex", flexWrap: "wrap", gap: 8, alignItems: "flex-start" }}>
                         <Icon name="graduation-cap" size={11} style={{ color: "var(--jade-600)", marginTop: 2, flexShrink: 0 }} />
                         <div style={{ display: "flex", flexWrap: "wrap", gap: "4px 12px" }}>
                           {s.hanjaTerms.map(t => (
@@ -309,12 +309,12 @@ function PatientInstructionModal({ patient, onClose }) {
           </div>
 
           {/* COL 3: Live preview */}
-          <div style={{ width: 340, flexShrink: 0, background: "var(--stone-100)", borderLeft: "1px solid var(--border-subtle)", display: "flex", flexDirection: "column", overflow: "hidden" }}>
+          <div style={{ width: 340, flexShrink: 0, background: "var(--bg-raised)", borderLeft: "1px solid var(--border-subtle)", display: "flex", flexDirection: "column", overflow: "hidden" }}>
             <div style={{ padding: "10px 14px", borderBottom: "1px solid var(--border-subtle)", background: "var(--bg-surface)", display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
               <Icon name="smartphone" size={13} style={{ color: "var(--jade-600)" }} />
               <span style={{ fontSize: 12, fontWeight: 600 }}>환자 미리보기</span>
               <div style={{ flex: 1 }} />
-              <div style={{ display: "flex", gap: 3, background: "var(--stone-100)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-sm)", padding: 2 }}>
+              <div style={{ display: "flex", gap: 3, background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-sm)", padding: 2 }}>
                 {[["kakao", "카톡"], ["pdf", "PDF"]].map(([k, v]) => (
                   <div key={k} onClick={() => setPreviewMode(k)} style={{
                     padding: "3px 9px", fontSize: 10, borderRadius: "var(--radius-xs)",
@@ -348,7 +348,7 @@ function PatientInstructionModal({ patient, onClose }) {
       {sentToast && (
         <div style={{
           position: "fixed", bottom: 40, left: "50%", transform: "translateX(-50%)",
-          background: "var(--ink-800)", color: "var(--stone-50)",
+          background: "var(--ink-800)", color: "var(--bg-raised)",
           padding: "10px 18px", borderRadius: "var(--radius-md)",
           fontSize: 13, boxShadow: "var(--shadow-lg)",
           display: "flex", alignItems: "center", gap: 8, zIndex: 300,

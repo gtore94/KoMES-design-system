@@ -23,14 +23,14 @@ const initialNP = {
 };
 
 const TAG_OPTIONS = [
-  { key: "VIP",     icon: "crown",      bg: "var(--amber-100)",   color: "var(--amber-700)",   border: "var(--amber-200)" },
-  { key: "임신부",  icon: "baby",       bg: "var(--cinnabar-100)", color: "var(--cinnabar-700)", border: "var(--cinnabar-200)" },
-  { key: "알러지",  icon: "alert-triangle", bg: "var(--cinnabar-100)", color: "var(--cinnabar-700)", border: "var(--cinnabar-200)" },
+  { key: "VIP",     icon: "crown",      bg: "var(--status-warning-bg)",   color: "var(--amber-700)",   border: "var(--amber-200)" },
+  { key: "임신부",  icon: "baby",       bg: "var(--status-danger-bg)", color: "var(--cinnabar-700)", border: "var(--cinnabar-200)" },
+  { key: "알러지",  icon: "alert-triangle", bg: "var(--status-danger-bg)", color: "var(--cinnabar-700)", border: "var(--cinnabar-200)" },
   { key: "보호자",  icon: "users",      bg: "var(--stone-200)",    color: "var(--ink-600)",      border: "var(--stone-300)" },
   { key: "노인",    icon: "user",       bg: "var(--stone-200)",    color: "var(--ink-600)",      border: "var(--stone-300)" },
-  { key: "소아",    icon: "smile",      bg: "var(--jade-100)",     color: "var(--jade-700)",     border: "var(--jade-200)" },
-  { key: "산정특례",icon: "shield-check", bg: "var(--jade-100)",   color: "var(--jade-700)",     border: "var(--jade-200)" },
-  { key: "연예인",  icon: "star",       bg: "var(--cinnabar-100)", color: "var(--cinnabar-700)", border: "var(--cinnabar-200)" },
+  { key: "소아",    icon: "smile",      bg: "var(--brand-muted)",     color: "var(--jade-700)",     border: "var(--jade-200)" },
+  { key: "산정특례",icon: "shield-check", bg: "var(--brand-muted)",   color: "var(--jade-700)",     border: "var(--jade-200)" },
+  { key: "연예인",  icon: "star",       bg: "var(--status-danger-bg)", color: "var(--cinnabar-700)", border: "var(--cinnabar-200)" },
 ];
 
 function FieldLabel({ children, required, hint }) {
@@ -50,7 +50,7 @@ function TextField({ value, onChange, placeholder, mono, suffix, prefix, type = 
   return (
     <div style={{
       display: "flex", alignItems: "center",
-      background: disabled ? "var(--stone-100)" : "var(--bg-surface)",
+      background: disabled ? "var(--bg-raised)" : "var(--bg-surface)",
       border: `1px solid ${focused ? "var(--border-brand)" : "var(--border-default)"}`,
       borderRadius: "var(--radius-md)",
       boxShadow: focused ? "0 0 0 3px var(--jade-100)" : "none",
@@ -81,7 +81,7 @@ function SegmentedSelect({ options, value, onChange }) {
   return (
     <div style={{
       display: "inline-flex",
-      background: "var(--stone-100)", border: "1px solid var(--border-subtle)",
+      background: "var(--bg-raised)", border: "1px solid var(--border-subtle)",
       borderRadius: "var(--radius-md)", padding: 2, gap: 2,
     }}>
       {options.map(opt => (
@@ -129,12 +129,12 @@ function SectionCard({ icon, title, hint, children, step }) {
     }}>
       <div style={{
         display: "flex", alignItems: "center", gap: 10,
-        padding: "12px 18px", borderBottom: "1px solid var(--stone-200)",
-        background: "var(--stone-50)",
+        padding: "12px 18px", borderBottom: "1px solid var(--border-subtle)",
+        background: "var(--bg-raised)",
       }}>
         <div style={{
           width: 24, height: 24, borderRadius: "50%",
-          background: "var(--jade-100)", color: "var(--jade-700)",
+          background: "var(--brand-muted)", color: "var(--jade-700)",
           display: "flex", alignItems: "center", justifyContent: "center",
           fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700,
         }}>{step}</div>
@@ -203,7 +203,7 @@ function NewPatientModal({ onClose, onSubmit }) {
         }}>
           <div style={{
             width: 38, height: 38, borderRadius: "var(--radius-md)",
-            background: "var(--jade-100)", color: "var(--jade-700)",
+            background: "var(--brand-muted)", color: "var(--jade-700)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
             <Icon name="user-plus" size={18} />
@@ -335,7 +335,7 @@ function NewPatientModal({ onClose, onSubmit }) {
             </div>
             <div style={{
               marginTop: 12, padding: "10px 12px",
-              background: "var(--jade-50)", borderRadius: "var(--radius-md)",
+              background: "var(--brand-subtle)", borderRadius: "var(--radius-md)",
               display: "flex", alignItems: "center", gap: 10,
               border: "1px solid var(--jade-100)",
             }}>
@@ -361,13 +361,13 @@ function NewPatientModal({ onClose, onSubmit }) {
                 {d.relations.map((r, i) => (
                   <div key={i} style={{
                     display: "flex", alignItems: "center", gap: 10, padding: "8px 12px",
-                    background: "var(--stone-50)", border: "1px solid var(--border-subtle)",
+                    background: "var(--bg-raised)", border: "1px solid var(--border-subtle)",
                     borderRadius: "var(--radius-md)",
                   }}>
                     <span style={{
                       fontSize: 10, fontWeight: 600, padding: "2px 8px",
                       borderRadius: "var(--radius-full)",
-                      background: "var(--jade-100)", color: "var(--jade-700)",
+                      background: "var(--brand-muted)", color: "var(--jade-700)",
                       border: "1px solid var(--jade-200)", fontFamily: "var(--font-sans)",
                     }}>{r.type}</span>
                     <div style={{ flex: 1 }}>
@@ -436,7 +436,7 @@ function NewPatientModal({ onClose, onSubmit }) {
 
             <div style={{
               marginTop: 10, padding: "8px 11px",
-              background: "var(--jade-50)", border: "1px dashed var(--jade-200)",
+              background: "var(--brand-subtle)", border: "1px dashed var(--jade-200)",
               borderRadius: "var(--radius-md)",
               display: "flex", alignItems: "center", gap: 8,
               fontSize: 11, color: "var(--jade-700)", fontFamily: "var(--font-sans)",
@@ -494,7 +494,7 @@ function NewPatientModal({ onClose, onSubmit }) {
               ].map(c => (
                 <label key={c.k} style={{
                   display: "flex", gap: 10, padding: "10px 12px",
-                  background: "var(--stone-50)", border: "1px solid var(--border-subtle)",
+                  background: "var(--bg-raised)", border: "1px solid var(--border-subtle)",
                   borderRadius: "var(--radius-md)", cursor: "pointer",
                 }}>
                   <input type="checkbox" checked={d[c.k]} onChange={e => set(c.k, e.target.checked)}

@@ -147,7 +147,7 @@ function HerbInventoryScreen({ onNavigate, onOpenRecSettings, onCreateDrafts }) 
             <div style={{ overflowX: "auto" }}>
               <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "var(--font-sans)" }}>
                 <thead>
-                  <tr style={{ background: "var(--stone-100)" }}>
+                  <tr style={{ background: "var(--bg-raised)" }}>
                     <HITh label="약재" sortable onClick={() => toggleSort("name")} active={sortKey==="name"} dir={sortDir} />
                     <HITh label="분류" />
                     <HITh label="재고 / 임계치" right sortable onClick={() => toggleSort("stock")} active={sortKey==="stock"} dir={sortDir} />
@@ -171,22 +171,22 @@ function HerbInventoryScreen({ onNavigate, onOpenRecSettings, onCreateDrafts }) 
                       <tr key={h.id} onClick={() => setSelectedId(h.id)}
                         style={{
                           borderTop: "1px solid var(--border-subtle)",
-                          background: isSel ? "var(--jade-50)" : "transparent",
+                          background: isSel ? "var(--brand-subtle)" : "transparent",
                           cursor: "pointer", transition: "background 0.1s ease",
                         }}
-                        onMouseEnter={e => { if (!isSel) e.currentTarget.style.background = "var(--stone-50)"; }}
+                        onMouseEnter={e => { if (!isSel) e.currentTarget.style.background = "var(--bg-raised)"; }}
                         onMouseLeave={e => { if (!isSel) e.currentTarget.style.background = "transparent"; }}>
                         <td style={{ padding: "10px 14px" }}>
                           <div style={{ fontSize: 13, fontWeight: 500, color: "var(--text-primary)" }}>{h.name}</div>
                           <div style={{ fontSize: 10, color: "var(--text-muted)", fontStyle: "italic", marginTop: 1 }}>{h.latin}</div>
                         </td>
                         <td style={{ padding: "10px 14px" }}>
-                          <span style={{ fontSize: 11, background: "var(--stone-100)", color: "var(--text-secondary)", padding: "2px 7px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-subtle)" }}>{h.category}</span>
+                          <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 7px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-subtle)" }}>{h.category}</span>
                         </td>
                         <td style={{ padding: "10px 14px", textAlign: "right", minWidth: 140 }}>
                           <div style={{ fontSize: 13, color: "var(--text-primary)", fontFamily: "var(--font-mono)", fontWeight: 500 }}>{fmtMass(h.stock)}</div>
                           <div style={{ display: "flex", alignItems: "center", gap: 6, justifyContent: "flex-end", marginTop: 4 }}>
-                            <div style={{ width: 64, height: 4, background: "var(--stone-200)", borderRadius: 2, overflow: "hidden" }}>
+                            <div style={{ width: 64, height: 4, background: "var(--bg-raised)", borderRadius: 2, overflow: "hidden" }}>
                               <div style={{
                                 width: `${ratio * 100}%`, height: "100%",
                                 background: st.key === "critical" ? "var(--cinnabar-500)" :
@@ -237,7 +237,7 @@ function HerbInventoryScreen({ onNavigate, onOpenRecSettings, onCreateDrafts }) 
       {toast && (
         <div style={{
           position: "fixed", bottom: 20, left: "50%", transform: "translateX(-50%)",
-          background: "var(--ink-800)", color: "var(--stone-50)",
+          background: "var(--ink-800)", color: "var(--bg-raised)",
           padding: "10px 18px", borderRadius: "var(--radius-md)",
           fontSize: 13, fontFamily: "var(--font-sans)", boxShadow: "var(--shadow-lg)",
           display: "flex", alignItems: "center", gap: 8, zIndex: 100,
@@ -328,8 +328,8 @@ function HIDetailPanel({ herb, onIntake, onToast }) {
         </div>
         <div style={{ fontSize: 11, color: "var(--text-muted)", fontStyle: "italic", fontFamily: "var(--font-sans)" }}>{herb.latin}</div>
         <div style={{ display: "flex", gap: 6, marginTop: 8 }}>
-          <span style={{ fontSize: 11, background: "var(--stone-100)", color: "var(--text-secondary)", padding: "2px 8px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-subtle)", fontFamily: "var(--font-sans)" }}>{herb.category}</span>
-          <span style={{ fontSize: 11, background: "var(--stone-100)", color: "var(--text-secondary)", padding: "2px 8px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-subtle)", fontFamily: "var(--font-sans)" }}>{herb.origin}</span>
+          <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 8px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-subtle)", fontFamily: "var(--font-sans)" }}>{herb.category}</span>
+          <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 8px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-subtle)", fontFamily: "var(--font-sans)" }}>{herb.origin}</span>
         </div>
       </div>
 
@@ -340,7 +340,7 @@ function HIDetailPanel({ herb, onIntake, onToast }) {
           <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>잔여 {runOut}일</span>
         </div>
         <div style={{ fontSize: 24, fontWeight: 600, fontFamily: "var(--font-mono)", color: "var(--text-primary)" }}>{fmtMass(herb.stock)}</div>
-        <div style={{ position: "relative", height: 6, background: "var(--stone-200)", borderRadius: 3, overflow: "hidden", marginTop: 6 }}>
+        <div style={{ position: "relative", height: 6, background: "var(--bg-raised)", borderRadius: 3, overflow: "hidden", marginTop: 6 }}>
           <div style={{
             position: "absolute", left: 0, top: 0, bottom: 0,
             width: `${Math.min(herb.stock / (herb.threshold * 2), 1) * 100}%`,
@@ -391,13 +391,13 @@ function HIDetailPanel({ herb, onIntake, onToast }) {
                 <div key={i} style={{
                   display: "grid", gridTemplateColumns: "82px 38px 1fr auto", gap: 8, alignItems: "center",
                   padding: "7px 10px", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-sm)",
-                  background: "var(--stone-50)",
+                  background: "var(--bg-raised)",
                 }}>
                   <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{h.date}</span>
                   <span style={{
                     fontSize: 10, fontWeight: 600, fontFamily: "var(--font-sans)",
                     color: h.type === "입고" ? "var(--jade-700)" : h.type === "사용" ? "var(--ink-600)" : "var(--amber-700)",
-                    background: h.type === "입고" ? "var(--jade-100)" : h.type === "사용" ? "var(--stone-200)" : "var(--amber-100)",
+                    background: h.type === "입고" ? "var(--brand-muted)" : h.type === "사용" ? "var(--bg-raised)" : "var(--status-warning-bg)",
                     padding: "1px 6px", borderRadius: "var(--radius-sm)", textAlign: "center",
                   }}>{h.type}</span>
                   <span style={{ fontSize: 11, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{h.note}</span>

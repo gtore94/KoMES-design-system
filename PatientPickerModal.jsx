@@ -4,7 +4,7 @@ const { useState: useStatePM, useMemo: useMemoPM, useEffect: useEffectPM, useRef
 
 // ── Tag pill ─────────────────────────────────────────────────────
 function PPTag({ tag }) {
-  const c = window.PP_TAG_COLORS[tag] || { bg: "var(--stone-100)", color: "var(--text-secondary)" };
+  const c = window.PP_TAG_COLORS[tag] || { bg: "var(--bg-raised)", color: "var(--text-secondary)" };
   return (
     <span style={{
       display: "inline-flex", alignItems: "center", padding: "1px 6px",
@@ -25,11 +25,11 @@ function PPRow({ patient, selected, onClick, onPick, isCurrent }) {
         display: "grid", gridTemplateColumns: "auto 1fr auto",
         gap: 12, alignItems: "center",
         padding: "10px 14px",
-        background: selected ? "var(--jade-50)" : "transparent",
+        background: selected ? "var(--brand-subtle)" : "transparent",
         borderLeft: `3px solid ${selected ? "var(--jade-500)" : "transparent"}`,
         cursor: "pointer", transition: "background 0.08s ease",
       }}
-      onMouseEnter={(e) => { if (!selected) e.currentTarget.style.background = "var(--stone-50)"; }}
+      onMouseEnter={(e) => { if (!selected) e.currentTarget.style.background = "var(--bg-raised)"; }}
       onMouseLeave={(e) => { if (!selected) e.currentTarget.style.background = "transparent"; }}
     >
       <Avatar name={patient.name} size={36} />
@@ -84,7 +84,7 @@ function PPChip({ active, onClick, children, count }) {
         <span style={{
           fontSize: 10, fontWeight: 700, fontFamily: "var(--font-mono)",
           padding: "0 5px", borderRadius: 8,
-          background: active ? "rgba(255,255,255,0.22)" : "var(--stone-100)",
+          background: active ? "rgba(255,255,255,0.22)" : "var(--bg-raised)",
           color: active ? "white" : "var(--text-muted)",
         }}>{count}</span>
       )}
@@ -135,7 +135,7 @@ function PPPreview({ patient }) {
       </div>
 
       <div style={{
-        marginTop: 16, padding: "10px 12px", background: "var(--jade-50)",
+        marginTop: 16, padding: "10px 12px", background: "var(--brand-subtle)",
         border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)",
         display: "flex", alignItems: "flex-start", gap: 8,
       }}>
@@ -226,7 +226,7 @@ function PatientPickerModal({ currentPatientId, onClose, onSelect }) {
         </div>
 
         {/* Search + filters */}
-        <div style={{ padding: "12px 22px", borderBottom: "1px solid var(--border-subtle)", background: "var(--stone-50)" }}>
+        <div style={{ padding: "12px 22px", borderBottom: "1px solid var(--border-subtle)", background: "var(--bg-raised)" }}>
           <div style={{ position: "relative", marginBottom: 10 }}>
             <Icon name="search" size={14} style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "var(--text-muted)" }} />
             <input
@@ -286,7 +286,7 @@ function PatientPickerModal({ currentPatientId, onClose, onSelect }) {
               ))
             )}
           </div>
-          <div style={{ width: 320, flexShrink: 0, overflowY: "auto", background: "var(--stone-50)" }}>
+          <div style={{ width: 320, flexShrink: 0, overflowY: "auto", background: "var(--bg-raised)" }}>
             <PPPreview patient={picked} />
           </div>
         </div>

@@ -678,7 +678,7 @@ function InjuryEditor({ data, onChange, clinic, patient, onChangePatient }) {
         </button>}
       >
         <div style={{
-          display: "flex", gap: 12, padding: "10px 12px", background: "var(--jade-50)",
+          display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)",
           border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)",
         }}>
           <Avatar name={patient.name} size={34} />
@@ -730,7 +730,7 @@ function InjuryEditor({ data, onChange, clinic, patient, onChangePatient }) {
           <MiniField label="질병분류기호 (KCD)">
             <div style={{ position: "relative" }}>
               <TextField value={data.icdCodes} onChange={set("icdCodes")} mono placeholder="S43.4, M75.1" />
-              <span style={{ position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", display: "inline-flex", alignItems: "center", gap: 3, fontSize: 10, color: "var(--jade-700)", background: "var(--jade-50)", padding: "2px 6px", borderRadius: 4, border: "1px solid var(--jade-200)" }}>
+              <span style={{ position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", display: "inline-flex", alignItems: "center", gap: 3, fontSize: 10, color: "var(--jade-700)", background: "var(--brand-subtle)", padding: "2px 6px", borderRadius: 4, border: "1px solid var(--jade-200)" }}>
                 <Icon name="sparkles" size={9} /> AI 추천
               </span>
             </div>
@@ -770,7 +770,7 @@ function InjuryEditor({ data, onChange, clinic, patient, onChangePatient }) {
 
       <PanelSection
         title="치료 기간 및 향후 소견"
-        right={<button style={{ background: "var(--jade-50)", border: "1px solid var(--jade-200)", color: "var(--jade-700)", padding: "3px 8px", borderRadius: 999, fontSize: 10.5, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}>
+        right={<button style={{ background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", color: "var(--jade-700)", padding: "3px 8px", borderRadius: 999, fontSize: 10.5, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}>
           <Icon name="wand-2" size={10} /> AI로 작성
         </button>}
       >
@@ -801,13 +801,13 @@ function InjuryEditor({ data, onChange, clinic, patient, onChangePatient }) {
         </span>}
       >
         <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 8 }}>
-          <div style={{ display: "flex", justifyContent: "space-between", padding: "6px 10px", background: "var(--stone-100)", borderRadius: "var(--radius-sm)", fontSize: 12 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", padding: "6px 10px", background: "var(--bg-raised)", borderRadius: "var(--radius-sm)", fontSize: 12 }}>
             <span style={{ color: "var(--text-secondary)" }}>의료기관</span><span style={{ color: "var(--text-primary)", fontWeight: 500 }}>{clinic.name}</span>
           </div>
-          <div style={{ display: "flex", justifyContent: "space-between", padding: "6px 10px", background: "var(--stone-100)", borderRadius: "var(--radius-sm)", fontSize: 12 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", padding: "6px 10px", background: "var(--bg-raised)", borderRadius: "var(--radius-sm)", fontSize: 12 }}>
             <span style={{ color: "var(--text-secondary)" }}>한의사 면허</span><span style={{ color: "var(--text-primary)", fontFamily: "var(--font-mono)" }}>제 {clinic.license} 호</span>
           </div>
-          <div style={{ display: "flex", justifyContent: "space-between", padding: "6px 10px", background: "var(--stone-100)", borderRadius: "var(--radius-sm)", fontSize: 12 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", padding: "6px 10px", background: "var(--bg-raised)", borderRadius: "var(--radius-sm)", fontSize: 12 }}>
             <span style={{ color: "var(--text-secondary)" }}>발급의</span>
             <span style={{ color: "var(--text-primary)", fontWeight: 500, display: "inline-flex", alignItems: "center", gap: 6 }}>
               <Avatar name={clinic.doctorName} size={18} /> {clinic.doctorName}
@@ -1230,7 +1230,7 @@ function ReferralEditor({ data, onChange, clinic, patient, onChangePatient }) {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <PanelSection title="환자 정보" right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--jade-700)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}><Icon name="arrow-left-right" size={11} /> 환자 변경</button>}>
-        <div style={{ display: "flex", gap: 12, padding: "10px 12px", background: "var(--jade-50)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)" }}>
+        <div style={{ display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)" }}>
           <Avatar name={patient.name} size={34} />
           <div style={{ flex: 1 }}>
             <div style={{ display: "flex", gap: 8, alignItems: "baseline" }}>
@@ -1277,7 +1277,7 @@ function OpinionEditor({ data, onChange, clinic, patient, onChangePatient }) {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <PanelSection title="환자 정보" right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--jade-700)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}><Icon name="arrow-left-right" size={11} /> 환자 변경</button>}>
-        <div style={{ display: "flex", gap: 12, padding: "10px 12px", background: "var(--jade-50)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)" }}>
+        <div style={{ display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)" }}>
           <Avatar name={patient.name} size={34} />
           <div style={{ flex: 1 }}>
             <div style={{ display: "flex", gap: 8, alignItems: "baseline" }}>
@@ -1299,7 +1299,7 @@ function OpinionEditor({ data, onChange, clinic, patient, onChangePatient }) {
           <MiniField label="진단 연월일"><TextField type="date" value={data.diagnosisDate} onChange={set("diagnosisDate")} mono /></MiniField>
         </div>
       </PanelSection>
-      <PanelSection title="소견 내용" right={<button style={{ background: "var(--jade-50)", border: "1px solid var(--jade-200)", color: "var(--jade-700)", padding: "3px 8px", borderRadius: 999, fontSize: 10.5, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}><Icon name="wand-2" size={10} /> AI로 작성</button>}>
+      <PanelSection title="소견 내용" right={<button style={{ background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", color: "var(--jade-700)", padding: "3px 8px", borderRadius: 999, fontSize: 10.5, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}><Icon name="wand-2" size={10} /> AI로 작성</button>}>
         <TextArea rows={7} value={data.opinion} onChange={set("opinion")} placeholder="환자 상태 및 소견을 기재하십시오." />
       </PanelSection>
       <PanelSection title="발급">
@@ -1330,7 +1330,7 @@ function CertEditor({ data, onChange, patient, onChangePatient, certType }) {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <PanelSection title="환자 정보" right={<button onClick={onChangePatient} style={{ background: "none", border: "none", color: "var(--jade-700)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}><Icon name="arrow-left-right" size={11} /> 환자 변경</button>}>
-        <div style={{ display: "flex", gap: 12, padding: "10px 12px", background: "var(--jade-50)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)" }}>
+        <div style={{ display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)" }}>
           <Avatar name={patient.name} size={34} />
           <div style={{ flex: 1 }}>
             <div style={{ display: "flex", gap: 8, alignItems: "baseline" }}>
@@ -1656,7 +1656,7 @@ function BillingEditor({ data, onChange, patient, onChangePatient, label }) {
           <Icon name="arrow-left-right" size={11} /> 환자 변경
         </button>}
       >
-        <div style={{ display: "flex", gap: 12, padding: "10px 12px", background: "var(--jade-50)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)" }}>
+        <div style={{ display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)" }}>
           <Avatar name={patient.name} size={34} />
           <div style={{ flex: 1 }}>
             <div style={{ display: "flex", gap: 8, alignItems: "baseline" }}>
@@ -1682,13 +1682,13 @@ function BillingEditor({ data, onChange, patient, onChangePatient, label }) {
           {MF_FEE_ITEMS.map((item, i) => {
             const rowTotal = item.selfPay + item.insurancePay + item.nonCovered;
             return (
-              <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "6px 10px", background: "var(--stone-50)", borderRadius: "var(--radius-sm)", fontSize: 11.5 }}>
+              <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "6px 10px", background: "var(--bg-raised)", borderRadius: "var(--radius-sm)", fontSize: 11.5 }}>
                 <span style={{ color: "var(--text-secondary)" }}>{item.category}</span>
                 <span style={{ fontFamily: "var(--font-mono)", color: "var(--text-primary)", fontWeight: 500 }}>{rowTotal.toLocaleString("ko-KR")} 원</span>
               </div>
             );
           })}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 10px", background: "var(--jade-50)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-sm)", fontSize: 12, marginTop: 4 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 10px", background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-sm)", fontSize: 12, marginTop: 4 }}>
             <span style={{ fontWeight: 600, color: "var(--jade-700)" }}>환자 납부 총액</span>
             <span style={{ fontFamily: "var(--font-mono)", fontWeight: 700, color: "var(--jade-700)" }}>{(totalSelf + totalNon).toLocaleString("ko-KR")} 원</span>
           </div>
@@ -1698,7 +1698,7 @@ function BillingEditor({ data, onChange, patient, onChangePatient, label }) {
       <PanelSection title="발급자" right={<span style={{ display: "inline-flex", alignItems: "center", gap: 4, fontSize: 10.5, color: "var(--text-muted)" }}><Icon name="info" size={10} /> 기본 의료기관 정보</span>}>
         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           {[["의료기관", MF_CLINIC.name], ["한의사 면허", `제 ${MF_CLINIC.license} 호`], ["발급의", MF_CLINIC.doctorName]].map(([k, v]) => (
-            <div key={k} style={{ display: "flex", justifyContent: "space-between", padding: "6px 10px", background: "var(--stone-100)", borderRadius: "var(--radius-sm)", fontSize: 12 }}>
+            <div key={k} style={{ display: "flex", justifyContent: "space-between", padding: "6px 10px", background: "var(--bg-raised)", borderRadius: "var(--radius-sm)", fontSize: 12 }}>
               <span style={{ color: "var(--text-secondary)" }}>{k}</span>
               <span style={{ color: "var(--text-primary)", fontWeight: 500 }}>{v}</span>
             </div>
@@ -1726,7 +1726,7 @@ function PlaceholderPreviewA4({ label, desc }) {
       </div>
       <div style={{ fontFamily: "var(--font-serif)", fontSize: 24, color: "var(--ink-700)", letterSpacing: "0.4em", paddingLeft: "0.4em" }}>{label}</div>
       <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 8 }}>{desc}</div>
-      <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 36, padding: "8px 16px", border: "1px solid var(--border-subtle)", borderRadius: 999, background: "var(--stone-50)" }}>
+      <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 36, padding: "8px 16px", border: "1px solid var(--border-subtle)", borderRadius: 999, background: "var(--bg-raised)" }}>
         템플릿 준비 중 · 진단서 양식 우선 출시
       </div>
     </div>
@@ -1813,7 +1813,7 @@ function DiagnosisEditor({ data, onChange, clinic, patient, onChangePatient }) {
         </button>}
       >
         <div style={{
-          display: "flex", gap: 12, padding: "10px 12px", background: "var(--jade-50)",
+          display: "flex", gap: 12, padding: "10px 12px", background: "var(--brand-subtle)",
           border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)",
         }}>
           <Avatar name={patient.name} size={34} />
@@ -1867,7 +1867,7 @@ function DiagnosisEditor({ data, onChange, clinic, patient, onChangePatient }) {
           <MiniField label="질병분류기호 (KCD)">
             <div style={{ position: "relative" }}>
               <TextField value={data.icdCodes} onChange={set("icdCodes")} mono placeholder="S13.4, M54.2" />
-              <span style={{ position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", display: "inline-flex", alignItems: "center", gap: 3, fontSize: 10, color: "var(--jade-700)", background: "var(--jade-50)", padding: "2px 6px", borderRadius: 4, border: "1px solid var(--jade-200)" }}>
+              <span style={{ position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", display: "inline-flex", alignItems: "center", gap: 3, fontSize: 10, color: "var(--jade-700)", background: "var(--brand-subtle)", padding: "2px 6px", borderRadius: 4, border: "1px solid var(--jade-200)" }}>
                 <Icon name="sparkles" size={9} /> AI 추천
               </span>
             </div>
@@ -1882,7 +1882,7 @@ function DiagnosisEditor({ data, onChange, clinic, patient, onChangePatient }) {
       {/* Treatment opinion */}
       <PanelSection
         title="치료 내용 및 향후 소견"
-        right={<button style={{ background: "var(--jade-50)", border: "1px solid var(--jade-200)", color: "var(--jade-700)", padding: "3px 8px", borderRadius: 999, fontSize: 10.5, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}>
+        right={<button style={{ background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", color: "var(--jade-700)", padding: "3px 8px", borderRadius: 999, fontSize: 10.5, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}>
           <Icon name="wand-2" size={10} /> AI로 작성
         </button>}
       >
@@ -1913,13 +1913,13 @@ function DiagnosisEditor({ data, onChange, clinic, patient, onChangePatient }) {
         </span>}
       >
         <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 8 }}>
-          <div style={{ display: "flex", justifyContent: "space-between", padding: "6px 10px", background: "var(--stone-100)", borderRadius: "var(--radius-sm)", fontSize: 12 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", padding: "6px 10px", background: "var(--bg-raised)", borderRadius: "var(--radius-sm)", fontSize: 12 }}>
             <span style={{ color: "var(--text-secondary)" }}>의료기관</span><span style={{ color: "var(--text-primary)", fontWeight: 500 }}>{clinic.name}</span>
           </div>
-          <div style={{ display: "flex", justifyContent: "space-between", padding: "6px 10px", background: "var(--stone-100)", borderRadius: "var(--radius-sm)", fontSize: 12 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", padding: "6px 10px", background: "var(--bg-raised)", borderRadius: "var(--radius-sm)", fontSize: 12 }}>
             <span style={{ color: "var(--text-secondary)" }}>한의사 면허</span><span style={{ color: "var(--text-primary)", fontFamily: "var(--font-mono)" }}>제 {clinic.license} 호</span>
           </div>
-          <div style={{ display: "flex", justifyContent: "space-between", padding: "6px 10px", background: "var(--stone-100)", borderRadius: "var(--radius-sm)", fontSize: 12 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", padding: "6px 10px", background: "var(--bg-raised)", borderRadius: "var(--radius-sm)", fontSize: 12 }}>
             <span style={{ color: "var(--text-secondary)" }}>발급의</span>
             <span style={{ color: "var(--text-primary)", fontWeight: 500, display: "inline-flex", alignItems: "center", gap: 6 }}>
               <Avatar name={clinic.doctorName} size={18} /> {clinic.doctorName}
@@ -1938,7 +1938,7 @@ function IssueHistory() {
     <div style={{ background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-lg)", boxShadow: "var(--shadow-sm)" }}>
       <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
         <thead>
-          <tr style={{ background: "var(--stone-50)", color: "var(--text-muted)", fontSize: 10.5, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase" }}>
+          <tr style={{ background: "var(--bg-raised)", color: "var(--text-muted)", fontSize: 10.5, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase" }}>
             <th style={{ textAlign: "left", padding: "8px 14px", fontWeight: 600 }}>발급번호</th>
             <th style={{ textAlign: "left", padding: "8px 10px", fontWeight: 600 }}>서식</th>
             <th style={{ textAlign: "left", padding: "8px 10px", fontWeight: 600 }}>환자</th>
@@ -2223,7 +2223,7 @@ function MedicalFormScreen() {
           {/* Footer status */}
           <div style={{
             padding: "10px 16px", borderTop: "1px solid var(--border-subtle)",
-            background: "var(--stone-50)", fontSize: 11, color: "var(--text-secondary)",
+            background: "var(--bg-raised)", fontSize: 11, color: "var(--text-secondary)",
             display: "flex", alignItems: "center", justifyContent: "space-between",
           }}>
             <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>

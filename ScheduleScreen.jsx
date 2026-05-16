@@ -77,10 +77,10 @@ const buildSeedSch = () => {
 
 // ── Status colors ──────────────────────────────────────────────
 const STATUS_SCH = {
-  "확정": { bg: "var(--jade-50)",     border: "var(--jade-300)",     text: "var(--jade-700)",   dot: "var(--jade-500)"   },
-  "대기": { bg: "var(--amber-100)",   border: "var(--amber-200)",    text: "var(--amber-700)",  dot: "var(--amber-500)"  },
-  "노쇼": { bg: "var(--cinnabar-100)",border: "var(--cinnabar-200)", text: "var(--cinnabar-700)", dot: "var(--cinnabar-600)" },
-  "취소": { bg: "var(--stone-100)",   border: "var(--stone-300)",    text: "var(--text-muted)", dot: "var(--stone-700)"  },
+  "확정": { bg: "var(--brand-subtle)",       border: "var(--jade-300)",     text: "var(--jade-700)",   dot: "var(--jade-500)"   },
+  "대기": { bg: "var(--status-warning-bg)",  border: "var(--amber-200)",    text: "var(--amber-700)",  dot: "var(--amber-500)"  },
+  "노쇼": { bg: "var(--status-danger-bg)",   border: "var(--cinnabar-200)", text: "var(--cinnabar-700)", dot: "var(--cinnabar-600)" },
+  "취소": { bg: "var(--bg-raised)",          border: "var(--stone-300)",    text: "var(--text-muted)", dot: "var(--stone-700)"  },
 };
 
 // ── Helpers ────────────────────────────────────────────────────
@@ -126,7 +126,7 @@ function NewAppointmentModal({ initial, onClose, onSubmit }) {
         }}>
           <div style={{
             width: 36, height: 36, borderRadius: "var(--radius-md)",
-            background: "var(--jade-100)", color: "var(--jade-700)",
+            background: "var(--brand-muted)", color: "var(--jade-700)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
             <Icon name="calendar-plus" size={17} />
@@ -166,7 +166,7 @@ function NewAppointmentModal({ initial, onClose, onSubmit }) {
             <div>
               <div style={apptLbl}>소요 시간</div>
               <div style={{
-                ...apptInput, background: "var(--stone-100)",
+                ...apptInput, background: "var(--bg-raised)",
                 color: "var(--text-secondary)", fontFamily: "var(--font-mono)",
                 display: "flex", alignItems: "center",
               }}>{treatmentMins}분</div>
@@ -211,7 +211,7 @@ function NewAppointmentModal({ initial, onClose, onSubmit }) {
             </div>
             <div>
               <div style={apptLbl}>방문 구분</div>
-              <div style={{ display: "flex", background: "var(--stone-100)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", padding: 2, gap: 2 }}>
+              <div style={{ display: "flex", background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", padding: 2, gap: 2 }}>
                 {["초진", "재진"].map(v => (
                   <button key={v} onClick={() => set("visit", v)} style={{
                     flex: 1, padding: "6px 10px", border: "none", cursor: "pointer",
@@ -270,7 +270,7 @@ function NewAppointmentModal({ initial, onClose, onSubmit }) {
           {/* Notify */}
           <label style={{
             display: "flex", alignItems: "center", gap: 8,
-            padding: "10px 12px", background: "var(--jade-50)",
+            padding: "10px 12px", background: "var(--brand-subtle)",
             border: "1px solid var(--jade-100)", borderRadius: "var(--radius-md)",
             cursor: "pointer",
           }}>
@@ -451,7 +451,7 @@ function DayView({ date, appts, onCellClick, onApptClick, doctorFilter }) {
             {Array.from({ length: 10 }).map((_, i) => (
               <div key={i} style={{
                 height: HOUR_PX, padding: "4px 8px",
-                borderTop: "1px solid var(--stone-200)",
+                borderTop: "1px solid var(--border-subtle)",
                 fontSize: 10, color: "var(--text-muted)",
                 fontFamily: "var(--font-mono)", textAlign: "right",
               }}>{String(9+i).padStart(2,"0")}:00</div>
@@ -468,14 +468,14 @@ function DayView({ date, appts, onCellClick, onApptClick, doctorFilter }) {
                   onClick={() => onCellClick && onCellClick({ date: dayStr, start: `${String(9+i).padStart(2,"0")}:00`, doctor: doc.id })}
                   style={{
                     height: HOUR_PX,
-                    borderTop: "1px solid var(--stone-200)",
+                    borderTop: "1px solid var(--border-subtle)",
                     cursor: "pointer",
                     position: "relative",
                   }}>
                   {/* Half-hour line */}
                   <div style={{
                     position: "absolute", top: HOUR_PX/2, left: 0, right: 0,
-                    borderTop: "1px dashed var(--stone-200)",
+                    borderTop: "1px dashed var(--border-subtle)",
                   }} />
                 </div>
               ))}
@@ -517,7 +517,7 @@ function WeekView({ date, appts, onCellClick, onApptClick, doctorFilter }) {
             <div key={i} style={{
               padding: "8px 10px",
               borderLeft: "1px solid var(--border-subtle)",
-              background: isToday ? "var(--jade-50)" : "transparent",
+              background: isToday ? "var(--brand-subtle)" : "transparent",
             }}>
               <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
                 <span style={{
@@ -535,7 +535,7 @@ function WeekView({ date, appts, onCellClick, onApptClick, doctorFilter }) {
                   <span style={{
                     marginLeft: "auto",
                     fontSize: 10, fontWeight: 600,
-                    color: "var(--jade-700)", background: "var(--jade-100)",
+                    color: "var(--jade-700)", background: "var(--brand-muted)",
                     borderRadius: "var(--radius-full)", padding: "1px 7px",
                     fontFamily: "var(--font-mono)",
                   }}>{dayCt}</span>
@@ -557,7 +557,7 @@ function WeekView({ date, appts, onCellClick, onApptClick, doctorFilter }) {
             {Array.from({ length: 10 }).map((_, i) => (
               <div key={i} style={{
                 height: HOUR_PX, padding: "4px 8px",
-                borderTop: "1px solid var(--stone-200)",
+                borderTop: "1px solid var(--border-subtle)",
                 fontSize: 10, color: "var(--text-muted)",
                 fontFamily: "var(--font-mono)", textAlign: "right",
               }}>{String(9+i).padStart(2,"0")}:00</div>
@@ -578,12 +578,12 @@ function WeekView({ date, appts, onCellClick, onApptClick, doctorFilter }) {
                     onClick={() => onCellClick && onCellClick({ date: dayStr, start: `${String(9+hi).padStart(2,"0")}:00` })}
                     style={{
                       height: HOUR_PX,
-                      borderTop: "1px solid var(--stone-200)",
+                      borderTop: "1px solid var(--border-subtle)",
                       cursor: "pointer", position: "relative",
                     }}>
                     <div style={{
                       position: "absolute", top: HOUR_PX/2, left: 0, right: 0,
-                      borderTop: "1px dashed var(--stone-200)",
+                      borderTop: "1px dashed var(--border-subtle)",
                     }} />
                   </div>
                 ))}
@@ -633,7 +633,7 @@ function MonthView({ date, appts, onCellClick, onDayClick, onApptClick, doctorFi
       <div style={{
         display: "grid", gridTemplateColumns: "repeat(7, 1fr)",
         borderBottom: "1px solid var(--border-subtle)",
-        background: "var(--stone-50)", flexShrink: 0,
+        background: "var(--bg-raised)", flexShrink: 0,
       }}>
         {KO_WEEKDAYS_SCH.map((w, i) => (
           <div key={w} style={{
@@ -657,9 +657,9 @@ function MonthView({ date, appts, onCellClick, onDayClick, onApptClick, doctorFi
               onClick={() => onDayClick && onDayClick(c.d)}
               style={{
                 minHeight: 110,
-                borderTop: i >= 7 ? "1px solid var(--stone-200)" : "none",
-                borderLeft: i % 7 !== 0 ? "1px solid var(--stone-200)" : "none",
-                background: c.muted ? "var(--stone-50)" : isToday ? "var(--jade-50)" : "var(--bg-surface)",
+                borderTop: i >= 7 ? "1px solid var(--border-subtle)" : "none",
+                borderLeft: i % 7 !== 0 ? "1px solid var(--border-subtle)" : "none",
+                background: c.muted ? "var(--bg-raised)" : isToday ? "var(--brand-subtle)" : "var(--bg-surface)",
                 padding: "6px 8px",
                 cursor: c.muted ? "default" : "pointer",
                 display: "flex", flexDirection: "column", gap: 3,
@@ -793,7 +793,7 @@ function ApptDetail({ appt, onClose, onChangeStatus }) {
 
           <div style={{
             marginTop: 4, padding: 12,
-            background: "var(--stone-50)", border: "1px solid var(--border-subtle)",
+            background: "var(--bg-raised)", border: "1px solid var(--border-subtle)",
             borderRadius: "var(--radius-md)",
             display: "flex", flexDirection: "column", gap: 6,
           }}>
@@ -919,7 +919,7 @@ function ScheduleScreen() {
         subtitle={`${headerLabel} · 총 ${periodFiltered.length}건 (초진 ${newCnt} · 재진 ${reCnt}${noShowCnt ? ` · 노쇼 ${noShowCnt}` : ""})`}
         actions={<>
           {/* View segmented */}
-          <div style={{ display: "flex", background: "var(--stone-200)", borderRadius: "var(--radius-md)", padding: 2, gap: 2 }}>
+          <div style={{ display: "flex", background: "var(--bg-raised)", borderRadius: "var(--radius-md)", padding: 2, gap: 2 }}>
             {[
               { key: "day", l: "일간" },
               { key: "week", l: "주간" },

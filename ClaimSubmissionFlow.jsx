@@ -170,8 +170,8 @@ function ClaimSubmissionFlow({ items, type, summary, onClose, scenario }) {
         {/* Summary strip */}
         <div style={{
           padding: "14px 28px",
-          background: "var(--stone-50)",
-          borderBottom: "1px solid var(--stone-200)",
+          background: "var(--bg-raised)",
+          borderBottom: "1px solid var(--border-subtle)",
           display: "flex", gap: 28,
         }}>
           <StripStat label="청구 건수" value={`${items.length}건`} />
@@ -201,8 +201,8 @@ function ClaimSubmissionFlow({ items, type, summary, onClose, scenario }) {
         {/* Footer */}
         <div style={{
           padding: "16px 24px",
-          borderTop: "1px solid var(--stone-200)",
-          background: "var(--stone-50)",
+          borderTop: "1px solid var(--border-subtle)",
+          background: "var(--bg-raised)",
           display: "flex", alignItems: "center", gap: 10,
         }}>
           {waitingApproval && (
@@ -210,7 +210,7 @@ function ClaimSubmissionFlow({ items, type, summary, onClose, scenario }) {
               <div style={{
                 display: "flex", alignItems: "center", gap: 8,
                 padding: "6px 12px",
-                background: "var(--amber-100)",
+                background: "var(--status-warning-bg)",
                 border: "1px solid var(--amber-200)",
                 borderRadius: "var(--radius-md)",
               }}>
@@ -251,7 +251,7 @@ function ClaimSubmissionFlow({ items, type, summary, onClose, scenario }) {
               <div style={{
                 display: "flex", alignItems: "center", gap: 8,
                 padding: "6px 12px",
-                background: "var(--jade-50)",
+                background: "var(--brand-subtle)",
                 border: "1px solid var(--jade-200)",
                 borderRadius: "var(--radius-md)",
               }}>
@@ -301,11 +301,11 @@ function StripStat({ label, value, color, mono }) {
 
 function StageRow({ stage, idx, status, isLast, expanded, details }) {
   const statusConfig = {
-    pending: { icon: "circle", color: "var(--text-disabled)", bg: "var(--stone-100)", label: "대기" },
-    running: { icon: "loader-2", color: "var(--jade-600)", bg: "var(--jade-50)", label: "진행 중" },
-    success: { icon: "check", color: "var(--jade-700)", bg: "var(--jade-100)", label: "완료" },
-    warning: { icon: "alert-triangle", color: "var(--amber-700)", bg: "var(--amber-100)", label: "검토 필요" },
-    error:   { icon: "x", color: "var(--cinnabar-700)", bg: "var(--cinnabar-100)", label: "실패" },
+    pending: { icon: "circle", color: "var(--text-disabled)", bg: "var(--bg-raised)", label: "대기" },
+    running: { icon: "loader-2", color: "var(--jade-600)", bg: "var(--brand-subtle)", label: "진행 중" },
+    success: { icon: "check", color: "var(--jade-700)", bg: "var(--brand-muted)", label: "완료" },
+    warning: { icon: "alert-triangle", color: "var(--amber-700)", bg: "var(--status-warning-bg)", label: "검토 필요" },
+    error:   { icon: "x", color: "var(--cinnabar-700)", bg: "var(--status-danger-bg)", label: "실패" },
   };
   const s = statusConfig[status] || statusConfig.pending;
   const isActive = status === "running" || status === "warning";
@@ -330,7 +330,7 @@ function StageRow({ stage, idx, status, isLast, expanded, details }) {
             <div style={{
               position: "absolute", top: 38, left: "50%", transform: "translateX(-50%)",
               width: 2, height: expanded ? "calc(100% + 12px)" : 22,
-              background: status === "success" || status === "warning" ? "var(--jade-300)" : "var(--stone-200)",
+              background: status === "success" || status === "warning" ? "var(--jade-300)" : "var(--bg-raised)",
             }}></div>
           )}
         </div>
@@ -363,7 +363,7 @@ function StageRow({ stage, idx, status, isLast, expanded, details }) {
           {status === "running" && (
             <div style={{
               marginTop: 10, height: 4, borderRadius: 2,
-              background: "var(--stone-200)", overflow: "hidden",
+              background: "var(--bg-raised)", overflow: "hidden",
             }}>
               <div style={{
                 height: "100%", width: "60%",
@@ -386,15 +386,15 @@ function PretestResults({ results }) {
   const { errors, passedCount, totalCount } = results;
   return (
     <div style={{
-      background: "var(--stone-50)",
-      border: "1px solid var(--stone-200)",
+      background: "var(--bg-raised)",
+      border: "1px solid var(--border-subtle)",
       borderRadius: "var(--radius-md)", overflow: "hidden",
     }}>
       {/* header */}
       <div style={{
         padding: "10px 14px",
         background: "var(--bg-surface)",
-        borderBottom: "1px solid var(--stone-200)",
+        borderBottom: "1px solid var(--border-subtle)",
         display: "flex", alignItems: "center", gap: 10,
       }}>
         <Icon name="clipboard-check" size={13} style={{ color: "var(--jade-700)" }} />
@@ -418,7 +418,7 @@ function PretestResults({ results }) {
           {errors.map((e, i) => (
             <div key={i} style={{
               padding: "8px 14px",
-              borderBottom: i < errors.length - 1 ? "1px solid var(--stone-200)" : "none",
+              borderBottom: i < errors.length - 1 ? "1px solid var(--border-subtle)" : "none",
               display: "flex", alignItems: "flex-start", gap: 10,
             }}>
               <span style={{

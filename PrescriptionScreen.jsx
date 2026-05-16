@@ -76,19 +76,19 @@ function PrescriptionScreen({ patient, onBack }) {
 
         {/* AI Suggestion banner */}
         {showAI && (
-          <div style={{ background: "var(--jade-50)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-lg)", padding: "14px 18px" }}>
+          <div style={{ background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-lg)", padding: "14px 18px" }}>
             <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 8 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <Icon name="sparkles" size={16} style={{ color: "var(--jade-600)" }} />
                 <span style={{ fontSize: 13, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-sans)" }}>AI 추천: {AI_SUGGESTION.name}</span>
-                <span style={{ fontSize: 12, background: "var(--jade-100)", color: "var(--jade-700)", padding: "1px 7px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>적합도 {AI_SUGGESTION.confidence}%</span>
+                <span style={{ fontSize: 12, background: "var(--brand-muted)", color: "var(--jade-700)", padding: "1px 7px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>적합도 {AI_SUGGESTION.confidence}%</span>
               </div>
               <button onClick={() => setShowAI(false)} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--jade-400)", fontSize: 16, lineHeight: 1, padding: 0 }}>×</button>
             </div>
             <div style={{ fontSize: 12, color: "var(--jade-600)", fontFamily: "var(--font-sans)", marginBottom: 10, lineHeight: 1.5 }}>{AI_SUGGESTION.rationale}</div>
             <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 10 }}>
               {AI_SUGGESTION.herbs.map(h => (
-                <span key={h.name} style={{ fontSize: 11, background: "var(--jade-100)", color: "var(--jade-700)", padding: "3px 9px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-mono)" }}>
+                <span key={h.name} style={{ fontSize: 11, background: "var(--brand-muted)", color: "var(--jade-700)", padding: "3px 9px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-mono)" }}>
                   {h.name} {h.dose}g
                 </span>
               ))}
@@ -105,7 +105,7 @@ function PrescriptionScreen({ patient, onBack }) {
           </div>
           <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "var(--font-sans)" }}>
             <thead>
-              <tr style={{ background: "var(--stone-100)" }}>
+              <tr style={{ background: "var(--bg-raised)" }}>
                 {["약재명", "효능 분류", "용량 (g)", ""].map(h => (
                   <th key={h} style={{ padding: "7px 14px", fontSize: 10, fontWeight: 700, color: "var(--text-muted)", textAlign: "left", letterSpacing: "0.06em", textTransform: "uppercase" }}>{h}</th>
                 ))}
@@ -120,11 +120,11 @@ function PrescriptionScreen({ patient, onBack }) {
                     {info && <div style={{ fontSize: 10, color: "var(--text-muted)", fontStyle: "italic" }}>{info.latin}</div>}
                   </td>
                   <td style={{ padding: "8px 14px" }}>
-                    {info && <span style={{ fontSize: 11, background: "var(--stone-100)", color: "var(--text-secondary)", padding: "2px 7px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-subtle)" }}>{info.category}</span>}
+                    {info && <span style={{ fontSize: 11, background: "var(--bg-raised)", color: "var(--text-secondary)", padding: "2px 7px", borderRadius: "var(--radius-full)", border: "1px solid var(--border-subtle)" }}>{info.category}</span>}
                   </td>
                   <td style={{ padding: "8px 14px" }}>
                     <input type="number" value={h.dose} onChange={e => updateDose(h.name, e.target.value)}
-                      style={{ width: 64, fontFamily: "var(--font-mono)", fontSize: 13, color: "var(--text-primary)", background: "var(--stone-50)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-sm)", padding: "4px 8px", outline: "none", textAlign: "right" }} />
+                      style={{ width: 64, fontFamily: "var(--font-mono)", fontSize: 13, color: "var(--text-primary)", background: "var(--bg-raised)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-sm)", padding: "4px 8px", outline: "none", textAlign: "right" }} />
                   </td>
                   <td style={{ padding: "8px 14px" }}>
                     <button onClick={() => removeHerb(h.name)} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--text-muted)", fontSize: 15, lineHeight: 1, padding: "2px 4px", borderRadius: "var(--radius-sm)" }}>×</button>
@@ -142,7 +142,7 @@ function PrescriptionScreen({ patient, onBack }) {
                 {filteredSuggestions.map(h => (
                   <div key={h.name} onClick={() => addHerb(h)}
                     style={{ padding: "8px 14px", cursor: "pointer", display: "flex", justifyContent: "space-between", fontSize: 13, fontFamily: "var(--font-sans)", borderBottom: "1px solid var(--border-subtle)" }}
-                    onMouseEnter={e => e.currentTarget.style.background = "var(--jade-50)"}
+                    onMouseEnter={e => e.currentTarget.style.background = "var(--brand-subtle)"}
                     onMouseLeave={e => e.currentTarget.style.background = "transparent"}>
                     <span style={{ fontWeight: 500 }}>{h.name}</span>
                     <span style={{ color: "var(--text-muted)", fontSize: 12 }}>{h.category} · 기본 {h.defaultDose}g</span>
@@ -157,7 +157,7 @@ function PrescriptionScreen({ patient, onBack }) {
         <div style={{ background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-lg)", padding: "14px 18px", boxShadow: "var(--shadow-sm)" }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: "var(--text-secondary)", marginBottom: 8, fontFamily: "var(--font-sans)" }}>복용 지도 / 메모</div>
           <textarea value={memo} onChange={e => setMemo(e.target.value)} placeholder="복용 방법, 주의사항 등 기재..."
-            rows={3} style={{ width: "100%", fontFamily: "var(--font-sans)", fontSize: 13, color: "var(--text-primary)", background: "var(--stone-50)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-md)", padding: "8px 12px", outline: "none", resize: "none", boxSizing: "border-box" }} />
+            rows={3} style={{ width: "100%", fontFamily: "var(--font-sans)", fontSize: 13, color: "var(--text-primary)", background: "var(--bg-raised)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-md)", padding: "8px 12px", outline: "none", resize: "none", boxSizing: "border-box" }} />
         </div>
       </div>
 
@@ -170,7 +170,7 @@ function PrescriptionScreen({ patient, onBack }) {
               <label style={{ fontSize: 12, fontWeight: 500, color: "var(--text-secondary)", display: "block", marginBottom: 4, fontFamily: "var(--font-sans)" }}>처방 일수</label>
               <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
                 <input type="number" value={days} onChange={e => setDays(e.target.value)}
-                  style={{ width: 64, fontFamily: "var(--font-mono)", fontSize: 14, color: "var(--text-primary)", background: "var(--stone-50)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-sm)", padding: "6px 8px", outline: "none", textAlign: "center" }} />
+                  style={{ width: 64, fontFamily: "var(--font-mono)", fontSize: 14, color: "var(--text-primary)", background: "var(--bg-raised)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-sm)", padding: "6px 8px", outline: "none", textAlign: "center" }} />
                 <span style={{ fontSize: 13, color: "var(--text-secondary)", fontFamily: "var(--font-sans)" }}>일</span>
               </div>
             </div>

@@ -129,7 +129,7 @@ function PatientCard({ patient, stage, onSelect, onAdvance }) {
             style={{
               display: "flex", alignItems: "center", gap: 4,
               fontSize: 11, fontWeight: 500, color: "var(--jade-700)",
-              background: "var(--jade-100)", border: "1px solid var(--jade-200)",
+              background: "var(--brand-muted)", border: "1px solid var(--jade-200)",
               borderRadius: "var(--radius-sm)", padding: "3px 9px",
               cursor: "pointer", fontFamily: "var(--font-sans)", transition: "all 0.12s",
             }}

@@ -26,7 +26,7 @@ function StaffFilterSidebar({ filter, setFilter, counts }) {
       <div key={item.key} onClick={() => setFilter(item.key)} style={{
         display: "flex", alignItems: "center", gap: 8, padding: "7px 10px",
         borderRadius: "var(--radius-md)", cursor: "pointer",
-        background: active ? "var(--jade-100)" : "transparent",
+        background: active ? "var(--brand-muted)" : "transparent",
         color: active ? "var(--jade-700)" : "var(--text-secondary)",
         fontSize: 12, fontWeight: active ? 600 : 400,
         fontFamily: "var(--font-sans)", transition: "all 0.12s",
@@ -98,14 +98,14 @@ function StaffRow({ s, selected, onSelect }) {
       alignItems: "center", gap: 10,
       padding: "11px 16px",
       cursor: "pointer",
-      background: selected ? "var(--jade-50)" : "transparent",
+      background: selected ? "var(--brand-subtle)" : "transparent",
       borderLeft: `3px solid ${selected ? "var(--jade-500)" : "transparent"}`,
       borderBottom: "1px solid var(--border-subtle)",
       fontFamily: "var(--font-sans)",
       transition: "background 0.1s",
       opacity: s.status === "resigned" ? 0.62 : 1,
     }}
-      onMouseEnter={e => { if (!selected) e.currentTarget.style.background = "var(--stone-50)"; }}
+      onMouseEnter={e => { if (!selected) e.currentTarget.style.background = "var(--bg-raised)"; }}
       onMouseLeave={e => { if (!selected) e.currentTarget.style.background = "transparent"; }}>
       <StaffAvatar staff={s} size={36} />
       <div style={{ minWidth: 0 }}>
@@ -171,7 +171,7 @@ function ScheduleGrid({ schedule }) {
         return (
           <div key={d} style={{
             padding: "6px 4px", borderRadius: "var(--radius-sm)",
-            background: off ? "var(--stone-100)" : "var(--jade-50)",
+            background: off ? "var(--bg-raised)" : "var(--brand-subtle)",
             border: `1px solid ${off ? "var(--border-subtle)" : "var(--jade-200)"}`,
             textAlign: "center",
           }}>
@@ -224,7 +224,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
             { label: "오늘 환자", value: staff.todayPatients == null ? "—" : `${staff.todayPatients}명` },
             { label: "잔여 연차", value: `${leaveRemaining}일` },
           ].map(s => (
-            <div key={s.label} style={{ background: "var(--stone-50)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", padding: "7px 10px" }}>
+            <div key={s.label} style={{ background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", padding: "7px 10px" }}>
               <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>{s.label}</div>
               <div style={{ fontSize: 12, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)", marginTop: 2 }}>{s.value}</div>
             </div>
@@ -260,7 +260,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
           }}>
             <Icon name={t.i} size={12} />{t.l}
             {t.count != null && (
-              <span style={{ fontSize: 10, fontWeight: 600, color: "var(--jade-700)", background: "var(--jade-100)", padding: "0 5px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-mono)" }}>
+              <span style={{ fontSize: 10, fontWeight: 600, color: "var(--jade-700)", background: "var(--brand-muted)", padding: "0 5px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-mono)" }}>
                 {t.count}
               </span>
             )}
@@ -306,7 +306,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
               <ScheduleGrid schedule={staff.schedule} />
             </div>
 
-            <div style={{ background: "var(--jade-50)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)", padding: 12, display: "flex", alignItems: "center", gap: 12 }}>
+            <div style={{ background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)", padding: 12, display: "flex", alignItems: "center", gap: 12 }}>
               <Icon name="clock" size={18} style={{ color: "var(--jade-600)" }} />
               <div style={{ flex: 1 }}>
                 <div style={{ fontSize: 11, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-sans)" }}>오늘 근무</div>
@@ -324,7 +324,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
                   { date: "2026-05-20", type: "연차", days: 1, note: "개인 사유" },
                   { date: "2026-06-08 ~ 06-10", type: "여름휴가", days: 3, note: "" },
                 ].map((l, i) => (
-                  <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, padding: "7px 10px", background: "var(--stone-50)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)" }}>
+                  <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, padding: "7px 10px", background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)" }}>
                     <span style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--text-secondary)", minWidth: 130 }}>{l.date}</span>
                     <Badge variant="warning">{l.type} {l.days}일</Badge>
                     <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>{l.note}</span>
@@ -353,7 +353,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
                       display: "inline-flex", alignItems: "center", gap: 4,
                       padding: "4px 10px", borderRadius: "var(--radius-full)",
                       border: `1px solid ${active ? "var(--jade-300)" : "var(--border-default)"}`,
-                      background: active ? "var(--jade-100)" : "var(--bg-surface)",
+                      background: active ? "var(--brand-muted)" : "var(--bg-surface)",
                       color: active ? "var(--jade-700)" : "var(--text-secondary)",
                       fontSize: 11, fontWeight: active ? 600 : 400, cursor: "pointer",
                       fontFamily: "var(--font-sans)", transition: "all 0.12s",
@@ -437,7 +437,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
                       <div key={p.key} style={{
                         display: "flex", alignItems: "center", gap: 10, padding: "9px 12px",
                         border: `1px solid ${granted ? "var(--jade-200)" : "var(--border-subtle)"}`,
-                        background: granted ? "var(--jade-50)" : "var(--bg-surface)",
+                        background: granted ? "var(--brand-subtle)" : "var(--bg-surface)",
                         borderRadius: "var(--radius-md)",
                       }}>
                         <div style={{ flex: 1, minWidth: 0 }}>
@@ -468,14 +468,14 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
                 const used = staff.leaveBalance.used;
                 const pct = total === 0 ? 0 : (used / total) * 100;
                 return (
-                  <div style={{ background: "var(--stone-50)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", padding: 12 }}>
+                  <div style={{ background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", padding: 12 }}>
                     <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 6 }}>
                       <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>
                         <span style={{ fontFamily: "var(--font-mono)" }}>{used}</span> / {total}일 사용
                       </span>
                       <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>잔여 <span style={{ color: "var(--jade-700)", fontWeight: 600, fontFamily: "var(--font-mono)" }}>{total - used}일</span></span>
                     </div>
-                    <div style={{ height: 6, background: "var(--stone-200)", borderRadius: "var(--radius-full)", overflow: "hidden" }}>
+                    <div style={{ height: 6, background: "var(--bg-raised)", borderRadius: "var(--radius-full)", overflow: "hidden" }}>
                       <div style={{ width: `${pct}%`, height: "100%", background: "var(--jade-500)", borderRadius: "var(--radius-full)" }} />
                     </div>
                   </div>
@@ -488,7 +488,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
               <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 9, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 8 }}>
                 <Icon name="banknote" size={10} />급여
               </div>
-              <div style={{ background: "var(--stone-50)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", padding: 12, display: "flex", alignItems: "center", gap: 12 }}>
+              <div style={{ background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", padding: 12, display: "flex", alignItems: "center", gap: 12 }}>
                 <Icon name="lock" size={16} style={{ color: "var(--text-muted)" }} />
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: 12, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>{staff.salary.type}</div>
@@ -511,7 +511,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
                   { date: "2025-12-15", type: "교육", note: "개인정보보호 의무 교육 이수" },
                   { date: "2025-01-01", type: "연봉 조정", note: "정기 연봉 협상" },
                 ].map((r, i) => (
-                  <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, padding: "7px 10px", background: "var(--stone-50)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)" }}>
+                  <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, padding: "7px 10px", background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)" }}>
                     <span style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--text-secondary)", minWidth: 88 }}>{r.date}</span>
                     <Badge variant={r.type === "입사" ? "brand" : r.type === "퇴사" ? "danger" : r.type === "휴직" ? "warning" : "neutral"}>{r.type}</Badge>
                     <span style={{ flex: 1, fontSize: 11, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>{r.note}</span>
@@ -562,10 +562,10 @@ function SummaryTiles({ staff }) {
   ];
 
   const toneColor = (t) => ({
-    neutral: { bg: "var(--stone-100)",   icon: "var(--ink-500)",      val: "var(--text-primary)" },
-    brand:   { bg: "var(--jade-100)",    icon: "var(--jade-700)",     val: "var(--jade-700)" },
-    warning: { bg: "var(--amber-100)",   icon: "var(--amber-700)",    val: "var(--amber-700)" },
-    info:    { bg: "var(--cinnabar-100)", icon: "var(--cinnabar-700)", val: "var(--cinnabar-700)" },
+    neutral: { bg: "var(--bg-raised)",   icon: "var(--ink-500)",      val: "var(--text-primary)" },
+    brand:   { bg: "var(--brand-muted)",    icon: "var(--jade-700)",     val: "var(--jade-700)" },
+    warning: { bg: "var(--status-warning-bg)",   icon: "var(--amber-700)",    val: "var(--amber-700)" },
+    info:    { bg: "var(--status-danger-bg)", icon: "var(--cinnabar-700)", val: "var(--cinnabar-700)" },
   })[t];
 
   return (
@@ -681,7 +681,7 @@ function StaffManagementScreen() {
             </span>
             <div style={{ width: 1, height: 16, background: "var(--border-subtle)" }} />
             <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>정렬</span>
-            <div style={{ display: "flex", gap: 2, background: "var(--stone-100)", borderRadius: "var(--radius-sm)", padding: 2 }}>
+            <div style={{ display: "flex", gap: 2, background: "var(--bg-raised)", borderRadius: "var(--radius-sm)", padding: 2 }}>
               {[
                 { k: "role", l: "직책순" },
                 { k: "join", l: "입사일순" },
@@ -698,7 +698,7 @@ function StaffManagementScreen() {
               ))}
             </div>
 
-            <div style={{ marginLeft: "auto", display: "flex", gap: 2, background: "var(--stone-100)", borderRadius: "var(--radius-sm)", padding: 2 }}>
+            <div style={{ marginLeft: "auto", display: "flex", gap: 2, background: "var(--bg-raised)", borderRadius: "var(--radius-sm)", padding: 2 }}>
               {[{ k: "list", i: "list" }, { k: "cards", i: "layout-grid" }].map(o => (
                 <button key={o.k} onClick={() => setView(o.k)} title={o.k === "list" ? "리스트" : "카드"} style={{
                   width: 26, height: 22, display: "inline-flex", alignItems: "center", justifyContent: "center",
@@ -720,7 +720,7 @@ function StaffManagementScreen() {
                 display: "grid",
                 gridTemplateColumns: "40px 1.3fr 1fr 1fr 0.85fr 0.65fr 22px",
                 alignItems: "center", gap: 10,
-                padding: "8px 16px", background: "var(--stone-50)",
+                padding: "8px 16px", background: "var(--bg-raised)",
                 borderBottom: "1px solid var(--border-subtle)",
                 fontSize: 9, fontWeight: 700, letterSpacing: "0.06em",
                 textTransform: "uppercase", color: "var(--text-muted)",

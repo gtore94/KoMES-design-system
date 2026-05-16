@@ -117,7 +117,7 @@ function SupplyRegistrationModal({ onClose, onSubmit }) {
                     style={{
                       fontFamily: "var(--font-sans)", fontSize: 12, padding: "5px 12px",
                       border: `1px solid ${unit === u ? "var(--jade-500)" : "var(--border-default)"}`,
-                      background: unit === u ? "var(--jade-50)" : "var(--bg-surface)",
+                      background: unit === u ? "var(--brand-subtle)" : "var(--bg-surface)",
                       color: unit === u ? "var(--jade-700)" : "var(--text-secondary)",
                       borderRadius: "var(--radius-full)", cursor: "pointer",
                       fontWeight: unit === u ? 600 : 400,
@@ -151,7 +151,7 @@ function SupplyRegistrationModal({ onClose, onSubmit }) {
             </div>
             {stockNum > 0 && upNum > 0 && (
               <div style={{
-                marginTop: 12, padding: "10px 14px", background: "var(--stone-100)",
+                marginTop: 12, padding: "10px 14px", background: "var(--bg-raised)",
                 border: "1px solid var(--stone-300)", borderRadius: "var(--radius-md)",
                 display: "flex", justifyContent: "space-between", alignItems: "center",
               }}>
@@ -174,7 +174,7 @@ function SupplyRegistrationModal({ onClose, onSubmit }) {
                     style={{
                       fontFamily: "var(--font-sans)", fontSize: 12, padding: "6px 14px",
                       border: `1px solid ${hasExpiry ? "var(--jade-500)" : "var(--border-default)"}`,
-                      background: hasExpiry ? "var(--jade-50)" : "var(--bg-surface)",
+                      background: hasExpiry ? "var(--brand-subtle)" : "var(--bg-surface)",
                       color: hasExpiry ? "var(--jade-700)" : "var(--text-secondary)",
                       borderRadius: "var(--radius-md)", cursor: "pointer",
                       fontWeight: hasExpiry ? 600 : 400,
@@ -183,7 +183,7 @@ function SupplyRegistrationModal({ onClose, onSubmit }) {
                     style={{
                       fontFamily: "var(--font-sans)", fontSize: 12, padding: "6px 14px",
                       border: `1px solid ${!hasExpiry ? "var(--jade-500)" : "var(--border-default)"}`,
-                      background: !hasExpiry ? "var(--jade-50)" : "var(--bg-surface)",
+                      background: !hasExpiry ? "var(--brand-subtle)" : "var(--bg-surface)",
                       color: !hasExpiry ? "var(--jade-700)" : "var(--text-secondary)",
                       borderRadius: "var(--radius-md)", cursor: "pointer",
                       fontWeight: !hasExpiry ? 600 : 400,
@@ -220,7 +220,7 @@ function SupplyRegistrationModal({ onClose, onSubmit }) {
         {/* Footer */}
         <div style={{
           padding: "14px 28px", borderTop: "1px solid var(--border-subtle)",
-          display: "flex", alignItems: "center", gap: 10, background: "var(--stone-50)",
+          display: "flex", alignItems: "center", gap: 10, background: "var(--bg-raised)",
         }}>
           <Icon name="info" size={13} style={{ color: "var(--text-muted)" }} />
           <span style={{ fontSize: 11, color: "var(--text-muted)" }}>

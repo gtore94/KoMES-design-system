@@ -37,18 +37,18 @@ const RELATION_TYPES = [
 ];
 
 const TAG_COLORS = {
-  "VIP":     { bg: "var(--amber-100)",   color: "var(--amber-700)",   border: "var(--amber-200)" },
-  "자보":    { bg: "var(--cinnabar-100)", color: "var(--cinnabar-700)", border: "var(--cinnabar-200)" },
-  "초진":    { bg: "var(--jade-50)",     color: "var(--jade-700)",     border: "var(--jade-200)" },
-  "노인":    { bg: "var(--stone-100)",   color: "var(--ink-600)",      border: "var(--stone-300)" },
-  "소아":    { bg: "var(--jade-100)",    color: "var(--jade-700)",     border: "var(--jade-200)" },
-  "알러지":  { bg: "var(--cinnabar-100)", color: "var(--cinnabar-700)", border: "var(--cinnabar-200)" },
-  "산정특례": { bg: "var(--jade-100)",   color: "var(--jade-700)",     border: "var(--jade-200)" },
-  "갱년기":  { bg: "var(--amber-100)",   color: "var(--amber-700)",   border: "var(--amber-200)" },
+  "VIP":     { bg: "var(--status-warning-bg)",   color: "var(--amber-700)",   border: "var(--amber-200)" },
+  "자보":    { bg: "var(--status-danger-bg)", color: "var(--cinnabar-700)", border: "var(--cinnabar-200)" },
+  "초진":    { bg: "var(--brand-subtle)",     color: "var(--jade-700)",     border: "var(--jade-200)" },
+  "노인":    { bg: "var(--bg-raised)",   color: "var(--ink-600)",      border: "var(--stone-300)" },
+  "소아":    { bg: "var(--brand-muted)",    color: "var(--jade-700)",     border: "var(--jade-200)" },
+  "알러지":  { bg: "var(--status-danger-bg)", color: "var(--cinnabar-700)", border: "var(--cinnabar-200)" },
+  "산정특례": { bg: "var(--brand-muted)",   color: "var(--jade-700)",     border: "var(--jade-200)" },
+  "갱년기":  { bg: "var(--status-warning-bg)",   color: "var(--amber-700)",   border: "var(--amber-200)" },
   "불면증":  { bg: "var(--stone-200)",   color: "var(--ink-600)",      border: "var(--stone-300)" },
 };
 
-const tagStyle = (tag) => TAG_COLORS[tag] || { bg: "var(--stone-100)", color: "var(--text-secondary)", border: "var(--border-subtle)" };
+const tagStyle = (tag) => TAG_COLORS[tag] || { bg: "var(--bg-raised)", color: "var(--text-secondary)", border: "var(--border-subtle)" };
 
 // ── Filter Sidebar ───────────────────────────────────────────────
 function MgrFilterSidebar({ filter, setFilter, counts }) {
@@ -74,7 +74,7 @@ function MgrFilterSidebar({ filter, setFilter, counts }) {
     <div key={item.key} onClick={() => setFilter(item.key)} style={{
       display: "flex", alignItems: "center", gap: 8, padding: "7px 10px",
       borderRadius: "var(--radius-md)", cursor: "pointer",
-      background: filter === item.key ? "var(--jade-100)" : "transparent",
+      background: filter === item.key ? "var(--brand-muted)" : "transparent",
       color: filter === item.key ? "var(--jade-700)" : "var(--text-secondary)",
       fontSize: 12, fontWeight: filter === item.key ? 600 : 400,
       fontFamily: "var(--font-sans)", transition: "all 0.12s",
@@ -110,13 +110,13 @@ function PatientRow({ p, selected, onSelect }) {
       alignItems: "center", gap: 10,
       padding: "10px 16px",
       cursor: "pointer",
-      background: selected ? "var(--jade-50)" : "transparent",
+      background: selected ? "var(--brand-subtle)" : "transparent",
       borderLeft: `3px solid ${selected ? "var(--jade-500)" : "transparent"}`,
       borderBottom: "1px solid var(--border-subtle)",
       fontFamily: "var(--font-sans)",
       transition: "all 0.1s",
     }}
-      onMouseEnter={e => { if (!selected) e.currentTarget.style.background = "var(--stone-50)"; }}
+      onMouseEnter={e => { if (!selected) e.currentTarget.style.background = "var(--bg-raised)"; }}
       onMouseLeave={e => { if (!selected) e.currentTarget.style.background = "transparent"; }}>
       <Avatar name={p.name} size={28} />
       <div>
@@ -134,7 +134,7 @@ function PatientRow({ p, selected, onSelect }) {
         fontSize: 10, fontWeight: 600, padding: "2px 8px",
         borderRadius: "var(--radius-full)", textAlign: "center",
         ...tagStyle(p.insurance === "자보" ? "자보" : ""),
-        background: p.insurance === "자보" ? "var(--cinnabar-100)" : "var(--stone-100)",
+        background: p.insurance === "자보" ? "var(--status-danger-bg)" : "var(--bg-raised)",
         color: p.insurance === "자보" ? "var(--cinnabar-700)" : "var(--text-secondary)",
         border: `1px solid ${p.insurance === "자보" ? "var(--cinnabar-200)" : "var(--border-subtle)"}`,
         justifySelf: "start",
@@ -194,13 +194,13 @@ function RelationsPanel({ patient, allPatients, onPatientClick }) {
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
         <Icon name="share-2" size={14} style={{ color: "var(--jade-600)" }} />
         <span style={{ fontSize: 13, fontWeight: 700, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>관계도</span>
-        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-mono)", background: "var(--jade-100)", borderRadius: "var(--radius-full)", padding: "1px 7px" }}>
+        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-mono)", background: "var(--brand-muted)", borderRadius: "var(--radius-full)", padding: "1px 7px" }}>
           {relations.length}건
         </span>
         <button onClick={() => setAdding(!adding)} style={{
           marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 4,
           fontSize: 11, fontWeight: 500, color: "var(--jade-700)",
-          background: adding ? "var(--jade-100)" : "transparent", border: "1px solid var(--jade-200)",
+          background: adding ? "var(--brand-muted)" : "transparent", border: "1px solid var(--jade-200)",
           borderRadius: "var(--radius-sm)", padding: "3px 9px", cursor: "pointer", fontFamily: "var(--font-sans)",
         }}>
           <Icon name={adding ? "x" : "plus"} size={11} />{adding ? "닫기" : "관계 추가"}
@@ -221,7 +221,7 @@ function RelationsPanel({ patient, allPatients, onPatientClick }) {
           return (
             <div key={rel.id} style={{
               display: "flex", alignItems: "center", gap: 10, padding: "8px 12px",
-              border: "1px solid var(--border-subtle)", background: "var(--stone-50)",
+              border: "1px solid var(--border-subtle)", background: "var(--bg-raised)",
               borderRadius: "var(--radius-md)",
             }}>
               <select value={rel.type} onChange={e => setType(rel.id, e.target.value)} style={{
@@ -251,7 +251,7 @@ function RelationsPanel({ patient, allPatients, onPatientClick }) {
 
       {/* Add new relation */}
       {adding && (
-        <div style={{ background: "var(--jade-50)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)", padding: 12 }}>
+        <div style={{ background: "var(--brand-subtle)", border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)", padding: 12 }}>
           {/* Type picker */}
           <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--jade-700)", marginBottom: 6, fontFamily: "var(--font-sans)" }}>관계 유형</div>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: 12 }}>
@@ -373,7 +373,7 @@ function PatientDetailPanel({ patient, onClose, onSelectPatient, onOpenChart, al
             { label: "최근 내원", value: patient.lastVisit },
             { label: "보험", value: patient.insurance },
           ].map(s => (
-            <div key={s.label} style={{ background: "var(--stone-50)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", padding: "7px 10px" }}>
+            <div key={s.label} style={{ background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", padding: "7px 10px" }}>
               <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>{s.label}</div>
               <div style={{ fontSize: 12, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)", marginTop: 2 }}>{s.value}</div>
             </div>
@@ -411,7 +411,7 @@ function PatientDetailPanel({ patient, onClose, onSelectPatient, onOpenChart, al
           }}>
             <Icon name={t.i} size={12} />{t.l}
             {t.count != null && (
-              <span style={{ fontSize: 10, fontWeight: 600, color: "var(--jade-700)", background: "var(--jade-100)", padding: "0 5px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-mono)" }}>
+              <span style={{ fontSize: 10, fontWeight: 600, color: "var(--jade-700)", background: "var(--brand-muted)", padding: "0 5px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-mono)" }}>
                 {t.count}
               </span>
             )}
@@ -457,7 +457,7 @@ function PatientDetailPanel({ patient, onClose, onSelectPatient, onOpenChart, al
                 { date: "2026-04-10", type: "재진", dx: patient.chief, dr: "김민준" },
                 { date: "2026-03-15", type: "초진", dx: patient.chief, dr: "김민준" },
               ].filter(v => v.date !== "—").map((v, i) => (
-                <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 10px", background: "var(--stone-50)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)" }}>
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 10px", background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)" }}>
                   <span style={{ fontSize: 12, fontFamily: "var(--font-mono)", color: "var(--text-secondary)" }}>{v.date}</span>
                   <Badge variant={v.type === "초진" ? "danger" : "neutral"}>{v.type}</Badge>
                   <span style={{ flex: 1, fontSize: 12, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>{v.dx}</span>
@@ -555,7 +555,7 @@ function PatientManagementScreen({ onOpenChart }) {
             </span>
             <div style={{ width: 1, height: 16, background: "var(--border-subtle)" }} />
             <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>정렬</span>
-            <div style={{ display: "flex", gap: 2, background: "var(--stone-100)", borderRadius: "var(--radius-sm)", padding: 2 }}>
+            <div style={{ display: "flex", gap: 2, background: "var(--bg-raised)", borderRadius: "var(--radius-sm)", padding: 2 }}>
               {[
                 { k: "recent", l: "최근 내원" },
                 { k: "visits", l: "내원 횟수" },
@@ -579,7 +579,7 @@ function PatientManagementScreen({ onOpenChart }) {
             display: "grid",
             gridTemplateColumns: "32px 1.2fr 0.7fr 1fr 0.8fr 1.2fr 0.7fr 0.9fr",
             alignItems: "center", gap: 10,
-            padding: "8px 16px", background: "var(--stone-50)",
+            padding: "8px 16px", background: "var(--bg-raised)",
             borderBottom: "1px solid var(--border-subtle)",
             fontSize: 9, fontWeight: 700, letterSpacing: "0.06em",
             textTransform: "uppercase", color: "var(--text-muted)",

@@ -92,7 +92,7 @@ function MiniCalendar() {
                 display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
                 position: "relative", borderRadius: "var(--radius-sm)",
                 cursor: cell.muted ? "default" : "pointer",
-                background: sel ? "var(--jade-500)" : td ? "var(--jade-50)" : "transparent",
+                background: sel ? "var(--jade-500)" : td ? "var(--brand-subtle)" : "transparent",
                 border: td && !sel ? "1px solid var(--jade-300)" : "1px solid transparent",
                 transition: "all 0.12s",
               }}>
@@ -125,7 +125,7 @@ function MiniCalendar() {
       {/* Selected day summary */}
       <div style={{
         marginTop: 12, padding: "10px 12px",
-        background: "var(--jade-50)", border: "1px solid var(--jade-100)",
+        background: "var(--brand-subtle)", border: "1px solid var(--jade-100)",
         borderRadius: "var(--radius-md)",
         display: "flex", alignItems: "center", gap: 10,
       }}>
@@ -155,9 +155,9 @@ const navBtn = {
 
 function TaskItem({ task, onToggle }) {
   const priColors = {
-    high: { dot: "var(--cinnabar-600)", text: "var(--cinnabar-700)", bg: "var(--cinnabar-100)" },
-    med:  { dot: "var(--amber-500)",    text: "var(--amber-700)",    bg: "var(--amber-100)" },
-    low:  { dot: "var(--ink-300)",      text: "var(--rail-text-muted)",   bg: "var(--stone-100)" },
+    high: { dot: "var(--cinnabar-600)", text: "var(--cinnabar-700)", bg: "var(--status-danger-bg)" },
+    med:  { dot: "var(--amber-500)",    text: "var(--amber-700)",    bg: "var(--status-warning-bg)" },
+    low:  { dot: "var(--ink-300)",      text: "var(--rail-text-muted)",   bg: "var(--bg-raised)" },
   }[task.priority] || {};
   return (
     <div style={{
@@ -230,7 +230,7 @@ function TasksPanel() {
         }}>업무</span>
         <span style={{
           fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700, color: "var(--jade-700)",
-          background: "var(--jade-100)", borderRadius: "var(--radius-full)",
+          background: "var(--brand-muted)", borderRadius: "var(--radius-full)",
           padding: "1px 7px",
         }}>{openCount}</span>
 

@@ -145,7 +145,7 @@ function PurchaseOrderDraftScreen({ onClose, onSubmit, initialRecommendations })
         />
 
         {/* Main — selected draft edit */}
-        <div style={{ flex: 1, overflowY: "auto", minWidth: 0, background: "var(--stone-50)" }}>
+        <div style={{ flex: 1, overflowY: "auto", minWidth: 0, background: "var(--bg-raised)" }}>
           {current && (
             <PODraftEditor
               draft={current}
@@ -172,7 +172,7 @@ function PurchaseOrderDraftScreen({ onClose, onSubmit, initialRecommendations })
       {toast && (
         <div style={{
           position: "fixed", bottom: 20, left: "50%", transform: "translateX(-50%)",
-          background: "var(--ink-800)", color: "var(--stone-50)",
+          background: "var(--ink-800)", color: "var(--bg-raised)",
           padding: "10px 18px", borderRadius: "var(--radius-md)",
           fontSize: 13, fontFamily: "var(--font-sans)", boxShadow: "var(--shadow-lg)",
           display: "flex", alignItems: "center", gap: 8, zIndex: 100,
@@ -222,11 +222,11 @@ function PODraftSidebar({ drafts, selectedIdx, onSelect, totalAll }) {
             <div key={d.id} onClick={() => onSelect(i)} style={{
               padding: "11px 12px", marginBottom: 4,
               borderRadius: "var(--radius-md)", cursor: "pointer",
-              background: isSel ? "var(--jade-50)" : "transparent",
+              background: isSel ? "var(--brand-subtle)" : "transparent",
               border: `1px solid ${isSel ? "var(--jade-300)" : "transparent"}`,
               transition: "all 0.1s ease",
             }}
-            onMouseEnter={e => { if (!isSel) e.currentTarget.style.background = "var(--stone-50)"; }}
+            onMouseEnter={e => { if (!isSel) e.currentTarget.style.background = "var(--bg-raised)"; }}
             onMouseLeave={e => { if (!isSel) e.currentTarget.style.background = "transparent"; }}>
               <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 3 }}>
                 <span style={{ fontSize: 13, fontWeight: 600, color: isSel ? "var(--jade-800)" : "var(--text-primary)", fontFamily: "var(--font-sans)" }}>{d.supplier}</span>
@@ -238,16 +238,16 @@ function PODraftSidebar({ drafts, selectedIdx, onSelect, totalAll }) {
               </div>
               <div style={{ display: "flex", gap: 5, marginTop: 6, flexWrap: "wrap" }}>
                 {urgent > 0 && (
-                  <span style={{ fontSize: 9, fontWeight: 600, background: "var(--cinnabar-100)", color: "var(--cinnabar-700)", padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>긴급 {urgent}</span>
+                  <span style={{ fontSize: 9, fontWeight: 600, background: "var(--status-danger-bg)", color: "var(--cinnabar-700)", padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>긴급 {urgent}</span>
                 )}
                 {belowMin && (
                   <span title={`최소 발주 ${won(meta.minOrder)}`}
-                        style={{ fontSize: 9, fontWeight: 600, background: "var(--amber-100)", color: "var(--amber-700)", padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>
+                        style={{ fontSize: 9, fontWeight: 600, background: "var(--status-warning-bg)", color: "var(--amber-700)", padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>
                     최소금액 미달
                   </span>
                 )}
                 {!urgent && !belowMin && (
-                  <span style={{ fontSize: 9, fontWeight: 500, background: "var(--jade-100)", color: "var(--jade-700)", padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>준비됨</span>
+                  <span style={{ fontSize: 9, fontWeight: 500, background: "var(--brand-muted)", color: "var(--jade-700)", padding: "1px 6px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>준비됨</span>
                 )}
               </div>
             </div>
@@ -276,7 +276,7 @@ function PODraftEditor({ draft, draftIdx, activeItemKey, onSelectItem, onUpdateD
         <div style={{ display: "flex", alignItems: "flex-start", gap: 16 }}>
           <div style={{
             width: 44, height: 44, borderRadius: "var(--radius-md)",
-            background: "var(--jade-100)", color: "var(--jade-700)",
+            background: "var(--brand-muted)", color: "var(--jade-700)",
             display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
           }}>
             <Icon name="building-2" size={20} />
@@ -361,7 +361,7 @@ function PODraftEditor({ draft, draftIdx, activeItemKey, onSelectItem, onUpdateD
           <div style={{ overflowX: "auto" }}>
           <table style={{ width: "100%", minWidth: 680, borderCollapse: "collapse", fontFamily: "var(--font-sans)" }}>
             <thead>
-              <tr style={{ background: "var(--stone-100)" }}>
+              <tr style={{ background: "var(--bg-raised)" }}>
                 <th style={dHdrL}>품목</th>
                 <th style={dHdrL}>추천 사유</th>
                 <th style={dHdrR}>현재 재고</th>
@@ -380,17 +380,17 @@ function PODraftEditor({ draft, draftIdx, activeItemKey, onSelectItem, onUpdateD
                     onClick={() => onSelectItem(it.key)}
                     style={{
                       borderTop: "1px solid var(--border-subtle)",
-                      background: isActive ? "var(--jade-50)" : "transparent",
+                      background: isActive ? "var(--brand-subtle)" : "transparent",
                       cursor: "pointer", transition: "background 0.1s ease",
                     }}
-                    onMouseEnter={e => { if (!isActive) e.currentTarget.style.background = "var(--stone-50)"; }}
+                    onMouseEnter={e => { if (!isActive) e.currentTarget.style.background = "var(--bg-raised)"; }}
                     onMouseLeave={e => { if (!isActive) e.currentTarget.style.background = "transparent"; }}>
                     <td style={{ padding: "10px 14px" }}>
                       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                         <span style={{
                           display: "inline-flex", alignItems: "center", justifyContent: "center",
                           width: 22, height: 22, borderRadius: "var(--radius-sm)",
-                          background: it.kind === "herb" ? "var(--jade-100)" : "var(--stone-200)",
+                          background: it.kind === "herb" ? "var(--brand-muted)" : "var(--bg-raised)",
                           color: it.kind === "herb" ? "var(--jade-700)" : "var(--ink-600)",
                           flexShrink: 0,
                         }}>
@@ -409,8 +409,8 @@ function PODraftEditor({ draft, draftIdx, activeItemKey, onSelectItem, onUpdateD
                         color: it.urgency === "high" ? "var(--cinnabar-700)" :
                                it.urgency === "med"  ? "var(--amber-700)" : "var(--jade-700)",
                         padding: "2px 8px", borderRadius: "var(--radius-full)",
-                        background: it.urgency === "high" ? "var(--cinnabar-100)" :
-                                    it.urgency === "med"  ? "var(--amber-100)" : "var(--jade-100)",
+                        background: it.urgency === "high" ? "var(--status-danger-bg)" :
+                                    it.urgency === "med"  ? "var(--status-warning-bg)" : "var(--brand-muted)",
                         whiteSpace: "nowrap",
                       }}>
                         {it.urgency === "high" ? "긴급" : it.urgency === "med" ? "주의" : "여유"} · {it.reason}
@@ -453,7 +453,7 @@ function PODraftEditor({ draft, draftIdx, activeItemKey, onSelectItem, onUpdateD
                   </tr>
                 );
               })}
-              <tr style={{ background: "var(--stone-100)", borderTop: "2px solid var(--border-default)" }}>
+              <tr style={{ background: "var(--bg-raised)", borderTop: "2px solid var(--border-default)" }}>
                 <td colSpan={5} style={{ padding: "10px 14px", textAlign: "right", fontSize: 12, fontWeight: 600, color: "var(--text-secondary)" }}>합계</td>
                 <td style={{ padding: "10px 14px", textAlign: "right", fontSize: 15, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-mono)" }}>{won(total)}</td>
                 <td></td>
@@ -467,7 +467,7 @@ function PODraftEditor({ draft, draftIdx, activeItemKey, onSelectItem, onUpdateD
       {/* 최소 발주 금액 경고 */}
       {belowMin && (
         <div style={{
-          padding: "12px 16px", background: "var(--amber-100)",
+          padding: "12px 16px", background: "var(--status-warning-bg)",
           border: "1px solid var(--amber-200)", borderRadius: "var(--radius-md)",
           display: "flex", alignItems: "flex-start", gap: 10,
         }}>
@@ -561,7 +561,7 @@ function PODraftRightPanel({ draft, activeItemKey }) {
         <div style={{
           color: "var(--text-muted)", fontSize: 12, fontFamily: "var(--font-sans)",
           padding: "24px 12px", textAlign: "center",
-          background: "var(--stone-50)", borderRadius: "var(--radius-md)",
+          background: "var(--bg-raised)", borderRadius: "var(--radius-md)",
           border: "1px dashed var(--border-subtle)",
         }}>
           품목을 선택하면<br/>추천 사유와 가격 이력이 표시됩니다
@@ -570,7 +570,7 @@ function PODraftRightPanel({ draft, activeItemKey }) {
 
       {/* Draft summary */}
       <div style={{
-        marginTop: "auto", padding: "12px 14px", background: "var(--stone-50)",
+        marginTop: "auto", padding: "12px 14px", background: "var(--bg-raised)",
         border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)",
       }}>
         <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 8 }}>이 발주서</div>
@@ -600,7 +600,7 @@ function PODItemDetail({ item, draft }) {
           <span style={{
             display: "inline-flex", alignItems: "center", justifyContent: "center",
             width: 30, height: 30, borderRadius: "var(--radius-md)",
-            background: item.kind === "herb" ? "var(--jade-100)" : "var(--stone-200)",
+            background: item.kind === "herb" ? "var(--brand-muted)" : "var(--bg-raised)",
             color: item.kind === "herb" ? "var(--jade-700)" : "var(--ink-600)",
             flexShrink: 0,
           }}>
@@ -616,8 +616,8 @@ function PODItemDetail({ item, draft }) {
       {/* AI 추천 사유 박스 */}
       <div style={{
         padding: "12px 14px",
-        background: item.urgency === "high" ? "var(--cinnabar-100)" :
-                    item.urgency === "med"  ? "var(--amber-100)" : "var(--jade-50)",
+        background: item.urgency === "high" ? "var(--status-danger-bg)" :
+                    item.urgency === "med"  ? "var(--status-warning-bg)" : "var(--brand-subtle)",
         border: `1px solid ${item.urgency === "high" ? "var(--cinnabar-200)" : item.urgency === "med" ? "var(--amber-200)" : "var(--jade-200)"}`,
         borderRadius: "var(--radius-md)",
       }}>
@@ -681,7 +681,7 @@ function PODItemDetail({ item, draft }) {
           ].map((p, i) => (
             <div key={i} style={{
               display: "flex", justifyContent: "space-between", padding: "6px 10px",
-              background: p.current ? "var(--jade-50)" : "var(--stone-50)",
+              background: p.current ? "var(--brand-subtle)" : "var(--bg-raised)",
               border: `1px solid ${p.current ? "var(--jade-200)" : "var(--border-subtle)"}`,
               borderRadius: "var(--radius-sm)",
               fontSize: 11, fontFamily: "var(--font-mono)",
@@ -719,7 +719,7 @@ function PODraftConfirmModal({ drafts, totalAll, totalItems, onClose, onConfirm 
         <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 16 }}>
           <div style={{
             width: 38, height: 38, borderRadius: "var(--radius-full)",
-            background: "var(--jade-100)", color: "var(--jade-700)",
+            background: "var(--brand-muted)", color: "var(--jade-700)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
             <Icon name="send" size={18} />
@@ -739,7 +739,7 @@ function PODraftConfirmModal({ drafts, totalAll, totalItems, onClose, onConfirm 
 
         {belowMinCount > 0 && (
           <div style={{
-            marginTop: 14, padding: "10px 12px", background: "var(--amber-100)",
+            marginTop: 14, padding: "10px 12px", background: "var(--status-warning-bg)",
             border: "1px solid var(--amber-200)", borderRadius: "var(--radius-md)",
             fontSize: 11, color: "var(--amber-700)", display: "flex", gap: 8,
           }}>

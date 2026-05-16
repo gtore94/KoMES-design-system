@@ -100,7 +100,7 @@ function SupplyAdjustmentScreen({ onClose, onSubmit }) {
 
           {/* Category quick filter */}
           <div style={{ padding: "16px 24px 8px", display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
-            <div style={{ display: "flex", gap: 4, background: "var(--stone-100)", padding: 3, borderRadius: "var(--radius-md)", border: "1px solid var(--border-subtle)" }}>
+            <div style={{ display: "flex", gap: 4, background: "var(--bg-raised)", padding: 3, borderRadius: "var(--radius-md)", border: "1px solid var(--border-subtle)" }}>
               {[
                 { key: "all",    label: "전체",    count: SUPPLIES.length },
                 { key: "empty",  label: "미실사",  count: SUPPLIES.length - summary.counted },
@@ -120,7 +120,7 @@ function SupplyAdjustmentScreen({ onClose, onSubmit }) {
                   {t.label}
                   <span style={{
                     fontSize: 10, fontFamily: "var(--font-mono)",
-                    background: filter === t.key ? (t.key === "diff" ? "var(--cinnabar-100)" : "var(--jade-100)") : "var(--stone-200)",
+                    background: filter === t.key ? (t.key === "diff" ? "var(--status-danger-bg)" : "var(--brand-muted)") : "var(--bg-raised)",
                     color: filter === t.key ? (t.key === "diff" ? "var(--cinnabar-700)" : "var(--jade-700)") : "var(--text-muted)",
                     padding: "0 6px", borderRadius: "var(--radius-full)",
                   }}>{t.count}</span>
@@ -143,7 +143,7 @@ function SupplyAdjustmentScreen({ onClose, onSubmit }) {
                   style={{
                     fontFamily: "var(--font-sans)", fontSize: 12, padding: "5px 12px",
                     border: `1px solid ${sel ? (tone?.fg || "var(--ink-600)") : "var(--border-default)"}`,
-                    background: sel ? (tone?.bg || "var(--stone-100)") : "var(--bg-surface)",
+                    background: sel ? (tone?.bg || "var(--bg-raised)") : "var(--bg-surface)",
                     color: sel ? (tone?.fg || "var(--text-primary)") : "var(--text-secondary)",
                     borderRadius: "var(--radius-full)", cursor: "pointer",
                     fontWeight: sel ? 600 : 400,
@@ -161,7 +161,7 @@ function SupplyAdjustmentScreen({ onClose, onSubmit }) {
             }}>
               <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "var(--font-sans)" }}>
                 <thead>
-                  <tr style={{ background: "var(--stone-100)" }}>
+                  <tr style={{ background: "var(--bg-raised)" }}>
                     <th style={hdrLs}>품목</th>
                     <th style={hdrLs}>위치</th>
                     <th style={hdrRs}>시스템 재고</th>
@@ -190,9 +190,9 @@ function SupplyAdjustmentScreen({ onClose, onSubmit }) {
                     return (
                       <tr key={s.id} style={{
                         borderTop: "1px solid var(--border-subtle)",
-                        background: tone === "match" ? "var(--jade-50)" :
-                                    tone === "alert" ? "var(--cinnabar-100)" :
-                                    tone === "diff"  ? "var(--amber-100)" : "transparent",
+                        background: tone === "match" ? "var(--brand-subtle)" :
+                                    tone === "alert" ? "var(--status-danger-bg)" :
+                                    tone === "diff"  ? "var(--status-warning-bg)" : "transparent",
                       }}>
                         <td style={{ padding: "10px 14px" }}>
                           <div style={{ fontSize: 13, fontWeight: 500, color: "var(--text-primary)" }}>{s.name}</div>
@@ -262,7 +262,7 @@ function SupplyAdjustmentScreen({ onClose, onSubmit }) {
                             onChange={ev => setEdit(s.id, { reason: ev.target.value })}
                             style={{
                               fontFamily: "var(--font-sans)", fontSize: 12, color: "var(--text-primary)",
-                              background: !hasCount || diff === 0 ? "var(--stone-100)" : "var(--bg-surface)",
+                              background: !hasCount || diff === 0 ? "var(--bg-raised)" : "var(--bg-surface)",
                               border: "1px solid var(--border-default)",
                               borderRadius: "var(--radius-md)", padding: "6px 24px 6px 8px",
                               outline: "none", appearance: "none",
@@ -281,7 +281,7 @@ function SupplyAdjustmentScreen({ onClose, onSubmit }) {
                             style={{
                               width: "100%", padding: "7px 10px",
                               fontFamily: "var(--font-sans)", fontSize: 12, color: "var(--text-primary)",
-                              background: !hasCount ? "var(--stone-100)" : "var(--bg-surface)",
+                              background: !hasCount ? "var(--bg-raised)" : "var(--bg-surface)",
                               border: "1px solid var(--border-default)",
                               borderRadius: "var(--radius-md)", outline: "none",
                               opacity: !hasCount ? 0.5 : 1, minWidth: 110,
@@ -334,9 +334,9 @@ const hdrCs = { ...hdrBaseS, textAlign: "center" };
 
 function SAStatCard({ icon, label, value, sub, tone = "neutral" }) {
   const tones = {
-    neutral: { fg: "var(--text-primary)",  bg: "var(--stone-100)",  iconFg: "var(--ink-600)" },
-    success: { fg: "var(--jade-800)",      bg: "var(--jade-50)",    iconFg: "var(--jade-700)" },
-    danger:  { fg: "var(--cinnabar-700)",  bg: "var(--cinnabar-100)", iconFg: "var(--cinnabar-700)" },
+    neutral: { fg: "var(--text-primary)",  bg: "var(--bg-raised)",  iconFg: "var(--ink-600)" },
+    success: { fg: "var(--jade-800)",      bg: "var(--brand-subtle)",    iconFg: "var(--jade-700)" },
+    danger:  { fg: "var(--cinnabar-700)",  bg: "var(--status-danger-bg)", iconFg: "var(--cinnabar-700)" },
   };
   const t = tones[tone];
   return (
@@ -383,7 +383,7 @@ function SAReviewPanel({ summary, edits }) {
     }}>
       <div>
         <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 6 }}>실사 진행</div>
-        <div style={{ position: "relative", height: 8, background: "var(--stone-200)", borderRadius: 4, overflow: "hidden" }}>
+        <div style={{ position: "relative", height: 8, background: "var(--bg-raised)", borderRadius: 4, overflow: "hidden" }}>
           <div style={{
             position: "absolute", top: 0, bottom: 0, left: 0,
             width: `${(summary.counted / summary.total) * 100}%`,
@@ -403,7 +403,7 @@ function SAReviewPanel({ summary, edits }) {
         {changes.length === 0 ? (
           <div style={{
             padding: "20px 12px", textAlign: "center", color: "var(--text-muted)",
-            fontSize: 12, background: "var(--stone-50)", borderRadius: "var(--radius-md)",
+            fontSize: 12, background: "var(--bg-raised)", borderRadius: "var(--radius-md)",
             border: "1px dashed var(--border-subtle)",
           }}>
             아직 차이가 발생한<br/>품목이 없습니다
@@ -416,7 +416,7 @@ function SAReviewPanel({ summary, edits }) {
               return (
                 <div key={s.id} style={{
                   padding: "8px 10px", border: "1px solid var(--border-subtle)",
-                  borderRadius: "var(--radius-md)", background: "var(--stone-50)",
+                  borderRadius: "var(--radius-md)", background: "var(--bg-raised)",
                   display: "flex", flexDirection: "column", gap: 2,
                 }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 6 }}>
@@ -445,7 +445,7 @@ function SAReviewPanel({ summary, edits }) {
       </div>
 
       <div style={{
-        marginTop: "auto", padding: "12px 14px", background: "var(--jade-50)",
+        marginTop: "auto", padding: "12px 14px", background: "var(--brand-subtle)",
         border: "1px solid var(--jade-200)", borderRadius: "var(--radius-md)",
         display: "flex", flexDirection: "column", gap: 8,
       }}>
@@ -480,7 +480,7 @@ function SAConfirmModal({ summary, edits, onClose, onConfirm }) {
         <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 16 }}>
           <div style={{
             width: 36, height: 36, borderRadius: "var(--radius-full)",
-            background: "var(--jade-100)", color: "var(--jade-700)",
+            background: "var(--brand-muted)", color: "var(--jade-700)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
             <Icon name="check-check" size={18} />
@@ -500,7 +500,7 @@ function SAConfirmModal({ summary, edits, onClose, onConfirm }) {
         </div>
 
         <div style={{
-          marginTop: 14, padding: "10px 12px", background: "var(--amber-100)",
+          marginTop: 14, padding: "10px 12px", background: "var(--status-warning-bg)",
           border: "1px solid var(--amber-200)", borderRadius: "var(--radius-md)",
           fontSize: 11, color: "var(--amber-700)", display: "flex", gap: 8,
         }}>

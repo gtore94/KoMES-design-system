@@ -93,7 +93,7 @@ function SRTextField({ value, onChange, placeholder, mono, type = "text", disabl
       placeholder={placeholder}
       style={{
         width: "100%", border: `1px solid ${focused ? "var(--border-brand)" : "var(--border-default)"}`,
-        background: disabled ? "var(--stone-100)" : "var(--bg-surface)",
+        background: disabled ? "var(--bg-raised)" : "var(--bg-surface)",
         borderRadius: "var(--radius-md)", padding: "8px 10px",
         fontSize: 13, outline: "none",
         fontFamily: mono ? "var(--font-mono)" : "var(--font-sans)",
@@ -126,7 +126,7 @@ function SRSelect({ value, onChange, options }) {
 
 function SRSegmented({ options, value, onChange }) {
   return (
-    <div style={{ display: "inline-flex", background: "var(--stone-100)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", padding: 2, gap: 2 }}>
+    <div style={{ display: "inline-flex", background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", padding: 2, gap: 2 }}>
       {options.map(opt => (
         <button key={opt} onClick={() => onChange(opt)} style={{
           padding: "5px 12px", border: "none", cursor: "pointer",
@@ -145,8 +145,8 @@ function SRSegmented({ options, value, onChange }) {
 function SRSectionCard({ step, icon, title, hint, children }) {
   return (
     <div style={{ background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-lg)", overflow: "hidden", flexShrink: 0 }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 18px", borderBottom: "1px solid var(--stone-200)", background: "var(--stone-50)" }}>
-        <div style={{ width: 24, height: 24, borderRadius: "50%", background: "var(--jade-100)", color: "var(--jade-700)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700 }}>{step}</div>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 18px", borderBottom: "1px solid var(--border-subtle)", background: "var(--bg-raised)" }}>
+        <div style={{ width: 24, height: 24, borderRadius: "50%", background: "var(--brand-muted)", color: "var(--jade-700)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700 }}>{step}</div>
         <Icon name={icon} size={15} style={{ color: "var(--jade-600)" }} />
         <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>{title}</span>
         {hint && <span style={{ marginLeft: "auto", fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>{hint}</span>}
@@ -229,7 +229,7 @@ function NewStaffModal({ onClose, onSubmit, initialData }) {
       }}>
         {/* Header */}
         <div style={{ display: "flex", alignItems: "center", gap: 14, padding: "16px 22px", background: "var(--bg-surface)", borderBottom: "1px solid var(--border-subtle)" }}>
-          <div style={{ width: 38, height: 38, borderRadius: "var(--radius-md)", background: "var(--jade-100)", color: "var(--jade-700)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ width: 38, height: 38, borderRadius: "var(--radius-md)", background: "var(--brand-muted)", color: "var(--jade-700)", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <Icon name="user-plus" size={18} />
           </div>
           <div style={{ flex: 1 }}>
@@ -372,7 +372,7 @@ function NewStaffModal({ onClose, onSubmit, initialData }) {
                       />
                     )}
                     {isOff && (
-                      <div style={{ fontSize: 11, padding: "5px 6px", background: "var(--stone-100)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-sm)", textAlign: "center", color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>
+                      <div style={{ fontSize: 11, padding: "5px 6px", background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-sm)", textAlign: "center", color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>
                         {val}
                       </div>
                     )}
@@ -397,7 +397,7 @@ function NewStaffModal({ onClose, onSubmit, initialData }) {
                         display: "inline-flex", alignItems: "center", gap: 5,
                         padding: "5px 12px", borderRadius: "var(--radius-full)",
                         border: `1px solid ${active ? "var(--jade-300)" : "var(--border-default)"}`,
-                        background: active ? "var(--jade-100)" : "var(--bg-surface)",
+                        background: active ? "var(--brand-muted)" : "var(--bg-surface)",
                         color: active ? "var(--jade-700)" : "var(--text-secondary)",
                         fontSize: 12, fontWeight: active ? 600 : 400, cursor: "pointer",
                         fontFamily: "var(--font-sans)", transition: "all 0.12s",
@@ -433,7 +433,7 @@ function NewStaffModal({ onClose, onSubmit, initialData }) {
                         <label key={p.key} style={{
                           display: "flex", alignItems: "center", gap: 10, padding: "8px 12px",
                           border: `1px solid ${active ? "var(--jade-200)" : "var(--border-subtle)"}`,
-                          background: active ? "var(--jade-50)" : "var(--bg-surface)",
+                          background: active ? "var(--brand-subtle)" : "var(--bg-surface)",
                           borderRadius: "var(--radius-md)", cursor: "pointer",
                         }}>
                           <input type="checkbox" checked={active} onChange={() => togglePermission(p.key)}
@@ -459,7 +459,7 @@ function NewStaffModal({ onClose, onSubmit, initialData }) {
                 <SRSegmented options={["월급제","연봉제","시급제"]} value={d.salaryType} onChange={v => set("salaryType", v)} />
               </div>
             </div>
-            <div style={{ marginTop: 12, padding: "10px 12px", background: "var(--stone-50)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", display: "flex", alignItems: "center", gap: 10 }}>
+            <div style={{ marginTop: 12, padding: "10px 12px", background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", display: "flex", alignItems: "center", gap: 10 }}>
               <Icon name="lock" size={14} style={{ color: "var(--text-muted)" }} />
               <span style={{ fontSize: 12, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>급여 금액은 등록 후 원장 권한으로 별도 입력합니다.</span>
             </div>

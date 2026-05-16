@@ -94,7 +94,7 @@ function RecommendationSettingsModal({ onClose, onSave, initial = REC_DEFAULTS }
         }}>
           <div style={{
             width: 38, height: 38, borderRadius: "var(--radius-md)",
-            background: "var(--jade-100)", color: "var(--jade-700)",
+            background: "var(--brand-muted)", color: "var(--jade-700)",
             display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
           }}>
             <Icon name="sparkles" size={18} />
@@ -155,7 +155,7 @@ function RecommendationSettingsModal({ onClose, onSave, initial = REC_DEFAULTS }
         {/* Footer */}
         <div style={{
           padding: "14px 24px", borderTop: "1px solid var(--border-subtle)",
-          display: "flex", alignItems: "center", gap: 10, background: "var(--stone-50)",
+          display: "flex", alignItems: "center", gap: 10, background: "var(--bg-raised)",
         }}>
           <Button variant="ghost" size="sm" icon="rotate-ccw" onClick={() => setS({ ...REC_DEFAULTS })}>기본값으로</Button>
           <div style={{ flex: 1 }}></div>
@@ -185,7 +185,7 @@ function TriggerPanel({ s, set }) {
               style={{
                 flex: 1, padding: "14px 12px", fontFamily: "var(--font-sans)", fontSize: 13,
                 border: `2px solid ${s.scope === o.key ? "var(--jade-500)" : "var(--border-default)"}`,
-                background: s.scope === o.key ? "var(--jade-50)" : "var(--bg-surface)",
+                background: s.scope === o.key ? "var(--brand-subtle)" : "var(--bg-surface)",
                 color: s.scope === o.key ? "var(--jade-700)" : "var(--text-secondary)",
                 borderRadius: "var(--radius-md)", cursor: "pointer",
                 fontWeight: s.scope === o.key ? 600 : 400,
@@ -206,7 +206,7 @@ function TriggerPanel({ s, set }) {
           onChange={v => set({ daysLeftTrigger: v })} />
 
         <div style={{
-          padding: "10px 14px", margin: "8px 0", background: "var(--stone-100)",
+          padding: "10px 14px", margin: "8px 0", background: "var(--bg-raised)",
           borderRadius: "var(--radius-md)", display: "flex", justifyContent: "center",
           fontSize: 11, color: "var(--text-muted)", letterSpacing: "0.04em",
         }}>또는</div>
@@ -335,7 +335,7 @@ function AlertPanel({ s, set }) {
           value={s.autoApprove} onChange={v => set({ autoApprove: v })} />
         {s.autoApprove && (
           <div style={{
-            marginTop: 14, padding: "14px 16px", background: "var(--amber-100)",
+            marginTop: 14, padding: "14px 16px", background: "var(--status-warning-bg)",
             border: "1px solid var(--amber-200)", borderRadius: "var(--radius-md)",
           }}>
             <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
@@ -380,7 +380,7 @@ function ExceptionPanel({ s, set, toggleArr }) {
                   style={{
                     fontFamily: "var(--font-sans)", fontSize: 12, padding: "5px 11px",
                     border: `1px solid ${sel ? "var(--cinnabar-400)" : "var(--border-default)"}`,
-                    background: sel ? "var(--cinnabar-100)" : "var(--bg-surface)",
+                    background: sel ? "var(--status-danger-bg)" : "var(--bg-surface)",
                     color: sel ? "var(--cinnabar-700)" : "var(--text-secondary)",
                     borderRadius: "var(--radius-full)", cursor: "pointer",
                     fontWeight: sel ? 600 : 400,
@@ -406,7 +406,7 @@ function ExceptionPanel({ s, set, toggleArr }) {
                     style={{
                       fontFamily: "var(--font-sans)", fontSize: 12, padding: "5px 11px",
                       border: `1px solid ${sel ? "var(--cinnabar-400)" : "var(--border-default)"}`,
-                      background: sel ? "var(--cinnabar-100)" : "var(--bg-surface)",
+                      background: sel ? "var(--status-danger-bg)" : "var(--bg-surface)",
                       color: sel ? "var(--cinnabar-700)" : "var(--text-secondary)",
                       borderRadius: "var(--radius-full)", cursor: "pointer",
                       fontWeight: sel ? 600 : 400,
@@ -426,7 +426,7 @@ function ExceptionPanel({ s, set, toggleArr }) {
 
       <RSSection title="추후 추가될 기능" desc="다음 업데이트에서 지원 예정">
         <div style={{
-          padding: "12px 14px", background: "var(--stone-50)",
+          padding: "12px 14px", background: "var(--bg-raised)",
           border: "1px dashed var(--border-subtle)", borderRadius: "var(--radius-md)",
           display: "flex", flexDirection: "column", gap: 6,
         }}>
@@ -450,7 +450,7 @@ function ExceptionPanel({ s, set, toggleArr }) {
 // ── 우측 라이브 프리뷰 ────────────────────────────────────────────
 function RSPreviewPanel({ preview, settings }) {
   return (
-    <div style={{ flex: "1 1 44%", background: "var(--stone-50)", display: "flex", flexDirection: "column", minWidth: 0 }}>
+    <div style={{ flex: "1 1 44%", background: "var(--bg-raised)", display: "flex", flexDirection: "column", minWidth: 0 }}>
       <div style={{ padding: "14px 20px", borderBottom: "1px solid var(--border-subtle)", display: "flex", alignItems: "center", gap: 8 }}>
         <Icon name="eye" size={14} style={{ color: "var(--jade-700)" }} />
         <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>실시간 미리보기</span>
@@ -492,13 +492,13 @@ function RSPreviewPanel({ preview, settings }) {
               }}>
                 <div style={{
                   padding: "10px 14px", display: "flex", justifyContent: "space-between",
-                  alignItems: "center", background: "var(--jade-50)",
+                  alignItems: "center", background: "var(--brand-subtle)",
                   borderBottom: "1px solid var(--jade-200)",
                 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                     <Icon name="building" size={13} style={{ color: "var(--jade-700)" }} />
                     <span style={{ fontSize: 13, fontWeight: 600, color: "var(--jade-800)" }}>{g.supplier}</span>
-                    <span style={{ fontSize: 10, fontFamily: "var(--font-mono)", color: "var(--jade-700)", background: "var(--jade-100)", padding: "1px 6px", borderRadius: "var(--radius-full)" }}>
+                    <span style={{ fontSize: 10, fontFamily: "var(--font-mono)", color: "var(--jade-700)", background: "var(--brand-muted)", padding: "1px 6px", borderRadius: "var(--radius-full)" }}>
                       {g.items.length}품목
                     </span>
                   </div>
@@ -515,7 +515,7 @@ function RSPreviewPanel({ preview, settings }) {
                       <span style={{
                         display: "inline-flex", alignItems: "center", justifyContent: "center",
                         width: 18, height: 18, borderRadius: "var(--radius-sm)",
-                        background: i.kind === "herb" ? "var(--jade-100)" : "var(--stone-200)",
+                        background: i.kind === "herb" ? "var(--brand-muted)" : "var(--bg-raised)",
                         color: i.kind === "herb" ? "var(--jade-700)" : "var(--ink-600)",
                       }}>
                         <Icon name={i.kind === "herb" ? "leaf" : "package"} size={10} />
@@ -531,8 +531,8 @@ function RSPreviewPanel({ preview, settings }) {
                       </div>
                       <span style={{
                         fontSize: 9, padding: "2px 6px", borderRadius: "var(--radius-full)",
-                        background: i.urgency === "high" ? "var(--cinnabar-100)" :
-                                    i.urgency === "med"  ? "var(--amber-100)" : "var(--stone-100)",
+                        background: i.urgency === "high" ? "var(--status-danger-bg)" :
+                                    i.urgency === "med"  ? "var(--status-warning-bg)" : "var(--bg-raised)",
                         color:      i.urgency === "high" ? "var(--cinnabar-700)" :
                                     i.urgency === "med"  ? "var(--amber-700)" : "var(--text-muted)",
                         fontWeight: 600, fontFamily: "var(--font-sans)",
@@ -613,7 +613,7 @@ function RSToggle({ label, desc, value, onChange }) {
       display: "flex", alignItems: "center", justifyContent: "space-between",
       padding: "12px 14px",
       border: `1px solid ${value ? "var(--jade-300)" : "var(--border-subtle)"}`,
-      background: value ? "var(--jade-50)" : "var(--bg-surface)",
+      background: value ? "var(--brand-subtle)" : "var(--bg-surface)",
       borderRadius: "var(--radius-md)", cursor: "pointer",
       transition: "all 0.12s ease",
     }}>
@@ -638,8 +638,8 @@ function RSToggle({ label, desc, value, onChange }) {
 
 function RSStatCard({ label, value, sub, icon, tone, small }) {
   const tones = {
-    brand:   { bg: "var(--jade-50)",     border: "var(--jade-200)",     fg: "var(--jade-700)" },
-    warning: { bg: "var(--amber-100)",   border: "var(--amber-200)",    fg: "var(--amber-700)" },
+    brand:   { bg: "var(--brand-subtle)",     border: "var(--jade-200)",     fg: "var(--jade-700)" },
+    warning: { bg: "var(--status-warning-bg)",   border: "var(--amber-200)",    fg: "var(--amber-700)" },
     default: { bg: "var(--bg-surface)",  border: "var(--border-subtle)", fg: "var(--text-primary)" },
   };
   const t = tones[tone] || tones.default;
@@ -661,7 +661,7 @@ function RSStatCard({ label, value, sub, icon, tone, small }) {
 const chip = (sel) => ({
   fontFamily: "var(--font-sans)", fontSize: 12, padding: "5px 11px",
   border: `1px solid ${sel ? "var(--jade-500)" : "var(--border-default)"}`,
-  background: sel ? "var(--jade-50)" : "var(--bg-surface)",
+  background: sel ? "var(--brand-subtle)" : "var(--bg-surface)",
   color: sel ? "var(--jade-700)" : "var(--text-secondary)",
   borderRadius: "var(--radius-md)", cursor: "pointer",
   fontWeight: sel ? 600 : 400,

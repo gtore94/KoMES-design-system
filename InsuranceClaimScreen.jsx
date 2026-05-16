@@ -219,9 +219,9 @@ function InsuranceClaimScreen() {
 
 function PillStat({ icon, label, value, tone, mono }) {
   const tones = {
-    neutral: { bg: "var(--stone-100)", fg: "var(--text-secondary)", bd: "var(--stone-200)", iconColor: "var(--text-muted)" },
-    brand:   { bg: "var(--jade-50)", fg: "var(--jade-700)", bd: "var(--jade-200)", iconColor: "var(--jade-600)" },
-    danger:  { bg: "var(--cinnabar-100)", fg: "var(--cinnabar-700)", bd: "var(--cinnabar-200)", iconColor: "var(--cinnabar-600)" },
+    neutral: { bg: "var(--bg-raised)", fg: "var(--text-secondary)", bd: "var(--border-subtle)", iconColor: "var(--text-muted)" },
+    brand:   { bg: "var(--brand-subtle)", fg: "var(--jade-700)", bd: "var(--jade-200)", iconColor: "var(--jade-600)" },
+    danger:  { bg: "var(--status-danger-bg)", fg: "var(--cinnabar-700)", bd: "var(--cinnabar-200)", iconColor: "var(--cinnabar-600)" },
   };
   const t = tones[tone] || tones.neutral;
   return (

@@ -30,7 +30,7 @@ function ClaimTypeTabs({ active, onChange, counts }) {
           }}>
             <div style={{
               width: 28, height: 28, borderRadius: "var(--radius-md)",
-              background: isActive ? t.pillColor : "var(--stone-100)",
+              background: isActive ? t.pillColor : "var(--bg-raised)",
               color: isActive ? "#fff" : "var(--text-muted)",
               display: "flex", alignItems: "center", justifyContent: "center",
               transition: "all 0.12s",
@@ -51,7 +51,7 @@ function ClaimTypeTabs({ active, onChange, counts }) {
             <span style={{
               fontSize: 11, fontWeight: 700, padding: "2px 8px",
               borderRadius: "var(--radius-full)",
-              background: isActive ? t.pillColor : "var(--stone-200)",
+              background: isActive ? t.pillColor : "var(--bg-raised)",
               color: isActive ? "#fff" : "var(--text-muted)",
               fontFamily: "var(--font-mono)", marginLeft: 4,
             }}>{counts[t.key]}</span>
@@ -79,7 +79,7 @@ function PeriodAndSummary({
       display: "flex", flexDirection: "column", minHeight: 0, overflowY: "auto",
     }}>
       {/* Header */}
-      <div style={{ padding: "18px 20px 14px", borderBottom: "1px solid var(--stone-200)" }}>
+      <div style={{ padding: "18px 20px 14px", borderBottom: "1px solid var(--border-subtle)" }}>
         <div style={{
           fontSize: 10, fontWeight: 700, color: "var(--text-muted)",
           letterSpacing: "0.08em", textTransform: "uppercase",
@@ -176,7 +176,7 @@ function PeriodAndSummary({
 
       {/* 청구 내역 요약 */}
       {loaded && (
-        <div style={{ padding: "16px 20px 20px", borderTop: "1px solid var(--stone-200)", marginTop: 6 }}>
+        <div style={{ padding: "16px 20px 20px", borderTop: "1px solid var(--border-subtle)", marginTop: 6 }}>
           <div style={{
             fontSize: 10, fontWeight: 700, color: "var(--text-muted)",
             letterSpacing: "0.08em", textTransform: "uppercase",
@@ -189,8 +189,8 @@ function PeriodAndSummary({
 
           {/* 기간 정보 */}
           <div style={{
-            background: "var(--stone-50)",
-            border: "1px solid var(--stone-200)",
+            background: "var(--bg-raised)",
+            border: "1px solid var(--border-subtle)",
             borderRadius: "var(--radius-md)",
             padding: "10px 12px", marginBottom: 12,
           }}>
@@ -225,7 +225,7 @@ function PeriodAndSummary({
               <div key={d.id} style={{
                 display: "grid", gridTemplateColumns: "60px 1fr 36px 24px",
                 padding: "7px 8px", alignItems: "center",
-                borderBottom: i < doctors.length - 1 ? "1px solid var(--stone-100)" : "none",
+                borderBottom: i < doctors.length - 1 ? "1px solid var(--border-subtle)" : "none",
                 fontSize: 12,
               }}>
                 <span style={{ fontWeight: 500, color: "var(--text-primary)" }}>{d.name}</span>
@@ -302,7 +302,7 @@ function RadioRow({ checked, onClick, children }) {
     <div onClick={onClick} style={{
       display: "flex", alignItems: "center", gap: 6,
       padding: "6px 8px", borderRadius: "var(--radius-sm)",
-      background: checked ? "var(--jade-50)" : "transparent",
+      background: checked ? "var(--brand-subtle)" : "transparent",
       border: `1px solid ${checked ? "var(--jade-200)" : "transparent"}`,
       cursor: "pointer", transition: "all 0.12s",
     }}>

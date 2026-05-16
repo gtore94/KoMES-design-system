@@ -94,7 +94,7 @@ function PurchaseOrderHistoryScreen({ openSettings }) {
             gap: 10, flexWrap: "wrap",
           }}>
             {/* Period segmented */}
-            <div style={{ display: "flex", gap: 0, background: "var(--stone-100)", padding: 3, borderRadius: "var(--radius-md)", border: "1px solid var(--border-subtle)" }}>
+            <div style={{ display: "flex", gap: 0, background: "var(--bg-raised)", padding: 3, borderRadius: "var(--radius-md)", border: "1px solid var(--border-subtle)" }}>
               {[
                 { key: "30d", label: "30일" },
                 { key: "90d", label: "90일" },
@@ -124,7 +124,7 @@ function PurchaseOrderHistoryScreen({ openSettings }) {
                   style={{
                     fontFamily: "var(--font-sans)", fontSize: 12, padding: "5px 12px",
                     border: `1px solid ${typeFilter === t.key ? "var(--jade-500)" : "var(--border-default)"}`,
-                    background: typeFilter === t.key ? "var(--jade-50)" : "var(--bg-surface)",
+                    background: typeFilter === t.key ? "var(--brand-subtle)" : "var(--bg-surface)",
                     color: typeFilter === t.key ? "var(--jade-700)" : "var(--text-secondary)",
                     borderRadius: "var(--radius-full)", cursor: "pointer",
                     fontWeight: typeFilter === t.key ? 600 : 400,
@@ -165,7 +165,7 @@ function PurchaseOrderHistoryScreen({ openSettings }) {
             }}>
               <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "var(--font-sans)" }}>
                 <thead>
-                  <tr style={{ background: "var(--stone-100)" }}>
+                  <tr style={{ background: "var(--bg-raised)" }}>
                     <th style={poHdrL}>발주번호</th>
                     <th style={poHdrC}>유형</th>
                     <th style={poHdrL}>공급처</th>
@@ -190,10 +190,10 @@ function PurchaseOrderHistoryScreen({ openSettings }) {
                       <tr key={po.id} onClick={() => setSelectedId(po.id)}
                         style={{
                           borderTop: "1px solid var(--border-subtle)",
-                          background: isSel ? "var(--jade-50)" : "transparent",
+                          background: isSel ? "var(--brand-subtle)" : "transparent",
                           cursor: "pointer", transition: "background 0.1s ease",
                         }}
-                        onMouseEnter={e => { if (!isSel) e.currentTarget.style.background = "var(--stone-50)"; }}
+                        onMouseEnter={e => { if (!isSel) e.currentTarget.style.background = "var(--bg-raised)"; }}
                         onMouseLeave={e => { if (!isSel) e.currentTarget.style.background = "transparent"; }}>
                         <td style={{ padding: "10px 14px" }}>
                           <div style={{ fontSize: 12, fontFamily: "var(--font-mono)", color: "var(--text-primary)", fontWeight: 500 }}>{po.id}</div>
@@ -202,7 +202,7 @@ function PurchaseOrderHistoryScreen({ openSettings }) {
                           <span title={po.type === "herb" ? "약재" : "소모품"} style={{
                             display: "inline-flex", alignItems: "center", justifyContent: "center",
                             width: 24, height: 24, borderRadius: "var(--radius-sm)",
-                            background: po.type === "herb" ? "var(--jade-100)" : "var(--stone-200)",
+                            background: po.type === "herb" ? "var(--brand-muted)" : "var(--bg-raised)",
                             color: po.type === "herb" ? "var(--jade-700)" : "var(--ink-600)",
                           }}>
                             <Icon name={po.type === "herb" ? "leaf" : "package"} size={12} />
@@ -213,7 +213,7 @@ function PurchaseOrderHistoryScreen({ openSettings }) {
                           <div style={{ display: "flex", alignItems: "center", gap: 4, maxWidth: 220, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                             <span style={{ overflow: "hidden", textOverflow: "ellipsis" }}>{po.items[0].name}</span>
                             {po.items.length > 1 && (
-                              <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)", background: "var(--stone-100)", padding: "0 5px", borderRadius: "var(--radius-full)", flexShrink: 0 }}>
+                              <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)", background: "var(--bg-raised)", padding: "0 5px", borderRadius: "var(--radius-full)", flexShrink: 0 }}>
                                 +{po.items.length - 1}
                               </span>
                             )}
@@ -255,7 +255,7 @@ function PurchaseOrderHistoryScreen({ openSettings }) {
       {toast && (
         <div style={{
           position: "fixed", bottom: 20, left: "50%", transform: "translateX(-50%)",
-          background: "var(--ink-800)", color: "var(--stone-50)",
+          background: "var(--ink-800)", color: "var(--bg-raised)",
           padding: "10px 18px", borderRadius: "var(--radius-md)",
           fontSize: 13, fontFamily: "var(--font-sans)", boxShadow: "var(--shadow-lg)",
           display: "flex", alignItems: "center", gap: 8, zIndex: 100,
@@ -278,7 +278,7 @@ function POKpi({ icon, label, value, sub, accent }) {
     }}>
       <div style={{
         width: 36, height: 36, borderRadius: "var(--radius-md)",
-        background: "var(--jade-50)", color: "var(--jade-700)",
+        background: "var(--brand-subtle)", color: "var(--jade-700)",
         display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
       }}>
         <Icon name={icon} size={16} />
@@ -321,12 +321,12 @@ function POStatusBar({ orders, statusFilter, onClick }) {
             <button onClick={() => onClick(active ? "all" : s.key)}
               style={{
                 flex: 1, padding: "8px 12px", border: "none", cursor: "pointer",
-                background: active ? "var(--jade-50)" : "transparent",
+                background: active ? "var(--brand-subtle)" : "transparent",
                 borderRadius: "var(--radius-md)", textAlign: "left",
                 transition: "background 0.12s ease",
                 fontFamily: "var(--font-sans)",
               }}
-              onMouseEnter={e => { if (!active) e.currentTarget.style.background = "var(--stone-50)"; }}
+              onMouseEnter={e => { if (!active) e.currentTarget.style.background = "var(--bg-raised)"; }}
               onMouseLeave={e => { if (!active) e.currentTarget.style.background = "transparent"; }}>
               <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
                 <span style={{ fontSize: 22, fontWeight: 600, fontFamily: "var(--font-mono)", color: active ? "var(--jade-700)" : "var(--text-primary)", lineHeight: 1 }}>{s.count}</span>
@@ -407,7 +407,7 @@ function PODetailPanel({ po, onToast }) {
           </div>
         ) : (
           <div style={{
-            padding: "8px 12px", marginTop: 10, background: po.status === "returned" ? "var(--cinnabar-100)" : "var(--stone-100)",
+            padding: "8px 12px", marginTop: 10, background: po.status === "returned" ? "var(--status-danger-bg)" : "var(--bg-raised)",
             border: `1px solid ${po.status === "returned" ? "var(--cinnabar-200)" : "var(--stone-300)"}`,
             borderRadius: "var(--radius-md)", fontSize: 11, color: po.status === "returned" ? "var(--cinnabar-700)" : "var(--text-secondary)",
           }}>{st.label} 처리된 발주입니다</div>
@@ -439,7 +439,7 @@ function PODetailPanel({ po, onToast }) {
           <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 8 }}>
             품목 ({po.items.length})
           </div>
-          <div style={{ background: "var(--stone-50)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", overflow: "hidden" }}>
+          <div style={{ background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", overflow: "hidden" }}>
             {po.items.map((it, i) => (
               <div key={i} style={{
                 padding: "9px 12px",
@@ -457,7 +457,7 @@ function PODetailPanel({ po, onToast }) {
                 </div>
               </div>
             ))}
-            <div style={{ padding: "9px 12px", borderTop: "1px solid var(--border-subtle)", background: "var(--stone-100)", display: "flex", justifyContent: "space-between" }}>
+            <div style={{ padding: "9px 12px", borderTop: "1px solid var(--border-subtle)", background: "var(--bg-raised)", display: "flex", justifyContent: "space-between" }}>
               <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-secondary)" }}>합계</span>
               <span style={{ fontSize: 13, fontWeight: 600, fontFamily: "var(--font-mono)", color: "var(--text-primary)" }}>{won(total)}</span>
             </div>
@@ -467,7 +467,7 @@ function PODetailPanel({ po, onToast }) {
         {/* Note */}
         {po.note && (
           <div style={{
-            padding: "10px 12px", background: "var(--amber-100)",
+            padding: "10px 12px", background: "var(--status-warning-bg)",
             border: "1px solid var(--amber-200)", borderRadius: "var(--radius-md)",
             fontSize: 12, color: "var(--amber-700)", lineHeight: 1.5,
             display: "flex", gap: 8,
@@ -499,7 +499,7 @@ function PODetailPanel({ po, onToast }) {
       </div>
 
       {/* Footer actions */}
-      <div style={{ padding: "12px 18px", borderTop: "1px solid var(--border-subtle)", display: "flex", gap: 6, background: "var(--stone-50)" }}>
+      <div style={{ padding: "12px 18px", borderTop: "1px solid var(--border-subtle)", display: "flex", gap: 6, background: "var(--bg-raised)" }}>
         <Button variant="secondary" size="sm" icon="printer" onClick={() => onToast("발주서 PDF를 생성합니다.")}>인쇄</Button>
         <Button variant="secondary" size="sm" icon="copy" onClick={() => onToast(`${po.id} 기준 발주서 복제 — 초안 작성`)}>복제</Button>
         <div style={{ flex: 1 }}></div>

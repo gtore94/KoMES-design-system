@@ -37,7 +37,7 @@ function FilterBar({ search, setSearch, kindFilter, setKindFilter,
       <button onClick={() => setErrorOnly(!errorOnly)} style={{
         display: "inline-flex", alignItems: "center", gap: 5,
         padding: "7px 12px", fontSize: 12, fontWeight: 500,
-        background: errorOnly ? "var(--cinnabar-100)" : "var(--bg-surface)",
+        background: errorOnly ? "var(--status-danger-bg)" : "var(--bg-surface)",
         color: errorOnly ? "var(--cinnabar-700)" : "var(--text-secondary)",
         border: `1px solid ${errorOnly ? "var(--cinnabar-300)" : "var(--border-default)"}`,
         borderRadius: "var(--radius-md)",
@@ -66,7 +66,7 @@ function FilterBar({ search, setSearch, kindFilter, setKindFilter,
 
       <div style={{
         display: "inline-flex", padding: 2,
-        background: "var(--stone-100)",
+        background: "var(--bg-raised)",
         borderRadius: "var(--radius-md)",
         border: "1px solid var(--border-subtle)",
       }}>
@@ -139,7 +139,7 @@ function ClaimsTable({ type, items, selected, setSelected, excluded, setExcluded
         <div style={{
           display: "grid", gridTemplateColumns: cols,
           padding: "8px 10px", position: "sticky", top: 0,
-          background: "var(--stone-50)", borderBottom: "2px solid var(--border-default)",
+          background: "var(--bg-raised)", borderBottom: "2px solid var(--border-default)",
           fontSize: 10, fontWeight: 700, letterSpacing: "0.04em",
           color: "var(--text-secondary)", fontFamily: "var(--font-sans)",
           textTransform: "uppercase", zIndex: 2,
@@ -176,10 +176,10 @@ function ClaimsTable({ type, items, selected, setSelected, excluded, setExcluded
               display: "grid", gridTemplateColumns: cols,
               alignItems: "center", padding: cellPad,
               minHeight: rowHeight,
-              borderBottom: "1px solid var(--stone-100)",
-              background: isExcluded ? "var(--stone-100)"
-                : isError ? "var(--cinnabar-100)"
-                : isSelected ? "var(--jade-50)" : "transparent",
+              borderBottom: "1px solid var(--bg-raised)",
+              background: isExcluded ? "var(--bg-raised)"
+                : isError ? "var(--status-danger-bg)"
+                : isSelected ? "var(--brand-subtle)" : "transparent",
               opacity: isExcluded ? 0.55 : 1,
               transition: "background 0.1s",
               cursor: isExcluded ? "default" : "pointer",
@@ -259,7 +259,7 @@ function ClaimsTable({ type, items, selected, setSelected, excluded, setExcluded
                   marginTop: 4, padding: "4px 12px 4px 28px",
                   fontSize: 11, color: "var(--cinnabar-800)",
                   fontFamily: "var(--font-sans)",
-                  background: "var(--cinnabar-100)",
+                  background: "var(--status-danger-bg)",
                   borderTop: "1px dashed var(--cinnabar-300)",
                   display: "flex", alignItems: "center", gap: 6,
                 }}>
@@ -297,10 +297,10 @@ function NumCell({ children, strong }) {
 }
 function KindBadge({ value }) {
   const colors = {
-    "보험": { bg: "var(--jade-50)", fg: "var(--jade-700)", bd: "var(--jade-200)" },
-    "의료급여": { bg: "var(--amber-100)", fg: "var(--amber-700)", bd: "var(--amber-200)" },
-    "시범사업": { bg: "var(--amber-100)", fg: "var(--amber-700)", bd: "var(--amber-200)" },
-    "자동차": { bg: "var(--cinnabar-100)", fg: "var(--cinnabar-700)", bd: "var(--cinnabar-200)" },
+    "보험": { bg: "var(--brand-subtle)", fg: "var(--jade-700)", bd: "var(--jade-200)" },
+    "의료급여": { bg: "var(--status-warning-bg)", fg: "var(--amber-700)", bd: "var(--amber-200)" },
+    "시범사업": { bg: "var(--status-warning-bg)", fg: "var(--amber-700)", bd: "var(--amber-200)" },
+    "자동차": { bg: "var(--status-danger-bg)", fg: "var(--cinnabar-700)", bd: "var(--cinnabar-200)" },
   };
   const c = colors[value] || colors["보험"];
   return <span style={{
@@ -335,8 +335,8 @@ function ActionBar({ type, summary, selected, errorCount, onSubmitAll, onSubmitS
       <div style={{
         display: "flex", alignItems: "center", gap: 10,
         padding: "6px 12px",
-        background: "var(--stone-50)",
-        border: "1px solid var(--stone-200)",
+        background: "var(--bg-raised)",
+        border: "1px solid var(--border-subtle)",
         borderRadius: "var(--radius-md)",
       }}>
         <div style={{ display: "flex", flexDirection: "column" }}>
@@ -364,9 +364,9 @@ function ActionBar({ type, summary, selected, errorCount, onSubmitAll, onSubmitS
         disabled={selected === 0}
         style={{
           padding: "10px 18px", fontSize: 13, fontWeight: 600,
-          background: selected === 0 ? "var(--stone-100)" : "var(--bg-surface)",
+          background: selected === 0 ? "var(--bg-raised)" : "var(--bg-surface)",
           color: selected === 0 ? "var(--text-disabled)" : "var(--jade-700)",
-          border: `1px solid ${selected === 0 ? "var(--stone-200)" : "var(--jade-300)"}`,
+          border: `1px solid ${selected === 0 ? "var(--border-subtle)" : "var(--jade-300)"}`,
           borderRadius: "var(--radius-md)",
           cursor: selected === 0 ? "not-allowed" : "pointer",
           fontFamily: "var(--font-sans)",

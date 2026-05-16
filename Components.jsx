@@ -33,7 +33,7 @@ function Badge({ variant = "neutral", children }) {
     warning: { background: "var(--status-warning-bg)", color: "var(--status-warning-text)", border: "1px solid var(--status-warning-border)" },
     danger:  { background: "var(--status-danger-bg)",  color: "var(--status-danger-text)",  border: "1px solid var(--status-danger-border)" },
     neutral: { background: "var(--status-neutral-bg)", color: "var(--status-neutral-text)", border: "1px solid var(--status-neutral-border)" },
-    brand:   { background: "var(--jade-50)", color: "var(--jade-700)", border: "1px solid var(--jade-200)" },
+    brand:   { background: "var(--brand-subtle)", color: "var(--jade-700)", border: "1px solid var(--jade-200)" },
   };
   return <span style={{
     display: "inline-flex", alignItems: "center", gap: 4,
@@ -161,7 +161,7 @@ function Sidebar({ activeScreen, onNavigate }) {
           <div style={{ width: 30, height: 30, background: "var(--jade-500)", borderRadius: "var(--radius-sm)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
             <span style={{ fontFamily: "var(--font-serif)", fontSize: 15, fontWeight: 600, color: "white" }}>K</span>
           </div>
-          <span style={{ fontFamily: "var(--font-serif)", fontSize: 15, fontWeight: 400, color: "var(--stone-50)", letterSpacing: "-0.01em", whiteSpace: "nowrap" }}>KoMES</span>
+          <span style={{ fontFamily: "var(--font-serif)", fontSize: 15, fontWeight: 400, color: "var(--bg-raised)", letterSpacing: "-0.01em", whiteSpace: "nowrap" }}>KoMES</span>
         </div>
         <div key="collapse-btn" onClick={() => setCollapsed(true)} style={{ cursor: "pointer", color: "var(--ink-300)", display: "flex", alignItems: "center", padding: 3, borderRadius: "var(--radius-sm)" }}>
           <Icon name="chevron-left" size={13} />
@@ -185,7 +185,7 @@ function Sidebar({ activeScreen, onNavigate }) {
         <Avatar name="김" size={26} />
         {!collapsed && <>
           <div>
-            <div style={{ fontSize: 12, color: "var(--stone-100)", fontWeight: 500, fontFamily: "var(--font-sans)" }}>김민준</div>
+            <div style={{ fontSize: 12, color: "var(--bg-raised)", fontWeight: 500, fontFamily: "var(--font-sans)" }}>김민준</div>
             <div style={{ fontSize: 10, color: "var(--ink-300)", fontFamily: "var(--font-sans)" }}>원장</div>
           </div>
           <Icon name="chevrons-up-down" size={13} style={{ marginLeft: "auto", color: "var(--ink-300)" }} />

@@ -33,7 +33,7 @@ function SPAICard({ suggestions, onApply, onDismiss, onOpenSettings }) {
   const totalCost = suggestions.reduce((s, x) => s + x.suggestQty * x.unitPrice, 0);
   return (
     <div style={{
-      background: "var(--jade-50)", border: "1px solid var(--jade-200)",
+      background: "var(--brand-subtle)", border: "1px solid var(--jade-200)",
       borderRadius: "var(--radius-lg)", padding: "16px 20px",
     }}>
       <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 10 }}>
@@ -42,7 +42,7 @@ function SPAICard({ suggestions, onApply, onDismiss, onOpenSettings }) {
           <span style={{ fontSize: 13, fontWeight: 600, color: "var(--jade-700)", fontFamily: "var(--font-sans)" }}>
             AI 발주 추천 · {suggestions.length}품목
           </span>
-          <span style={{ fontSize: 11, background: "var(--jade-100)", color: "var(--jade-700)", padding: "2px 9px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>
+          <span style={{ fontSize: 11, background: "var(--brand-muted)", color: "var(--jade-700)", padding: "2px 9px", borderRadius: "var(--radius-full)", fontFamily: "var(--font-sans)" }}>
             지난 90일 소비 패턴 분석
           </span>
         </div>
@@ -54,7 +54,7 @@ function SPAICard({ suggestions, onApply, onDismiss, onOpenSettings }) {
       <div style={{ background: "var(--bg-surface)", borderRadius: "var(--radius-md)", border: "1px solid var(--jade-200)", overflow: "hidden" }}>
         <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "var(--font-sans)" }}>
           <thead>
-            <tr style={{ background: "var(--jade-50)" }}>
+            <tr style={{ background: "var(--brand-subtle)" }}>
               {["품목", "공급처", "월 소비", "잔여", "추천 수량", "예상 금액"].map(h => (
                 <th key={h} style={{ padding: "6px 12px", fontSize: 10, fontWeight: 700, color: "var(--jade-700)", textAlign: "left", letterSpacing: "0.06em", textTransform: "uppercase" }}>{h}</th>
               ))}
@@ -71,7 +71,7 @@ function SPAICard({ suggestions, onApply, onDismiss, onOpenSettings }) {
                 <td style={{ padding: "7px 12px", fontSize: 12, color: "var(--text-primary)", fontFamily: "var(--font-mono)" }}>{won(s.suggestQty * s.unitPrice)}</td>
               </tr>
             ))}
-            <tr style={{ borderTop: "1px solid var(--jade-200)", background: "var(--jade-50)" }}>
+            <tr style={{ borderTop: "1px solid var(--jade-200)", background: "var(--brand-subtle)" }}>
               <td colSpan={5} style={{ padding: "7px 12px", fontSize: 11, fontWeight: 600, color: "var(--jade-700)", textAlign: "right" }}>합계</td>
               <td style={{ padding: "7px 12px", fontSize: 12, fontWeight: 700, color: "var(--jade-700)", fontFamily: "var(--font-mono)" }}>{won(totalCost)}</td>
             </tr>
@@ -90,7 +90,7 @@ function SPAlertSection({ alerts, onPick }) {
   if (!alerts.length) return null;
   return (
     <div style={{
-      background: "var(--cinnabar-100)", border: "1px solid var(--cinnabar-200)",
+      background: "var(--status-danger-bg)", border: "1px solid var(--cinnabar-200)",
       borderRadius: "var(--radius-lg)", overflow: "hidden",
     }}>
       <div style={{ padding: "10px 16px", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid var(--cinnabar-200)" }}>
@@ -112,7 +112,7 @@ function SPAlertSection({ alerts, onPick }) {
               background: "var(--bg-surface)", padding: "10px 14px", cursor: "pointer",
               transition: "background 0.12s ease",
             }}
-            onMouseEnter={e => e.currentTarget.style.background = "var(--cinnabar-100)"}
+            onMouseEnter={e => e.currentTarget.style.background = "var(--status-danger-bg)"}
             onMouseLeave={e => e.currentTarget.style.background = "var(--bg-surface)"}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4, gap: 8 }}>
                 <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{a.name}</span>
@@ -147,7 +147,7 @@ function SPOpenPOs({ pos, onOpenHistory }) {
             display: "grid", gridTemplateColumns: "120px 1fr auto auto auto",
             gap: 12, alignItems: "center", padding: "8px 10px",
             border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)",
-            background: "var(--stone-50)",
+            background: "var(--bg-raised)",
           }}>
             <span style={{ fontSize: 12, fontFamily: "var(--font-mono)", color: "var(--text-primary)" }}>{p.id}</span>
             <span style={{ fontSize: 12, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>{p.supplier} · {p.itemCount}품목</span>

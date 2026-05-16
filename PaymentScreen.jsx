@@ -72,7 +72,7 @@ function QueueRow({ p, selected, onSelect }) {
       padding: "12px 14px",
       borderBottom: "1px solid var(--border-subtle)",
       borderLeft: `3px solid ${selected ? "var(--jade-500)" : "transparent"}`,
-      background: selected ? "var(--jade-50)" : "transparent",
+      background: selected ? "var(--brand-subtle)" : "transparent",
       cursor: "pointer",
       transition: "all 0.12s",
     }}>
@@ -85,7 +85,7 @@ function QueueRow({ p, selected, onSelect }) {
           fontSize: 10, fontWeight: 600, padding: "1px 7px",
           borderRadius: "var(--radius-full)",
           color: p.visit === "초진" ? "var(--cinnabar-700)" : "var(--jade-700)",
-          background: p.visit === "초진" ? "var(--cinnabar-100)" : "var(--jade-50)",
+          background: p.visit === "초진" ? "var(--status-danger-bg)" : "var(--brand-subtle)",
           border: `1px solid ${p.visit === "초진" ? "var(--cinnabar-200)" : "var(--jade-200)"}`,
           fontFamily: "var(--font-sans)",
         }}>{p.visit}</span>
@@ -132,7 +132,7 @@ function PayMethodBtn({ icon, label, hint, primary, onClick, disabled }) {
     }}>
       <div style={{
         width: 36, height: 36, borderRadius: "var(--radius-md)",
-        background: primary ? "rgba(255,255,255,0.2)" : "var(--jade-50)",
+        background: primary ? "rgba(255,255,255,0.2)" : "var(--brand-subtle)",
         color: primary ? "#fff" : "var(--jade-700)",
         display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
       }}>
@@ -208,7 +208,7 @@ function PaymentScreen() {
         actions={<>
           <div style={{
             display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 12px",
-            background: "var(--amber-100)", border: "1px solid var(--amber-200)",
+            background: "var(--status-warning-bg)", border: "1px solid var(--amber-200)",
             borderRadius: "var(--radius-full)",
           }}>
             <Icon name="clock" size={13} style={{ color: "var(--amber-700)" }} />
@@ -221,7 +221,7 @@ function PaymentScreen() {
           </div>
           <div style={{
             display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 12px",
-            background: "var(--jade-50)", border: "1px solid var(--jade-200)",
+            background: "var(--brand-subtle)", border: "1px solid var(--jade-200)",
             borderRadius: "var(--radius-full)",
           }}>
             <Icon name="check-circle-2" size={13} style={{ color: "var(--jade-700)" }} />
@@ -276,7 +276,7 @@ function PaymentScreen() {
                   <span style={{
                     fontSize: 10, fontWeight: 700, padding: "1px 7px",
                     borderRadius: "var(--radius-full)",
-                    background: active ? t.color : "var(--stone-200)",
+                    background: active ? t.color : "var(--bg-raised)",
                     color: active ? "#fff" : "var(--text-muted)",
                     fontFamily: "var(--font-mono)",
                   }}>{t.n}</span>
@@ -361,7 +361,7 @@ function PaymentScreen() {
                       <span key={d.code} style={{
                         display: "inline-flex", alignItems: "center", gap: 6,
                         padding: "4px 10px", fontSize: 12,
-                        background: "var(--jade-50)", border: "1px solid var(--jade-200)",
+                        background: "var(--brand-subtle)", border: "1px solid var(--jade-200)",
                         color: "var(--jade-700)", borderRadius: "var(--radius-full)",
                         fontFamily: "var(--font-sans)",
                       }}>
@@ -383,8 +383,8 @@ function PaymentScreen() {
                   <div>
                     <div style={{
                       display: "grid", gridTemplateColumns: "60px 1fr 90px 80px",
-                      padding: "6px 16px", borderBottom: "1px solid var(--stone-200)",
-                      background: "var(--stone-50)", fontSize: 10, fontWeight: 700, letterSpacing: "0.06em",
+                      padding: "6px 16px", borderBottom: "1px solid var(--border-subtle)",
+                      background: "var(--bg-raised)", fontSize: 10, fontWeight: 700, letterSpacing: "0.06em",
                       color: "var(--text-muted)", textTransform: "uppercase", fontFamily: "var(--font-sans)",
                     }}>
                       <span>구분</span>
@@ -396,13 +396,13 @@ function PaymentScreen() {
                       <div key={i} style={{
                         display: "grid", gridTemplateColumns: "60px 1fr 90px 80px",
                         padding: "10px 16px",
-                        borderBottom: i < selected.items.length - 1 ? "1px solid var(--stone-200)" : "none",
+                        borderBottom: i < selected.items.length - 1 ? "1px solid var(--border-subtle)" : "none",
                         alignItems: "center",
                       }}>
                         <span style={{
                           fontSize: 10, fontWeight: 600, padding: "2px 8px",
                           borderRadius: "var(--radius-sm)",
-                          background: it.kind === "한약" ? "var(--amber-100)" : it.kind === "시술" ? "var(--jade-50)" : "var(--stone-100)",
+                          background: it.kind === "한약" ? "var(--status-warning-bg)" : it.kind === "시술" ? "var(--brand-subtle)" : "var(--bg-raised)",
                           color: it.kind === "한약" ? "var(--amber-700)" : it.kind === "시술" ? "var(--jade-700)" : "var(--text-secondary)",
                           fontFamily: "var(--font-sans)",
                           width: "fit-content",
@@ -436,7 +436,7 @@ function PaymentScreen() {
                       width: "100%", minHeight: 56,
                       padding: "9px 11px", fontSize: 13,
                       fontFamily: "var(--font-sans)", color: "var(--text-primary)",
-                      background: selected.status === "완료" ? "var(--stone-50)" : "var(--bg-surface)",
+                      background: selected.status === "완료" ? "var(--bg-raised)" : "var(--bg-surface)",
                       border: "1px solid var(--border-default)",
                       borderRadius: "var(--radius-md)", outline: "none", resize: "vertical",
                     }}
@@ -486,7 +486,7 @@ function PaymentScreen() {
                   할인 적용
                 </div>
                 <div style={{
-                  background: "var(--stone-50)",
+                  background: "var(--bg-raised)",
                   border: "1px dashed var(--border-default)",
                   borderRadius: "var(--radius-md)", padding: 10,
                   display: "flex", flexDirection: "column", gap: 8,
@@ -524,7 +524,7 @@ function PaymentScreen() {
                           fontFamily: "var(--font-mono)", textAlign: "right",
                           border: "1px solid var(--border-default)",
                           borderRadius: "var(--radius-sm)", outline: "none",
-                          background: selected.status === "완료" ? "var(--stone-100)" : "var(--bg-surface)",
+                          background: selected.status === "완료" ? "var(--bg-raised)" : "var(--bg-surface)",
                         }}
                       />
                       <span style={{ fontSize: 12, color: "var(--text-muted)", fontFamily: "var(--font-sans)", minWidth: 24 }}>
@@ -545,7 +545,7 @@ function PaymentScreen() {
 
               {/* Final amount */}
               <div style={{
-                background: "var(--jade-50)",
+                background: "var(--brand-subtle)",
                 border: "1.5px solid var(--jade-300)",
                 borderRadius: "var(--radius-lg)",
                 padding: "14px 16px",
@@ -627,7 +627,7 @@ function PaymentScreen() {
                 <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>{selected.name} ({selected.chartNo})</span>
               </div>
               <div style={{
-                background: "var(--jade-50)", border: "1px solid var(--jade-200)",
+                background: "var(--brand-subtle)", border: "1px solid var(--jade-200)",
                 borderRadius: "var(--radius-md)", padding: "14px 16px",
                 display: "flex", alignItems: "baseline", justifyContent: "space-between",
               }}>
@@ -705,10 +705,10 @@ const panelStyle = {
 const panelHeader = {
   display: "flex", alignItems: "center", gap: 8,
   padding: "10px 16px",
-  borderBottom: "1px solid var(--stone-200)",
+  borderBottom: "1px solid var(--border-subtle)",
   fontSize: 13, fontWeight: 600,
   color: "var(--text-primary)", fontFamily: "var(--font-sans)",
-  background: "var(--stone-50)",
+  background: "var(--bg-raised)",
 };
 const completedActionBtn = {
   width: "100%", padding: "10px 14px", fontSize: 13, fontWeight: 500,
