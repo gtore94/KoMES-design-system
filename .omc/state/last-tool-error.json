@@ -1,7 +1,0 @@
-{
-  "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"cd \\\"/Users/jaehoon/Downloads/KoMES design system\\\" && git add StaffManagementScreen.jsx && git commit -m \\\"$(cat <<'EOF'\\nUpdate permissions tab badge to show granted count only\\n\\nCo-Aut...",
-  "error": "Exit code 1\nOn branch main\nYour branch is up to date with 'origin/main'.\n\nChanges not staged for commit:\n  (use \"git add/rm <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   .DS_Store\n\tmodified:   .claude/settings.local.json\n\tmodified:   .omc/project-memory.json\n\tdeleted:    .omc/state/agent-replay-5baef195-ff37-4152-ab99-6a1b6c93678e.jsonl\n\tmodified:   .omc/state/hud-state.json\n\tmodified:   .omc/state/hud-stdin-cach...",
-  "timestamp": "2026-05-16T09:57:35.297Z",
-  "retry_count": 1
-}
