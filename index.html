@@ -132,14 +132,12 @@
 [data-color="navy"] {
   --sidebar-bg: var(--navy-800);
   --sidebar-active: var(--navy-400);
-  --rail-bg: var(--navy-900);
-  --rail-surface: var(--navy-800);
-  --rail-text: var(--navy-50);
-  --rail-text-secondary: var(--navy-200);
+  --rail-bg: #FFFFFF;
+  --rail-surface: var(--navy-50);
+  --rail-text: var(--navy-800);
+  --rail-text-secondary: var(--navy-500);
   --rail-text-muted: var(--navy-300);
-  --rail-border: var(--navy-800);
-  --rail-stripe: rgba(255,255,255,0.04);
-  --rail-divider: rgba(255,255,255,0.07);
+  --rail-border: var(--navy-100);
   --jade-900: #0E1A2E; --jade-800: #16263F; --jade-700: #1E3252; --jade-600: #294569;
   --jade-500: #355A82; --jade-400: #5878A3; --jade-300: #8298BF; --jade-200: #B3C0D7;
   --jade-100: #D6DEEB; --jade-50:  #EEF1F7;
@@ -153,6 +151,11 @@
   --status-success-bg:     #EEF1F7;
   --status-success-text:   #1E3252;
   --status-success-border: #B3C0D7;
+  /* board column backgrounds — navy-tinted instead of jade/amber-tinted */
+  --board-appt-bg:   #EEF1F7; --board-appt-border:  #CDD5E8;
+  --board-treat-bg:  #EBF0F8; --board-treat-border: #C3CEDF;
+  /* doc appointment card backgrounds — navy-tinted for d1, keep others */
+  --doc-d1-bg:  #EEF1F7; --doc-d1-border: #CDD5E8;
 }
 
 /* ── Navy color — dark mode override ─────────────── */
