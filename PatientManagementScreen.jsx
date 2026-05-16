@@ -479,6 +479,7 @@ function PatientManagementScreen({ onOpenChart }) {
   const [search, setSearch] = useStateMgr("");
   const [sort, setSort] = useStateMgr("recent"); // recent | visits | name | reg
   const [selectedId, setSelectedId] = useStateMgr(patients[0]?.id);
+  const [showNewPatient, setShowNewPatient] = useStateMgr(false);
 
   const counts = useMemoMgr(() => {
     const tagSet = (key) => patients.filter(p => p.tags.includes(key)).length;
@@ -538,7 +539,7 @@ function PatientManagementScreen({ onOpenChart }) {
             <Input placeholder="이름·연락처·주소증 검색…" value={search} onChange={setSearch} icon="search" />
           </div>
           <Button variant="secondary" size="sm" icon="download">내보내기</Button>
-          <Button variant="primary" icon="user-plus">신규 등록</Button>
+          <Button variant="primary" icon="user-plus" onClick={() => setShowNewPatient(true)}>신규 등록</Button>
         </>}
       />
 
@@ -618,6 +619,13 @@ function PatientManagementScreen({ onOpenChart }) {
           />
         )}
       </div>
+
+      {showNewPatient && (
+        <NewPatientModal
+          onClose={() => setShowNewPatient(false)}
+          onSubmit={() => setShowNewPatient(false)}
+        />
+      )}
     </div>
   );
 }
