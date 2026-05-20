@@ -105,6 +105,26 @@ const EQUIPMENT = [
   { code: "EQ-010", name: "차트 워크스테이션 × 4대",         cat: "IT",     maker: "—",            room: "전실", purchased: "2023-03-01", warranty: "2026-02-28", nextCheck: "—",          status: "운영"  },
 ];
 
+// ──────────────────────────────────────────────────────────────
+// 치료재 관리 (보험 치료재 카탈로그 — 상한금액·판매자·적용기간·선별급여)
+// ──────────────────────────────────────────────────────────────
+const MATERIALS = [
+  { code: "P0001001", name: "일회용 부항컵", limit: 114, vendor: "성호통상",                   start: "2012-01-01", end: "—", benefit: "본인부담 기본", inUse: false },
+  { code: "P0001002", name: "일회용 부항컵", limit: 124, vendor: "동방침구제작소",             start: "2012-01-01", end: "—", benefit: "본인부담 기본", inUse: true  },
+  { code: "P0001003", name: "일회용 부항컵", limit: 114, vendor: "리더스메디텍",               start: "2012-01-01", end: "—", benefit: "본인부담 기본", inUse: false },
+  { code: "P0001004", name: "일회용 부항컵", limit: 114, vendor: "디아메디칼상사",             start: "2012-01-01", end: "—", benefit: "본인부담 기본", inUse: false },
+  { code: "P0001005", name: "일회용 부항컵", limit: 114, vendor: "행림서원의료기",             start: "2018-04-01", end: "—", benefit: "본인부담 기본", inUse: false },
+  { code: "P0001006", name: "일회용 부항컵", limit: 114, vendor: "하이헬스",                   start: "2018-04-01", end: "—", benefit: "본인부담 기본", inUse: false },
+  { code: "P0001007", name: "일회용 부항컵", limit: 114, vendor: "굿플",                       start: "2018-04-01", end: "—", benefit: "본인부담 기본", inUse: false },
+  { code: "P0001008", name: "일회용 부항컵", limit: 114, vendor: "HANSUNG GREENPACK CO. LTD",  start: "2018-04-01", end: "—", benefit: "본인부담 기본", inUse: false },
+  { code: "P0001009", name: "일회용 부항컵", limit: 114, vendor: "DANA MEDICAL",               start: "2018-05-01", end: "—", benefit: "본인부담 기본", inUse: false },
+  { code: "P0001010", name: "일회용 부항컵", limit: 114, vendor: "SINATECH",                   start: "2018-12-01", end: "—", benefit: "본인부담 기본", inUse: false },
+  { code: "P0002001", name: "일회용 호침",   limit: 117, vendor: "성호통상",                   start: "2019-04-01", end: "—", benefit: "본인부담 기본", inUse: true  },
+  { code: "P0002002", name: "일회용 호침",   limit: 117, vendor: "동방침구제작소",             start: "2019-04-01", end: "—", benefit: "본인부담 기본", inUse: false },
+  { code: "P0003001", name: "피내침(이침)",  limit: 132, vendor: "우진메디칼",                 start: "2020-01-01", end: "—", benefit: "선별급여 50%", inUse: true  },
+  { code: "P0004001", name: "약침용 주사기", limit:  98, vendor: "대화메디칼",                 start: "2021-07-01", end: "—", benefit: "본인부담 기본", inUse: false },
+];
+
 const BACKUPS = [
   { ts: "2026-05-17 04:00", scope: "전체",       size: "1.42 GB", status: "성공" },
   { ts: "2026-05-16 04:00", scope: "전체",       size: "1.41 GB", status: "성공" },
@@ -123,6 +143,7 @@ const SECTIONS = [
   { id: "hours",     icon: "clock",        label: "진료 시간 · 휴진일", roles: ["원장", "데스크"],        group: "기본" },
   { id: "rooms",     icon: "door-open",    label: "진료실 · 베드",      roles: ["원장", "데스크-읽기"], group: "운영" },
   { id: "equipment", icon: "cpu",          label: "장비 관리",          roles: ["원장", "데스크-읽기"], group: "운영" },
+  { id: "materials", icon: "syringe",      label: "치료재 관리",        roles: ["원장", "데스크"],        group: "운영" },
   { id: "menu",      icon: "list-checks",  label: "진료 과목 · 수가표", roles: ["원장"],                  group: "운영" },
   { id: "license",   icon: "shield-check", label: "면허 · 자격",        roles: ["원장"],                  group: "법적 정보" },
   { id: "insurance", icon: "file-badge",   label: "보험 연동",          roles: ["원장"],                  group: "법적 정보" },
@@ -206,6 +227,6 @@ function permFor(role, sectionId) {
 
 Object.assign(window, {
   CLINIC_DATA, HOURS, HOLIDAYS, ROOMS, PRICE_LIST, LICENSES,
-  INSURANCE, BILLING, BRANCHES, EQUIPMENT, BACKUPS, ALERTS,
+  INSURANCE, BILLING, BRANCHES, EQUIPMENT, MATERIALS, BACKUPS, ALERTS,
   SECTIONS, permFor,
 });

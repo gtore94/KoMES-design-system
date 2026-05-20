@@ -260,6 +260,90 @@ function EquipmentSection({ perm }) {
 }
 
 // ──────────────────────────────────────────────────────────────
+// 3-2) 치료재 관리 (보험 치료재 카탈로그)
+// ──────────────────────────────────────────────────────────────
+function MaterialsSection({ perm }) {
+  const [query, setQuery] = React.useState("");
+  const [editRow, setEditRow] = React.useState(null);  // null | "new" | row
+
+  const q = query.trim().toLowerCase();
+  const rows = q
+    ? MATERIALS.filter(m => m.code.toLowerCase().includes(q) || m.name.toLowerCase().includes(q))
+    : MATERIALS;
+
+  const remove = (m) => showToast(`${m.code} ${m.name} · 삭제되었습니다`, { variant: "warning", icon: "trash-2" });
+
+  return (
+    <SectionCard
+      title="치료재 관리"
+      hint="보험 치료재 카탈로그 — 상한금액·판매자·적용기간·선별급여 구분을 관리합니다."
+      icon="syringe" anchor="materials" perm={perm}
+      actions={perm === "edit" && <>
+        <Button variant="ghost" size="sm" icon="download" onClick={() => toastProgress("치료재 목록 내보내는 중…", `치료재 ${MATERIALS.length}건을 CSV로 내보냈습니다`)}>CSV</Button>
+        <Button variant="secondary" size="sm" icon="plus" onClick={() => setEditRow("new")}>새 오더 등록</Button>
+      </>}>
+      {/* 검색 */}
+      <div style={{
+        padding: "12px 16px", borderBottom: "1px solid var(--border-subtle)",
+        display: "flex", alignItems: "center", gap: 10,
+      }}>
+        <div style={{ position: "relative", width: 320, maxWidth: "100%" }}>
+          <span style={{ position: "absolute", left: 9, top: "50%", transform: "translateY(-50%)", color: "var(--text-muted)", display: "flex" }}>
+            <Icon name="search" size={14} />
+          </span>
+          <input value={query} onChange={(e) => setQuery(e.target.value)}
+            placeholder="코드 or 명칭 입력"
+            style={{
+              fontFamily: "var(--font-sans)", fontSize: 13, color: "var(--text-primary)",
+              background: "var(--bg-surface)", border: "1px solid var(--border-default)",
+              borderRadius: "var(--radius-md)", padding: "7px 10px 7px 30px",
+              outline: "none", width: "100%", boxSizing: "border-box",
+            }} />
+        </div>
+        <span style={{ fontSize: 11.5, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>
+          {rows.length}건
+        </span>
+      </div>
+
+      <DataTable
+        cols={[
+          { label: "코드", key: "code", mono: true, w: "10%" },
+          { label: "명칭", w: "20%", render: (m) =>
+            <span style={{ color: "var(--text-brand)", fontWeight: 600 }}>{m.name}</span>
+          },
+          { label: "상한금액", w: "9%", mono: true, align: "right", render: (m) =>
+            <span style={{ fontVariantNumeric: "tabular-nums" }}>{m.limit.toLocaleString()}</span>
+          },
+          { label: "판매자", key: "vendor", w: "18%" },
+          { label: "적용시작일", key: "start", mono: true, align: "center", w: "11%" },
+          { label: "적용종료일", w: "11%", mono: true, align: "center", render: (m) =>
+            m.end && m.end !== "—"
+              ? <span style={{ fontFamily: "var(--font-mono)" }}>{m.end}</span>
+              : <span style={{ color: "var(--text-muted)" }}>—</span>
+          },
+          { label: "선별급여", key: "benefit", w: "11%" },
+          { label: "사용여부", w: "8%", align: "center", render: (m) =>
+            m.inUse ? <Badge variant="success">사용</Badge> : <Badge variant="neutral">사용안함</Badge>
+          },
+          { label: "수정 및 삭제", w: "12%", align: "center", render: (m) =>
+            perm === "edit" ? (
+              <div style={{ display: "inline-flex", gap: 6 }}>
+                <Button variant="secondary" size="sm" onClick={() => setEditRow(m)}>수정</Button>
+                <Button variant="ghost" size="sm" onClick={() => remove(m)}>삭제</Button>
+              </div>
+            ) : <span style={{ color: "var(--text-muted)" }}>—</span>
+          },
+        ]}
+        rows={rows}
+      />
+      <MaterialAddModal open={editRow !== null}
+        initial={editRow && editRow !== "new" ? editRow : undefined}
+        onClose={() => setEditRow(null)} />
+    </SectionCard>
+  );
+}
+
+// ──────────────────────────────────────────────────────────────
 // 4) 진료 과목 · 수가표
 // ──────────────────────────────────────────────────────────────
 function MenuSection({ perm }) {
@@ -634,6 +718,7 @@ const SECTION_COMPONENTS = {
   hours:     HoursSection,
   rooms:     RoomsSection,
   equipment: EquipmentSection,
+  materials: MaterialsSection,
   menu:      MenuSection,
   license:   LicenseSection,
   insurance: InsuranceSection,
@@ -650,7 +735,7 @@ function renderSection(id, role) {
 }
 
 Object.assign(window, {
-  IdentitySection, HoursSection, RoomsSection, EquipmentSection, MenuSection,
+  IdentitySection, HoursSection, RoomsSection, EquipmentSection, MaterialsSection, MenuSection,
   LicenseSection, InsuranceSection, BillingSection,
   BranchSection, BrandSection, BackupSection,
   SECTION_COMPONENTS, renderSection,

@@ -349,6 +349,17 @@ const EQUIPMENT_FIELDS = [
   { key: "status", label: "상태", type: "segment", options: ["운영", "점검 예정", "수리 중"], full: true },
 ];
 
+const MATERIAL_FIELDS = [
+  { key: "code", label: "코드", type: "mono", placeholder: "P0001011" },
+  { key: "name", label: "명칭", type: "text", placeholder: "치료재 명칭" },
+  { key: "limit", label: "상한금액 (원)", type: "number", placeholder: "0" },
+  { key: "vendor", label: "판매자", type: "text", placeholder: "판매처", full: true },
+  { key: "start", label: "적용시작일", type: "date" },
+  { key: "end", label: "적용종료일", type: "date" },
+  { key: "benefit", label: "선별급여", type: "segment", options: ["본인부담 기본", "선별급여 50%", "선별급여 80%", "비급여"], full: true },
+  { key: "inUse", label: "사용 여부", type: "toggle" },
+];
+
 const MENU_FIELDS = [
   { key: "code", label: "EDI 코드", type: "mono", placeholder: "AA000 (비급여는 비워둠)" },
   { key: "cat", label: "분류", type: "text", placeholder: "침구 / 물리 / 약침 ..." },
@@ -404,6 +415,16 @@ function EquipmentAddModal({ open, onClose }) {
     title="장비 등록"
     subtitle="진료·조제·IT 장비의 위치, 점검 일정, 보증 관리"
     fields={EQUIPMENT_FIELDS} submitLabel="장비 등록" toastMsg="장비가 등록되었습니다" />;
+}
+
+function MaterialAddModal({ open, onClose, initial }) {
+  const editing = !!initial;
+  return <ClinicFormModal open={open} onClose={onClose} icon="syringe"
+    title={editing ? "치료재 수정" : "새 오더 등록"}
+    subtitle="보험 치료재 카탈로그 — 상한금액·판매자·적용기간·선별급여"
+    fields={MATERIAL_FIELDS} initial={initial}
+    submitLabel={editing ? "변경사항 저장" : "치료재 등록"}
+    toastMsg={editing ? "치료재가 수정되었습니다" : "치료재가 등록되었습니다"} />;
 }
 
 function MenuItemAddModal({ open, onClose }) {
@@ -500,6 +521,6 @@ function LogoUploadModal({ open, onClose }) {
 
 Object.assign(window, {
   showToast, toastProgress, ClinicToaster,
-  IdentityEditModal, BillingEditModal, RoomAddModal, EquipmentAddModal,
+  IdentityEditModal, BillingEditModal, RoomAddModal, EquipmentAddModal, MaterialAddModal,
   MenuItemAddModal, LicenseAddModal, BranchAddModal, LogoUploadModal,
 });
