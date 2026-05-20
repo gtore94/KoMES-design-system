@@ -69,6 +69,7 @@
 <script type="text/babel" src="dashboardScreen.jsx?v=2"></script>
 <script type="text/babel" src="collectionsData.jsx"></script>
 <script type="text/babel" src="CollectionsScreen.jsx"></script>
+<script type="text/babel" src="AiAnalysisScreen.jsx"></script>
 
 <script type="text/babel">
 const { useState, useEffect } = React;
@@ -163,10 +164,10 @@ function App() {
     if (nav === "stats") {
       return <DashboardScreen onNavigate={handleNavigate} />;
     }
-    const labels = {
-      ai: "AI 분석"
-    };
-    return <PlaceholderScreen title={labels[nav] || nav} />;
+    if (nav === "ai") {
+      return <AiAnalysisScreen />;
+    }
+    return <PlaceholderScreen title={nav} />;
   };
 
   const handleNavigate = (key) => {
