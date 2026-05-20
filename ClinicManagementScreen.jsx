@@ -12,12 +12,25 @@ function ClinicManagementScreen() {
   React.useEffect(() => { localStorage.setItem("komes_clinic_tab", tab); }, [tab]);
   React.useEffect(() => { localStorage.setItem("komes_clinic_role", role); }, [role]);
 
+  // 권한 있는 섹션만 (잠금 섹션은 숨김)
+  const visibleSections = React.useMemo(
+    () => SECTIONS.filter(s => permFor(role, s.id) !== "locked"),
+    [role]
+  );
+
   // 섹션을 그룹별로 묶음
   const grouped = React.useMemo(() => {
     const m = {};
-    SECTIONS.forEach(s => { (m[s.group] = m[s.group] || []).push(s); });
+    visibleSections.forEach(s => { (m[s.group] = m[s.group] || []).push(s); });
     return m;
-  }, []);
+  }, [visibleSections]);
+
+  // 현재 탭이 권한 밖이면 첫 보이는 섹션으로 이동
+  React.useEffect(() => {
+    if (visibleSections.length && !visibleSections.some(s => s.id === tab)) {
+      setTab(visibleSections[0].id);
+    }
+  }, [visibleSections, tab]);
 
   // 섹션별 알림 개수 (가장 높은 severity 기준 점 색상)
   const alertsBySection = React.useMemo(() => {
@@ -152,8 +165,6 @@ function ClinicManagementScreen() {
                         fontFamily: "var(--font-mono)",
                       }}>{al.count}</span>
                     )}
-                    {p === "locked" && <Icon name="lock" size={11} style={{ color: "var(--text-muted)" }} />}
-                    {p === "read" && <Icon name="eye" size={11} style={{ color: "var(--text-muted)" }} />}
                   </button>
                 );
               })}
