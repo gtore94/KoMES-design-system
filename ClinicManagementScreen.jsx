@@ -45,31 +45,43 @@ function ClinicManagementScreen() {
         title="병원 관리"
         subtitle="한의원 운영에 필요한 모든 설정을 한 곳에서"
         actions={<>
-          {/* 권한 미리보기 — 시연/QA 용도 */}
+          {/* 권한 미리보기 — 목업/QA 용도 (프로덕션에서는 제외) */}
           <div style={{
-            display: "inline-flex", alignItems: "center", gap: 2,
-            padding: 2, background: "var(--bg-raised)",
-            border: "1px solid var(--border-subtle)",
+            display: "inline-flex", alignItems: "center", gap: 8,
+            padding: "3px 8px 3px 10px",
+            background: "var(--bg-raised)",
+            border: "1px dashed var(--border-default)",
             borderRadius: "var(--radius-md)",
           }}>
-            {["원장", "데스크"].map(r => (
-              <button key={r} onClick={() => setRole(r)} style={{
-                padding: "4px 10px", fontSize: 11, fontWeight: 500,
-                background: role === r ? "var(--bg-surface)" : "transparent",
-                color: role === r ? "var(--text-primary)" : "var(--text-muted)",
-                border: role === r ? "1px solid var(--border-default)" : "1px solid transparent",
-                borderRadius: "var(--radius-sm)",
-                fontFamily: "var(--font-sans)",
-                cursor: "pointer",
-                boxShadow: role === r ? "var(--shadow-sm)" : "none",
-              }}>{r === "원장" ? "원장 보기" : "데스크 보기"}</button>
-            ))}
+            <span style={{
+              fontSize: 9, fontWeight: 700, letterSpacing: "0.06em",
+              textTransform: "uppercase", color: "var(--text-muted)",
+              fontFamily: "var(--font-sans)", whiteSpace: "nowrap",
+            }} title="목업 미리보기용 — 프로덕션 빌드에서는 제외됩니다">목업 전용</span>
+            <div style={{
+              display: "inline-flex", alignItems: "center", gap: 2,
+              padding: 2, background: "var(--bg-surface)",
+              border: "1px solid var(--border-subtle)",
+              borderRadius: "var(--radius-sm)",
+            }}>
+              {["원장", "데스크"].map(r => (
+                <button key={r} onClick={() => setRole(r)} style={{
+                  padding: "4px 10px", fontSize: 11, fontWeight: 500,
+                  background: role === r ? "var(--bg-surface)" : "transparent",
+                  color: role === r ? "var(--text-primary)" : "var(--text-muted)",
+                  border: role === r ? "1px solid var(--border-default)" : "1px solid transparent",
+                  borderRadius: "var(--radius-sm)",
+                  fontFamily: "var(--font-sans)",
+                  cursor: "pointer",
+                  boxShadow: role === r ? "var(--shadow-sm)" : "none",
+                }}>{r === "원장" ? "원장 보기" : "데스크 보기"}</button>
+              ))}
+            </div>
           </div>
           <RoleBadge role={role} />
           <Button variant="secondary" size="sm" icon="bell" onClick={() => setAlertCenter("history")}>
             알림 센터
           </Button>
-          <Button variant="ghost" size="sm" icon="external-link">공개 페이지</Button>
         </>}
       />
 
