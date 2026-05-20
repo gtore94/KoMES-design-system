@@ -666,7 +666,7 @@ function InjuryEditor({ data, onChange, clinic, patient, onChangePatient }) {
   ];
   const YNField = ({ label, k }) => (
     <MiniField label={label}>
-      <TextField value={data[k]} onChange={set(k)} placeholder="예 / 아니요" />
+      <FormTextField value={data[k]} onChange={set(k)} placeholder="예 / 아니요" />
     </MiniField>
   );
   return (
@@ -695,9 +695,9 @@ function InjuryEditor({ data, onChange, clinic, patient, onChangePatient }) {
 
       <PanelSection title="발급 식별">
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-          <MiniField label="등록번호"><TextField value={data.registry} onChange={set("registry")} mono /></MiniField>
-          <MiniField label="면번호"><TextField value={data.serial} onChange={set("serial")} mono /></MiniField>
-          <MiniField label="발급일자"><TextField value={data.issueDate} onChange={set("issueDate")} type="date" mono /></MiniField>
+          <MiniField label="등록번호"><FormTextField value={data.registry} onChange={set("registry")} mono /></MiniField>
+          <MiniField label="면번호"><FormTextField value={data.serial} onChange={set("serial")} mono /></MiniField>
+          <MiniField label="발급일자"><FormTextField value={data.issueDate} onChange={set("issueDate")} type="date" mono /></MiniField>
           <MiniField label="용도">
             <select value={data.purpose} onChange={(e) => set("purpose")(e.target.value)} style={{ ...fieldInput, paddingRight: 26, appearance: "none", backgroundImage: "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%234A5E5B' stroke-width='2.5'><polyline points='6 9 12 15 18 9'/></svg>\")", backgroundRepeat: "no-repeat", backgroundPosition: "right 8px center" }}>
               <option>보험 청구용</option>
@@ -722,14 +722,14 @@ function InjuryEditor({ data, onChange, clinic, patient, onChangePatient }) {
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 10 }}>
           <MiniField label="주 질병ㆍ부상">
-            <TextField value={data.mainDx} onChange={set("mainDx")} placeholder="예: 우측 견관절 염좌" />
+            <FormTextField value={data.mainDx} onChange={set("mainDx")} placeholder="예: 우측 견관절 염좌" />
           </MiniField>
           <MiniField label="부 질병ㆍ부상 (선택)">
-            <TextField value={data.subDx} onChange={set("subDx")} placeholder="예: 견부통" />
+            <FormTextField value={data.subDx} onChange={set("subDx")} placeholder="예: 견부통" />
           </MiniField>
           <MiniField label="질병분류기호 (KCD)">
             <div style={{ position: "relative" }}>
-              <TextField value={data.icdCodes} onChange={set("icdCodes")} mono placeholder="S43.4, M75.1" />
+              <FormTextField value={data.icdCodes} onChange={set("icdCodes")} mono placeholder="S43.4, M75.1" />
               <span style={{ position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", display: "inline-flex", alignItems: "center", gap: 3, fontSize: 10, color: "var(--text-brand)", background: "var(--brand-subtle)", padding: "2px 6px", borderRadius: 4, border: "1px solid var(--brand-muted)" }}>
                 <Icon name="sparkles" size={9} /> AI 추천
               </span>
@@ -737,8 +737,8 @@ function InjuryEditor({ data, onChange, clinic, patient, onChangePatient }) {
           </MiniField>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 10 }}>
-          <MiniField label="발병/상해 연월일"><TextField type="date" value={data.injuryDate} onChange={set("injuryDate")} mono /></MiniField>
-          <MiniField label="진단 연월일"><TextField type="date" value={data.diagnosisDate} onChange={set("diagnosisDate")} mono /></MiniField>
+          <MiniField label="발병/상해 연월일"><FormTextField type="date" value={data.injuryDate} onChange={set("injuryDate")} mono /></MiniField>
+          <MiniField label="진단 연월일"><FormTextField type="date" value={data.diagnosisDate} onChange={set("diagnosisDate")} mono /></MiniField>
         </div>
       </PanelSection>
 
@@ -775,9 +775,9 @@ function InjuryEditor({ data, onChange, clinic, patient, onChangePatient }) {
         </button>}
       >
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 80px", gap: 10, marginBottom: 10 }}>
-          <MiniField label="치료 시작일"><TextField type="date" value={data.treatmentStartDate} onChange={set("treatmentStartDate")} mono /></MiniField>
-          <MiniField label="치료 종료일"><TextField type="date" value={data.treatmentEndDate} onChange={set("treatmentEndDate")} mono /></MiniField>
-          <MiniField label="치료 일수"><TextField value={data.treatmentDays} onChange={set("treatmentDays")} mono placeholder="30" /></MiniField>
+          <MiniField label="치료 시작일"><FormTextField type="date" value={data.treatmentStartDate} onChange={set("treatmentStartDate")} mono /></MiniField>
+          <MiniField label="치료 종료일"><FormTextField type="date" value={data.treatmentEndDate} onChange={set("treatmentEndDate")} mono /></MiniField>
+          <MiniField label="치료 일수"><FormTextField value={data.treatmentDays} onChange={set("treatmentDays")} mono placeholder="30" /></MiniField>
         </div>
         <MiniField label="치료 후 및 향후 치료에 대한 소견">
           <TextArea rows={4} value={data.treatmentFutureOpinion} onChange={set("treatmentFutureOpinion")} placeholder="현재까지의 치료 내용과 향후 치료에 대한 소견" />
@@ -786,8 +786,8 @@ function InjuryEditor({ data, onChange, clinic, patient, onChangePatient }) {
 
       <PanelSection title="입퇴원 / 비고">
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-          <MiniField label="입원일"><TextField type="date" value={data.admitDate} onChange={set("admitDate")} mono /></MiniField>
-          <MiniField label="퇴원일"><TextField type="date" value={data.dischargeDate} onChange={set("dischargeDate")} mono /></MiniField>
+          <MiniField label="입원일"><FormTextField type="date" value={data.admitDate} onChange={set("admitDate")} mono /></MiniField>
+          <MiniField label="퇴원일"><FormTextField type="date" value={data.dischargeDate} onChange={set("dischargeDate")} mono /></MiniField>
         </div>
         <div style={{ marginTop: 10 }}>
           <MiniField label="비고"><TextArea rows={2} value={data.remarks} onChange={set("remarks")} /></MiniField>
@@ -1243,29 +1243,29 @@ function ReferralEditor({ data, onChange, clinic, patient, onChangePatient }) {
       </PanelSection>
       <PanelSection title="수신처">
         <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 10 }}>
-          <MiniField label="의료기관명"><TextField value={data.toClinicName} onChange={set("toClinicName")} placeholder="예: 서울대학교병원 정형외과" /></MiniField>
-          <MiniField label="주소"><TextField value={data.toAddress} onChange={set("toAddress")} /></MiniField>
-          <MiniField label="담당 의사 (선택)"><TextField value={data.toDoctor} onChange={set("toDoctor")} placeholder="예: 홍길동" /></MiniField>
+          <MiniField label="의료기관명"><FormTextField value={data.toClinicName} onChange={set("toClinicName")} placeholder="예: 서울대학교병원 정형외과" /></MiniField>
+          <MiniField label="주소"><FormTextField value={data.toAddress} onChange={set("toAddress")} /></MiniField>
+          <MiniField label="담당 의사 (선택)"><FormTextField value={data.toDoctor} onChange={set("toDoctor")} placeholder="예: 홍길동" /></MiniField>
         </div>
       </PanelSection>
       <PanelSection title="진단 정보">
         <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 10 }}>
-          <MiniField label="주 질병ㆍ부상"><TextField value={data.mainDx} onChange={set("mainDx")} /></MiniField>
-          <MiniField label="부 질병ㆍ부상 (선택)"><TextField value={data.subDx} onChange={set("subDx")} /></MiniField>
-          <MiniField label="질병분류기호"><TextField value={data.icdCodes} onChange={set("icdCodes")} mono /></MiniField>
-          <MiniField label="발병 연월일"><TextField type="date" value={data.onsetDate} onChange={set("onsetDate")} mono /></MiniField>
+          <MiniField label="주 질병ㆍ부상"><FormTextField value={data.mainDx} onChange={set("mainDx")} /></MiniField>
+          <MiniField label="부 질병ㆍ부상 (선택)"><FormTextField value={data.subDx} onChange={set("subDx")} /></MiniField>
+          <MiniField label="질병분류기호"><FormTextField value={data.icdCodes} onChange={set("icdCodes")} mono /></MiniField>
+          <MiniField label="발병 연월일"><FormTextField type="date" value={data.onsetDate} onChange={set("onsetDate")} mono /></MiniField>
         </div>
       </PanelSection>
       <PanelSection title="의뢰 내용">
         <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 10 }}>
-          <MiniField label="의뢰 목적"><TextField value={data.purpose} onChange={set("purpose")} /></MiniField>
+          <MiniField label="의뢰 목적"><FormTextField value={data.purpose} onChange={set("purpose")} /></MiniField>
           <MiniField label="현재까지의 치료 내용"><TextArea rows={3} value={data.treatment} onChange={set("treatment")} /></MiniField>
           <MiniField label="의뢰 내용"><TextArea rows={3} value={data.requestContent} onChange={set("requestContent")} /></MiniField>
           <MiniField label="비고"><TextArea rows={2} value={data.remarks} onChange={set("remarks")} /></MiniField>
         </div>
       </PanelSection>
       <PanelSection title="발급">
-        <MiniField label="발급일자"><TextField type="date" value={data.issueDate} onChange={set("issueDate")} mono /></MiniField>
+        <MiniField label="발급일자"><FormTextField type="date" value={data.issueDate} onChange={set("issueDate")} mono /></MiniField>
       </PanelSection>
     </div>
   );
@@ -1290,13 +1290,13 @@ function OpinionEditor({ data, onChange, clinic, patient, onChangePatient }) {
       </PanelSection>
       <PanelSection title="진단 정보">
         <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 10 }}>
-          <MiniField label="주 진단명"><TextField value={data.mainDx} onChange={set("mainDx")} /></MiniField>
-          <MiniField label="부 진단명 (선택)"><TextField value={data.subDx} onChange={set("subDx")} /></MiniField>
-          <MiniField label="질병분류기호"><TextField value={data.icdCodes} onChange={set("icdCodes")} mono /></MiniField>
+          <MiniField label="주 진단명"><FormTextField value={data.mainDx} onChange={set("mainDx")} /></MiniField>
+          <MiniField label="부 진단명 (선택)"><FormTextField value={data.subDx} onChange={set("subDx")} /></MiniField>
+          <MiniField label="질병분류기호"><FormTextField value={data.icdCodes} onChange={set("icdCodes")} mono /></MiniField>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 10 }}>
-          <MiniField label="발병 연월일"><TextField type="date" value={data.onsetDate} onChange={set("onsetDate")} mono /></MiniField>
-          <MiniField label="진단 연월일"><TextField type="date" value={data.diagnosisDate} onChange={set("diagnosisDate")} mono /></MiniField>
+          <MiniField label="발병 연월일"><FormTextField type="date" value={data.onsetDate} onChange={set("onsetDate")} mono /></MiniField>
+          <MiniField label="진단 연월일"><FormTextField type="date" value={data.diagnosisDate} onChange={set("diagnosisDate")} mono /></MiniField>
         </div>
       </PanelSection>
       <PanelSection title="소견 내용" right={<button style={{ background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", color: "var(--text-brand)", padding: "3px 8px", borderRadius: 999, fontSize: 10.5, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}><Icon name="wand-2" size={10} /> AI로 작성</button>}>
@@ -1304,7 +1304,7 @@ function OpinionEditor({ data, onChange, clinic, patient, onChangePatient }) {
       </PanelSection>
       <PanelSection title="발급">
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-          <MiniField label="발급일자"><TextField type="date" value={data.issueDate} onChange={set("issueDate")} mono /></MiniField>
+          <MiniField label="발급일자"><FormTextField type="date" value={data.issueDate} onChange={set("issueDate")} mono /></MiniField>
           <MiniField label="용도">
             <select value={data.purpose} onChange={(e) => set("purpose")(e.target.value)} style={{ ...fieldInput, paddingRight: 26, appearance: "none" }}>
               <option>보험 청구용</option><option>회사 제출용</option><option>법원/관공서 제출용</option><option>본인 보관용</option><option>기타</option>
@@ -1343,23 +1343,23 @@ function CertEditor({ data, onChange, patient, onChangePatient, certType }) {
       </PanelSection>
       <PanelSection title="진단 정보">
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-          <MiniField label="병명" span={2}><TextField value={data.mainDx} onChange={set("mainDx")} /></MiniField>
-          <MiniField label="질병분류기호" span={2}><TextField value={data.icdCodes} onChange={set("icdCodes")} mono /></MiniField>
+          <MiniField label="병명" span={2}><FormTextField value={data.mainDx} onChange={set("mainDx")} /></MiniField>
+          <MiniField label="질병분류기호" span={2}><FormTextField value={data.icdCodes} onChange={set("icdCodes")} mono /></MiniField>
         </div>
       </PanelSection>
       <PanelSection title={isAdmission ? "입퇴원 기간" : isOutpatient ? "통원 정보" : "진료 기간"}>
         {isAdmission ? (
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-            <MiniField label="입원일"><TextField type="date" value={data.admitDate} onChange={set("admitDate")} mono /></MiniField>
-            <MiniField label="퇴원일"><TextField type="date" value={data.dischargeDate} onChange={set("dischargeDate")} mono /></MiniField>
+            <MiniField label="입원일"><FormTextField type="date" value={data.admitDate} onChange={set("admitDate")} mono /></MiniField>
+            <MiniField label="퇴원일"><FormTextField type="date" value={data.dischargeDate} onChange={set("dischargeDate")} mono /></MiniField>
           </div>
         ) : (
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-            <MiniField label="시작일"><TextField type="date" value={data.startDate} onChange={set("startDate")} mono /></MiniField>
-            <MiniField label="종료일"><TextField type="date" value={data.endDate} onChange={set("endDate")} mono /></MiniField>
+            <MiniField label="시작일"><FormTextField type="date" value={data.startDate} onChange={set("startDate")} mono /></MiniField>
+            <MiniField label="종료일"><FormTextField type="date" value={data.endDate} onChange={set("endDate")} mono /></MiniField>
             {isOutpatient && (
               <>
-                <MiniField label="총 통원 횟수"><TextField value={String(data.visitCount)} onChange={(v) => set("visitCount")(Number(v))} mono placeholder="8" /></MiniField>
+                <MiniField label="총 통원 횟수"><FormTextField value={String(data.visitCount)} onChange={(v) => set("visitCount")(Number(v))} mono placeholder="8" /></MiniField>
                 <MiniField label="" span={1}><div style={{ height: 10 }} /></MiniField>
                 <MiniField label="내원 날짜 (쉼표 구분)" span={2}>
                   <TextArea rows={3} value={data.visitDates} onChange={set("visitDates")} placeholder="2026-04-10, 2026-04-15, ..." />
@@ -1371,7 +1371,7 @@ function CertEditor({ data, onChange, patient, onChangePatient, certType }) {
       </PanelSection>
       <PanelSection title="발급">
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-          <MiniField label="발급일자"><TextField type="date" value={data.issueDate} onChange={set("issueDate")} mono /></MiniField>
+          <MiniField label="발급일자"><FormTextField type="date" value={data.issueDate} onChange={set("issueDate")} mono /></MiniField>
           <MiniField label="용도">{purposeSelect}</MiniField>
         </div>
         <div style={{ marginTop: 10 }}><MiniField label="비고"><TextArea rows={2} value={data.remarks} onChange={set("remarks")} /></MiniField></div>
@@ -1670,10 +1670,10 @@ function BillingEditor({ data, onChange, patient, onChangePatient, label }) {
 
       <PanelSection title="진료 기간">
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-          <MiniField label="시작일"><TextField type="date" value={data.startDate} onChange={set("startDate")} mono /></MiniField>
-          <MiniField label="종료일"><TextField type="date" value={data.endDate} onChange={set("endDate")} mono /></MiniField>
-          <MiniField label="총 내원 횟수"><TextField value={String(data.visits)} onChange={(v) => set("visits")(Number(v))} mono placeholder="8" /></MiniField>
-          <MiniField label="발급일"><TextField type="date" value={data.issueDate} onChange={set("issueDate")} mono /></MiniField>
+          <MiniField label="시작일"><FormTextField type="date" value={data.startDate} onChange={set("startDate")} mono /></MiniField>
+          <MiniField label="종료일"><FormTextField type="date" value={data.endDate} onChange={set("endDate")} mono /></MiniField>
+          <MiniField label="총 내원 횟수"><FormTextField value={String(data.visits)} onChange={(v) => set("visits")(Number(v))} mono placeholder="8" /></MiniField>
+          <MiniField label="발급일"><FormTextField type="date" value={data.issueDate} onChange={set("issueDate")} mono /></MiniField>
         </div>
       </PanelSection>
 
@@ -1762,7 +1762,7 @@ const fieldInput = {
   borderRadius: "var(--radius-sm)", padding: "6px 9px", outline: "none", width: "100%",
 };
 
-function TextField({ value, onChange, placeholder, mono, type = "text" }) {
+function FormTextField({ value, onChange, placeholder, mono, type = "text" }) {
   return <input
     type={type}
     value={value || ""}
@@ -1831,9 +1831,9 @@ function DiagnosisEditor({ data, onChange, clinic, patient, onChangePatient }) {
       {/* Issue identifiers */}
       <PanelSection title="발급 식별">
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-          <MiniField label="등록번호"><TextField value={data.registry} onChange={set("registry")} mono /></MiniField>
-          <MiniField label="연번호"><TextField value={data.serial} onChange={set("serial")} mono /></MiniField>
-          <MiniField label="발급일자"><TextField value={data.issueDate} onChange={set("issueDate")} type="date" mono /></MiniField>
+          <MiniField label="등록번호"><FormTextField value={data.registry} onChange={set("registry")} mono /></MiniField>
+          <MiniField label="연번호"><FormTextField value={data.serial} onChange={set("serial")} mono /></MiniField>
+          <MiniField label="발급일자"><FormTextField value={data.issueDate} onChange={set("issueDate")} type="date" mono /></MiniField>
           <MiniField label="용도">
             <select value={data.purpose} onChange={(e) => set("purpose")(e.target.value)} style={{ ...fieldInput, paddingRight: 26, appearance: "none", backgroundImage: "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%234A5E5B' stroke-width='2.5'><polyline points='6 9 12 15 18 9'/></svg>\")", backgroundRepeat: "no-repeat", backgroundPosition: "right 8px center" }}>
               <option>보험 청구용</option>
@@ -1859,14 +1859,14 @@ function DiagnosisEditor({ data, onChange, clinic, patient, onChangePatient }) {
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 10 }}>
           <MiniField label="주 질병ㆍ부상">
-            <TextField value={data.mainDx} onChange={set("mainDx")} placeholder="예: 경추의 염좌 및 긴장" />
+            <FormTextField value={data.mainDx} onChange={set("mainDx")} placeholder="예: 경추의 염좌 및 긴장" />
           </MiniField>
           <MiniField label="부 질병ㆍ부상 (선택)">
-            <TextField value={data.subDx} onChange={set("subDx")} placeholder="예: 경부통" />
+            <FormTextField value={data.subDx} onChange={set("subDx")} placeholder="예: 경부통" />
           </MiniField>
           <MiniField label="질병분류기호 (KCD)">
             <div style={{ position: "relative" }}>
-              <TextField value={data.icdCodes} onChange={set("icdCodes")} mono placeholder="S13.4, M54.2" />
+              <FormTextField value={data.icdCodes} onChange={set("icdCodes")} mono placeholder="S13.4, M54.2" />
               <span style={{ position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", display: "inline-flex", alignItems: "center", gap: 3, fontSize: 10, color: "var(--text-brand)", background: "var(--brand-subtle)", padding: "2px 6px", borderRadius: 4, border: "1px solid var(--brand-muted)" }}>
                 <Icon name="sparkles" size={9} /> AI 추천
               </span>
@@ -1874,8 +1874,8 @@ function DiagnosisEditor({ data, onChange, clinic, patient, onChangePatient }) {
           </MiniField>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 10 }}>
-          <MiniField label="발병 연월일"><TextField type="date" value={data.onsetDate} onChange={set("onsetDate")} mono /></MiniField>
-          <MiniField label="진단 연월일"><TextField type="date" value={data.diagnosisDate} onChange={set("diagnosisDate")} mono /></MiniField>
+          <MiniField label="발병 연월일"><FormTextField type="date" value={data.onsetDate} onChange={set("onsetDate")} mono /></MiniField>
+          <MiniField label="진단 연월일"><FormTextField type="date" value={data.diagnosisDate} onChange={set("diagnosisDate")} mono /></MiniField>
         </div>
       </PanelSection>
 
@@ -1897,8 +1897,8 @@ function DiagnosisEditor({ data, onChange, clinic, patient, onChangePatient }) {
       {/* Admission */}
       <PanelSection title="입퇴원 / 비고">
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-          <MiniField label="입원일"><TextField type="date" value={data.admitDate} onChange={set("admitDate")} mono /></MiniField>
-          <MiniField label="퇴원일"><TextField type="date" value={data.dischargeDate} onChange={set("dischargeDate")} mono /></MiniField>
+          <MiniField label="입원일"><FormTextField type="date" value={data.admitDate} onChange={set("admitDate")} mono /></MiniField>
+          <MiniField label="퇴원일"><FormTextField type="date" value={data.dischargeDate} onChange={set("dischargeDate")} mono /></MiniField>
         </div>
         <div style={{ marginTop: 10 }}>
           <MiniField label="비고"><TextArea rows={2} value={data.remarks} onChange={set("remarks")} /></MiniField>

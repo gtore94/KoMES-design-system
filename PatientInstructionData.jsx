@@ -32,7 +32,7 @@ const TODAY_ORDERS = {
 
 // ── AI 초안 — 섹션별 ────────────────────────────────────────────
 // 각 섹션은 { id, icon, title, hanjaTitle?, default: {short, normal, detailed} x {warm, formal}, hanjaAnnotations }
-const SECTIONS = [
+const INSTRUCTION_SECTIONS = [
   {
     id: "summary",
     icon: "stethoscope",
@@ -196,4 +196,4 @@ const PAST_INSTRUCTIONS = [
   { date: "2026-02-28", dx: "수면장애 단독", similarity: 68, title: "수면 클리닉 — 천왕보심단 30일분" },
 ];
 
-Object.assign(window, { PATIENT, TODAY_SOAP, TODAY_DX, TODAY_ORDERS, SECTIONS, QUICK_PROMPTS, PAST_INSTRUCTIONS });
+Object.assign(window, { PATIENT, TODAY_SOAP, TODAY_DX, TODAY_ORDERS, INSTRUCTION_SECTIONS, QUICK_PROMPTS, PAST_INSTRUCTIONS });

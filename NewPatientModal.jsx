@@ -118,7 +118,7 @@ function SelectField({ value, onChange, options }) {
   );
 }
 
-function SectionCard({ icon, title, hint, children, step }) {
+function NPSectionCard({ icon, title, hint, children, step }) {
   return (
     <div style={{
       background: "var(--bg-surface)",
@@ -232,7 +232,7 @@ function NewPatientModal({ onClose, onSubmit }) {
         {/* Body */}
         <div style={{ flex: 1, overflowY: "auto", padding: "18px 22px", display: "flex", flexDirection: "column", gap: 14 }}>
           {/* Section 1: Basic info */}
-          <SectionCard step="1" icon="user" title="기본 정보" hint="환자 본인 확인용">
+          <NPSectionCard step="1" icon="user" title="기본 정보" hint="환자 본인 확인용">
             <div style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr", gap: 14 }}>
               <div>
                 <FieldLabel required>이름</FieldLabel>
@@ -270,10 +270,10 @@ function NewPatientModal({ onClose, onSubmit }) {
               <TextField value={d.address} onChange={v => set("address", v)} placeholder="기본 주소" />
               <TextField value={d.addressDetail} onChange={v => set("addressDetail", v)} placeholder="상세 주소" />
             </div>
-          </SectionCard>
+          </NPSectionCard>
 
           {/* Section 2: Visit info */}
-          <SectionCard step="2" icon="stethoscope" title="진료 정보">
+          <NPSectionCard step="2" icon="stethoscope" title="진료 정보">
             <div style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 14 }}>
               <div>
                 <FieldLabel>방문 구분</FieldLabel>
@@ -314,10 +314,10 @@ function NewPatientModal({ onClose, onSubmit }) {
                 }}
               />
             </div>
-          </SectionCard>
+          </NPSectionCard>
 
           {/* Section 3: Insurance */}
-          <SectionCard step="3" icon="shield" title="보험 정보">
+          <NPSectionCard step="3" icon="shield" title="보험 정보">
             <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr 1fr", gap: 14 }}>
               <div>
                 <FieldLabel>보험 종류</FieldLabel>
@@ -350,10 +350,10 @@ function NewPatientModal({ onClose, onSubmit }) {
                 fontFamily: "var(--font-sans)",
               }}>자격 조회</button>
             </div>
-          </SectionCard>
+          </NPSectionCard>
 
           {/* Section 3.5: Relations */}
-          <SectionCard step="4" icon="share-2" title="가족 / 지인 관계" hint="선택 항목">
+          <NPSectionCard step="4" icon="share-2" title="가족 / 지인 관계" hint="선택 항목">
             <FieldLabel>등록된 환자와의 관계</FieldLabel>
 
             {d.relations.length > 0 && (
@@ -444,10 +444,10 @@ function NewPatientModal({ onClose, onSubmit }) {
               <Icon name="info" size={12} />
               가족 단위 관리가 가능합니다 — 등록된 환자와의 관계를 입력하면 양측 차트에 자동 반영됩니다.
             </div>
-          </SectionCard>
+          </NPSectionCard>
 
           {/* Section 5: Tags + Memo */}
-          <SectionCard step="5" icon="tag" title="태그 및 메모" hint="선택 항목">
+          <NPSectionCard step="5" icon="tag" title="태그 및 메모" hint="선택 항목">
             <FieldLabel>주의 태그</FieldLabel>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 14 }}>
               {TAG_OPTIONS.map(tag => {
@@ -479,10 +479,10 @@ function NewPatientModal({ onClose, onSubmit }) {
                 borderRadius: "var(--radius-md)", outline: "none", resize: "vertical",
               }}
             />
-          </SectionCard>
+          </NPSectionCard>
 
           {/* Section 6: Consents */}
-          <SectionCard step="6" icon="file-check" title="동의 항목">
+          <NPSectionCard step="6" icon="file-check" title="동의 항목">
             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
               {[
                 { k: "agreePrivacy",   l: "개인정보 수집 및 이용 동의", req: true,
@@ -509,7 +509,7 @@ function NewPatientModal({ onClose, onSubmit }) {
                 </label>
               ))}
             </div>
-          </SectionCard>
+          </NPSectionCard>
         </div>
 
         {/* Footer */}

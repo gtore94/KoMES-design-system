@@ -4,7 +4,7 @@
 
 const { useState: useStPOD, useMemo: useMemoPOD, useEffect: useEffPOD } = React;
 
-const TODAY_STR = "2026-05-16";
+const PO_TODAY_STR = "2026-05-16";
 const STAFF_OPTIONS = ["김민준 (원장)", "이수민 (간호조무)", "박지원 (간호조무)"];
 const PAYMENT_OPTIONS = ["월말 정산", "선결제", "후불 30일", "현금 결제"];
 
@@ -14,11 +14,11 @@ function PurchaseOrderDraftScreen({ onClose, onSubmit, initialRecommendations })
     const recs = initialRecommendations || computeRecommendations(REC_DEFAULTS);
     return recs.map((g, i) => {
       const meta = SUPPLIERS[g.supplier] || {};
-      const expected = addDays(TODAY_STR, (meta.avgLead || 7));
+      const expected = addDays(PO_TODAY_STR, (meta.avgLead || 7));
       return {
         id: `DRAFT-${String(i + 1).padStart(3, "0")}`,
         supplier: g.supplier,
-        orderDate: TODAY_STR,
+        orderDate: PO_TODAY_STR,
         expectedDate: expected,
         placedBy: STAFF_OPTIONS[0],
         paymentTerms: meta.payment || "월말 정산",
@@ -120,7 +120,7 @@ function PurchaseOrderDraftScreen({ onClose, onSubmit, initialRecommendations })
         </div>
         <div style={{ flex: 1 }}></div>
         <div style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--stone-300)" }}>
-          작성 시각 {TODAY_STR} 14:32
+          작성 시각 {PO_TODAY_STR} 14:32
         </div>
       </div>
 

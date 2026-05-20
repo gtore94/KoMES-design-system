@@ -8,7 +8,7 @@ function PatientInstructionModal({ patient, onClose }) {
   const [length, setLength]         = useStPI("normal");     // short | normal | detailed
   const [showHanja, setShowHanja]   = useStPI(true);
   const [previewMode, setPreviewMode] = useStPI("kakao");    // kakao | pdf
-  const [sections, setSections]     = useStPI(SECTIONS);
+  const [sections, setSections]     = useStPI(INSTRUCTION_SECTIONS);
   const [activeId, setActiveId]     = useStPI("summary");
   const [pastOpen, setPastOpen]     = useStPI(false);
   const [sentToast, setSentToast]   = useStPI(null);

@@ -4,7 +4,7 @@
 const { useState: useStMd, useEffect: useEfMd, useRef: useRfMd } = React;
 
 // 가짜 진행 단계
-const STAGES = [
+const CLAIM_STAGES = [
   {
     key: "build",
     label: "청구파일 생성",
@@ -51,7 +51,7 @@ function ClaimSubmissionFlow({ items, type, summary, onClose, scenario }) {
   const hasErrors = errorItems.length > 0 || scenario === "errors";
 
   useEfMd(() => {
-    const s = STAGES[stage];
+    const s = CLAIM_STAGES[stage];
     if (!s) return;
     if (statusByKey[s.key] !== "running") return;
     timerRef.current = setTimeout(() => {
@@ -78,8 +78,8 @@ function ClaimSubmissionFlow({ items, type, summary, onClose, scenario }) {
           setStatusByKey(next);
           // advance
           const nextStageIdx = stage + 1;
-          if (nextStageIdx < STAGES.length) {
-            next[STAGES[nextStageIdx].key] = "running";
+          if (nextStageIdx < CLAIM_STAGES.length) {
+            next[CLAIM_STAGES[nextStageIdx].key] = "running";
             setStatusByKey(next);
             setStage(nextStageIdx);
           }
@@ -91,8 +91,8 @@ function ClaimSubmissionFlow({ items, type, summary, onClose, scenario }) {
       } else {
         next[s.key] = "success";
         const nextStageIdx = stage + 1;
-        if (nextStageIdx < STAGES.length) {
-          next[STAGES[nextStageIdx].key] = "running";
+        if (nextStageIdx < CLAIM_STAGES.length) {
+          next[CLAIM_STAGES[nextStageIdx].key] = "running";
           setStage(nextStageIdx);
         }
         setStatusByKey(next);
@@ -182,13 +182,13 @@ function ClaimSubmissionFlow({ items, type, summary, onClose, scenario }) {
 
         {/* Stages */}
         <div style={{ flex: 1, overflowY: "auto", padding: "8px 0" }}>
-          {STAGES.map((s, idx) => (
+          {CLAIM_STAGES.map((s, idx) => (
             <StageRow
               key={s.key}
               stage={s}
               idx={idx}
               status={statusByKey[s.key]}
-              isLast={idx === STAGES.length - 1}
+              isLast={idx === CLAIM_STAGES.length - 1}
               // Stage 3 expands to show results
               expanded={s.key === "pretest" && pretestResults}
               details={s.key === "pretest" && pretestResults ? (
@@ -239,7 +239,7 @@ function ClaimSubmissionFlow({ items, type, summary, onClose, scenario }) {
                   animation: "pulse 1.4s infinite",
                 }}></span>
                 <span style={{ fontFamily: "var(--font-sans)" }}>
-                  {STAGES[stage]?.label} 진행 중…
+                  {CLAIM_STAGES[stage]?.label} 진행 중…
                 </span>
               </div>
               <div style={{ flex: 1 }}></div>

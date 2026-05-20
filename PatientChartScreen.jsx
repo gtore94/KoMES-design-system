@@ -79,7 +79,7 @@ const ACTING_TYPES = [
 ];
 
 // ── Section Header ───────────────────────────────────────────────
-function SectionHeader({ icon, title, children }) {
+function ChartSectionHeader({ icon, title, children }) {
   return (
     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>

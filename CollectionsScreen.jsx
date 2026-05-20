@@ -319,7 +319,7 @@ function CollectionsScreen() {
                       ₩{r.amount.toLocaleString("ko-KR")}
                     </div>
                     <div>
-                      <StatusPill status={r.status} />
+                      <CollectStatusPill status={r.status} />
                     </div>
                     <div style={{ display: "flex", gap: 4 }}>
                       {r.kind === "patient" ? (
@@ -435,7 +435,7 @@ function AgingPanel({ title, buckets, totalLabel, color }) {
 }
 
 // ─── Status pill ────────────────────────────────────────
-function StatusPill({ status }) {
+function CollectStatusPill({ status }) {
   const s = COLLECTION_STATUS[status];
   if (!s) return null;
   return (
@@ -523,7 +523,7 @@ function DetailPanel({ row, onClose }) {
             ₩{row.amount.toLocaleString("ko-KR")}
           </div>
           <div style={{ marginTop: 6, display: "flex", gap: 8, alignItems: "center" }}>
-            <StatusPill status={row.status} />
+            <CollectStatusPill status={row.status} />
             <span style={{ fontSize: 11.5, color: "var(--cinnabar-700)", fontFamily: "var(--font-mono)", fontWeight: 600 }}>{row.days}일 경과</span>
           </div>
         </div>

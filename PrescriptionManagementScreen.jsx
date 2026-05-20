@@ -471,11 +471,11 @@ function RxDetailModal({ rx, onClose, onAdvance }) {
             <div>
               <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 6 }}>처방 정보</div>
               <div style={{ display: "flex", flexDirection: "column", gap: 8, fontSize: 13, fontFamily: "var(--font-sans)", padding: "10px 14px", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", background: "var(--bg-raised)" }}>
-                <DetailRow label="처방 일수" value={`${rx.days}일`} mono />
-                <DetailRow label="총 중량" value={`${totalWeight * rx.days}g`} mono />
-                <DetailRow label="수령 방법" value={rx.pickup === "delivery" ? "택배 배송" : "방문 픽업"} icon={rx.pickup === "delivery" ? "truck" : "shopping-bag"} />
-                <DetailRow label="처방의" value={rx.doctor} />
-                {rx.dispenser && <DetailRow label="조제 담당" value={rx.dispenser} />}
+                <RxDetailRow label="처방 일수" value={`${rx.days}일`} mono />
+                <RxDetailRow label="총 중량" value={`${totalWeight * rx.days}g`} mono />
+                <RxDetailRow label="수령 방법" value={rx.pickup === "delivery" ? "택배 배송" : "방문 픽업"} icon={rx.pickup === "delivery" ? "truck" : "shopping-bag"} />
+                <RxDetailRow label="처방의" value={rx.doctor} />
+                {rx.dispenser && <RxDetailRow label="조제 담당" value={rx.dispenser} />}
               </div>
             </div>
           </div>
@@ -498,7 +498,7 @@ function RxDetailModal({ rx, onClose, onAdvance }) {
   );
 }
 
-function DetailRow({ label, value, mono, icon }) {
+function RxDetailRow({ label, value, mono, icon }) {
   return (
     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
       <span style={{ color: "var(--text-secondary)" }}>{label}</span>
