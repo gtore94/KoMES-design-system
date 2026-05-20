@@ -105,6 +105,30 @@ python3 -m http.server 8080   # 또는  npx serve .
 
 ---
 
+## 전역 이름 규칙 (중요)
+
+빌드 도구가 없어 **모든 `*.jsx`가 하나의 전역 스코프를 공유**합니다. 서로 다른 파일에 같은 이름의 top-level `function`/`const`가 있으면 **나중에 로드된 정의가 먼저 것을 덮어써** 조용한 버그가 납니다(예: 직원 목록이 대시보드 행으로 렌더되어 `₩NaN만` 표시).
+
+- **공용 컴포넌트는 `Components.jsx`** 한 곳에만 정의.
+- **화면 전용 헬퍼는 고유 접두사**를 붙입니다 — `NP*`(NewPatient), `Chart*`, `Rx*`, `Collect*`, `Form*`, `SR*`(NewStaff) 등.
+- 새 컴포넌트/상수를 추가하면 충돌 검사를 돌리세요:
+
+```bash
+python3 check-collisions.py
+```
+
+`build-standalone.py`는 빌드 전에 이 검사를 자동 실행하며, 충돌이 있으면 빌드를 중단합니다.
+
+**커밋 시 자동 차단** — `.githooks/pre-commit`이 커밋마다 충돌 검사를 실행합니다. 새로 클론한 경우 한 번만 활성화하세요:
+
+```bash
+git config core.hooksPath .githooks
+# (또는 cp .githooks/pre-commit .git/hooks/pre-commit)
+```
+검사를 건너뛰고 커밋하려면 `git commit --no-verify`.
+
+---
+
 ## 공통 인프라
 
 - **토스트 피드백** — `ClinicEditModals.jsx`의 `showToast(msg, opts)` / `toastProgress(시작, 완료)`. `<ClinicToaster />`는 `index.html`의 `App` 루트에 1회 마운트되어 전 화면에서 동작합니다. CSV·내보내기·인쇄 등 액션 버튼이 이를 사용합니다.

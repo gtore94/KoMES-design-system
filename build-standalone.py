@@ -8,50 +8,30 @@ import os
 SRC = "index.html"
 OUT = "index.standalone.html"
 
-JSX_FILES = [
-    "Components.jsx",
-    "LeftRail.jsx",
-    "NewPatientModal.jsx",
-    "ChartActingPanel.jsx",
-    "PatientListScreen.jsx",
-    "PatientManagementScreen.jsx",
-    "PatientChartScreen.jsx",
-    "PrescriptionScreen.jsx",
-    "PrescriptionManagementScreen.jsx",
-    "ScheduleScreen.jsx",
-    "PaymentScreen.jsx",
-    "herbData.jsx",
-    "HerbInventoryParts.jsx",
-    "HerbRegistrationModal.jsx",
-    "HerbAdjustmentScreen.jsx",
-    "HerbInventoryScreen.jsx",
-    "suppliesData.jsx",
-    "SuppliesParts.jsx",
-    "SupplyRegistrationModal.jsx",
-    "SupplyAdjustmentScreen.jsx",
-    "SuppliesScreen.jsx",
-    "purchaseOrdersData.jsx",
-    "PurchaseOrderHistoryScreen.jsx",
-    "PurchaseOrderDraftScreen.jsx",
-    "RecommendationSettingsModal.jsx",
-    "claimData.jsx",
-    "ClaimSidebar.jsx",
-    "ClaimList.jsx",
-    "ClaimSubmissionFlow.jsx",
-    "InsuranceClaimScreen.jsx",
-    "PatientPickerData.jsx",
-    "PatientPickerModal.jsx",
-    "MedicalFormScreen.jsx",
-    "PatientInstructionData.jsx",
-    "PatientInstructionModal.jsx",
-    "staffData.jsx",
-    "NewStaffModal.jsx",
-    "StaffManagementScreen.jsx",
-    "SettingsScreen.jsx",
-]
+
+def jsx_files_from_index(html):
+    """index.html의 <script src="*.jsx"> 를 로드 순서대로 추출(중복/?v= 제거)."""
+    ordered = []
+    for ref in re.findall(r'src="([^"]+\.jsx)', html):
+        name = ref.split("?")[0]
+        if name not in ordered:
+            ordered.append(name)
+    return ordered
+
+
+def check_collisions():
+    """전역 이름 충돌이 있으면 빌드를 중단한다."""
+    import subprocess
+    r = subprocess.run([sys.executable, "check-collisions.py"])
+    if r.returncode != 0:
+        print("\n빌드 중단: 전역 이름 충돌을 먼저 해결하세요.", file=sys.stderr)
+        sys.exit(1)
+
 
 def main():
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+    check_collisions()
 
     with open(SRC) as f:
         html = f.read()
@@ -76,18 +56,12 @@ def main():
     last = html.rindex('<script type="text/babel">')
     app_script = html[last : html.index("</script>", last) + len("</script>")]
 
-    # Detect any new JSX files referenced in index.html but not in JSX_FILES
-    referenced = re.findall(r'src="([^"]+\.jsx)', html)
-    referenced_clean = [r.split("?")[0] for r in referenced]
-    missing = [f for f in referenced_clean if f not in JSX_FILES]
-    if missing:
-        print(f"WARNING: these files are in {SRC} but not in JSX_FILES list:")
-        for m in missing:
-            print(f"  - {m}")
+    # JSX 목록은 index.html의 로드 순서에서 직접 도출 (하드코딩하지 않음)
+    jsx_files = jsx_files_from_index(html)
 
     parts = [head, "\n"]
     ok = err = 0
-    for fname in JSX_FILES:
+    for fname in jsx_files:
         if os.path.exists(fname):
             with open(fname) as f:
                 content = f.read()
