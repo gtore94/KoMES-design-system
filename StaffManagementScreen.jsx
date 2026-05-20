@@ -664,8 +664,8 @@ function StaffManagementScreen() {
           <div style={{ width: 240 }}>
             <Input placeholder="이름·직책·부서·연락처 검색…" value={search} onChange={setSearch} icon="search" />
           </div>
-          <Button variant="secondary" size="sm" icon="calendar-days">근무표</Button>
-          <Button variant="secondary" size="sm" icon="download">내보내기</Button>
+          <Button variant="secondary" size="sm" icon="calendar-days" onClick={() => showToast("근무표를 불러옵니다.")}>근무표</Button>
+          <Button variant="secondary" size="sm" icon="download" onClick={() => toastProgress("직원 목록 내보내는 중…", "직원 목록 CSV를 내려받았습니다")}>내보내기</Button>
           <Button variant="primary" icon="user-plus" onClick={() => setShowNewStaff(true)}>직원 등록</Button>
         </>}
       />

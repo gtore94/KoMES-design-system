@@ -2053,10 +2053,10 @@ function MedicalFormScreen() {
           <div style={{ fontSize: 11, color: "var(--text-muted)" }}>진단서 · 소견서 · 확인서 등 환자 발급 서식</div>
         </div>
         <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
-          <Button variant="secondary" size="sm" icon="save">임시 저장</Button>
-          <Button variant="secondary" size="sm" icon="file-down">PDF 저장</Button>
-          <Button variant="secondary" size="sm" icon="send">환자에게 전송</Button>
-          <Button variant="primary" size="sm" icon="printer">인쇄 / 발급</Button>
+          <Button variant="secondary" size="sm" icon="save" onClick={() => showToast("서식이 임시 저장되었습니다.")}>임시 저장</Button>
+          <Button variant="secondary" size="sm" icon="file-down" onClick={() => toastProgress("PDF 생성 중…", "서식 PDF를 저장했습니다")}>PDF 저장</Button>
+          <Button variant="secondary" size="sm" icon="send" onClick={() => showToast("환자에게 서식을 전송했습니다.")}>환자에게 전송</Button>
+          <Button variant="primary" size="sm" icon="printer" onClick={() => showToast("서식 인쇄 · 발급을 시작합니다.")}>인쇄 / 발급</Button>
           <div style={{ width: 1, height: 22, background: "var(--border-subtle)", margin: "0 4px" }}></div>
           <Icon name="bell" size={17} style={{ color: "var(--text-muted)", cursor: "pointer" }} />
         </div>

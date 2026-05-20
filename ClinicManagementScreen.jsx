@@ -227,8 +227,6 @@ function ClinicManagementScreen() {
         initialTab={alertCenter || "rules"}
         role={role}
       />
-
-      <ClinicToaster />
     </div>
   );
 }

@@ -538,7 +538,7 @@ function PatientManagementScreen({ onOpenChart }) {
           <div style={{ width: 240 }}>
             <Input placeholder="이름·연락처·주소증 검색…" value={search} onChange={setSearch} icon="search" />
           </div>
-          <Button variant="secondary" size="sm" icon="download">내보내기</Button>
+          <Button variant="secondary" size="sm" icon="download" onClick={() => toastProgress("환자 목록 내보내는 중…", "환자 목록 CSV를 내려받았습니다")}>내보내기</Button>
           <Button variant="primary" icon="user-plus" onClick={() => setShowNewPatient(true)}>신규 등록</Button>
         </>}
       />

@@ -102,9 +102,9 @@ function CollectionsScreen() {
         subtitle={`총 받을 돈 ${fmtKRW(totals.total)} · ${COLLECTIONS.asOf} 기준`}
         actions={
           <>
-            <Button variant="secondary" size="sm" icon="phone">일괄 연락</Button>
-            <Button variant="secondary" size="sm" icon="download">CSV 내보내기</Button>
-            <Button variant="primary" size="sm" icon="bell-ring">독촉 캠페인</Button>
+            <Button variant="secondary" size="sm" icon="phone" onClick={() => showToast("미수금 환자에게 일괄 연락을 시작했습니다.")}>일괄 연락</Button>
+            <Button variant="secondary" size="sm" icon="download" onClick={() => toastProgress("미수금 내역 내보내는 중…", "미수금 CSV를 내려받았습니다")}>CSV 내보내기</Button>
+            <Button variant="primary" size="sm" icon="bell-ring" onClick={() => showToast("독촉 캠페인이 예약되었습니다.")}>독촉 캠페인</Button>
           </>
         }
       />

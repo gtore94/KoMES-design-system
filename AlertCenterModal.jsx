@@ -574,7 +574,7 @@ function LogTab() {
           </select>
         </div>
         <div style={{ flex: 1 }} />
-        <Button variant="ghost" size="sm" icon="download">CSV 내보내기</Button>
+        <Button variant="ghost" size="sm" icon="download" onClick={() => toastProgress("처리 로그 내보내는 중…", "처리 로그 CSV를 내려받았습니다")}>CSV 내보내기</Button>
       </div>
 
       {/* Timeline */}

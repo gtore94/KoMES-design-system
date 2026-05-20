@@ -73,8 +73,8 @@ function PrescriptionManagementScreen() {
         title="처방 관리"
         subtitle={`전체 ${RX_QUEUE.length}건 · 진행 중 ${RX_QUEUE.filter(r => r.status !== "completed").length}건`}
         actions={<>
-          <Button variant="ghost" size="sm" icon="download">엑셀</Button>
-          <Button variant="secondary" size="sm" icon="printer">출력 묶음</Button>
+          <Button variant="ghost" size="sm" icon="download" onClick={() => toastProgress("처방 목록 내보내는 중…", "처방 목록 엑셀을 내려받았습니다")}>엑셀</Button>
+          <Button variant="secondary" size="sm" icon="printer" onClick={() => showToast("처방전 출력 묶음을 생성합니다.")}>출력 묶음</Button>
           <Button variant="primary" size="sm" icon="plus">신규 처방</Button>
         </>}
       />
@@ -483,8 +483,8 @@ function RxDetailModal({ rx, onClose, onAdvance }) {
 
         {/* Footer actions */}
         <div style={{ padding: "14px 24px", borderTop: "1px solid var(--border-subtle)", display: "flex", gap: 8, alignItems: "center", background: "var(--bg-raised)" }}>
-          <Button variant="ghost" size="md" icon="printer">출력</Button>
-          <Button variant="ghost" size="md" icon="copy">재처방</Button>
+          <Button variant="ghost" size="md" icon="printer" onClick={() => showToast("처방전을 출력합니다.")}>출력</Button>
+          <Button variant="ghost" size="md" icon="copy" onClick={() => showToast("이전 처방을 복사해 재처방을 시작합니다.")}>재처방</Button>
           <div style={{ flex: 1 }} />
           <Button variant="secondary" size="md" onClick={onClose}>닫기</Button>
           {nextCol && (
