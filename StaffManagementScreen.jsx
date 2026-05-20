@@ -89,7 +89,7 @@ function TodayStatusPill({ status }) {
 }
 
 // ── Staff Row ────────────────────────────────────────────────────
-function StaffRow({ s, selected, onSelect }) {
+function StaffListRow({ s, selected, onSelect }) {
   const statusMeta = STATUS_META[s.status];
   return (
     <div onClick={() => onSelect(s)} style={{
@@ -444,7 +444,7 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
                           <div style={{ fontSize: 12, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>{p.label}</div>
                           <div style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginTop: 1 }}>{p.desc}</div>
                         </div>
-                        <Toggle on={granted} onChange={() =>
+                        <StaffToggle on={granted} onChange={() =>
                           setPermState(prev => prev.includes(p.key) ? prev.filter(x => x !== p.key) : [...prev, p.key])
                         } />
                       </div>
@@ -526,8 +526,8 @@ function StaffDetailPanel({ staff, onClose, onEdit }) {
   );
 }
 
-// ── Toggle ───────────────────────────────────────────────────────
-function Toggle({ on, onChange }) {
+// ── StaffToggle ───────────────────────────────────────────────────────
+function StaffToggle({ on, onChange }) {
   const [val, setVal] = useStateStaff(on);
   useEffectStaff(() => setVal(on), [on]);
   return (
@@ -742,7 +742,7 @@ function StaffManagementScreen() {
                     <div>조건에 맞는 직원이 없습니다.</div>
                   </div>
                 ) : filtered.map(s => (
-                  <StaffRow key={s.id} s={s} selected={selected?.id === s.id} onSelect={() => setSelectedId(s.id)} />
+                  <StaffListRow key={s.id} s={s} selected={selected?.id === s.id} onSelect={() => setSelectedId(s.id)} />
                 ))}
               </div>
             </>
