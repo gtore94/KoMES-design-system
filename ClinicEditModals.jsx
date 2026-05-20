@@ -360,6 +360,16 @@ const MATERIAL_FIELDS = [
   { key: "inUse", label: "사용 여부", type: "toggle" },
 ];
 
+const NONBENEFIT_FIELDS = [
+  { key: "code", label: "코드", type: "mono", placeholder: "SE00" },
+  { key: "name", label: "오더명칭", type: "text", placeholder: "오더 이름", full: true },
+  { key: "price", label: "단가 (원)", type: "number", placeholder: "0" },
+  { key: "vat", label: "VAT (원)", type: "number", placeholder: "0" },
+  { key: "cat", label: "구분", type: "segment", options: ["투약", "물리요법", "시술 및 처치", "검사", "기타", "제증명수수료", "자동차보험"], full: true },
+  { key: "report", label: "보고대상", type: "segment", options: ["미확인", "Y"] },
+  { key: "taxable", label: "과세항목 (VAT)", type: "toggle" },
+];
+
 const MENU_FIELDS = [
   { key: "code", label: "EDI 코드", type: "mono", placeholder: "AA000 (비급여는 비워둠)" },
   { key: "cat", label: "분류", type: "text", placeholder: "침구 / 물리 / 약침 ..." },
@@ -415,6 +425,16 @@ function EquipmentAddModal({ open, onClose }) {
     title="장비 등록"
     subtitle="진료·조제·IT 장비의 위치, 점검 일정, 보증 관리"
     fields={EQUIPMENT_FIELDS} submitLabel="장비 등록" toastMsg="장비가 등록되었습니다" />;
+}
+
+function NonBenefitOrderModal({ open, onClose, initial }) {
+  const editing = !!initial;
+  return <ClinicFormModal open={open} onClose={onClose} icon="tag"
+    title={editing ? "비급여 오더 수정" : "새 비급여 오더 등록"}
+    subtitle="비급여 시술·투약·검사·제증명 오더 카탈로그"
+    fields={NONBENEFIT_FIELDS} initial={initial}
+    submitLabel={editing ? "변경사항 저장" : "오더 등록"}
+    toastMsg={editing ? "비급여 오더가 수정되었습니다" : "비급여 오더가 등록되었습니다"} />;
 }
 
 function MaterialAddModal({ open, onClose, initial }) {
@@ -658,4 +678,5 @@ Object.assign(window, {
   showToast, toastProgress, ClinicToaster,
   IdentityEditModal, BillingEditModal, RoomAddModal, EquipmentAddModal, MaterialAddModal,
   MenuItemAddModal, LicenseAddModal, BranchAddModal, LogoUploadModal, PrescriptionRxModal,
+  NonBenefitOrderModal,
 });

@@ -148,6 +148,36 @@ const INSURANCE_RX = [
   { code: "C00010007", name: "십전대보탕", price: 2140, note: "허약·보혈", herbs: [] },
 ];
 
+// ──────────────────────────────────────────────────────────────
+// 기타 비급여 오더 (비급여 시술·투약·검사 등 카탈로그)
+// ──────────────────────────────────────────────────────────────
+const NONBENEFIT_CATS = ["전체", "투약", "물리요법", "시술 및 처치", "검사", "기타", "제증명수수료", "자동차보험"];
+
+const NONBENEFIT_ORDERS = [
+  { code: "sb0617",     name: "(옴니핏+인바디)",                price: 15000,  vat: 0, cat: "검사",        report: "미확인", taxable: true },
+  { code: "*",          name: "*일반한약",                      price: 0,      vat: 0, cat: "투약",        report: "미확인", taxable: true },
+  { code: "12062",      name: "8자형 밴드(산재)",               price: 10000,  vat: 0, cat: "기타",        report: "미확인", taxable: true },
+  { code: "SE21",       name: "GDP",                            price: 15000,  vat: 0, cat: "기타",        report: "미확인", taxable: true },
+  { code: "SE61",       name: "GSP",                            price: 15000,  vat: 0, cat: "기타",        report: "미확인", taxable: true },
+  { code: "29061",      name: "QSCCII 설문지에 의한 심성검사",   price: 0,      vat: 0, cat: "검사",        report: "Y",      taxable: true },
+  { code: "29062",      name: "QSCCII 설문지에 의한 심성검사 및 상담", price: 0, vat: 0, cat: "검사",        report: "Y",      taxable: true },
+  { code: "6/25",       name: "가감귀룡탕연조",                 price: 50000,  vat: 0, cat: "투약",        report: "미확인", taxable: true },
+  { code: "SE31",       name: "가미오적3포",                    price: 15000,  vat: 0, cat: "투약",        report: "미확인", taxable: true },
+  { code: "SE49",       name: "가미오적환",                     price: 2000,   vat: 0, cat: "기타",        report: "미확인", taxable: true },
+  { code: "SE45",       name: "가미팔물환",                     price: 3000,   vat: 0, cat: "기타",        report: "미확인", taxable: true },
+  { code: "290120000",  name: "가속도맥파검사",                 price: 0,      vat: 0, cat: "검사",        report: "Y",      taxable: true },
+  { code: "19100",      name: "가정간호교통비[1회방문당]",      price: 7100,   vat: 0, cat: "기타",        report: "미확인", taxable: true },
+  { code: "70714",      name: "간병요구도 평가 소견서-의원(산재)", price: 20000, vat: 0, cat: "제증명수수료", report: "미확인", taxable: true },
+  { code: "SE12",       name: "건양단",                         price: 4000,   vat: 0, cat: "투약",        report: "미확인", taxable: true },
+  { code: "MI-93027",   name: "경근간섭저주파요법(ICT)",        price: 5510,   vat: 0, cat: "자동차보험",  report: "Y",      taxable: true },
+  { code: "tens",       name: "경근저주파요법",                 price: 0,      vat: 0, cat: "물리요법",    report: "미확인", taxable: true },
+  { code: "49020",      name: "경근중주파요법(자보)",           price: 3030,   vat: 0, cat: "자동차보험",  report: "Y",      taxable: true },
+  { code: "SE57",       name: "경옥고(1.2Kg)",                  price: 300000, vat: 0, cat: "기타",        report: "미확인", taxable: true },
+  { code: "SE22",       name: "경옥고(500g)",                   price: 150000, vat: 0, cat: "기타",        report: "미확인", taxable: true },
+  { code: "SE71",       name: "NM약침",                         price: 10000,  vat: 0, cat: "시술 및 처치", report: "미확인", taxable: true },
+  { code: "SE72",       name: "봉약침",                         price: 15000,  vat: 0, cat: "시술 및 처치", report: "미확인", taxable: true },
+];
+
 const BACKUPS = [
   { ts: "2026-05-17 04:00", scope: "전체",       size: "1.42 GB", status: "성공" },
   { ts: "2026-05-16 04:00", scope: "전체",       size: "1.41 GB", status: "성공" },
@@ -168,6 +198,7 @@ const SECTIONS = [
   { id: "equipment", icon: "cpu",          label: "장비 관리",          roles: ["원장", "데스크-읽기"], group: "운영" },
   { id: "materials", icon: "syringe",      label: "치료재 관리",        roles: ["원장", "데스크"],        group: "운영" },
   { id: "rx",        icon: "pill",         label: "보험 임의처방",      roles: ["원장", "데스크"],        group: "운영" },
+  { id: "nonbenefit",icon: "tag",          label: "기타 비급여",        roles: ["원장", "데스크"],        group: "운영" },
   { id: "menu",      icon: "list-checks",  label: "진료 과목 · 수가표", roles: ["원장"],                  group: "운영" },
   { id: "license",   icon: "shield-check", label: "면허 · 자격",        roles: ["원장"],                  group: "법적 정보" },
   { id: "insurance", icon: "file-badge",   label: "보험 연동",          roles: ["원장"],                  group: "법적 정보" },
@@ -251,6 +282,7 @@ function permFor(role, sectionId) {
 
 Object.assign(window, {
   CLINIC_DATA, HOURS, HOLIDAYS, ROOMS, PRICE_LIST, LICENSES,
-  INSURANCE, BILLING, BRANCHES, EQUIPMENT, MATERIALS, INSURANCE_RX, RX_SUPPLIERS, BACKUPS, ALERTS,
+  INSURANCE, BILLING, BRANCHES, EQUIPMENT, MATERIALS, INSURANCE_RX, RX_SUPPLIERS,
+  NONBENEFIT_ORDERS, NONBENEFIT_CATS, BACKUPS, ALERTS,
   SECTIONS, permFor,
 });

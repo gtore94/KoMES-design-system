@@ -426,6 +426,109 @@ function PrescriptionSection({ perm }) {
 }
 
 // ──────────────────────────────────────────────────────────────
+// 3-4) 기타 비급여 오더
+// ──────────────────────────────────────────────────────────────
+function NonBenefitSection({ perm }) {
+  const [cat, setCat] = React.useState("전체");
+  const [query, setQuery] = React.useState("");
+  const [editRow, setEditRow] = React.useState(null);  // null | "new" | row
+
+  const q = query.trim().toLowerCase();
+  const rows = NONBENEFIT_ORDERS.filter(o => {
+    if (cat !== "전체" && o.cat !== cat) return false;
+    if (q && !(o.code.toLowerCase().includes(q) || o.name.toLowerCase().includes(q))) return false;
+    return true;
+  });
+
+  const remove = (o) => showToast(`${o.code} ${o.name} · 삭제되었습니다`, { variant: "warning", icon: "trash-2" });
+
+  return (
+    <SectionCard
+      title="기타 비급여"
+      hint="비급여 시술·투약·검사·제증명 등 오더를 분류별로 관리합니다."
+      icon="tag" anchor="nonbenefit" perm={perm}
+      actions={perm === "edit" && <>
+        <Button variant="ghost" size="sm" icon="download" onClick={() => toastProgress("비급여 오더 내보내는 중…", `비급여 오더 ${NONBENEFIT_ORDERS.length}건을 CSV로 내보냈습니다`)}>CSV</Button>
+        <Button variant="secondary" size="sm" icon="plus" onClick={() => setEditRow("new")}>새 오더 등록</Button>
+      </>}>
+      {/* 분류 탭 + 검색 */}
+      <div style={{ padding: "12px 16px", borderBottom: "1px solid var(--border-subtle)" }}>
+        <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 10 }}>
+          {NONBENEFIT_CATS.map(c => {
+            const on = cat === c;
+            return (
+              <button key={c} onClick={() => setCat(c)} style={{
+                padding: "4px 11px", fontSize: 11.5, fontWeight: on ? 600 : 500,
+                borderRadius: "var(--radius-full)",
+                background: on ? "var(--brand-subtle)" : "var(--bg-surface)",
+                color: on ? "var(--text-brand)" : "var(--text-secondary)",
+                border: `1px solid ${on ? "var(--brand)" : "var(--border-default)"}`,
+                cursor: "pointer", fontFamily: "var(--font-sans)",
+              }}>{c}</button>
+            );
+          })}
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <div style={{ position: "relative", width: 320, maxWidth: "100%" }}>
+            <span style={{ position: "absolute", left: 9, top: "50%", transform: "translateY(-50%)", color: "var(--text-muted)", display: "flex" }}>
+              <Icon name="search" size={14} />
+            </span>
+            <input value={query} onChange={(e) => setQuery(e.target.value)}
+              placeholder="비급여오더 조회 (코드 · 오더명칭)"
+              style={{
+                fontFamily: "var(--font-sans)", fontSize: 13, color: "var(--text-primary)",
+                background: "var(--bg-surface)", border: "1px solid var(--border-default)",
+                borderRadius: "var(--radius-md)", padding: "7px 10px 7px 30px",
+                outline: "none", width: "100%", boxSizing: "border-box",
+              }} />
+          </div>
+          <span style={{ fontSize: 11.5, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>
+            {rows.length}건
+          </span>
+        </div>
+      </div>
+
+      <DataTable
+        cols={[
+          { label: "코드", key: "code", mono: true, w: "10%" },
+          { label: "오더명칭", w: "26%", render: (o) =>
+            <span style={{ color: "var(--text-brand)", fontWeight: 600 }}>{o.name}</span>
+          },
+          { label: "단가", w: "11%", mono: true, align: "right", render: (o) =>
+            <span style={{ fontVariantNumeric: "tabular-nums" }}>{o.price.toLocaleString()}</span>
+          },
+          { label: "VAT", w: "8%", mono: true, align: "right", render: (o) =>
+            <span style={{ fontVariantNumeric: "tabular-nums", color: "var(--text-muted)" }}>{o.vat.toLocaleString()}</span>
+          },
+          { label: "구분", w: "12%", render: (o) =>
+            o.cat ? <Badge variant="neutral">{o.cat}</Badge> : <span style={{ color: "var(--text-muted)" }}>—</span>
+          },
+          { label: "보고대상", w: "10%", align: "center", render: (o) =>
+            o.report === "Y" ? <Badge variant="success">Y</Badge>
+                             : <span style={{ fontSize: 12, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>미확인</span>
+          },
+          { label: "과세", w: "7%", align: "center", render: (o) =>
+            o.taxable ? <Badge variant="warning">VAT</Badge> : <span style={{ color: "var(--text-muted)" }}>—</span>
+          },
+          { label: "수정 및 삭제", w: "16%", align: "center", render: (o) =>
+            perm === "edit" ? (
+              <div style={{ display: "inline-flex", gap: 6 }}>
+                <Button variant="secondary" size="sm" onClick={() => setEditRow(o)}>수정</Button>
+                <Button variant="ghost" size="sm" onClick={() => remove(o)}>삭제</Button>
+              </div>
+            ) : <span style={{ color: "var(--text-muted)" }}>—</span>
+          },
+        ]}
+        rows={rows}
+      />
+      <NonBenefitOrderModal open={editRow !== null}
+        initial={editRow && editRow !== "new" ? editRow : undefined}
+        onClose={() => setEditRow(null)} />
+    </SectionCard>
+  );
+}
+
+// ──────────────────────────────────────────────────────────────
 // 4) 진료 과목 · 수가표
 // ──────────────────────────────────────────────────────────────
 function MenuSection({ perm }) {
@@ -802,6 +905,7 @@ const SECTION_COMPONENTS = {
   equipment: EquipmentSection,
   materials: MaterialsSection,
   rx:        PrescriptionSection,
+  nonbenefit: NonBenefitSection,
   menu:      MenuSection,
   license:   LicenseSection,
   insurance: InsuranceSection,
@@ -818,7 +922,7 @@ function renderSection(id, role) {
 }
 
 Object.assign(window, {
-  IdentitySection, HoursSection, RoomsSection, EquipmentSection, MaterialsSection, PrescriptionSection, MenuSection,
+  IdentitySection, HoursSection, RoomsSection, EquipmentSection, MaterialsSection, PrescriptionSection, NonBenefitSection, MenuSection,
   LicenseSection, InsuranceSection, BillingSection,
   BranchSection, BrandSection, BackupSection,
   SECTION_COMPONENTS, renderSection,
