@@ -243,6 +243,11 @@ function CeField({ field, value, onChange }) {
         <div style={{ paddingTop: 2 }}>
           <CeSegment options={field.options} value={value} onChange={onChange} />
         </div>
+      ) : type === "textarea" ? (
+        <textarea value={value ?? ""} placeholder={placeholder}
+          rows={field.rows || 4}
+          onChange={(e) => onChange(e.target.value)}
+          style={{ ...ceInputStyle(false), resize: "vertical", lineHeight: 1.5 }} />
       ) : (
         <input
           type={type === "date" ? "date" : type === "number" ? "number" : "text"}
@@ -360,6 +365,14 @@ const MATERIAL_FIELDS = [
   { key: "inUse", label: "사용 여부", type: "toggle" },
 ];
 
+const RX_DICT_FIELDS = [
+  { key: "name", label: "처방명", type: "text", placeholder: "예: 보중보익탕" },
+  { key: "source", label: "출전", type: "text", placeholder: "예: 화제국방" },
+  { key: "tags", label: "태그", type: "text", placeholder: "쉼표로 구분 (예: 보기, 피로)", full: true },
+  { key: "content", label: "처방내용", type: "textarea", rows: 5, placeholder: "약재 구성 (예: 백출초 8, 일당귀 6, …)", full: true },
+  { key: "memo", label: "메모", type: "text", placeholder: "선택", full: true },
+];
+
 const FEE_FIELDS = [
   { key: "code", label: "코드", type: "mono", placeholder: "예: 99100" },
   { key: "cat", label: "구분", type: "segment", options: ["진찰료", "관리료", "진료지원금", "방문진료", "침구", "약침", "검사", "기타"], full: true },
@@ -436,6 +449,17 @@ function EquipmentAddModal({ open, onClose }) {
     title="장비 등록"
     subtitle="진료·조제·IT 장비의 위치, 점검 일정, 보증 관리"
     fields={EQUIPMENT_FIELDS} submitLabel="장비 등록" toastMsg="장비가 등록되었습니다" />;
+}
+
+function RxDictModal({ open, onClose, initial }) {
+  const editing = !!initial;
+  const seed = initial ? { ...initial, tags: Array.isArray(initial.tags) ? initial.tags.join(", ") : (initial.tags || "") } : undefined;
+  return <ClinicFormModal open={open} onClose={onClose} icon="book-text"
+    title={editing ? "처방 사전 수정" : "새 처방사전 등록"}
+    subtitle="한약 처방 — 출전·태그·약재 구성"
+    fields={RX_DICT_FIELDS} initial={seed}
+    submitLabel={editing ? "변경사항 저장" : "등록"}
+    toastMsg={editing ? "처방이 수정되었습니다" : "처방이 등록되었습니다"} />;
 }
 
 function FeeModal({ open, onClose, initial }) {
@@ -699,5 +723,5 @@ Object.assign(window, {
   showToast, toastProgress, ClinicToaster,
   IdentityEditModal, BillingEditModal, RoomAddModal, EquipmentAddModal, MaterialAddModal,
   MenuItemAddModal, LicenseAddModal, BranchAddModal, LogoUploadModal, PrescriptionRxModal,
-  NonBenefitOrderModal, FeeModal,
+  NonBenefitOrderModal, FeeModal, RxDictModal,
 });

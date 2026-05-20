@@ -205,6 +205,36 @@ const INSURANCE_FEES = [
   { code: "40300",     name: "부항술(건식)",                                                   price:   3210, maker: "", note: "", cat: "침구",       start: "2026-01-01", end: "2026-12-31" },
 ];
 
+// ──────────────────────────────────────────────────────────────
+// 처방 사전 (한약 처방 — 출전·태그·처방내용 약재 구성)
+// ──────────────────────────────────────────────────────────────
+const RX_DICT = [
+  { name: "보중보익탕", source: "회산43", tags: ["보기", "피로"],
+    memo: "",
+    content: "백출초 8, 일당귀 6, 백작약초 6, 토사자초 4, 복분자 4, 차전자 4, 산사 4, 봉출 4, 목향 4, 목단피 4, 맥문동거심 4, 산약 4, 황기밀구 4, 백복령 4, 용안육 4, 구기자 4, 인삼 4, 녹각 4, 공사인 3, 천궁 3, 육계 3, 자감초 3, 강3조 2" },
+  { name: "십전대보탕", source: "화제국방", tags: ["보혈", "허약"],
+    memo: "산후·병후 회복",
+    content: "숙지황 4, 백작약 4, 천궁 4, 당귀 4, 인삼 4, 백출 4, 백복령 4, 감초 4, 황기 4, 육계 4" },
+  { name: "보중익기탕", source: "동원", tags: ["보기", "피로"],
+    memo: "",
+    content: "황기 6, 인삼 4, 백출 4, 감초 4, 당귀 2, 진피 2, 승마 1, 시호 1" },
+  { name: "쌍화탕", source: "화제국방", tags: ["보혈", "감기"],
+    memo: "피로·몸살",
+    content: "백작약 10, 숙지황 4, 황기 4, 당귀 4, 천궁 4, 계피 3, 감초 3, 강3조 2" },
+  { name: "갈근탕", source: "상한론", tags: ["감기", "발산"],
+    memo: "감기 초기·항강",
+    content: "갈근 8, 마황 4, 계지 4, 작약 4, 감초 4, 생강 3, 대조 2" },
+  { name: "오적산", source: "화제국방", tags: ["소화", "한증"],
+    memo: "",
+    content: "창출 8, 마황 4, 진피 4, 후박 3, 길경 3, 지각 3, 당귀 3, 건강 3, 백작약 3, 백복령 3" },
+  { name: "평위산", source: "화제국방", tags: ["소화"],
+    memo: "식체·복부창만",
+    content: "창출 8, 후박 4, 진피 4, 감초 2, 강3조 2" },
+  { name: "반하사심탕", source: "상한론", tags: ["소화", "심하비"],
+    memo: "",
+    content: "반하 8, 황금 4, 인삼 4, 감초 4, 황련 2, 건강 4, 대조 3" },
+];
+
 const BACKUPS = [
   { ts: "2026-05-17 04:00", scope: "전체",       size: "1.42 GB", status: "성공" },
   { ts: "2026-05-16 04:00", scope: "전체",       size: "1.41 GB", status: "성공" },
@@ -225,6 +255,7 @@ const SECTIONS = [
   { id: "equipment", icon: "cpu",          label: "장비 관리",          roles: ["원장", "데스크-읽기"], group: "운영" },
   { id: "materials", icon: "syringe",      label: "치료재 관리",        roles: ["원장", "데스크"],        group: "운영" },
   { id: "rx",        icon: "pill",         label: "보험 임의처방",      roles: ["원장", "데스크"],        group: "운영" },
+  { id: "rxdict",    icon: "book-text",    label: "처방 사전",          roles: ["원장", "데스크"],        group: "운영" },
   { id: "nonbenefit",icon: "tag",          label: "기타 비급여",        roles: ["원장", "데스크"],        group: "운영" },
   { id: "fees",      icon: "calculator",   label: "보험 수가",          roles: ["원장", "데스크"],        group: "운영" },
   { id: "menu",      icon: "list-checks",  label: "진료 과목 · 수가표", roles: ["원장"],                  group: "운영" },
@@ -311,6 +342,6 @@ function permFor(role, sectionId) {
 Object.assign(window, {
   CLINIC_DATA, HOURS, HOLIDAYS, ROOMS, PRICE_LIST, LICENSES,
   INSURANCE, BILLING, BRANCHES, EQUIPMENT, MATERIALS, INSURANCE_RX, RX_SUPPLIERS,
-  NONBENEFIT_ORDERS, NONBENEFIT_CATS, INSURANCE_FEES, FEE_CATS, BACKUPS, ALERTS,
+  NONBENEFIT_ORDERS, NONBENEFIT_CATS, INSURANCE_FEES, FEE_CATS, RX_DICT, BACKUPS, ALERTS,
   SECTIONS, permFor,
 });

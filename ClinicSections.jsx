@@ -426,6 +426,137 @@ function PrescriptionSection({ perm }) {
 }
 
 // ──────────────────────────────────────────────────────────────
+// 3-3b) 처방 사전
+// ──────────────────────────────────────────────────────────────
+function RxDictSection({ perm }) {
+  const [query, setQuery] = React.useState("");
+  const [openName, setOpenName] = React.useState(null);
+  const [editRow, setEditRow] = React.useState(null);  // null | "new" | row
+
+  const q = query.trim().toLowerCase();
+  const rows = q
+    ? RX_DICT.filter(r => r.name.toLowerCase().includes(q) || (r.tags || []).some(t => t.toLowerCase().includes(q)))
+    : RX_DICT;
+
+  const remove = (r) => showToast(`${r.name} · 삭제되었습니다`, { variant: "warning", icon: "trash-2" });
+
+  return (
+    <SectionCard
+      title="처방 사전"
+      hint="자주 쓰는 한약 처방을 출전·태그·약재 구성과 함께 등록·관리합니다."
+      icon="book-text" anchor="rxdict" perm={perm}
+      actions={perm === "edit" && <Button variant="secondary" size="sm" icon="plus" onClick={() => setEditRow("new")}>새 처방사전 등록</Button>}>
+      {/* 검색 */}
+      <div style={{
+        padding: "12px 16px", borderBottom: "1px solid var(--border-subtle)",
+        display: "flex", alignItems: "center", gap: 10,
+      }}>
+        <div style={{ position: "relative", width: 320, maxWidth: "100%" }}>
+          <span style={{ position: "absolute", left: 9, top: "50%", transform: "translateY(-50%)", color: "var(--text-muted)", display: "flex" }}>
+            <Icon name="search" size={14} />
+          </span>
+          <input value={query} onChange={(e) => setQuery(e.target.value)}
+            placeholder="처방명 · 태그 조회"
+            style={{
+              fontFamily: "var(--font-sans)", fontSize: 13, color: "var(--text-primary)",
+              background: "var(--bg-surface)", border: "1px solid var(--border-default)",
+              borderRadius: "var(--radius-md)", padding: "7px 10px 7px 30px",
+              outline: "none", width: "100%", boxSizing: "border-box",
+            }} />
+        </div>
+        <span style={{ fontSize: 11.5, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>
+          {rows.length}건
+        </span>
+      </div>
+
+      {/* 헤더 */}
+      <div style={{
+        display: "grid", gridTemplateColumns: "1fr 130px 1.4fr 24px",
+        gap: 12, padding: "8px 16px",
+        borderBottom: "1px solid var(--border-subtle)",
+        fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase",
+        color: "var(--text-muted)", fontFamily: "var(--font-sans)",
+      }}>
+        <span>처방명</span><span>출전</span><span>태그</span><span />
+      </div>
+
+      {/* 목록 (펼침형) */}
+      {rows.map((r, i) => {
+        const isOpen = openName === r.name;
+        return (
+          <div key={r.name} style={{
+            borderBottom: i < rows.length - 1 ? "1px solid var(--border-subtle)" : "none",
+            background: isOpen ? "var(--brand-tint)" : "transparent",
+          }}>
+            <div onClick={() => setOpenName(isOpen ? null : r.name)} style={{
+              display: "grid", gridTemplateColumns: "1fr 130px 1.4fr 24px",
+              gap: 12, alignItems: "center", padding: "11px 16px", cursor: "pointer",
+            }}>
+              <span style={{ fontFamily: "var(--font-sans)", fontSize: 13.5, fontWeight: 600, color: "var(--text-primary)" }}>
+                {r.name}
+              </span>
+              <span style={{ fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-sans)" }}>{r.source}</span>
+              <div style={{ display: "flex", gap: 5, flexWrap: "wrap" }}>
+                {(r.tags || []).map(t => (
+                  <span key={t} style={{
+                    fontSize: 10.5, padding: "1px 8px", borderRadius: "var(--radius-full)",
+                    background: "var(--brand-subtle)", color: "var(--text-brand)", fontFamily: "var(--font-sans)",
+                  }}>{t}</span>
+                ))}
+              </div>
+              <Icon name={isOpen ? "chevron-up" : "chevron-down"} size={15} style={{ color: "var(--text-muted)" }} />
+            </div>
+
+            {isOpen && (
+              <div style={{ padding: "4px 16px 16px" }}>
+                <div style={{
+                  fontSize: 10.5, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase",
+                  color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 8,
+                }}>처방내용</div>
+                <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 14 }}>
+                  {r.content.split(",").map((tok, idx) => {
+                    const s = tok.trim();
+                    const m = s.match(/^(.*?)(\d+)$/);
+                    const herb = m ? m[1].trim() : s;
+                    const qty = m ? m[2] : "";
+                    return (
+                      <span key={idx} style={{
+                        display: "inline-flex", alignItems: "baseline", gap: 4,
+                        fontSize: 12, padding: "3px 9px", borderRadius: "var(--radius-md)",
+                        background: "var(--bg-surface)", border: "1px solid var(--border-subtle)",
+                        fontFamily: "var(--font-sans)",
+                      }}>
+                        <span style={{ color: "var(--text-primary)", fontWeight: 500 }}>{herb}</span>
+                        {qty && <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--text-brand)" }}>{qty}</span>}
+                      </span>
+                    );
+                  })}
+                </div>
+                {r.memo ? (
+                  <div style={{ fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", marginBottom: 12 }}>
+                    <span style={{ color: "var(--text-muted)" }}>메모 · </span>{r.memo}
+                  </div>
+                ) : null}
+                {perm === "edit" && (
+                  <div style={{ display: "flex", gap: 8 }}>
+                    <Button variant="secondary" size="sm" icon="pencil" onClick={() => setEditRow(r)}>수정</Button>
+                    <Button variant="ghost" size="sm" icon="trash-2" onClick={() => remove(r)}>삭제</Button>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        );
+      })}
+
+      <RxDictModal open={editRow !== null}
+        initial={editRow && editRow !== "new" ? editRow : undefined}
+        onClose={() => setEditRow(null)} />
+    </SectionCard>
+  );
+}
+
+// ──────────────────────────────────────────────────────────────
 // 3-4) 기타 비급여 오더
 // ──────────────────────────────────────────────────────────────
 function NonBenefitSection({ perm }) {
@@ -993,6 +1124,7 @@ const SECTION_COMPONENTS = {
   equipment: EquipmentSection,
   materials: MaterialsSection,
   rx:        PrescriptionSection,
+  rxdict:    RxDictSection,
   nonbenefit: NonBenefitSection,
   fees:      FeeSection,
   menu:      MenuSection,
@@ -1011,7 +1143,7 @@ function renderSection(id, role) {
 }
 
 Object.assign(window, {
-  IdentitySection, HoursSection, RoomsSection, EquipmentSection, MaterialsSection, PrescriptionSection, NonBenefitSection, FeeSection, MenuSection,
+  IdentitySection, HoursSection, RoomsSection, EquipmentSection, MaterialsSection, PrescriptionSection, RxDictSection, NonBenefitSection, FeeSection, MenuSection,
   LicenseSection, InsuranceSection, BillingSection,
   BranchSection, BrandSection, BackupSection,
   SECTION_COMPONENTS, renderSection,
