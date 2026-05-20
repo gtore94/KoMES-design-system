@@ -1989,8 +1989,13 @@ function MedicalFormScreen() {
   const [pickerOpen, setPickerOpen] = useStateMF(false);
   const [historyOpen, setHistoryOpen] = useStateMF(false);
   const [panelWidth, setPanelWidth] = useStateMF(400);
+  const [previewRight, setPreviewRight] = useStateMF(() => localStorage.getItem("komes_form_preview_right") === "true");
   const stageRef = useRefMF(null);
   const isDragging = useRefMF(false);
+  const previewRightRef = useRefMF(previewRight);
+  previewRightRef.current = previewRight;
+
+  useEffectMF(() => { localStorage.setItem("komes_form_preview_right", String(previewRight)); }, [previewRight]);
 
   useEffectMF(() => {
     const onMouseMove = (e) => {
@@ -1998,7 +2003,9 @@ function MedicalFormScreen() {
       const bodyEl = stageRef.current?.parentElement;
       if (!bodyEl) return;
       const rect = bodyEl.getBoundingClientRect();
-      const newWidth = Math.max(280, Math.min(700, rect.right - e.clientX));
+      // 패널이 좌측이면(미리보기 우측) 드래그 방향을 반전
+      const raw = previewRightRef.current ? (e.clientX - rect.left) : (rect.right - e.clientX);
+      const newWidth = Math.max(280, Math.min(700, raw));
       setPanelWidth(newWidth);
     };
     const onMouseUp = () => {
@@ -2090,6 +2097,16 @@ function MedicalFormScreen() {
           );
         })}
         <div style={{ flex: 1, minWidth: 8 }}></div>
+        <button title={previewRight ? "미리보기 왼쪽으로" : "미리보기 오른쪽으로"}
+          onClick={() => setPreviewRight(v => !v)}
+          style={{
+            background: "none", border: "1px solid var(--border-subtle)", borderRadius: 6,
+            padding: "3px 9px", marginRight: 8, fontSize: 11, color: "var(--text-secondary)", cursor: "pointer",
+            display: "inline-flex", alignItems: "center", gap: 5, flexShrink: 0, whiteSpace: "nowrap",
+          }}>
+          <Icon name={previewRight ? "panel-right" : "panel-left"} size={12} />
+          미리보기 {previewRight ? "우측" : "좌측"}
+        </button>
         <div style={{ display: "flex", alignItems: "center", gap: 4, padding: "8px 0", flexShrink: 0, whiteSpace: "nowrap" }}>
           <button style={{ background: "none", border: "1px solid var(--border-subtle)", borderRadius: 6, padding: "2px 6px", cursor: "pointer", color: "var(--text-secondary)" }} onClick={() => setZoom(Math.max(0.45, zoom - 0.1))}><Icon name="minus" size={11} /></button>
           <div style={{ fontSize: 11.5, color: "var(--text-secondary)", minWidth: 38, textAlign: "center", fontFamily: "var(--font-mono)" }}>{Math.round(zoom * 100)}%</div>
@@ -2106,6 +2123,7 @@ function MedicalFormScreen() {
           background: "linear-gradient(180deg, var(--bg-raised) 0%, var(--bg-sunken) 100%)",
           padding: "32px 24px 48px",
           display: "flex", flexDirection: "column", alignItems: "center", gap: 24, minWidth: 0,
+          order: previewRight ? 3 : 1,
         }}>
           <div style={{
             display: "inline-flex", alignItems: "center", gap: 10, padding: "6px 14px",
@@ -2157,7 +2175,7 @@ function MedicalFormScreen() {
             document.body.style.cursor = "col-resize";
             document.body.style.userSelect = "none";
           }}
-          style={{ width: 5, flexShrink: 0, cursor: "col-resize", position: "relative", zIndex: 10, background: "transparent" }}
+          style={{ width: 5, flexShrink: 0, cursor: "col-resize", position: "relative", zIndex: 10, background: "transparent", order: 2 }}
         >
           <div style={{
             position: "absolute", inset: 0,
@@ -2172,15 +2190,16 @@ function MedicalFormScreen() {
           }} />
         </div>
 
-        {/* Right panel */}
+        {/* Form panel */}
         <div style={{
           width: panelWidth, background: "var(--bg-surface)",
           display: "flex", flexDirection: "column", flexShrink: 0,
+          order: previewRight ? 1 : 3,
         }}>
           <div style={{ padding: "14px 18px", borderBottom: "1px solid var(--border-subtle)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <div>
               <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>서식 입력</div>
-              <div style={{ fontSize: 10.5, color: "var(--text-muted)", marginTop: 2 }}>좌측 미리보기에 실시간 반영됩니다.</div>
+              <div style={{ fontSize: 10.5, color: "var(--text-muted)", marginTop: 2 }}>{previewRight ? "우측" : "좌측"} 미리보기에 실시간 반영됩니다.</div>
             </div>
             {(isDiagnosis || isInjury || isFeeDetail || isCalcDetail || isReferral || isOpinion || isTreatmentProof || isAdmissionProof || isOutpatientProof) && <button onClick={() => {
               if (isDiagnosis) setData(MF_DEFAULT_DX);
