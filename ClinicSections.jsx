@@ -1210,6 +1210,86 @@ function CheopUseSection({ perm }) {
 }
 
 // ──────────────────────────────────────────────────────────────
+// 3-9) 상용 혈자리 설정
+// ──────────────────────────────────────────────────────────────
+function AcupointsSection({ perm }) {
+  const [alpha, setAlpha] = React.useState(false);
+  const [sel, setSel] = React.useState(() => {
+    const m = {};
+    ACUPOINT_REGIONS.forEach(r => { m[r] = new Set(ACUPOINTS[r].filter(p => p.on).map(p => p.code)); });
+    return m;
+  });
+
+  const toggle = (region, code) => {
+    if (perm !== "edit") return;
+    setSel(prev => {
+      const next = { ...prev, [region]: new Set(prev[region]) };
+      if (next[region].has(code)) next[region].delete(code); else next[region].add(code);
+      return next;
+    });
+  };
+
+  const totalOn = ACUPOINT_REGIONS.reduce((a, r) => a + sel[r].size, 0);
+  const save = () => showToast(`상용 혈자리 ${totalOn}개가 저장되었습니다`, { variant: "success", icon: "check-circle-2" });
+
+  return (
+    <SectionCard
+      title="상용 혈자리 설정"
+      hint="부위별로 자주 사용하는 경혈을 선택해 차트 입력 시 빠르게 불러옵니다."
+      icon="target" anchor="acupoints" perm={perm}
+      actions={perm === "edit" && <Button variant="secondary" size="sm" icon="check" onClick={save}>저장</Button>}>
+      {/* 정렬 옵션 */}
+      <div style={{
+        padding: "10px 16px", borderBottom: "1px solid var(--border-subtle)",
+        display: "flex", alignItems: "center", gap: 12,
+      }}>
+        <label style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", cursor: "pointer" }}>
+          <input type="checkbox" checked={alpha} onChange={(e) => setAlpha(e.target.checked)} style={{ accentColor: "var(--brand)" }} />
+          알파벳순 정렬
+        </label>
+        <span style={{ fontSize: 11.5, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>선택 {totalOn}개</span>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", minHeight: 440 }}>
+        {ACUPOINT_REGIONS.map((region, ri) => {
+          const list = alpha ? [...ACUPOINTS[region]].sort((a, b) => a.code.localeCompare(b.code)) : ACUPOINTS[region];
+          return (
+            <div key={region} style={{ borderRight: ri < 4 ? "1px solid var(--border-subtle)" : "none", display: "flex", flexDirection: "column" }}>
+              <div style={{
+                padding: "9px 10px", textAlign: "center",
+                background: "var(--bg-raised)", borderBottom: "1px solid var(--border-subtle)",
+                fontSize: 12, fontWeight: 700, color: "var(--text-primary)", fontFamily: "var(--font-sans)",
+              }}>
+                {region}
+                <span style={{ marginLeft: 6, fontSize: 11, fontWeight: 500, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{sel[region].size}</span>
+              </div>
+              <div style={{ flex: 1, overflowY: "auto" }}>
+                {list.map(p => {
+                  const on = sel[region].has(p.code);
+                  return (
+                    <div key={p.code} onClick={() => toggle(region, p.code)} style={{
+                      display: "flex", alignItems: "center", gap: 7, padding: "6px 10px",
+                      borderBottom: "1px solid var(--border-subtle)",
+                      cursor: perm === "edit" ? "pointer" : "default",
+                      background: on ? "var(--brand-tint)" : "transparent",
+                      fontFamily: "var(--font-sans)",
+                    }}>
+                      <input type="checkbox" checked={on} readOnly style={{ accentColor: "var(--brand)", flexShrink: 0, pointerEvents: "none" }} />
+                      <span style={{ fontFamily: "var(--font-mono)", fontSize: 10.5, color: "var(--text-muted)", width: 44, flexShrink: 0 }}>{p.code}</span>
+                      <span style={{ fontSize: 12, color: on ? "var(--text-primary)" : "var(--text-secondary)", fontWeight: on ? 500 : 400, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{p.name}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </SectionCard>
+  );
+}
+
+// ──────────────────────────────────────────────────────────────
 // 4) 진료 과목 · 수가표
 // ──────────────────────────────────────────────────────────────
 function MenuSection({ perm }) {
@@ -1590,6 +1670,7 @@ const SECTION_COMPONENTS = {
   nonbenefit: NonBenefitSection,
   fees:      FeeSection,
   insmeds:   InsMedsSection,
+  acupoints: AcupointsSection,
   cheopset:  CheopSettingsSection,
   cheopuse:  CheopUseSection,
   menu:      MenuSection,
@@ -1608,7 +1689,7 @@ function renderSection(id, role) {
 }
 
 Object.assign(window, {
-  IdentitySection, HoursSection, RoomsSection, EquipmentSection, MaterialsSection, PrescriptionSection, RxDictSection, NonBenefitSection, FeeSection, InsMedsSection, CheopSettingsSection, CheopUseSection, MenuSection,
+  IdentitySection, HoursSection, RoomsSection, EquipmentSection, MaterialsSection, PrescriptionSection, RxDictSection, NonBenefitSection, FeeSection, InsMedsSection, AcupointsSection, CheopSettingsSection, CheopUseSection, MenuSection,
   LicenseSection, InsuranceSection, BillingSection,
   BranchSection, BrandSection, BackupSection,
   SECTION_COMPONENTS, renderSection,
