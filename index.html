@@ -51,6 +51,14 @@
 <script type="text/babel" src="staffData.jsx?v=1"></script>
 <script type="text/babel" src="NewStaffModal.jsx"></script>
 <script type="text/babel" src="StaffManagementScreen.jsx?v=2"></script>
+<script type="text/babel" src="clinicData.jsx"></script>
+<script type="text/babel" src="alertRulesData.jsx"></script>
+<script type="text/babel" src="ClinicManagementParts.jsx?v=2"></script>
+<script type="text/babel" src="ClinicEditModals.jsx?v=2"></script>
+<script type="text/babel" src="HoursEditModal.jsx?v=2"></script>
+<script type="text/babel" src="ClinicSections.jsx?v=2"></script>
+<script type="text/babel" src="AlertCenterModal.jsx"></script>
+<script type="text/babel" src="ClinicManagementScreen.jsx?v=2"></script>
 <script type="text/babel" src="SettingsScreen.jsx"></script>
 
 <script type="text/babel">
@@ -131,8 +139,8 @@ function App() {
     if (nav === "orders") {
       return <PurchaseOrderHistoryScreen openSettings={() => setRecOpen(true)} />;
     }
-    if (nav === "staff") {
-      return <StaffManagementScreen />;
+    if (nav === "clinic") {
+      return <ClinicManagementScreen />;
     }
     if (nav === "settings") {
       return <SettingsScreen />;

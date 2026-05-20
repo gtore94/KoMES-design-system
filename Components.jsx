@@ -121,7 +121,7 @@ function Sidebar({ activeScreen, onNavigate }) {
       { key: "ai",    icon: "sparkles",    label: "AI 분석" },
     ]},
     { label: "조직", items: [
-      { key: "staff", icon: "user-cog", label: "직원 관리" },
+      { key: "clinic", icon: "building-2", label: "병원 관리" },
     ]},
   ];
 
