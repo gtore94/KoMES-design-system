@@ -529,6 +529,94 @@ function NonBenefitSection({ perm }) {
 }
 
 // ──────────────────────────────────────────────────────────────
+// 3-5) 보험 수가
+// ──────────────────────────────────────────────────────────────
+function FeeSection({ perm }) {
+  const [cat, setCat] = React.useState("전체");
+  const [query, setQuery] = React.useState("");
+  const [adding, setAdding] = React.useState(false);
+  const today = new Date("2026-05-20");
+
+  const q = query.trim().toLowerCase();
+  const rows = INSURANCE_FEES.filter(f => {
+    if (cat !== "전체" && f.cat !== cat) return false;
+    if (q && !(f.code.toLowerCase().includes(q) || f.name.toLowerCase().includes(q))) return false;
+    return true;
+  });
+
+  const expired = (f) => f.end && f.end !== "—" && new Date(f.end) < today;
+
+  return (
+    <SectionCard
+      title="보험 수가"
+      hint="건강보험 수가와 준용수가를 적용기간별로 조회합니다."
+      icon="calculator" anchor="fees" perm={perm}
+      actions={perm === "edit" && <Button variant="secondary" size="sm" icon="plus" onClick={() => setAdding(true)}>준용수가 등록</Button>}>
+      {/* 구분 + 검색 */}
+      <div style={{
+        padding: "12px 16px", borderBottom: "1px solid var(--border-subtle)",
+        display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap",
+      }}>
+        <div style={{
+          display: "inline-flex", alignItems: "center", gap: 6,
+          padding: "5px 10px", background: "var(--bg-surface)",
+          border: "1px solid var(--border-default)", borderRadius: "var(--radius-md)",
+        }}>
+          <Icon name="filter" size={12} style={{ color: "var(--text-muted)" }} />
+          <select value={cat} onChange={(e) => setCat(e.target.value)} style={{
+            border: "none", background: "transparent", outline: "none",
+            fontFamily: "var(--font-sans)", fontSize: 12.5, color: "var(--text-primary)", cursor: "pointer",
+          }}>
+            {FEE_CATS.map(c => <option key={c} value={c}>{c === "전체" ? "구분 전체" : c}</option>)}
+          </select>
+        </div>
+        <div style={{ position: "relative", width: 300, maxWidth: "100%" }}>
+          <span style={{ position: "absolute", left: 9, top: "50%", transform: "translateY(-50%)", color: "var(--text-muted)", display: "flex" }}>
+            <Icon name="search" size={14} />
+          </span>
+          <input value={query} onChange={(e) => setQuery(e.target.value)}
+            placeholder="코드 or 명칭 입력"
+            style={{
+              fontFamily: "var(--font-sans)", fontSize: 13, color: "var(--text-primary)",
+              background: "var(--bg-surface)", border: "1px solid var(--border-default)",
+              borderRadius: "var(--radius-md)", padding: "7px 10px 7px 30px",
+              outline: "none", width: "100%", boxSizing: "border-box",
+            }} />
+        </div>
+        <span style={{ fontSize: 11.5, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>
+          {rows.length}건
+        </span>
+      </div>
+
+      <DataTable
+        cols={[
+          { label: "코드", key: "code", mono: true, w: "10%" },
+          { label: "명칭", key: "name", w: "38%" },
+          { label: "단가", w: "11%", mono: true, align: "right", render: (f) =>
+            <span style={{
+              fontVariantNumeric: "tabular-nums", fontWeight: 600,
+              color: expired(f) ? "var(--cinnabar-600)" : "var(--accent-slate)",
+            }}>{f.price.toLocaleString()}</span>
+          },
+          { label: "제약사", w: "11%", render: (f) =>
+            f.maker ? f.maker : <span style={{ color: "var(--text-muted)" }}>—</span>
+          },
+          { label: "비고", w: "10%", render: (f) =>
+            f.note ? f.note : <span style={{ color: "var(--text-muted)" }}>—</span>
+          },
+          { label: "적용시작일", key: "start", mono: true, align: "center", w: "10%" },
+          { label: "적용종료일", w: "10%", mono: true, align: "center", render: (f) =>
+            <span style={{ fontFamily: "var(--font-mono)", color: expired(f) ? "var(--text-muted)" : "var(--text-secondary)" }}>{f.end}</span>
+          },
+        ]}
+        rows={rows}
+      />
+      <FeeModal open={adding} onClose={() => setAdding(false)} />
+    </SectionCard>
+  );
+}
+
+// ──────────────────────────────────────────────────────────────
 // 4) 진료 과목 · 수가표
 // ──────────────────────────────────────────────────────────────
 function MenuSection({ perm }) {
@@ -906,6 +994,7 @@ const SECTION_COMPONENTS = {
   materials: MaterialsSection,
   rx:        PrescriptionSection,
   nonbenefit: NonBenefitSection,
+  fees:      FeeSection,
   menu:      MenuSection,
   license:   LicenseSection,
   insurance: InsuranceSection,
@@ -922,7 +1011,7 @@ function renderSection(id, role) {
 }
 
 Object.assign(window, {
-  IdentitySection, HoursSection, RoomsSection, EquipmentSection, MaterialsSection, PrescriptionSection, NonBenefitSection, MenuSection,
+  IdentitySection, HoursSection, RoomsSection, EquipmentSection, MaterialsSection, PrescriptionSection, NonBenefitSection, FeeSection, MenuSection,
   LicenseSection, InsuranceSection, BillingSection,
   BranchSection, BrandSection, BackupSection,
   SECTION_COMPONENTS, renderSection,

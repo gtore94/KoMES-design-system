@@ -178,6 +178,33 @@ const NONBENEFIT_ORDERS = [
   { code: "SE72",       name: "봉약침",                         price: 15000,  vat: 0, cat: "시술 및 처치", report: "미확인", taxable: true },
 ];
 
+// ──────────────────────────────────────────────────────────────
+// 보험 수가 (건강보험 수가 + 준용수가 — 적용기간별 단가)
+//   단가 색: 적용종료일이 지난 항목은 만료(빨강), 유효 항목은 파랑
+// ──────────────────────────────────────────────────────────────
+const FEE_CATS = ["전체", "진찰료", "관리료", "진료지원금", "방문진료", "침구", "약침", "검사", "기타"];
+
+const INSURANCE_FEES = [
+  { code: "JJJJJ",     name: "산소10L(1시간30분)(699900020(10원)*1)",                          price:    270, maker: "", note: "", cat: "기타",        start: "2017-06-01", end: "2017-07-31" },
+  { code: "94100",     name: "(비상)추석 연휴 운영 진료지원금",                                 price:   3000, maker: "", note: "", cat: "진료지원금", start: "2024-09-14", end: "2024-09-18" },
+  { code: "94020",     name: "(비상)설 연휴 운영 진료지원금_설당일",                            price:   6000, maker: "", note: "", cat: "진료지원금", start: "2025-01-29", end: "2025-01-29" },
+  { code: "94010",     name: "(비상)설 연휴 운영 진료지원금",                                   price:   3000, maker: "", note: "", cat: "진료지원금", start: "2025-01-25", end: "2025-02-02" },
+  { code: "91004",     name: "비대면진료 관리료-공휴",                                          price:   3000, maker: "", note: "", cat: "관리료",     start: "2026-01-01", end: "2026-12-31" },
+  { code: "91004",     name: "비대면진료 관리료-공휴",                                          price:   2950, maker: "", note: "", cat: "관리료",     start: "2025-01-01", end: "2025-12-31" },
+  { code: "91004",     name: "비대면진료 관리료-공휴",                                          price:   2840, maker: "", note: "", cat: "관리료",     start: "2024-01-01", end: "2024-12-31" },
+  { code: "91003",     name: "비대면진료 관리료-심야",                                          price:   3000, maker: "", note: "", cat: "관리료",     start: "2026-01-01", end: "2026-12-31" },
+  { code: "91003",     name: "비대면진료 관리료-심야",                                          price:   2950, maker: "", note: "", cat: "관리료",     start: "2025-01-01", end: "2025-12-31" },
+  { code: "91002",     name: "비대면진료 관리료-야간",                                          price:   3000, maker: "", note: "", cat: "관리료",     start: "2026-01-01", end: "2026-12-31" },
+  { code: "91001",     name: "비대면진료 관리료-주간",                                          price:   2840, maker: "", note: "", cat: "관리료",     start: "2026-01-01", end: "2026-12-31" },
+  { code: "91000R04",  name: "한의방문진료료-의료접근성 취약지기관, 동일 세대 환자 연속 방문, 두번째 방문부터", price: 64960, maker: "", note: "", cat: "방문진료", start: "2026-01-01", end: "2026-12-31" },
+  { code: "91000R03",  name: "한의방문진료료-의료접근성 취약지기관, 동일 건물 환자 연속 방문",  price:  97430, maker: "", note: "", cat: "방문진료",   start: "2026-01-01", end: "2026-12-31" },
+  { code: "91000R00",  name: "한의방문진료료-의료접근성 취약지기관 방문",                       price: 129910, maker: "", note: "", cat: "방문진료",   start: "2026-01-01", end: "2026-12-31" },
+  { code: "AA154",     name: "초진진찰료",                                                     price:  17310, maker: "", note: "", cat: "진찰료",     start: "2026-01-01", end: "2026-12-31" },
+  { code: "AA254",     name: "재진진찰료",                                                     price:  12380, maker: "", note: "", cat: "진찰료",     start: "2026-01-01", end: "2026-12-31" },
+  { code: "40011",     name: "체침",                                                           price:   9670, maker: "", note: "", cat: "침구",       start: "2026-01-01", end: "2026-12-31" },
+  { code: "40300",     name: "부항술(건식)",                                                   price:   3210, maker: "", note: "", cat: "침구",       start: "2026-01-01", end: "2026-12-31" },
+];
+
 const BACKUPS = [
   { ts: "2026-05-17 04:00", scope: "전체",       size: "1.42 GB", status: "성공" },
   { ts: "2026-05-16 04:00", scope: "전체",       size: "1.41 GB", status: "성공" },
@@ -199,6 +226,7 @@ const SECTIONS = [
   { id: "materials", icon: "syringe",      label: "치료재 관리",        roles: ["원장", "데스크"],        group: "운영" },
   { id: "rx",        icon: "pill",         label: "보험 임의처방",      roles: ["원장", "데스크"],        group: "운영" },
   { id: "nonbenefit",icon: "tag",          label: "기타 비급여",        roles: ["원장", "데스크"],        group: "운영" },
+  { id: "fees",      icon: "calculator",   label: "보험 수가",          roles: ["원장", "데스크"],        group: "운영" },
   { id: "menu",      icon: "list-checks",  label: "진료 과목 · 수가표", roles: ["원장"],                  group: "운영" },
   { id: "license",   icon: "shield-check", label: "면허 · 자격",        roles: ["원장"],                  group: "법적 정보" },
   { id: "insurance", icon: "file-badge",   label: "보험 연동",          roles: ["원장"],                  group: "법적 정보" },
@@ -283,6 +311,6 @@ function permFor(role, sectionId) {
 Object.assign(window, {
   CLINIC_DATA, HOURS, HOLIDAYS, ROOMS, PRICE_LIST, LICENSES,
   INSURANCE, BILLING, BRANCHES, EQUIPMENT, MATERIALS, INSURANCE_RX, RX_SUPPLIERS,
-  NONBENEFIT_ORDERS, NONBENEFIT_CATS, BACKUPS, ALERTS,
+  NONBENEFIT_ORDERS, NONBENEFIT_CATS, INSURANCE_FEES, FEE_CATS, BACKUPS, ALERTS,
   SECTIONS, permFor,
 });

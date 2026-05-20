@@ -360,6 +360,17 @@ const MATERIAL_FIELDS = [
   { key: "inUse", label: "사용 여부", type: "toggle" },
 ];
 
+const FEE_FIELDS = [
+  { key: "code", label: "코드", type: "mono", placeholder: "예: 99100" },
+  { key: "cat", label: "구분", type: "segment", options: ["진찰료", "관리료", "진료지원금", "방문진료", "침구", "약침", "검사", "기타"], full: true },
+  { key: "name", label: "명칭", type: "text", placeholder: "수가 명칭", full: true },
+  { key: "price", label: "단가 (원)", type: "number", placeholder: "0" },
+  { key: "maker", label: "제약사", type: "text", placeholder: "선택" },
+  { key: "start", label: "적용시작일", type: "date" },
+  { key: "end", label: "적용종료일", type: "date" },
+  { key: "note", label: "비고", type: "text", placeholder: "선택", full: true },
+];
+
 const NONBENEFIT_FIELDS = [
   { key: "code", label: "코드", type: "mono", placeholder: "SE00" },
   { key: "name", label: "오더명칭", type: "text", placeholder: "오더 이름", full: true },
@@ -425,6 +436,16 @@ function EquipmentAddModal({ open, onClose }) {
     title="장비 등록"
     subtitle="진료·조제·IT 장비의 위치, 점검 일정, 보증 관리"
     fields={EQUIPMENT_FIELDS} submitLabel="장비 등록" toastMsg="장비가 등록되었습니다" />;
+}
+
+function FeeModal({ open, onClose, initial }) {
+  const editing = !!initial;
+  return <ClinicFormModal open={open} onClose={onClose} icon="calculator"
+    title={editing ? "준용수가 수정" : "준용수가 등록"}
+    subtitle="건강보험 수가 · 준용수가 — 적용기간별 단가"
+    fields={FEE_FIELDS} initial={initial}
+    submitLabel={editing ? "변경사항 저장" : "등록"}
+    toastMsg={editing ? "수가가 수정되었습니다" : "준용수가가 등록되었습니다"} />;
 }
 
 function NonBenefitOrderModal({ open, onClose, initial }) {
@@ -678,5 +699,5 @@ Object.assign(window, {
   showToast, toastProgress, ClinicToaster,
   IdentityEditModal, BillingEditModal, RoomAddModal, EquipmentAddModal, MaterialAddModal,
   MenuItemAddModal, LicenseAddModal, BranchAddModal, LogoUploadModal, PrescriptionRxModal,
-  NonBenefitOrderModal,
+  NonBenefitOrderModal, FeeModal,
 });
