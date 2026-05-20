@@ -379,7 +379,7 @@ function RulesTab({ canEdit }) {
 // 탭 2 — 히스토리
 // ──────────────────────────────────────────────────────────────
 function HistoryTab() {
-  const [filter, setFilter] = useStateAC("all");
+  const [filter, setFilter] = useStateAC("active");
   const [sev, setSev] = useStateAC("all");
   const [query, setQuery] = useStateAC("");
 

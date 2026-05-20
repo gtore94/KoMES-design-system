@@ -36,6 +36,12 @@ function ClinicManagementScreen() {
 
   const current = SECTIONS.find(s => s.id === tab);
 
+  // 활성 알림 개수 — 알림 센터 버튼의 빨간 점 표시용
+  const activeAlertCount = React.useMemo(
+    () => ALERT_HISTORY.filter(h => h.status === "active").length,
+    []
+  );
+
   return (
     <div style={{
       display: "flex", flexDirection: "column", height: "100%",
@@ -79,9 +85,19 @@ function ClinicManagementScreen() {
             </div>
           </div>
           <RoleBadge role={role} />
-          <Button variant="secondary" size="sm" icon="bell" onClick={() => setAlertCenter("history")}>
-            알림 센터
-          </Button>
+          <span style={{ position: "relative", display: "inline-flex" }}>
+            <Button variant="secondary" size="sm" icon="bell" onClick={() => setAlertCenter("history")}>
+              알림 센터
+            </Button>
+            {activeAlertCount > 0 && (
+              <span title={`활성 알림 ${activeAlertCount}건`} style={{
+                position: "absolute", top: -3, right: -3,
+                width: 9, height: 9, borderRadius: "50%",
+                background: "var(--cinnabar-600)",
+                border: "1.5px solid var(--bg-surface)",
+              }} />
+            )}
+          </span>
         </>}
       />
 
@@ -185,15 +201,6 @@ function ClinicManagementScreen() {
         ) : (
           <main style={{ flex: 1, overflowY: "auto", padding: "26px 36px 60px" }}>
             <div style={{ maxWidth: 880 }}>
-              {/* 알림 배너 */}
-              <NotificationBanner
-                alerts={ALERTS}
-                role={role}
-                onJump={(id) => setTab(id)}
-                onOpenSettings={() => setAlertCenter("rules")}
-                onOpenHistory={() => setAlertCenter("history")}
-              />
-
               {/* breadcrumb */}
               <div style={{
                 display: "flex", alignItems: "center", gap: 6,
