@@ -329,8 +329,8 @@ function SettingsScreen() {
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%", background: "var(--bg-page)" }}>
       <TopBar
-        title="설정"
-        subtitle="외관, 일반 환경, 계정 정보를 관리합니다"
+        title="차트 설정"
+        subtitle="외관과 단축키를 관리합니다"
         actions={null}
       />
 
@@ -346,13 +346,9 @@ function SettingsScreen() {
             fontSize: 10, fontWeight: 700, letterSpacing: "0.12em",
             color: "var(--text-muted)", textTransform: "uppercase",
             padding: "0 10px 8px",
-          }}>설정</div>
+          }}>차트 설정</div>
           {[
             { key: "appearance", icon: "palette",   label: "외관" },
-            { key: "general",    icon: "sliders-horizontal", label: "일반" },
-            { key: "account",    icon: "user",      label: "계정" },
-            { key: "clinic",     icon: "building-2", label: "한의원 정보" },
-            { key: "billing",    icon: "receipt",   label: "청구 환경" },
             { key: "shortcuts",  icon: "command",   label: "단축키" },
           ].map(item => (
             <button key={item.key} onClick={() => setTab(item.key)} style={{
@@ -476,18 +472,33 @@ function SettingsScreen() {
               </>
             )}
 
-            {tab !== "appearance" && (
-              <SettingsSection title={({
-                general: "일반", account: "계정", clinic: "한의원 정보",
-                billing: "청구 환경", shortcuts: "단축키",
-              })[tab]} description="이 화면은 준비 중입니다.">
-                <div style={{
-                  padding: "44px 22px", textAlign: "center",
-                  color: "var(--text-muted)", fontSize: 13,
-                  fontFamily: "var(--font-sans)",
-                }}>
-                  <Icon name="construction" size={28} style={{ color: "var(--text-muted)", marginBottom: 10 }} />
-                  <div>곧 제공될 예정입니다.</div>
+            {tab === "shortcuts" && (
+              <SettingsSection title="단축키" description="자주 쓰는 기능의 키보드 단축키입니다.">
+                <div style={{ padding: "6px 0" }}>
+                  {[
+                    { keys: ["Ctrl", "K"], label: "환자 검색" },
+                    { keys: ["Ctrl", "N"], label: "신규 환자 등록" },
+                    { keys: ["Ctrl", "S"], label: "차트 저장" },
+                    { keys: ["Ctrl", "P"], label: "처방 작성" },
+                    { keys: ["Ctrl", "Enter"], label: "수납 처리" },
+                    { keys: ["Alt", "←"], label: "이전 화면" },
+                    { keys: ["F2"], label: "치료실 현황판" },
+                    { keys: ["Esc"], label: "모달 닫기" },
+                  ].map((s, i) => (
+                    <Row key={i} label={s.label} control={
+                      <span style={{ display: "inline-flex", gap: 5 }}>
+                        {s.keys.map(k => (
+                          <kbd key={k} style={{
+                            fontFamily: "var(--font-mono)", fontSize: 11.5, fontWeight: 600,
+                            color: "var(--text-secondary)", background: "var(--bg-raised)",
+                            border: "1px solid var(--border-default)",
+                            borderRadius: "var(--radius-sm)", padding: "3px 8px",
+                            boxShadow: "0 1px 0 var(--border-default)",
+                          }}>{k}</kbd>
+                        ))}
+                      </span>
+                    } />
+                  ))}
                 </div>
               </SettingsSection>
             )}

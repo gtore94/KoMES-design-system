@@ -179,7 +179,7 @@ function Sidebar({ activeScreen, onNavigate }) {
       ))}
 
       <div style={{ padding: collapsed ? "10px 4px 2px" : "10px 8px 2px" }}>
-        {navItem("settings", "settings", "설정", activeScreen === "settings")}
+        {navItem("settings", "settings", "차트 설정", activeScreen === "settings")}
       </div>
     </div>
 
