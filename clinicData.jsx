@@ -235,6 +235,31 @@ const RX_DICT = [
     content: "반하 8, 황금 4, 인삼 4, 감초 4, 황련 2, 건강 4, 대조 3" },
 ];
 
+// ──────────────────────────────────────────────────────────────
+// 보험약 사용설정 (제약사별 보험 한약제제 카탈로그 + 사용 목록)
+// ──────────────────────────────────────────────────────────────
+const INS_MEDS = [
+  { maker: "경방신약(주)", name: "갈근탕 엑스산",     dose: "3g", price: 1342 },
+  { maker: "경방신약(주)", name: "소청룡탕 엑스산",   dose: "3g", price: 1287 },
+  { maker: "경방신약(주)", name: "반하사심탕 엑스산", dose: "3g", price: 1518 },
+  { maker: "경방신약(주)", name: "보중익기탕 엑스산", dose: "3g", price: 1925 },
+  { maker: "경방신약(주)", name: "오적산 엑스산",     dose: "3g", price: 1684 },
+  { maker: "경방신약(주)", name: "평위산 엑스산",     dose: "3g", price:  982 },
+  { maker: "한국신약(주)", name: "쌍화탕 엑스산",     dose: "3g", price: 1120 },
+  { maker: "한국신약(주)", name: "갈근탕 엑스산",     dose: "3g", price: 1310 },
+  { maker: "한국신약(주)", name: "황련해독탕 엑스산", dose: "3g", price: 1233 },
+  { maker: "정우신약(주)", name: "십전대보탕 엑스산", dose: "3g", price: 2140 },
+  { maker: "정우신약(주)", name: "보중익기탕 엑스산", dose: "3g", price: 1890 },
+  { maker: "한풍제약(주)", name: "소시호탕 엑스산",   dose: "3g", price: 1450 },
+  { maker: "한풍제약(주)", name: "작약감초탕 엑스산", dose: "3g", price: 1077 },
+];
+
+const INS_MEDS_USED = [
+  { code: "M00001", maker: "경방신약(주)", name: "갈근탕 엑스산",     price: 1342 },
+  { code: "M00002", maker: "한풍제약(주)", name: "작약감초탕 엑스산", price: 1077 },
+  { code: "M00003", maker: "정우신약(주)", name: "십전대보탕 엑스산", price: 2140 },
+];
+
 const BACKUPS = [
   { ts: "2026-05-17 04:00", scope: "전체",       size: "1.42 GB", status: "성공" },
   { ts: "2026-05-16 04:00", scope: "전체",       size: "1.41 GB", status: "성공" },
@@ -258,6 +283,7 @@ const SECTIONS = [
   { id: "rxdict",    icon: "book-text",    label: "처방 사전",          roles: ["원장", "데스크"],        group: "운영" },
   { id: "nonbenefit",icon: "tag",          label: "기타 비급여",        roles: ["원장", "데스크"],        group: "운영" },
   { id: "fees",      icon: "calculator",   label: "보험 수가",          roles: ["원장", "데스크"],        group: "운영" },
+  { id: "insmeds",   icon: "package-2",    label: "보험약 사용설정",    roles: ["원장", "데스크"],        group: "운영" },
   { id: "menu",      icon: "list-checks",  label: "진료 과목 · 수가표", roles: ["원장"],                  group: "운영" },
   { id: "license",   icon: "shield-check", label: "면허 · 자격",        roles: ["원장"],                  group: "법적 정보" },
   { id: "insurance", icon: "file-badge",   label: "보험 연동",          roles: ["원장"],                  group: "법적 정보" },
@@ -342,6 +368,7 @@ function permFor(role, sectionId) {
 Object.assign(window, {
   CLINIC_DATA, HOURS, HOLIDAYS, ROOMS, PRICE_LIST, LICENSES,
   INSURANCE, BILLING, BRANCHES, EQUIPMENT, MATERIALS, INSURANCE_RX, RX_SUPPLIERS,
-  NONBENEFIT_ORDERS, NONBENEFIT_CATS, INSURANCE_FEES, FEE_CATS, RX_DICT, BACKUPS, ALERTS,
+  NONBENEFIT_ORDERS, NONBENEFIT_CATS, INSURANCE_FEES, FEE_CATS, RX_DICT,
+  INS_MEDS, INS_MEDS_USED, BACKUPS, ALERTS,
   SECTIONS, permFor,
 });

@@ -748,6 +748,154 @@ function FeeSection({ perm }) {
 }
 
 // ──────────────────────────────────────────────────────────────
+// 3-6) 보험약 사용설정 (좌: 제약사 카탈로그 / 우: 사용 목록)
+// ──────────────────────────────────────────────────────────────
+function InsMedsSection({ perm }) {
+  const makers = React.useMemo(() => Array.from(new Set(INS_MEDS.map(m => m.maker))), []);
+  const [maker, setMaker] = React.useState(makers[0]);
+  const [query, setQuery] = React.useState("");
+  const [sel, setSel] = React.useState(null);  // index in filtered left list
+  const [used, setUsed] = React.useState(INS_MEDS_USED);
+
+  const q = query.trim().toLowerCase();
+  const left = INS_MEDS.filter(m => m.maker === maker && (!q || m.name.toLowerCase().includes(q)));
+
+  const add = () => {
+    if (sel == null || !left[sel]) return;
+    const m = left[sel];
+    if (used.some(u => u.maker === m.maker && u.name === m.name)) {
+      showToast("이미 사용 목록에 있습니다", { variant: "warning", icon: "info" });
+      return;
+    }
+    const code = "M" + String(used.length + 1).padStart(5, "0");
+    setUsed(prev => [...prev, { code, maker: m.maker, name: m.name, price: m.price }]);
+    showToast(`${m.name} · 사용 목록에 추가되었습니다`, { variant: "success", icon: "check-circle-2" });
+  };
+  const removeUsed = (u) => setUsed(prev => prev.filter(x => x.code !== u.code));
+
+  const headStyle = {
+    fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase",
+    color: "var(--text-muted)", fontFamily: "var(--font-sans)",
+  };
+  const cellNum = { fontFamily: "var(--font-mono)", fontVariantNumeric: "tabular-nums" };
+
+  return (
+    <SectionCard
+      title="보험약 사용설정"
+      hint="제약사별 보험 한약제제 중 우리 한의원에서 사용할 약을 선택합니다."
+      icon="package-2" anchor="insmeds" perm={perm}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: 380 }}>
+        {/* 좌 — 제약사 카탈로그 */}
+        <div style={{ borderRight: "1px solid var(--border-subtle)", display: "flex", flexDirection: "column" }}>
+          <div style={{
+            padding: "12px 14px", borderBottom: "1px solid var(--border-subtle)",
+            display: "flex", alignItems: "center", gap: 8,
+          }}>
+            <select value={maker} onChange={(e) => { setMaker(e.target.value); setSel(null); }} style={{
+              fontFamily: "var(--font-sans)", fontSize: 12.5, color: "var(--text-primary)",
+              background: "var(--bg-surface)", border: "1px solid var(--border-default)",
+              borderRadius: "var(--radius-md)", padding: "6px 8px", outline: "none", cursor: "pointer",
+            }}>
+              {makers.map(m => <option key={m} value={m}>{m}</option>)}
+            </select>
+            <div style={{ position: "relative", flex: 1 }}>
+              <span style={{ position: "absolute", left: 8, top: "50%", transform: "translateY(-50%)", color: "var(--text-muted)", display: "flex" }}>
+                <Icon name="search" size={13} />
+              </span>
+              <input value={query} onChange={(e) => { setQuery(e.target.value); setSel(null); }}
+                placeholder="보험약명 검색"
+                style={{
+                  fontFamily: "var(--font-sans)", fontSize: 12.5, color: "var(--text-primary)",
+                  background: "var(--bg-surface)", border: "1px solid var(--border-default)",
+                  borderRadius: "var(--radius-md)", padding: "6px 8px 6px 28px", outline: "none",
+                  width: "100%", boxSizing: "border-box",
+                }} />
+            </div>
+          </div>
+
+          <div style={{
+            display: "grid", gridTemplateColumns: "1.1fr 1.5fr 0.7fr 0.9fr", gap: 8,
+            padding: "8px 14px", borderBottom: "1px solid var(--border-subtle)",
+          }}>
+            <span style={headStyle}>제약사</span><span style={headStyle}>보험약명</span>
+            <span style={{ ...headStyle, textAlign: "center" }}>기준용량</span>
+            <span style={{ ...headStyle, textAlign: "right" }}>단가</span>
+          </div>
+
+          <div style={{ flex: 1, overflowY: "auto" }}>
+            {left.map((m, i) => (
+              <div key={i} onClick={() => setSel(i)} style={{
+                display: "grid", gridTemplateColumns: "1.1fr 1.5fr 0.7fr 0.9fr", gap: 8,
+                padding: "9px 14px", cursor: "pointer", alignItems: "center",
+                fontFamily: "var(--font-sans)", fontSize: 12.5,
+                background: sel === i ? "var(--brand-subtle)" : "transparent",
+                borderBottom: "1px solid var(--border-subtle)",
+              }}>
+                <span style={{ color: "var(--text-muted)", fontSize: 11.5 }}>{m.maker}</span>
+                <span style={{ color: "var(--text-primary)", fontWeight: 500 }}>{m.name}</span>
+                <span style={{ ...cellNum, textAlign: "center", color: "var(--text-secondary)" }}>{m.dose}</span>
+                <span style={{ ...cellNum, textAlign: "right", color: "var(--text-secondary)" }}>{m.price.toLocaleString()}</span>
+              </div>
+            ))}
+            {left.length === 0 && (
+              <div style={{ padding: "28px 16px", textAlign: "center", color: "var(--text-muted)", fontSize: 12, fontFamily: "var(--font-sans)" }}>
+                해당 제약사 보험약이 없습니다.
+              </div>
+            )}
+          </div>
+
+          {perm === "edit" && (
+            <div style={{ padding: "10px 14px", borderTop: "1px solid var(--border-subtle)", display: "flex", justifyContent: "flex-end" }}>
+              <Button variant="primary" size="sm" icon="plus" disabled={sel == null} onClick={add}>추가</Button>
+            </div>
+          )}
+        </div>
+
+        {/* 우 — 사용 목록 */}
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{
+            display: "grid", gridTemplateColumns: "0.8fr 1.1fr 1.5fr 0.8fr 28px", gap: 8,
+            padding: "8px 14px",
+            borderBottom: "1px solid var(--border-subtle)", marginTop: 45,
+          }}>
+            <span style={headStyle}>코드</span><span style={headStyle}>제약사</span>
+            <span style={headStyle}>처방명</span>
+            <span style={{ ...headStyle, textAlign: "right" }}>단가</span><span />
+          </div>
+          <div style={{ flex: 1, overflowY: "auto" }}>
+            {used.map((u) => (
+              <div key={u.code} style={{
+                display: "grid", gridTemplateColumns: "0.8fr 1.1fr 1.5fr 0.8fr 28px", gap: 8,
+                padding: "9px 14px", alignItems: "center",
+                fontFamily: "var(--font-sans)", fontSize: 12.5,
+                borderBottom: "1px solid var(--border-subtle)",
+              }}>
+                <span style={{ ...cellNum, color: "var(--text-secondary)" }}>{u.code}</span>
+                <span style={{ color: "var(--text-muted)", fontSize: 11.5 }}>{u.maker}</span>
+                <span style={{ color: "var(--text-primary)", fontWeight: 500 }}>{u.name}</span>
+                <span style={{ ...cellNum, textAlign: "right", color: "var(--text-secondary)" }}>{u.price.toLocaleString()}</span>
+                {perm === "edit" ? (
+                  <button onClick={() => removeUsed(u)} title="제거" style={{
+                    width: 24, height: 24, borderRadius: "var(--radius-sm)", background: "transparent",
+                    color: "var(--text-danger)", border: "none", cursor: "pointer",
+                    display: "inline-flex", alignItems: "center", justifyContent: "center",
+                  }}><Icon name="x" size={13} /></button>
+                ) : <span />}
+              </div>
+            ))}
+            {used.length === 0 && (
+              <div style={{ padding: "28px 16px", textAlign: "center", color: "var(--text-muted)", fontSize: 12, fontFamily: "var(--font-sans)" }}>
+                왼쪽에서 보험약을 선택해 추가하세요.
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </SectionCard>
+  );
+}
+
+// ──────────────────────────────────────────────────────────────
 // 4) 진료 과목 · 수가표
 // ──────────────────────────────────────────────────────────────
 function MenuSection({ perm }) {
@@ -1127,6 +1275,7 @@ const SECTION_COMPONENTS = {
   rxdict:    RxDictSection,
   nonbenefit: NonBenefitSection,
   fees:      FeeSection,
+  insmeds:   InsMedsSection,
   menu:      MenuSection,
   license:   LicenseSection,
   insurance: InsuranceSection,
@@ -1143,7 +1292,7 @@ function renderSection(id, role) {
 }
 
 Object.assign(window, {
-  IdentitySection, HoursSection, RoomsSection, EquipmentSection, MaterialsSection, PrescriptionSection, RxDictSection, NonBenefitSection, FeeSection, MenuSection,
+  IdentitySection, HoursSection, RoomsSection, EquipmentSection, MaterialsSection, PrescriptionSection, RxDictSection, NonBenefitSection, FeeSection, InsMedsSection, MenuSection,
   LicenseSection, InsuranceSection, BillingSection,
   BranchSection, BrandSection, BackupSection,
   SECTION_COMPONENTS, renderSection,
