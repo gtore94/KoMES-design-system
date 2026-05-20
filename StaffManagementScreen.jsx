@@ -607,7 +607,7 @@ function StaffManagementScreen() {
   const [search, setSearch] = useStateStaff("");
   const [sort, setSort] = useStateStaff("role"); // role | join | name | tenure
   const [view, setView] = useStateStaff("list"); // list | cards
-  const [selectedId, setSelectedId] = useStateStaff(staff[0]?.id);
+  const [selectedId, setSelectedId] = useStateStaff(null);
   const [showNewStaff, setShowNewStaff] = useStateStaff(false);
   const [editStaff, setEditStaff] = useStateStaff(null);
 
@@ -653,7 +653,7 @@ function StaffManagementScreen() {
     });
   }, [staff, filter, search, sort]);
 
-  const selected = staff.find(s => s.id === selectedId) || filtered[0];
+  const selected = selectedId == null ? null : staff.find(s => s.id === selectedId) || null;
 
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%", background: "var(--bg-page)" }}>
