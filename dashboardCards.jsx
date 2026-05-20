@@ -119,7 +119,7 @@ function KPITile({ icon, iconColor, label, value, unit, mom, yoy, sub, spark, sp
 }
 
 // ─── Alert banner row ──────────────────────────────────────
-function AlertBanner({ alerts }) {
+function AlertBanner({ alerts, onNavigate }) {
   if (!alerts || alerts.length === 0) return null;
   return (
     <div style={{
@@ -145,11 +145,13 @@ function AlertBanner({ alerts }) {
             <Icon name={a.icon} size={13} />
             {a.text}
             {a.cta && (
-              <button style={{
-                fontSize: 11, fontWeight: 600, color: t.color, background: "transparent",
-                border: `1px solid ${t.color}`, borderRadius: "var(--radius-sm)",
-                padding: "1px 8px", cursor: "pointer", fontFamily: "var(--font-sans)", marginLeft: 4,
-              }}>{a.cta} →</button>
+              <button
+                onClick={a.jump && onNavigate ? () => onNavigate(a.jump) : undefined}
+                style={{
+                  fontSize: 11, fontWeight: 600, color: t.color, background: "transparent",
+                  border: `1px solid ${t.color}`, borderRadius: "var(--radius-sm)",
+                  padding: "1px 8px", cursor: "pointer", fontFamily: "var(--font-sans)", marginLeft: 4,
+                }}>{a.cta} →</button>
             )}
           </div>
         );

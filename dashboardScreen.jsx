@@ -3,7 +3,7 @@
 
 const { useState: useStateMain, useEffect: useEffectMain } = React;
 
-function DashboardScreen() {
+function DashboardScreen({ onNavigate }) {
   // 상태 — localStorage에 저장
   const [variation, setVariation] = useStateMain(() => localStorage.getItem("komes_dash_var") || "brief");
   const [period, setPeriod]       = useStateMain(() => localStorage.getItem("komes_dash_period") || "month");
@@ -85,7 +85,7 @@ function DashboardScreen() {
       </div>
 
       {/* 알림 배너 */}
-      {showAlerts && <AlertBanner alerts={DASH.alerts} />}
+      {showAlerts && <AlertBanner alerts={DASH.alerts} onNavigate={onNavigate} />}
 
       {/* 본문 — 변형별 */}
       <div style={{ flex: 1, overflowY: "auto", minHeight: 0 }}>

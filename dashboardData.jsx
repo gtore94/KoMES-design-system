@@ -212,8 +212,8 @@ const DASH = {
 
   // ── 상단 알림 배너 ───────────────────────────────────
   alerts: [
-    { tone: "danger", icon: "alert-circle", text: "보험 청구 보류 6건이 14일 이상 경과", cta: "검토" },
-    { tone: "warn",   icon: "wallet",       text: "미수금 ₩4,230,000 · 15건 (전월 대비 +12%)", cta: "수금 관리" },
+    { tone: "danger", icon: "alert-circle", text: "보험 청구 보류 6건이 14일 이상 경과", cta: "검토", jump: "claim" },
+    { tone: "warn",   icon: "wallet",       text: "미수금 ₩4,230,000 · 15건 (전월 대비 +12%)", cta: "수금 관리", jump: "collect" },
   ],
 };
 

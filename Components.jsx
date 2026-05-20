@@ -107,6 +107,7 @@ function Sidebar({ activeScreen, onNavigate }) {
     ]},
     { label: "청구", items: [
       { key: "claim",    icon: "file-text",         label: "보험 청구" },
+      { key: "collect",  icon: "wallet",            label: "수금 관리" },
     ]},
     { label: "처방", items: [
       { key: "prescriptions", icon: "flask-conical", label: "처방 관리" },
