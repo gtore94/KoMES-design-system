@@ -117,7 +117,7 @@ function Sidebar({ activeScreen, onNavigate }) {
       { key: "orders",   icon: "clipboard-list", label: "발주 이력" },
     ]},
     { label: "분석", items: [
-      { key: "stats", icon: "bar-chart-2", label: "통계" },
+      { key: "stats", icon: "bar-chart-2", label: "대시보드" },
       { key: "ai",    icon: "sparkles",    label: "AI 분석" },
     ]},
     { label: "조직", items: [
