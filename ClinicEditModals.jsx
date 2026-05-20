@@ -519,8 +519,143 @@ function LogoUploadModal({ open, onClose }) {
   );
 }
 
+// ══════════════════════════════════════════════════════════════
+// 보험 임의처방 등록/수정 모달 (약재 조합 빌더)
+// ══════════════════════════════════════════════════════════════
+function PrescriptionRxModal({ open, onClose, initial }) {
+  const editing = !!initial;
+  const suppliers = typeof RX_SUPPLIERS !== "undefined" ? RX_SUPPLIERS : ["경방신약(주)"];
+
+  const [name, setName] = useStateCE("");
+  const [note, setNote] = useStateCE("");
+  const [supplier, setSupplier] = useStateCE(suppliers[0]);
+  const [herbName, setHerbName] = useStateCE("");
+  const [herbQty, setHerbQty] = useStateCE(0);
+  const [herbs, setHerbs] = useStateCE([]);
+
+  useEffectCE(() => {
+    if (!open) return;
+    setName(initial?.name || "");
+    setNote(initial?.note || "");
+    setHerbs(initial?.herbs ? initial.herbs.map(h => ({ ...h })) : []);
+    setSupplier(suppliers[0]);
+    setHerbName(""); setHerbQty(0);
+  }, [open]);
+
+  const addHerb = () => {
+    if (!herbName.trim()) return;
+    setHerbs(prev => [...prev, { supplier, name: herbName.trim(), qty: Number(herbQty) || 0 }]);
+    setHerbName(""); setHerbQty(0);
+  };
+  const removeHerb = (i) => setHerbs(prev => prev.filter((_, idx) => idx !== i));
+
+  const save = () => {
+    onClose();
+    showToast(editing ? "임의처방이 수정되었습니다" : "임의처방이 등록되었습니다",
+      { variant: "success", icon: "check-circle-2" });
+  };
+
+  const inputStyle = {
+    fontFamily: "var(--font-sans)", fontSize: 13, color: "var(--text-primary)",
+    background: "var(--bg-surface)", border: "1px solid var(--border-default)",
+    borderRadius: "var(--radius-md)", padding: "8px 11px", outline: "none",
+    width: "100%", boxSizing: "border-box",
+  };
+  const labelStyle = {
+    fontSize: 10.5, fontWeight: 700, letterSpacing: "0.06em",
+    textTransform: "uppercase", color: "var(--text-muted)",
+    fontFamily: "var(--font-sans)", marginBottom: 5, display: "block",
+  };
+  const stepBtn = {
+    width: 30, height: 34, borderRadius: "var(--radius-sm)",
+    background: "var(--bg-surface)", border: "1px solid var(--border-default)",
+    color: "var(--text-secondary)", cursor: "pointer",
+    display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
+  };
+
+  return (
+    <ModalShell open={open} onClose={onClose} icon="pill"
+      title={editing ? "임의처방 수정" : "새 임의처방 등록"}
+      subtitle="원내 조제용 보험 한약 처방 — 약재를 조합해 등록합니다"
+      footer={<>
+        <Button variant="secondary" size="md" onClick={onClose}>닫기</Button>
+        <Button variant="primary" size="md" icon="check" onClick={save}>{editing ? "변경사항 저장" : "등록"}</Button>
+      </>}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px 22px" }}>
+        <div>
+          <label style={labelStyle}>임의처방명</label>
+          <input value={name} onChange={(e) => setName(e.target.value)} placeholder="예: 작약감초탕" style={inputStyle} />
+        </div>
+        <div>
+          <label style={labelStyle}>비고</label>
+          <input value={note} onChange={(e) => setNote(e.target.value)} placeholder="선택" style={inputStyle} />
+        </div>
+      </div>
+
+      {/* 약재 추가 줄 */}
+      <div style={{ marginTop: 18 }}>
+        <label style={labelStyle}>약재 추가</label>
+        <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+          <select value={supplier} onChange={(e) => setSupplier(e.target.value)}
+            style={{ ...inputStyle, width: 150, cursor: "pointer" }}>
+            {suppliers.map(s => <option key={s} value={s}>{s}</option>)}
+          </select>
+          <input value={herbName} onChange={(e) => setHerbName(e.target.value)}
+            onKeyDown={(e) => { if (e.key === "Enter") addHerb(); }}
+            placeholder="약재명 입력" style={{ ...inputStyle, flex: 1, minWidth: 140 }} />
+          <button onClick={() => setHerbQty(q => Math.max(0, (Number(q) || 0) - 1))} style={stepBtn} title="감소">
+            <Icon name="minus" size={14} />
+          </button>
+          <input value={herbQty} onChange={(e) => setHerbQty(e.target.value.replace(/[^0-9]/g, ""))}
+            style={{ ...inputStyle, width: 56, textAlign: "center", fontFamily: "var(--font-mono)" }} />
+          <button onClick={() => setHerbQty(q => (Number(q) || 0) + 1)} style={stepBtn} title="증가">
+            <Icon name="plus" size={14} />
+          </button>
+          <Button variant="secondary" size="md" onClick={addHerb}>추가</Button>
+        </div>
+      </div>
+
+      {/* 약재 목록 */}
+      <div style={{ marginTop: 14 }}>
+        {herbs.length === 0 ? (
+          <div style={{
+            padding: "20px 16px", textAlign: "center",
+            color: "var(--text-muted)", fontSize: 12, fontFamily: "var(--font-sans)",
+            background: "var(--bg-surface)", border: "1px dashed var(--border-default)",
+            borderRadius: "var(--radius-md)",
+          }}>추가된 약재가 없습니다. 위에서 약재를 검색해 추가하세요.</div>
+        ) : (
+          <div style={{
+            border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", overflow: "hidden",
+          }}>
+            {herbs.map((h, i) => (
+              <div key={i} style={{
+                display: "grid", gridTemplateColumns: "150px 1fr auto auto",
+                gap: 10, alignItems: "center", padding: "9px 12px",
+                borderBottom: i < herbs.length - 1 ? "1px solid var(--border-subtle)" : "none",
+                background: i % 2 ? "var(--bg-raised)" : "var(--bg-surface)",
+              }}>
+                <span style={{ fontSize: 11.5, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>{h.supplier}</span>
+                <span style={{ fontSize: 13, color: "var(--text-primary)", fontWeight: 500, fontFamily: "var(--font-sans)" }}>{h.name}</span>
+                <span style={{ fontFamily: "var(--font-mono)", fontSize: 12.5, color: "var(--text-secondary)" }}>{h.qty}g</span>
+                <button onClick={() => removeHerb(i)} title="삭제" style={{
+                  width: 26, height: 26, borderRadius: "var(--radius-sm)",
+                  background: "transparent", color: "var(--text-danger)", border: "none",
+                  display: "inline-flex", alignItems: "center", justifyContent: "center", cursor: "pointer",
+                }}>
+                  <Icon name="trash-2" size={14} />
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </ModalShell>
+  );
+}
+
 Object.assign(window, {
   showToast, toastProgress, ClinicToaster,
   IdentityEditModal, BillingEditModal, RoomAddModal, EquipmentAddModal, MaterialAddModal,
-  MenuItemAddModal, LicenseAddModal, BranchAddModal, LogoUploadModal,
+  MenuItemAddModal, LicenseAddModal, BranchAddModal, LogoUploadModal, PrescriptionRxModal,
 });

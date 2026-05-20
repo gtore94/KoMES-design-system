@@ -125,6 +125,29 @@ const MATERIALS = [
   { code: "P0004001", name: "약침용 주사기", limit:  98, vendor: "대화메디칼",                 start: "2021-07-01", end: "—", benefit: "본인부담 기본", inUse: false },
 ];
 
+// ──────────────────────────────────────────────────────────────
+// 보험 임의처방 (원내 조제 보험 한약 처방 — 약재 조합 + 단가)
+// ──────────────────────────────────────────────────────────────
+const RX_SUPPLIERS = ["경방신약(주)", "한국신약(주)", "정우신약(주)", "한풍제약(주)"];
+
+const INSURANCE_RX = [
+  { code: "C00010000", name: "작약감초탕", price: 1077, note: "", herbs: [
+    { supplier: "경방신약(주)", name: "작약", qty: 8 },
+    { supplier: "경방신약(주)", name: "감초", qty: 8 },
+  ]},
+  { code: "C00010001", name: "갈근탕",     price: 1342, note: "감기 초기", herbs: [
+    { supplier: "경방신약(주)", name: "갈근", qty: 8 },
+    { supplier: "경방신약(주)", name: "마황", qty: 4 },
+    { supplier: "경방신약(주)", name: "계지", qty: 4 },
+  ]},
+  { code: "C00010002", name: "반하사심탕", price: 1518, note: "", herbs: [] },
+  { code: "C00010003", name: "보중익기탕", price: 1925, note: "기허·피로", herbs: [] },
+  { code: "C00010004", name: "오적산",     price: 1684, note: "", herbs: [] },
+  { code: "C00010005", name: "평위산",     price:  982, note: "소화불량", herbs: [] },
+  { code: "C00010006", name: "황련해독탕", price: 1233, note: "", herbs: [] },
+  { code: "C00010007", name: "십전대보탕", price: 2140, note: "허약·보혈", herbs: [] },
+];
+
 const BACKUPS = [
   { ts: "2026-05-17 04:00", scope: "전체",       size: "1.42 GB", status: "성공" },
   { ts: "2026-05-16 04:00", scope: "전체",       size: "1.41 GB", status: "성공" },
@@ -144,6 +167,7 @@ const SECTIONS = [
   { id: "rooms",     icon: "door-open",    label: "진료실 · 베드",      roles: ["원장", "데스크-읽기"], group: "운영" },
   { id: "equipment", icon: "cpu",          label: "장비 관리",          roles: ["원장", "데스크-읽기"], group: "운영" },
   { id: "materials", icon: "syringe",      label: "치료재 관리",        roles: ["원장", "데스크"],        group: "운영" },
+  { id: "rx",        icon: "pill",         label: "보험 임의처방",      roles: ["원장", "데스크"],        group: "운영" },
   { id: "menu",      icon: "list-checks",  label: "진료 과목 · 수가표", roles: ["원장"],                  group: "운영" },
   { id: "license",   icon: "shield-check", label: "면허 · 자격",        roles: ["원장"],                  group: "법적 정보" },
   { id: "insurance", icon: "file-badge",   label: "보험 연동",          roles: ["원장"],                  group: "법적 정보" },
@@ -227,6 +251,6 @@ function permFor(role, sectionId) {
 
 Object.assign(window, {
   CLINIC_DATA, HOURS, HOLIDAYS, ROOMS, PRICE_LIST, LICENSES,
-  INSURANCE, BILLING, BRANCHES, EQUIPMENT, MATERIALS, BACKUPS, ALERTS,
+  INSURANCE, BILLING, BRANCHES, EQUIPMENT, MATERIALS, INSURANCE_RX, RX_SUPPLIERS, BACKUPS, ALERTS,
   SECTIONS, permFor,
 });

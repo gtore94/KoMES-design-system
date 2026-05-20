@@ -344,6 +344,88 @@ function MaterialsSection({ perm }) {
 }
 
 // ──────────────────────────────────────────────────────────────
+// 3-3) 보험 임의처방
+// ──────────────────────────────────────────────────────────────
+function PrescriptionSection({ perm }) {
+  const [query, setQuery] = React.useState("");
+  const [editRow, setEditRow] = React.useState(null);  // null | "new" | row
+
+  const q = query.trim().toLowerCase();
+  const rows = q
+    ? INSURANCE_RX.filter(r => r.code.toLowerCase().includes(q) || r.name.toLowerCase().includes(q))
+    : INSURANCE_RX;
+
+  const remove = (r) => showToast(`${r.code} ${r.name} · 삭제되었습니다`, { variant: "warning", icon: "trash-2" });
+
+  return (
+    <SectionCard
+      title="보험 임의처방"
+      hint="원내 조제용 보험 한약 처방을 약재 조합으로 직접 등록·관리합니다."
+      icon="pill" anchor="rx" perm={perm}
+      actions={perm === "edit" && <>
+        <Button variant="ghost" size="sm" icon="download" onClick={() => toastProgress("임의처방 목록 내보내는 중…", `임의처방 ${INSURANCE_RX.length}건을 CSV로 내보냈습니다`)}>CSV</Button>
+        <Button variant="secondary" size="sm" icon="plus" onClick={() => setEditRow("new")}>새 임의처방 등록</Button>
+      </>}>
+      {/* 검색 */}
+      <div style={{
+        padding: "12px 16px", borderBottom: "1px solid var(--border-subtle)",
+        display: "flex", alignItems: "center", gap: 10,
+      }}>
+        <div style={{ position: "relative", width: 320, maxWidth: "100%" }}>
+          <span style={{ position: "absolute", left: 9, top: "50%", transform: "translateY(-50%)", color: "var(--text-muted)", display: "flex" }}>
+            <Icon name="search" size={14} />
+          </span>
+          <input value={query} onChange={(e) => setQuery(e.target.value)}
+            placeholder="임의처방 조회 (코드 · 처방명)"
+            style={{
+              fontFamily: "var(--font-sans)", fontSize: 13, color: "var(--text-primary)",
+              background: "var(--bg-surface)", border: "1px solid var(--border-default)",
+              borderRadius: "var(--radius-md)", padding: "7px 10px 7px 30px",
+              outline: "none", width: "100%", boxSizing: "border-box",
+            }} />
+        </div>
+        <span style={{ fontSize: 11.5, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>
+          {rows.length}건
+        </span>
+      </div>
+
+      <DataTable
+        cols={[
+          { label: "코드", key: "code", mono: true, w: "12%" },
+          { label: "처방명", w: "26%", render: (r) =>
+            <div>
+              <span style={{ color: "var(--text-brand)", fontWeight: 600 }}>{r.name}</span>
+              {r.herbs && r.herbs.length > 0 && (
+                <span style={{ fontSize: 11, color: "var(--text-muted)", marginLeft: 8 }}>약재 {r.herbs.length}종</span>
+              )}
+            </div>
+          },
+          { label: "단가", w: "12%", mono: true, align: "right", render: (r) =>
+            <span style={{ fontVariantNumeric: "tabular-nums" }}>{r.price.toLocaleString()}</span>
+          },
+          { label: "비고", w: "34%", render: (r) =>
+            r.note ? <span style={{ color: "var(--text-secondary)" }}>{r.note}</span>
+                   : <span style={{ color: "var(--text-muted)" }}>—</span>
+          },
+          { label: "수정 및 삭제", w: "16%", align: "center", render: (r) =>
+            perm === "edit" ? (
+              <div style={{ display: "inline-flex", gap: 6 }}>
+                <Button variant="secondary" size="sm" onClick={() => setEditRow(r)}>수정</Button>
+                <Button variant="ghost" size="sm" onClick={() => remove(r)}>삭제</Button>
+              </div>
+            ) : <span style={{ color: "var(--text-muted)" }}>—</span>
+          },
+        ]}
+        rows={rows}
+      />
+      <PrescriptionRxModal open={editRow !== null}
+        initial={editRow && editRow !== "new" ? editRow : undefined}
+        onClose={() => setEditRow(null)} />
+    </SectionCard>
+  );
+}
+
+// ──────────────────────────────────────────────────────────────
 // 4) 진료 과목 · 수가표
 // ──────────────────────────────────────────────────────────────
 function MenuSection({ perm }) {
@@ -719,6 +801,7 @@ const SECTION_COMPONENTS = {
   rooms:     RoomsSection,
   equipment: EquipmentSection,
   materials: MaterialsSection,
+  rx:        PrescriptionSection,
   menu:      MenuSection,
   license:   LicenseSection,
   insurance: InsuranceSection,
@@ -735,7 +818,7 @@ function renderSection(id, role) {
 }
 
 Object.assign(window, {
-  IdentitySection, HoursSection, RoomsSection, EquipmentSection, MaterialsSection, MenuSection,
+  IdentitySection, HoursSection, RoomsSection, EquipmentSection, MaterialsSection, PrescriptionSection, MenuSection,
   LicenseSection, InsuranceSection, BillingSection,
   BranchSection, BrandSection, BackupSection,
   SECTION_COMPONENTS, renderSection,
