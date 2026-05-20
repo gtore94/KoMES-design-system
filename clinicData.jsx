@@ -260,6 +260,116 @@ const INS_MEDS_USED = [
   { code: "M00003", maker: "정우신약(주)", name: "십전대보탕 엑스산", price: 2140 },
 ];
 
+// ──────────────────────────────────────────────────────────────
+// 첩약 건강보험 시범사업
+// ──────────────────────────────────────────────────────────────
+// 탕전실 기본 설정 (자체탕전)
+const TANGJEON = { mode: "원내", seq: "01", preparer: "대표자명" };
+
+// 한약재 목록 (업체별 공급 카탈로그)
+const HERB_CATALOG = [
+  { company: "(유)대제제약",        item: "가자", mainCode: "3001H1AHM", repCode: "8800628000305", productCode: "062800030" },
+  { company: "(주)광명생약",        item: "가자", mainCode: "3001H1AHM", repCode: "8800646013905", productCode: "064601390" },
+  { company: "(주)농림생약",        item: "가자", mainCode: "3001H1AHM", repCode: "8800616016608", productCode: "061601660" },
+  { company: "(주)동양한방제약",    item: "가자", mainCode: "3001H1AHM", repCode: "8800684000509", productCode: "068400050" },
+  { company: "(주)동양허브",        item: "가자", mainCode: "3001H1AHM", repCode: "8800672012101", productCode: "067201210" },
+  { company: "(주)보양제약",        item: "갈근", mainCode: "3002H1AHM", repCode: "8800614029105", productCode: "061402910" },
+  { company: "(주)세화당",          item: "감국", mainCode: "3004H1AHM", repCode: "8800608016401", productCode: "060801640" },
+  { company: "(주)신흥제약",        item: "감초", mainCode: "3007H1AHM", repCode: "8800606008200", productCode: "060600820" },
+  { company: "(주)옥천당",          item: "강활", mainCode: "3012H1AHM", repCode: "8800613000105", productCode: "061300010" },
+  { company: "(주)자연세상",        item: "강황", mainCode: "3013H1AHM", repCode: "8800675018308", productCode: "067501830" },
+  { company: "(주)푸른무약",        item: "개자", mainCode: "3014H1AHM", repCode: "8800687000100", productCode: "068700010" },
+  { company: "고강제약",            item: "건강", mainCode: "3017H1AHM", repCode: "8800673000107", productCode: "067300010" },
+  { company: "녹원제약(주)",        item: "계지", mainCode: "3033H1AHM", repCode: "8800676010707", productCode: "067601070" },
+  { company: "농업회사법인다온허브주식회사", item: "곽향", mainCode: "3051H1AHM", repCode: "8800663003001", productCode: "063300300" },
+];
+
+// 등록된 한약재 (구매처·원산지·구매가 — excluded는 취급제외)
+const HERB_REGISTERED = [
+  { company: "취급제외",                  item: "갈근",     mainCode: "3002H1AHM", productCode: "699917070", origin: "",            buyDate: "2024-09-04", buyPrice: 0,      excluded: true },
+  { company: "농업회사법인다온허브주식회사", item: "갈근",   mainCode: "3002H1AHM", productCode: "063301370", origin: "중국",        buyDate: "2024-06-24", buyPrice: 5.166 },
+  { company: "씨케이주식회사",            item: "감국",     mainCode: "3004H1AHM", productCode: "061902300", origin: "중국",        buyDate: "2024-04-30", buyPrice: 18.333 },
+  { company: "취급제외",                  item: "감초",     mainCode: "3007H1AHM", productCode: "699917070", origin: "",            buyDate: "2025-10-10", buyPrice: 0,      excluded: true },
+  { company: "농업회사법인다온허브주식회사", item: "감초",   mainCode: "3007H1AHM", productCode: "063301410", origin: "중국",        buyDate: "2024-04-30", buyPrice: 20.333 },
+  { company: "취급제외",                  item: "감초밀자", mainCode: "3009H1AHM", productCode: "699917070", origin: "",            buyDate: "2025-06-09", buyPrice: 0,      excluded: true },
+  { company: "(주)농림생약",              item: "감초초",   mainCode: "3010H1AHM", productCode: "061601740", origin: "중국",        buyDate: "2024-04-08", buyPrice: 21.833 },
+  { company: "취급제외",                  item: "강활",     mainCode: "3012H1AHM", productCode: "699917070", origin: "",            buyDate: "2025-03-18", buyPrice: 0,      excluded: true },
+  { company: "농업회사법인 주식회사 월드허브", item: "강활", mainCode: "3012H1AHM", productCode: "066800040", origin: "한국(경북 봉화)", buyDate: "2024-04-30", buyPrice: 37 },
+  { company: "농업회사법인다온허브주식회사", item: "강황",   mainCode: "3013H1AHM", productCode: "063300090", origin: "인도",        buyDate: "2024-07-08", buyPrice: 8.5 },
+  { company: "(주)현진제약",              item: "개자",     mainCode: "3014H1AHM", productCode: "064800400", origin: "중국",        buyDate: "2025-05-07", buyPrice: 7.166 },
+  { company: "취급제외",                  item: "갱미",     mainCode: "3016H1AHM", productCode: "699917070", origin: "",            buyDate: "2025-08-30", buyPrice: 0,      excluded: true },
+  { company: "취급제외",                  item: "건강",     mainCode: "3017H1AHM", productCode: "699917070", origin: "",            buyDate: "2025-05-07", buyPrice: 0,      excluded: true },
+  { company: "농업회사법인다온허브주식회사", item: "건강",   mainCode: "3017H1AHM", productCode: "063301010", origin: "페루",        buyDate: "2024-04-30", buyPrice: 11.166 },
+  { company: "취급제외",                  item: "계심",     mainCode: "3032H1AHM", productCode: "699917070", origin: "",            buyDate: "2024-09-28", buyPrice: 0,      excluded: true },
+  { company: "농업회사법인다온허브주식회사", item: "계지",   mainCode: "3033H1AHM", productCode: "063300760", origin: "중국",        buyDate: "2024-04-30", buyPrice: 5.333 },
+  { company: "씨케이주식회사",            item: "고량강",   mainCode: "3035H1AHM", productCode: "061902210", origin: "중국",        buyDate: "—",          buyPrice: 0 },
+  { company: "씨케이주식회사",            item: "고본",     mainCode: "3039H1AHM", productCode: "061900240", origin: "중국",        buyDate: "—",          buyPrice: 0 },
+  { company: "농업회사법인다온허브주식회사", item: "골쇄보", mainCode: "3049H1AHM", productCode: "063300400", origin: "미얀마",      buyDate: "—",          buyPrice: 0 },
+];
+
+const CHEOP_DISEASES = ["전체", "기능성소화불량", "알레르기성비염", "월경통", "요추추간판탈출증"];
+
+const CHEOP_CATALOG = [
+  { disease: "기능성소화불량", name: "가미소요산_변증",   code: "H00610013" },
+  { disease: "기능성소화불량", name: "가미청심탕",        code: "H00620016" },
+  { disease: "기능성소화불량", name: "갈근탕_변증",       code: "H00610018" },
+  { disease: "기능성소화불량", name: "갈근해기탕",        code: "H00620019" },
+  { disease: "기능성소화불량", name: "거풍탕",            code: "H00620025" },
+  { disease: "기능성소화불량", name: "곽향정기산",        code: "H00620031" },
+  { disease: "기능성소화불량", name: "관계부자이중탕",    code: "H00620184" },
+  { disease: "기능성소화불량", name: "궁귀총소이중탕",    code: "H00620033" },
+  { disease: "기능성소화불량", name: "귀비탕",            code: "H00610037" },
+  { disease: "기능성소화불량", name: "내소산",            code: "H00600187" },
+  { disease: "기능성소화불량", name: "내소화중탕",        code: "H00600188" },
+  { disease: "기능성소화불량", name: "반하사심탕",        code: "H00610057" },
+  { disease: "기능성소화불량", name: "방풍통성산",        code: "H00610060" },
+  { disease: "기능성소화불량", name: "향사육군자탕",      code: "H00610163" },
+  { disease: "알레르기성비염", name: "가미통규탕",        code: "H00400181" },
+  { disease: "알레르기성비염", name: "형개연교탕",        code: "H00400253" },
+  { disease: "알레르기성비염", name: "방풍통성산",        code: "H00410060" },
+  { disease: "월경통",         name: "현부이경탕",        code: "H00100165" },
+  { disease: "월경통",         name: "가감오적산",        code: "H00100001" },
+  { disease: "월경통",         name: "교애사물탕",        code: "H00100032" },
+  { disease: "요추추간판탈출증", name: "활락탕",          code: "H00500254" },
+];
+
+const CHEOP_USED = [
+  { disease: "기능성소화불량", name: "곽향정기산",        code: "H00620031" },
+  { disease: "알레르기성비염", name: "가미통규탕",        code: "H00400181" },
+  { disease: "월경통",         name: "현부이경탕",        code: "H00100165" },
+  { disease: "기능성소화불량", name: "육울탕",            code: "H00610116" },
+  { disease: "월경통",         name: "가감오적산",        code: "H00100001" },
+  { disease: "요추추간판탈출증", name: "활락탕",          code: "H00500254" },
+  { disease: "알레르기성비염", name: "형개연교탕",        code: "H00400253" },
+  { disease: "알레르기성비염", name: "방풍통성산",        code: "H00410060" },
+  { disease: "기능성소화불량", name: "내소중탕",          code: "H00600188" },
+  { disease: "월경통",         name: "교애사물탕",        code: "H00100032" },
+  { disease: "기능성소화불량", name: "향사육군자탕",      code: "H00610163" },
+];
+
+// 처방 코드별 약재 구성 (없는 코드는 빈 구성)
+const CHEOP_HERBS = {
+  "H00620031": [ // 곽향정기산
+    { ic: "d00251", herb: "곽향",   origin: "중국", dose: 6, adj: 0, orig: 6 },
+    { ic: "d00863", herb: "자소엽", origin: "국산", dose: 4, adj: 0, orig: 4 },
+    { ic: "d00115", herb: "백지",   origin: "국산", dose: 4, adj: 0, orig: 4 },
+    { ic: "d00342", herb: "대복피", origin: "중국", dose: 4, adj: 0, orig: 4 },
+    { ic: "d00078", herb: "백복령", origin: "국산", dose: 4, adj: 0, orig: 4 },
+    { ic: "d00701", herb: "후박",   origin: "중국", dose: 4, adj: 0, orig: 4 },
+    { ic: "d00065", herb: "백출",   origin: "국산", dose: 4, adj: 0, orig: 4 },
+    { ic: "d00455", herb: "진피",   origin: "국산", dose: 4, adj: 0, orig: 4 },
+    { ic: "d00390", herb: "반하",   origin: "국산", dose: 4, adj: 0, orig: 4 },
+    { ic: "d00012", herb: "감초",   origin: "국산", dose: 3, adj: 0, orig: 3 },
+  ],
+  "H00400181": [ // 가미통규탕
+    { ic: "d00115", herb: "백지",   origin: "국산", dose: 4, adj: 0, orig: 4 },
+    { ic: "d00210", herb: "길경",   origin: "국산", dose: 4, adj: 0, orig: 4 },
+    { ic: "d00500", herb: "신이",   origin: "중국", dose: 4, adj: 0, orig: 4 },
+    { ic: "d00521", herb: "세신",   origin: "중국", dose: 2, adj: 0, orig: 2 },
+    { ic: "d00012", herb: "감초",   origin: "국산", dose: 2, adj: 0, orig: 2 },
+  ],
+};
+
 const BACKUPS = [
   { ts: "2026-05-17 04:00", scope: "전체",       size: "1.42 GB", status: "성공" },
   { ts: "2026-05-16 04:00", scope: "전체",       size: "1.41 GB", status: "성공" },
@@ -284,6 +394,8 @@ const SECTIONS = [
   { id: "nonbenefit",icon: "tag",          label: "기타 비급여",        roles: ["원장", "데스크"],        group: "운영" },
   { id: "fees",      icon: "calculator",   label: "보험 수가",          roles: ["원장", "데스크"],        group: "운영" },
   { id: "insmeds",   icon: "package-2",    label: "보험약 사용설정",    roles: ["원장", "데스크"],        group: "운영" },
+  { id: "cheopset",  icon: "settings-2",   label: "첩약 시범사업 설정", roles: ["원장"],                  group: "운영" },
+  { id: "cheopuse",  icon: "layers",       label: "첩약 시범사업 사용설정", roles: ["원장", "데스크"],     group: "운영" },
   { id: "menu",      icon: "list-checks",  label: "진료 과목 · 수가표", roles: ["원장"],                  group: "운영" },
   { id: "license",   icon: "shield-check", label: "면허 · 자격",        roles: ["원장"],                  group: "법적 정보" },
   { id: "insurance", icon: "file-badge",   label: "보험 연동",          roles: ["원장"],                  group: "법적 정보" },
@@ -369,6 +481,8 @@ Object.assign(window, {
   CLINIC_DATA, HOURS, HOLIDAYS, ROOMS, PRICE_LIST, LICENSES,
   INSURANCE, BILLING, BRANCHES, EQUIPMENT, MATERIALS, INSURANCE_RX, RX_SUPPLIERS,
   NONBENEFIT_ORDERS, NONBENEFIT_CATS, INSURANCE_FEES, FEE_CATS, RX_DICT,
-  INS_MEDS, INS_MEDS_USED, BACKUPS, ALERTS,
+  INS_MEDS, INS_MEDS_USED,
+  TANGJEON, HERB_CATALOG, HERB_REGISTERED, CHEOP_DISEASES, CHEOP_CATALOG, CHEOP_USED, CHEOP_HERBS,
+  BACKUPS, ALERTS,
   SECTIONS, permFor,
 });

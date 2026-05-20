@@ -896,6 +896,320 @@ function InsMedsSection({ perm }) {
 }
 
 // ──────────────────────────────────────────────────────────────
+// 3-7) 첩약 시범사업 설정 (탕전실 + 한약재 목록/등록)
+// ──────────────────────────────────────────────────────────────
+function CheopSettingsSection({ perm }) {
+  const [leftQ, setLeftQ] = React.useState("");
+  const [rightQ, setRightQ] = React.useState("");
+
+  const lq = leftQ.trim().toLowerCase();
+  const rq = rightQ.trim().toLowerCase();
+  const left = lq
+    ? HERB_CATALOG.filter(h => h.company.toLowerCase().includes(lq) || h.item.toLowerCase().includes(lq) || h.productCode.includes(lq))
+    : HERB_CATALOG;
+  const right = rq
+    ? HERB_REGISTERED.filter(h => h.company.toLowerCase().includes(rq) || h.item.toLowerCase().includes(rq) || h.productCode.includes(rq))
+    : HERB_REGISTERED;
+
+  const head = { fontSize: 10, fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)" };
+  const searchBox = (val, set, ph) => (
+    <div style={{ position: "relative", flex: 1, minWidth: 0 }}>
+      <span style={{ position: "absolute", left: 8, top: "50%", transform: "translateY(-50%)", color: "var(--text-muted)", display: "flex" }}>
+        <Icon name="search" size={13} />
+      </span>
+      <input value={val} onChange={(e) => set(e.target.value)} placeholder={ph} style={{
+        fontFamily: "var(--font-sans)", fontSize: 12, color: "var(--text-primary)",
+        background: "var(--bg-surface)", border: "1px solid var(--border-default)",
+        borderRadius: "var(--radius-md)", padding: "6px 8px 6px 27px", outline: "none", width: "100%", boxSizing: "border-box",
+      }} />
+    </div>
+  );
+
+  return (
+    <SectionCard
+      title="첩약 시범사업 설정"
+      hint="탕전실 정보와 한약재 목록·등록 한약재(원산지·구매가)를 관리합니다."
+      icon="settings-2" anchor="cheopset" perm={perm}>
+      {/* 탕전실 설정 */}
+      <div style={{ padding: "14px 16px", borderBottom: "1px solid var(--border-subtle)", display: "flex", flexDirection: "column", gap: 10 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
+          <span style={{ ...head, width: 88 }}>자체탕전</span>
+          <Badge variant="brand">{TANGJEON.mode}</Badge>
+          <span style={{ fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-sans)" }}>탕전실 연번 <strong style={{ fontFamily: "var(--font-mono)", color: "var(--text-primary)" }}>{TANGJEON.seq}</strong></span>
+          <span style={{ fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-sans)" }}>조제자 <strong style={{ color: "var(--text-primary)" }}>{TANGJEON.preparer}</strong></span>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 12, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>
+          <span style={{ ...head, width: 88 }}>공동이용탕전</span>
+          <span>원외 · 미설정</span>
+          {perm === "edit" && <Button variant="ghost" size="sm" icon="plus">탕전 등록</Button>}
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 12, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>
+          <span style={{ ...head, width: 88 }}>한약국</span>
+          <span>원외 · 미설정</span>
+          {perm === "edit" && <Button variant="ghost" size="sm" icon="plus">한약국 등록</Button>}
+        </div>
+      </div>
+
+      {/* 한약재 목록 / 등록된 한약재 */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1.25fr", minHeight: 420 }}>
+        {/* 좌 — 한약재 목록 */}
+        <div style={{ borderRight: "1px solid var(--border-subtle)", display: "flex", flexDirection: "column" }}>
+          <div style={{ padding: "10px 12px", borderBottom: "1px solid var(--border-subtle)", display: "flex", alignItems: "center", gap: 8 }}>
+            <span style={{ fontSize: 12, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)", whiteSpace: "nowrap" }}>한약재 목록</span>
+            {searchBox(leftQ, setLeftQ, "업체명·제품명·제품코드")}
+            {perm === "edit" && <Button variant="secondary" size="sm" icon="plus">추가</Button>}
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1.4fr 0.7fr 1fr 1fr", gap: 6, padding: "8px 12px", borderBottom: "1px solid var(--border-subtle)" }}>
+            <span style={head}>업체명</span><span style={head}>품목</span><span style={head}>주성분코드</span><span style={{ ...head, textAlign: "right" }}>제품코드</span>
+          </div>
+          <div style={{ flex: 1, overflowY: "auto" }}>
+            {left.map((h, i) => (
+              <div key={i} style={{
+                display: "grid", gridTemplateColumns: "1.4fr 0.7fr 1fr 1fr", gap: 6, padding: "8px 12px",
+                alignItems: "center", fontFamily: "var(--font-sans)", fontSize: 11.5,
+                borderBottom: "1px solid var(--border-subtle)",
+              }}>
+                <span style={{ color: "var(--text-primary)" }}>{h.company}</span>
+                <span style={{ color: "var(--text-secondary)" }}>{h.item}</span>
+                <span style={{ fontFamily: "var(--font-mono)", color: "var(--text-secondary)" }}>{h.mainCode}</span>
+                <span style={{ fontFamily: "var(--font-mono)", color: "var(--text-muted)", textAlign: "right" }}>{h.productCode}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 우 — 등록된 한약재 */}
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ padding: "10px 12px", borderBottom: "1px solid var(--border-subtle)", display: "flex", alignItems: "center", gap: 8 }}>
+            <span style={{ fontSize: 12, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)", whiteSpace: "nowrap" }}>등록된 한약재</span>
+            {searchBox(rightQ, setRightQ, "업체명·제품명·제품코드")}
+            {perm === "edit" && <>
+              <Button variant="ghost" size="sm" icon="download" onClick={() => toastProgress("등록 한약재 내보내는 중…", `등록 한약재 ${HERB_REGISTERED.length}건을 내려받았습니다`)}>다운로드</Button>
+            </>}
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1.6fr 0.7fr 1fr 0.8fr 0.9fr 0.7fr 24px", gap: 6, padding: "8px 12px", borderBottom: "1px solid var(--border-subtle)" }}>
+            <span style={head}>업체명</span><span style={head}>품목</span><span style={head}>주성분코드</span>
+            <span style={head}>원산지</span><span style={head}>구매일</span>
+            <span style={{ ...head, textAlign: "right" }}>구매가</span><span />
+          </div>
+          <div style={{ flex: 1, overflowY: "auto" }}>
+            {right.map((h, i) => (
+              <div key={i} style={{
+                display: "grid", gridTemplateColumns: "1.6fr 0.7fr 1fr 0.8fr 0.9fr 0.7fr 24px", gap: 6, padding: "8px 12px",
+                alignItems: "center", fontFamily: "var(--font-sans)", fontSize: 11.5,
+                borderBottom: "1px solid var(--border-subtle)",
+              }}>
+                <span style={{ color: h.excluded ? "var(--text-muted)" : "var(--text-primary)" }}>{h.company}</span>
+                <span style={{ color: h.excluded ? "var(--cinnabar-600)" : "var(--text-secondary)", fontWeight: h.excluded ? 600 : 400 }}>{h.item}</span>
+                <span style={{ fontFamily: "var(--font-mono)", color: h.excluded ? "var(--cinnabar-600)" : "var(--text-secondary)" }}>{h.mainCode}</span>
+                <span style={{ color: "var(--text-secondary)", fontSize: 11 }}>{h.origin || "—"}</span>
+                <span style={{ fontFamily: "var(--font-mono)", color: "var(--text-muted)", fontSize: 11 }}>{h.buyDate}</span>
+                <span style={{ fontFamily: "var(--font-mono)", textAlign: "right", color: h.buyPrice ? "var(--text-secondary)" : "var(--text-muted)", fontVariantNumeric: "tabular-nums" }}>{h.buyPrice ? h.buyPrice.toLocaleString(undefined, { maximumFractionDigits: 3 }) : "0"}</span>
+                {perm === "edit" ? (
+                  <button title="삭제" style={{
+                    width: 22, height: 22, borderRadius: "var(--radius-sm)", background: "transparent",
+                    color: "var(--text-danger)", border: "none", cursor: "pointer",
+                    display: "inline-flex", alignItems: "center", justifyContent: "center",
+                  }}><Icon name="x" size={12} /></button>
+                ) : <span />}
+              </div>
+            ))}
+          </div>
+          <div style={{ padding: "8px 12px", borderTop: "1px solid var(--border-subtle)", fontSize: 10.5, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>
+            * 단가는 소수점 3자리까지 입력 가능 · 취급제외 <span style={{ color: "var(--cinnabar-600)" }}>빨강</span> 표시
+          </div>
+        </div>
+      </div>
+    </SectionCard>
+  );
+}
+
+// ──────────────────────────────────────────────────────────────
+// 3-8) 첩약 시범사업 사용설정 (좌: 카탈로그 / 중: 사용목록 / 우: 약재구성)
+// ──────────────────────────────────────────────────────────────
+function CheopUseSection({ perm }) {
+  const [disease, setDisease] = React.useState("전체");
+  const [query, setQuery] = React.useState("");
+  const [used, setUsed] = React.useState(CHEOP_USED);
+  const [selCode, setSelCode] = React.useState(null);
+  const [herbs, setHerbs] = React.useState([]);
+  const [herbInput, setHerbInput] = React.useState("");
+  const [doseInput, setDoseInput] = React.useState("");
+
+  const q = query.trim().toLowerCase();
+  const left = CHEOP_CATALOG.filter(c => {
+    if (disease !== "전체" && c.disease !== disease) return false;
+    if (q && !(c.name.toLowerCase().includes(q) || c.code.toLowerCase().includes(q))) return false;
+    return true;
+  });
+
+  const selectUsed = (u) => {
+    setSelCode(u.code);
+    setHerbs((CHEOP_HERBS[u.code] || []).map(h => ({ ...h })));
+  };
+  const addToUsed = (c) => {
+    if (used.some(u => u.code === c.code)) { showToast("이미 사용 목록에 있습니다", { variant: "warning", icon: "info" }); return; }
+    setUsed(prev => [...prev, { ...c }]);
+    showToast(`${c.name} · 사용 처방에 추가되었습니다`, { variant: "success", icon: "check-circle-2" });
+  };
+  const removeUsed = (u) => {
+    setUsed(prev => prev.filter(x => x.code !== u.code));
+    if (selCode === u.code) { setSelCode(null); setHerbs([]); }
+  };
+  const addHerb = () => {
+    if (!herbInput.trim() || !selCode) return;
+    setHerbs(prev => [...prev, { ic: "-", herb: herbInput.trim(), origin: "국산", dose: Number(doseInput) || 0, adj: 0, orig: Number(doseInput) || 0 }]);
+    setHerbInput(""); setDoseInput("");
+  };
+  const removeHerb = (i) => setHerbs(prev => prev.filter((_, idx) => idx !== i));
+  const saveHerbs = () => showToast("약재 구성이 저장되었습니다", { variant: "success", icon: "check-circle-2" });
+
+  const head = { fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)" };
+  const selName = used.find(u => u.code === selCode);
+
+  return (
+    <SectionCard
+      title="첩약 시범사업 사용설정"
+      hint="시범사업 처방 중 우리 한의원에서 사용할 처방과 약재 구성을 설정합니다."
+      icon="layers" anchor="cheopuse" perm={perm}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1.1fr", minHeight: 420 }}>
+        {/* 좌 — 카탈로그 */}
+        <div style={{ borderRight: "1px solid var(--border-subtle)", display: "flex", flexDirection: "column" }}>
+          <div style={{ padding: "12px 14px", borderBottom: "1px solid var(--border-subtle)", display: "flex", gap: 8 }}>
+            <select value={disease} onChange={(e) => setDisease(e.target.value)} style={{
+              fontFamily: "var(--font-sans)", fontSize: 12, color: "var(--text-primary)",
+              background: "var(--bg-surface)", border: "1px solid var(--border-default)",
+              borderRadius: "var(--radius-md)", padding: "6px 6px", outline: "none", cursor: "pointer",
+            }}>
+              {CHEOP_DISEASES.map(d => <option key={d} value={d}>{d === "전체" ? "질환 전체" : d}</option>)}
+            </select>
+            <div style={{ position: "relative", flex: 1 }}>
+              <span style={{ position: "absolute", left: 8, top: "50%", transform: "translateY(-50%)", color: "var(--text-muted)", display: "flex" }}>
+                <Icon name="search" size={13} />
+              </span>
+              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="처방명 검색"
+                style={{
+                  fontFamily: "var(--font-sans)", fontSize: 12, color: "var(--text-primary)",
+                  background: "var(--bg-surface)", border: "1px solid var(--border-default)",
+                  borderRadius: "var(--radius-md)", padding: "6px 8px 6px 27px", outline: "none", width: "100%", boxSizing: "border-box",
+                }} />
+            </div>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr", gap: 6, padding: "8px 14px", borderBottom: "1px solid var(--border-subtle)" }}>
+            <span style={head}>질환명</span><span style={head}>처방명</span><span style={{ ...head, textAlign: "right" }}>기준처방코드</span>
+          </div>
+          <div style={{ flex: 1, overflowY: "auto" }}>
+            {left.map((c, i) => (
+              <div key={i} onClick={() => perm === "edit" && addToUsed(c)} title={perm === "edit" ? "더블 효과: 사용 처방에 추가" : ""}
+                style={{
+                  display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr", gap: 6, padding: "8px 14px",
+                  alignItems: "center", fontFamily: "var(--font-sans)", fontSize: 12,
+                  borderBottom: "1px solid var(--border-subtle)", cursor: perm === "edit" ? "pointer" : "default",
+                }}>
+                <span style={{ color: "var(--text-muted)", fontSize: 11 }}>{c.disease}</span>
+                <span style={{ color: "var(--text-primary)", fontWeight: 500 }}>{c.name}</span>
+                <span style={{ fontFamily: "var(--font-mono)", textAlign: "right", color: "var(--text-secondary)", fontSize: 11 }}>{c.code}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 중 — 사용 처방 */}
+        <div style={{ borderRight: "1px solid var(--border-subtle)", display: "flex", flexDirection: "column" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "0.9fr 1.4fr 1fr auto", gap: 6, padding: "8px 14px", borderBottom: "1px solid var(--border-subtle)", marginTop: 45 }}>
+            <span style={head}>질환명</span><span style={head}>처방명</span><span style={head}>기준처방코드</span><span style={head}>수정/삭제</span>
+          </div>
+          <div style={{ flex: 1, overflowY: "auto" }}>
+            {used.map((u) => (
+              <div key={u.code} onClick={() => selectUsed(u)} style={{
+                display: "grid", gridTemplateColumns: "0.9fr 1.4fr 1fr auto", gap: 6, padding: "8px 14px",
+                alignItems: "center", fontFamily: "var(--font-sans)", fontSize: 12, cursor: "pointer",
+                borderBottom: "1px solid var(--border-subtle)",
+                background: selCode === u.code ? "var(--brand-subtle)" : "transparent",
+              }}>
+                <span style={{ color: "var(--text-muted)", fontSize: 11 }}>{u.disease}</span>
+                <span style={{ color: "var(--text-primary)", fontWeight: 500 }}>{u.name}</span>
+                <span style={{ fontFamily: "var(--font-mono)", color: "var(--text-secondary)", fontSize: 11 }}>{u.code}</span>
+                {perm === "edit" ? (
+                  <button onClick={(e) => { e.stopPropagation(); removeUsed(u); }} title="삭제" style={{
+                    width: 22, height: 22, borderRadius: "var(--radius-sm)", background: "transparent",
+                    color: "var(--text-danger)", border: "none", cursor: "pointer",
+                    display: "inline-flex", alignItems: "center", justifyContent: "center",
+                  }}><Icon name="x" size={12} /></button>
+                ) : <span />}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 우 — 약재 구성 */}
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ padding: "12px 14px", borderBottom: "1px solid var(--border-subtle)", fontSize: 12.5, fontWeight: 600, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>
+            {selName ? `${selName.name} · 약재 구성` : "처방을 선택하세요"}
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 0.8fr 0.7fr 28px", gap: 6, padding: "8px 14px", borderBottom: "1px solid var(--border-subtle)" }}>
+            <span style={head}>한약재</span><span style={head}>원산지</span>
+            <span style={{ ...head, textAlign: "right" }}>용량(g)</span>
+            <span style={{ ...head, textAlign: "right" }}>원방(g)</span><span />
+          </div>
+          <div style={{ flex: 1, overflowY: "auto" }}>
+            {selCode == null ? (
+              <div style={{ padding: "28px 16px", textAlign: "center", color: "var(--text-muted)", fontSize: 12, fontFamily: "var(--font-sans)" }}>
+                가운데 사용 처방을 선택하면 약재 구성이 표시됩니다.
+              </div>
+            ) : herbs.length === 0 ? (
+              <div style={{ padding: "28px 16px", textAlign: "center", color: "var(--text-muted)", fontSize: 12, fontFamily: "var(--font-sans)" }}>
+                등록된 약재가 없습니다. 아래에서 추가하세요.
+              </div>
+            ) : herbs.map((h, i) => (
+              <div key={i} style={{
+                display: "grid", gridTemplateColumns: "1fr 1fr 0.8fr 0.7fr 28px", gap: 6, padding: "8px 14px",
+                alignItems: "center", fontFamily: "var(--font-sans)", fontSize: 12,
+                borderBottom: "1px solid var(--border-subtle)",
+              }}>
+                <span style={{ color: "var(--text-primary)", fontWeight: 500 }}>{h.herb}</span>
+                <span style={{ color: "var(--text-secondary)", fontSize: 11 }}>{h.origin}</span>
+                <span style={{ fontFamily: "var(--font-mono)", textAlign: "right", color: "var(--text-secondary)" }}>{h.dose}</span>
+                <span style={{ fontFamily: "var(--font-mono)", textAlign: "right", color: "var(--text-muted)" }}>{h.orig}</span>
+                {perm === "edit" ? (
+                  <button onClick={() => removeHerb(i)} title="삭제" style={{
+                    width: 22, height: 22, borderRadius: "var(--radius-sm)", background: "transparent",
+                    color: "var(--text-danger)", border: "none", cursor: "pointer",
+                    display: "inline-flex", alignItems: "center", justifyContent: "center",
+                  }}><Icon name="x" size={12} /></button>
+                ) : <span />}
+              </div>
+            ))}
+          </div>
+          {perm === "edit" && selCode != null && (
+            <div style={{ padding: "10px 14px", borderTop: "1px solid var(--border-subtle)", display: "flex", alignItems: "center", gap: 8 }}>
+              <input value={herbInput} onChange={(e) => setHerbInput(e.target.value)}
+                onKeyDown={(e) => { if (e.key === "Enter") addHerb(); }}
+                placeholder="한약재 추가"
+                style={{
+                  fontFamily: "var(--font-sans)", fontSize: 12, color: "var(--text-primary)",
+                  background: "var(--bg-surface)", border: "1px solid var(--border-default)",
+                  borderRadius: "var(--radius-md)", padding: "6px 8px", outline: "none", flex: 1, minWidth: 0, boxSizing: "border-box",
+                }} />
+              <input value={doseInput} onChange={(e) => setDoseInput(e.target.value.replace(/[^0-9]/g, ""))}
+                placeholder="용량"
+                style={{
+                  fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--text-primary)", textAlign: "center",
+                  background: "var(--bg-surface)", border: "1px solid var(--border-default)",
+                  borderRadius: "var(--radius-md)", padding: "6px 6px", outline: "none", width: 52, boxSizing: "border-box",
+                }} />
+              <span style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>g</span>
+              <Button variant="secondary" size="sm" onClick={addHerb}>추가</Button>
+              <Button variant="primary" size="sm" icon="check" onClick={saveHerbs}>저장</Button>
+            </div>
+          )}
+        </div>
+      </div>
+    </SectionCard>
+  );
+}
+
+// ──────────────────────────────────────────────────────────────
 // 4) 진료 과목 · 수가표
 // ──────────────────────────────────────────────────────────────
 function MenuSection({ perm }) {
@@ -1276,6 +1590,8 @@ const SECTION_COMPONENTS = {
   nonbenefit: NonBenefitSection,
   fees:      FeeSection,
   insmeds:   InsMedsSection,
+  cheopset:  CheopSettingsSection,
+  cheopuse:  CheopUseSection,
   menu:      MenuSection,
   license:   LicenseSection,
   insurance: InsuranceSection,
@@ -1292,7 +1608,7 @@ function renderSection(id, role) {
 }
 
 Object.assign(window, {
-  IdentitySection, HoursSection, RoomsSection, EquipmentSection, MaterialsSection, PrescriptionSection, RxDictSection, NonBenefitSection, FeeSection, InsMedsSection, MenuSection,
+  IdentitySection, HoursSection, RoomsSection, EquipmentSection, MaterialsSection, PrescriptionSection, RxDictSection, NonBenefitSection, FeeSection, InsMedsSection, CheopSettingsSection, CheopUseSection, MenuSection,
   LicenseSection, InsuranceSection, BillingSection,
   BranchSection, BrandSection, BackupSection,
   SECTION_COMPONENTS, renderSection,
