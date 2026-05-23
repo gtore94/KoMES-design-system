@@ -104,6 +104,7 @@ function Sidebar({ activeScreen, onNavigate }) {
       { key: "schedule", icon: "calendar",          label: "예약 관리" },
       { key: "payment",  icon: "credit-card",       label: "수납" },
       { key: "packages", icon: "tags",              label: "패키지 관리" },
+      { key: "noncovered", icon: "sparkles",        label: "비급여 · 미용/다이어트" },
       { key: "forms",    icon: "file-signature",    label: "서식 발급" },
     ]},
     { label: "청구", items: [

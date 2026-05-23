@@ -13,7 +13,7 @@
 <body>
 <div id="root"></div>
 
-<script type="text/babel" src="Components.jsx?v=4"></script>
+<script type="text/babel" src="Components.jsx?v=5"></script>
 <script type="text/babel" src="LeftRail.jsx"></script>
 <script type="text/babel" src="NewPatientModal.jsx?v=2"></script>
 <script type="text/babel" src="ChartActingPanel.jsx"></script>
@@ -76,6 +76,9 @@
 <script type="text/babel" src="AiAnalysisScreen.jsx"></script>
 <script type="text/babel" src="realCostData.jsx"></script>
 <script type="text/babel" src="RealCostScreen.jsx"></script>
+<script type="text/babel" src="noncoveredData.jsx?v=1"></script>
+<script type="text/babel" src="NonCoveredScreen.jsx?v=2"></script>
+<script type="text/babel" src="NonCoveredChartScreen.jsx?v=1"></script>
 
 <script type="text/babel">
 const { useState, useEffect } = React;
@@ -93,6 +96,7 @@ function App() {
   const [recOpen, setRecOpen] = useState(false);
   const [recToast, setRecToast] = useState(null);
   const [draftsActive, setDraftsActive] = useState(null);  // null | "herb" | "supply" | "both"
+  const [ncChartOpen, setNcChartOpen] = useState(false);
 
   useEffect(() => { localStorage.setItem("komes_nav", nav); }, [nav]);
   useEffect(() => { localStorage.setItem("komes_screen", screen); }, [screen]);
@@ -148,6 +152,12 @@ function App() {
     }
     if (nav === "realcost") {
       return <RealCostScreen onNavigate={handleNavigate} />;
+    }
+    if (nav === "noncovered") {
+      if (ncChartOpen) {
+        return <NonCoveredChartScreen onBack={() => setNcChartOpen(false)} />;
+      }
+      return <NonCoveredScreen onOpenChart={() => setNcChartOpen(true)} />;
     }
     if (nav === "collect") {
       return <CollectionsScreen />;
