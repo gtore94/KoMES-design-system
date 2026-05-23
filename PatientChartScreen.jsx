@@ -152,7 +152,7 @@ function ActingOrderBlock({ orders, editable }) {
 }
 
 // ── SOAP Block ───────────────────────────────────────────────────
-function SoapBlock({ data, editable }) {
+function SoapBlock({ data, editable, mode = "soap" }) {
   const [vals, setVals] = useStateChart(data);
   const fields = [
     { key: "s", label: "S 주소증",        rows: 2 },
@@ -160,6 +160,24 @@ function SoapBlock({ data, editable }) {
     { key: "a", label: "A 진단",           rows: 2 },
     { key: "p", label: "P 치료 계획",      rows: 2 },
   ];
+
+  if (mode === "plain") {
+    // 읽기 전용 plain — 라벨 prefix 붙여서 한 흐름으로 표시
+    return (
+      <div style={{ fontSize: 13, color: "var(--text-primary)", lineHeight: 1.8, fontFamily: "var(--font-sans)", whiteSpace: "pre-line" }}>
+        {fields.map((f, i) => (
+          <span key={f.key}>
+            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", color: "var(--text-muted)", marginRight: 6, fontFamily: "var(--font-sans)" }}>
+              [{f.label.split(" ")[0]}]
+            </span>
+            {vals[f.key]}
+            {i < fields.length - 1 ? "\n" : ""}
+          </span>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
       {fields.map(f => (
@@ -202,10 +220,82 @@ function RxOrderBlock({ orders, onPrescribe }) {
   );
 }
 
+// ── Patient Memo Card ────────────────────────────────────────────
+function PatientMemoCard({ storageKey, initial = "" }) {
+  const [memo, setMemo] = useStateChart(() => {
+    try { return localStorage.getItem(storageKey) ?? initial; } catch { return initial; }
+  });
+  const [editing, setEditing] = useStateChart(false);
+  const [draft, setDraft] = useStateChart(memo);
+
+  useEffectChart(() => {
+    try { localStorage.setItem(storageKey, memo); } catch {}
+  }, [memo, storageKey]);
+
+  const save = () => { setMemo(draft); setEditing(false); };
+  const cancel = () => { setDraft(memo); setEditing(false); };
+
+  return (
+    <div style={{
+      background: "var(--bg-surface)",
+      border: "1px solid var(--border-subtle)",
+      borderRadius: "var(--radius-lg)",
+      padding: "12px 16px", marginBottom: 14,
+      boxShadow: "var(--shadow-sm)",
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: editing || memo ? 8 : 0 }}>
+        <Icon name="sticky-note" size={13} style={{ color: "var(--amber-600)" }} />
+        <span style={{ fontSize: 12, fontWeight: 700, color: "var(--text-primary)", fontFamily: "var(--font-sans)", letterSpacing: "0.02em" }}>환자 메모</span>
+        <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>환자 전체에 표시 · 진료 기록과 별개</span>
+        {!editing ? (
+          <button onClick={() => { setDraft(memo); setEditing(true); }} style={{
+            marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 3,
+            fontSize: 11, fontWeight: 500, color: "var(--text-secondary)",
+            background: "transparent", border: "1px solid var(--border-subtle)",
+            borderRadius: "var(--radius-sm)", padding: "2px 8px", cursor: "pointer", fontFamily: "var(--font-sans)",
+          }}>
+            <Icon name={memo ? "pencil" : "plus"} size={10} />{memo ? "수정" : "추가"}
+          </button>
+        ) : (
+          <div style={{ marginLeft: "auto", display: "flex", gap: 4 }}>
+            <button onClick={cancel} style={{
+              fontSize: 11, color: "var(--text-muted)",
+              background: "transparent", border: "1px solid var(--border-subtle)",
+              borderRadius: "var(--radius-sm)", padding: "2px 8px", cursor: "pointer", fontFamily: "var(--font-sans)",
+            }}>취소</button>
+            <button onClick={save} style={{
+              fontSize: 11, fontWeight: 600, color: "var(--text-on-brand)",
+              background: "var(--jade-500)", border: "none",
+              borderRadius: "var(--radius-sm)", padding: "2px 10px", cursor: "pointer", fontFamily: "var(--font-sans)",
+            }}>저장</button>
+          </div>
+        )}
+      </div>
+
+      {editing ? (
+        <textarea value={draft} onChange={e => setDraft(e.target.value)} autoFocus
+          rows={3}
+          placeholder="예: 페니실린 알러지, 임신 14주차, 보호자 연락처 등"
+          style={{
+            width: "100%", fontFamily: "var(--font-sans)", fontSize: 13, color: "var(--text-primary)",
+            background: "var(--bg-raised)", border: "1px solid var(--border-default)",
+            borderRadius: "var(--radius-md)", padding: "7px 10px", outline: "none",
+            resize: "vertical", lineHeight: 1.6, boxSizing: "border-box",
+          }} />
+      ) : memo ? (
+        <div style={{ fontSize: 12, color: "var(--text-secondary)", fontFamily: "var(--font-sans)", lineHeight: 1.6, whiteSpace: "pre-line" }}>
+          {memo}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 // ── Visit Card (history — SOAP + collapsible orders) ─────────────
 function VisitCard({ visit }) {
   const [expanded, setExpanded] = useStateChart(true); // 기본 펼침
   const [ordersOpen, setOrdersOpen] = useStateChart(false);
+  const [mode, setMode] = useStateChart("soap"); // "soap" | "plain"
 
   return (
     <div style={{ display: "flex", gap: 0 }}>
@@ -232,7 +322,27 @@ function VisitCard({ visit }) {
               {visit.soap.a}
             </span>
           )}
-          <Icon name={expanded ? "chevron-up" : "chevron-down"} size={14} style={{ color: "var(--text-muted)", marginLeft: "auto", flexShrink: 0 }} />
+          <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 8 }} onClick={e => e.stopPropagation()}>
+            {/* SOAP / Plain 토글 */}
+            {expanded && (
+              <div style={{ display: "inline-flex", background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-sm)", padding: 1, gap: 1 }}>
+                {[{ k: "soap", l: "SOAP", icon: "layout-grid" }, { k: "plain", l: "Plain", icon: "align-left" }].map(opt => (
+                  <button key={opt.k} onClick={() => setMode(opt.k)} style={{
+                    display: "inline-flex", alignItems: "center", gap: 4,
+                    fontSize: 10, fontWeight: mode === opt.k ? 600 : 400,
+                    padding: "2px 7px", borderRadius: "var(--radius-xs)", border: "none", cursor: "pointer",
+                    background: mode === opt.k ? "var(--bg-surface)" : "transparent",
+                    color: mode === opt.k ? "var(--text-primary)" : "var(--text-muted)",
+                    boxShadow: mode === opt.k ? "var(--shadow-sm)" : "none",
+                    fontFamily: "var(--font-sans)", transition: "all 0.12s",
+                  }}>
+                    <Icon name={opt.icon} size={9} />{opt.l}
+                  </button>
+                ))}
+              </div>
+            )}
+            <Icon name={expanded ? "chevron-up" : "chevron-down"} size={14} style={{ color: "var(--text-muted)", flexShrink: 0, cursor: "pointer" }} onClick={() => setExpanded(!expanded)} />
+          </div>
         </div>
 
         {/* SOAP block */}
@@ -240,8 +350,8 @@ function VisitCard({ visit }) {
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             <div style={{ background: "var(--bg-surface)", border: `1px solid ${visit.isToday ? "var(--brand-muted)" : "var(--border-subtle)"}`, borderRadius: "var(--radius-lg)", padding: "14px 18px", boxShadow: visit.isToday ? "var(--shadow-md)" : "var(--shadow-sm)" }}>
               {visit.isToday
-                ? <SoapBlockAI data={visit.soap} editable={true} />
-                : <SoapBlock data={visit.soap} editable={false} />}
+                ? <SoapBlockAI data={visit.soap} editable={true} mode={mode} />
+                : <SoapBlock data={visit.soap} editable={false} mode={mode} />}
               {visit.isToday && visit.aiNote && (
                 <div style={{ marginTop: 12, padding: "9px 12px", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", borderRadius: "var(--radius-md)", display: "flex", gap: 8, alignItems: "flex-start" }}>
                   <Icon name="sparkles" size={13} style={{ color: "var(--jade-600)", marginTop: 1, flexShrink: 0 }} />
@@ -389,6 +499,9 @@ function PatientChartScreen({ patient, onBack, onPrescribe, onNavigate }) {
               </div>
             </div>
           </div>
+
+          {/* Patient memo (특이사항 / 임상 메모) */}
+          <PatientMemoCard storageKey={`komes_memo_${patient.id}`} initial={patient.id === 1 ? "감초+감수 배합 주의. 두통 호소 시 풍지·합곡 우선. 보호자 연락처 010-1234-9999 (배우자)." : ""} />
 
           {/* 자보 경과 배너 (자보 환자만) */}
           {patient.insurance === "자보" && <AutoInsuranceBar injuryDate={patient.injuryDate} />}

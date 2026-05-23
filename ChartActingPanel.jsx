@@ -417,7 +417,7 @@ function TabAutocompleteTextarea({ value, onChange, snippets = [], placeholder, 
 }
 
 // ── SOAP (with AI tab autocomplete) ─────────────────────────────
-function SoapBlockAI({ data, editable }) {
+function SoapBlockAI({ data, editable, mode = "soap" }) {
   const [vals, setVals] = useStateCAP(data);
   const fields = [
     { key: "s", label: "S 주소증",        rows: 2 },
@@ -425,6 +425,52 @@ function SoapBlockAI({ data, editable }) {
     { key: "a", label: "A 진단",           rows: 2 },
     { key: "p", label: "P 치료 계획",      rows: 2 },
   ];
+
+  // ── Plain text 모드: 라벨 prefix를 붙여 한 textarea에 합침 ──
+  const buildPlain = (v) => fields.map(f => `[${f.label.split(" ")[0]}] ${v[f.key] || ""}`).join("\n");
+  const [plain, setPlain] = useStateCAP(() => buildPlain(data));
+
+  // SOAP↔plain 동기화: vals 변경 시 plain 재생성, plain 편집 시 vals로 파싱
+  const syncPlainToVals = (text) => {
+    setPlain(text);
+    const next = { s: "", o: "", a: "", p: "" };
+    let curKey = null;
+    text.split("\n").forEach(line => {
+      const m = line.match(/^\[([SOAP])\]\s?(.*)$/i);
+      if (m) {
+        curKey = m[1].toLowerCase();
+        next[curKey] = m[2];
+      } else if (curKey) {
+        next[curKey] += (next[curKey] ? "\n" : "") + line;
+      }
+    });
+    setVals(next);
+  };
+
+  if (mode === "plain") {
+    const allSnippets = [...(SOAP_AUTOCOMPLETE.s || []), ...(SOAP_AUTOCOMPLETE.o || []), ...(SOAP_AUTOCOMPLETE.a || []), ...(SOAP_AUTOCOMPLETE.p || [])];
+    return editable ? (
+      <TabAutocompleteTextarea
+        value={plain}
+        onChange={syncPlainToVals}
+        snippets={allSnippets}
+        rows={10}
+      />
+    ) : (
+      <div style={{ fontSize: 13, color: "var(--text-primary)", lineHeight: 1.8, fontFamily: "var(--font-sans)", whiteSpace: "pre-line" }}>
+        {fields.map((f, i) => (
+          <span key={f.key}>
+            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", color: "var(--text-muted)", marginRight: 6, fontFamily: "var(--font-sans)" }}>
+              [{f.label.split(" ")[0]}]
+            </span>
+            {vals[f.key]}
+            {i < fields.length - 1 ? "\n" : ""}
+          </span>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
       {fields.map(f => (
@@ -433,7 +479,7 @@ function SoapBlockAI({ data, editable }) {
           {editable ? (
             <TabAutocompleteTextarea
               value={vals[f.key]}
-              onChange={v => setVals(prev => ({ ...prev, [f.key]: v }))}
+              onChange={v => { const nv = { ...vals, [f.key]: v }; setVals(nv); setPlain(buildPlain(nv)); }}
               snippets={SOAP_AUTOCOMPLETE[f.key] || []}
               rows={f.rows}
             />
