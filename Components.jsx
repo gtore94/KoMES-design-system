@@ -103,6 +103,7 @@ function Sidebar({ activeScreen, onNavigate }) {
       { key: "registry", icon: "users",            label: "환자 관리" },
       { key: "schedule", icon: "calendar",          label: "예약 관리" },
       { key: "payment",  icon: "credit-card",       label: "수납" },
+      { key: "packages", icon: "tags",              label: "패키지 관리" },
       { key: "forms",    icon: "file-signature",    label: "서식 발급" },
     ]},
     { label: "청구", items: [
