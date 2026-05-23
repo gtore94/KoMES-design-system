@@ -108,6 +108,7 @@ function Sidebar({ activeScreen, onNavigate }) {
     ]},
     { label: "청구", items: [
       { key: "claim",    icon: "file-text",         label: "보험 청구" },
+      { key: "realcost", icon: "shield-plus",       label: "실비보험" },
       { key: "collect",  icon: "wallet",            label: "수금 관리" },
     ]},
     { label: "처방", items: [
