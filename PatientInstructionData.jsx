@@ -26,7 +26,7 @@ const TODAY_DX = [
 ];
 
 const TODAY_ORDERS = {
-  acting: ["체침 (백회·풍지·족삼리)", "뜸 (관원·신궐)"],
+  acting: ["경혈침술 (백회·풍지·족삼리)", "간접구 (관원·신궐)"],
   rx: { name: "귀비탕 가감", days: 14, herbs: "황기 10g, 백출 8g, 복신 10g, 산조인 15g, 용안육 8g, 감초 6g" },
 };
 

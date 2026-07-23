@@ -530,19 +530,19 @@ function DetailPanel({ row, onClose }) {
 
         {isPatient ? (
           <>
-            <DetailRow label="전화" value={r.phone} mono />
-            <DetailRow label="진료일" value={r.visitDate} mono />
-            <DetailRow label="사유" value={r.origin} />
-            {r.promisedDate && <DetailRow label="입금 약속" value={r.promisedDate} mono accent />}
-            <DetailRow label="연락 횟수" value={`${r.contacts}회`} mono />
+            <CollectDetailRow label="전화" value={r.phone} mono />
+            <CollectDetailRow label="진료일" value={r.visitDate} mono />
+            <CollectDetailRow label="사유" value={r.origin} />
+            {r.promisedDate && <CollectDetailRow label="입금 약속" value={r.promisedDate} mono accent />}
+            <CollectDetailRow label="연락 횟수" value={`${r.contacts}회`} mono />
           </>
         ) : (
           <>
-            <DetailRow label="청구번호" value={r.claimNo} mono />
-            <DetailRow label="환자" value={r.patient} />
-            <DetailRow label="유형" value={r.type} />
-            <DetailRow label="제출일" value={r.submittedDate} mono />
-            <DetailRow label="예상 입금" value={r.expectedDate} mono accent />
+            <CollectDetailRow label="청구번호" value={r.claimNo} mono />
+            <CollectDetailRow label="환자" value={r.patient} />
+            <CollectDetailRow label="유형" value={r.type} />
+            <CollectDetailRow label="제출일" value={r.submittedDate} mono />
+            <CollectDetailRow label="예상 입금" value={r.expectedDate} mono accent />
           </>
         )}
 
@@ -584,7 +584,7 @@ function DetailPanel({ row, onClose }) {
   );
 }
 
-function DetailRow({ label, value, mono, accent }) {
+function CollectDetailRow({ label, value, mono, accent }) {
   return (
     <div style={{ display: "flex", alignItems: "baseline", gap: 8, fontFamily: "var(--font-sans)" }}>
       <span style={{ fontSize: 11, color: "var(--text-muted)", width: 80, flexShrink: 0 }}>{label}</span>

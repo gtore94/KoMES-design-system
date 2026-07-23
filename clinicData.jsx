@@ -40,21 +40,21 @@ const HOLIDAYS = [
 const ROOMS = [
   { code: "P-01", name: "1진료실",     type: "진료", staff: "김민준 원장",   beds: 1, status: "운영" },
   { code: "P-02", name: "2진료실",     type: "진료", staff: "이서연 부원장",  beds: 1, status: "운영" },
-  { code: "C-01", name: "체침실 A",    type: "치료", staff: "—",            beds: 3, status: "운영" },
-  { code: "C-02", name: "체침실 B",    type: "치료", staff: "—",            beds: 3, status: "운영" },
+  { code: "C-01", name: "침구실 A",    type: "치료", staff: "—",            beds: 3, status: "운영" },
+  { code: "C-02", name: "침구실 B",    type: "치료", staff: "—",            beds: 3, status: "운영" },
   { code: "C-03", name: "추나실",      type: "치료", staff: "박지훈 한의사",  beds: 1, status: "운영" },
   { code: "H-01", name: "한약 조제실", type: "조제", staff: "—",            beds: 0, status: "운영" },
   { code: "X-01", name: "리커버리룸",  type: "휴게", staff: "—",            beds: 2, status: "점검 중" },
 ];
 
 const PRICE_LIST = [
-  { code: "AA154", name: "초진진찰료",      cat: "진찰", price: 17310, ins: "급여" },
-  { code: "AA254", name: "재진진찰료",      cat: "진찰", price: 12380, ins: "급여" },
-  { code: "40011", name: "체침",            cat: "침구", price:  9670, ins: "급여" },
-  { code: "40020", name: "투자법",          cat: "침구", price:  6520, ins: "급여" },
-  { code: "40300", name: "부항술",          cat: "물리", price:  3210, ins: "급여" },
+  { code: "10100", name: "초진진찰료",      cat: "진찰", price: 15570, ins: "급여" },
+  { code: "10200", name: "재진진찰료",      cat: "진찰", price:  9830, ins: "급여" },
+  { code: "40011", name: "경혈침술(1부위)", cat: "침구", price:  4000, ins: "급여" },
+  { code: "40080", name: "투자법 침술",     cat: "침구", price:  4810, ins: "급여" },
+  { code: "40321", name: "부항술(건식부항)-유관법", cat: "물리", price:  5490, ins: "급여" },
   { code: "—",     name: "도수치료 30분",   cat: "수기", price: 50000, ins: "비급여" },
-  { code: "—",     name: "약침 — 봉약침",   cat: "약침", price: 25000, ins: "비급여" },
+  { code: "—",     name: "약침술 — 봉약침", cat: "약침", price: 25000, ins: "비급여" },
   { code: "—",     name: "공진단 1환",      cat: "처방", price: 35000, ins: "비급여" },
 ];
 
@@ -199,10 +199,10 @@ const INSURANCE_FEES = [
   { code: "91000R04",  name: "한의방문진료료-의료접근성 취약지기관, 동일 세대 환자 연속 방문, 두번째 방문부터", price: 64960, maker: "", note: "", cat: "방문진료", start: "2026-01-01", end: "2026-12-31" },
   { code: "91000R03",  name: "한의방문진료료-의료접근성 취약지기관, 동일 건물 환자 연속 방문",  price:  97430, maker: "", note: "", cat: "방문진료",   start: "2026-01-01", end: "2026-12-31" },
   { code: "91000R00",  name: "한의방문진료료-의료접근성 취약지기관 방문",                       price: 129910, maker: "", note: "", cat: "방문진료",   start: "2026-01-01", end: "2026-12-31" },
-  { code: "AA154",     name: "초진진찰료",                                                     price:  17310, maker: "", note: "", cat: "진찰료",     start: "2026-01-01", end: "2026-12-31" },
-  { code: "AA254",     name: "재진진찰료",                                                     price:  12380, maker: "", note: "", cat: "진찰료",     start: "2026-01-01", end: "2026-12-31" },
-  { code: "40011",     name: "체침",                                                           price:   9670, maker: "", note: "", cat: "침구",       start: "2026-01-01", end: "2026-12-31" },
-  { code: "40300",     name: "부항술(건식)",                                                   price:   3210, maker: "", note: "", cat: "침구",       start: "2026-01-01", end: "2026-12-31" },
+  { code: "10100",     name: "초진진찰료",                                                     price:  15570, maker: "", note: "", cat: "진찰료",     start: "2026-01-01", end: "2026-12-31" },
+  { code: "10200",     name: "재진진찰료",                                                     price:   9830, maker: "", note: "", cat: "진찰료",     start: "2026-01-01", end: "2026-12-31" },
+  { code: "40011",     name: "경혈침술(1부위)",                                                price:   4000, maker: "", note: "", cat: "침구",       start: "2026-01-01", end: "2026-12-31" },
+  { code: "40321",     name: "부항술(건식부항)-유관법",                                        price:   5490, maker: "", note: "", cat: "침구",       start: "2026-01-01", end: "2026-12-31" },
 ];
 
 // ──────────────────────────────────────────────────────────────

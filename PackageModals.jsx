@@ -116,10 +116,10 @@ function PackageDetailModal({ pkg, onClose }) {
               <div>
                 <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 6 }}>메타</div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 6, fontSize: 12, padding: "10px 14px", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", background: "var(--bg-raised)" }}>
-                  <DetailRow label="패키지 코드" value={pkg.code} mono />
-                  <DetailRow label="등록일" value={pkg.createdAt} mono />
-                  <DetailRow label="총 회차" value={`${totalSessions}회`} mono />
-                  <DetailRow label="유효 기간" value={`${pkg.validity}일`} mono />
+                  <PkgDetailRow label="패키지 코드" value={pkg.code} mono />
+                  <PkgDetailRow label="등록일" value={pkg.createdAt} mono />
+                  <PkgDetailRow label="총 회차" value={`${totalSessions}회`} mono />
+                  <PkgDetailRow label="유효 기간" value={`${pkg.validity}일`} mono />
                 </div>
               </div>
             </div>
@@ -188,13 +188,13 @@ function PackageDetailModal({ pkg, onClose }) {
 
 function iconForType(type) {
   if (type.includes("침")) return "syringe";
-  if (type.includes("부항")) return "circle-dot";
+  if (type.includes("부항") || type.includes("관법")) return "circle-dot";
   if (type.includes("한약")) return "leaf";
-  if (type.includes("뜸")) return "flame";
+  if (type.includes("구") || type.includes("뜸")) return "flame";
   if (type.includes("추나")) return "hand";
   if (type.includes("상담")) return "messages-square";
   if (type.includes("인바디") || type.includes("측정") || type.includes("진단") || type.includes("사진")) return "activity";
-  if (type.includes("이학")) return "zap";
+  if (type.includes("물리") || type.includes("이학")) return "zap";
   return "circle";
 }
 
@@ -213,7 +213,7 @@ function PkgStat({ label, value, hint, tone = "default" }) {
   );
 }
 
-function DetailRow({ label, value, mono }) {
+function PkgDetailRow({ label, value, mono }) {
   return (
     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
       <span style={{ color: "var(--text-secondary)" }}>{label}</span>
@@ -339,14 +339,14 @@ function EnrollmentDetailModal({ enr, onClose }) {
               </div>
             </div>
             <div style={{ border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", padding: "14px 16px", background: "var(--bg-raised)", display: "flex", flexDirection: "column", gap: 8 }}>
-              <DetailRow label="구매일"     value={enr.startDate} mono />
-              <DetailRow label="만료일"     value={enr.expiryDate} mono />
+              <PkgDetailRow label="구매일"     value={enr.startDate} mono />
+              <PkgDetailRow label="만료일"     value={enr.expiryDate} mono />
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <span style={{ fontSize: 12, color: "var(--text-secondary)" }}>잔여 기간</span>
                 <span style={{ fontSize: 13, fontWeight: 600, color: expColor, fontFamily: "var(--font-mono)" }}>{expLabel}</span>
               </div>
-              <DetailRow label="최근 방문"   value={`${enr.lastVisit} (${enr.daysSinceLastVisit}일 전)`} mono />
-              <DetailRow label="등록 담당"   value={enr.sales} />
+              <PkgDetailRow label="최근 방문"   value={`${enr.lastVisit} (${enr.daysSinceLastVisit}일 전)`} mono />
+              <PkgDetailRow label="등록 담당"   value={enr.sales} />
             </div>
           </div>
 
@@ -410,11 +410,11 @@ function NewPackageModal({ onClose }) {
   const [validity, setValidity] = useStatePkgM(56);
   const [tagline, setTagline]   = useStatePkgM("");
   const [items, setItems] = useStatePkgM([
-    { type: "체침",       count: 8, unit: "회" },
+    { type: "경혈침술",   count: 8, unit: "회" },
     { type: "한약(첩약)", count: 4, unit: "주" },
   ]);
 
-  const TYPE_OPTIONS = ["체침", "약침", "이침", "복잡추나", "건식부항", "온뜸", "이학요법", "한약(첩약)", "식이상담", "체질 진단", "인바디 측정", "체형 사진"];
+  const TYPE_OPTIONS = ["경혈침술", "약침술", "이침술", "단순추나", "복잡추나", "건식부항", "자락관법", "간접구", "한방물리요법", "한약(첩약)", "식이상담", "체질 진단", "인바디 측정", "체형 사진"];
   const memberPrice = Math.round(price * (1 - memberPct / 100) / 1000) * 1000;
   const totalSessions = items.reduce((s, i) => s + (Number(i.count) || 0), 0);
 

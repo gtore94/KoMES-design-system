@@ -24,7 +24,7 @@ const COLLECTIONS = {
     },
     {
       id: "P-2026-0387", patientId: 11, name: "한지민", gender: "여", age: 34, phone: "010-4455-1100",
-      visitDate: "2026-05-15", overdueDays: 5,  amount: 32000,  origin: "체침 본인부담",
+      visitDate: "2026-05-15", overdueDays: 5,  amount: 32000,  origin: "경혈침술 본인부담",
       status: "pending",
       lastContact: null,
       contacts: 0,
@@ -45,7 +45,7 @@ const COLLECTIONS = {
     },
     {
       id: "P-2026-0205", patientId: 7, name: "오세훈",  gender: "남", age: 46, phone: "010-8800-4411",
-      visitDate: "2026-02-18", overdueDays: 91, amount: 95000,  origin: "추나 비급여",
+      visitDate: "2026-02-18", overdueDays: 91, amount: 95000,  origin: "추나요법 비급여",
       status: "overdue",
       lastContact: { date: "2026-04-05", channel: "전화", result: "연락 불가 (결번 의심)" },
       contacts: 4,

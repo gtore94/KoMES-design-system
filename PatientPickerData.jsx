@@ -4,7 +4,7 @@ const { useState: useStatePP, useMemo: useMemoPP, useEffect: useEffectPP, useRef
 
 // ── Sample patient pool ──────────────────────────────────────────
 const PP_PATIENTS = [
-  { id: 1,  name: "박지영", gender: "여", age: 39, rrn: "850523-2******", rrnFull: "850523-2123456", phone: "010-3421-9087", address: "서울특별시 강남구 테헤란로 123, 405동 1502호", chartNo: "00012483", lastVisit: "2026-05-16", tags: ["VIP","자보"],     chief: "경추 염좌 (체침·부항 중)" },
+  { id: 1,  name: "박지영", gender: "여", age: 39, rrn: "850523-2******", rrnFull: "850523-2123456", phone: "010-3421-9087", address: "서울특별시 강남구 테헤란로 123, 405동 1502호", chartNo: "00012483", lastVisit: "2026-05-16", tags: ["VIP","자보"],     chief: "경추 염좌 (경혈침술·부항술 중)" },
   { id: 2,  name: "홍길동", gender: "남", age: 40, rrn: "850412-1******", rrnFull: "850412-1234567", phone: "010-1234-5678", address: "서울 마포구 합정동 22-3",                           chartNo: "00010012", lastVisit: "2026-05-16", tags: ["VIP"],            chief: "두통, 어지러움" },
   { id: 3,  name: "김수진", gender: "여", age: 53, rrn: "721130-2******", rrnFull: "721130-2345678", phone: "010-9876-5432", address: "서울 마포구 합정동 22-3",                           chartNo: "00010013", lastVisit: "2026-05-16", tags: ["VIP","갱년기"],   chief: "요통, 피로감" },
   { id: 4,  name: "송재호", gender: "남", age: 49, rrn: "760518-1******", rrnFull: "760518-1456789", phone: "010-3322-7755", address: "서울 강동구 천호동 405-1",                         chartNo: "00012501", lastVisit: "2026-05-15", tags: ["자보"],          chief: "교통사고 후 경항통" },

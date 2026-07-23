@@ -96,9 +96,9 @@ const DASH = {
   // ── Top 처방·시술 (이번 달) ──────────────────────────
   top: {
     treatments: [
-      { label: "체침 + 추나",      count: 412, share: 36, trend:  +4 },
-      { label: "단순 추나",        count: 178, share: 16, trend:  -2 },
-      { label: "부항",             count: 156, share: 14, trend:  +1 },
+      { label: "경혈침술 + 추나",  count: 412, share: 36, trend:  +4 },
+      { label: "단순추나",         count: 178, share: 16, trend:  -2 },
+      { label: "부항술",           count: 156, share: 14, trend:  +1 },
       { label: "도수치료",         count:  67, share:  6, trend:  +9 },
       { label: "복잡추나",         count:  54, share:  5, trend: +18 },
     ],

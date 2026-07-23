@@ -29,7 +29,7 @@ const PAYMENT_QUEUE_SEED = [
     diagnoses: [{ code: "M75.0", label: "유착성 견관절낭염" }],
     items: [
       { kind: "진찰", label: "한의 외래 재진 진찰료", amount: 11500, copay: 0.30 },
-      { kind: "시술", label: "추나요법 (단순)", amount: 32000, copay: 0.30 },
+      { kind: "시술", label: "추나요법-단순추나", amount: 32000, copay: 0.30 },
     ],
     discountType: "none", discountValue: 0,
     note: "",
@@ -50,7 +50,7 @@ const PAYMENT_QUEUE_SEED = [
   },
 ];
 
-const KRW = (n) => `${Math.round(n).toLocaleString("ko-KR")}원`;
+const PayKRW = (n) => `${Math.round(n).toLocaleString("ko-KR")}원`;
 
 function calcAmounts(p) {
   const total = p.items.reduce((s, it) => s + it.amount, 0);
@@ -96,7 +96,7 @@ function QueueRow({ p, selected, onSelect }) {
           fontFamily: "var(--font-mono)",
           textDecoration: isPending ? "none" : "line-through",
         }}>
-          {KRW(a.net)}
+          {PayKRW(a.net)}
         </span>
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
@@ -216,7 +216,7 @@ function PaymentScreen() {
               대기 {pendingCount}건
             </span>
             <span style={{ fontSize: 12, fontWeight: 700, color: "var(--status-warning-text)", fontFamily: "var(--font-mono)" }}>
-              {KRW(pendingTotal)}
+              {PayKRW(pendingTotal)}
             </span>
           </div>
           <div style={{
@@ -229,7 +229,7 @@ function PaymentScreen() {
               완료 {doneCount}건
             </span>
             <span style={{ fontSize: 12, fontWeight: 700, color: "var(--text-brand)", fontFamily: "var(--font-mono)" }}>
-              {KRW(doneTotal)}
+              {PayKRW(doneTotal)}
             </span>
           </div>
           <button onClick={reset} title="시드 초기화" style={{
@@ -409,10 +409,10 @@ function PaymentScreen() {
                         }}>{it.kind}</span>
                         <span style={{ fontSize: 13, color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}>{it.label}</span>
                         <span style={{ fontSize: 13, color: "var(--text-secondary)", fontFamily: "var(--font-mono)", textAlign: "right" }}>
-                          {KRW(it.amount)}
+                          {PayKRW(it.amount)}
                         </span>
                         <span style={{ fontSize: 13, color: "var(--text-primary)", fontFamily: "var(--font-mono)", fontWeight: 500, textAlign: "right" }}>
-                          {KRW(it.amount * it.copay)}
+                          {PayKRW(it.amount * it.copay)}
                         </span>
                       </div>
                     ))}
@@ -468,9 +468,9 @@ function PaymentScreen() {
                   금액 명세
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-                  <SumRow label="총 진료비" value={KRW(amounts.total)} />
-                  <SumRow label="급여 부담금" value={`-${KRW(amounts.insuranceCovered)}`} muted />
-                  <SumRow label="본인 부담금" value={KRW(amounts.copay)} bold />
+                  <SumRow label="총 진료비" value={PayKRW(amounts.total)} />
+                  <SumRow label="급여 부담금" value={`-${PayKRW(amounts.insuranceCovered)}`} muted />
+                  <SumRow label="본인 부담금" value={PayKRW(amounts.copay)} bold />
                 </div>
               </div>
 
@@ -536,7 +536,7 @@ function PaymentScreen() {
                     <div style={{ display: "flex", justifyContent: "space-between", paddingTop: 6, borderTop: "1px dashed var(--border-default)" }}>
                       <span style={{ fontSize: 12, color: "var(--status-danger-text)", fontFamily: "var(--font-sans)" }}>할인액</span>
                       <span style={{ fontSize: 13, fontWeight: 600, color: "var(--status-danger-text)", fontFamily: "var(--font-mono)" }}>
-                        -{KRW(amounts.discount)}
+                        -{PayKRW(amounts.discount)}
                       </span>
                     </div>
                   )}
@@ -555,7 +555,7 @@ function PaymentScreen() {
                     최종 수납액
                   </span>
                   <span style={{ fontSize: 26, fontWeight: 700, color: "var(--text-brand)", fontFamily: "var(--font-serif)", letterSpacing: "-0.02em" }}>
-                    {KRW(amounts.net)}
+                    {PayKRW(amounts.net)}
                   </span>
                 </div>
                 {selected.status === "완료" && (
@@ -633,7 +633,7 @@ function PaymentScreen() {
               }}>
                 <span style={{ fontSize: 13, color: "var(--text-brand)", fontWeight: 600 }}>수납 금액</span>
                 <span style={{ fontSize: 24, fontWeight: 700, color: "var(--text-brand)", fontFamily: "var(--font-serif)", letterSpacing: "-0.02em" }}>
-                  {KRW(amounts.net)}
+                  {PayKRW(amounts.net)}
                 </span>
               </div>
               {confirmMethod === "현금" && (
@@ -662,7 +662,7 @@ function PaymentScreen() {
                 boxShadow: "var(--shadow-sm)",
               }}>
                 <Icon name="check" size={13} />
-                {KRW(amounts.net)} 수납 완료
+                {PayKRW(amounts.net)} 수납 완료
               </button>
             </div>
           </div>

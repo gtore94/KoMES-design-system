@@ -7,7 +7,7 @@ const HISTORY = [
     id: "v3", date: "2026-04-22", doctor: "김민준", visitType: "재진", isToday: true,
     diagnoses: [
       { code: "S13.4", name: "경추의 염좌 및 긴장", primary: true },
-      { code: "S43.4", name: "어긨관절의 염좌", primary: false },
+      { code: "S43.4", name: "어깨관절의 염좌 및 긴장", primary: false },
     ],
     soap: {
       s: "두통 지속, 전보다 빈도 줄었으나 어지러움 여전함. 수면은 조금 개선됨.",
@@ -16,8 +16,8 @@ const HISTORY = [
       p: "귀비탕 가감 유지, 2주 연장. 산조인 증량.",
     },
     actingOrders: [
-      { type: "체침", sites: "백회, 풍지, 족삼리", count: 15, duration: 20, done: true },
-      { type: "뜸",   sites: "관원, 신궐",         count: 3,  duration: 10, done: false },
+      { type: "경혈침술",     sites: "백회, 풍지, 족삼리", count: 15, duration: 20, done: true },
+      { type: "간접구",       sites: "관원, 신궐",         count: 3,  duration: 10, done: false },
     ],
     rxOrders: [
       { name: "귀비탕 가감", herbs: "황기 10g, 백출 8g, 복신 10g, 산조인 15g, 용안육 8g, 감초 6g", days: 14, status: "조제 중" },
@@ -28,7 +28,7 @@ const HISTORY = [
     id: "v2", date: "2026-04-10", doctor: "김민준", visitType: "재진", isToday: false,
     diagnoses: [
       { code: "S13.4", name: "경추의 염좌 및 긴장", primary: true },
-      { code: "M54.2", name: "경부통", primary: false },
+      { code: "M54.22", name: "경추통, 경부", primary: false },
     ],
     soap: {
       s: "두통이 지속되며 어지러움이 있다. 수면의 질이 낮고 자주 깬다고 함.",
@@ -37,9 +37,9 @@ const HISTORY = [
       p: "귀비탕 가감, 2주 처방. 다음 내원 시 수면 상태 재평가.",
     },
     actingOrders: [
-      { type: "체침",   sites: "백회, 풍지, 합곡", count: 12, duration: 20, done: true },
-      { type: "전침",   sites: "족삼리 (2Hz)",      count: 2,  duration: 15, done: true },
-      { type: "부항",   sites: "견정, 대추",         count: 4,  duration: 10, done: true },
+      { type: "경혈침술",     sites: "백회, 풍지, 합곡", count: 12, duration: 20, done: true },
+      { type: "침전기자극술", sites: "족삼리 (2Hz)",      count: 2,  duration: 15, done: true },
+      { type: "유관법",       sites: "견정, 대추",         count: 4,  duration: 10, done: true },
     ],
     rxOrders: [
       { name: "귀비탕 가감", herbs: "황기 10g, 백출 8g, 복신 10g, 산조인 12g, 용안육 8g, 감초 6g", days: 14, status: "완료" },
@@ -58,8 +58,8 @@ const HISTORY = [
       p: "시호소간탕, 1주 처방. 추적 관찰.",
     },
     actingOrders: [
-      { type: "체침", sites: "태충, 합곡, 내관", count: 10, duration: 20, done: true },
-      { type: "추나", sites: "경추 교정",         count: 1,  duration: 15, done: true },
+      { type: "경혈침술",     sites: "태충, 합곡, 내관", count: 10, duration: 20, done: true },
+      { type: "단순추나",     sites: "경추 교정",         count: 1,  duration: 15, done: true },
     ],
     rxOrders: [
       { name: "시호소간탕", herbs: "시호 8g, 백작약 10g, 지실 6g, 진피 6g, 향부자 8g, 감초 4g", days: 7, status: "완료" },
@@ -68,14 +68,17 @@ const HISTORY = [
   },
 ];
 
+// 「한방 수가리스트(2025.11.1. 시행)」 산정명칭 기준 약칭
 const ACTING_TYPES = [
-  { key: "체침",   icon: "zap",        color: "var(--accent-pine)" },
-  { key: "전침",   icon: "activity",   color: "var(--jade-400)" },
-  { key: "약침",   icon: "syringe",    color: "var(--brand)" },
-  { key: "뜸",     icon: "flame",      color: "var(--amber-500)" },
-  { key: "부항",   icon: "droplets",   color: "var(--cinnabar-500)" },
-  { key: "추나",   icon: "hand",       color: "var(--ink-300)" },
-  { key: "레이저", icon: "scan-line",  color: "var(--ink-400)" },
+  { key: "경혈침술",     icon: "zap",        color: "var(--accent-pine)" },
+  { key: "침전기자극술", icon: "activity",   color: "var(--jade-400)" },
+  { key: "전자침술",     icon: "activity",   color: "var(--jade-400)" },
+  { key: "약침술",       icon: "syringe",    color: "var(--brand)" },
+  { key: "간접구",       icon: "flame",      color: "var(--amber-500)" },
+  { key: "유관법",       icon: "circle-dot", color: "var(--cinnabar-600)" },
+  { key: "자락관법",     icon: "droplets",   color: "var(--cinnabar-500)" },
+  { key: "단순추나",     icon: "hand",       color: "var(--ink-300)" },
+  { key: "레이저침술",   icon: "scan-line",  color: "var(--ink-400)" },
 ];
 
 // ── Section Header ───────────────────────────────────────────────
@@ -95,7 +98,7 @@ function ChartSectionHeader({ icon, title, children }) {
 function ActingOrderBlock({ orders, editable }) {
   const [items, setItems] = useStateChart(orders);
   const [adding, setAdding] = useStateChart(false);
-  const [newType, setNewType] = useStateChart("체침");
+  const [newType, setNewType] = useStateChart("경혈침술");
   const [newSites, setNewSites] = useStateChart("");
 
   const toggleDone = (i) => {
@@ -508,8 +511,8 @@ function PatientChartScreen({ patient, onBack, onPrescribe, onNavigate }) {
 
           {/* 상병 */}
           <DiagnosisSection initialDx={[
-            { code: "S13.4", name: "경추의 염좌 및 긴장", region: "경추", primary: true },
-            { code: "M54.2", name: "경부통", region: "경추", primary: false },
+            { code: "S13.4", kcd: "S134", name: "경추의 염좌 및 긴장", region: "경추", primary: true },
+            { code: "M54.22", kcd: "M5422", name: "경추통, 경부", region: "경추", primary: false },
           ]} />
 
           {/* Section label */}
@@ -526,7 +529,7 @@ function PatientChartScreen({ patient, onBack, onPrescribe, onNavigate }) {
         </div>
 
         {/* ── RIGHT: 오늘 오더 + 환자 정보 ── */}
-        <div style={{ width: 300, display: "flex", flexDirection: "column", flexShrink: 0, background: "var(--bg-surface)", overflow: "hidden" }}>
+        <div style={{ width: 340, display: "flex", flexDirection: "column", flexShrink: 0, background: "var(--bg-surface)", overflow: "hidden" }}>
 
           {/* Today's billing + acting orders (통합 — 실시간 계산) */}
           <div style={{ flex: 1, overflow: "hidden" }}>

@@ -326,7 +326,7 @@ function ActionBar({ type, summary, selected, errorCount, onSubmitAll, onSubmitS
       {type !== "auto" && (
         <>
           <SmallBtn icon="activity" onClick={onOpenPhysioRecords}>물리치료 내역</SmallBtn>
-          <SmallBtn icon="hand" onClick={onOpenChunaRecords}>추나치료 내역</SmallBtn>
+          <SmallBtn icon="hand" onClick={onOpenChunaRecords}>추나요법 내역</SmallBtn>
           <div style={{ width: 1, height: 22, background: "var(--border-subtle)" }}></div>
         </>
       )}

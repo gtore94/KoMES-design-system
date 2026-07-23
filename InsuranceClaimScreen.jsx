@@ -198,7 +198,7 @@ function InsuranceClaimScreen() {
                 onSubmitAll={handleSubmitAll}
                 onSubmitSelected={handleSubmitSelected}
                 onOpenPhysioRecords={() => alert("물리치료 내역 (모의)")}
-                onOpenChunaRecords={() => alert("추나치료 내역 (모의)")}
+                onOpenChunaRecords={() => alert("추나요법 내역 (모의)")}
               />
             </>
           )}

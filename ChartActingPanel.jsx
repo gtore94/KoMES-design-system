@@ -3,42 +3,92 @@
 const { useState: useStateCAP, useRef: useRefCAP, useEffect: useEffectCAP, useMemo: useMemoCAP } = React;
 
 // ── 상병(KCD) 카탈로그 ────────────────────────────────────────────
+// 출처: 심평원 상병마스터(2025-09-30). 완전코드 · 주상병 사용 가능 항목만 수록.
+// code = 표기용(점 구분), kcd = 마스터 원본 코드, hanbang = 양한방구분 '한방' 전용 상병
 const DIAGNOSIS_CATALOG = [
-  { code: "S13.4", name: "경추의 염좌 및 긴장", region: "경추" },
-  { code: "S13.6", name: "경추의 다른 부분의 염좌 및 긴장", region: "경추" },
-  { code: "S33.5", name: "요추의 염좌", region: "요추" },
-  { code: "S33.6", name: "골반의 염좌", region: "요천추" },
-  { code: "S43.4", name: "어깨관절의 염좌", region: "견관절" },
-  { code: "S53.4", name: "팔꿈치의 염좌", region: "주관절" },
-  { code: "S63.5", name: "손목의 염좌", region: "수관절" },
-  { code: "S83.5", name: "무릎의 염좌", region: "슬관절" },
-  { code: "S93.4", name: "발목의 염좌", region: "족관절" },
-  { code: "M54.2", name: "경부통", region: "경추" },
-  { code: "M54.5", name: "요통", region: "요추" },
-  { code: "M62.838", name: "근육경련", region: "전신" },
-  { code: "M79.1", name: "근육통", region: "전신" },
-  { code: "M25.5", name: "관절통", region: "관절" },
-  { code: "G44.2", name: "긴장형 두통", region: "두부" },
-  { code: "F51.0", name: "비기질성 불면증", region: "정신" },
+  { code: "S13.4",   kcd: "S134",   name: "경추의 염좌 및 긴장", region: "경추" },
+  { code: "S13.6",   kcd: "S136",   name: "목의 기타 및 상세불명 부분의 관절 및 인대의 염좌 및 긴장", region: "경추" },
+  { code: "M54.22",  kcd: "M5422",  name: "경추통, 경부", region: "경추" },
+  { code: "U30.3",   kcd: "U303",   name: "항강(項强)", region: "경항부", hanbang: true },
+  { code: "S33.50",  kcd: "S3350",  name: "요추의 염좌 및 긴장", region: "요추" },
+  { code: "S33.51",  kcd: "S3351",  name: "요천추[관절][인대]의 염좌 및 긴장", region: "요천추" },
+  { code: "M54.56",  kcd: "M5456",  name: "요통, 요추부", region: "요추" },
+  { code: "M54.16",  kcd: "M5416",  name: "신경뿌리병증, 요추부", region: "요추" },
+  { code: "S43.4",   kcd: "S434",   name: "어깨관절의 염좌 및 긴장", region: "견관절" },
+  { code: "M75.1",   kcd: "M751",   name: "회전근개증후군", region: "견관절" },
+  { code: "M25.51",  kcd: "M2551",  name: "관절통, 어깨부분", region: "견관절" },
+  { code: "S53.49",  kcd: "S5349",  name: "팔꿈치의 상세불명 부분의 염좌 및 긴장", region: "주관절" },
+  { code: "S63.50",  kcd: "S6350",  name: "수근(관절)의 염좌 및 긴장", region: "수관절" },
+  { code: "S83.59",  kcd: "S8359",  name: "상세불명의 십자인대의 염좌 및 긴장", region: "슬관절" },
+  { code: "M17.0",   kcd: "M170",   name: "양쪽 원발성 무릎관절증", region: "슬관절" },
+  { code: "S93.49",  kcd: "S9349",  name: "발목의 상세불명 부분의 염좌 및 긴장", region: "족관절" },
+  { code: "M79.180", kcd: "M79180", name: "근근막통증후군, 기타 부분", region: "전신" },
+  { code: "G44.2",   kcd: "G442",   name: "긴장형두통", region: "두부" },
+  { code: "F51.0",   kcd: "F510",   name: "비기질성 불면증", region: "정신" },
+  { code: "K30",     kcd: "K30",    name: "기능성 소화불량", region: "소화기" },
+  { code: "U23.8",   kcd: "U238",   name: "비증(痺證)", region: "전신", hanbang: true },
+  { code: "U22.2",   kcd: "U222",   name: "화병(火病)", region: "정신", hanbang: true },
+  { code: "U23.4",   kcd: "U234",   name: "중풍후유증(中風後遺證)", region: "신경", hanbang: true },
+  { code: "U32.7",   kcd: "U327",   name: "산후풍(産後風)", region: "부인", hanbang: true },
 ];
 
-// ── 한방 액팅 오더 카탈로그 (수가 코드 + 자보 경과별 가능 여부) ───
+// ── 한방 액팅 오더 카탈로그 ───────────────────────────────────────
+// 출처: 「한방 수가리스트(2025.11.1. 시행)」 — 수가코드 · 한글명 · 한방병의원 단가.
+//   fee     = 한방병의원 단가(원). 급여는 고시가, 비급여(49010·49020)는 원내 설정 예시값.
+//   covered = 급여 여부 (false면 전액 본인부담)
 // phase: 1=급성기(0–7일), 2=아급성기(8–28일), 3=만성기(29일+)
 // allowedPhases: 자보 환자에서 청구 가능한 경과 단계
 const ACTING_ORDER_CATALOG = [
-  { code: "40020", key: "경혈 침술 1부위",        short: "침-1",    icon: "zap",         color: "var(--accent-pine)", allowedPhases: [1,2,3], default: true,  duration: 15, fee: 4920 },
-  { code: "40021", key: "경혈 침술 2부위",        short: "침-2",    icon: "zap",         color: "var(--accent-pine)", allowedPhases: [1,2,3], default: true,  duration: 15, fee: 6210 },
-  { code: "40022", key: "경혈 침술 3부위",        short: "침-3",    icon: "zap",         color: "var(--accent-pine)", allowedPhases: [2,3],   default: false, duration: 20, autoOnly: true, note: "자보 한정", fee: 7480 },
-  { code: "40080", key: "침전기 자극술",          short: "전침",    icon: "activity",    color: "var(--jade-400)", allowedPhases: [1,2,3], default: false, duration: 15, fee: 2860 },
-  { code: "40090", key: "직접구",                 short: "직접구",  icon: "flame",       color: "var(--amber-600)", allowedPhases: [1,2,3], default: false, duration: 10, fee: 1830 },
-  { code: "40091", key: "간접구",                 short: "간접구",  icon: "flame",       color: "var(--amber-500)", allowedPhases: [1,2,3], default: false, duration: 10, fee: 2200 },
-  { code: "40095", key: "기기구",                 short: "기기구",  icon: "thermometer", color: "var(--cinnabar-500)", allowedPhases: [1,2,3], default: false, duration: 10, fee: 2750 },
-  { code: "40300", key: "건식부항(유관법)",       short: "건부항",  icon: "circle-dot",  color: "var(--cinnabar-600)", allowedPhases: [1,2,3], default: false, duration: 10, fee: 5530 },
-  { code: "40310", key: "습식부항(자락관법)",     short: "습부항",  icon: "droplets",    color: "var(--cinnabar-500)", allowedPhases: [1,2],   default: false, duration: 10, note: "급성·아급성기", fee: 6840 },
-  { code: "40320", key: "약침술",                 short: "약침",    icon: "syringe",     color: "var(--brand)", allowedPhases: [1,2,3], default: false, duration: 10, fee: 11540 },
-  { code: "40400", key: "추나요법(단순)",         short: "추나-단", icon: "hand",        color: "var(--ink-400)", allowedPhases: [2,3],   default: false, duration: 15, note: "1주 이후 권장", fee: 14750 },
-  { code: "40401", key: "추나요법(복잡)",         short: "추나-복", icon: "hands",       color: "var(--accent-slate)", allowedPhases: [2,3],   default: false, duration: 30, fee: 32100 },
+  // 하1~하13 — 침술
+  { code: "40011", key: "경혈침술(1부위)",            short: "경혈-1",  btn: "경혈침술 1부위",  group: "침술",     icon: "zap",         color: "var(--accent-pine)",   allowedPhases: [1,2,3], default: true,  duration: 15, fee: 4000,  covered: true },
+  { code: "40012", key: "경혈침술(2부위이상)",        short: "경혈-2",  btn: "경혈침술 2부위↑", group: "침술",     icon: "zap",         color: "var(--accent-pine)",   allowedPhases: [1,2,3], default: false, duration: 20, fee: 6000,  covered: true },
+  { code: "40091", key: "침전기자극술",               short: "전기침",  btn: "침전기자극술",    group: "침술",     icon: "activity",    color: "var(--jade-400)",      allowedPhases: [1,2,3], default: true,  duration: 15, fee: 4100,  covered: true },
+  { code: "40092", key: "전자침술",                   short: "전자침",  btn: "전자침술",        group: "침술",     icon: "activity",    color: "var(--jade-400)",      allowedPhases: [1,2,3], default: false, duration: 15, fee: 4580,  covered: true },
+  { code: "40100", key: "레이저 침술",                short: "레이저",  btn: "레이저침술",      group: "침술",     icon: "scan-line",   color: "var(--ink-400)",       allowedPhases: [1,2,3], default: false, duration: 10, fee: 4000,  covered: true },
+  // 하3~하8 — 부위 침술
+  { code: "40030", key: "안와내 침술",                short: "안와",    btn: "안와",           group: "부위 침술", icon: "eye",         color: "var(--accent-slate)",  allowedPhases: [1,2,3], default: false, duration: 10, fee: 4730,  covered: true },
+  { code: "40040", key: "비강내 침술",                short: "비강",    btn: "비강",           group: "부위 침술", icon: "wind",        color: "var(--accent-slate)",  allowedPhases: [1,2,3], default: false, duration: 10, fee: 4290,  covered: true },
+  { code: "40050", key: "복강내 침술",                short: "복강",    btn: "복강",           group: "부위 침술", icon: "circle",      color: "var(--accent-slate)",  allowedPhases: [1,2,3], default: false, duration: 10, fee: 4300,  covered: true },
+  { code: "40060", key: "관절내 침술",                short: "관절",    btn: "관절",           group: "부위 침술", icon: "bone",        color: "var(--accent-slate)",  allowedPhases: [1,2,3], default: false, duration: 10, fee: 4670,  covered: true },
+  { code: "40070", key: "척추간 침술",                short: "척추",    btn: "척추",           group: "부위 침술", icon: "spline",      color: "var(--accent-slate)",  allowedPhases: [1,2,3], default: false, duration: 15, fee: 4790,  covered: true },
+  { code: "40080", key: "투자법 침술",                short: "투자",    btn: "투자",           group: "부위 침술", icon: "move-right",  color: "var(--accent-slate)",  allowedPhases: [1,2,3], default: false, duration: 15, fee: 4810,  covered: true },
+  // 하12 — 분구침술 등
+  { code: "40121", key: "분구침술 등(분구침술)-이침술",   short: "이침",   btn: "이침",         group: "분구침술",  icon: "ear",         color: "var(--jade-600)",      allowedPhases: [1,2,3], default: false, duration: 10, fee: 4120,  covered: true },
+  { code: "40122", key: "분구침술 등(분구침술)-두침술",   short: "두침",   btn: "두침",         group: "분구침술",  icon: "brain",       color: "var(--jade-600)",      allowedPhases: [1,2,3], default: false, duration: 10, fee: 4120,  covered: true },
+  { code: "40125", key: "분구침술 등(분구침술)-수지침술", short: "수지침", btn: "수지침",        group: "분구침술",  icon: "hand",        color: "var(--jade-600)",      allowedPhases: [1,2,3], default: false, duration: 10, fee: 4120,  covered: true },
+  { code: "40131", key: "분구침술 등(기타)-피내침술",     short: "피내침", btn: "피내침",        group: "분구침술",  icon: "pin",         color: "var(--jade-600)",      allowedPhases: [1,2,3], default: false, duration: 10, fee: 4120,  covered: true },
+  // 하30 — 구술
+  { code: "40304", key: "구술(직접구)-직접애주구",     short: "직접구",  btn: "직접애주구",      group: "구술",     icon: "flame",       color: "var(--amber-600)",     allowedPhases: [1,2,3], default: false, duration: 15, fee: 12060, covered: true },
+  { code: "40305", key: "구술(직접구)-반흔구",         short: "반흔구",  btn: "반흔구",         group: "구술",     icon: "flame",       color: "var(--amber-600)",     allowedPhases: [1,2,3], default: false, duration: 15, fee: 12090, covered: true },
+  { code: "40306", key: "구술(간접구)-간접애주구",     short: "간접구",  btn: "간접애주구",      group: "구술",     icon: "flame",       color: "var(--amber-500)",     allowedPhases: [1,2,3], default: false, duration: 10, fee: 5000,  covered: true },
+  { code: "40307", key: "구술(간접구)-기기구술",       short: "기기구",  btn: "기기구술",        group: "구술",     icon: "thermometer", color: "var(--amber-500)",     allowedPhases: [1,2,3], default: false, duration: 10, fee: 4290,  covered: true },
+  // 하31 — 부항술
+  { code: "40321", key: "부항술(건식부항)-유관법",     short: "유관법",  btn: "유관법",         group: "부항",     icon: "circle-dot",  color: "var(--cinnabar-600)",  allowedPhases: [1,2,3], default: false, duration: 10, fee: 5490,  covered: true },
+  { code: "40322", key: "부항술(건식부항)-섬관법",     short: "섬관법",  btn: "섬관법",         group: "부항",     icon: "circle-dot",  color: "var(--cinnabar-600)",  allowedPhases: [1,2,3], default: false, duration: 10, fee: 6390,  covered: true },
+  { code: "40323", key: "부항술(건식부항)-주관법",     short: "주관법",  btn: "주관법",         group: "부항",     icon: "circle-dot",  color: "var(--cinnabar-600)",  allowedPhases: [1,2,3], default: false, duration: 10, fee: 6600,  covered: true },
+  { code: "40312", key: "부항술(자락관법)",           short: "자락관",  btn: "자락관법",        group: "부항",     icon: "droplets",    color: "var(--cinnabar-500)",  allowedPhases: [1,2],   default: false, duration: 10, fee: 9650,  covered: true, note: "급성·아급성기" },
+  { code: "40313", key: "부항술(자락관법)(2부위이상)", short: "자락-2",  btn: "자락관법 2부위↑", group: "부항",     icon: "droplets",    color: "var(--cinnabar-500)",  allowedPhases: [1,2],   default: false, duration: 15, fee: 14480, covered: true, note: "급성·아급성기" },
+  // 하70 — 온냉경락요법
+  { code: "40700", key: "온냉경락요법-경피경근온열요법",   short: "온열",  btn: "경피경근온열",   group: "온냉경락",  icon: "flame",       color: "var(--amber-500)",     allowedPhases: [1,2,3], default: false, duration: 15, fee: 2470,  covered: true },
+  { code: "40701", key: "온냉경락요법-경피적외선조사요법", short: "적외선", btn: "경피적외선조사", group: "온냉경락",  icon: "sun",         color: "var(--amber-500)",     allowedPhases: [1,2,3], default: false, duration: 15, fee: 1900,  covered: true },
+  { code: "40702", key: "온냉경락요법-경피경근한냉요법",   short: "한냉",  btn: "경피경근한냉",   group: "온냉경락",  icon: "snowflake",   color: "var(--accent-slate)",  allowedPhases: [1,2,3], default: false, duration: 15, fee: 2330,  covered: true },
+  // 하71 — 추나요법
+  { code: "40710", key: "추나요법-단순추나",           short: "단순추나", btn: "단순추나",       group: "추나",     icon: "hand",        color: "var(--ink-400)",       allowedPhases: [2,3],   default: false, duration: 15, fee: 25850, covered: true, note: "1주 이후 권장" },
+  { code: "40720", key: "추나요법-복잡추나",           short: "복잡추나", btn: "복잡추나",       group: "추나",     icon: "hands",       color: "var(--accent-slate)",  allowedPhases: [2,3],   default: false, duration: 30, fee: 43640, covered: true, note: "1주 이후 권장" },
+  { code: "40730", key: "추나요법-특수(탈구)추나",     short: "특수추나", btn: "특수(탈구)추나", group: "추나",     icon: "hands",       color: "var(--accent-slate)",  allowedPhases: [2,3],   default: false, duration: 30, fee: 66900, covered: true, note: "1주 이후 권장" },
+  // 한1~한3 검사 · 허1/허2 비급여
+  { code: "20010", key: "양도락검사",                 short: "양도락",  btn: "양도락검사",      group: "검사·비급여", icon: "activity",  color: "var(--jade-600)",      allowedPhases: [1,2,3], default: false, duration: 10, fee: 5240,  covered: true },
+  { code: "20030", key: "경락기능검사",               short: "경락검사", btn: "경락기능검사",    group: "검사·비급여", icon: "waves",     color: "var(--jade-600)",      allowedPhases: [1,2,3], default: false, duration: 10, fee: 6750,  covered: true },
+  { code: "49010", key: "약침술",                     short: "약침",    btn: "약침술",          group: "검사·비급여", icon: "syringe",   color: "var(--brand)",         allowedPhases: [1,2,3], default: false, duration: 10, fee: 15000, covered: false },
+  { code: "49020", key: "한방물리요법",               short: "한방물리", btn: "한방물리요법",    group: "검사·비급여", icon: "dumbbell",  color: "var(--brand)",         allowedPhases: [1,2,3], default: false, duration: 20, fee: 8000,  covered: false },
 ];
+
+// 버튼 그리드 그룹 (카탈로그 순서 유지)
+const ACTING_ORDER_GROUPS = ACTING_ORDER_CATALOG.reduce((acc, c) => {
+  const g = acc.find(x => x.label === c.group);
+  if (g) g.items.push(c); else acc.push({ label: c.group, items: [c] });
+  return acc;
+}, []);
 
 // ── AI 자동완성 스니펫 (의사 작성 패턴 기반) ─────────────────────
 // Subject가 sStartsWith로 시작하면 ghostSuffix를 제안
@@ -56,11 +106,11 @@ const SOAP_AUTOCOMPLETE = {
   a: [
     { trigger: "기허",   suffix: "혈허(氣虛血虛) 패턴, 수면장애 동반" },
     { trigger: "경항",   suffix: "부염좌 (S13.4) 아급성기, 견관절 염좌 동반" },
-    { trigger: "요부",   suffix: "염좌 (S33.5) 급성기, 좌골신경통 의심" },
+    { trigger: "요부",   suffix: "염좌 (S33.50) 급성기, 좌골신경통 의심" },
   ],
   p: [
     { trigger: "귀비",   suffix: "탕 가감 14일분. 산조인 증량. 2주 후 추적" },
-    { trigger: "체침",   suffix: " + 전침 + 부항 병행. 주 3회 1주 시행 후 재평가" },
+    { trigger: "경혈침술", suffix: " + 침전기자극술 + 유관법 병행. 주 3회 1주 시행 후 재평가" },
   ],
 };
 
@@ -226,10 +276,15 @@ function DiagnosisSection({ initialDx = [] }) {
   const [query, setQuery] = useStateCAP("");
 
   const matches = query.trim()
-    ? DIAGNOSIS_CATALOG.filter(c => c.name.includes(query) || c.code.toLowerCase().includes(query.toLowerCase())).slice(0, 6)
+    ? DIAGNOSIS_CATALOG.filter(c => {
+        const q = query.trim().toLowerCase();
+        return c.name.includes(query.trim())
+          || c.code.toLowerCase().includes(q)
+          || c.kcd.toLowerCase().includes(q.replace(/\./g, ""));
+      }).slice(0, 6)
     : DIAGNOSIS_CATALOG.slice(0, 5);
 
-  const aiSuggestions = ["S13.4", "M54.2"]
+  const aiSuggestions = ["S43.4", "U30.3"]
     .filter(c => !dx.find(d => d.code === c))
     .map(c => DIAGNOSIS_CATALOG.find(x => x.code === c))
     .filter(Boolean);
@@ -316,6 +371,9 @@ function DiagnosisSection({ initialDx = [] }) {
               </span>
               <span style={{ fontSize: 12, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)", letterSpacing: "0.02em" }}>{d.code}</span>
               <span style={{ fontSize: 13, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flex: 1 }}>{d.name}</span>
+              {d.hanbang && (
+                <span style={{ fontSize: 9, fontWeight: 700, color: "var(--text-brand)", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", padding: "1px 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)" }}>한방</span>
+              )}
               <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)", background: "var(--bg-surface)", border: "1px solid var(--border-default)", padding: "1px 7px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap" }}>{d.region}</span>
               <button onClick={() => remove(d.code)} style={{ display: "inline-flex", alignItems: "center", padding: 3, background: "transparent", border: "none", color: "var(--text-muted)", cursor: "pointer" }}>
                 <Icon name="x" size={13} />
@@ -331,7 +389,7 @@ function DiagnosisSection({ initialDx = [] }) {
           <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "5px 10px", background: "var(--bg-surface)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-sm)", marginBottom: 8 }}>
             <Icon name="search" size={13} style={{ color: "var(--text-muted)" }} />
             <input autoFocus value={query} onChange={e => setQuery(e.target.value)}
-              placeholder="상병명 또는 KCD 코드 검색 (예: 요추, S33.5)"
+              placeholder="상병명 또는 KCD 코드 검색 (예: 요추, S3350, 항강)"
               style={{ flex: 1, border: "none", outline: "none", fontSize: 13, fontFamily: "var(--font-sans)", background: "transparent" }} />
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 3, maxHeight: 200, overflowY: "auto" }}>
@@ -345,6 +403,9 @@ function DiagnosisSection({ initialDx = [] }) {
               onMouseLeave={e => { e.currentTarget.style.background = "var(--bg-surface)"; e.currentTarget.style.borderColor = "var(--border-subtle)"; }}>
                 <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-brand)", fontFamily: "var(--font-mono)" }}>{m.code}</span>
                 <span style={{ fontSize: 12, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flex: 1 }}>{m.name}</span>
+                {m.hanbang && (
+                  <span style={{ fontSize: 9, fontWeight: 700, color: "var(--text-brand)", background: "var(--brand-subtle)", border: "1px solid var(--brand-muted)", padding: "1px 5px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)" }}>한방</span>
+                )}
                 <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>{m.region}</span>
               </div>
             ))}
@@ -499,15 +560,17 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
   const isAuto = insurance === "자보";
 
   const [orders, setOrders] = useStateCAP(() => ACTING_ORDER_CATALOG.filter(c => c.default).map(c => ({
-    code: c.code, sites: c.key === "경혈 침술 1부위" ? "백회, 풍지, 천주" : "견정, 견우, 곡지",
+    code: c.code, sites: c.code === "40011" ? "백회, 풍지, 천주" : "견정, 곡지",
     done: false,
   })));
-  const [showCatalog, setShowCatalog] = useStateCAP(false);
 
   const addOrder = (cat) => {
     if (orders.find(o => o.code === cat.code)) return;
     setOrders(prev => [...prev, { code: cat.code, sites: "", done: false }]);
   };
+  const toggleOrder = (cat) => setOrders(prev => prev.find(o => o.code === cat.code)
+    ? prev.filter(o => o.code !== cat.code)
+    : [...prev, { code: cat.code, sites: "", done: false }]);
   const removeOrder = (i) => setOrders(prev => prev.filter((_, idx) => idx !== i));
   const toggleDone = (i) => setOrders(prev => prev.map((o, idx) => idx === i ? { ...o, done: !o.done } : o));
   const updateSites = (i, v) => setOrders(prev => prev.map((o, idx) => idx === i ? { ...o, sites: v } : o));
@@ -518,7 +581,11 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
   }).filter(Boolean);
 
   const total = items.reduce((s, it) => s + it.subtotal, 0);
-  const patientPay = isAuto ? 0 : Math.round(total * 0.4);
+  const coveredTotal = items.filter(it => it.covered).reduce((s, it) => s + it.subtotal, 0);
+  const uncoveredTotal = total - coveredTotal;
+  // 급여는 본인부담 40%(한의원 외래), 비급여는 전액 본인부담.
+  // 자보는 약침 등 비급여 항목도 자동차보험 진료수가 기준으로 보험사가 부담 → 본인부담 0.
+  const patientPay = isAuto ? 0 : Math.round(coveredTotal * 0.4) + uncoveredTotal;
   const insurancePay = total - patientPay;
   const fmt = (n) => n.toLocaleString("ko-KR");
 
@@ -543,9 +610,9 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
       </div>
 
       {/* AI 추천 */}
-      {!showCatalog && phase && (() => {
+      {phase && (() => {
         const aiOrders = ACTING_ORDER_CATALOG
-          .filter(c => c.allowedPhases.includes(phase) && !orders.find(o => o.code === c.code) && ["40080", "40300"].includes(c.code));
+          .filter(c => c.allowedPhases.includes(phase) && !orders.find(o => o.code === c.code) && ["40321", "40700"].includes(c.code));
         if (!aiOrders.length) return null;
         return (
           <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 10, flexWrap: "wrap" }}>
@@ -575,8 +642,60 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
         );
       })()}
 
-      {/* 등록된 오더 */}
-      <div style={{ display: "flex", flexDirection: "column", gap: 4, marginBottom: 8 }}>
+      {/* 액팅 오더 버튼 그리드 — 클릭 토글로 선택/해제 */}
+      <div style={{ display: "flex", flexDirection: "column", gap: 9, marginBottom: 12 }}>
+        {ACTING_ORDER_GROUPS.map(g => (
+          <div key={g.label}>
+            <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 5 }}>
+              {g.label}
+            </div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+              {g.items.map(c => {
+                const selected = !!orders.find(o => o.code === c.code);
+                const blocked = !!phase && !c.allowedPhases.includes(phase);
+                return (
+                  <button key={c.code} onClick={() => !blocked && toggleOrder(c)} disabled={blocked}
+                    title={blocked ? `${c.key} · 현재 경과(${phase}단계) 청구 불가${c.note ? ` — ${c.note}` : ""}` : `${c.key} · ₩${fmt(c.fee)}`}
+                    onMouseEnter={e => { if (!blocked && !selected) { e.currentTarget.style.background = "var(--brand-subtle)"; e.currentTarget.style.borderColor = "var(--jade-300)"; } }}
+                    onMouseLeave={e => { if (!blocked && !selected) { e.currentTarget.style.background = "var(--bg-surface)"; e.currentTarget.style.borderColor = "var(--border-default)"; } }}
+                    style={{
+                      display: "inline-flex", alignItems: "center", gap: 3,
+                      fontSize: 11, fontWeight: selected ? 600 : 500,
+                      fontFamily: "var(--font-sans)", whiteSpace: "nowrap",
+                      padding: selected ? "5px 9px 5px 6px" : "5px 9px",
+                      borderRadius: "var(--radius-md)",
+                      color: blocked ? "var(--text-muted)" : selected ? "var(--text-on-brand)" : "var(--text-secondary)",
+                      background: blocked ? "var(--bg-raised)" : selected ? "var(--jade-500)" : "var(--bg-surface)",
+                      border: `1px solid ${blocked ? "var(--border-subtle)" : selected ? "var(--jade-500)" : "var(--border-default)"}`,
+                      boxShadow: selected ? "var(--shadow-sm)" : "none",
+                      opacity: blocked ? 0.5 : 1,
+                      textDecoration: blocked ? "line-through" : "none",
+                      cursor: blocked ? "not-allowed" : "pointer",
+                      transition: "all 0.12s",
+                    }}>
+                    {selected && <Icon name="check" size={11} />}
+                    {c.btn}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* 선택된 오더 */}
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
+        <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>
+          선택된 오더
+        </span>
+        <div style={{ flex: 1, height: 1, background: "var(--border-subtle)" }} />
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 4, marginBottom: 12 }}>
+        {!items.length && (
+          <div style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)", textAlign: "center", padding: "10px 0", border: "1px dashed var(--border-subtle)", borderRadius: "var(--radius-sm)" }}>
+            위 버튼에서 시술을 선택하세요
+          </div>
+        )}
         {items.map((it, i) => (
           <div key={i} style={{
             display: "flex", alignItems: "center", gap: 6,
@@ -597,6 +716,9 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
             <span style={{ fontSize: 11, fontWeight: 600, color: it.color, background: `${it.color}18`, padding: "1px 6px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)", flexShrink: 0 }}>
               {it.short}
             </span>
+            {!it.covered && (
+              <span style={{ fontSize: 9, fontWeight: 700, color: "var(--status-warning-text)", background: "var(--status-warning-bg)", border: "1px solid var(--status-warning-border)", padding: "0 4px", borderRadius: "var(--radius-sm)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)", flexShrink: 0 }}>비급여</span>
+            )}
             <input value={it.sites} onChange={e => updateSites(i, e.target.value)}
               placeholder="부위"
               style={{ flex: 1, minWidth: 30, fontSize: 11, fontFamily: "var(--font-sans)", color: "var(--text-secondary)", border: "none", outline: "none", background: "transparent", padding: "1px 2px" }} />
@@ -610,55 +732,13 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
         ))}
       </div>
 
-      {/* 카탈로그에서 추가 */}
-      <button onClick={() => setShowCatalog(!showCatalog)} style={{
-        width: "100%", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 5,
-        fontSize: 11, fontWeight: 500, color: "var(--text-brand)",
-        background: showCatalog ? "var(--brand-subtle)" : "transparent",
-        border: "1px dashed var(--jade-300)",
-        borderRadius: "var(--radius-sm)", padding: "5px 9px", cursor: "pointer", fontFamily: "var(--font-sans)",
-        marginBottom: showCatalog ? 8 : 12,
-      }}>
-        <Icon name={showCatalog ? "chevron-up" : "plus"} size={11} />
-        {showCatalog ? "닫기" : "오더 추가"}
-      </button>
-
-      {showCatalog && (
-        <div style={{ background: "var(--bg-raised)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-sm)", padding: 8, marginBottom: 12, maxHeight: 220, overflowY: "auto" }}>
-          {phase && (
-            <div style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)", marginBottom: 6 }}>
-              <Icon name="info" size={10} style={{ verticalAlign: "middle", marginRight: 3 }} />
-              자동차보험 청구 가능 항목
-            </div>
-          )}
-          <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
-            {ACTING_ORDER_CATALOG.map(c => {
-              const allowed = !phase || c.allowedPhases.includes(phase);
-              const already = orders.find(o => o.code === c.code);
-              return (
-                <button key={c.code} disabled={!allowed || already} onClick={() => addOrder(c)} style={{
-                  display: "flex", alignItems: "center", gap: 6,
-                  padding: "5px 7px", borderRadius: "var(--radius-sm)",
-                  background: already ? "var(--bg-raised)" : "var(--bg-surface)",
-                  border: `1px solid ${allowed ? "var(--border-subtle)" : "var(--status-danger-border)"}`,
-                  opacity: allowed && !already ? 1 : 0.45,
-                  cursor: allowed && !already ? "pointer" : "not-allowed",
-                  textAlign: "left", transition: "all 0.12s",
-                }}>
-                  <span style={{ fontSize: 10, fontWeight: 700, color: c.color, background: `${c.color}18`, padding: "1px 5px", borderRadius: "var(--radius-full)", whiteSpace: "nowrap", fontFamily: "var(--font-sans)", minWidth: 42, textAlign: "center", flexShrink: 0 }}>
-                    {c.short}
-                  </span>
-                  <span style={{ fontSize: 11, color: "var(--text-primary)", fontFamily: "var(--font-sans)", flex: 1 }}>{c.key}</span>
-                  <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>₩{fmt(c.fee)}</span>
-                  {already && <Icon name="check" size={11} style={{ color: "var(--jade-500)" }} />}
-                  {!allowed && <span style={{ fontSize: 9, color: "var(--status-danger-text)", fontWeight: 600, background: "var(--status-danger-bg)", borderRadius: "var(--radius-sm)", padding: "1px 4px", fontFamily: "var(--font-sans)" }}>불가</span>}
-                </button>
-              );
-            })}
-          </div>
+      {/* 경과 제한 안내 */}
+      {phase && (
+        <div style={{ display: "flex", alignItems: "flex-start", gap: 4, fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-sans)", lineHeight: 1.5 }}>
+          <Icon name="info" size={10} style={{ flexShrink: 0, marginTop: 2 }} />
+          <span>취소선 버튼은 현재 자보 경과({phase === 1 ? "급성기" : phase === 2 ? "아급성기" : "만성기"})에 청구 불가한 항목입니다.</span>
         </div>
       )}
-
 
       </div>{/* end 스크롤 영역 */}
 
@@ -678,6 +758,12 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
           <span>총 진료비</span>
           <span style={{ fontFamily: "var(--font-mono)" }}>₩{fmt(total)}</span>
         </div>
+        {uncoveredTotal > 0 && (
+          <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>
+            <span>비급여</span>
+            <span style={{ fontFamily: "var(--font-mono)" }}>₩{fmt(uncoveredTotal)}</span>
+          </div>
+        )}
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>
           <span>{isAuto ? "보험사 청구" : "공단 부담"}</span>
           <span style={{ fontFamily: "var(--font-mono)" }}>₩{fmt(insurancePay)}</span>
@@ -723,5 +809,5 @@ function ActingOrderBillingPanel({ injuryDate, insurance = "건강보험" }) {
 Object.assign(window, {
   AutoInsuranceBar, UsageBar, DiagnosisSection,
   TabAutocompleteTextarea, SoapBlockAI, ActingOrderBillingPanel,
-  DIAGNOSIS_CATALOG, ACTING_ORDER_CATALOG, SOAP_AUTOCOMPLETE,
+  DIAGNOSIS_CATALOG, ACTING_ORDER_CATALOG, ACTING_ORDER_GROUPS, SOAP_AUTOCOMPLETE,
 });

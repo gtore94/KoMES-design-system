@@ -14,7 +14,7 @@ function PurchaseOrderDraftScreen({ onClose, onSubmit, initialRecommendations })
     const recs = initialRecommendations || computeRecommendations(REC_DEFAULTS);
     return recs.map((g, i) => {
       const meta = SUPPLIERS[g.supplier] || {};
-      const expected = addDays(PO_TODAY_STR, (meta.avgLead || 7));
+      const expected = poAddDays(PO_TODAY_STR, (meta.avgLead || 7));
       return {
         id: `DRAFT-${String(i + 1).padStart(3, "0")}`,
         supplier: g.supplier,
@@ -589,7 +589,7 @@ function PODraftRightPanel({ draft, activeItemKey }) {
 
 function PODItemDetail({ item, draft }) {
   const meta = SUPPLIERS[draft.supplier] || {};
-  const projectedReceive = addDays(draft.orderDate, meta.avgLead || 7);
+  const projectedReceive = poAddDays(draft.orderDate, meta.avgLead || 7);
   const stockAfter = item.currentStock + item.qty;
   const daysAfter = Math.round((stockAfter / (item.monthly / 30)));
 
@@ -806,7 +806,7 @@ const dHdrR = { ...dHdrBase, textAlign: "right" };
 const dHdrC = { ...dHdrBase, textAlign: "center" };
 
 // 날짜 더하기 (YYYY-MM-DD)
-function addDays(dateStr, days) {
+function poAddDays(dateStr, days) {
   const d = new Date(dateStr);
   d.setDate(d.getDate() + days);
   return d.toISOString().slice(0, 10);

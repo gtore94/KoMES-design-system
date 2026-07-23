@@ -24,7 +24,7 @@ const PACKAGES = [
     tagline: "체질 평가 + 입문자용 균형 케어",
     sessions: 16, validity: 35, price: 480000, memberPrice: 432000,
     includes: [
-      { type: "체침",       count: 8, unit: "회" },
+      { type: "경혈침술",       count: 8, unit: "회" },
       { type: "건식부항",   count: 4, unit: "회" },
       { type: "한약(첩약)", count: 4, unit: "주" },
       { type: "식이상담",   count: 4, unit: "회" },
@@ -38,7 +38,7 @@ const PACKAGES = [
     tagline: "체중·체지방 동시 관리 · 인바디 포함",
     sessions: 36, validity: 70, price: 880000, memberPrice: 792000,
     includes: [
-      { type: "체침",       count: 16, unit: "회" },
+      { type: "경혈침술",       count: 16, unit: "회" },
       { type: "건식부항",   count: 8,  unit: "회" },
       { type: "한약(첩약)", count: 8,  unit: "주" },
       { type: "식이상담",   count: 8,  unit: "회" },
@@ -54,7 +54,7 @@ const PACKAGES = [
     tagline: "체질 개선까지 · 1:1 코칭",
     sessions: 56, validity: 100, price: 1_280_000, memberPrice: 1_152_000,
     includes: [
-      { type: "체침",       count: 24, unit: "회" },
+      { type: "경혈침술",       count: 24, unit: "회" },
       { type: "건식부항",   count: 12, unit: "회" },
       { type: "한약(첩약)", count: 12, unit: "주" },
       { type: "식이상담",   count: 12, unit: "회" },
@@ -70,8 +70,8 @@ const PACKAGES = [
     tagline: "산후풍 예방 · 체형 회복 · 모유 케어",
     sessions: 32, validity: 84, price: 920000, memberPrice: 828000,
     includes: [
-      { type: "체침",       count: 16, unit: "회" },
-      { type: "온뜸",       count: 8,  unit: "회" },
+      { type: "경혈침술",       count: 16, unit: "회" },
+      { type: "간접구",       count: 8,  unit: "회" },
       { type: "한약(첩약)", count: 8,  unit: "주" },
       { type: "골반 추나",  count: 4,  unit: "회" },
       { type: "산후 상담",  count: 4,  unit: "회" },
@@ -86,7 +86,7 @@ const PACKAGES = [
     sessions: 10, validity: 56, price: 380000, memberPrice: 342000,
     includes: [
       { type: "복잡추나",   count: 10, unit: "회" },
-      { type: "체침",       count: 10, unit: "회" },
+      { type: "경혈침술",       count: 10, unit: "회" },
       { type: "체형 사진",  count: 2,  unit: "회" },
     ],
     status: "active", enrolled: 28, active: 19,
@@ -98,10 +98,10 @@ const PACKAGES = [
     tagline: "약침·봉약침 · 만성 슬통",
     sessions: 24, validity: 84, price: 720000, memberPrice: 648000,
     includes: [
-      { type: "체침",       count: 12, unit: "회" },
-      { type: "약침",       count: 8,  unit: "회" },
+      { type: "경혈침술",       count: 12, unit: "회" },
+      { type: "약침술",       count: 8,  unit: "회" },
       { type: "봉약침",     count: 4,  unit: "회" },
-      { type: "이학요법",   count: 12, unit: "회" },
+      { type: "한방물리요법", count: 12, unit: "회" },
     ],
     status: "active", enrolled: 9, active: 7,
     revenue: 5_832_000, monthlyEnroll: 1,
@@ -112,9 +112,9 @@ const PACKAGES = [
     tagline: "변비·복부팽만·체질 정화",
     sessions: 16, validity: 35, price: 520000, memberPrice: 468000,
     includes: [
-      { type: "체침",       count: 8, unit: "회" },
+      { type: "경혈침술",       count: 8, unit: "회" },
       { type: "한약(첩약)", count: 4, unit: "주" },
-      { type: "온뜸",       count: 4, unit: "회" },
+      { type: "간접구",       count: 4, unit: "회" },
       { type: "식이상담",   count: 4, unit: "회" },
     ],
     status: "active", enrolled: 14, active: 9,
@@ -126,9 +126,9 @@ const PACKAGES = [
     tagline: "수족열·불면·자율신경 조절",
     sessions: 36, validity: 100, price: 980000, memberPrice: 882000,
     includes: [
-      { type: "체침",       count: 24, unit: "회" },
+      { type: "경혈침술",       count: 24, unit: "회" },
       { type: "한약(첩약)", count: 12, unit: "주" },
-      { type: "이침",       count: 12, unit: "회" },
+      { type: "이침술",       count: 12, unit: "회" },
     ],
     status: "active", enrolled: 8, active: 7,
     revenue: 6_174_000, monthlyEnroll: 1,
@@ -139,8 +139,8 @@ const PACKAGES = [
     tagline: "긴장성·편두통 · 침+한약 병행",
     sessions: 18, validity: 56, price: 560000, memberPrice: 504000,
     includes: [
-      { type: "체침",       count: 12, unit: "회" },
-      { type: "약침",       count: 6,  unit: "회" },
+      { type: "경혈침술",       count: 12, unit: "회" },
+      { type: "약침술",       count: 6,  unit: "회" },
       { type: "한약(첩약)", count: 6,  unit: "주" },
     ],
     status: "paused", enrolled: 5, active: 2,
@@ -152,8 +152,8 @@ const PACKAGES = [
     tagline: "환절기 보양 · 보약 + 침구",
     sessions: 12, validity: 35, price: 420000, memberPrice: 378000,
     includes: [
-      { type: "체침",       count: 8, unit: "회" },
-      { type: "온뜸",       count: 4, unit: "회" },
+      { type: "경혈침술",       count: 8, unit: "회" },
+      { type: "간접구",       count: 4, unit: "회" },
       { type: "한약(첩약)", count: 4, unit: "주" },
     ],
     status: "active", enrolled: 19, active: 15,
@@ -166,7 +166,7 @@ const PACKAGES = [
     sessions: 24, validity: 84, price: 760000, memberPrice: 684000,
     includes: [
       { type: "체질 진단",  count: 1,  unit: "회" },
-      { type: "체침",       count: 16, unit: "회" },
+      { type: "경혈침술",       count: 16, unit: "회" },
       { type: "한약(첩약)", count: 8,  unit: "주" },
     ],
     status: "active", enrolled: 6, active: 5,
@@ -178,7 +178,7 @@ const PACKAGES = [
     tagline: "단기 체험 · 부기 케어",
     sessions: 6, validity: 21, price: 220000, memberPrice: 198000,
     includes: [
-      { type: "체침",     count: 4, unit: "회" },
+      { type: "경혈침술",     count: 4, unit: "회" },
       { type: "건식부항", count: 2, unit: "회" },
       { type: "한약(첩약)", count: 2, unit: "주" },
     ],
@@ -196,7 +196,7 @@ function daysBetween(a, b) {
 function fmtDate(d) {
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
 }
-function addDays(d, n) { const x = new Date(d); x.setDate(x.getDate()+n); return x; }
+function pkgAddDays(d, n) { const x = new Date(d); x.setDate(x.getDate()+n); return x; }
 
 const ENROLL_SEED = [
   { p:"김지수", g:"여", age:34, ph:"010-1234-5678", pkg:"pkg-2",  start:-22, used:11, last:-1,  status:"active",   sales:"김민준", paid:792000 },
@@ -225,9 +225,9 @@ const ENROLL_SEED = [
 
 const ENROLLMENTS = ENROLL_SEED.map((e, idx) => {
   const pkg = PACKAGES.find(p => p.id === e.pkg);
-  const start  = addDays(PKG_TODAY, e.start);
-  const expiry = addDays(start, pkg.validity);
-  const last   = addDays(PKG_TODAY, e.last);
+  const start  = pkgAddDays(PKG_TODAY, e.start);
+  const expiry = pkgAddDays(start, pkg.validity);
+  const last   = pkgAddDays(PKG_TODAY, e.last);
   const daysLeft = daysBetween(PKG_TODAY, expiry);
   return {
     id: `en-${idx+1}`,

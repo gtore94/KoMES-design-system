@@ -114,7 +114,7 @@ const ALERT_HISTORY = [
   { id: "h-005", ts: "2026-05-12 04:00", ruleId: "r-cert",         severity: "warning",  title: "공인인증서 만료 D-230",        status: "snoozed",   actor: "김민준", target: "insurance", resolution: "7일 미루기" },
   { id: "h-006", ts: "2026-05-10 14:22", ruleId: "r-ins-missing",  severity: "critical", title: "DB자보 청구 인증서 갱신 필요", status: "resolved",  actor: "이서연", target: "insurance", resolution: "신규 인증서 등록 완료" },
   { id: "h-007", ts: "2026-05-08 11:08", ruleId: "r-holiday",      severity: "info",     title: "어버이날 자동 등록",            status: "dismissed", actor: "박지훈", target: "hours" },
-  { id: "h-008", ts: "2026-05-07 18:40", ruleId: "r-room-maintenance", severity: "info", title: "체침실 B 점검 등록",            status: "resolved",  actor: "박지훈", target: "rooms",     resolution: "점검 완료 · 운영 복귀" },
+  { id: "h-008", ts: "2026-05-07 18:40", ruleId: "r-room-maintenance", severity: "info", title: "침구실 B 점검 등록",            status: "resolved",  actor: "박지훈", target: "rooms",     resolution: "점검 완료 · 운영 복귀" },
   { id: "h-009", ts: "2026-05-05 03:58", ruleId: "r-backup-size",  severity: "warning",  title: "백업 크기 +31% 급증",          status: "dismissed", actor: "김민준", target: "backup",    resolution: "신규 처방 차트 반영으로 확인" },
   { id: "h-010", ts: "2026-05-03 09:14", ruleId: "r-ins-missing",  severity: "critical", title: "근로복지공단 인증서 만료",     status: "resolved",  actor: "김민준", target: "insurance", resolution: "갱신 후 재연동 완료" },
   { id: "h-011", ts: "2026-05-01 00:00", ruleId: "r-holiday",      severity: "info",     title: "5월 법정공휴일 일괄 등록",     status: "dismissed", actor: "시스템", target: "hours" },

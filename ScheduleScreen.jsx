@@ -23,9 +23,9 @@ const DOCTORS_SCH = [
 const TREATMENTS_SCH = [
   { key: "초진", mins: 40 },
   { key: "재진", mins: 20 },
-  { key: "침치료", mins: 30 },
-  { key: "약침", mins: 25 },
-  { key: "추나", mins: 40 },
+  { key: "경혈침술", mins: 30 },
+  { key: "약침술", mins: 25 },
+  { key: "추나요법", mins: 40 },
   { key: "한약 상담", mins: 30 },
 ];
 
